@@ -1,0 +1,235 @@
+0x00 None
+0x01 [IMG] Fields 1
+0x02 [IMG] Fields 2
+0x03 [PAL] Fields
+0x04 [TSA] Fields
+0x05 [MAP] Tutorial
+0x06 [ANM] Water (Fields)
+0x07 [CHG] Tutorial
+0x08 [EVT] Tutorial
+0x09 [PRE] Tutorial
+0x0A [MAP] Ch.1
+0x0B [CHG] Ch.1
+0x0C [EVT] Ch.1
+0x0D [PRE] Ch.1
+0x0E [MAP] Ch.2
+0x0F [CHG] Ch.2
+0x10 [EVT] Ch.2
+0x11 [PRE] Ch.2
+0x12 [IMG] Castle & Town
+0x13 [PAL] Castle & Town
+0x14 [TSA] Castle & Town
+0x15 [MAP] Ch.3
+0x16 [CHG] Ch.3
+0x17 [EVT] Ch.3
+0x18 [PRE] Ch.3
+0x19 [MAP] Ch.4
+0x1A [CHG] Ch.4
+0x1B [EVT] Ch.4
+0x1C [PRE] Ch.4
+0x1D [MAP] Ch.5
+0x1E [CHG] Ch.5
+0x1F [EVT] Ch.5
+0x20 [PRE] Ch.5
+0x21 [IMG] Castle & Fields
+0x22 [PAL] Castle & Fields
+0x23 [TSA] Castle & Fields
+0x24 [MAP] Ch.6
+0x25 [CHG] Ch.6
+0x26 [EVT] Ch.6
+0x27 [PRE] Ch.6
+0x28 [MAP] Ch.7
+0x29 [CHG] Ch.7
+0x2A [EVT] Ch.7
+0x2B [PRE] Ch.7
+0x2C [IMG] Castle
+0x2D [PAL] Castle (Purple)
+0x2E [TSA] Castle
+0x2F [MAP] Ch.8
+0x30 [CHG] Ch.8
+0x31 [EVT] Ch.8
+0x32 [PRE] Ch.8
+0x33 [IMG] Western Isles (Water)
+0x34 [PAL] Western Isles (Water)
+0x35 [TSA] Western Isles (Water)
+0x36 [MAP] Ch.9
+0x37 [CHG] Ch.9
+0x38 [EVT] Ch.9
+0x39 [PRE] Ch.9
+0x3A [MAP] Ch.10A
+0x3B [CHG] Ch.10A
+0x3C [EVT] Ch.10A
+0x3D [PRE] Ch.10A
+0x3E [IMG] Western Isles (Town)
+0x3F [PAL] Western Isles (Town)
+0x40 [TSA] Western Isles (Town)
+0x41 [MAP] Ch.11A
+0x42 [CHG] Ch.11A
+0x43 [EVT] Ch.11A
+0x44 [PRE] Ch.11A
+0x45 [IMG] Western Isles (Castle)
+0x46 [PAL] Western Isles (Castle)
+0x47 [TSA] Western Isles (Castle) 
+0x48 [MAP] Ch.12
+0x49 [CHG] Ch.12
+0x4A [EVT] Ch.12
+0x4B [PRE] Ch.12
+0x4C [IMG] Fields & Bridge
+0x4D [PAL] Fields & Bridge
+0x4E [TSA] Fields & Bridge
+0x4F [MAP] Ch.13
+0x50 [CHG] Ch.13
+0x51 [EVT] Ch.13
+0x52 [PRE] Ch.13
+0x53 [IMG] Desert
+0x54 [PAL] Desert
+0x55 [TSA] Desert
+0x56 [MAP] Ch.14
+0x57 [EVT] Ch.14
+0x58 [PRE] Ch.14
+0x59 [MAP] Ch.15
+0x5A [CHG] Ch.15
+0x5B [EVT] Ch.15
+0x5C [PRE] Ch.15
+0x5D [PAL] Castle (Blue)
+0x5E [MAP] Ch.16
+0x5F [CHG] Ch.16
+0x60 [EVT] Ch.16
+0x61 [PRE] Ch.16
+0x62 [MAP] Ch.17A
+0x63 [CHG] Ch.17A
+0x64 [EVT] Ch.17A
+0x65 [PRE] Ch.17A
+0x66 [IMG] Snow
+0x67 [PAL] Snow
+0x68 [TSA] Snow
+0x69 [MAP] Ch.18A
+0x6A [ANM] Water (Snow)
+0x6B [ANM] Shimmering Ice
+0x6C [CHG] Ch.18A
+0x6D [EVT] Ch.18A
+0x6E [PRE] Ch.18A
+0x6F [MAP] Ch.19A
+0x70 [CHG] Ch.19A
+0x71 [EVT] Ch.19A
+0x72 [PRE] Ch.19A
+0x73 [IMG] Snow & Castle
+0x74 [PAL] Snow & Castle
+0x75 [TSA] Snow & Castle
+0x76 [MAP] Ch.20A
+0x77 [CHG] Ch.20A
+0x78 [EVT] Ch.20A
+0x79 [PRE] Ch.20A
+0x7A [IMG] Fields & Shrine
+0x7B [PAL] Fields & Shrine
+0x7C [TSA] Fields & Shrine
+0x7D [MAP] Ch.21
+0x7E [CHG] Ch.21
+0x7F [EVT] Ch.21
+0x80 [PRE] Ch.21
+0x81 [IMG] Fortress
+0x82 [PAL] Fortress
+0x83 [TSA] Fortress
+0x84 [MAP] Ch.22
+0x85 [ANM] Fortress
+0x86 [ANM] Fortress
+0x87 [CHG] Ch.22
+0x88 [EVT] Ch.22
+0x89 [PRE] Ch.22
+0x8A [MAP] Ch.23
+0x8B [CHG] Ch.23
+0x8C [EVT] Ch.23
+0x8D [PRE] Ch.23
+0x8E [IMG] Temple
+0x8F [PAL] Temple
+0x90 [TSA] Temple
+0x91 [MAP] Ch.24
+0x92 [CHG] Ch.24
+0x93 [EVT] Ch.24
+0x94 [PRE] Ch.24
+0x95 [MAP] Final Ch.
+0x96 [ANM] Glow (Final Ch.)
+0x97 [EVT] Final Ch.
+0x98 [MAP] Ch.10B
+0x99 [CHG] Ch.10B
+0x9A [EVT] Ch.10B
+0x9B [PRE] Ch.10B
+0x9C [MAP] Ch.11B
+0x9D [CHG] Ch.11B
+0x9E [EVT] Ch.11B
+0x9F [PRE] Ch.11B
+0xA0 [PAL] Plains (Dark Sand)
+0xA1 [MAP] Ch.17B
+0xA2 [CHG] Ch.17B
+0xA3 [EVT] Ch.17B
+0xA4 [PRE] Ch.17B
+0xA5 [IMG] Plains
+0xA6 [PAL] Plains
+0xA7 [TSA] Plains
+0xA8 [MAP] Ch. 18B
+0xA9 [EVT] Ch. 18B
+0xAA [PRE] Ch. 18B
+0xAB [PAL] Plains & Town
+0xAC [TSA] Plains & Town
+0xAD [MAP] Ch. 19B
+0xAE [CHG] Ch. 19B
+0xAF [EVT] Ch. 19B
+0xB0 [PRE] Ch. 19B
+0xB1 [IMG] Plains & Castle
+0xB2 [PAL] Plains & Castle
+0xB3 [TSA] Plains & Castle
+0xB4 [MAP] Ch. 20B
+0xB5 [CHG] Ch. 20B
+0xB6 [EVT] Ch. 20B
+0xB7 [PRE] Ch. 20B
+0xB8 [PAL] Lava Cave
+0xB9 [MAP] Ch. 8x
+0xBA [ANM] Lava Cave
+0xBB [EVT] Ch. 8x
+0xBC [PRE] Ch. 8x
+0xBD [PAL] Sand Cave
+0xBE [TSA] Sand Cave
+0xBF [MAP] Ch. 12x
+0xC0 [CHG] Ch. 12x
+0xC1 [EVT] Ch. 12x
+0xC2 [PRE] Ch. 12x
+0xC3 [PAL] Castle (Shrine)
+0xC4 [MAP] Ch. 14x
+0xC5 [ANM] Water (Castle & Shrine)
+0xC6 [CHG] Ch. 14x
+0xC7 [EVT] Ch. 14x
+0xC8 [PRE] Ch. 14x
+0xC9 [PAL] Temple (Golden)
+0xCA [MAP] Ch. 16x
+0xCB [EVT] Ch. 16x
+0xCC [PRE] Ch. 16x
+0xCD [PAL] Ice Temple
+0xCE [MAP] Ch. 20Ax
+0xCF [CHG] Ch. 20Ax
+0xD0 [EVT] Ch. 20Ax
+0xD1 [PRE] Ch. 20Ax
+0xD2 [MAP] Ch. 20Bx
+0xD3 [EVT] Ch. 20Bx
+0xD4 [PRE] Ch. 20Bx
+0xD5 [PAL] Castle (Dark)
+0xD6 [MAP] Ch. 21x
+0xD7 [CHG] Ch. 21x
+0xD8 [EVT] Ch. 21x
+0xD9 [PRE] Ch. 21x
+0xDA [MAP] Link Arena
+0xDB [MAP] Trial Map 1
+0xDC [EVT] Trial Map 1
+0xDD [MAP] Trial Map 2
+0xDE [EVT] Trial Map 2
+0xDF [MAP] Trial Map 3
+0xE0 [EVT] Trial Map 3
+0xE1 [MAP] Trial Map 4
+0xE2 [EVT] Trial Map 4
+0xE3 [MAP] Trial Map 5
+0xE4 [EVT] Trial Map 5
+0xE5 Undocumented
+0xE6 Undocumented
+0xE7 Undocumented
+0xE8 Undocumented
+0xE9 Undocumented
+0xEA Undocumented

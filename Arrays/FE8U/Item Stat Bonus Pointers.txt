@@ -1,0 +1,24 @@
+0x000000 None
+0x8AEEC4 Excalibur (+5 Spd)
+0x8AEED0 Gleipnir (+5 Skl)
+0x8AEEDC Angelic Robe (+7 HP)
+0x8AEEE8 Energy Ring (+2 Str)
+0x8AEEF4 Secret Book (+2 Skl)
+0x8AEF00 Speedwings (+2 Spd)
+0x8AEF0C Goddess Icon (+2 Lck)
+0x8AEF18 Dragonshield (+2 Def)
+0x8AEF24 Talisman (+2 Res)
+0x8AEF30 Boots (+2 Mov)
+0x8AEF3C Body Ring (+2 Con)
+0x8AEF48 Sieglinde (+5 Str)
+0x8AEF54 Ivaldi (+5 Def)
+0x8AEF60 Vidofnir (+5 Def)
+0x8AEF6C Wretched Air
+0x8AEF78 Audhulma (+5 Res)
+0x8AEF84 Siegmund (+5 Str)
+0x8AEF90 Garm (+5 Spd)
+0x8AEF9C Nidhogg (+5 Lck)
+0x8AEFA8 Nightmare
+0x8AEFB4 Demon Light
+0x8AEFC0 Ravager
+0x8AEFCC Holy Dragon Stone

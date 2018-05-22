@@ -1,0 +1,9 @@
+0x0274FD Hero Crest
+0x027505 Knight Crest
+0x02750D Orion Bolt
+0x027515 Elysian Whip
+0x027525 Master Seal
+0x02752D Guiding Ring
+0x027540 Heaven Seal
+0x027549 Fallen Contract
+0x027571 Ocean Seal

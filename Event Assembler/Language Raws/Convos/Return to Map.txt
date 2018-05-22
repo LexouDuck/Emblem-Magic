@@ -1,0 +1,22 @@
+##command:REturn to MAp
+##Removes all text bubbles, backgrounds
+##and portraits and returns to the map.
+REMA, 0x05, 4, -game:FE6 -indexMode:8
+
+##command:REturn to MAp
+##Removes all text bubbles, backgrounds
+##and portraits and returns to the map.
+REMA, 0x09, 4, -game:FE7 -indexMode:8
+
+##command:REturn to MAp
+##Removes all text bubbles, backgrounds
+##and portraits and returns to the map.
+REMA, 0x1B22, 4, -game:FE8 -indexMode:8
+
+
+
+##Removes brown text-boxes.
+RETB, 0xD8, 4, -game:FE7 -indexMode:8
+
+##Removes all current text bubbles.
+REBU, 0x1E, 4, -game:FE7 -indexMode:8

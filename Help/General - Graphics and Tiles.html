@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <link rel="stylesheet" href="Emblem Magic.css">
+	<title>Graphics and Tiles</title>
+</head>
+<body>
+	<h1>Graphics and Tiles</h1>
+	<p>
+	Graphics in the GBA (and in most other Nintendo consoles) are usually stored in 8x8 pixel tiles. Since a tile can only use one palette (16 colors), each pixel of the tile can be written as a 4-bit number (ranging from 0 to 15). In other words, by storing pixels as indexes to palette colors, in 4 bits per pixel (4BPP), an 8x8 tile takes up 32 bytes.<br>
+	Note that the pixels are 'reversed' within their respective bytes, the higher 4 bits of the byte being the right pixel, and the lower 4 bits being the left pixel.
+	<br><br>
+	Graphics are most often stored as 4BPP tilesets, but it is also possible to store 8BPP pixel data for backgrounds. In this case, the palette holds 256 colors, thus each byte is a pixel.<br>
+	Lastly, the GBA can do 16BPP bitmaps, having each pixel directly being its 16-bit color value, not using palettes. As this is the heaviest type of graphics storage, it is rarely seen.
+	</p>
+</body>
+</html>

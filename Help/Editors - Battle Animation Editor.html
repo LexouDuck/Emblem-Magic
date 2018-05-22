@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+    <link rel="stylesheet" href="Emblem Magic.css">
+	<title>Battle Animation Editor</title>
+</head>
+<body>
+	<h1>The Battle Animation Editor</h1>
+	<p>
+		This editor allows you to view and change the battle animations in the game.
+	<br>
+	</p>
+	<h2>• The Battle Animation Array</h2>
+	<p>
+	Here are the default addresses for the Battle Animation Array in each game:<br>
+<table>
+	<tr>
+		<th></th>
+		<th>JAP</th>
+		<th>USA</th>
+		<th>EUR</th>
+	</tr>
+	<tr>
+		<th>FE6</th>
+		<td>0x6A0008</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<th>FE7</th>
+		<td>0xE00008</td>
+		<td>0xE00008</td>
+		<td>0xE00008</td>
+	</tr>
+	<tr>
+		<th>FE8</th>
+		<td>0xC00008</td>
+		<td>0xC00008</td>
+		<td>0xC00008</td>
+	</tr>
+</table>
+	<br>
+	Here is how each entry in the array is laid out:<br>
+	'Animation name' is an 8-character ASCII string, it is never used by the game.<br>
+	'Sections' refers to the list of 32bit ints detailing how the 12 modes of animation data are sectioned.<br>
+	'Anim data' refers to the compiled animation code - all 12 modes are in one compressed block.<br>
+	The 2 OAM pointers are for 2 blocks of OAM sprite data, for both the right-to-left and left-to-right facing animations.<br>
+	'Palettes' refers to the 4 default palettes for the animation: ally, enemy, neutral, and gray (P4)<br>
+	<br>
+<table>
+	<tr>
+		<th>• All 3 games - 16 bytes long</th>
+	</tr>
+	<tr>
+		<td>
+			8 - Animation name<br>
+			4 - Separator (always 0)<br>
+			4 - Sections pointer<br>
+			4 - Anim data pointer<br>
+			4 - OAM R-t-L pointer<br>
+			4 - OAM L-t-R pointer<br>
+			4 - Palettes pointer<br>
+		</td>
+	</tr>
+</table>
+	<br>
+		So, where are the tileset pointers ? They are in the anim data, each animation frame has its own pointer to a 32x8 tileset.
+	</p>
+	<h2>• General Format</h2>
+	<p>
+	The files Emblem Magic uses for storing battle animations are:<br>
+	- An .fea file, stores the 12 sections of battle animation code<br>
+	- An .oam file, stores the OAM sprite data for the animation frames<br>
+	- A .pal file, stores the 4 default palettes for the class<br>
+	- Several .png files, the tilesheets used to compose the battle sprites<br>
+	They must all have the same name (the tilesheet image files have a space and number after it).<br>
+	</p>
+	<h2>• Creating Battle Animations with Emblem Magic</h2>
+	<p>
+	You can create these files with Emblem Magic by clicking the 'Create animation...' button in the Battle Animation Editor; it will prompt you for a text file.<br>
+	This text file must contain your animation code, referencing image files in the same folder for your battle animation. The syntax for the code is such :<br>
+	<br>
+<code>
+# - Mode 1 : Normal Attack<br>
+c03               # Comments are done with '#'<br>
+c07               # The code is not line-return dependent<br>
+1   f [stand.png] # the 'C' in Cxx codes isn't caps sensitive, neither is the 'END' command<br>
+4   f [1.png]     # Whitespace can be put pretty much anywhere you want<br>
+4   f [2.png]     # For a frame, do "{DURATION} f [{FILENAME}]"<br>
+c0D               # Simply do this for the 12 sections of the battle animation<br>
+end               # with an 'end' command after each section, and that's it<br>
+# - Mode 3 : Critical Attack<br>
+c03               # Modes 2 and 4 shouldn't be written - they're the background layer modes<br>
+1   f[stand.png]  # The program generates the anim data for these modes from "b[{FILENAME}]" commands<br>
+    b[bglayer.png]# Just put one after a frame command, with its own 240x160 image for the bg layer of the frame<br>
+1   f[c1.png]     # Affine commands will allow you to rotate/scale/transform a sprite within a frame.<br>
+    a[rotate.png] # After the 'f' command for the frame, add an "a[{FILENAME}] (X,Y) (Ux,Vx,Uy,Vy)" command<br>
+       (145, 70)  # The following parentheses must contain the X and Y coordinates of where to show the sprite onscreen<br>
+       (2.0, 0.0, # And the last parentheses must contain the vector coordinates of the transformation<br>
+        0.0, 2.5) # These are decimal point numbers, detailing the vectors that are to deform the sprite<br>
+</code>
+	The animation frame images can be in PNG, BMP or GIF format, they must all be 240x160 pixels (like the GBA screen) and can have any name (so long as they are correctly referenced in the TXT file). You can also have files in subfolders, if you reference them like so:<br>
+<code>
+f[subfolder\file.png]<br>
+</code>
+	<br>
+	There must also be a palette file in the folder, to specify the 4 default palettes for the class.<br>
+	This file must be named 'palette', and it can be a PAL file, or an image file (PNG, BMP, GIF - colors will be added in order by scanning the image left-to-right, up-to-down).<br>
+	</p>
+	<h2>• Affine sprite transformations</h2>
+	<p>
+	Affine sprites on the GBA can be scaled, rotated, or sheared. This is done with 2 vectors detailing how the X and Y axes are to be deformed, or a 2x2 matrix like so:<br>
+	<code>
+		[ Ux  Vx ]  [ 1  0 ]<br>
+		[ Uy  Vy ]  [ 0  1 ]<br>
+	</code>
+	The other matrix to the right is the identity matrix (the matrix that, when applied to the sprite, does not transform the sprite whatsoever). If you want to scale the sprite to twice its original size, enter the same coordinates as an identity matrix but with 2s instead of 1s.<br>
+	You might, however, wish for your sprite OAM not to be set as an affine sprite at all, but you do want it to use specific tiles from a given file (and to have the surrounding blank tiles in the sprite also be on the tilesheet): in that case, set all four coordinates to 0.Normally, four 0s would draw a sprite streched to infinity, or rather a solid-color rectangle, but Emblem Magic instead uses this to allow the user greater control over the tile layout in the final tilesheets.<br>
+	If you want to rotate the sprite, here is how to calculate the vector coordinates (where 'a' is the angle):<br>
+	<code>
+		[ cos(a) -sin(a) ]<br>
+		[ sin(a)  cos(a) ]<br>
+	</code>
+	You may also use a 'd' command instead of the 'a' command to specify that you want the transformed sprite to use a double-sized draw surface, so as to correctly display an enlarged sprite for instance.<br>
+	</p>
+</body>
+</html>

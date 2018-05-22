@@ -1,0 +1,229 @@
+0x00000000 Generic
+0x00000001 Default
+0x00000002 Eliwood
+0x00000003 Eliwood (angry)
+0x00000004 Eliwood (sad)
+0x00000005 Eliwood (commoner)
+0x00000006 Eliwood (looking at you)
+0x00000007 Eliwood (commoner, looking at you)
+0x00000008 Eliwood (noble clothing)
+0x00000009 Eliwood (noble clothing, happy)
+0x0000000A Eliwood (eyes closed)
+0x0000000B Old Eliwood
+0x0000000C Hector
+0x0000000D Hector (angry)
+0x0000000E Hector (sad)
+0x0000000F Hector (commoner)
+0x00000010 Hector (commoner, looking at you)
+0x00000011 Hector (commoner, angry)
+0x00000012 Hector (noble clothing)
+0x00000013 Hector (noble clothing, looking at you)
+0x00000014 Hector (looking at you)
+0x00000015 Old Hector
+0x00000016 Lyn
+0x00000017 Lyn (angry)
+0x00000018 Lyn (sad)
+0x00000019 Lyn (commoner)
+0x0000001A Lyn (looking at you)
+0x0000001B Athos
+0x0000001C Ninian
+0x0000001D Ninian (possessed)
+0x0000001E Ninian (eyes closed)
+0x0000001F Hawkeye
+0x00000020 Matthew
+0x00000021 Jaffar
+0x00000022 Jaffar (eyes closed)
+0x00000023 Raven
+0x00000024 Geitz
+0x00000025 Legault
+0x00000026 Karel
+0x00000027 Dorcas
+0x00000028 Bartre
+0x00000029 Oswin
+0x0000002A Dart
+0x0000002B Wil
+0x0000002C Guy
+0x0000002D Karla
+0x0000002E Rath
+0x0000002F Kent
+0x00000030 Sain
+0x00000031 Lowen
+0x00000032 Marcus
+0x00000033 Florina
+0x00000034 Florina (eyes closed)
+0x00000035 Fiora
+0x00000036 Heath
+0x00000037 Vaida
+0x00000038 Erk
+0x00000039 Nino
+0x0000003A Pent
+0x0000003B Louise
+0x0000003C Canas
+0x0000003D Lucius
+0x0000003E Serra
+0x0000003F Priscilla
+0x00000040 Farina
+0x00000041 Nils
+0x00000042 Nils (sad)
+0x00000043 Nils (possessed)
+0x00000044 Nils (eyes closed)
+0x00000045 Renault
+0x00000046 Isadora
+0x00000047 Harken
+0x00000048 Rebecca
+0x00000049 Wallace
+0x0000004A Merlinus
+0x0000004B Hannah (Old fortune teller)
+0x0000004C Elenora
+0x0000004D Elenora (eyes closed)
+0x0000004E Uther
+0x0000004F Elbert
+0x00000050 Fargus
+0x00000051 Zephiel
+0x00000052 Guinevere
+0x00000053 Desmond
+0x00000054 Hellene
+0x00000055 Hellene (happy)
+0x00000056 Murdock
+0x00000057 Leila
+0x00000058 Leila (eyes closed)
+0x00000059 Hausen (Lyn's grandfather)
+0x0000005A Jan
+0x0000005B Natalie
+0x0000005C Bramimond
+0x0000005D Roland
+0x0000005E Durban
+0x0000005F Nergal (masked)
+0x00000060 Nergal (masked, flipped)
+0x00000061 Nergal (unmasked)
+0x00000062 Nergal (unmasked, flipped)
+0x00000063 Sonia
+0x00000064 Brendan
+0x00000065 Lloyd
+0x00000066 Linus
+0x00000067 Limstella
+0x00000068 Ephidel
+0x00000069 Ephidel (hooded)
+0x0000006A Darin
+0x0000006B Erik
+0x0000006C Helman
+0x0000006D Marquess Araphen
+0x0000006E Groznyi
+0x0000006F Wire
+0x00000070 Zagan
+0x00000071 Boies
+0x00000072 Sealen
+0x00000073 Bauker
+0x00000074 Bernard
+0x00000075 Damian
+0x00000076 Zoldam
+0x00000077 Uhai
+0x00000078 Aion
+0x00000079 Georg
+0x0000007A Cameron
+0x0000007B Oleg
+0x0000007C Eubans
+0x0000007D Kishuna
+0x0000007E Paul
+0x0000007F Jasmine
+0x00000080 Pascal
+0x00000081 Kenneth
+0x00000082 Jerme
+0x00000083 Maxime
+0x00000084 Ursula
+0x00000085 Teodor
+0x00000086 Denning
+0x00000087 Kaim
+0x00000088 Batta
+0x00000089 Zugu
+0x0000008A Glass
+0x0000008B Migal
+0x0000008C Carjiga
+0x0000008D Bug
+0x0000008E Puzon
+0x0000008F Bool
+0x00000090 Heintz
+0x00000091 Beyard
+0x00000092 Yogi
+0x00000093 Eagler
+0x00000094 Lundgren
+0x00000095 Unlisted (blue haired generic mercenary boss)
+0x00000096 Lloyd (Morph)
+0x00000097 Linus (Morph)
+0x00000098 Brendan (Morph)
+0x00000099 Uhai (Morph)
+0x0000009A Ursula (Morph)
+0x0000009B Kenneth (Morph)
+0x0000009C Darin (Morph)
+0x0000009D Jerme (Morph)
+0x0000009E Roy (Young)
+0x0000009F Lilina (Young)
+0x000000A0 Fa
+0x000000A1 Sophia
+0x000000A2 Bishop (gives Lyn the Mani Katti)
+0x000000A3 Caelin servant (Ch.10)
+0x000000A4 Caelin servant (recolored)
+0x000000A5 Generic Blue Soldier
+0x000000A6 Generic Red Soldier
+0x000000A7 Generic Gray Soldier
+0x000000A8 Generic Bronze Soldier
+0x000000A9 Commoner Man (Balding, with moustache)
+0x000000AA Commoner Man (Green hair and moustache)
+0x000000AB Commoner Man (Brown hair and moustache)
+0x000000AC Commoner Man (Scrawny, with moustache)
+0x000000AD Commoner Woman (hair in a bun)
+0x000000AE Commoner Girl (Freckles)
+0x000000AF Commoner Girl (Blond hair)
+0x000000B0 Commoner Young man
+0x000000B1 Commoner Young man (Freckles)
+0x000000B2 Commoner Boy (Blond hair)
+0x000000B3 Commoner Boy (Redhead)
+0x000000B4 Commoner Girl (Pigtails)
+0x000000B5 Commoner Girl (Redhead)
+0x000000B6 Commoner Old Man (Bearded)
+0x000000B7 Commoner Old Woman (Grey hair)
+0x000000B8 Commoner Old Woman (Brown hair)
+0x000000B9 Commoner Young Man (Redhead)
+0x000000BA Random enemy assassin/Black fang member
+0x000000BB Random enemy brigand (Batta)
+0x000000BC Random enemy brigand (Buckteeth)
+0x000000BD Random enemy brigand (Sideburns)
+0x000000BE Myrmidon card
+0x000000BF Swordmaster card
+0x000000C0 Fighter card
+0x000000C1 Warrior card
+0x000000C2 Knight card
+0x000000C3 General card
+0x000000C4 Archer card
+0x000000C5 Sniper card
+0x000000C6 Cleric card
+0x000000C7 Bishop card
+0x000000C8 Mage card
+0x000000C9 Sage card
+0x000000CA Shaman card
+0x000000CB Druid card
+0x000000CC Cavalier card
+0x000000CD Paladin card
+0x000000CE Troubadour card
+0x000000CF Valkyrie card
+0x000000D0 Nomad card
+0x000000D1 Nomadic Trooper card
+0x000000D2 Pegasus card
+0x000000D3 Falco Knight card
+0x000000D4 Wywern Knight card
+0x000000D5 Wywern Lord card
+0x000000D6 Soldier card
+0x000000D7 Brigand card
+0x000000D8 Pirate card
+0x000000D9 Berserker card
+0x000000DA Thief card
+0x000000DB Manakete card
+0x000000DC Mercenary card
+0x000000DD Hero card
+0x000000DE Fire Dragon card
+0x000000DF Anna
+0x000000E0 Jake
+0x000000E1 Armory man (shop)
+0x000000E2 Arena man (shop)
+0x000000E3 Shop girl (shop)
+0x000000E4 Anna (Secret shop)

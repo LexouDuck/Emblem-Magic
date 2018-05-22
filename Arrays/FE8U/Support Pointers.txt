@@ -1,0 +1,66 @@
+0x000000 None
+0x8AEBAC Default Eirika
+0x8AEBC4 Default Ephraim
+0x8AEBDC Default Seth
+0x8AEBF4 Default Frantz
+0x8AEC0C Default Gilliam
+0x8AEC24 Default Moulder
+0x8AEC3C Default Vanessa
+0x8AEC54 Default Garcia
+0x8AEC6C Default Ross
+0x8AEC84 Default Colm
+0x8AEC9C Default Neimi
+0x8AECB4 Default Artur
+0x8AECCC Default Lute
+0x8AECE4 Default Natasha
+0x8AECFC Default Joshua
+0x8AED14 Default Kyle
+0x8AED2C Default Forde
+0x8AED44 Default Tana
+0x8AED5C Default Innes
+0x8AED74 Default Gerik
+0x8AED8C Default Tethys
+0x8AEDA4 Default Marisa
+0x8AEDBC Default Saleh
+0x8AEDD4 Default Ewan
+0x8AEDEC Default L'Arachel
+0x8AEE04 Default Dozla
+0x8AEE1C Default Cormag
+0x8AEE34 Default Amelia
+0x8AEE4C Default Rennac
+0x8AEE64 Default Duessel
+0x8AEE7C Default Myrrh
+0x8AEE94 Default Knoll
+0x8AEEAC Default Syrene
+0xE70400 Custom
+0xE70418 Custom
+0xE70430 Custom
+0xE70448 Custom
+0xE70460 Custom
+0xE70478 Custom
+0xE70490 Custom
+0xE704A8 Custom
+0xE704C0 Custom
+0xE704D8 Custom
+0xE704F0 Custom
+0xE70508 Custom
+0xE70520 Custom
+0xE70538 Custom
+0xE70550 Custom
+0xE70568 Custom
+0xE70580 Custom
+0xE70598 Custom
+0xE705B0 Custom
+0xE705C8 Custom
+0xE705E0 Custom
+0xE705F8 Custom
+0xE70610 Custom
+0xE70628 Custom
+0xE70640 Custom
+0xE70658 Custom
+0xE70670 Custom
+0xE70688 Custom
+0xE706A0 Custom
+0xE706B8 Custom
+0xE706D0 Custom
+0xE706E8 Custom

@@ -1,0 +1,4 @@
+0xA45B04 8
+
+0x00 4 Pointer Sprite
+0x04 4 Pointer AnimData

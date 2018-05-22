@@ -1,0 +1,345 @@
+FE6J
+Chapter Data Editor (FE6)
+by Kate & Arch
+0x6637A4
+45
+68
+LIST
+Chapter List.txt
+
+Chapter Ref Pointer
+General
+0
+4
+POIN
+Chapter Ref Pointers.txt
+
+Tileset 1
+Chapter Map
+4
+1
+LIST
+Map List.txt
+
+Tileset 2
+Chapter Map
+5
+1
+LIST
+Map List.txt
+
+Palette
+Chapter Map
+6
+1
+LIST
+Map List.txt
+
+Tileset TSA
+Chapter Map
+7
+1
+LIST
+Map List.txt
+
+Map
+Chapter Map
+8
+1
+LIST
+Map List.txt
+
+Tileset Animations
+Chapter Map
+9
+2
+LIST
+Map List.txt
+
+Triggerable Map Changes
+Chapter Map
+11
+1
+LIST
+Map List.txt
+
+Fog Amount
+Chapter Gameplay
+12
+1
+NUMU
+NULL
+
+Preparations Screen
+Chapter Gameplay
+13
+1
+BOOL
+NULL
+
+Chapter Name
+General
+14
+1
+HEXU
+NULL
+
+Byte 15
+Unknown
+15
+1
+HEXU
+NULL
+
+Byte 16
+Unknown
+16
+1
+HEXU
+NULL
+
+Weather
+Chapter Gameplay
+18
+1
+LIST
+Chapter Weather.txt
+
+Battle Tileset
+Chapter Map
+19
+1
+LIST
+Battle Tileset List.txt
+
+Hard Mode Enemy Stat Bonus
+Chapter Gameplay
+19
+1
+HEXU
+NULL
+
+Player Phase
+Chapter Music
+20
+1
+LIST(Music Editor)
+Music List.txt
+
+Enemy Phase
+Chapter Music
+21
+1
+LIST(Music Editor)
+Music List.txt
+
+NPC Phase
+Chapter Music
+22
+1
+LIST(Music Editor)
+Music List.txt
+
+World Map Prologue
+Chapter Music
+23
+1
+LIST(Music Editor)
+Music List.txt
+
+
+Chapter Opening
+Chapter Music
+24
+1
+LIST(Music Editor)
+Music List.txt
+
+Byte 25
+Unknown
+25
+1
+HEXU
+NULL
+
+Bytes 26-27
+Unknown
+26
+2
+HEXU
+NULL
+
+Bytes 28-29
+Unknown
+28
+2
+HEXU
+NULL
+
+Bytes 30-31
+Unknown
+30
+2
+HEXU
+NULL
+
+Bytes 32-33
+Unknown
+32
+2
+HEXU
+NULL
+
+Bytes 34-35
+Unknown
+34
+2
+HEXU
+NULL
+
+Bytes 36-37
+Unknown
+36
+2
+HEXU
+NULL
+
+Bytes 38-39
+Unknown
+38
+2
+HEXU
+NULL
+
+Bytes 40-41
+Unknown
+40
+2
+HEXU
+NULL
+
+Bytes 42-43
+Unknown
+42
+2
+HEXU
+NULL
+
+Byte 44
+Unknown
+44
+1
+HEXU
+NULL
+
+Byte 45
+Unknown
+45
+1
+HEXU
+NULL
+
+Byte 46
+Unknown
+46
+1
+HEXU
+NULL
+
+Byte 47
+Unknown
+47
+1
+HEXU
+NULL
+
+Goal Text (Data Screen)
+Chapter Objective
+48
+2
+HEXU(Text Editor)
+NULL
+
+Ally Army Title
+Chapter Objective
+50
+2
+HEXU(Text Editor)
+NULL
+
+Enemy Army Title
+Chapter Objective
+52
+2
+HEXU(Text Editor)
+NULL
+
+Enemy Emblem (Data Screen)
+Chapter Objective
+54
+1
+LIST
+Character Mini Portraits.txt
+
+Byte 55
+Unknown
+55
+1
+HEXU
+NULL
+
+Byte 56
+Unknown
+56
+1
+HEXU
+NULL
+
+Byte 57
+Unknown
+57
+1
+HEXU
+NULL
+
+Event Data Reference
+General
+58
+1
+LIST
+Map List.txt
+
+Chapter Prologue Scene
+General
+59
+1
+LIST
+Map List.txt
+
+Byte 60
+Unknown
+60
+1
+HEXU
+NULL
+
+Byte 62
+Unknown
+62
+2
+HEXU
+NULL
+
+Byte 64
+Unknown
+64
+2
+HEXU
+NULL
+
+Byte 66
+Unknown
+66
+2
+HEXU
+NULL

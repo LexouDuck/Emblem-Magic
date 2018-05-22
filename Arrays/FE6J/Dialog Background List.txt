@@ -1,0 +1,21 @@
+0x00 House
+0x01 Village
+0x02 Prison
+0x03 Shrine (Purple)
+0x04 Shrine (Bright)
+0x05 Castle with door
+0x06 Castle with pillars
+0x07 Grass field with trees
+0x08 Room inside castle
+0x09 House
+0x0A Snowy village
+0x0B Snowy field with trees
+0x0C Grass field, gray sky
+0x0D Shrine (White)
+0x0E Shrine (Purple)
+0x0F Shrine (Yellow)
+0x10 Arena
+0x11 Cave
+0x12 Fiery cave
+0x13 To Be Continued
+0x14 Game Over

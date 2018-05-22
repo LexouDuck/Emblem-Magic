@@ -1,0 +1,231 @@
+0x00 Generic
+0x01 Default
+0x02 Roy
+0x03 Clarine
+0x04 Fa
+0x05 Shin
+0x06 Sue
+0x07 Dayan
+0x08 Barth
+0x09 Bors
+0x0A Douglas
+0x0B Wolt
+0x0C Dorothy
+0x0D Klein
+0x0E Saul
+0x0F Ellen
+0x10 Yodel
+0x11 Chad
+0x12 Karel
+0x13 Fir
+0x14 Rutger
+0x15 Dieck
+0x16 Oujay
+0x17 Garet
+0x18 Alan
+0x19 Lance
+0x1A Percival
+0x1B Igrene
+0x1C Marcus
+0x1D Astol
+0x1E Wade
+0x1F Lot
+0x20 Bartre
+0x21 Lugh
+0x22 Lilina
+0x23 Hugh
+0x24 Niime
+0x25 Ray
+0x26 Lalum
+0x27 Juno
+0x28 Tate
+0x29 Thany
+0x2A Zeiss
+0x2B Elfin
+0x2C Cass
+0x2D Sophia
+0x2E Miledy
+0x2F Gonzales
+0x30 Noah
+0x31 Treck
+0x32 Zealot
+0x33 Echidna
+0x34 Cecilia
+0x35 Geese
+0x36 Gale
+0x37 Damas
+0x38 Rud
+0x39 Slater
+0x3A Erik
+0x3B Dorie
+0x3C Devias
+0x3D Roartz
+0x3E Scott
+0x3F Flaer
+0x40 Oro
+0x41 Aine
+0x42 Narshen
+0x43 Raeth
+0x44 Reygance
+0x45 Sigune
+0x46 Alucard
+0x47 Murdock
+0x48 Brunya
+0x49 Zephiel
+0x4A Idoun
+0x4B Idoun (hooded)
+0x4C Yahn
+0x4D Zinc
+0x4E Gel
+0x4F Erik (old)
+0x50 Random bandit (bucktooth)
+0x51 Random bandit (bearded)
+0x52 Generic Soldier
+0x53 Generic Pegasus Knight
+0x54 Merlinus
+0x55 Merlinus (shop)
+0x56 Eliwood
+0x57 Guinevere
+0x58 Hector
+0x59 Old King
+0x5A Commoner Young Woman
+0x5B Commoner Girl
+0x5C Commoner Girl (freckles)
+0x5D Commoner Man (balding, moustache)
+0x5E Commoner Man (moustache)
+0x5F Commoner Woman (hair in a bun)
+0x60 Commoner Girl (ponytail)
+0x61 Commoner Old Man
+0x62 Commoner Man
+0x63 Commoner Old Woman
+0x64 Commoner Young Man (freckles)
+0x65 Commoner Young Man
+0x66 Commoner Boy
+0x67 Commoner Girl (pigtails)
+0x68 Commoner Woman (gypsy)
+0x69 Commoner Girl (freckles, blond)
+0x6A Commoner Man (balding, blond)
+0x6B Commoner Man (moustache, blond)
+0x6C Commoner Woman (hairbun, blond)
+0x6D Commoner Girl (ponytail, blond)
+0x6E Commoner Old Man (blond)
+0x6F Commoner Man (blond)
+0x70 Commoner Old Woman (blond)
+0x71 Commoner Young Man (freckles, blond)
+0x72 Commoner Young Man (blond)
+0x73 Commoner Boy (blond)
+0x74 Commoner Girl (pigtails, blond)
+0x75 Commoner Girl (freckles, green)
+0x76 Commoner Man (balding, white)
+0x77 Commoner Man (moustache, brown)
+0x78 Commoner Woman (hairbun, green)
+0x79 Commoner Girl (ponytail, brown)
+0x7A Commoner Old Man (dark blond)
+0x7B Commoner Man (brown)
+0x7C Commoner Old Woman (brown)
+0x7D Commoner Young Man (freckles, brown)
+0x7E Commoner Young Man (brown)
+0x7F Commoner Boy (brown)
+0x80 Commoner Girl (pigtails, brown)
+0x81 Commoner Girl (freckles, redhead)
+0x82 Commoner Man (balding, reddish)
+0x83 Commoner Man (moustache, reddish)
+0x84 Commoner Woman (hairbun, brown)
+0x85 Commoner Girl (ponytail, redhead)
+0x86 Commoner Old Man (red clothing)
+0x87 Commoner Man (redhead)
+0x88 Commoner Old Woman (redhead)
+0x89 Commoner Young Man (freckles, redhead)
+0x8A Commoner Young Man (redhead)
+0x8B Commoner Boy (redhead)
+0x8C Commoner Girl (pigtails, redhead)
+0x8D Commoner Girl (freckles, black)
+0x8E Commoner Man (balding, black)
+0x8F Commoner Man (moustache, black)
+0x90 Commoner Woman (hairbun, black)
+0x91 Commoner Girl (ponytail, black)
+0x92 Commoner Old Man (gray)
+0x93 Commoner Man (gray)
+0x94 Commoner Old Woman (black)
+0x95 Commoner Young Man (freckles, black)
+0x96 Commoner Young Man (black)
+0x97 Commoner Boy (black)
+0x98 Commoner Girl (pigtails, black)
+0x99 Myrmidon card
+0x9A Swordmaster card
+0x9B Fighter card
+0x9C Warrior card
+0x9D Knight card
+0x9E General card
+0x9F Archer card
+0xA0 Sniper card
+0xA1 Priest card
+0xA2 Bishop card
+0xA3 Mage card
+0xA4 Sage card
+0xA5 Shaman card
+0xA6 Druid card
+0xA7 Cavalier card
+0xA8 Paladin card
+0xA9 Troubadour card
+0xAA Valkyrie card
+0xAB Nomad card
+0xAC Nomad Trooper card
+0xAD Pegasus Knight card
+0xAE Falco Knight card
+0xAF Wyvern Rider card
+0xB0 Wyvern Lord card
+0xB1 Soldier card
+0xB2 Brigand card
+0xB3 Pirate card
+0xB4 Berserker card
+0xB5 Thief card
+0xB6 Manakete card
+0xB7 Mercenary card
+0xB8 Hero card
+0xB9 Armory Man (shop)
+0xBA Arena Man (shop)
+0xBB Shop Woman (shop)
+0xBC Anna (secret shop)
+0xBD Wendy
+0xBE Idoun (dark dragon)
+0xBF Hector (bloody)
+0xC0 Anna
+0xC1 Bishop from the orphanage
+0xC2 Bishop from the orphanage (shadow)
+0xC3 Bishop from the orphanage (shadow)
+0xC4 Bishop from the orphanage (shadow)
+0xC5 Old Sage (green)
+0xC6 Ohtz (Ch.14x)
+0xC7 Pereth (Ch.21x)
+0xC8 Old Sage (orange)
+0xC9 Warrior (red)
+0xCA Warrior (white)
+0xCB Henning (Ch.8x)
+0xCC Warrior (green)
+0xCD Monke (Ch.18B)
+0xCE Brakul (Ch.20Bx)
+0xCF Nomad (yellow)
+0xD0 Nomad (blue)
+0xD1 Brute (pink)
+0xD2 Brute (green)
+0xD3 Grero (Ch.12x)
+0xD4 Martel (Ch.18A)
+0xD5 Windam (CH.16x)
+0xD6 Bihsop (orange)
+0xD7 Generic Soldier (red)
+0xD8 Generic Soldier (gray)
+0xD9 Generic Soldier (green)
+0xDA Generic Soldier (yellow)
+0xDB Generic Soldier (redder)
+0xDC Generic Soldier (greener)
+0xDD Morgan (Ch.11B)
+0xDE Lord (white hair)
+0xDF Lord (red hair)
+0xE0 Teck (Ch.20Ax)
+0xE1 Soldier (green hair)
+0xE2 Soldier (blond hair)
+0xE3 Wagner (Ch.6)
+0xE4 Nord (Ch.10A)
+0xE5 Shaman (green)
+0xE6 Shaman (brown)

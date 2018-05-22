@@ -1,0 +1,6 @@
+0xC99058 4
+
+0x02 1 Byte Anim
+0x01 1 Byte Bool
+0x00 1 Byte Type
+0x03 1 Byte Separator

@@ -1,0 +1,23 @@
+body
+{
+	font-family: Calibri,sans-serif;
+}
+h1 {
+    letter-spacing:1px;
+    font-size: 24px;
+}
+h2 {
+    font-size: 18px;
+}
+p {
+    font-size: 15px;
+}
+code {
+	display:block;
+	line-height:8px;
+	white-space:pre;
+}
+table, th, td {
+	border-spacing: 0px;
+    border: 1px solid black;
+}

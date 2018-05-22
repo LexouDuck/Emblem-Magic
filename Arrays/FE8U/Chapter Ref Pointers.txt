@@ -1,0 +1,64 @@
+0x000000 None
+0x1C32C8 Prologue
+0x1C32CC Ch.1
+0x1C32D0 Ch.2
+0x1C32D4 Ch.3
+0x1C32D8 Ch.4
+0x1C32DC Ch.5x
+0x1C32E0 Ch.5
+0x1C32E4 Ch.6
+0x1C32E8 Ch.7
+0x1C32EC Ch.8
+0x1C32F0 Eirika Ch.9
+0x1C32F4 Eirika Ch.10
+0x1C32F8 Eirika Ch.12
+0x1C32FC Eirika Ch.13
+0x1C3300 Eirika Ch.14
+0x1C3304 Eirika Ch.15
+0x1C3308 Eirika Ch.16
+0x1C330C Eirika Ch.17
+0x1C3310 Eirika Ch.18
+0x1C3314 Eirika Ch.19
+0x1C3318 Eirika Ch.20
+0x1C331C Eirika Final Ch.p1
+0x1C3320 Eirika Final Ch.p2
+0x1C3324 ???
+0x1C3328 Ephraim Ch.9
+0x1C332C Ephraim Ch.10
+0x1C3330 Ephraim Ch.12
+0x1C3334 Ephraim Ch.13
+0x1C3338 Ephraim Ch.14
+0x1C333C Ephraim Ch.15
+0x1C3340 Ephraim Ch.16
+0x1C3344 Ephraim Ch.17
+0x1C3348 Ephraim Ch.18
+0x1C334C Ephraim Ch.19
+0x1C3350 Ephraim Ch.20
+0x1C3354 Ephraim Final Ch.p1
+0x1C3358 Ephraim Final Ch.p2
+0x1C3360 Tower of Valni 1
+0x1C3364 Tower of Valni 2
+0x1C3368 Tower of Valni 3
+0x1C336C Tower of Valni 4
+0x1C3370 Tower of Valni 5
+0x1C3374 Tower of Valni 6
+0x1C3378 Tower of Valni 7
+0x1C337C Tower of Valni 8
+0x1C3380 Empty
+0x1C3384 Lagdou Ruins 1
+0x1C3388 Lagdou Ruins 2
+0x1C338C Lagdou Ruins 3
+0x1C3390 Lagdou Ruins 4
+0x1C3394 Lagdou Ruins 5
+0x1C3398 Lagdou Ruins 6
+0x1C339C Lagdou Ruins 7
+0x1C33A0 Lagdou Ruins 8
+0x1C33A4 Lagdou Ruins 9
+0x1C33A8 Lagdou Ruins 10
+0x1C33AC Lords split up
+0x1C33B0 Melkaen Coast
+0x1C33B4 Debug map 1
+0x1C33B8 Debug map 2
+0x1C33BC Eirika Ch.11
+0x1C33C0 ???
+0x1C33C4 Ephraim Ch.11

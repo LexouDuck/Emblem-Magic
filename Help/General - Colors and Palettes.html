@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <link rel="stylesheet" href="Emblem Magic.css">
+	<title>Colors and Palettes</title>
+</head>
+<body>
+	<h1>Colors and Palettes</h1>
+	<br>
+	<h2>• Color</h2>
+	<p>
+	The GBA works with a 16-bit color system, this means it stores colors in 16-bit integers (an unsigned 16-bit int can go from 0 to 65535, or 2<sup>16</sup> - 1).<br>
+	In this system, the first bit is the alpha bit (tells whether or not the color is transparent), the next 5 bits are the blue channel, followed by 5 bits for the green channel, and lastly 5 bits for the red channel.<br>
+	Here are the bitmasks for a 16-bit color int:<br>
+	<br>
+	<code>
+0x8000 - 10000000 00000000 - A) Alpha bit<br>
+0x7C00 - 01111100 00000000 - B) Blue channel<br>
+0x03E0 - 00000011 11100000 - G) Green channel<br>
+0x001F - 00000000 00011111 - R) Red channel<br>
+	</code>
+	</p><br>
+	<h2>• Palettes</h2>
+	<p><br>
+	Palettes in the GBA can hold 16 different colors, the first (or 0th) of which is usually the color used for transparency (the alpha bit in each color is irrelevant most of the time). Sprites can use only one palette each, while backgrounds can use several palettes simultaneously, with a TSA array indicating which palette each 8x8 tile should use.<br>
+	<br>
+	In Emblem Magic, there is usually a PaletteBox next to an image, showing said image's palette. If you click on the PaletteBox, it will open a Palette Editor, so as to modify the colors of the palette in question, as well as saving it to a .pal file, or loading a .pal file to replace said palette.<br>
+	</p>
+</body>
+</html>

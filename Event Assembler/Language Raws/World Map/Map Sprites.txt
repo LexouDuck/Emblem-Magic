@@ -1,0 +1,104 @@
+##Places or moves a map sprite on the world map.
+WM_PUTSPRITE, 0xB7, 20, -game:FE7 -indexMode:8
+##The ID to give this object on the world map.
+##All items shown at once must have a unique ID.
+	MapObjectID, 4, 2
+##Position of the sprite on the world map (in pixels).
+	Position, 8, 4, -coordinates:2 -preferredBase:10
+##The class of the map sprite to display.
+	ClassID, 12, 1
+##This parameter handles the map sprite's palette,
+##its walking speed, and whether the camera follows it.
+	SpriteProperties, 13, 1
+##ID that separates sprites with same class.
+	MapSpriteID, 14, 1
+	Unknown, 15, 1
+	Unknown2, 16, 4
+
+##Removes a map sprite from the world map.
+WM_REMSPRITE, 0xB8, 12, -game:FE7 -indexMode:8
+##The unique object ID of the map sprite to
+##remove from the world map.
+	MapObjectID, 4, 2
+	Unknown, 8, 4
+
+
+
+##Places or moves a map sprite on the world map.
+WM_PUTSPRITE, 0x9E60, 12, -game:FE8 -indexMode:8
+##The ID to give this object on the world map.
+##All items shown at once must have a unique ID.
+	MapObjectID, 4, 2
+##The class of the map sprite to display.
+	ClassID, 6, 1
+##The palette for this map sprite.
+	Allegiance, 8, 1
+	Unknown, 10, 2
+
+##Removes a map sprite from the world map.
+WM_REMSPRITE, 0xA040, 8, -game:FE8 -indexMode:8
+##The unique object ID of the map sprite to
+##remove from the world map.
+	MapObjectID, 4, 2
+
+##Displays the main lord (see 'WM_HIDELORD')
+WM_SHOWLORD, 0xA140, 8, -game:FE8 -indexMode:8
+	0, 2, 2, -fixed
+	Unknown, 4, 2
+	0, 6, 2, -fixed
+
+##Hides the main lord's sprite (see 'WM_SHOWLORD')
+WM_HIDELORD, 0xA240, 8, -game:FE8 -indexMode:8
+	0, 2, 2, -fixed
+	0, 4, 2, -fixed
+	0, 6, 2, -fixed
+
+WM_FADEINSPRITE, 0xA340, 8, -game:FE8 -indexMode:8
+	Value1, 2, 2
+	Value2, 4, 2
+	Value3, 6, 2 
+
+WM_FADEOUTSPRITE, 0xA440, 8, -game:FE8 -indexMode:8
+	Value1, 2, 2
+	Value2, 4, 2
+	Value3, 6, 2  
+
+WM_WAITFORSPRITELOAD, 0xA520, 4, -game:FE8 -indexMode:8
+
+
+WM_PUTSPRITE, 0xA760, 12, -game:FE8 -indexMode:8
+	ID, 2, 2
+	ClassID, 4, 2
+	Allegiance, 6, 2
+	Position, 8, 4, -coordinates:2 -preferredBase:10
+
+WM_PUTMOVINGSPRITE, 0xA8C0, 24, -game:FE8 -indexMode:8
+	Value1, 2, 2
+	ClassID, 4, 2
+	Acceleration, 6, 2
+	StartPosition, 8, 4, -coordinates:2 -preferredBase:10
+	EndPosition, 12, 4, -coordinates:2 -preferredBase:10
+	Time, 16, 2
+	Flags, 18, 2
+#Flags are: 0x1 = don't disappear until overwritten, 0x3 = Fade to black at ending position
+	Delay, 20, 2
+#Always 0
+	Value11, 22, 2
+		
+WM_MOVESPRITETO, 0xA980, 16, -game:FE8 -indexMode:8
+	Value1, 2, 2
+	Value2, 4, 2
+	Value3, 6, 2
+	Value4, 8, 2
+	Location ID, 10, 2
+	Time, 12, 2
+	Delay, 14, 2
+
+WM_SPAWNLORD, 0xC360, 12, -game:FE8 -indexMode:8
+#Always 0
+	Value1, 2, 2
+	Value2, 4, 2
+	CharacterID, 6, 2
+	MapLocation, 8, 2
+#Always 0
+	Value5, 10, 2

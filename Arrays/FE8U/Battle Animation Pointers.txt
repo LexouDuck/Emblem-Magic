@@ -1,0 +1,102 @@
+0x000000 None
+0x8AEFD8 Ephraim Lord
+0x8AEFE4 Eirika Lord
+0x8AEFF0 Ephraim Great Lord
+0x8AEFFC Eirika Great Lord
+0x8AF008 Cavalier
+0x8AF018 Cavalier (F)
+0x8AF028 Paladin
+0x8AF038 Paladin (F)
+0x8AF048 Knight
+0x8AF054 Knight (F)
+0x8AF060 General
+0x8AF080 General (F)
+0x8AF0A0 Thief
+0x8AF0AC Manakete
+0x8AF0B8 Mercenary
+0x8AF0C4 Mercenary (F)
+0x8AF0D0 Hero
+0x8AF0EC Hero (F)
+0x8AF108 Myrmidon
+0x8AF114 Myrmidon (F)
+0x8AF120 Swordmaster
+0x8AF12C Swordmaster (F)
+0x8AF138 Assassin
+0x8AF144 Assassin (F)
+0x8AF150 Archer
+0x8AF168 Archer (F)
+0x8AF180 Sniper
+0x8AF198 Sniper (F)
+0x8AF1B0 Ranger
+0x8AF1C0 Ranger (F)
+0x8AF1D0 Wyvern Rider
+0x8AF1DC Wyvern Rider (F)
+0x8AF1E8 Wyvern Lord
+0x8AF1F8 Wyvern Lord (F)
+0x8AF208 Wyvern Knight
+0x8AF214 Wyvern Knight (F)
+0x8AF220 Mage
+0x8AF234 Mage (F)
+0x8AF248 Sage
+0x8AF260 Sage (F)
+0x8AF278 Mage Knight
+0x8AF290 Mage Knight (F)
+0x8AF2A8 Bishop
+0x8AF2C0 Bishop (F)
+0x8AF2D8 Shaman
+0x8AF2EC Shaman (F)
+0x8AF300 Druid
+0x8AF318 Druid (F)
+0x8AF330 Summoner
+0x8AF348 Summoner (F)
+0x8AF360 Rogue
+0x8AF36C Great Knight
+0x8AF38C Great Knight (F)
+0x8AF3AC Recruit (2)
+0x8AF3B8 Journeyman (3)
+0x8AF3D0 Pupil (3)
+0x8AF3E4 Recruit (3)
+0x8AF3F0 Manakete
+0x8AF3FC Manakete (F)
+0x8AF408 Journeyman (1)
+0x8AF420 Pupil (1)
+0x8AF434 Fighter
+0x8AF44C Warrior
+0x8AF468 Brigand
+0x8AF480 Pirate
+0x8AF498 Berserker
+0x8AF4B0 Monk
+0x8AF4C4 Priest
+0x8AF4D0 Recruit (1)
+0x8AF4DC Pegasus Knight
+0x8AF4E8 Falco Knight
+0x8AF4F8 Cleric
+0x8AF504 Troubadour
+0x8AF510 Valkyrie
+0x8AF528 Dancer
+0x8AF53C Soldier
+0x8AF548 Necromancer
+0x8AF560 Revenant
+0x8AF56C Entombed
+0x8AF578 Bonewalker
+0x8AF588 Bonewalker (Bow)
+0x8AF594 Wight
+0x8AF5A4 Wight (Bow)
+0x8AF5B0 Bael
+0x8AF5BC Elder Bael
+0x8AF5C8 Cyclops
+0x8AF5E0 Mauthedoog
+0x8AF5EC Gwyllgi
+0x8AF5F8 Tarvos
+0x8AF610 Maelduin
+0x8AF62C Mogall
+0x8AF640 Arch Mogall
+0x8AF654 Gorgon
+0x8AF668 Gargoyle
+0x8AF674 Deathgoyle
+0x8AF680 Draco Zombie
+0x8AF68C Demon King
+0x8AF6A4 Cyclops (2)
+0x8AF6BC Elder Bael (2)
+0x8AF6C8 Journeyman (2)
+0x8AF6E0 Pupil (2)

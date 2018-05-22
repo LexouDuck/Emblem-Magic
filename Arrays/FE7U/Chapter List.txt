@@ -1,0 +1,67 @@
+0x00 Prologue: A Girl from the Plains
+0x01 Ch.1: Footsteps of Fate
+0x02 Ch.2: Sword of Spirits
+0x03 Ch.3: Band of Mercenaries
+0x04 Ch.4: In Occupation's Shadow
+0x05 Ch.5: Beyond the Borders
+0x06 Ch.6: Blood of Pride
+0x07 Ch.7: Siblings Abroad
+0x08 Ch.7x: The Black Shadow
+0x09 Ch.8: Vortex of Strategy
+0x0A Ch.9: A Grim Reunion
+0x0B Ch.10: The Distant Plains
+0x0C Ch.11E: Taking Leave
+0x0D Ch.11H: Another Journey
+0x0E Ch.12: Birds of a Feather
+0x0F Ch.13: In Search of Truth
+0x10 Ch.13x: The Peddler Merlinus
+0x11 Ch.14: False Friends
+0x12 Ch.15H: Talons Alight
+0x13 Ch.15/16: Noble Lady of Caelin 
+0x14 Ch.16/17: Whereabouts Unknown 
+0x15 Ch.16x/17x: The Port of Badon 
+0x16 Ch.17/18: Pirate Ship
+0x17 Ch.18/19: The Dread Isle 
+0x18 Ch.18x/19x: Imprisoner of Magic 
+0x19 Ch.19xH: A Glimpse in Time
+0x1A Ch.19/20: Dragon's Gate 
+0x1B Ch.20/21: New Resolve 
+0x1C Ch.21/22: Kinship's Bond 
+0x1D Ch.22/23: Living Legend 
+0x1E Ch.22x/23x: Genesis 
+0x1F Ch.23/24 A: Four-Fanged Offense (Lloyd)
+0x20 Ch.23/24 B: Four-Fanged Offense (Linus)
+0x21 Ch.25H: Crazed Beast
+0x22 Ch.24/26: Unfulfilled Heart 
+0x23 Ch.25/27 A: Pale Flower of Darkness (Kenneth)
+0x24 Ch.25/27 B: Pale Flower of Darkness (Jerme) 
+0x25 Ch.26/28: Battle before Dawn 
+0x26 Ch.26x/28x: Night of Farewells 
+0x27 Ch.27/29: Cog of Destiny 
+0x28 Ch.28E: Valorous Roland
+0x29 Ch.30H: The Berserker
+0x2A Ch.29/31: Sands of Time 
+0x2B Ch.29x/31x: Battle Preparations 
+0x2C Ch.30/32: Victory or Death 
+0x2D Ch.32x: The Value of Life
+0x2E Final Chapter: Light (pt1)
+0x2F Final Chapter: Light (pt2)
+0x30 Outside Araphen 
+0x31 Outside fort
+0x32 Ostia
+0x33 Castle
+0x34 Laus
+0x35 Nergal and kids flashback
+0x36 Meeting with Uther
+0x37 Athos' place (Sacred Shrine)
+0x38 Messed up building
+0x39 Town with Nino (talk w/Lloyd + Linus)
+0x3A Path to the HQ (Lyn uses tracking)
+0x3B Black Fang HQ
+0x3C Small Forest Map
+0x3D Nighttime village (Jaffar + Nino leave for Sonia)
+0x3E Cave with Ninian (Ch. 19xx Teodor n stuff)
+0x3F Ostia with Athos (Telling about history)
+0x40 Closed Dragon's Gate
+0x41 Link Arena
+0x42 Unknown

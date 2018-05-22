@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <link rel="stylesheet" href="Emblem Magic.css">
+	<title>Addresses and Pointers</title>
+</head>
+<body>
+	<h1>Addresses and Pointers</h1>
+	<p>
+	Any file on a computer is a big sequence of bytes (so really just a sequence of 0s and 1s). An address is a specific location in the file, it is the number of bytes that come before said location.<br>
+	We sometimes see the word 'offset' be used interchangeably with 'address', which isn't quite correct. Whereas an address refers specifically to a byte index within a file, the word offset is normally used to specify a byte index within a subsection of a file.
+	<br>
+	<br>
+	In Emblem Magic, addresses generally are represented with 6 digits, since most Fire Emblem ROMs weigh 16MB or less, although you might see 7 digit addresses on an expanded ROM or with the PAL version of Fire Emblem 8.
+	<br>
+	<br>
+	A pointer is an address, written in the file itself. It is a reference to a location in the file read from another place in this same file. The Game Boy Advance writes and reads numbers in Little Endian - this means all the numbers stored in the ROM are reversed byte-by-byte - and pointers are no exception.<br>
+	What's more, when running, the GBA uses all the addressing space in its memory from 0x00000000 to 0x08000000 - thus, any data the GBA reads from the cartridge has its address shifted by 0x08000000, and pointers are written in the ROM with this in account.
+	So, where we might write an address like "0x6AF500", a pointer to this same address would look like "00 F5 6A 08" in the ROM.
+	</p>
+</body>
+</html>

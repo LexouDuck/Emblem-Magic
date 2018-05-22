@@ -1,0 +1,355 @@
+# Modes 1 & 2: Normal Attack
+c03 # Start animation 1
+c07 # Start animation 2
+1 f [hero_0.png]  b [hero_4.png]
+2 f [hero_1.png]  b [hero_4.png]
+1 f [hero_2.png]  b [hero_4.png]
+1 f [hero_3.png]  b [hero_4.png]
+2 f [hero_4.png] a [hero_affine_0.png] (133, 66) (0.92578, 0.37109, -0.37109, 0.92578)  b [hero_4.png]
+c36 # SFX sword unsheath
+2 f [hero_5.png]  b [hero_4.png]
+5 f [hero_6.png]  b [hero_4.png]
+3 f [hero_7.png]  b [hero_4.png]
+4 f [hero_8.png]  b [hero_4.png]
+2 f [hero_9.png] a [hero_affine_1.png] (116, 65) (0.96484, 0.25781, -0.25781, 0.96484)  b [hero_4.png]
+1 f [hero_9.png]  b [hero_4.png]
+1 f [hero_9.png] a [hero_affine_1.png] (116, 66) (0.95703, -0.27734, 0.27734, 0.95703)  b [hero_4.png]
+1 f [hero_9.png] a [hero_affine_1.png] (116, 67) (0.86328, -0.50000, 0.50000, 0.86328)  b [hero_4.png]
+1 f [hero_9.png] a [hero_affine_0.png] (126, 69) (0.98438, 0.17188, -0.17188, 0.98438)  b [hero_4.png]
+1 f [hero_9.png] a [hero_affine_0.png] (127, 70) (0.99609, 0.06641, -0.06641, 0.99609)  b [hero_4.png]
+3 f [hero_9.png] a [hero_affine_0.png] (128, 70) (0.97266, -0.22656, 0.22656, 0.97266)  b [hero_4.png]
+c22 # SFX blade swing
+3 f [hero_16.png]  b [hero_4.png]
+c04 # Deplete HP
+c20 # SFX hit (heavy)
+c1A # Normal hit
+3 f [hero_17.png]  b [hero_64.png]
+1 f [hero_18.png]  b [hero_64.png]
+c01 # Wait for HP
+1 f [hero_19.png] a [hero_affine_2.png] (110, 65) (0.69141, -0.71875, 0.71875, 0.69141)  b [hero_64.png]
+1 f [hero_19.png] a [hero_affine_2.png] (109, 65) (0.80469, -0.58984, 0.58984, 0.80469)  b [hero_64.png]
+1 f [hero_19.png] a [hero_affine_2.png] (108, 65) (0.88672, -0.45313, 0.45313, 0.88672)  b [hero_64.png]
+1 f [hero_19.png] a [hero_affine_2.png] (107, 65) (0.96875, -0.24219, 0.24219, 0.96875)  b [hero_64.png]
+1 f [hero_19.png]  b [hero_64.png]
+1 f [hero_24.png] a [hero_affine_2.png] (95, 70) (0.90625, 0.42188, -0.42188, 0.90625)  b [hero_64.png]
+4 f [hero_24.png] a [hero_affine_2.png] (94, 71) (0.74219, 0.66797, -0.66797, 0.74219)  b [hero_64.png]
+2 f [hero_26.png]  b [hero_4.png]
+c15 # Small screenshake
+1 f [hero_27.png] a [hero_affine_2.png] (98, 50) (0.71875, 0.69141, -0.69141, 0.71875)  b [hero_4.png]
+1 f [hero_28.png] a [hero_affine_2.png] (99, 38) (-0.71484, 0.69531, -0.69531, -0.71484)  b [hero_4.png]
+1 f [hero_29.png] a [hero_affine_2.png] (102, 34) (-0.71484, 0.69531, -0.69531, -0.71484)  b [hero_4.png]
+1 f [hero_30.png] a [hero_affine_2.png] (106, 28) (-0.71484, 0.69531, -0.69531, -0.71484)  b [hero_4.png]
+1 f [hero_31.png] a [hero_affine_2.png] (110, 22) (-0.71484, 0.69531, -0.69531, -0.71484)  b [hero_4.png]
+1 f [hero_32.png] a [hero_affine_2.png] (112, 15) (-0.71484, 0.69531, -0.69531, -0.71484)  b [hero_4.png]
+1 f [hero_33.png] a [hero_affine_2.png] (114, 13) (-0.71484, 0.69531, -0.69531, -0.71484)  b [hero_4.png]
+1 f [hero_34.png] a [hero_affine_2.png] (116, 12) (-0.71484, 0.69531, -0.69531, -0.71484)  b [hero_4.png]
+1 f [hero_35.png] a [hero_affine_2.png] (118, 10) (-0.71484, 0.69531, -0.69531, -0.71484)  b [hero_4.png]
+1 f [hero_36.png] a [hero_affine_2.png] (120, 9) (-0.71484, 0.69531, -0.69531, -0.71484)  b [hero_4.png]
+1 f [hero_37.png] a [hero_affine_2.png] (120, 12) (-0.06641, 0.99609, -0.99609, -0.06641)  b [hero_4.png]
+c37 # SFX sword clicking
+4 f [hero_38.png] a [hero_affine_2.png] (124, 14) (0.45313, 0.89063, -0.89063, 0.45313)  b [hero_4.png]
+2 f [hero_39.png] a [hero_affine_2.png] (125, 15) (0.45313, 0.89063, -0.89063, 0.45313)  b [hero_4.png]
+2 f [hero_40.png] a [hero_affine_2.png] (126, 16) (0.45313, 0.89063, -0.89063, 0.45313)  b [hero_4.png]
+1 f [hero_41.png] a [hero_affine_2.png] (127, 17) (0.45313, 0.89063, -0.89063, 0.45313)  b [hero_4.png]
+1 f [hero_42.png] a [hero_affine_2.png] (128, 18) (0.45313, 0.89063, -0.89063, 0.45313)  b [hero_4.png]
+1 f [hero_43.png] a [hero_affine_2.png] (129, 20) (0.45313, 0.89063, -0.89063, 0.45313)  b [hero_4.png]
+1 f [hero_44.png]  b [hero_4.png]
+2 f [hero_45.png]  b [hero_4.png]
+1 f [hero_46.png]  b [hero_4.png]
+2 f [hero_47.png]  b [hero_4.png]
+1 f [hero_48.png]  b [hero_4.png]
+2 f [hero_49.png]  b [hero_4.png]
+1 f [hero_50.png]  b [hero_4.png]
+2 f [hero_51.png]  b [hero_4.png]
+1 f [hero_52.png]  b [hero_4.png]
+2 f [hero_53.png]  b [hero_4.png]
+1 f [hero_54.png]  b [hero_4.png]
+1 f [hero_55.png] a [hero_affine_2.png] (120, 43) (0.91797, -0.39063, 0.39063, 0.91797)  b [hero_4.png]
+2 f [hero_56.png] a [hero_affine_2.png] (117, 30) (-0.23828, 0.96875, -0.96875, -0.23828)  b [hero_4.png]
+1 f [hero_57.png] a [hero_affine_2.png] (120, 29) (-0.71484, 0.69531, -0.69531, -0.71484)  b [hero_4.png]
+1 f [hero_58.png] a [hero_affine_2.png] (125, 33) (-0.91797, 0.39063, -0.39063, -0.91797)  b [hero_4.png]
+1 f [hero_59.png] a [hero_affine_3.png] (133, 36) (-0.97266, -0.22266, 0.22266, -0.97266)  b [hero_4.png]
+1 f [hero_60.png] a [hero_affine_3.png] (135, 41) (-0.91797, -0.38672, 0.38672, -0.91797)  b [hero_4.png]
+c34 # SFX heavy stomp
+c15 # Small screenshake
+5 f [hero_61.png]  b [hero_4.png]
+3 f [hero_62.png] a [hero_affine_4.png] (135, 83) ( 0.46875,  0.87891, -0.87891,  0.46875)
+		  a [hero_affine_3.png] (129, 72) (-0.91797, -0.38672,  0.38672, -0.91797)  b [hero_4.png]
+2 f [hero_62.png] a [hero_affine_4.png] (133, 85) ( 0.46875,  0.87891, -0.87891,  0.46875)
+		  a [hero_affine_3.png] (127, 74) (-0.91797, -0.38672,  0.38672, -0.91797)  b [hero_4.png]
+2 f [hero_64.png] a [hero_affine_5.png] (127, 79) ( 0.87891, -0.46875,  0.46875,  0.87891)
+		  a [hero_affine_4.png] (132, 82) (-0.99609,  0.00000,  0.00000, -0.99609)  b [hero_4.png]
+1 f [hero_65.png]  b [hero_4.png]
+c06 # Start enemy turn
+1 f [hero_65.png]  b [hero_4.png]
+2 f [hero_66.png]  b [hero_4.png]
+3 f [hero_1.png]  b [hero_4.png]
+c0D # End animation
+end
+
+# Modes 3 & 4: Critical Attack
+c03 # Start animation 1
+c07 # Start animation 2
+1 f [hero_0.png]  b [hero_4.png]
+1 f [hero_68.png]  b [hero_4.png]
+1 f [hero_68.png] a [hero_affine_5.png] (148, 71) (0.90234, -0.42188, 0.42188, 0.90234)
+	 a [hero_affine_6.png] (153, 71) (0.84375, -0.53125, 0.53125, 0.84375)  b [hero_4.png]
+1 f [hero_68.png] a [hero_affine_5.png] (149, 70) (0.81641, -0.57422, 0.57422, 0.81641)
+	 a [hero_affine_6.png] (152, 71) (0.76172, -0.64453, 0.64453, 0.76172)  b [hero_4.png]
+1 f [hero_68.png] a [hero_affine_5.png] (150, 69) (0.76172, -0.64453, 0.64453, 0.76172)
+	 a [hero_affine_6.png] (153, 70) (0.76172, -0.64453, 0.64453, 0.76172)  b [hero_4.png]
+1 f [hero_68.png] a [hero_affine_5.png] (152, 66) (0.59766, -0.79688, 0.79688, 0.59766)
+	 a [hero_affine_6.png] (155, 69) (0.67969, -0.73047, 0.73047, 0.67969)  b [hero_4.png]
+1 f [hero_68.png] a [hero_affine_5.png] (154, 65) (0.48047, -0.87500, 0.87500, 0.48047)
+	 a [hero_affine_6.png] (155, 69) (0.44922, -0.89063, 0.89063, 0.44922)  b [hero_4.png]
+1 f [hero_68.png] a [hero_affine_5.png] (157, 62) (0.18750, -0.98047, 0.98047, 0.18750)
+	 a [hero_affine_6.png] (157, 68) (0.13672, -0.98828, 0.98828, 0.13672)  b [hero_4.png]
+1 f [hero_68.png] a [hero_affine_5.png] (151, 69) (0.65234, -0.75391, 0.75391, 0.65234)
+	 a [hero_affine_6.png] (153, 71) (0.65234, -0.75391, 0.75391, 0.65234)  b [hero_4.png]
+1 f [hero_68.png] a [hero_affine_5.png] (148, 72) (0.81641, -0.57422, 0.57422, 0.81641)
+	 a [hero_affine_6.png] (151, 73) (0.81641, -0.57422, 0.57422, 0.81641)  b [hero_4.png]
+1 f [hero_68.png] a [hero_affine_5.png] (145, 74) (0.90234, -0.42188, 0.42188, 0.90234)
+	 a [hero_affine_6.png] (150, 74) (0.90234, -0.42188, 0.42188, 0.90234)  b [hero_4.png]
+1 f [hero_68.png] a [hero_affine_5.png] (139, 75) (0.98047, -0.19141, 0.19141, 0.98047)
+	 a [hero_affine_6.png] (146, 75) (0.98047, -0.19141, 0.19141, 0.98047)  b [hero_4.png]
+1 f [hero_68.png] a [hero_affine_5.png] (132, 74) (0.94531, 0.32422, -0.32422, 0.94531)
+	 a [hero_affine_6.png] (143, 75) (0.94531, 0.32422, -0.32422, 0.94531)  b [hero_4.png]
+1 f [hero_80.png] a [hero_affine_5.png] (118, 54) (0.77734, 0.62891, -0.62891, 0.77734)
+	 a [hero_affine_6.png] (130, 58) (0.61328, 0.78516, -0.78516, 0.61328)  b [hero_4.png]
+1 f [hero_80.png] a [hero_affine_5.png] (116, 51) (0.42188, 0.90234, -0.90234, 0.42188)
+	 a [hero_affine_6.png] (131, 56) (0.61328, 0.78516, -0.78516, 0.61328)  b [hero_4.png]
+1 f [hero_80.png] a [hero_affine_5.png] (115, 46) (0.10156, 0.99219, -0.99219, 0.10156)
+	 a [hero_affine_6.png] (130, 54) (0.15625, 0.98438, -0.98438, 0.15625)  b [hero_4.png]
+1 f [hero_80.png] a [hero_affine_5.png] (117, 39) (-0.38672, 0.91797, -0.91797, -0.38672)
+	 a [hero_affine_6.png] (131, 51) (-0.38672, 0.91797, -0.91797, -0.38672)  b [hero_4.png]
+1 f [hero_80.png] a [hero_affine_5.png] (121, 35) (-0.87109, 0.48438, -0.48438, -0.87109)
+	 a [hero_affine_6.png] (132, 51) (-0.86328, 0.50000, -0.50000, -0.86328)  b [hero_4.png]
+c27 # ANIM Hero Axe+Shield toss
+14 f [hero_85.png]  b [hero_4.png]
+3 f [hero_86.png]  b [hero_4.png]
+3 f [hero_87.png]  b [hero_4.png]
+2 f [hero_88.png]  b [hero_4.png]
+c15 # Small screenshake
+2 f [hero_89.png]  b [hero_4.png]
+1 f [hero_90.png]  b [hero_4.png]
+1 f [hero_91.png]  b [hero_4.png]
+1 f [hero_92.png]  b [hero_4.png]
+1 f [hero_93.png]  b [hero_4.png]
+35 f [hero_4.png]  b [hero_4.png]
+2 f [hero_94.png]  b [hero_4.png]
+c04 # Deplete HP
+c1F # SFX hit normal/crit
+c0A # Critical hit
+c42 # SFX long axe swing
+5 f [hero_95.png]  b [hero_64.png]
+c01 # Wait for HP
+2 f [hero_96.png]  b [hero_64.png]
+16 f [hero_97.png]  b [hero_64.png]
+1 f [hero_98.png] a [hero_affine_5.png] (85, 35) (-0.89844, -0.43359, 0.43359, -0.89844)  b [hero_64.png]
+1 f [hero_98.png] a [hero_affine_5.png] (84, 39) (-0.99609, -0.01563, 0.01563, -0.99609)  b [hero_64.png]
+1 f [hero_98.png] a [hero_affine_5.png] (80, 42) (-0.80469, 0.58594, -0.58594, -0.80469)  b [hero_64.png]
+1 f [hero_101.png] a [hero_affine_7.png] (100, 60) (-0.13672, 0.98828, -0.98828, -0.13672)  b [hero_64.png]
+1 f [hero_101.png] a [hero_affine_7.png] (100, 64) (0.54297, 0.83594, -0.83594, 0.54297)  b [hero_64.png]
+1 f [hero_101.png] a [hero_affine_7.png] (102, 65) (0.85547, 0.51172, -0.51172, 0.85547)  b [hero_64.png]
+1 f [hero_101.png] a [hero_affine_7.png] (108, 65) (0.98047, -0.19141, 0.19141, 0.98047)  b [hero_64.png]
+1 f [hero_101.png] a [hero_affine_7.png] (112, 64) (0.38672, -0.91797, 0.91797, 0.38672)  b [hero_64.png]
+1 f [hero_101.png] a [hero_affine_7.png] (112, 62) (0.03125, -0.99609, 0.99609, 0.03125)  b [hero_64.png]
+1 f [hero_101.png] a [hero_affine_7.png] (112, 60) (-0.37500, -0.92578, 0.92578, -0.37500)  b [hero_64.png]
+1 f [hero_101.png] a [hero_affine_7.png] (111, 56) (-0.73047, -0.67969, 0.67969, -0.73047)  b [hero_64.png]
+1 f [hero_101.png] a [hero_affine_7.png] (109, 55) (-0.99609, -0.06641, 0.06641, -0.99609)  b [hero_64.png]
+1 f [hero_101.png] a [hero_affine_7.png] (107, 53) (-0.93750, 0.33984, -0.33984, -0.93750)  b [hero_64.png]
+1 f [hero_101.png] a [hero_affine_7.png] (104, 54) (-0.69141, 0.71875, -0.71875, -0.69141)  b [hero_64.png]
+1 f [hero_101.png] a [hero_affine_7.png] (100, 59) (0.12109, 0.99219, -0.99219, 0.12109)  b [hero_64.png]
+1 f [hero_101.png] a [hero_affine_7.png] (101, 65) (0.83594, 0.54297, -0.54297, 0.83594)  b [hero_64.png]
+1 f [hero_101.png] a [hero_affine_7.png] (105, 67) (0.98047, -0.19141, 0.19141, 0.98047)  b [hero_64.png]
+1 f [hero_101.png] a [hero_affine_7.png] (110, 65) (0.67969, -0.73047, 0.73047, 0.67969)  b [hero_64.png]
+1 f [hero_116.png] a [hero_affine_2.png] (112, 63) (0.38672, -0.91797, 0.91797, 0.38672)  b [hero_64.png]
+1 f [hero_116.png] a [hero_affine_2.png] (113, 58) (-0.39063, -0.91797, 0.91797, -0.39063)  b [hero_64.png]
+1 f [hero_116.png] a [hero_affine_2.png] (110, 56) (-0.89063, -0.44922, 0.44922, -0.89063)  b [hero_64.png]
+1 f [hero_116.png] a [hero_affine_2.png] (104, 56) (-0.91797, 0.39063, -0.39063, -0.91797)  b [hero_64.png]
+1 f [hero_116.png] a [hero_affine_2.png] (101, 59) (-0.18750, 0.98047, -0.98047, -0.18750)  b [hero_64.png]
+1 f [hero_116.png] a [hero_affine_2.png] (100, 63) (0.39063, 0.91797, -0.91797, 0.39063)  b [hero_64.png]
+1 f [hero_116.png] a [hero_affine_2.png] (104, 66) (0.91797, 0.38672, -0.38672, 0.91797)  b [hero_64.png]
+1 f [hero_116.png] a [hero_affine_2.png] (108, 66) (0.94922, -0.30859, 0.30859, 0.94922)  b [hero_64.png]
+1 f [hero_116.png] a [hero_affine_2.png] (110, 65) (0.71484, -0.69531, 0.69531, 0.71484)  b [hero_64.png]
+1 f [hero_116.png] a [hero_affine_2.png] (111, 63) (0.41797, -0.90625, 0.90625, 0.41797)  b [hero_64.png]
+1 f [hero_116.png] a [hero_affine_2.png] (110, 65) (0.69141, -0.71875, 0.71875, 0.69141)  b [hero_64.png]
+1 f [hero_116.png] a [hero_affine_2.png] (109, 65) (0.80469, -0.58984, 0.58984, 0.80469)  b [hero_64.png]
+1 f [hero_116.png] a [hero_affine_2.png] (108, 65) (0.88672, -0.45313, 0.45313, 0.88672)  b [hero_64.png]
+1 f [hero_116.png] a [hero_affine_2.png] (107, 65) (0.96875, -0.24219, 0.24219, 0.96875)  b [hero_64.png]
+1 f [hero_116.png]  b [hero_64.png]
+1 f [hero_131.png] a [hero_affine_2.png] (95, 70) (0.90625, 0.42188, -0.42188, 0.90625)  b [hero_64.png]
+4 f [hero_131.png] a [hero_affine_2.png] (94, 70) (0.71875, 0.69141, -0.69141, 0.71875)  b [hero_64.png]
+2 f [hero_26.png]  b [hero_4.png]
+c15 # Small screenshake
+1 f [hero_27.png] a [hero_affine_2.png] (98, 50) (0.71875, 0.69141, -0.69141, 0.71875)  b [hero_4.png]
+1 f [hero_28.png] a [hero_affine_2.png] (99, 38) (-0.71484, 0.69531, -0.69531, -0.71484)  b [hero_4.png]
+1 f [hero_29.png] a [hero_affine_2.png] (102, 34) (-0.71484, 0.69531, -0.69531, -0.71484)  b [hero_4.png]
+1 f [hero_30.png] a [hero_affine_2.png] (106, 28) (-0.71484, 0.69531, -0.69531, -0.71484)  b [hero_4.png]
+1 f [hero_31.png] a [hero_affine_2.png] (110, 22) (-0.71484, 0.69531, -0.69531, -0.71484)  b [hero_4.png]
+1 f [hero_32.png] a [hero_affine_2.png] (112, 15) (-0.71484, 0.69531, -0.69531, -0.71484)  b [hero_4.png]
+1 f [hero_33.png] a [hero_affine_2.png] (114, 13) (-0.71484, 0.69531, -0.69531, -0.71484)  b [hero_4.png]
+1 f [hero_34.png] a [hero_affine_2.png] (116, 12) (-0.71484, 0.69531, -0.69531, -0.71484)  b [hero_4.png]
+1 f [hero_35.png] a [hero_affine_2.png] (118, 10) (-0.71484, 0.69531, -0.69531, -0.71484)  b [hero_4.png]
+1 f [hero_36.png] a [hero_affine_2.png] (120, 9) (-0.71484, 0.69531, -0.69531, -0.71484)  b [hero_4.png]
+1 f [hero_37.png] a [hero_affine_2.png] (120, 12) (-0.06641, 0.99609, -0.99609, -0.06641)  b [hero_4.png]
+c37 # SFX sword clicking
+4 f [hero_38.png] a [hero_affine_2.png] (124, 14) (0.45313, 0.89063, -0.89063, 0.45313)  b [hero_4.png]
+2 f [hero_39.png] a [hero_affine_2.png] (125, 15) (0.45313, 0.89063, -0.89063, 0.45313)  b [hero_4.png]
+2 f [hero_40.png] a [hero_affine_2.png] (126, 16) (0.45313, 0.89063, -0.89063, 0.45313)  b [hero_4.png]
+1 f [hero_41.png] a [hero_affine_2.png] (127, 17) (0.45313, 0.89063, -0.89063, 0.45313)  b [hero_4.png]
+1 f [hero_42.png] a [hero_affine_2.png] (128, 18) (0.45313, 0.89063, -0.89063, 0.45313)  b [hero_4.png]
+1 f [hero_43.png] a [hero_affine_2.png] (129, 20) (0.45313, 0.89063, -0.89063, 0.45313)  b [hero_4.png]
+1 f [hero_44.png]  b [hero_44.png]
+2 f [hero_45.png]  b [hero_4.png]
+1 f [hero_46.png]  b [hero_4.png]
+2 f [hero_47.png]  b [hero_4.png]
+1 f [hero_48.png]  b [hero_4.png]
+2 f [hero_49.png]  b [hero_4.png]
+1 f [hero_50.png]  b [hero_4.png]
+2 f [hero_51.png]  b [hero_4.png]
+1 f [hero_52.png]  b [hero_4.png]
+2 f [hero_53.png]  b [hero_4.png]
+1 f [hero_54.png]  b [hero_4.png]
+1 f [hero_55.png] a [hero_affine_2.png] (120, 43) (0.91797, -0.39063, 0.39063, 0.91797)  b [hero_4.png]
+2 f [hero_56.png] a [hero_affine_2.png] (117, 30) (-0.23828, 0.96875, -0.96875, -0.23828)  b [hero_4.png]
+1 f [hero_57.png] a [hero_affine_2.png] (120, 29) (-0.71484, 0.69531, -0.69531, -0.71484)  b [hero_4.png]
+1 f [hero_58.png] a [hero_affine_2.png] (125, 33) (-0.91797, 0.39063, -0.39063, -0.91797)  b [hero_4.png]
+1 f [hero_59.png] a [hero_affine_3.png] (133, 36) (-0.97266, -0.22266, 0.22266, -0.97266)  b [hero_4.png]
+1 f [hero_60.png] a [hero_affine_3.png] (135, 41) (-0.91797, -0.38672, 0.38672, -0.91797)  b [hero_4.png]
+c34 # SFX heavy stomp
+c15 # Small screenshake
+5 f [hero_61.png]  b [hero_4.png]
+3 f [hero_62.png] a [hero_affine_4.png] (135, 83) (0.46875, 0.87891, -0.87891, 0.46875)
+	 a [hero_affine_3.png] (129, 72) (-0.91797, -0.38672, 0.38672, -0.91797)  b [hero_4.png]
+2 f [hero_62.png] a [hero_affine_4.png] (133, 85) (0.46875, 0.87891, -0.87891, 0.46875)
+	 a [hero_affine_3.png] (127, 74) (-0.91797, -0.38672, 0.38672, -0.91797)  b [hero_4.png]
+2 f [hero_64.png] a [hero_affine_5.png] (127, 79) (0.87891, -0.46875, 0.46875, 0.87891)
+	 a [hero_affine_4.png] (132, 82) (-0.99609, 0.00000, 0.00000, -0.99609)  b [hero_4.png]
+1 f [hero_65.png]  b [hero_4.png]
+c06 # Start enemy turn
+1 f [hero_65.png]  b [hero_4.png]
+2 f [hero_66.png]  b [hero_4.png]
+3 f [hero_1.png]  b [hero_4.png]
+c0D # End animation
+end
+
+# Mode 5: Normal Attack (ranged)
+4 f [hero_0.png]
+end
+
+# Mode 6: Critical Attack (ranged)
+4 f [hero_0.png]
+end
+
+# Mode 7: Avoid
+c18 # Avoid to front
+1 f [hero_0.png]
+c0E # Avoid to back
+3 f [hero_137.png]
+1 f [hero_138.png]
+c01 # Wait for HP
+3 f [hero_137.png]
+c0D # End animation
+end
+
+# Mode 8: Avoid (ranged)
+c18 # Avoid to front
+1 f [hero_0.png]
+c0E # Avoid to back
+3 f [hero_137.png]
+1 f [hero_138.png]
+c01 # Wait for HP
+3 f [hero_137.png]
+c0D # End animation
+end
+
+# Modes 9 & 10: Idle
+1 f [hero_0.png]  b [hero_0.png]
+c01 # Wait for HP
+end
+
+# Mode 11: Idle (ranged)
+1 f [hero_0.png]
+c01 # Wait for HP
+end
+
+# Mode 12: Missed Attack
+c03 # Start animation 1
+c07 # Start animation 2
+1 f [hero_0.png]
+2 f [hero_1.png]
+1 f [hero_2.png]
+1 f [hero_3.png]
+2 f [hero_4.png] a [hero_affine_0.png] (133, 66) (0.92578, 0.37109, -0.37109, 0.92578)
+c36 # SFX sword unsheath
+2 f [hero_5.png]
+5 f [hero_6.png]
+3 f [hero_7.png]
+4 f [hero_8.png]
+2 f [hero_9.png] a [hero_affine_1.png] (116, 65) (0.96484, 0.25781, -0.25781, 0.96484)
+1 f [hero_9.png]
+1 f [hero_9.png] a [hero_affine_1.png] (116, 66) (0.95703, -0.27734, 0.27734, 0.95703)
+1 f [hero_9.png] a [hero_affine_1.png] (116, 67) (0.86328, -0.50000, 0.50000, 0.86328)
+1 f [hero_9.png] a [hero_affine_0.png] (126, 69) (0.98438, 0.17188, -0.17188, 0.98438)
+1 f [hero_9.png] a [hero_affine_0.png] (127, 70) (0.99609, 0.06641, -0.06641, 0.99609)
+3 f [hero_9.png] a [hero_affine_0.png] (128, 70) (0.97266, -0.22656, 0.22656, 0.97266)
+c22 # SFX blade swing
+c04 # Deplete HP
+3 f [hero_16.png]
+3 f [hero_143.png]
+1 f [hero_144.png]
+c01 # Wait for HP
+2 f [hero_26.png]
+c15 # Small screenshake
+1 f [hero_27.png] a [hero_affine_2.png] (98, 50) (0.71875, 0.69141, -0.69141, 0.71875)
+1 f [hero_28.png] a [hero_affine_2.png] (99, 38) (-0.71484, 0.69531, -0.69531, -0.71484)
+1 f [hero_29.png] a [hero_affine_2.png] (102, 34) (-0.71484, 0.69531, -0.69531, -0.71484)
+1 f [hero_30.png] a [hero_affine_2.png] (106, 28) (-0.71484, 0.69531, -0.69531, -0.71484)
+1 f [hero_31.png] a [hero_affine_2.png] (110, 22) (-0.71484, 0.69531, -0.69531, -0.71484)
+1 f [hero_32.png] a [hero_affine_2.png] (112, 15) (-0.71484, 0.69531, -0.69531, -0.71484)
+1 f [hero_33.png] a [hero_affine_2.png] (114, 13) (-0.71484, 0.69531, -0.69531, -0.71484)
+1 f [hero_34.png] a [hero_affine_2.png] (116, 12) (-0.71484, 0.69531, -0.69531, -0.71484)
+1 f [hero_35.png] a [hero_affine_2.png] (118, 10) (-0.71484, 0.69531, -0.69531, -0.71484)
+1 f [hero_36.png] a [hero_affine_2.png] (120, 9) (-0.71484, 0.69531, -0.69531, -0.71484)
+1 f [hero_37.png] a [hero_affine_2.png] (120, 12) (-0.06641, 0.99609, -0.99609, -0.06641)
+c37 # SFX sword clicking
+4 f [hero_38.png] a [hero_affine_2.png] (124, 14) (0.45313, 0.89063, -0.89063, 0.45313)
+2 f [hero_39.png] a [hero_affine_2.png] (125, 15) (0.45313, 0.89063, -0.89063, 0.45313)
+2 f [hero_40.png] a [hero_affine_2.png] (126, 16) (0.45313, 0.89063, -0.89063, 0.45313)
+1 f [hero_41.png] a [hero_affine_2.png] (127, 17) (0.45313, 0.89063, -0.89063, 0.45313)
+1 f [hero_42.png] a [hero_affine_2.png] (128, 18) (0.45313, 0.89063, -0.89063, 0.45313)
+1 f [hero_43.png] a [hero_affine_2.png] (129, 20) (0.45313, 0.89063, -0.89063, 0.45313)
+1 f [hero_44.png]
+2 f [hero_45.png]
+1 f [hero_46.png]
+2 f [hero_47.png]
+1 f [hero_48.png]
+2 f [hero_49.png]
+1 f [hero_50.png]
+2 f [hero_51.png]
+1 f [hero_52.png]
+2 f [hero_53.png]
+1 f [hero_54.png]
+1 f [hero_55.png] a [hero_affine_2.png] (120, 43) (0.91797, -0.39063, 0.39063, 0.91797)
+2 f [hero_56.png] a [hero_affine_2.png] (117, 30) (-0.23828, 0.96875, -0.96875, -0.23828)
+1 f [hero_57.png] a [hero_affine_2.png] (120, 29) (-0.71484, 0.69531, -0.69531, -0.71484)
+1 f [hero_58.png] a [hero_affine_2.png] (125, 33) (-0.91797, 0.39063, -0.39063, -0.91797)
+1 f [hero_59.png] a [hero_affine_3.png] (133, 36) (-0.97266, -0.22266, 0.22266, -0.97266)
+1 f [hero_60.png] a [hero_affine_3.png] (135, 41) (-0.91797, -0.38672, 0.38672, -0.91797)
+c34 # SFX heavy stomp
+c15 # Small screenshake
+5 f [hero_61.png]
+3 f [hero_62.png] a [hero_affine_4.png] (135, 83) (0.46875, 0.87891, -0.87891, 0.46875)
+	 a [hero_affine_3.png] (129, 72) (-0.91797, -0.38672, 0.38672, -0.91797)
+2 f [hero_62.png] a [hero_affine_4.png] (133, 85) (0.46875, 0.87891, -0.87891, 0.46875)
+	 a [hero_affine_3.png] (127, 74) (-0.91797, -0.38672, 0.38672, -0.91797)
+2 f [hero_64.png] a [hero_affine_5.png] (127, 79) (0.87891, -0.46875, 0.46875, 0.87891)
+	 a [hero_affine_4.png] (132, 82) (-0.99609, 0.00000, 0.00000, -0.99609)
+1 f [hero_65.png]
+c06 # Start enemy turn
+1 f [hero_65.png]
+2 f [hero_66.png]
+3 f [hero_1.png]
+c0D # End animation
+end

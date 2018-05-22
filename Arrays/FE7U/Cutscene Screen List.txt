@@ -1,0 +1,65 @@
+0x00 Lyn wakes you up
+0x01 Meeting Sain and Kent
+0x02 Lyn gets the Mani Katti
+0x03 Florina acting shy
+0x04 Lyn's team in battle
+0x05 Lyn meets Rath the nomad
+0x06 Eliwood carries Ninian (Ch.7x)
+0x07 Lyn charges towards Lundgren
+0x08 Lyn and her grandfather
+0x09 Lyn saying goodbye
+0x0A End of Lyn's story
+0x0B Eliwood yelling at Florina
+0x0C Ninian and Nils
+0x0D Hector and Nils in the desert
+0x0E Nergal takes Ninian
+0x0F Eliwood cries over Elbert
+0x10 Ninian and Nils (greenish)
+0x11 Nergal looking at a dragon
+0x12 Nergal looking up
+0x13 Nergal with evil grin
+0x14 Eliwood confronts the Ice Dragon
+0x15 Eliwood holds Ninian, Nergal laughs
+0x16 Eliwood holds Ninian
+0x17 Eliwood holds Ninian, Nils cries
+0x18 Flashback: Athos and Nergal
+0x19 Flashback: Living amongst dragons
+0x1A Flashback: Evil Nergal
+0x1B Flashback: Ice Dragons
+0x1C Flashback: Nergal traps the kids
+0x1D Flashback: Ninian and Nils run away
+0x1E Flashback: Elbert with the kids
+0x1F Nergal reveals his eye
+0x20 Dragons emerge from the gate
+0x21 Eliwood slays the Ice Dragon
+0x22 Dragon's Gate background
+0x23 (bright) Humanoid dragon
+0x24 The Fire Dragon
+0x25 Lyn talks to Hector
+0x26 Flashback: Nergal meets the kids
+0x27 Flashback: Nergal creates a Morph
+0x28 Flashback: Brammimond warns Nergal
+0x29 The Forteress of Bern
+0x2A Flashback: Dragons
+0x2B Athos dying
+0x2C Nils says goodbye
+0x2D Nils and Ninian say goodbye
+0x2E Eliwood with Ninian
+0x2F Eliwood with Hector
+0x30 Eliwood with Lyn
+0x31 Eliwood with Fiora
+0x32 Eliwood ending
+0x33 Castle Ostia
+0x34 Eliwood and Hector, Roy and Lilina
+0x35 The Forteress of Bern (night)
+0x36 Zephiel on his throne
+0x37 Jahn speaks to Zephiel
+0x38 Zephiel
+0x39 Zephiel (evil)
+0x3A Nils goes in the gate
+0x3B Hector with Florina
+0x3C Hector with Lyn
+0x3D Hector with Farina
+0x3E Hector ending
+0x3F Human and dragon
+0x40 Zephiel on his throne

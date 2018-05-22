@@ -1,0 +1,247 @@
+0x00 None
+0x01 [IMG] Sacae Plains
+0x02 [PAL] Sacae Plains (Light Sand)
+0x03 [TSA] Sacae Plains
+0x04 [MAP] Prologue
+0x05 [ANM] Water (Fields)
+0x06 [EVT] Prologue
+0x07 [PAL] Sacae Plains (Dark Sand)
+0x08 [MAP] Ch.1
+0x09 [EVT] Ch.1
+0x0A [IMG] Plains & Castle
+0x0B [PAL] Plains & Castle (Bright)
+0x0C [TSA] Plains & Castle
+0x0D [MAP] Ch.2
+0x0E [CHG] Ch.2
+0x0F [EVT] Ch.2
+0x10 [IMG] Town & Docks
+0x11 [PAL] Town & Docks (No Cliffs)
+0x12 [TSA] Town & Docks
+0x13 [MAP] Ch.3
+0x14 [CHG] Ch.3
+0x15 [EVT] Ch.3
+0x16 [IMG] Fields & Fortress
+0x17 [PAL] Fields & Fortress (Sunset)
+0x18 [TSA] Fields & Fortress
+0x19 [MAP] Ch.4
+0x1A [CHG] Ch.4
+0x1B [EVT] Ch.4
+0x1C [IMG] Fields 1
+0x1D [IMG] Fields 2
+0x1E [PAL] Fields (Sunny)
+0x1F [TSA] Fields
+0x20 [MAP] Ch.5
+0x21 [EVT] Ch.5
+0x22 [PAL] Town & Docks (No Water)
+0x23 [MAP] Ch.6
+0x24 [CHG] Ch.6
+0x25 [EVT] Ch.6
+0x26 [MAP] Ch.7
+0x27 [CHG] Ch.7
+0x28 [EVT] Ch.7
+0x29 [PAL] Plains & Castle (Normal)
+0x2A [MAP] Ch.7x
+0x2B [CHG] Ch.7x
+0x2C [EVT] Ch.7x
+0x2D [MAP] Ch.8
+0x2E [CHG] Ch.8
+0x2F [EVT] Ch.8
+0x30 [MAP] Ch.9
+0x31 [CHG] Ch.9
+0x32 [EVT] Ch.9
+0x33 [PAL] Fields (Cloudy)
+0x34 [MAP] Ch.10
+0x35 [CHG] Ch.10
+0x36 [EVT] Ch.10
+0x37 [MAP] Ch.11E
+0x38 [CHG] Ch.11E
+0x39 [EVT] Ch.11E
+0x3A [PAL] Plains & Castle (Ostia/Laus)
+0x3B [MAP] Ch.11H
+0x3C [CHG] Ch.11H
+0x3D [EVT] Ch.11H
+0x3E [MAP] Ch.12
+0x3F [CHG] Ch.12
+0x40 [EVT] Ch.12
+0x41 [MAP] Ch.13
+0x42 [CHG] Ch.13
+0x43 [EVT] Ch.13
+0x44 [PAL] Fields (Night)
+0x45 [MAP] Ch.13x
+0x46 [CHG] Ch.13x
+0x47 [EVT] Ch.13x
+0x48 [PAL] Fields (Darker)
+0x49 [MAP] Ch.14
+0x4A [CHG] Ch.14
+0x4B [EVT] Ch.14
+0x4C [MAP] Ch.15H
+0x4D [CHG] Ch.15H
+0x4E [EVT] Ch.15H
+0x4F [MAP] Ch.15/16
+0x50 [CHG] Ch.15/16
+0x51 [EVT] Ch.15/16
+0x52 [PAL] Plains & Castle (Caelin)
+0x53 [MAP] Ch.16/17
+0x54 [CHG] Ch.16/17
+0x55 [EVT] Ch.16/17
+0x56 [PAL] Town & Docks (No Ship)
+0x57 [MAP] Ch.16x/17x
+0x58 [ANM] Water (Town & Docks)
+0x59 [CHG] Ch.16x/17x
+0x5A [EVT] Ch.16x/17x
+0x5B [IMG] Ship
+0x5C [PAL] Ship
+0x5D [TSA] Ship
+0x5E [MAP] Ch.17/18
+0x5F [ANM] Water (Ship)
+0x60 [CHG] Ch.17/18
+0x61 [EVT] Ch.17/18
+0x62 [PAL] Fields (Foggy)
+0x63 [MAP] Ch.18/19
+0x64 [CHG] Ch.18/19
+0x65 [EVT] Ch.18/19
+0x66 [PAL] Fields (Kishuna)
+0x67 [MAP] Ch.18x/19x
+0x68 [CHG] Ch.18x/19x
+0x69 [EVT] Ch.18x/19x
+0x6A [IMG] Mountains & Shrine
+0x6B [PAL] Mountains & Shrine (Normal)
+0x6C [TSA] Mountains & Shrine
+0x6D [MAP] Ch.19x pt2
+0x6E [CHG] Ch.19x pt2
+0x6F [EVT] Ch.19x pt2
+0x70 [MAP] Ch.19/20
+0x71 [CHG] Ch.19/20
+0x72 [EVT] Ch.19/20
+0x73 [PAL] Town & Docks (Night)
+0x74 [MAP] Ch.20/21
+0x75 [CHG] Ch.20/21
+0x76 [EVT] Ch.20/21
+0x77 [PAL] Fields & Forteress (Normal)
+0x78 [MAP] Ch.21/22
+0x79 [CHG] Ch.21/22
+0x7A [EVT] Ch.21/22
+0x7B [IMG] Desert
+0x7C [PAL] Desert
+0x7D [TSA] Desert
+0x7E [MAP] Ch.22/23
+0x7F [EVT] Ch.22/23
+0x80 [PAL] Plains & Castle (Shrine)
+0x81 [MAP] Ch.22x/23x
+0x82 [CHG] Ch.22x/23x
+0x83 [EVT] Ch.22x/23x
+0x84 [MAP] Ch.23/24 (Lloyd)
+0x85 [CHG] Ch.23/24 (Lloyd)
+0x86 [EVT] Ch.23/24 (Lloyd)
+0x87 [MAP] Ch.23/24 (Linus)
+0x88 [CHG] Ch.23/24 (Linus)
+0x89 [EVT] Ch.23/24 (Linus)
+0x8A [PAL] Fields (Normal)
+0x8B [MAP] Ch.25H
+0x8C [CHG] Ch.25H
+0x8D [EVT] Ch.25H
+0x8E [MAP] Ch.24/26
+0x8F [CHG] Ch.24/26
+0x90 [EVT] Ch.24/26
+0x91 [IMG] Snow
+0x92 [PAL] Snow
+0x93 [TSA] Snow
+0x94 [MAP] Ch.25/27 (Kenneth)
+0x95 [CHG] Ch.25/27 (Kenneth)
+0x96 [EVT] Ch.25/27 (Kenneth)
+0x97 [MAP] Ch.25/27 (Jerme)
+0x98 [ANM] Shimmering Ice (Snow)
+0x99 [CHG] Ch.25/27 (Jerme)
+0x9A [EVT] Ch.25/27 (Jerme)
+0x9B [PAL] Plains & Castle (Night)
+0x9C [MAP] Ch.26/28
+0x9D [CHG] Ch.26/28
+0x9E [EVT] Ch.26/28
+0x9F [PAL] Plains & Castle (Purple)
+0xA0 [MAP] Ch.26x/28x
+0xA1 [ANM] Water (Castle & Shrine)
+0xA2 [CHG] Ch.26x/28x
+0xA3 [EVT] Ch.26x/28x
+0xA4 [MAP] Ch.27/29
+0xA5 [CHG] Ch.27/29
+0xA6 [EVT] Ch.27/29
+0xA7 [IMG] Lava Cave
+0xA8 [PAL] Lava Cave
+0xA9 [TSA] Lava Cave
+0xAA [MAP] Ch.28E
+0xAB [ANM] Lava (Lava Cave)
+0xAC [CHG] Ch.28E
+0xAD [EVT] Ch.28E
+0xAE [IMG] Sand Cave
+0xAF [PAL] Sand Cave
+0xB0 [TSA] Sand Cave
+0xB1 [MAP] Ch.30H
+0xB2 [CHG] Ch.30H
+0xB3 [EVT] Ch.30H
+0xB4 [MAP] Ch.29/31
+0xB5 [CHG] Ch.29/31
+0xB6 [EVT] Ch.29/31
+0xB7 [PAL] Town & Docks (No Stone Floor)
+0xB8 [MAP] Ch.29x/31x
+0xB9 [EVT] Ch.29x/31x
+0xBA [MAP] Ch.30/32
+0xBB [CHG] Ch.30/32
+0xBC [EVT] Ch.30/32
+0xBD [PAL] Mountains & Shrine (No Plains)
+0xBE [MAP] Ch.32x
+0xBF [CHG] Ch.32x
+0xC0 [EVT] Ch.32x
+0xC1 [IMG] Dragon's Gate
+0xC2 [PAL] Dragon's Gate
+0xC3 [TSA] Dragon's Gate
+0xC4 [MAP] Final Ch. pt1
+0xC5 [ANM] Gate & Flames (Dragon's Gate)
+0xC6 [CHG] Final Ch. pt1
+0xC7 [EVT] Final Ch. pt1
+0xC8 [MAP] Final Ch. pt2
+0xC9 [CHG] Final Ch. pt2
+0xCA [EVT] Final Ch. pt2
+0xCB [PAL] Town & Docks (Sunset)
+0xCC [MAP] Outside Araphen
+0xCD [EVT] Outside Araphen
+0xCE [MAP] Outside Fort
+0xCF [CHG] Outside Fort
+0xD0 [EVT] Outside Fort
+0xD1 [MAP] Ostia
+0xD2 [EVT] Ostia
+0xD3 [MAP] Castle
+0xD4 [EVT] Castle
+0xD5 [MAP] Laus
+0xD6 [EVT] Laus
+0xD7 [PAL] Mountains & Shrine (Flashback)
+0xD8 [MAP] Nergal and Kids Flashback
+0xD9 [EVT] Nergal and Kids Flashback
+0xDA [MAP] Meeting with Uther
+0xDB [EVT] Meeting with Uther
+0xDC [PAL] Plains & Castle (Athos' Shrine)
+0xDD [MAP] Athos' Shrine
+0xDE [EVT] Athos' Shrine
+0xDF [MAP] Messed-up Building
+0xE0 [EVT] Messed-up Building
+0xE1 [MAP] Town with Nino
+0xE2 [EVT] Town with Nino
+0xE3 [PAL] Fields (Bright)
+0xE4 [MAP] Path to the HQ
+0xE5 [EVT] Path to the HQ
+0xE6 [MAP] Black Fang HQ
+0xE7 [EVT] Black Fang HQ
+0xE8 [MAP] Forests Cutscene
+0xE9 [EVT] Forests Cutscene
+0xEA [PAL] Town (Night)
+0xEB [MAP] Nighttime Village
+0xEC [EVT] Nighttime Village
+0xED [MAP] Cave with Ninian
+0xEE [EVT] Cave with Ninian
+0xEF [MAP] Ostia with Athos
+0xF0 [EVT] Ostia with Athos
+0xF1 [MAP] Closed Dragons Gate
+0xF2 [CHG] Closed Dragons Gate
+0xF3 [EVT] Closed Dragons Gate
+0xF4 [MAP] Link Arena
+0xF5 [MAP] Unknown
+0xF6 [EVT] Unknown

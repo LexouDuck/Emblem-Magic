@@ -1,0 +1,310 @@
+FE8U
+Chapter Editor
+by SpyroDi, updated by Nintenlord
+0x8B0890
+79
+148
+LIST
+Chapter List.txt
+
+Chapter Ref Pointer
+General
+0
+4
+POIN
+Chapter Ref Pointers.txt
+
+Tileset 1
+Chapter Map
+4
+1
+LIST
+Map List.txt
+
+Tileset 2
+Chapter Map
+5
+1
+LIST
+Map List.txt
+
+Palette
+Chapter Map
+6
+1
+LIST
+Map List.txt
+
+Tileset TSA
+Chapter Map
+7
+1
+LIST
+Map List.txt
+
+Map
+Chapter Map
+8
+1
+LIST
+Map List.txt
+
+Tileset Animation 1
+Chapter Map
+9
+1
+LIST
+Map List.txt
+
+Tileset Animation 2
+Chapter Map
+10
+1
+LIST
+Map List.txt
+
+Triggerable Map Changes
+Chapter Map
+11
+1
+LIST
+Map List.txt
+
+Fog Amount
+Chapter Gameplay
+12
+1
+NUMU
+NULL
+
+Preparations Screen
+Chapter Gameplay
+13
+1
+BOOL
+NULL
+
+Byte 14
+Unknown
+14
+1
+HEXU
+NULL
+
+Byte 15
+Unknown
+15
+1
+HEXU
+NULL
+
+Byte 16
+Unknown
+16
+1
+HEXU
+NULL
+
+Byte 17
+Unknown
+17
+1
+HEXU
+NULL
+
+Weather
+Chapter Gameplay
+18
+1
+LIST
+Chapter Weather.txt
+
+Battle Tileset
+Chapter Map
+19
+1
+LIST
+Battle Tileset List.txt
+
+Byte 20
+Unknown
+20
+1
+HEXU
+NULL
+
+Byte 21
+Unknown
+21
+1
+HEXU
+NULL
+
+Player Phase
+Chapter Music
+22
+2
+LIST
+Music List.txt
+
+Enemy Phase
+Chapter Music
+24
+2
+LIST
+Music List.txt
+
+NPC Phase
+Chapter Music
+26
+2
+LIST
+Music List.txt
+
+Player Phase 2
+Chapter Music
+28
+2
+LIST
+Music List.txt
+
+Enemy Phase 2
+Chapter Music
+30
+2
+LIST
+Music List.txt
+
+NPC Phase 2
+Chapter Music
+32
+2
+LIST
+Music List.txt
+
+Bytes 32-44
+Unknown
+32
+12
+HEXT
+NULL
+
+Destructible Walls HP
+Chapter Gameplay
+44
+1
+NUMU
+NULL
+
+Bytes 44-116
+Unknown
+32
+12
+HEXT
+NULL
+
+Event Data Reference
+General
+116
+1
+LIST
+Map List.txt
+
+Chapter Prologue Scene
+General
+117
+1
+LIST
+Chapter Prologues.txt
+
+Bytes 118-134
+Unknown
+118
+16
+HEXT
+NULL
+
+Enemy count for victory music
+Chapter Music
+134
+1
+NUMU
+NULL
+
+
+Fade to Map after Chapter Title ?
+General
+135
+1
+BOOL
+NULL
+
+Status - Objective Text
+Chapter Objective
+136
+2
+HEXU
+NULL
+
+Goal Window Text
+Chapter Objective
+138
+2
+HEXU
+NULL
+
+Goal Window Info
+Chapter Objective
+140
+1
+LIST
+Chapter Goals.txt
+
+Base Remaining Turns
+Chapter Objective
+141
+1
+NUMU
+NULL
+
+Protect Character Marker
+Chapter Objective
+142
+1
+LIST
+Character List.txt
+
+Seize Tile Marker X
+Chapter Objective
+143
+1
+NUMU
+NULL
+
+Seize Tile Marker Y
+Chapter Objective
+144
+1
+NUMU
+NULL
+
+Byte 145
+Unknown
+145
+1
+HEXU
+NULL
+
+Byte 146
+Unknown
+146
+1
+HEXU
+NULL
+
+Byte 147
+Unknown
+147
+1
+HEXU
+NULL

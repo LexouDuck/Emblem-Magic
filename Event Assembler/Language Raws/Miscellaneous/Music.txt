@@ -1,0 +1,156 @@
+##Plays a sound effect.
+SOUN, 0x3C, 8, -game:FE6 -indexMode:8
+##The ID of the sound effect to play.
+	MusicID, 4, 4
+
+##command:MUSic Change
+##Changes the currently playing music.
+MUSC, 0x36, 8, -game:FE6 -indexMode:8
+##The ID of the music to change to.
+	MusicID, 4, 2
+
+##command:MUSic Switch
+##Changes music while saving the previous song
+##so that it can be restored with 'MURE'.
+MUSS, 0x37, 8, -game:FE6 -indexMode:8
+##The ID of the music to change to.
+	MusicID, 4, 2
+
+##command:MUsic REturn
+##Returns to the previously playing music
+##after a 'MUSS' music switch command.
+MURE, 0x38, 4, -game:FE6 -indexMode:8
+
+##command:MUsic ENd
+##Fades out the currently playing music.
+MUEN, 0x39, 8, -game:FE6 -indexMode:8
+##The speed at which to perform the fade-out.
+##A larger value means a slower fade-out.
+	FadeOutSpeed, 4, 4, -preferredBase:10
+
+##Makes the currently playing music quieter.
+MUSI, 0x3A, 4, -game:FE6 -indexMode:8
+
+##Makes the currently playing music return
+##to normal volume after a 'MUSI' command.
+MUNO, 0x3B, 4, -game:FE6 -indexMode:8
+
+
+
+##Plays a sound effect.
+SOUN, 0x7F, 4, -game:FE7 -indexMode:8
+##The ID of the sound effect to play.
+	MusicID, 2, 2
+
+##command:MUSic Change
+##Changes the currently playing music.
+MUSC, 0x78, 4, -game:FE7 -indexMode:8
+##The ID of the music to change to.
+	MusicID, 2, 2
+
+##command:MUSic Switch
+##Changes music while saving the previous song
+##so that it can be restored with 'MURE'.
+MUSS, 0x79, 4, -game:FE7 -indexMode:8
+##The ID of the music to change to.
+	MusicID, 2, 2
+
+##command:MUsic REturn
+##Returns to the previously playing music
+##after a 'MUSS' music switch command.
+MURE, 0x7A, 4, -game:FE7 -indexMode:8
+##The speed at which to perform the fade-out.
+##A larger value means a slower fade-out.
+	FadeOutSpeed, 2, 2
+
+##command:MUSic Mix
+##Plays music simultaneously with the currently playing music,
+##fading in progressively.
+MUSM, 0x7B, 8, -game:FE7 -indexMode:8
+##The ID of the music to change to.
+	MusicID, 2, 2
+##The speed at which to perform the fade-in.
+##A larger value means a slower fade-in.
+	FadeInSpeed, 4, 1
+	0, 5, 3, -fixed
+
+##command:MUsic ENd
+##Fades out the currently playing music.
+MUEN, 0x7C, 4, -game:FE7 -indexMode:8
+##The speed at which to perform the fade-out.
+##A larger value means a slower fade-out.
+	Fade out time, 2, 2, -preferredBase:10
+
+##Makes the currently playing music quieter.
+MUSI, 0x7D, 4, -game:FE7 -indexMode:8
+
+##Makes the currently playing music return
+##to normal volume after a 'MUSI' command.
+MUNO, 0x7E, 4, -game:FE7 -indexMode:8
+
+
+
+##Plays a sound effect.
+SOUN, 0x1620, 4, -game:FE8 -indexMode:8
+##The ID of the sound effect to play.
+	MusicID, 2, 2
+
+##command:MUSic Change
+##Changes the currently playing music.
+MUSC, 0x1220, 4, -game:FE8 -indexMode:8
+##The ID of the music to change to.
+	MusicID, 2, 2
+
+##command:MUSic Switch
+##Changes music while saving the previous song
+##so that it can be restored with 'MURE'.
+MUSS, 0x1420, 4, -game:FE8 -indexMode:8
+##The ID of the music to change to.
+	MusicID, 2, 2
+
+##command:MUsic REturn
+##Returns to the previously playing music
+##after a 'MUSS' music switch command.
+MURE, 0x1421, 4, -game:FE8 -indexMode:8
+##The speed at which to perform the fade-out.
+##A larger value means a slower fade-out.
+	FadeOutSpeed, 2, 2
+
+##Makes the currently playing music quieter.
+MUSI, 0x1520, 4, -game:FE8 -indexMode:8
+
+##Makes the currently playing music return
+##to normal volume after a 'MUSI' command.
+MUNO, 0x1521, 4, -game:FE8 -indexMode:8
+
+
+
+#Changes music.
+#MUS3, 0x1320, 8, -game:FE8 -indexMode:8
+#Music to change to.
+#	Music ID, 4, 2
+
+
+##command:MUSic Change FAST
+##Changes the currently playing music.
+##The game always uses it with 0x7FFF (silence).
+MUSCFAST, 0x1322, 4, -game:FE8 -indexMode:8
+	Value1, 2, 2
+
+##command:MUSic Change MID
+##Changes the currently playing music.
+##Has a moderate fade-out speed.
+MUSCMID, 0x1324, 4, -game:FE8 -indexMode:8
+	Value1, 2, 2
+
+##command:MUSic Change SLOW
+##Changes the currently playing music.
+##Has a slow fade-out speed.
+MUSCSLOW, 0x1326, 4, -game:FE8 -indexMode:8
+	Value1, 2, 2
+
+##command: SUDDEN MUSic change
+##Abruptly changes the currently playing music.
+##This does not unlock the track in the sound room.
+SUDDENMUS, 0x1620, 4, -game:FE8 -indexMode:8
+	Value1, 2, 2

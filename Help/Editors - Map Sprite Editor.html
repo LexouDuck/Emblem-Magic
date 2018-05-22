@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <link rel="stylesheet" href="Emblem Magic.css">
+	<title>Map Sprite Editor</title>
+</head>
+<body>
+	<h1>The Map Sprite Editor</h1>
+	<p>
+	The Map Sprite Editor allows you to view and change the map sprites in the game.<br>
+	Map Sprites are laid out in two different arrays in the ROM.<br>
+	The first stores the 3 standing frames, called the 'Idle' array.<br>
+	The second stores the movement frames and the 'unit selected' frames, called the 'Walk' array.<br>
+	<br>
+	</p>
+	<h2>The Map Sprite Idle Array</h2>
+	<p>
+	Here are the default addresses for the Idle Array in each game:<br>
+<table>
+	<tr>
+		<th></th>
+		<th>JAP</th>
+		<th>USA</th>
+		<th>EUR</th>
+	</tr>
+	<tr>
+		<th>FE6</th>
+		<td>0x662C14</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<th>FE7</th>
+		<td>0xD613B8</td>
+		<td>0xC99700</td>
+		<td>0xD607B0</td>
+	</tr>
+	<tr>
+		<th>FE8</th>
+		<td>0x903E0C</td>
+		<td>0x8AF880</td>
+		<td>0xFABB1C</td>
+	</tr>
+</table>
+	<br>
+	Here is how each entry in the array is laid out:<br>
+<table>
+	<tr>
+		<th>• All 3 games - 8 bytes long</th>
+	</tr>
+	<tr>
+		<td>
+			1 - Unknown byte - value is almost always 0x02 (0x00 for General and 0x03 for Dark Druid and Dragon)<br>
+			1 - Separator byte (always 0)<br>
+			1 - Sprite Size byte : 0x00 = 16x16 | 0x01 = 16x32 | 0x02 = 32x32<br>
+			1 - Separator byte (always 0)<br>
+			4 - Pixel data pointer<br>
+		</td>
+	</tr>
+</table>
+	<br>
+	</p>
+	<h2>The Map Sprite Walk Array</h2>
+	<p>
+	And the default addresses for the Walk array in each game:<br>
+<table>
+	<tr>
+		<th></th>
+		<th>JAP</th>
+		<th>USA</th>
+		<th>EUR</th>
+	</tr>
+	<tr>
+		<th>FE6</th>
+		<td>0x6649B4</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<th>FE7</th>
+		<td>0xD650B4</td>
+		<td>0xC9D174</td>
+		<td>0xD64224</td>
+	</tr>
+	<tr>
+		<th>FE8</th>
+		<td>0xA13488</td>
+		<td>0x9A2E00</td>
+		<td>0xA45B04</td>
+	</tr>
+</table>
+	<br>
+	Here is how each entry in the array is laid out:<br>
+<table>
+	<tr>
+		<th>• All 3 games - 8 bytes long</th>
+	</tr>
+	<tr>
+		<td>
+			4 - Pixel data pointer<br>
+			4 - Animation data pointer<br>
+		</td>
+	</tr>
+</table>
+	The pixel data is a 32x480 image (or 4x60, in tiles).<br>
+	Emblem Magic currently does not support editing map sprite animation data.<br>
+	As a result, the dancer map sprite appears glitchy in the editor.<br>
+	</p>
+	<h2>The Map Sprite Palettes</h2>
+	<p>
+	Here are the default addresses for the Map Sprite Palettes in each game:<br>
+<table>
+	<tr>
+		<th></th>
+		<th>JAP</th>
+		<th>USA</th>
+		<th>EUR</th>
+	</tr>
+	<tr>
+		<th>FE6</th>
+		<td>0x100968</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<th>FE7</th>
+		<td>0x1900E8</td>
+		<td>0x194594</td>
+		<td>0x0D13D0</td>
+	</tr>
+	<tr>
+		<th>FE8</th>
+		<td>0x5C7340</td>
+		<td>0x59EE20</td>
+		<td>0x7B13E4</td>
+	</tr>
+</table>
+</body>
+</html>

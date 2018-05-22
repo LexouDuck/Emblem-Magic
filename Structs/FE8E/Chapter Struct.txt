@@ -1,0 +1,12 @@
+0xFACB2C 148
+
+0x00 4 Pointer ChapterRef
+0x04 1 Byte Tileset1
+0x05 1 Byte Tileset2
+0x06 1 Byte Palette
+0x07 1 Byte TSA
+0x08 1 Byte Map
+0x09 1 Byte TileAnim1
+0x0A 1 Byte TileAnim2
+0x0B 1 Byte MapChanges
+0x0C 1 Byte FogAmount

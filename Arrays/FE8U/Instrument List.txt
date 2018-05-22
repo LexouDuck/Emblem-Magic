@@ -1,0 +1,128 @@
+0x00 Piano
+0x01 Piano 2
+0x02 High pitched staccato organ???
+0x03 
+0x04 Echoey Piano 2 (Respite in Battle)
+0x05 
+0x06 Harpsichord (Dragon's Gate II)
+0x07 Harpsichord (More Echoey) (Game OVer)
+0x08 Celesta (Reveive the blessing of)
+0x09 blank
+0x0A Music Box (Requiem)
+0x0B Music Box 2 (Reminiscence)
+0x0C 
+0x0D Xylophone (Softly with Grace)
+0x0E Tubular Bells (The Archsage Athos)
+0x0F Dulcimer (Shop)
+0x10 
+0x11 Percussive Organ (Victory Now!)
+0x12 
+0x13 Church Organ (Shadow Approaches)
+0x14 Reed Organ (Campaign of Fire)
+0x15 Accoridan (Going my Way)
+0x16 
+0x17 Bass sounding Organ? (Nabata's Wandering Messenger)
+0x18 Acoustic Guitar (nylon)
+0x19 
+0x1A 
+0x1B 
+0x1C Overdriven Guitar hit
+0x1D Electric Guitar (short) - was Overdriven Guitar (Destiny Enlaced with Fear)
+0x1E Distortion Guitar (Scars of the Scouring)
+0x1F Guitar Harmonics (Scars of the Scouring)
+0x20 Acoustic Bass (The Messenger)
+0x21 Electric Bass (finger) (Companions)
+0x22 Electric Bass(pick) (Precious Things)
+0x23 
+0x24 Slap Bass 1 (v.short)
+0x25 
+0x26 Synth Bass (Blessing of the 8 Generals)
+0x27 Acoustic Bass 2 (Land of the Swirling Sands)
+0x28 Resonant Sounding Strings (Winning Road)
+0x29 SynthStrings 3 (Companions)
+0x2A More Strings? (Rise to the Challenge)
+0x2B 
+0x2C 
+0x2D Pizzicato Strings (Road of Trials)
+0x2E Orchestral Strings 2 (Healing)
+0x2F Timpani (Precious Things)
+0x30 
+0x31 
+0x32 SynthStrings 1 (Precious Things)
+0x33 SynthStrings 2 (Friendship and adventure)
+0x34 Choir Aahs (What comes from Darkness)
+0x35 
+0x36 
+0x37 
+0x38 Trumpet (Winning Road)
+0x39 Trombone (Binding Ties)
+0x3A 
+0x3B 
+0x3C French Horn (Precious Things)
+0x3D Brass Section (Raise Your Spirits)
+0x3E SynthBrass 1 (Friendship and adventure)
+0x3F SynthBrass 2 (Companions)
+0x40 
+0x41 
+0x42 
+0x43 English Horn (short)
+0x44 Oboe (Precious Things)
+0x45 English Horn (Raise Your Spirits)
+0x46 Bassoon (Happiness Abounds)
+0x47 Clarinet (Winds Across the Plains)
+0x48 
+0x49 Flute (Companions)
+0x4A Recorder (Requiem)
+0x4B Pan Flute (Enemies Appear)
+0x4C 
+0x4D Piccolo
+0x4E Oboe 2? (Treasured Hope)
+0x4F Ocarina (Shop)
+0x50 Lead 1 (square) (An Unexpected Caller)
+0x51 Lead 2 (sawtooth) (2 or 3 octaves lower)
+0x52 
+0x53 
+0x54 
+0x55 Lead 6 (voice) (Distant Travels)
+0x56 
+0x57 
+0x58 
+0x59 
+0x5A Some Stacatto Muted Reedy sounding thing
+0x5B Some Echoey Brass or Trumpet ensemble (Precious Things)
+0x5C Synth Sounding Brass Section (To the Heights)
+0x5D Trumpet used in Road of Trials (DUh)
+0x5E Pad 7 (halo) (Healing)
+0x5F 
+0x60 
+0x61 
+0x62 Muted French Horn (The Cogs of Fate)
+0x63 
+0x64 FX 5 (brightness) (Campaign of Fire)
+0x65 Synth Trumpet (Strike)
+0x66 Not sure...weird sounding synth brass (Can also be used as guitar)? (Shadow Approaches)
+0x67 Ireallydunno (Enemies appear, first melody)
+0x68 Sitar (Land of the Swirling Sands)
+0x69 Damned strings + brass (short)
+0x6A More damned strings (short)
+0x6B Dammit more strings? (long)
+0x6C More Synth strings? (Dragon's Gate II)
+0x6D Distant sounding strings that rise? (Dragon's Gate II)
+0x6E Pad 7 Halo 2? (lolwut) (Opening: History Unveiled)
+0x6F Legendary Weapon Theme
+0x70  
+0x71  
+0x72  
+0x73  
+0x74  
+0x75  
+0x76 Cymbal 1
+0x77 Cymbal 2
+0x78 
+0x79 Drum kit (Treasured Memories)
+0x7A Yet another Drum kit (Fire Emblem Theme)
+0x7B Another Drum kit (Rise Above)
+0x7C Drum kit (Are these even different) (Distant Roads)
+0x7D 
+0x7E Applause (Arena Entrance)
+0x7F Drum kit (Fire Emblem Theme again)

@@ -1,0 +1,79 @@
+0x00 Prologue: The Fall of Renais
+0x01 Ch.1: Escape!
+0x02 Ch.2: The Protected
+0x03 Ch.3: Bandits of Borgo
+0x04 Ch.4: Ancient Horrors
+0x05 Ch.5x: Unbroken Heart
+0x06 Ch.5: The Empire's Reach
+0x07 Ch.6: Victims of War
+0x08 Ch.7: Waterside Renvall
+0x09 Ch.8: It's a Trap!
+0x0A Eirika Ch.9: Distant Blade
+0x0B Eirika Ch.10: Revolt at Carcino
+0x0C Eirika Ch.12: Village of Silence
+0x0D Eirika Ch.13: Hamill Canyon
+0x0E Eirika Ch.14: Queen of White Dunes
+0x0F Eirika Ch.15: Scorched Sand
+0x10 Eirika Ch.16: Ruled by Madness
+0x11 Eirika Ch.17: River of Regrets
+0x12 Eirika Ch.18: Two Faces of Evil
+0x13 Eirika Ch.19: Last Hope
+0x14 Eirika Ch.20: Darkling Woods
+0x15 Eirika Final Ch.p1
+0x16 Eirika Final Ch.p2
+0x17 Ephraim Ch.9: Fort Rigwald
+0x18 Ephraim Ch.10: Turning Traitor
+0x19 Ephraim Ch.12: Landing at Taizel
+0x1A Ephraim Ch.13: Fluorspar's Oath
+0x1B Ephraim Ch.14: Father and Son
+0x1C Ephraim Ch.15: Scorched Sand
+0x1D Ephraim Ch.16: Ruled by Madness
+0x1E Ephraim Ch.17: River of Regrets
+0x1F Ephraim Ch.18: Two Faces of Evil
+0x20 Ephraim Ch.19: Last Hope
+0x21 Ephraim Ch.20: Darkling Woods
+0x22 Ephraim Final Ch.p1
+0x23 Ephraim Final Ch.p2
+0x24 Tower of Valni 1
+0x25 Tower of Valni 2
+0x26 Tower of Valni 3
+0x27 Tower of Valni 4
+0x28 Tower of Valni 5
+0x29 Tower of Valni 6
+0x2A Tower of Valni 7
+0x2B Tower of Valni 8
+0x2C Tower of Valni 8 Clone
+0x2D Tower of Valni 8 Clone
+0x2E Lagdou Ruins 1
+0x2F Lagdou Ruins 2
+0x30 Lagdou Ruins 3
+0x31 Lagdou Ruins 4
+0x32 Lagdou Ruins 5
+0x33 Lagdou Ruins 6
+0x34 Lagdou Ruins 7
+0x35 Lagdou Ruins 8
+0x36 Lagdou Ruins 9
+0x37 Lagdou Ruins 10
+0x38 Lords split up (glitchy map)
+0x39 Melkaen Coast
+0x3A Link Arena
+0x3B Debug map 1
+0x3C Debug map 2
+0x3D Eirika Ch.11: Creeping Darkness
+0x3E Ephraim Ch.11: Phantom Ship
+0x3F Grado Castle
+0x40 Renais Castle
+0x41 Caer Pelyn
+0x42 Renais Throne Room
+0x43 Renais Audience Room
+0x44 Renvall Gate
+0x45 Grado Borders
+0x46 Grado Prison
+0x47 Renais Shrine
+0x48 Rausten Shrine
+0x49 Some Path
+0x4A Some Throne room
+0x4B Grado Shrine (Flashback)
+0x4C Another Path
+0x4D Grado Shrine
+0x4E Ch.5 Town (Flashback)

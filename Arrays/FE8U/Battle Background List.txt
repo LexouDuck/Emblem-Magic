@@ -1,0 +1,60 @@
+0x00 Village
+0x01 Castle Interior
+0x02 Plains
+0x03 River
+0x04 Lakeside
+0x05 Plains and Mountains
+0x06 Wasteland
+0x07 Desert
+0x08 Mountains
+0x09 Village
+0x0A Castle Gate
+0x0B Thick Forest
+0x0C Sea
+0x0D Castle Room
+0x0E Castle Hall (dark)
+0x0F Village (burning)
+0x10 Village (snow)
+0x11 Plains (snow)
+0x12 River (snow)
+0x13 Lakeside (snow)
+0x14 Plains and Mountains (snow)
+0x15 Mountains (snow)
+0x16 Castle Gate (snow)
+0x17 Thick Forest (snow)
+0x18 Castle Interior (golden)
+0x19 Castle Room (golden)
+0x1A Thick Forest (night)
+0x1B Forest (night)
+0x1C Thick Forest (sunset)
+0x1D Forest (sunset)
+0x1E Thick Forest (dark)
+0x1F Forest
+0x20 Dungeon Chamber
+0x21 Village (destroyed)
+0x22 Village (destroyed, night)
+0x23 Plains (dark)
+0x24 Plains (bright)
+0x25 Plains (night)
+0x26 Plains (sunset)
+0x27 Village (night)
+0x28 Castle Interior (gray)
+0x29 Castle Interior (dark)
+0x2A Castle Room (blue carpet)
+0x2B Castle Room (red carpet)
+0x2C Sea (dark)
+0x2D Dungeon Hall (red carpet)
+0x2E Dungeon Hall
+0x2F Dungeon Hall with Door
+0x30 River (bright)
+0x31 River (night)
+0x32 River (sunset)
+0x33 Village
+0x34 Plains and Hills
+0x35 Plains and Mountains (night)
+0x36 Castle Gate (night)
+0x37 Volcano
+0x38 Darkling Woods
+0x39 Dark Temple
+0x3A Village
+0x3B Shrine

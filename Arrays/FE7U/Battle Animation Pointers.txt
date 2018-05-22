@@ -1,0 +1,88 @@
+0x000000 None
+0xC99058 Eliwood Lord
+0xC99064 Lyn Lord
+0xC99070 Hector Lord
+0xC99084 Fake Knight Lord
+0xC99090 Fake Blade Lord
+0xC9909C Fake Great Lord
+0xC990B0 Knight Lord
+0xC990C4 Blade Lord
+0xC990D8 Great Lord
+0xC990F4 Mercenary
+0xC99100 Hero
+0xC99118 Hero (F)
+0xC99130 Myrmidon
+0xC9913C Myrmidon (F)
+0xC99148 Swordmaster
+0xC99154 Swordmaster (F)
+0xC99160 Fighter
+0xC99174 Warrior
+0xC9918C Knight
+0xC99198 Knight (F)
+0xC991A4 General
+0xC991BC General (F)
+0xC991D4 Archer
+0xC991EC Archer (F)
+0xC99204 Sniper
+0xC9921C Sniper (F)
+0xC99234 Monk
+0xC99248 Cleric
+0xC99254 Bishop
+0xC9926C Bishop (F)
+0xC99284 Mage
+0xC99298 Mage (F)
+0xC992AC Sage
+0xC992C4 Sage (F)
+0xC992DC Shaman
+0xC992F0 Shaman (F)
+0xC99304 Druid
+0xC9931C Druid (F)
+0xC99334 Cavalier
+0xC99344 Cavalier (F)
+0xC99354 Paladin
+0xC99370 Paladin (F)
+0xC9938C Troubadour
+0xC99398 Valkyrie
+0xC993B0 Nomad
+0xC993BC Nomad (F)
+0xC993C8 Nomad Trooper
+0xC993D8 Nomad Trooper (F)
+0xC993E8 Pegasus Knight
+0xC993F4 Falco Knight
+0xC99404 Wyvern Rider
+0xC99410 Wyvern Rider (F)
+0xC9941C Wyvern Lord
+0xC9942C Wyvern Lord (F)
+0xC9943C Soldier
+0xC99448 Brigand
+0xC9945C Pirate
+0xC99470 Berserker
+0xC99484 Thief
+0xC99490 Thief (F)
+0xC9949C Assassin
+0xC994A8 Dancer
+0xC994CC Bard
+0xC994F0 Archsage
+0xC99508 Tent
+0xC99510 Dark Druid
+0xC99528 Fire Dragon
+0xC99534 Corsair
+0xC99548 Ice Dragon
+0xC99554 Transporter
+0xC9955C Uber sage
+0xC99574 Monk (Lucius)
+0xC99588 Bishop (Lucius)
+0xC995A0 Hero (Linus)(1)
+0xC995B8 Hero (Linus)(2)
+0xC995D0 Hero (Linus)(3)
+0xC995E8 Swordmaster (Lloyd)(1)
+0xC995F4 Swordmaster (Lloyd)(2)
+0xC99600 Swordmaster (Lloyd)(3)
+0xC9960C Paladin (Isadora)
+0xC99628 Nino (Sage)
+0xC99640 Thief (Legault)
+0xC9964C Assassin (Legault)
+0xC99658 Hero (Raven)
+0xC99670 Myrmidon (Guy)
+0xC9967C Swordmaster (Guy)
+0xC99688 Berserker (Hawkeye)

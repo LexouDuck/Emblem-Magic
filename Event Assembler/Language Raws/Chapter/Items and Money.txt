@@ -1,0 +1,66 @@
+##Gives an item to a character.
+ITGC, 0x27, 12, -game:FE6 -indexMode:8
+##The ID of the character to whom the item should be given.
+	Character, 4, 4
+##The item to give.
+	Item, 8, 4
+
+##Gives an item to the current character, like in villages.
+ITGV, 0x26, 8, -game:FE6 -indexMode:8
+##The item to give.
+	Item, 4, 2
+
+##Gives money to the player.
+MONE, 0x28, 8, -game:FE6 -indexMode:8
+##Amount of money to give.
+	MoneyAmount, 4, 2, -preferredBase:10
+
+
+
+##Gives an item to a character.
+ITGC, 0x5C, 12, -game:FE7 -indexMode:8
+##The ID of the character to whom the item should be given.
+	Character, 4, 2
+##The item to give.
+	Item, 8, 2
+
+##Gives an item to the main character.
+ITGM, 0x5D, 8, -game:FE7 -indexMode:8
+##The item to give.
+	Item, 4, 2
+
+##Gives an item to the current character, like in villages.
+ITGV, 0x5B, 8, -game:FE7 -indexMode:8
+##The item to give.
+	Item, 4, 2
+
+##Gives money to the player.
+MONE, 0x5E, 8, -game:FE7 -indexMode:8
+##Determines the way money is given.
+	VillageOrCutscene, 2, 2
+##Amount of money to give.
+	MoneyAmount, 4, 2, -preferredBase:10
+
+
+
+##Gives an item of ID stored in Memory slot 0x1.
+GIVEITEMTO, 0x3720, 4, -game:FE8 -indexMode:8
+##The ID of the character to whom the item should be given.
+	Character, 2, 2
+
+##Gives an item of ID stored in Memory slot 0x1
+##to the main lord character.
+GIVEITEMTOMAIN, 0x3721, 4, -game:FE8 -indexMode:8
+##Determines the way the item is given
+	VillageOrCutscene, 2, 2
+
+##Gives an item of ID stored in Memory slot 0x1
+##to the character of ID in Memory slot 0x3
+GIVETOSLOT3, 0x3722, 4, -game:FE8 -indexMode:8
+
+
+
+##Sets the list of items used by a shop.
+SHLI, 0, 0, -game:FE6:FE7:FE8 -indexMode:8 -terminatingList:00 -end -priority:shopList -offsetMod:1
+##Item for sale in the shop.
+	Item, 0, 2

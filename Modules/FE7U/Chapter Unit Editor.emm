@@ -1,0 +1,120 @@
+FE7U
+Chapter Unit Editor
+Kirb
+0x000000
+12
+16
+LIST
+NULL
+
+Character Reference Number
+General
+0
+1
+LIST
+Character List.txt
+
+Starting Class
+General
+1
+1
+LIST
+Class List.txt
+
+Character's Leader
+General
+2
+1
+LIST
+Character List.txt
+
+Starting Level
+General
+3
+1
+LIST
+Starting Level.txt
+
+Loads at X
+Map Positioning
+4
+1
+NUMU
+NULL
+
+Loads at Y
+Map Positioning
+5
+1
+NUMU
+NULL
+
+Start at X
+Map Positioning
+6
+1
+HEXU
+NULL
+
+Start at Y
+Map Positioning
+7
+1
+HEXU
+NULL
+
+Slot Item 1
+Starting Items
+8
+1
+LIST
+Item List.txt
+
+Slot Item 2
+Starting Items
+9
+1
+LIST
+Item List.txt
+
+Slot Item 3
+Starting Items
+10
+1
+LIST
+Item List.txt
+
+Slot Item 4
+Starting Items
+11
+1
+LIST
+Item List.txt
+
+AI 1
+NPC Unit AI
+12
+1
+LIST
+AI Byte 1.txt
+
+AI 2
+NPC Unit AI
+13
+1
+LIST
+AI Byte 2.txt
+
+AI 3
+NPC Unit AI
+14
+1
+LIST
+AI Byte 3.txt
+
+AI 4
+NPC Unit AI
+15
+1
+LIST
+AI Byte 4.txt

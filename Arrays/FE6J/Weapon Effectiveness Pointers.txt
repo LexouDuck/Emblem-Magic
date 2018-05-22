@@ -1,0 +1,7 @@
+0x000000 None
+0x6615C1 Knights & Cavalry
+0x6615D4 Dragons
+0x6615BC Cavalry
+0x6615DB Flying units
+0x6615C6 Armor Knights
+0x6615CF Divine Dragon Stone

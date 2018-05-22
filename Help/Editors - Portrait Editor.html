@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <link rel="stylesheet" href="Emblem Magic.css">
+	<title>Portrait Editor</title>
+</head>
+<body>
+	<h1>The Portrait Editor</h1>
+	<p>
+		The Portrait Editor allows you to view and change the portraits in the game.
+	<br>
+	</p>
+	<h2>The Portrait Array</h2>
+	<p>
+	Here are the default addresses for the Portrait Array in each game:<br>
+<table>
+	<tr>
+		<th></th>
+		<th>JAP</th>
+		<th>USA</th>
+		<th>EUR</th>
+	</tr>
+	<tr>
+		<th>FE6</th>
+		<td>0x66074C</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<th>FE7</th>
+		<td>0xD5E23C</td>
+		<td>0xC96584</td>
+		<td>0xD5D634</td>
+	</tr>
+	<tr>
+		<th>FE8</th>
+		<td>0x90111C</td>
+		<td>0x8ACBC4</td>
+		<td>0xFA8E60</td>
+	</tr>
+</table>
+	<br>
+	Here is how each entry in the array is laid out:<br>
+	'Main' refers the actual 96x80 portrait image (with blink frames, or mouth for FE6).<br>
+	'Chibi' refers to the small 32x32 portrait that most portraits have.<br>
+	'Card' refers to the generic 80x92 class cards that are towards the end of the array.<br>
+	<br>
+<table>
+	<tr>
+		<th>• FE6 - 16 bytes long</th>
+		<th>• FE7 and FE8 - 28 bytes long</th>
+	</tr>
+	<tr>
+		<td>
+			4 - Main/Card image pointer<br>
+			4 - Chibi portrait image pointer<br>
+			4 - Palette pointer<br>
+			1 - Mouth frames X position<br>
+			1 - Mouth frames Y position<br>
+			1 - Blink frames X position<br>
+			1 - Blink frames Y position<br>
+		</td>
+		<td>
+			4 - Main image pointer<br>
+			4 - Chibi portrait image pointer<br>
+			4 - Palette pointer<br>
+			4 - Mouth frames image pointer<br>
+			4 - Card image pointer<br>
+			1 - Mouth frames X position<br>
+			1 - Mouth frames Y position<br>
+			1 - Blink frames X position<br>
+			1 - Blink frames Y position<br>
+			4 - Eyes closed value (0x01=false, 0x06=true)<br>
+		</td>
+	</tr>
+</table>
+	<br>
+	How does the game know whether an entry is supposed to be a portrait or a class card ?<br>
+	For FE7 and FE8, the 'main' image pointer will be null, or the 'card' pointer will be in the other case.
+	In FE6, it checks whether or not the chibi pointer is an actual pointer or a null one - this means even portraits that didn't have a chibi made for them still point to garbage, so that they can be properly recognized.
+	</p>
+</body>
+</html>

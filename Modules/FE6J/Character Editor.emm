@@ -1,0 +1,505 @@
+FE6J
+Character Editor
+by SpyroDi, updated by flyingace24 and Nintenlord
+0x6076A0
+227
+48
+LIST
+Character List.txt
+
+Character Name
+General
+0
+2
+HEXU(Text Editor)
+NULL
+
+Description Text
+General
+2
+2
+HEXU(Text Editor)
+NULL
+
+Character Number
+General
+4
+1
+LIST
+Character List.txt
+
+Class
+General
+5
+1
+LIST
+Class List.txt
+
+Portrait
+Graphics
+6
+1
+LIST(Portrait Editor)
+Portrait List.txt
+
+Byte 7
+Unused
+7
+1
+HEXU
+NULL
+
+Mini Portrait
+Graphics
+8
+1
+LIST
+Character Mini Portraits.txt
+
+Affinity
+General
+9
+1
+LIST
+Affinity.txt
+
+Recruitment Number
+General
+10
+1
+HEXU
+NULL
+
+Level
+Base Stats
+11
+1
+NUMU
+NULL
+
+HP
+Base Stats
+12
+1
+NUMS
+NULL
+
+Str
+Base Stats
+13
+1
+NUMS
+NULL
+
+Skl
+Base Stats
+14
+1
+NUMS
+NULL
+
+Spd
+Base Stats
+15
+1
+NUMS
+NULL
+
+Def
+Base Stats
+16
+1
+NUMS
+NULL
+
+Res
+Base Stats
+17
+1
+NUMS
+NULL
+
+Luck
+Base Stats
+18
+1
+NUMS
+NULL
+
+Con
+Base Stats
+19
+1
+NUMS
+NULL
+
+Sword Level
+Weapon Ranks
+20
+1
+LIST
+Weapon Rank.txt
+
+Spear Level
+Weapon Ranks
+21
+1
+LIST
+Weapon Rank.txt
+
+Axe Level
+Weapon Ranks
+22
+1
+LIST
+Weapon Rank.txt
+
+Bow Level
+Weapon Ranks
+23
+1
+LIST
+Weapon Rank.txt
+
+Staff Level
+Weapon Ranks
+24
+1
+LIST
+Weapon Rank.txt
+
+Anima Level
+Weapon Ranks
+25
+1
+LIST
+Weapon Rank.txt
+
+Light Level
+Weapon Ranks
+26
+1
+LIST
+Weapon Rank.txt
+
+Dark Level
+Weapon Ranks
+27
+1
+LIST
+Weapon Rank.txt
+
+HP
+Growth Chances
+28
+1
+NUMU
+NULL
+
+Str
+Growth Chances
+29
+1
+NUMU
+NULL
+
+Skl
+Growth Chances
+30
+1
+NUMU
+NULL
+
+Spd
+Growth Chances
+31
+1
+NUMU
+NULL
+
+Def
+Growth Chances
+32
+1
+NUMU
+NULL
+
+Res
+Growth Chances
+33
+1
+NUMU
+NULL
+
+Luck
+Growth Chances
+34
+1
+NUMU
+NULL
+
+Palette (Unpromoted)
+Graphics
+35
+1
+LIST
+Character Palettes.txt
+
+Palette (Promoted)
+Graphics
+36
+1
+LIST
+Character Palettes.txt
+
+Byte 37
+Unused
+37
+1
+HEXU
+NULL
+
+Byte 38
+Unused
+38
+1
+HEXU
+NULL
+
+Byte 39
+Unused
+39
+1
+HEXU
+NULL
+
+Can use Ballistae? (Archers)
+Unused
+320b
+1b
+BOOL
+NULL
+
+Critical % Bonus +30
+Unused
+321b
+1b
+BOOL
+NULL
+
+Can play? (Bards)
+Unused
+322b
+1b
+BOOL
+NULL
+
+Can dance? (Dancers)
+Unused
+323b
+1b
+BOOL
+NULL
+
+Can pick locks? (Thiefs)
+Unused
+324b
+1b
+BOOL
+NULL
+
+Can steal? (Thiefs)
+Unused
+325b
+1b
+BOOL
+NULL
+
+Can move again? (Mounted units)
+Unused
+326b
+1b
+BOOL
+NULL
+
+Mounted Aid system
+Unused
+327b
+1b
+BOOL
+NULL
+
+Boss Character
+Attributes
+328b
+1b
+BOOL
+NULL
+
+Female Character
+Attributes
+329b
+1b
+BOOL
+NULL
+
+Lord class
+Unused
+330b
+1b
+BOOL
+NULL
+
+Pegasus class
+Unused
+331b
+1b
+BOOL
+NULL
+
+Dragon class
+Unused
+332b
+1b
+BOOL
+NULL
+
+Horse class
+Unused
+333b
+1b
+BOOL
+NULL
+
+Item Supply class
+Unused
+334b
+1b
+BOOL
+NULL
+
+Promoted class
+Unused
+335b
+1b
+BOOL
+NULL
+
+Starts as NPC
+Attributes
+336b
+1b
+BOOL
+NULL
+
+Armor Knight triangle attack?
+Attributes
+337b
+1b
+BOOL
+NULL
+
+Pegasus Knight triangle attack?
+Attributes
+338b
+1b
+BOOL
+NULL
+
+Bit flag
+Unknown
+339b
+1b
+BOOL
+NULL
+
+Zephiel ?
+Unknown
+340b
+1b
+BOOL
+NULL
+
+Weapon lock 1
+Unused
+341b
+1b
+BOOL
+NULL
+
+Weapon lock 2
+Unused
+342b
+1b
+BOOL
+NULL
+
+Can use Rapier/Sword of Seals ?
+Unused
+343b
+1b
+BOOL
+NULL
+
+Byte 43 1
+Unused
+344b
+1b
+BOOL
+NULL
+
+Byte 43 2
+Unused
+345b
+1b
+BOOL
+NULL
+
+Byte 43 3
+Unused
+346b
+1b
+BOOL
+NULL
+
+Byte 43 4
+Unused
+347b
+1b
+BOOL
+NULL
+
+Byte 43 5
+Unused
+348b
+1b
+BOOL
+NULL
+
+Byte 43 6
+Unused
+349b
+1b
+BOOL
+NULL
+
+Byte 43 7
+Unused
+350b
+1b
+BOOL
+NULL
+
+Give no EXP to opponents?
+Attributes
+351b
+1b
+BOOL
+NULL
+
+Support Data Pointer
+General
+44
+4
+POIN
+NULL

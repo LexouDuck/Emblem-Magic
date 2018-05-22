@@ -1,0 +1,96 @@
+0x00 Lyn's Tent
+0x01 House with fireplace
+0x02 Village 
+0x03 Village (Night)
+0x04 Road to Village
+0x05 Road to Village (Night)
+0x06 Road to Village (Sunset)
+0x07 Road to Village (Dark)
+0x08 Road to Village (Foggy)
+0x09 Village (Destroyed)
+0x0A Sea Port
+0x0B Ship
+0x0C Ocean Coast
+0x0D Inn/Tavern
+0x0E Palace Exterior (Bern)
+0x0F Castle Exterior
+0x10 Castle Interior with pillars
+0x11 Castle Interior with pillars (Dark)
+0x12 Palace Room
+0x13 Palace Room (Dark)
+0x14 Castle Room (Bern)
+0x15 Castle Hall
+0x16 Castle Hall (Dark)
+0x17 Castle Garden (Arches)
+0x18 Castle Garden (Bushes)
+0x19 Castle Hallway with door
+0x1A Castle Hallway with door (Dark)
+0x1B Prison/Cell
+0x1C Plains with forest
+0x1D Plains with mountains
+0x1E Plains with forest (Sunset)
+0x1F Plains with forest (Night)
+0x20 Plains with forest (Cloudy)
+0x21 Plains with forest (Foggy)
+0x22 Plains
+0x23 Plains with forest & mountains
+0x24 Plains with forest & mountains (Cloudy)
+0x25 Plains with forest & mountains (Foggy)
+0x26 Plains with forest & mountains (Sunset)
+0x27 Plains with forest & mountains (Night)
+0x28 Plains with mountains & trees
+0x29 Plains with mountains & trees (Night)
+0x2A Forest
+0x2B Forest (Special)
+0x2C Forest (Thick)
+0x2D Forest (Thick, with bright light)
+0x2E Forest (Thick, Foggy)
+0x2F Town
+0x30 Town (Sunset)
+0x31 Town Gate
+0x32 Town Gate (Sunset)
+0x33 Town Gate (Dark)
+0x34 Town Gate (Cloudy)
+0x35 House/Inn with bed
+0x36 Forteress Exterior (Sunset)
+0x37 Forteress Exterior (Cloudy)
+0x38 Forteress Exterior (Night)
+0x39 Forteress (Sunset)
+0x3A Forteress (Winter)
+0x3B Forteress (Cloudy)
+0x3C Castle Interior (Gray)
+0x3D Castle Interior (Dark)
+0x3E Castle Interior (Sepia)
+0x3F Ruined Forteress Exterior
+0x40 Ruined Forteress Exterior (Sunset)
+0x41 Ruined Forteress Exterior (Foggy)
+0x42 Ruined Forteress Interior
+0x43 Ruined Forteress Interior (Dark)
+0x44 Dragon's Gate Chamber (Brown)
+0x45 Dragon's Gate Chamber (Green)
+0x46 Dungeon Hallway
+0x47 Dungeon Hallway (Dark)
+0x48 Dungeon Hallway (Green)
+0x49 Shrine
+0x4A Shrine (Athos)
+0x4B Shrine (Athos, dark)
+0x4C Shrine Hallway
+0x4D Shrine Hallway (Dark)
+0x4E Shrine Hallway (Purple)
+0x4F Altar
+0x50 Altar (Golden)
+0x51 Desert
+0x52 Desert (Sunset)
+0x53 Dragon's Gate (Green)
+0x54 Dragon's Gate (Dark)
+0x55 Fiery Cave
+0x56 Shrine (Durandal)
+0x57 Cave
+0x58 Altar with stairs
+0x59 Sky
+0x5A Camp/Tent with Weapons
+0x5B Black Background
+0x5C Dragon's Gate (Close-Up)
+0x5D Dragon's Gate (Close-Up) (Lighter)
+0x5E To Be Continued
+0x5F Game Over

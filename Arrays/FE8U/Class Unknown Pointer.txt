@@ -1,0 +1,5 @@
+0x000000 None
+0x80C5FF Brigand, Bael, Elder Bael
+0x80C640 Pirate
+0x80C681 Berserker
+0x80C6C2 Priest, Cleric, Monk, Bishop

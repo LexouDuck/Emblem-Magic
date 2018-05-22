@@ -1,0 +1,12 @@
+0xD5D634 28
+
+0x00 4 Pointer Face
+0x04 4 Pointer Chibi
+0x08 4 Pointer Palette
+0x0C 4 Pointer Mouth
+0x10 4 Pointer Card
+0x14 1 Byte MouthX
+0x15 1 Byte MouthY
+0x16 1 Byte BlinkX
+0x17 1 Byte BlinkY
+0x18 1 Byte EyesClosed

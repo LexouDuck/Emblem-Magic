@@ -1,0 +1,6 @@
+0x000000 None
+0x60CB43 Priest, Cleric and Bishops
+0x60CAAA Brigand
+0x60CADD Pirate
+0x60CB10 Berserker
+0x60CB76 King

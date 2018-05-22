@@ -1,0 +1,202 @@
+0x00 None
+0x01 Lord (Ephraim) (Lance)
+0x02 Lord (Ephraim)
+0x03 Lord (Eirika) (Sword)
+0x04 Lord (Eirika)
+0x05 Great Lord (Ephraim) (Lance)
+0x06 Lord (Eirika) (Sword)
+0x07 Great Lord (Ephraim)
+0x08 Great Lord (Eirika) (Sword)
+0x09 Lord (Eirika) (Sword)
+0x0A Great Lord (Eirika)
+0x0B Mercenary (Sword)
+0x0C Mercenary
+0x0D Hero (Sword)
+0x0E Hero (Axe)
+0x0F Hero (Handaxe)
+0x10 Hero
+0x11 Myrmidon (Sword)
+0x12 Myrmidon
+0x13 Myrmidon (F) (Sword)
+0x14 Myrmidon (F)
+0x15 Swordmaster (Sword)
+0x16 Swordmaster
+0x17 Swordmaster (F) (Sword)
+0x18 Swordmaster (F)
+0x19 Fighter (Axe)
+0x1A Fighter (Handaxe)
+0x1B Fighter
+0x1C Warrior (Axe)
+0x1D Warrior (Handaxe)
+0x1E Warrior (Bow)
+0x1F Warrior
+0x20 Brigand (Axe)
+0x21 Brigand (Handaxe)
+0x22 Brigand
+0x23 Berserker (Axe)
+0x24 Berserker (Handaxe)
+0x25 Berserker
+0x26 Archer (Bow)
+0x27 Archer
+0x28 Archer (F) (Bow)
+0x29 Archer (F)
+0x2A Sniper (Bow)
+0x2B Sniper
+0x2C Sniper (F) (Bow)
+0x2D Sniper (F)
+0x2E Ranger (Sword)
+0x2F Ranger (Bow)
+0x30 Ranger
+0x31 Ranger (F) (Sword)
+0x32 Ranger (F) (Bow)
+0x33 Ranger (F)
+0x34 Cavalier (Sword)
+0x35 Cavalier (Lance)
+0x36 Cavalier
+0x37 Cavalier (F) (Sword)
+0x38 Cavalier (F) (Lance)
+0x39 Cavalier (F)
+0x3A Paladin (Sword)
+0x3B Paladin (Lance)
+0x3C Paladin
+0x3D Paladin (F) (Sword)
+0x3E Paladin (F) (Lance)
+0x3F Paladin (F)
+0x40 Knight (Lance)
+0x41 Knight
+0x42 Knight (F) (Lance)
+0x43 Knight (F)
+0x44 General (Sword)
+0x45 General (Lance)
+0x46 General (Axe)
+0x47 General (Handaxe)
+0x48 General
+0x49 General (F) (Sword)
+0x4A General (F) (Lance)
+0x4B General (F) (Axe)
+0x4C General (F) (Handaxe)
+0x4D General (F)
+0x4E Great Knight (Sword)
+0x4F Great Knight (Lance)
+0x50 Great Knight (Axe)
+0x51 Great Knight (Handaxe)
+0x52 Great Knight
+0x53 Great Knight (F) (Sword)
+0x54 Great Knight (F) (Lance)
+0x55 Great Knight (F) (Axe)
+0x56 Great Knight (F) (Handaxe)
+0x57 Great Knight (F)
+0x58 Wyvern Rider (Lance)
+0x59 Wyvern Rider
+0x5A Wyvern Rider (F) (Lance)
+0x5B Wyvern Rider (F)
+0x5C Wyvern Lord (Sword)
+0x5D Wyvern Lord (Lance)
+0x5E Wyvern Lord
+0x5F Wyvern Lord (F) (Sword)
+0x60 Wyvern Lord (F) (Lance)
+0x61 Wyvern Lord (F)
+0x62 Wyvern Knight (Lance)
+0x63 Wyvern Knight
+0x64 Wyvern Knight (F) (Lance)
+0x65 Wyvern Knight (F)
+0x66 Pegasus Knight (Lance)
+0x67 Pegasus Knight
+0x68 Falco Knight (Sword)
+0x69 Falco Knight (Lance)
+0x6A Falco Knight
+0x6B Mage
+0x6C Mage (F)
+0x6D Sage
+0x6E Sage (Staff)
+0x6F Sage (F)
+0x70 Sage (F) (Staff)
+0x71 Mage Knight
+0x72 Mage Knight (Staff)
+0x73 Mage Knight (F)
+0x74 Mage Knight (F) (Staff)
+0x75 Shaman
+0x76 Shaman (F)
+0x77 Druid
+0x78 Druid (Staff)
+0x79 Druid (F)
+0x7A Druid (F) (Staff)
+0x7B Summoner
+0x7C Summoner (Staff)
+0x7D Monk
+0x7E Cleric
+0x7F Cleric (Staff)
+0x80 Cleric (F) (Staff)
+0x81 Bishop
+0x82 Bishop (Staff)
+0x83 Bishop (F)
+0x84 Bishop (F) (Staff)
+0x85 Troubadour
+0x86 Troubadour (Staff)
+0x87 Valkyrie
+0x88 Valkyrie (Staff)
+0x89 Thief (Sword)
+0x8A Thief
+0x8B Assassin (Sword)
+0x8C Assassin
+0x8D Assassin (F) (Sword)
+0x8E Assassin (F)
+0x8F Rogue (Sword)
+0x90 Rogue
+0x91 Dancer
+0x92 Journeyman (Axe)
+0x93 Journeyman (Handaxe)
+0x94 Journeyman
+0x95 Pupil
+0x96 Recruit (Lance)
+0x97 Recruit
+0x98 Soldier (Lance)
+0x99 Soldier
+0x9A Pirate (Axe)
+0x9B Pirate (Handaxe)
+0x9C Pirate
+0x9D Necromancer
+0x9E Necromancer (Staff)
+0x9F Ballista (unused)
+0xA0 Revenant
+0xA1 Entombed
+0xA2 Bonewalker (Sword)
+0xA3 Bonewalker (Lance)
+0xA4 Bonewalker
+0xA5 Bonewalker (Bow)
+0xA6 Bonewalker
+0xA7 Wight (Sword)
+0xA8 Wight (Lance)
+0xA9 Wight
+0xAA Wight (Bow)
+0xAB Wight
+0xAC Bael
+0xAD Elder Bael
+0xAE Cyclops (Axe)
+0xAF Cyclops (Handaxe)
+0xB0 Cyclops
+0xB1 Mauthedoog
+0xB2 Gwyllgi
+0xB3 Tarvos (Axe)
+0xB4 Tarvos (Handaxe)
+0xB5 Tarvos
+0xB6 Maelduin (Axe)
+0xB7 Maelduin (Handaxe)
+0xB8 Maelduin (Bow)
+0xB9 Maelduin
+0xBA Mogall
+0xBB Arch Mogall
+0xBC Gorgon
+0xBD Gargoyle (Lance)
+0xBE Gargoyle
+0xBF Deathgoyle (Lance)
+0xC0 Deathgoyle
+0xC1 Dragon Zombie
+0xC2 Demon King (Melee)
+0xC3 Demon King (Spell)
+0xC4 Dragon (Myrrh)
+0xC5 Manakete (Transform)
+0xC6 Manakete (Transform)
+0xC7 Manakete
+0xC8 Cleric (F)
+0xC9 Dragon (Morva)

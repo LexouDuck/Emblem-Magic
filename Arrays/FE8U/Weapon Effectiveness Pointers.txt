@@ -1,0 +1,9 @@
+0x000000 None
+0x8ADEBB Armor units
+0x8ADEC2 Armor/Mounted
+0x8ADED7 Sword wielders
+0x8ADEE0 Mounted units
+0x8ADEF1 Flying/Monsters
+0x8ADF13 Dragons
+0x8ADF2A Flying units
+0x8ADF39 Monsters

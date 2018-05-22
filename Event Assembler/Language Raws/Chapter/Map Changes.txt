@@ -1,0 +1,67 @@
+##command: MAp Change (2)
+##Performs a map tile change.
+MAC2, 0x29, 8, -game:FE6 -indexMode:8
+##The ID of the map change to trigger.
+	MapChangeID, 4, 4
+
+##command: MAp Change (Coordinates)
+##Performs a map tile change.
+MACC, 0x2A, 8, -game:FE6 -indexMode:8
+##Position of the map change that should occur.
+	Position, 4, 2, -coordinates:2 -preferredBase:10
+
+
+
+##command: MAp Change (1)
+##Performs a map tile change.
+MAC1, 0x5F, 32, -game:FE7
+##The ID of the map change to trigger.
+	MapChangeID, 16, 8
+##Whether to apply or to reverse the map change.
+	ApplyOrUndo, 28, 4
+
+##command: MAp Change (Coordinates)
+##Performs a map tile change.
+MACC, 0x60, 4, -game:FE7 -indexMode:8
+##Position of the map change that should occur.
+	Position, 2, 2, coordinates:2 -preferredBase:10
+
+##command: MAp Change (2)
+##Performs a map tile change.
+MAC2, 0x62, 4, -game:FE7 -indexMode:8
+##The ID of the map change to trigger.
+	MapChangeID, 2, 1
+	Unknown, 3, 1
+
+##command: MAp Change (3)
+##Performs a map tile change.
+MAC3, 0x64, 4, -game:FE7 -indexMode:8
+##The ID of the map change to trigger.
+	MapChangeID, 2, 1
+	Unknown, 3, 1
+
+##command: MAp Change Event
+##If parameter is 0, skip something..?
+MACE, 0x63, 4, -game:FE7 -indexMode:8
+	Value, 2, 2
+
+
+
+##Performs a map tile change.
+##This command is called in one of two formats:
+##_SETVAL 0xB 0xYY00XX // [XX,YY] coordinates of top left corner
+##TILECHANGE 0xFFFF
+##or
+##_SETVAL 0x1 ID // map change ID
+##TILECHANGE 0x0
+TILECHANGE, 0x2720, 4, -game:FE8 -indexMode:8
+##Is 0x0000 or 0xFFFF depending on whether this map change
+##is MapChangeID-based or position-based.
+	Value1, 2, 2
+
+##This is the same as the TILECHANGE command,
+##but undoes the selected tile change.
+TILEREVERSE, 0x2721, 4, -game:FE8 -indexMode:8
+##Is 0x0000 or 0xFFFF depending on whether this map change
+##is MapChangeID-based or position-based.
+	Value1, 2, 2

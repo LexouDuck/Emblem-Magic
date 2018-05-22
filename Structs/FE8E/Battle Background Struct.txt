@@ -1,0 +1,5 @@
+0x99AFC8 12
+
+0x00 4 Pointer Tileset
+0x04 4 Pointer TSA
+0x08 4 Pointer Palette

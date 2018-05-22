@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <link rel="stylesheet" href="Emblem Magic.css">
+	<title>TSA Images</title>
+</head>
+<body>
+	<h1>TSA Images</h1>
+	<p>
+	Since tile-based graphics are stored in 4bpp format, images can only have 16 different colors - unless they use TSA (which stands for Tile Sheet Arrangement, I believe).<br>
+	A TSA array is basically a series of 16-bit unsigned integers that store tiling information so as to make an image using several palettes simultaneously. Each tile references a 0-15 index to a palette for it- as such, TSA images can have up to 256 colors.
+	<br>
+	<br>
+	The first 2 bytes of a TSA array are the width and height (in 8x8 tiles) of the TSA image. The following bytes are the actual array, in little endian 16-bit ints. These ints are interpreted like so:
+	<code>
+0xF000 - 11110000 00000000 - Palette Index (0-15)<br>
+0x0800 - 00001000 00000000 - Flip Vertical (bitflag)<br>
+0x0400 - 00000100 00000000 - Flip Horizontal (bitflag)<br>
+0x03FF - 00000011 11111111 - Tile Index (0-1023)<br>
+	</code>
+	<br>
+	<br>
+	A TSA array may be stored as LZ77 compressed data - and if it is not, the rows of this TSA array are usually flipped.
+	</p>
+</body>
+</html>

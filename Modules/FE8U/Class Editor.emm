@@ -1,0 +1,610 @@
+FE8U
+Class Editor
+by SpyroDi
+0x807110
+128
+84
+LIST
+Class List.txt
+
+Class Name Text
+General
+0
+2
+HEXU(Text Editor)
+NULL
+
+Description Text
+General
+2
+2
+HEXU(Text Editor)
+NULL
+
+Class Number
+General
+4
+1
+LIST
+Class List.txt
+
+Promotes To
+General
+5
+1
+LIST
+Class List.txt
+
+Map Sprite
+Graphics
+6
+1
+LIST(Map Sprite Editor)
+Map Sprite List.txt
+
+Walking Speed
+Graphics
+7
+1
+LIST
+Walking Speed.txt
+
+Default Portrait
+Graphics
+8
+1
+LIST(Portrait Editor)
+Portrait List.txt
+
+Byte 9
+Unknown
+9
+1
+HEXU
+NULL
+
+Class Index
+General
+10
+1
+HEXU
+NULL
+
+HP
+Base stats
+11
+1
+NUMS
+NULL
+
+Str
+Base stats
+12
+1
+NUMS
+NULL
+
+Skl
+Base stats
+13
+1
+NUMS
+NULL
+
+Spd
+Base stats
+14
+1
+NUMS
+NULL
+
+Def
+Base stats
+15
+1
+NUMS
+NULL
+
+Res
+Base stats
+16
+1
+NUMS
+NULL
+
+Con
+Base stats
+17
+1
+NUMS
+NULL
+
+Mov
+Base stats
+18
+1
+NUMS
+NULL
+
+Max HP
+Stat Caps
+19
+1
+NUMS
+NULL
+
+Max Str
+Stat Caps
+20
+1
+NUMS
+NULL
+
+Max Skl
+Stat Caps
+21
+1
+NUMS
+NULL
+
+Max Spd
+Stat Caps
+22
+1
+NUMS
+NULL
+
+Max Def
+Stat Caps
+23
+1
+NUMS
+NULL
+
+Max Res
+Stat Caps
+24
+1
+NUMS
+NULL
+
+Max Con
+Stat Caps
+25
+1
+NUMS
+NULL
+
+Class Relative Power
+General
+26
+1
+HEXU
+NULL
+
+HP
+Growth Chances
+27
+1
+NUMU
+NULL
+
+Str
+Growth Chances
+28
+1
+NUMU
+NULL
+
+Skl
+Growth Chances
+29
+1
+NUMU
+NULL
+
+Spd
+Growth Chances
+30
+1
+NUMU
+NULL
+
+Def
+Growth Chances
+31
+1
+NUMU
+NULL
+
+Res
+Growth Chances
+32
+1
+NUMU
+NULL
+
+Luck
+Growth Chances
+33
+1
+NUMU
+NULL
+
+HP
+Promotion Bonus
+34
+1
+NUMS
+NULL
+
+Str
+Promotion Bonus
+35
+1
+NUMS
+NULL
+
+Skl
+Promotion Bonus
+36
+1
+NUMS
+NULL
+
+Spd
+Promotion Bonus
+37
+1
+NUMS
+NULL
+
+Def
+Promotion Bonus
+38
+1
+NUMS
+NULL
+
+Res
+Promotion Bonus
+39
+1
+NUMS
+NULL
+
+Can use Ballistae? (Archers)
+Abilities
+320b
+1b
+BOOL
+NULL
+
+Critical % bonus +15
+Abilities
+321b
+1b
+BOOL
+NULL
+
+Can play? (Bards)
+Abilities
+322b
+1b
+BOOL
+NULL
+
+Can dance? (Dancers)
+Abilities
+323b
+1b
+BOOL
+NULL
+
+Can pick locks? (Thiefs)
+Abilities
+324b
+1b
+BOOL
+NULL
+
+Can steal? (Thiefs)
+Abilities
+325b
+1b
+BOOL
+NULL
+
+Can move again? (Mounted units)
+Abilities
+326b
+1b
+BOOL
+NULL
+
+Mounted Aid system
+Abilities
+327b
+1b
+BOOL
+NULL
+
+Boss Character
+Unused
+328b
+1b
+BOOL
+NULL
+
+Female Character
+Unused
+329b
+1b
+BOOL
+NULL
+
+Lord class
+Class Type
+330b
+1b
+BOOL
+NULL
+
+Pegasus class
+Class Type
+331b
+1b
+BOOL
+NULL
+
+Dragon class
+Class Type
+332b
+1b
+BOOL
+NULL
+
+Horse class
+Class Type
+333b
+1b
+BOOL
+NULL
+
+Item Supply
+Class Type
+334b
+1b
+BOOL
+NULL
+
+Promoted
+Class Type
+335b
+1b
+BOOL
+NULL
+
+Glitchy bit
+Unused
+336b
+1b
+BOOL
+NULL
+
+Armor triangle attack?
+Unused
+337b
+1b
+BOOL
+NULL
+
+Pegasus triangle attack?
+Unused
+338b
+1b
+BOOL
+NULL
+
+Cannot be controlled
+Abilities
+339b
+1b
+BOOL
+NULL
+
+Max Level 10
+Class Type
+340b
+1b
+BOOL
+NULL
+
+Can use Monster Weapons?
+Locked Weapons
+341b
+1b
+BOOL
+NULL
+
+Can use Shamshir?
+Locked Weapons
+342b
+1b
+BOOL
+NULL
+
+Unused weapon lock 1
+Locked Weapons
+343b
+1b
+BOOL
+NULL
+
+Unused weapon lock 2
+Locked Weapons
+344b
+1b
+BOOL
+NULL
+
+Unused weapon lock 3
+Locked Weapons
+345b
+1b
+BOOL
+NULL
+
+Can use Reginleif/Siegmund?
+Locked Weapons
+346b
+1b
+BOOL
+NULL
+
+Can use Rapier/Sieglinde?
+Locked Weapons
+347b
+1b
+BOOL
+NULL
+
+Summoning
+Abilities
+348b
+1b
+BOOL
+NULL
+
+Magic Sealing?
+Unused
+349b
+1b
+BOOL
+NULL
+
+Lethality? (Assassins)
+Abilities
+350b
+1b
+BOOL
+NULL
+
+Give no EXP to opponents?
+Unused
+351b
+1b
+BOOL
+NULL
+
+Sword Level
+Base Weapon Ranks
+44
+1
+LIST
+Weapon Rank.txt
+
+Spear Level
+Base Weapon Ranks
+45
+1
+LIST
+Weapon Rank.txt
+
+Axe Level
+Base Weapon Ranks
+46
+1
+LIST
+Weapon Rank.txt
+
+Bow Level
+Base Weapon Ranks
+47
+1
+LIST
+Weapon Rank.txt
+
+Staff Level
+Base Weapon Ranks
+48
+1
+LIST
+Weapon Rank.txt
+
+Anima Level
+Base Weapon Ranks
+49
+1
+LIST
+Weapon Rank.txt
+
+Light Level
+Base Weapon Ranks
+50
+1
+LIST
+Weapon Rank.txt
+
+Dark Level
+Base Weapon Ranks
+51
+1
+LIST
+Weapon Rank.txt
+
+Battle Animation Pointer
+Graphics
+52
+4
+POIN(Battle Animation Editor)
+Battle Animation Pointers.txt
+
+Movement Cost 
+Terrain Attribute Pointers
+56
+4
+POIN
+Terrain Move Cost Pointers.txt
+
+Movement Cost (rain)
+Terrain Attribute Pointers
+60
+4
+POIN
+Terrain Move Cost Pointers.txt
+
+Movement Cost (snow)
+Terrain Attribute Pointers
+64
+4
+POIN
+Terrain Move Cost Pointers.txt
+
+Terrain Def bonus
+Terrain Attribute Pointers
+68
+4
+POIN
+Terrain Stat Pointers.txt
+
+Terrain Avo bonus
+Terrain Attribute Pointers
+72
+4
+POIN
+Terrain Stat Pointers.txt
+
+Terrain Res bonus
+Terrain Attribute Pointers
+76
+4
+POIN
+Terrain Stat Pointers.txt
+
+Pointer
+Unknown
+80
+4
+POIN
+Class Unknown Pointer.txt

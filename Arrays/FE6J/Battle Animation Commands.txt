@@ -1,0 +1,84 @@
+0x00 None
+0x01 Wait for HP
+0x02 Start avoid
+0x03 Start animation 1
+0x04 Deplete HP
+0x05 Start spell anim
+0x06 Start enemy turn
+0x07 Start animation 2
+0x08 Critical hit
+0x09 Critical hit
+0x0A Critical hit
+0x0B Critical hit
+0x0C Critical hit
+0x0D End animation
+0x0E Avoid to back
+0x0F
+0x10
+0x11
+0x12
+0x13 Handaxe return
+0x14 Big screenshake
+0x15 Small screenshake
+0x16
+0x17
+0x18 Avoid to front
+0x19 SFX bow pull
+0x1A Normal hit
+0x1B SFX heavy step
+0x1C SFX horse step 1
+0x1D SFX horse step 2
+0x1E SFX loud horse step
+0x1F SFX hit normal/crit
+0x20 SFX hit (heavy)
+0x21 SFX hit (light)
+0x22 SFX blade swing
+0x23 SFX short swing
+0x24 SFX blade slash
+0x25 SFX wing flap
+0x26 ANIM Hero Sword+Shield toss
+0x27 ANIM Hero Axe+Shield toss
+0x28 SFX electricity
+0x29 Kills music
+0x2A Kills music
+0x2B SFX armor step
+0x2C Sealed Sword fire
+0x2D Assassin lethality 1
+0x2E Sage rune (normal)
+0x2F Sage rune (critical)
+0x30 Dirt cloud (behind)
+0x31 Dirt cloud (forward)
+0x32 Dirt cloud (backward)
+0x33 SFX battle cry
+0x34 SFX heavy stomp
+0x35 SFX long wing flap
+0x36 SFX sword unsheath
+0x37 SFX sword clicking
+0x38 SFX spear spinning
+0x39 Attacker fake hit
+0x3A SFX dancer magic
+0x3B SFX bard song
+0x3C SFX sword whoosh
+0x3D Unknown (King anim)
+0x3E SFX burning
+0x3F SFX arrow fired
+0x40 Kills music
+0x41 SFX short axe swing
+0x42 SFX long axe swing
+0x43 SFX weapon click
+0x44 SFX light emission
+0x45 SFX horse neighing
+0x46 SFX axe crashing
+0x47 ANIM Cape flowing
+0x48 Kills BGM
+0x49 SFX Sage magic casting
+0x4A SFX magic charging
+0x4B SFX Monk's magic casting
+0x4C SFX Athos' magic casting
+0x4D SFX Athos' critical
+0x4E Dirt cloud (horse)
+0x4F SFX Druid's critical
+0x50 ? (Nergal's critical)
+0x51 Screen flash
+0x52
+0x55 Assassin lethality 2

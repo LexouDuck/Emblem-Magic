@@ -1,0 +1,32 @@
+0x00 Uncounterable weapon
+0x01 Magic Damage weapon
+0x02 Brave weapon (hits twice)
+0x03 Unsellable item
+0x04 Indestructible
+0x05 Is Staff
+0x06 Is Magic
+0x07 Is Weapon
+0x08 Negates Criticals
+0x09 Negates Flying weaknesses
+0x0A Unknown
+0x0B Class Lock 1 (Wo dao)
+0x0C Class Lock 2 (Unused)
+0x0D Class Lock 3 (Flametongue)
+0x0E Class Lock 4 (Dancer items)
+0x0F Reverses weapon triangle
+0x10 Unknown
+0x11 Unknown
+0x12 Class Lock 5 (Forblaze)
+0x13 Class Lock 6 (Mani/Sol Katti)
+0x14 Class Lock 7 (Wolf Beil/Armads)
+0x15 Class Lock 8 (Rapier/Durandal)
+0x16 Negates Enemy Defense
+0x17 Unknown
+0x18 Unknown
+0x19 Unknown
+0x1A Unknown
+0x1B Unknown
+0x1C Unknown
+0x1D Unknown
+0x1E Unknown
+0x1F Unknown

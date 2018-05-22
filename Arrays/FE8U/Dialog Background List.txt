@@ -1,0 +1,54 @@
+0x00 Interior (fireplace)
+0x01 Interior (Caer Pelyn)
+0x02 Village
+0x03 Road to village
+0x04 Road to village (Sunset)
+0x05 Village (Ch. 5)
+0x06 Village (flashback)
+0x07 Sea Port
+0x08 Ship
+0x09 Inn/Tavern
+0x0A Castle Interior
+0x0B Castle Interior (Dark)
+0x0C Grado Keep
+0x0D Grado Keep (flashback)
+0x0E Castle Room
+0x0F Castle Room (flashback)
+0x10 Castle Hall
+0x11 Castle Hall (Dark)
+0x12 Castle Hall with door
+0x13 Courtyard
+0x14 Courtyard (flashback)
+0x15 Palace Exterior 
+0x16 Palace Exterior (flashback)
+0x17 Prison Cell
+0x18 Plains with forest
+0x19 Plains with forest (Sunset)
+0x1A Plains with forest (Foggy)
+0x1B Plains with mountains
+0x1C Plains
+0x1D Plains with forest & mountains
+0x1E Plains with forest & mountains (Foggy)
+0x1F Plains with forest & mountains (Sunset)
+0x20 Plains with forest & mountains (Night)
+0x21 Plains with pond
+0x22 Forest
+0x23 Forest (Thick)
+0x24 Town Gate
+0x25 Fortress
+0x26 Castle Interior (Gray)
+0x27 Castle Interior (Brown)
+0x28 Ruined Fortress Interior
+0x29 Ruined Fortress Exterior
+0x2A Jehanna Hall
+0x2B Jehanna Hall (on fire)
+0x2C Grado Altar
+0x2D Grado Altar (flashback)
+0x2E Renais Altar
+0x2F Rausten Altar
+0x30 Desert
+0x31 Forest (Darkling Woods)
+0x32 Volcano
+0x33 Dark Temple Exterior
+0x34 Dark Temple Interior
+0x35 Black Background

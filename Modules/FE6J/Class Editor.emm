@@ -1,0 +1,568 @@
+FE6J
+Class Editor
+by SpyroDi, updated by Nintenlord
+0x60A0E8
+75
+72
+LIST
+Class List.txt
+
+Class Name Text
+General
+0
+2
+HEXU(Text Editor)
+NULL
+
+Description Text
+General
+2
+2
+HEXU(Text Editor)
+NULL
+
+Class Number
+General
+4
+1
+LIST
+Class List.txt
+
+Promotes To
+General
+5
+1
+LIST
+Class List.txt
+
+Map Sprite
+Graphics
+6
+1
+LIST(Map Sprite Editor)
+Map Sprite List.txt
+
+Walking Speed
+Graphics
+7
+1
+LIST
+Walking Speed.txt
+
+Byte 8
+Unused
+8
+1
+HEXU
+NULL
+
+Default Portrait
+Unused
+9
+1
+LIST
+Portrait List.txt
+
+Class Index
+General
+10
+1
+HEXU
+NULL
+
+HP
+Base stats
+11
+1
+NUMS
+NULL
+
+Str
+Base stats
+12
+1
+NUMS
+NULL
+
+Skl
+Base stats
+13
+1
+NUMS
+NULL
+
+Spd
+Base stats
+14
+1
+NUMS
+NULL
+
+Def
+Base stats
+15
+1
+NUMS
+NULL
+
+Res
+Base stats
+16
+1
+NUMS
+NULL
+
+Con
+Base stats
+17
+1
+NUMS
+NULL
+
+Mov
+Base stats
+18
+1
+NUMS
+NULL
+
+Max HP
+Stat Caps
+19
+1
+NUMS
+NULL
+
+Max Str
+Stat Caps
+20
+1
+NUMS
+NULL
+
+Max Skl
+Stat Caps
+21
+1
+NUMS
+NULL
+
+Max Spd
+Stat Caps
+22
+1
+NUMS
+NULL
+
+Max Def
+Stat Caps
+23
+1
+NUMS
+NULL
+
+Max Res
+Stat Caps
+24
+1
+NUMS
+NULL
+
+Max Con
+Stat Caps
+25
+1
+NUMS
+NULL
+
+Class Relative Power
+General
+26
+1
+HEXU
+NULL
+
+HP
+Growth Chances
+27
+1
+NUMU
+NULL
+
+Str
+Growth Chances
+28
+1
+NUMU
+NULL
+
+Skl
+Growth Chances
+29
+1
+NUMU
+NULL
+
+Spd
+Growth Chances
+30
+1
+NUMU
+NULL
+
+Def
+Growth Chances
+31
+1
+NUMU
+NULL
+
+Res
+Growth Chances
+32
+1
+NUMU
+NULL
+
+Luck
+Growth Chances
+33
+1
+NUMU
+NULL
+
+Byte 34
+Unused
+34
+1
+HEXU
+NULL
+
+Byte 35
+Unused
+35
+1
+HEXU
+NULL
+
+Can use Ballistae? (Archers)
+Abilities
+288b
+1b
+BOOL
+NULL
+
+Critical % +30
+Abilities
+289b
+1b
+BOOL
+NULL
+
+Can play? (Bards)
+Abilities
+290b
+1b
+BOOL
+NULL
+
+Can dance? (Dancers)
+Abilities
+291b
+1b
+BOOL
+NULL
+
+Can pick locks? (Thiefs)
+Abilities
+292b
+1b
+BOOL
+NULL
+
+Can steal? (Thiefs)
+Abilities
+293b
+1b
+BOOL
+NULL
+
+Can move again? (Mounted units)
+Abilities
+294b
+1b
+BOOL
+NULL
+
+Mounted Aid system
+Abilities
+295b
+1b
+BOOL
+NULL
+
+Boss Character
+Unused
+296b
+1b
+BOOL
+NULL
+
+Female Character
+Unused
+297b
+1b
+BOOL
+NULL
+
+Lord class
+Class Type
+298b
+1b
+BOOL
+NULL
+
+Pegasus class
+Class Type
+299b
+1b
+BOOL
+NULL
+
+Wyvern class
+Class Type
+300b
+1b
+BOOL
+NULL
+
+Horse class
+Class Type
+301b
+1b
+BOOL
+NULL
+
+Item Supply
+Class Type
+302b
+1b
+BOOL
+NULL
+
+Promoted
+Class Type
+303b
+1b
+BOOL
+NULL
+
+Starts as NPC
+Unused
+304b
+1b
+BOOL
+NULL
+
+Armor triangle attack?
+Unused
+305b
+1b
+BOOL
+NULL
+
+Pegasus triangle attack?
+Unused
+306b
+1b
+BOOL
+NULL
+
+Cannot be controlled
+Abilities
+307b
+1b
+BOOL
+NULL
+
+Unused bit
+Unused
+308b
+1b
+BOOL
+NULL
+
+Unused weapon lock 1
+Locked Weapons
+309b
+1b
+BOOL
+NULL
+
+Unused weapon lock 2
+Locked Weapons
+310b
+1b
+BOOL
+NULL
+
+Can use Rapier/Sword of Seals?
+Locked Weapons
+311b
+1b
+BOOL
+NULL
+
+Byte 43 1
+Unused
+312b
+1b
+BOOL
+NULL
+
+Byte 43 2
+Unused
+313b
+1b
+BOOL
+NULL
+
+Byte 43 3
+Unused
+314b
+1b
+BOOL
+NULL
+
+Byte 43 4
+Unused
+315b
+1b
+BOOL
+NULL
+
+Byte 43 5
+Unused
+316b
+1b
+BOOL
+NULL
+
+Byte 43 6
+Unused
+317b
+1b
+BOOL
+NULL
+
+Byte 43 7
+Unused
+318b
+1b
+BOOL
+NULL
+
+Byte 43 8
+Unused
+318b
+1b
+BOOL
+NULL
+
+Sword Level
+Base Weapon Ranks
+40
+1
+LIST
+Weapon Rank.txt
+
+Spear Level
+Base Weapon Ranks
+41
+1
+LIST
+Weapon Rank.txt
+
+Axe Level
+Base Weapon Ranks
+42
+1
+LIST
+Weapon Rank.txt
+
+Bow Level
+Base Weapon Ranks
+43
+1
+LIST
+Weapon Rank.txt
+
+Staff Level
+Base Weapon Ranks
+44
+1
+LIST
+Weapon Rank.txt
+
+Anima Level
+Base Weapon Ranks
+45
+1
+LIST
+Weapon Rank.txt
+
+Light Level
+Base Weapon Ranks
+46
+1
+LIST
+Weapon Rank.txt
+
+Dark Level
+Base Weapon Ranks
+47
+1
+LIST
+Weapon Rank.txt
+
+Battle Animation Pointer
+Graphics
+48
+4
+POIN(Battle Animation Editor)
+Battle Animation Pointers.txt
+
+Movement Cost 
+Terrain Attribute Pointers
+52
+4
+POIN
+Terrain Move Cost Pointers.txt
+
+Terrain Def bonus
+Terrain Attribute Pointers
+56
+4
+POIN
+Terrain Stat Pointers.txt
+
+Terrain Avo bonus
+Terrain Attribute Pointers
+60
+4
+POIN
+Terrain Stat Pointers.txt
+
+Terrain Res bonus
+Terrain Attribute Pointers
+64
+4
+POIN
+Terrain Stat Pointers.txt
+
+Pointer
+Unknown
+68
+4
+POIN
+Class Unknown Pointer.txt

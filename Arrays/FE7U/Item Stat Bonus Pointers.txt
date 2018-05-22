@@ -1,0 +1,17 @@
+0x000000 None
+0xC98F98 Forblaze (+5 Luck)
+0xC98FA4 Angelic Robe (+7 HP)
+0xC98FB0 Energy Ring (+2 Str)
+0xC98FBC Skill Book (+2 Skl)
+0xC98FC8 Speedwings (+2 Spd)
+0xC98FD4 Goddess Icon (+2 Luck)
+0xC98FE0 Dragonshield (+2 Def)
+0xC98FEC Talisman (+2 Res)
+0xC98FF8 Boots (+2 Mov)
+0xC99004 Body Ring (+2 Con)
+0xC99010 Vaida's Spear
+0xC9901C Durandal (+5 Str)
+0xC99028 Armads (+5 Def)
+0xC99034 Aureola (+5 Res)
+0xC9904C Flametongue
+0xC99040 Sol Katti (+5 Res)

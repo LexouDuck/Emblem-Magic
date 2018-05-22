@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <link rel="stylesheet" href="Emblem Magic.css">
+	<title>Converting Battle Animations</title></title>
+</head>
+<body>
+	<h1>Converting Battle Animations</h1>
+	<br>
+	<p>There are a couple significant changes done to the battle animation code syntax from the FEditor format, as well as some additions, such as affine sprite transformations.<br>
+	Please refer to the <a href="Editors - Battle Animation Editor.html">Battle Animation Editor</a> help topic if you wish to convert a battle animation as a folder of images with a text file - it covers the animation format, the code syntax as well as many other things in greater detail.<br>
+	</p>
+	<h2>• Converting from compiled FEditor animation</h2>
+	<p>
+	Now, if you wish to make an Emblem Magic-compatible battle animation from an exported FEditor animation (that is, the tilesheet images along with an extensionless file and a .dmp file), there are a couple steps to go through.<br>
+	<br>
+	1. First, create a .pal file for your animation containing the 4 16-color palettes for it (Ally, Enemy, Neutral, and Gray). This .pal file format is just the 16-bit colors in sequence, so the file should be exactly 128 bytes long.<br>
+	2. The .dmp file can simply be renamed to have the .fea (Fire Emblem Animation) extension, and should work as is.<br>
+	3. FEditor's extensionless file is bit more tricky: it stores the OAM sprite data, however, unlike Emblem Magic's .oam files, this file has a header with some java code referencing the tilesheet images associated. You will have to delete this beginning section of the file (in a hex editor or so).<br>
+	4. This same extentionless file also holds twice the OAM data necessary, since it stores both the right-to-left and left-to-right version of the OAM for each battle animation frame. Emblem Magic calculates the flipped version's OAM from the other upon insertion - as such, you should keep only half the file: check the new filesize (after deleting the header), divide that number in two, and make that the new filesize. (I also recommend checking you're not taking out an OAM terminator, align the bytes at 12b per column to better see the OAM data in a hex editor, an OAM terminator is one '01' byte followed by eleven '00' bytes)<br>
+	</p>
+</body>
+</html>

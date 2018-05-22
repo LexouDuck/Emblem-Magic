@@ -1,0 +1,50 @@
+0x000000 None
+0xBE3888 Strong land units
+0xBE38C9 Weak land units
+0xBE390A Armor-clad units
+0xBE394B Axe-wielding units
+0xBE398C Berserker
+0xBE39CD Brigand
+0xBE3A0E Pirate
+0xBE3A4F Thief, Assassin
+0xBE3A90 Magic-using units
+0xBE3AD1 Civilian units
+0xBE3B12 Weak mounted units
+0xBE3B53 Strong mounted units
+0xBE3B94 Nomad
+0xBE3BD5 Nomad Trooper
+0xBE3C16 Flying units
+0xBE3C57 Dragons
+0xBE3C98 -
+0xBE3CD9 (Rain) Strong land units
+0xBE3D1A (Rain) Weak land units
+0xBE3D5B (Rain) Armor-clad units
+0xBE3D9C (Rain) Axe-wielding units
+0xBE3DDD (Rain) Berserker
+0xBE3E1E (Rain) Brigand
+0xBE3E5F (Rain) Pirate
+0xBE3EA0 (Rain) Thief, Assassin
+0xBE3EE1 (Rain) Magic-using units
+0xBE3F22 (Rain) Civilian units
+0xBE3F63 (Rain) Weak mounted units
+0xBE3FA4 (Rain) Strong mounted units
+0xBE3FE5 (Rain) Nomad
+0xBE4026 (Rain) Nomad Trooper
+0xBE4067 (Rain) Flying units
+0xBE40A8 -
+0xBE40E9 (Snow) Strong land units
+0xBE412A (Snow) Weak land units
+0xBE416B (Snow) Armor-clad units
+0xBE41AC (Snow) Axe-wielding units
+0xBE41ED (Snow) Berserker
+0xBE422E (Snow) Brigand
+0xBE426F (Snow) Pirate
+0xBE42B0 (Snow) Thief, Assassin
+0xBE42F1 (Snow) Magic-using units
+0xBE4332 (Snow) Civilian units
+0xBE4373 (Snow) Weak mounted units
+0xBE43B4 (Snow) Strong mounted units
+0xBE43F5 (Snow) Nomad
+0xBE4436 (Snow) Nomad Trooper
+0xBE4477 (Snow) Flying units
+0xBE44B8 -

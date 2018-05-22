@@ -1,0 +1,31 @@
+0xC97EDD Default Hero Crest
+0xC97EE3 Default Knight Crest
+0xC97EE8 Default Orion Bolt
+0xC97EED Default Elysian Whip
+0xC97EF1 Default Guiding Ring
+0xC97EFD Default Master Seal
+0xC97F24 Default Ocean Seal
+0xC97F29 Default Fallen Contract
+0xC97F16 Hector & Lyn
+0xC97F21 Eliwood & Lyn
+0xC97F26 Dancer & Bard
+0xC97F2B Eliwood
+0xC97F2F Hector
+0xC97F33 Lyn
+0xC97F37 Archsage
+0xFFFA00 Custom
+0xFFFA20 Custom
+0xFFFA40 Custom
+0xFFFA60 Custom
+0xFFFA80 Custom
+0xFFFAA0 Custom
+0xFFFAC0 Custom
+0xFFFAE0 Custom
+0xFFFB00 Custom
+0xFFFB20 Custom
+0xFFFB40 Custom
+0xFFFB60 Custom
+0xFFFB80 Custom
+0xFFFBA0 Custom
+0xFFFBC0 Custom
+0xFFFBE0 Custom

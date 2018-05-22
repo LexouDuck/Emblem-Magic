@@ -1,0 +1,17 @@
+0x000000 None
+0x60C648 Strong land units
+0x60C67B Weak land units
+0x60C6AE Armor-clad units
+0x60C6E1 Axe-wielding units
+0x60C714 Berserker
+0x60C747 Brigand
+0x60C77A Pirate
+0x60C7AD Thief
+0x60C7E0 Magic-using units
+0x60C813 Civilian units
+0x60C846 Weak mounted units
+0x60C879 Strong mounted units
+0x60C8AC Nomad
+0x60C8DF Nomad Trooper
+0x60C912 Flying units
+0x60C945 Dragons

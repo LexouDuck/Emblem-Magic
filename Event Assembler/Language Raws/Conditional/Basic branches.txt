@@ -1,0 +1,115 @@
+##Unconditional GOTO (jumps to LABEL *ConditionalID*)
+GOTO, 0x1C, 8, -game:FE6 -indexMode:8
+	ConditionalID, 4, 2
+
+##Label (target for conditional branches)
+LABEL, 0x1B, 8, -game:FE6 -indexMode:8
+	ConditionalID, 4, 2
+
+
+
+##Unconditional GOTO (jumps to LABEL *conditional ID*)
+GOTO, 0x45, 8, -game:FE7 -indexMode:8
+	ConditionalID, 4, 2
+
+##Label (target for conditional branches)
+LABEL, 0x44, 8, -game:FE7 -indexMode:8
+	ConditionalID, 4, 2
+
+
+
+##Unconditional GOTO (jumps to LABEL *conditional ID*)
+GOTO, 0x920, 4, -game:FE8 -indexMode:8
+	ConditionalID, 2, 2
+
+##Label (target for conditional branches)
+LABEL, 0x820, 4, -game:FE8 -indexMode:8
+	ConditionalID, 2, 2
+
+#The CHECK_ commands store the results of their checks to MemorySlot 0xC.
+#Some are boolean checks (they store 0 or 1), and others store ints.
+
+##Returns (MemorySlot 0xC) a value for the current game mode:
+##returns 0x1 for Prologue-C8, 0x2 for Eirika Mode, and 0x3 for Ephraim Mode.
+CHECK_MODE, 0x1920, 4, -game:FE8 -indexMode:8
+
+##Returns (MemorySlot 0xC) the boolean value for Difficult Mode.
+CHECK_HARD, 0x1922, 4, -game:FE8 -indexMode:8
+
+##Returns (MemorySlot 0xC) the current turn number
+CHECK_TURNS, 0x1923, 4, -game:FE8 -indexMode:8
+
+##Returns (MemorySlot 0xC) the amount of enemies on the map
+CHECK_ENEMIES, 0x1924, 4, -game:FE8 -indexMode:8
+
+##Returns (MemorySlot 0xC) the amount of NPCs on the map
+CHECK_OTHERS, 0x1925, 4, -game:FE8 -indexMode:8
+
+##Returns (MemorySlot 0xC) a value indicating whether the player
+##is in a skirmish or dungeon (used for the 'Retreat' menu command).
+CHECK_SKIRMISH, 0x1926, 4, -game:FE8 -indexMode:8
+
+##Returns (MemorySlot 0xC) a value indicating whether
+##tutorials are enabled (i.e. Easy Mode) or not.
+CHECK_TUTORIAL, 0x1927, 4, -game:FE8 -indexMode:8
+
+##Returns (MemorySlot 0xC) the player's current amount of gold.
+CHECK_MONEY, 0x1928, 4, -game:FE8 -indexMode:8
+
+##Returns (MemorySlot 0xC) the Event ID associated with the current event.
+CHECK_EVENTID, 0x1929, 4, -game:FE8 -indexMode:8
+
+##Returns (MemorySlot 0xC) the Mode byte;
+##likely checks to see if the player is in the postgame.
+CHECK_POSTGAME, 0x192A, 4, -game:FE8 -indexMode:8
+
+##Returns (MemorySlot 0xC) the Chapter Number associated with the current map.
+CHECK_CHAPTER_NUMBER, 0x1921, 4, -game:FE8 -indexMode:8
+
+# These commands compare two memory slots and branch to LABEL *ConditionalID* if the condition is met
+
+##command:Branch if EQual
+##Branches if the values in the two given MemorySlots are equal.
+BEQ, 0xC40, 8, -game:FE8 -indexMode:8
+	ConditionalID, 2, 2
+	MemorySlot1, 4, 2
+	MemorySlot2, 6, 2
+
+##command:Branch if Not Equal
+##Branches if the values in the two given MemorySlots are different.
+BNE, 0xC41, 8, -game:FE8 -indexMode:8
+	ConditionalID, 2, 2
+	MemorySlot1, 4, 2
+	MemorySlot2, 6, 2
+
+##command:Branch if Greater than or Equal
+##Branches if the value in MemorySlot1 is bigger
+##or equivalent to the one in MemorySlot2
+BGE, 0xC42, 8, -game:FE8 -indexMode:8
+	ConditionalID, 2, 2
+	MemorySlot1, 4, 2
+	MemorySlot2, 6, 2
+
+##command:Branch if Greater Than
+##Branches if and only if the value in MemorySlot1
+##is bigger than the one in MemorySlot2
+BGT, 0xC43, 8, -game:FE8 -indexMode:8
+	ConditionalID, 2, 2
+	MemorySlot1, 4, 2
+	MemorySlot2, 6, 2
+
+##command:Branch if Less than or Equal
+##Branches if the value in MemorySlot1 is smaller
+##or equivalent to the one in MemorySlot2
+BLE, 0xC44, 8, -game:FE8 -indexMode:8
+	ConditionalID, 2, 2
+	MemorySlot1, 4, 2
+	MemorySlot2, 6, 2
+
+##command:Branch if Less Than
+##Branches if and only if the value in MemorySlot1
+##is smaller than the one in MemorySlot2
+BLT, 0xC45, 8, -game:FE8 -indexMode:8
+	ConditionalID, 2, 2
+	MemorySlot1, 4, 2
+	MemorySlot2, 6, 2

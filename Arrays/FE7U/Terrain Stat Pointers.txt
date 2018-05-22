@@ -1,0 +1,7 @@
+0x000000 None
+0xBE44F9 Ground Avd
+0xBE453A Ground Def
+0xBE457B Ground Res
+0xBE45BC Aerial Avd
+0xBE45FD Aerial Def
+0xBE463E Aerial Res

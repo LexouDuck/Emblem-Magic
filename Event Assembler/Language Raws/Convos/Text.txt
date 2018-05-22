@@ -1,0 +1,212 @@
+##Displays text.
+##Alias: TEX1
+TEXT, 0x07, 8, -game:FE6 -indexMode:8
+##The ID of the text to display.
+	TextID, 4, 2
+
+##Displays text.
+##Alias: TEXT
+TEX1, 0x07, 8, -game:FE6 -indexMode:8
+##The ID of the text to display.
+	TextID, 4, 2
+
+##Continues displaying text without resetting
+##the current text bubbles and/or portraits.
+MORETEXT, 0x08, 8, -game:FE6 -indexMode:8
+##The ID of the text to display.
+	TextID, 4, 4
+
+
+
+##Displays text.
+##Alias: TEX1
+TEXT, 0x0D, 8, -game:FE7 -indexMode:8
+##The ID of the text to display.
+	TextID, 4, 2
+
+##Displays text.
+##Alias: TEXT
+TEX1, 0x0D, 8, -game:FE7 -indexMode:8
+##The ID of the text to display.
+	TextID, 4, 2
+
+##Displays text.
+TEX2, 0x0E, 8, -game:FE7 -indexMode:8
+##The ID of the text to display.
+	TextID, 4, 2
+
+##Continues displaying text without resetting
+##the current text bubbles and/or portraits.
+MORETEXT, 0x11, 8, -game:FE7 -indexMode:8
+##The ID of the text to display.
+	TextID, 4, 2
+
+##Displays text depending on the current game mode.
+TEXTIFEM, 0x0F, 12, -game:FE7 -indexMode:8
+##Text to display if Eliwood mode.
+	TextID 1, 4, 2
+##Text to display if Hector mode.
+	TextID 2, 8, 2
+
+##Continues displaying text depending on the mode,
+##without resetting text bubbles and/or portraits.
+MORETEXTIFEM, 0x12, 12, -game:FE7 -indexMode:8
+##Text to display if Eliwood mode.
+	TextID 1, 4, 2
+##Text to display if Hector mode.
+	TextID 2, 8, 2
+
+##Scrolls text.
+SCRO, 0x14, 4, -game:FE7 -indexMode:8
+
+##Displays text with a specific text bubble type
+##and position on the screen.
+TEX6, 0xA7, 12, -game:FE7 -indexMode:8
+##The type of text bubble to display.
+	BubbleType, 2, 2
+##Position at which to display the text bubble.
+##Position [0,0] means the center of the screen.
+	TextPosition, 4, 4, coordinates:2 -preferredBase:10
+##The ID of the text to display.
+	TextID, 8, 2
+
+##Displays text on a cutscene screen image.
+TEXTCG, 0xCF, 12, -game:FE7 -indexMode:8
+##The ID of the text to display.
+	TextID, 4, 2
+##(Unknown, is usually 1)
+	CutsceneID, 8, 1
+
+TEXTCG, 0xCF, 12, -game:FE7 -indexMode:8 -noDisassembly
+	TextID, 4, 2
+	1, 8, 1, -fixed
+
+##Follows up a previous 'TEXTCG' command,
+##to display another text entry without resetting
+##the current text bubbles and/or portraits.
+MORETEXTCG, 0xD1, 12, -game:FE7 -indexMode:8
+##The ID of the text to display.
+	TextID, 4, 4
+##(Unknown, is usually 1)
+	CutsceneID, 8, 4
+
+##Displays text.
+TEX8, 0xD7, 12, -game:FE7 -indexMode:8
+##The ID of the text to display.
+	TextID, 4, 2
+##Position at which to display the text.
+	TextPosition, 8, 4, coordinates:2 -preferredBase:10
+
+##Displays seperate text depending on whether
+##the tactician's gender is male or female.
+TEXTIFTACTF, 0x18, 12, -game:FE7 -indexMode:8
+##Text to display if tactician is male.
+	TextID 1, 4, 2
+##Text to display if tactician is female.
+	TextID 2, 8, 2
+
+##Follows up a previous 'TEXTIFTACTF' command,
+##to display another text entry without resetting
+##the current text bubbles and/or portraits.
+MORETEXTIFTACTF, 0x19, 12, -game:FE7 -indexMode:8
+##Text to display if the tactician is male.
+	TextID 1, 4, 2
+##Text to display if the tactician is female.
+	TextID 2, 8, 2
+
+##Displays text depending on whether the given
+##event ID is set as 'used' or not.
+TEXTIFEVENTID, 0x1A, 16, -game:FE7 -indexMode:8
+##The event ID to check.
+	EventID, 4, 1
+##Text to display if event ID is 'used'.
+	TextID 1, 8, 2
+##Text to display if event ID is 'unused'.
+	TextID 2, 12, 2
+
+##Follows up a previous 'TEXTIFEVENTID' command,
+##to display another text entry without resetting
+##the current text bubbles and/or portraits.
+MORETEXTIFEVENTID, 0x1B, 16, -game:FE7 -indexMode:8
+##The event ID to check.
+	EventID, 4, 4
+##Text to display if event ID is used.
+	TextID 1, 8, 2
+##Text to display if event ID is unused.
+	TextID 2, 12, 2
+
+##Displays text depending on the return value
+##of the given ASM routine.
+TEXTIFASM, 0x1C, 16, -game:FE7 -indexMode:8
+##The address of the ASM routine to execute.
+##The return value determines which text to display.
+##Thumb routines must have 1 added to their offset.
+	ASM_Pointer, 4, 4, -pointer:ASM
+##Text to display if routine returns 0.
+	TextID 1, 8, 2
+##Text to display if routine returns 1.
+	TextID 2, 12, 2
+
+##Follows up a previous 'TEXTIFASM' command,
+##to display another text entry without resetting
+##the current text bubbles and/or portraits.
+MORETEXTIFASM, 0x1D, 16, -game:FE7 -indexMode:8
+##The address of the ASM routine to execute.
+##The return value determines which text to display.
+##Thumb routines must have 1 added to their offset.
+	ASM_Pointer, 4, 4, -pointer:ASM
+##Text to display if routine returns 0.
+	TextID 1, 8, 2
+##Text to display if routine returns 1.
+	TextID 2, 12, 2
+
+
+	
+##Begins text displaying.
+TEXTSTART, 0x1A20, 4, -game:FE8 -indexMode:8
+
+##Displays text, after a 'TEXTSTART' command.
+TEXTSHOW, 0x1B20, 4, -game:FE8 -indexMode:8
+##The ID of the text to display.
+##If this is 0xFFFF, this command will use
+##the value in MemorySlot 0x2 as TextID.
+	TextID, 2, 2
+
+##Displays text, after a 'TEXTSTART' command.
+TEXTSHOW2, 0x1B21, 4, -game:FE8 -indexMode:8
+##The ID of the text to display.
+##If this is 0xFFFF, this command will use
+##the value in MemorySlot 0x2 as TextID.
+	TextID, 2, 2
+
+##Displays more text, after a preceding 'TEXTSHOW'.
+TEXTCONT, 0x1C20, 4, -game:FE8 -indexMode:8
+
+##Ends text displaying started by 'TEXTSTART'.
+TEXTEND, 0x1D20, 4, -game:FE8 -indexMode:8
+
+##Displays a yellow-ish text box used for tutorials.
+##The text box will be centered in the middle of the screen
+##if this command is preceded by 'SETVAL 0xB 0xFFFFFFFF'.
+TUTORIALTEXTBOXSTART, 0x1A23, 4, -game:FE8 -indexMode:8
+ 
+##Displays a text box at specific coordinates
+##Set the position with a preceding 'SETVAL 0xB 0xXX00YY',
+##where X and Y are the coordinates.
+SOLOTEXTBOXSTART, 0x1A24, 4, -game:FE8 -indexMode:8
+
+##Brings up a notification box (like when getting an item),
+##on which some text is displayed.
+NOTIFY, 0x3A40, 8, -game:FE8 -indexMode:8
+##The ID of the text to display.
+	TextID, 2, 2
+##The sound effect (or music track) to play.
+	MusicID, 4, 2
+	0, 6, 2, -fixed
+
+##Displays text in a brown text box.
+BROWNBOXTEXT, 0x3A41, 8, -game:FE8 -indexMode:8
+##The ID of the text to display.
+	TextID, 2, 2
+##The position at which to display the brown box.
+	TextPosition, 4, 4, coordinates:2 -preferredBase:10

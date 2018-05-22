@@ -1,0 +1,99 @@
+##command:FADe In
+##Performs a fade-in of the screen to black.
+FADI, 0x43, 8, -game:FE6 -indexMode:8
+##Amount of frames the fading should last.
+##A larger value means slower fading.
+	FadeTime, 4, 2, -preferredBase:10
+
+##command:FADe oUt
+##Performs a screen fade-out of black.
+FADU, 0x44, 8, -game:FE6 -indexMode:8
+##Amount of frames the fading should last.
+##A larger value means slower fading.
+	FadeTime, 4, 2, -preferredBase:10
+
+##command:FAde White In
+##Performs a fade-in of the screen to black.
+FAWI, 0x45, 8, -game:FE6 -indexMode:8
+##Amount of frames the fading should last.
+##A larger value means slower fading.
+	FadeTime, 4, 4
+
+##command:FAde White oUt
+##Performs a screen fade-out of white.
+FAWU, 0x46, 8, -game:FE6 -indexMode:8
+##Amount of frames the fading should last.
+##A larger value means slower fading.
+	FadeTime, 4, 4
+
+
+
+##command:FADe In
+##Performs a fade-in of the screen to black.
+FADI, 0x8E, 4, -game:FE7 -indexMode:8
+##Amount of frames the fading should last.
+##A larger value means slower fading.
+	FadeTime, 2, 2, -preferredBase:10
+
+##command:FADe oUt
+##Performs a screen fade-out of black.
+FADU, 0x8F, 4, -game:FE7 -indexMode:8
+##Amount of frames the fading should last.
+##A larger value means slower fading.
+	FadeTime, 2, 2, -preferredBase:10
+
+##command:FAde White In
+##Performs a fade-in of the screen to black.
+FAWI, 0x90, 4, -game:FE7 -indexMode:8
+##Amount of frames the fading should last.
+##A larger value means slower fading.
+	FadeTime, 2, 2, -preferredBase:10
+
+##command:FAde White oUt
+##Performs a screen fade-out of white.
+FAWU, 0x91, 4, -game:FE7 -indexMode:8
+##Amount of frames the fading should last.
+##A larger value means slower fading.
+	FadeTime, 2, 2, -preferredBase:10
+
+##Performs a fade-in for cutscene screen images.
+FADICG, 0xD6, 4, -game:FE7 -indexMode:8
+##Amount of frames the fading should last.
+##A larger value means slower fading.
+	FadeTime, 2, 2, -preferredBase:10
+
+##Performs a fade-out for cutscene screen images.
+FADUCG, 0xD5, 4, -game:FE7 -indexMode:8
+##Amount of frames the fading should last.
+##A larger value means slower fading.
+	FadeTime, 2, 2, -preferredBase:10
+
+
+
+##command:FADe In
+##Performs a fade-in of the screen to black.
+FADI, 0x1721, 4, -game:FE8 -indexMode:8
+##Amount of frames the fading should last.
+##A larger value means slower fading.
+	FadeTime, 2, 2, -preferredBase:10
+
+##command:FADe oUt
+##Performs a screen fade-out of black.
+FADU, 0x1720, 4, -game:FE8 -indexMode:8
+##Amount of frames the fading should last.
+##A larger value means slower fading.
+	FadeTime, 2, 2, -preferredBase:10
+
+##command:FAde White In
+##Performs a fade-in of the screen to black.
+FAWI, 0x1723, 4, -game:FE8 -indexMode:8
+##Amount of frames the fading should last.
+##A larger value means slower fading.
+	FadeTime, 2, 2, -preferredBase:10
+
+##command:FAde White oUt
+##Performs a screen fade-out of white.
+FAWU, 0x1722, 4, -game:FE8 -indexMode:8
+##Amount of frames the fading should last.
+##A larger value means slower fading.
+	FadeTime, 2, 2, -preferredBase:10

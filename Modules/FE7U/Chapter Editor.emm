@@ -1,0 +1,687 @@
+FE7U
+Chapter Editor
+by Icy Toast
+0xC9A200
+67
+152
+LIST
+Chapter List.txt
+
+Chapter Ref Pointer
+General
+0
+4
+POIN
+Chapter Ref Pointers.txt
+
+Tileset 1
+Chapter Map
+4
+1
+LIST
+Map List.txt
+
+Tileset 2
+Chapter Map
+5
+1
+LIST
+Map List.txt
+
+Palette
+Chapter Map
+6
+1
+LIST
+Map List.txt
+
+Tileset TSA
+Chapter Map
+7
+1
+LIST
+Map List.txt
+
+Map
+Chapter Map
+8
+1
+LIST
+Map List.txt
+
+Tileset Animation 1
+Chapter Map
+9
+1
+LIST
+Map List.txt
+
+Tileset Animation 2
+Chapter Map
+10
+1
+LIST
+Map List.txt
+
+Triggerable Map Changes
+Chapter Map
+11
+1
+LIST
+Map List.txt
+
+Fog Amount
+Chapter Gameplay
+12
+1
+NUMU
+NULL
+
+Preparations Screen
+Chapter Gameplay
+13
+1
+BOOL
+NULL
+
+Eliwood Mode Chapter Ref?
+General
+14
+1
+HEXU
+NULL
+
+Hector Mode Chapter Ref?
+General
+15
+1
+HEXU
+NULL
+
+Byte 16
+Unknown
+16
+1
+HEXU
+NULL
+
+Byte 17
+Unknown
+17
+1
+HEXU
+NULL
+
+Weather
+Chapter Gameplay
+18
+1
+LIST
+Chapter Weather.txt
+
+Battle Tileset
+Chapter Map
+19
+1
+LIST
+Battle Tileset List.txt
+
+Chapter Mode (Tutorial?)
+Chapter Objective
+20
+1
+HEXU
+NULL
+
+Byte 21
+Unknown
+21
+1
+HEXU
+NULL
+
+Player Phase (E)
+Chapter Music
+22
+2
+LIST(Music Editor)
+Music List.txt
+
+Enemy Phase (E)
+Chapter Music
+24
+2
+LIST(Music Editor)
+Music List.txt
+
+NPC Phase (E)
+Chapter Music
+26
+2
+LIST(Music Editor)
+Music List.txt
+
+Player Phase (H)
+Chapter Music
+28
+2
+LIST(Music Editor)
+Music List.txt
+
+Enemy Phase (H)
+Chapter Music
+30
+2
+LIST(Music Editor)
+Music List.txt
+
+NPC Phase (H)
+Chapter Music
+32
+2
+LIST(Music Editor)
+Music List.txt
+
+Secondary Player Phase
+Chapter Music
+34
+2
+LIST(Music Editor)
+Music List.txt
+
+Secondary Enemy Phase
+Chapter Music
+36
+2
+LIST(Music Editor)
+Music List.txt
+
+World Map Prologue
+Chapter Music
+38
+2
+LIST(Music Editor)
+Music List.txt
+
+Chapter Opening (E)
+Chapter Music
+40
+2
+LIST(Music Editor)
+Music List.txt
+
+Chapter Opening (H)
+Chapter Music
+42
+2
+LIST(Music Editor)
+Music List.txt
+
+Destructible Walls HP
+Chapter Gameplay
+44
+1
+NUMU
+NULL
+
+5-Stars Turn Limit
+Tactics Score (E Normal)
+45
+1
+NUMU
+NULL
+
+5-Stars Turn Limit
+Tactics Score (E Hard)
+46
+1
+NUMU
+NULL
+
+5-Stars Turn Limit
+Tactics Score (H Normal)
+47
+1
+NUMU
+NULL
+
+5-Stars Turn Limit
+Tactics Score (H Hard)
+48
+1
+NUMU
+NULL
+
+4-Stars Turn Limit
+Tactics Score (E Normal)
+49
+1
+NUMU
+NULL
+
+4-Stars Turn Limit
+Tactics Score (E Hard)
+50
+1
+NUMU
+NULL
+
+4-Stars Turn Limit
+Tactics Score (H Normal)
+51
+1
+NUMU
+NULL
+
+4-Stars Turn Limit
+Tactics Score (H Hard)
+52
+1
+NUMU
+NULL
+
+3-Stars Turn Limit
+Tactics Score (E Normal)
+53
+1
+NUMU
+NULL
+
+3-Stars Turn Limit
+Tactics Score (E Hard)
+54
+1
+NUMU
+NULL
+
+3-Stars Turn Limit
+Tactics Score (H Normal)
+55
+1
+NUMU
+NULL
+
+3-Stars Turn Limit
+Tactics Score (H Hard)
+56
+1
+NUMU
+NULL
+
+2-Stars Turn Limit
+Tactics Score (E Normal)
+57
+1
+NUMU
+NULL
+
+2-Stars Turn Limit
+Tactics Score (E Hard)
+58
+1
+NUMU
+NULL
+
+2-Stars Turn Limit
+Tactics Score (H Normal)
+59
+1
+NUMU
+NULL
+
+2-Stars Turn Limit
+Tactics Score (H Hard)
+60
+1
+NUMU
+NULL
+
+5-Stars Exp Requirement
+Tactics Score (E Normal)
+62
+2
+NUMU
+NULL
+
+5-Stars Exp Requirement
+Tactics Score (E Hard)
+64
+2
+NUMU
+NULL
+
+5-Stars Exp Requirement
+Tactics Score (H Normal)
+66
+2
+NUMU
+NULL
+
+5-Stars Exp Requirement
+Tactics Score (H Hard)
+68
+2
+NUMU
+NULL
+
+4-Stars Exp Requirement
+Tactics Score (E Normal)
+70
+2
+NUMU
+NULL
+
+4-Stars Exp Requirement
+Tactics Score (E Hard)
+72
+2
+NUMU
+NULL
+
+4-Stars Exp Requirement
+Tactics Score (H Normal)
+74
+2
+NUMU
+NULL
+
+4-Stars Exp Requirement
+Tactics Score (H Hard)
+76
+2
+NUMU
+NULL
+
+3-Stars Exp Requirement
+Tactics Score (E Normal)
+78
+2
+NUMU
+NULL
+
+3-Stars Exp Requirement
+Tactics Score (E Hard)
+80
+2
+NUMU
+NULL
+
+3-Stars Exp Requirement
+Tactics Score (H Normal)
+82
+2
+NUMU
+NULL
+
+3-Stars Exp Requirement
+Tactics Score (H Hard)
+84
+2
+NUMU
+NULL
+
+2-Stars Exp Requirement
+Tactics Score (E Normal)
+86
+2
+NUMU
+NULL
+
+2-Stars Exp Requirement
+Tactics Score (E Hard)
+88
+2
+NUMU
+NULL
+
+2-Stars Exp Requirement
+Tactics Score (H Normal)
+90
+2
+NUMU
+NULL
+
+2-Stars Exp Requirement
+Tactics Score (H Hard)
+92
+2
+NUMU
+NULL
+
+Maximum Acquirable Funds
+Tactics Score (E Normal)
+96
+4
+NUMU
+NULL
+
+Maximum Acquirable Funds
+Tactics Score (E Hard)
+100
+4
+NUMU
+NULL
+
+Maximum Acquirable Funds
+Tactics Score (H Normal)
+104
+4
+NUMU
+NULL
+
+Maximum Acquirable Funds
+Tactics Score (H Hard)
+108
+4
+NUMU
+NULL
+
+Chapter Name Text (w/ Number) (E)
+General
+112
+2
+HEXU(Text Editor)
+NULL
+
+Chapter Name Text (w/ Number) (H)
+General
+114
+2
+HEXU(Text Editor)
+NULL
+
+Chapter Name Text (E)
+General
+116
+2
+HEXU(Text Editor)
+NULL
+
+Chapter Name Text (H)
+General
+118
+2
+HEXU(Text Editor)
+NULL
+
+Event Data Reference
+General
+120
+1
+LIST
+Map List.txt
+
+Chapter Prologue Scene
+General
+121
+1
+LIST
+Chapter Prologues.txt
+
+Pre-Augury Text
+Chapter Augury
+122
+2
+HEXU(Text Editor)
+NULL
+
+Augury Text (E)
+Chapter Augury
+124
+2
+HEXU(Text Editor)
+NULL
+
+Augury Text (H)
+Chapter Augury
+126
+2
+HEXU(Text Editor)
+NULL
+
+Post-Augury Text
+Chapter Augury
+128
+2
+HEXU(Text Editor)
+NULL
+
+Augury Portrait
+Chapter Augury
+130
+1
+LIST(Portrait Editor)
+Portrait List.txt
+
+Augury Price
+Chapter Augury
+131
+1
+NUMU
+NULL
+
+Preparation Screen Ch. (E)
+Chapter Gameplay
+132
+1
+LIST
+Chapter Preparations List.txt
+
+Preparation Screen Ch. (H)
+Chapter Gameplay
+133
+1
+LIST
+Chapter Preparations List.txt
+
+Merlinus X (E)
+Chapter Gameplay
+134
+1
+NUMU
+NULL
+
+Merlinus X (H)
+Chapter Gameplay
+135
+1
+NUMU
+NULL
+
+Merlinus Y (E)
+Chapter Gameplay
+136
+1
+NUMU
+NULL
+
+Merlinus Y (H)
+Chapter Gameplay
+137
+1
+NUMU
+NULL
+
+Enemy count for victory music
+Chapter Music
+138
+1
+NUMU
+NULL
+
+Fade to Map after Chapter Title ?
+General
+139
+1
+BOOL
+NULL
+
+Status - Objective Text
+Chapter Objective
+140
+2
+HEXU(Text Editor)
+NULL
+
+Goal Window Text
+Chapter Objective
+142
+2
+HEXU(Text Editor)
+NULL
+
+Goal Window Info
+Chapter Objective
+144
+1
+LIST
+Chapter Goals.txt
+
+Base Remaining Turns
+Chapter Objective
+145
+1
+NUMU
+NULL
+
+Protect Character Marker
+Chapter Objective
+146
+1
+LIST
+Character List.txt
+
+Seize Tile Marker X
+Chapter Objective
+147
+1
+NUMU
+NULL
+
+Seize Tile Marker Y
+Chapter Objective
+148
+1
+NUMU
+NULL
+
+Byte 149
+Unknown
+149
+1
+HEXU
+NULL
+
+Byte 150
+Unknown
+150
+1
+HEXU
+NULL
+
+Byte 151
+Unknown
+151
+1
+HEXU
+NULL

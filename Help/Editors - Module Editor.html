@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <link rel="stylesheet" href="Emblem Magic.css">
+	<title>Module Editor</title>
+</head>
+<body>
+	<h1>The Module Editor</h1>
+	<p>
+	<br>
+	</p>
+	<h2>• Emblem Magic Modules</h2>
+	<p>
+	Here is how the header of an EMM file is laid out:<br>
+	<code>
+FE7U             # FE Game identifier (FE7U, FE6J, etc)<br>
+something Editor # Title of the module (shown as window title)<br>
+by whomever      # Author of the module (shown on bottom bar)<br>
+0xFFFFFF         # Address of the array (will prompt the user for an address if 0x000000)<br>
+100              # Amount of entries in the array<br>
+16               # Length of each entry (in bytes)<br>
+LIST             # The type of control for the array, usually LIST or POIN<br>
+file.txt         # The TXT file for the array entry names<br>
+	</code>
+	Each subsequent field for the module is like so:<br>
+	<code>
+[text]     # Name of the field<br>
+[text]     # Category of the field (if the Category is 'Unused', it will be the last category to show up)<br>
+[number]   # byte/bit index of the field (add a 'b' at the end of a number to make it a bit amount)<br>
+[number]   # byte/bit length of the field<br>
+[NULL]     # The kind of control, see more about these just below<br>
+[file.txt] # usually 'NULL', or the filename of a txt list file to use for the control<br>
+	</code>
+	Here is the list of possible controls for fields:
+	<code>
+NULL # nothing<br>
+BOOL # CheckBox<br>
+TEXT # TextBox (one-line)<br>
+HEXT # HexBox (multi-line)<br>
+HEXU # Hex Numeric Up/Down box<br>
+NUMU # Unsigned decimal NUDbox<br>
+NUMS # Signed decimal NUDbox<br>
+LIST # ByteBox with dropdownlist, should have a TXT list file<br>
+POIN # PointerBox (with a dropdown list if the TXT file is not 'NULL')<br>
+	</code>
+	</p>
+</body>
+</html>

@@ -1,0 +1,5 @@
+0xD613B8 8
+
+0x00 1 Byte	Unknown
+0x02 1 Byte	Size
+0x04 4 Pointer	Sprite

@@ -1,0 +1,11 @@
+0x000000 None
+0x029395 Hero Crest
+0x02939D Knight Crest
+0x0293A5 Orion Bolt
+0x0293AD Elysian Whip
+0x0293B5 Guiding Ring
+0x0293BD Master Seal
+0x0293C5 Moon Bracelet
+0x0293CD Sun Bracelet
+0x0293D5 Heaven Seal
+0x029405 Ocean Seal

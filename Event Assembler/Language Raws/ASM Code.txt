@@ -1,0 +1,28 @@
+##This command calls an ASM routine at 'Pointer'.
+ASMC, 0x17, 8, -language:FE6 -repeatable -indexMode:8
+##Address of the ASM routine to execute.
+##Thumb routines should have 1 added.
+	Pointer, 4, 4, -pointer:ASM
+
+
+
+##This command calls an ASM routine at 'Pointer'.
+ASMC, 0x3E, 8, -language:FE7 -repeatable -indexMode:8
+##Address of the ASM routine to execute.
+##Thumb routines should have 1 added.
+	Pointer, 4, 4, -pointer:ASM
+
+
+
+##This command calls an ASM routine at 'Pointer'.
+ASMC, 0xD40, 8, -language:FE8 -repeatable -indexMode:8
+##Address of the ASM routine to execute.
+##Thumb routines should have 1 added.
+	Pointer, 4, 4, -pointer:ASM
+
+##This command calls an ASM routine at 'Pointer'
+##if bit 0x8 in event execution bitfield is not set.
+ASMC2, 0xD41, 8, -language:FE8 -repeatable -indexMode:8
+##Address of the ASM routine to execute.
+##Thumb routines should have 1 added.
+	Pointer, 4, 4, -pointer:ASM

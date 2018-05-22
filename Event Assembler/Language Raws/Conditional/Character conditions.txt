@@ -1,0 +1,131 @@
+##command:GOTO IF Character Active
+##Branches if the given character is active.
+GOTO_IFCA, 0x24, 12, -game:FE6 -indexMode:8
+	ConditionalID, 4, 4
+##Character to check.
+	CharacterID, 8, 4
+
+
+
+##command:GOTO IF Not Unit Fielded
+##Branches if the given unit is not fielded.
+GOTO_IFNUF, 0x57, 12, -game:FE7 -indexMode:8
+	Unknown, 2, 2	
+	ConditionalID, 4, 2
+##The ID of the character to check.
+	CharacterID, 8, 2
+
+##command:GOTO IF Character Not Active
+##Branches if the given character is not active.
+GOTO_IFCNA, 0x4E, 12, -game:FE7 -indexMode:8
+	Unknown, 2, 2
+	ConditionalID, 4, 4
+##The ID of the character to check.
+	CharacterID, 8, 2
+
+##command:GOTO IF Character Lives
+##Branches if the given character is alive.
+GOTO_IFCL, 0x55, 16, -game:FE7 -indexMode:8
+	ConditionalID, 4, 2
+##The ID of the character to check.
+	CharacterID, 8, 2
+	0, 12, 2, -fixed
+
+GOTO_IFCL, 0x55, 16, -game:FE7 -indexMode:8
+	ConditionalID, 4, 2
+##The ID of the character to check.
+	CharacterID, 8, 2
+##Unknown parameter, is usually 0.
+	Unknown, 12, 2
+
+
+
+##Returns the character ID of the current "active" character
+##(used during village events, AREA events, etc).
+##The result of the check is stored in MemorySlot 0xC.
+CHECK_ACTIVE, 0x2E21, 4, -game:FE8 -indexMode:8
+
+
+
+##Returns 1 if this character exists anywhere, alive or dead.
+##The result of the check is stored in MemorySlot 0xC.
+CHECK_EXISTS, 0x3320, 4, -game:FE8 -indexMode:8
+##The ID of the character to check. Special inputs are:
+##0xFFFF: checks active unit (currently selected for moving/attacking)
+##0xFFFE: checks unit at coordinates stored to MemorySlot 0xB
+##0xFFFD: checks unit of ID stored to MemorySlot 0x2
+	CharacterID, 2, 2
+
+##Returns the value for the status effect that the
+##given character is experiencing, if any.
+##The result of the check is stored in MemorySlot 0xC.
+CHECK_STATUS, 0x3321, 4, -game:FE8 -indexMode:8
+##The ID of the character to check. Special inputs are:
+##0xFFFF: checks active unit (currently selected for moving/attacking)
+##0xFFFE: checks unit at coordinates stored to MemorySlot 0xB
+##0xFFFD: checks unit of ID stored to MemorySlot 0x2
+	CharacterID, 2, 2
+
+##Returns 1 if the given character is alive.
+##The result of the check is stored in MemorySlot 0xC.
+CHECK_ALIVE, 0x3322, 4, -game:FE8 -indexMode:8
+##The ID of the character to check. Special inputs are:
+##0xFFFF: checks active unit (currently selected for moving/attacking)
+##0xFFFE: checks unit at coordinates stored to MemorySlot 0xB
+##0xFFFD: checks unit of ID stored to MemorySlot 0x2
+	CharacterID, 2, 2
+
+##Returns 1 if the given character is deployed on this map.
+##Will return 0 if the given character is not alive.
+##The result of the check is stored in MemorySlot 0xC.
+CHECK_DEPLOYED, 0x3323, 4, -game:FE8 -indexMode:8
+##The ID of the character to check. Special inputs are:
+##0xFFFF: checks active unit (currently selected for moving/attacking)
+##0xFFFE: checks unit at coordinates stored to MemorySlot 0xB
+##0xFFFD: checks unit of ID stored to MemorySlot 0x2
+	CharacterID, 2, 2
+
+##Returns 1 if the active character has the same character ID as the parameter.
+##The result of the check is stored in MemorySlot 0xC.
+CHECK_ACTIVEID, 0x3324, 4, -game:FE8 -indexMode:8
+##The ID of the character to check. Special inputs are:
+##0xFFFF: checks active unit (currently selected for moving/attacking)
+##0xFFFE: checks unit at coordinates stored to MemorySlot 0xB
+##0xFFFD: checks unit of ID stored to MemorySlot 0x2
+	CharacterID, 2, 2
+
+##Returns 0 for a player character, 2 for an enemy, and 1 otherwise.
+##The result of the check is stored in MemorySlot 0xC.
+CHECK_ALLEGIANCE, 0x3325, 4, -game:FE8 -indexMode:8
+##The ID of the character to check. Special inputs are:
+##0xFFFF: checks active unit (currently selected for moving/attacking)
+##0xFFFE: checks unit at coordinates stored to MemorySlot 0xB
+##0xFFFD: checks unit of ID stored to MemorySlot 0x2
+	CharacterID, 2, 2
+
+##Returns the current coordinates of the given character.
+##The result of the check is stored in MemorySlot 0xC.
+CHECK_COORDS, 0x3326, 4, -game:FE8 -indexMode:8
+##The ID of the character to check. Special inputs are:
+##0xFFFF: checks active unit (currently selected for moving/attacking)
+##0xFFFE: checks unit at coordinates stored to MemorySlot 0xB
+##0xFFFD: checks unit of ID stored to MemorySlot 0x2
+	CharacterID, 2, 2
+
+##Returns the class ID of the given character.
+##The result of the check is stored in MemorySlot 0xC.
+CHECK_CLASS, 0x3327, 4, -game:FE8 -indexMode:8
+##The ID of the character to check. Special inputs are:
+##0xFFFF: checks active unit (currently selected for moving/attacking)
+##0xFFFE: checks unit at coordinates stored to MemorySlot 0xB
+##0xFFFD: checks unit of ID stored to MemorySlot 0x2
+	CharacterID, 2, 2
+
+##Returns the luck stat of the given character.
+##The result of the check is stored in MemorySlot 0xC.
+CHECK_LUCK, 0x3328, 4, -game:FE8 -indexMode:8
+##The ID of the character to check. Special inputs are:
+##0xFFFF: checks active unit (currently selected for moving/attacking)
+##0xFFFE: checks unit at coordinates stored to MemorySlot 0xB
+##0xFFFD: checks unit of ID stored to MemorySlot 0x2
+	CharacterID, 2, 2

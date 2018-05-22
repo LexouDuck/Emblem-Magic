@@ -1,0 +1,74 @@
+##Event that occurs when two characters end up next to each
+##other and the 'Talk' menu command is selected.
+CHAR, 4, 12, -language:FE6 -priority:main -indexMode:8
+##Once the event ID has been marked as 'used', this event can't be invoked.
+##Leaving this as 0 will allow the event to occur whenever otherwise possible.
+	EventID, 2, 2
+##Pointer to the event that should occur.
+	EventPointer, 4, 4, -pointer
+##The two characters that participate in this event.
+##The first character is the one which needs to start this event.
+##If you want both characters to be able to start this event,
+##add another CHAR code with the exact same parameters, except 
+##with the same two characters the other way around.
+	Characters, 8, 2, -coordinates:2
+
+##Event that occurs when two characters end up next to each
+##other and the 'Talk' menu command is selected.
+CHAR, 3, 16, -language:FE7:FE8 -priority:main -indexMode:8
+##Once the event ID has been marked as 'used', this event can't be invoked.
+##Leaving this as 0 will allow the event to occur whenever otherwise possible.
+	EventID, 2, 2
+##Pointer to the event that should occur.
+	EventPointer, 4, 4, -pointer
+##The two characters that participate in this event.
+##The first character is the one which needs to start this event.
+##If you want both characters to be able to start this event,
+##add another CHAR code with the exact same parameters, except 
+##with the same two characters the other way around.
+	Characters, 8, 2, -coordinates:2
+##Extra conditions that can disable the 'Talk' menu command.
+##Leaving this as 0 means no extra condition.
+	Extra, 12, 4
+
+CHAR, 3, 16, -language:FE7:FE8 -priority:main -indexMode:8
+	EventID, 2, 2
+	EventPointer, 4, 4, -pointer
+	Characters, 8, 2, -coordinates:2
+	Extra, 12, 4, -coordinates:4
+
+CHAR, 3, 16, -language:FE7:FE8 -priority:main -indexMode:8
+	EventID, 2, 2
+	EventPointer, 4, 4, -pointer
+	Characters, 8, 2, -coordinates:2
+	Extra1, 12, 1
+	Extra2, 13, 1
+	Extra3, 14, 1
+	Extra4, 15, 1
+
+CHAR, 0, 4, -priority:main -language:FE8:FE7:FE6 -end -indexMode:8 -noDisassembly
+	0, 0, 4, -fixed
+
+
+
+##Like the CHAR command, this is an event that occurs when two characters
+##end up next to each other and the 'Talk' menu command is selected, except
+##that the given ASM routine must return true for the 'Talk' option to appear.
+CHARASM, 0x4, 16, -game:FE7 -indexMode:8 -priority:main
+##Once the event ID has been marked as 'used', this event can't be invoked.
+##Leaving this as 0 will allow the event to occur whenever otherwise possible.
+	EventID, 2, 2
+##Pointer to the event that should occur.
+	EventPointer, 4, 4, -pointer:none
+##The two characters that participate in this event.
+##The first character is the one which needs to start this event.
+##If you want both characters to be able to start this event,
+##add another CHAR code with the exact same parameters, except 
+##with the same two characters the other way around.
+	Characters, 8, 2, -coordinates:2
+##ASM routine to run that must return 1 for the 'Talk' option to appear.
+##Thumb routines must have 1 added to their pointer to be run properly.
+	ASM_Pointer, 12, 4, -pointer:ASM
+
+CHARASM, 0, 4, -priority:main -language:FE7 -end -indexMode:8 -noDisassembly
+	0, 0, 4, -fixed

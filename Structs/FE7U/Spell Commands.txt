@@ -1,0 +1,218 @@
+{
+push {r4,lr}		@ Start routine
+
+{
+push {r4,r5,lr}		@ Start routine
+
+{
+push {r4-r6,lr}		@ Start routine
+
+{
+push {r4-r7,lr}		@ Start routine
+
+
+
+}
+pop {r4}		@ 
+pop {r0}		@ 
+bx r0			@ End routine
+
+}
+pop {r4,r5}		@ 
+pop {r0}		@ 
+bx r0			@ End routine
+
+}
+pop {r4-r6}		@ 
+pop {r0}		@ 
+bx r0			@ End routine
+
+}
+pop {r4-r7}		@ 
+pop {r0}		@ 
+bx r0			@ End routine
+
+
+
+goto_b
+b $08______		@ branch
+
+goto_beq
+beq $08______		@ branch if equal
+
+goto_bne
+bne $08______		@ branch if not equal
+
+
+
+Initialize
+mov r4, r0	@ saves the r0 arg to the spell in another reg
+bl $0804FFF0	@ Stops/loops the caster's anim and starts the spell anim (sets bitflag at 0x0201772C as true)
+
+Initialize
+mov r5, r0	@ saves the r0 arg to the spell in another reg
+bl $0804FFF0	@ Stops/loops the caster's anim and starts the spell anim (sets bitflag at 0x0201772C as true)
+
+Terminate
+bl $0804FFFC	@ End spell anim, and allow caster anim to continue (sets bitflag at 0x0201772C as false)
+mov r0, r*	@ set the r0 argument for the next call
+bl $080046A0	@ Stop Loop Routine (sets 6C field 0xC to null)
+
+
+
+DimScreen
+bl $0804FB6C	@ Dims the screen to make it darker (called by most spells)
+
+BlackenBG
+bl $0804FD1C	@ Makes the battle background solid black (called by Ereshkigal)
+
+
+
+CreateStruct
+ldr r0, [pc, #0x**] (=$08______) @ Loads the Loop routine callback into r0
+mov r1, #0x03			 @ r1 becomes 3, presumably an argument for the following call
+bl $08004494			 @ Create6C: Allocates new 6C And starts interpretation (r0 becomes RAM pointer to the 6C struct, r1 is return pointer)
+
+
+
+StartAnimation
+str r4, [r0, #0x5C]	@ stores AIS pointer into the 6C struct
+mov r1, #0x00		@ clears r1
+strh r1, [r0, #0x2C]	@ sets the current frame as 0
+
+StartAnimation
+mov r4, r0		@ so r4 is the 6CStruct pointer now
+str r5, [r4, #0x5C]	@ stores AIS pointer into the 6C struct
+mov r0, #0x00		@ clears r0
+strh r0, [r4, #0x2C]	@ sets the current frame as 0
+
+StartAnimation
+mov r4, r0		@ 
+str r5, [r4, #0x5C]	@ 
+mov r1, #0x00		@ (Fire does this)
+mov r0, #0x00		@ 
+strh r0, [r4, #0x2C]	@ 
+
+StartAnimation
+str r4, [r0, #0x5C]	@
+mov r2, #0x00		@ (Fortify does this)
+mov r1, #0x00		@
+strh r1, [r0, #0x2C]	@
+
+
+
+LoadHitEffects
+mov r0, r5		@ 
+bl $08054804		@ 
+lsl r0, r0, #0x10	@ 
+asr r0, r0, #0x10	@ 
+bl $0805468C		@ do Hit effect (SFX, crit, death fade anim, all that)
+add r4, #0x29		@ 
+strb r0, [r4, #0x00]	@ 
+
+
+
+LoadSpritePalette
+ldr r0, [pc, #0x**] (=$08______)@ loads palette pointer
+mov r1, #0x20			@ r1 = 0x20 (palette length in bytes)
+bl $080505F0			@ "load palette" routine
+
+LoadSpriteTileset
+ldr r0, [pc, #0x**] (=$08______)@ loads tileset pointer into r0
+mov r1, #0x80			@ prepare r1 as second argument for the following call
+lsl r1, r1, #0x05		@ r1 = 0x1000 (tileset length in bytes)
+bl $080505C8			@ "load tileset" routine
+
+LoadSpriteTilesetSmall
+ldr r0, [pc, #0x**] (=$08______)@ loads tileset pointer into r0
+mov r1, #0x60			@ r1 = 0x60 (tileset length in bytes)
+bl $080505C8			@ "load tileset" routine
+
+
+
+LoadJavelin
+mov r0, r5		@ prepare r0 arg for the following call
+mov r1, #0x0_		@ prepare r1 (is either 0 or 1, true/false argument ?)
+bl $08056DD4		@ call the javelin loop routine
+
+LoadDance
+mov r0, #0x0_		@ this number is Filla:1/Nini:2/Tor:3/Set:4
+str r0, [r4, #0x44]	@ sets the number to field +0x44 of the 6C struct
+
+
+
+SetTarget
+ldr r0, [r*, #0x5C]	@ loads pointer to AnimInterpreterStruct into r0
+bl $080547A8		@ (arg:r0) sets correct target (left/right) and HP bar +/-
+
+
+
+GetCastingFrame
+bl $08050778		@ if (field at 0x0203E02C == 2) returns 0x18 else does complex shit
+
+
+
+ScrollScreen
+ldr r0, [r*, #0x5C]	@ load AIS pointer from 6C struct
+mov r1, #0x01		@ 
+neg r1, r1		@ r1 becomes -1
+bl $0804E498		@ Scrolls the screen
+
+
+
+IncrementFrame
+ldrh r0, [r*, #0x2C]	@ loads current frame number
+add r0, #0x01		@ increments frame number
+strh r0, [r*, #0x2C]	@ stores new frame number
+
+IncrementFrame
+ldrh r0, [r*, #0x2C]	@ loads current frame number
+add r0, #0x01		@ increments frame number
+mov r6, #0x00		@ (None spell does this mov here)
+strh r0, [r*, #0x2C]	@ stores new frame number
+
+
+
+CheckFrame
+lsl r0, r0, #0x10	@ 
+asr r0, r0, #0x10	@ 
+cmp r0, #0x__		@ 
+
+CheckFrame
+ldrh r0, [r*, #0x2C]	@
+cmp r0, #0x__		@
+
+
+
+HitTarget
+mov r0, #0x09		@ these 4 instructions update an int16 in the AIS
+ldrh r1, [r*, #0x10]	@ it does a bitwise OR with 9 (0b1001)
+orr r0, r1		@ on the short at position 0x10 in the AIS
+strh r0, [r*, #0x10]	@ The bits in 0x09 are "hit" flags that indicate the target has been hit
+
+HitTarget
+mov r0, #0x09		@ these 4 instructions update an int16 in the AIS
+ldrh r3, [r*, #0x10]	@ it does a bitwise OR with 9 (0b1001)
+orr r0, r3		@ on the short at position 0x10 in the AIS
+strh r0, [r*, #0x10]	@ The bits in 0x09 are "hit" flags that indicate the target has been hit
+
+
+
+ReduceTargetHP
+add r4, #0x29		@ i imagine there's a similar thing with the hit flags being at 0x29 in the 6C ?
+ldrb r1, [r4, #0x00]	@ 
+mov r0, r*		@
+bl $08050140		@
+
+DrainTargetHP
+add r4, #0x29		@
+ldrb r1, [r4, #0x00]	@
+mov r0, r6		@
+bl $080502EC		@ Nosferatu calls this (to increase caster HP too, i suppose)
+
+
+
+PlayAudio	@ 
+mov r0, #0x__	@ r0 becomes the music routine ID
+mov r3, #0x01	@ r3 becomes 'true' ("force playback" argument perhaps ?)
+bl $080681E4	@ Play Music/SFX routine

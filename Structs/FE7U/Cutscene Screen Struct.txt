@@ -1,0 +1,6 @@
+0xCED888 16
+
+0x00 1 Byte	Strips
+0x04 4 Pointer	Tileset
+0x08 4 Pointer	TSA
+0x0C 4 Pointer	Palette

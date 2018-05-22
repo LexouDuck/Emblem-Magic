@@ -1,0 +1,5 @@
+0x42FFB0 8
+
+0x00 4 Pointer	Address
+0x04 1 Byte	TrackGroup1
+0x06 1 Byte	TrackGroup2

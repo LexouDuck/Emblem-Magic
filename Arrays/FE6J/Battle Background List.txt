@@ -1,0 +1,27 @@
+0x00 Village
+0x01 Castle Interior
+0x02 Plains
+0x03 River
+0x04 Lakeside
+0x05 Plains and Mountains
+0x06 Wasteland
+0x07 Desert
+0x08 Mountains
+0x09 Cave
+0x0A Castle Gate
+0x0B Thick Forest
+0x0C Sea
+0x0D Castle Room
+0x0E Shrine
+0x0F Village (burning)
+0x10 Village (snow)
+0x11 Plains (snow)
+0x12 River (snow)
+0x13 Lakeside (snow)
+0x14 Plains and Mountains (snow)
+0x15 Mountains (snow)
+0x16 Castle Gate (snow)
+0x17 Thick Forest (snow)
+0x18 Castle Interior (golden)
+0x19 Castle Room (golden)
+0x1A Thick Forest (night)

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <link rel="stylesheet" href="Emblem Magic.css">
+	<title>NMM To EMM</title></title>
+</head>
+<body>
+	<h1>Converting Modules - NMM To EMM</h1>
+	<br>
+	<p>The changes from the NMM file format to EMM are relatively few, but significant nonetheless.</p>
+	<br><br>
+	<h2>• THE FILE HEADER</h2>
+	<br><p>
+	The beginning of an NMM file goes as such:<br>
+	<b>[Version number]</b> ? (It's usually just '1')<br>
+	<b>[text]</b> Title of the module<br>
+	<b>[0xFFFFFF]</b> Pointer to the start of the array<br>
+	<b>[number]</b> Amount of entries in the array<br>
+	<b>[number]</b> Length in bytes of each entry<br>
+	<b>[file.txt]</b> TXT file detailing the  names of entries in the array<br>
+	<b>[NULL]</b> I think this line has to be NULL ? Not sure<br>
+	<br>
+	And the beginning of an EMM file goes as such:<br>
+	<b>[FE__]</b> FE Game identifier (FE7U, FE6J, etc)<br>
+	<b>[text]</b> Title of the module<br>
+	<b>[text]</b> Author of the module<br>
+	<b>[0xFFFFFF]</b> Array Pointer<br>
+	<b>[number]</b> Amount of entries<br>
+	<b>[number]</b> Length of each entry<br>
+	<b>[LIST]</b> The type of control for the array, can be LIST or POIN for a pointer-based module<br>
+	<b>[file.txt]</b> The TXT file for the array entry names<br>
+	<br>
+	Then just skip over one line, and start the entry fields, skipping a line between each field.<br>
+	</p>
+	<br><br>
+	<h2>• FIELDS OF THE MODULE</h2>
+	<br><p>
+	These are loaded into the module window in the order they were written into the file.<br>
+	You can arrange these non-linearly if you wish (Though I usually prefer to keep the byte indexes in order).<br>
+	<br><br>
+	Now, a field in an NMM looks like so:<br>
+	<b>[text]</b> Name of the field<br>
+	<b>[number]</b> byte index of the field<br>
+	<b>[number]</b> byte length of the field<br>
+	<b>[NULL]</b> The kind of control for this field (NEHU, NDHU, etc)<br>
+	<b>[file.txt]</b> The list file used for this field's control<br>
+	<br>
+	In an EMM file, it's:<br>
+	<b>[text]</b> Name of the field<br>
+	<b>[text]</b> Category of the field (if the Category is 'Unused', it will be the last category to show up)<br>
+	<b>[number]</b> byte/bit index of the field<br>
+	<b>[number]</b> byte/bit length of the field<br>
+	<b>[NULL]</b> The kind of control, see more about these just below<br>
+	<b>[file.txt]</b> The potential list file to use for the control, 'NULL' otherwise<br>
+	<br>
+	Here is the list of controls, and what to change them to if converting from an NMM file.<br>
+	<br>
+	<code>
+| .nmm | .emm  | Control type<br>
+| NULL -> NULL | nothing<br>
+|(none)-> BOOL | CheckBox (some NMMs have it as a NDHU/LIST dropdown reading from an OnOff.txt list file)<br>
+| TEXT -> TEXT | TextBox (one-line)<br>
+| HEXA -> HEXT | HexBox (multi-line)<br>
+| NEHU -> HEXU | Hex Numeric Up/Down box<br>
+| NEDU -> NUMU | Unsigned decimal NUDbox<br>
+| NEDS -> NUMS | Signed decimal NUDbox<br>
+| NDHU -> LIST | ByteBox with dropdownlist, should have a TXT file<br>
+|STRUCT-> POIN | PointerBox, with a dropdown list if the TXT file is not "NULL"<br>
+	</code>
+	<br>
+	Note that not all versions of Nightmare support bit numbers, but Emblem Magic does, this means a (number) can have a 'b' after it to indicate that it's a bit index, so you might do for example:<br>
+	<br>
+	<code>
+Some bitflag<br>
+Category<br>
+24b  # it's the 24th bit in the entry<br>
+1b   # one bit long, it's a bitflag in this example<br>
+BOOL # so it'll be a checkbox<br>
+NULL # and so it can't have a TXT file<br>
+	</code>
+	</p>
+</body>
+</html>

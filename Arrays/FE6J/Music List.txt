@@ -1,0 +1,75 @@
+0x00 None
+0x01 Fire Emblem Main Theme
+0x02 Deer of the Mainland~ Lycia, Etruia- Enemy Map 1
+0x03 Frontier~ Western Isles, Missur Peninsula- Enemy Map 2
+0x04 Polar Region~ Ilia, Sacae- Enemy Map 3
+0x05 Land of Dragons- Enemy Map 4
+0x06 Sanctuary of Dragons- Enemy Map 5
+0x07 Legendary Inheritance- Enemy Map 6
+0x08 FE Gaiden CP Map- Enemy Map 7
+0x09 Messenger from the Darkness- Enemy Map 8
+0x0A Beyond the Sky (Roy's Journey)- Player Map 1
+0x0B Will of One (Roy's Battle)- Player Map 2
+0x0C Within the Great Nature (Roy's Expedition)- Player Map 3
+0x0D Beneath a New Light (Roy's Courage)- Player Map 4
+0x0E Path of the Divine Generals (Roy's Challenge)- Player Map 5
+0x0F Scars of the Scouring (Roy's Journey)- Player Map 6
+0x10 FE Gaiden Player Map- Player Map 7
+0x11 Shadow Approaches (Roy's Confusion)- Player Map 8
+0x12 Binding Ties (Roy's Friendship)- Allied Map
+0x13 Winning Road (Roy's Hope)- Player Map (Victory is near)
+0x14 Poem of Breeze- Battle (Elphin)
+0x15 The Last Dragon- Battle (Jahn)
+0x16 Fight to Tomorrow- Battle (Boss)
+0x17 In the Name of Bern- Battle (Wyvern Generals)
+0x18 Battle for Whose Sake- Battle (Zephiel)
+0x19 Shaman in the Dark- Battle (Idoun)
+0x1A Curing- Battle (Status effect)
+0x1B Healing- Battle (White Magic, Recovery)
+0x1C To the Heights- Class Change
+0x1D Nothing
+0x1E I Charge- World Map 1
+0x1F II Reclaim the Capital- World Map 2
+0x20 III Unseen Enemy- World Map 3
+0x21 IV Final Chapter- World Map 4
+0x22 Prepare to Charge- Battle Preparations
+0x23 An Unexpected Caller- Opening, Ending Event
+0x24 when the Rush Comes- Opening, Ending Event
+0x25 Invisible Thread- Opening, Ending Event
+0x26 Distant Utopia- Opening, Ending Event
+0x27 Triumph- Opening, Ending Event
+0x28 Into the Shadow of Triumph- Opening, Ending Event
+0x29 Shaman of Darkness- Idoun's Theme
+0x2A The King of Bern- Zephiel's Theme
+0x2B Princess of Fate- Guinevere's Theme
+0x2C Suspicious~ Wyvern General's Theme- Narshen's Theme
+0x2D Dignity~ Wyvern General's Theme- Murdoch's Theme
+0x2E Melancholy~ Wyvern General's Theme- Brunya's Theme
+0x2F Nothing
+0x30 Nothing
+0x31 Time of Sadness- Event
+0x32 Cath- Event
+0x33 Join Us!- Event
+0x34 Epilogue- Epilogue
+0x35 Results- Score Display
+0x36 After the War- Afterwards
+0x37 Game Over- Game Over
+0x38 Shop- Shop
+0x39 Arena~ Entrance- Arena 1 (Entrance)
+0x3A Arena~ Battle- Arena 2 (Battle)
+0x3B Happiness Abounds- Event
+0x3C Main Theme Motif- Event
+0x3D Shock I- Event
+0x3E Shock II- Event
+0x3F Talking- Event
+0x40 Captivating Dance- Battle (Lalum's Dance)
+0x41 Prelude~ Tale passed down from generations- Opening
+0x42 Eternal Wind
+0x43 The Beginning
+0x44 Attack!- Battle (Player)
+0x45 Revenge!- Battle (CP)
+0x46 Arena victory
+0x47 Unknown
+0x48 Battle?
+0x49 Boss battle?
+0x4A Unknown

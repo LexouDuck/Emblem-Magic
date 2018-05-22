@@ -1,0 +1,163 @@
+0x00 None
+0x01 Eliwood Lord (Sword)
+0x02 Eliwood Lord
+0x03 Knight Lord (Sword)
+0x04 Knight Lord (Durandal)
+0x05 Knight Lord (Lance)
+0x06 Knight Lord
+0x07 Hector Lord (Axe)
+0x08 Hector Lord (Handaxe)
+0x09 Hector Lord
+0x0A Great Lord (Axe)
+0x0B Great Lord (Handaxe)
+0x0C Great Lord (Armads)
+0x0D Great Lord (Sword)
+0x0E Great Lord
+0x0F Lyn Lord (Sword)
+0x10 Lyn Lord
+0x11 Blade Lord (Sword)
+0x12 Blade Lord (Sol Katti)
+0x13 Blade Lord (Bow)
+0x14 Blade Lord
+0x15 Brigand (Axe)
+0x16 Brigand (Handaxe)
+0x17 Brigand
+0x18 Pirate (Axe)
+0x19 Pirate (Handaxe)
+0x1A Pirate
+0x1B Berserker (Hawkeye) (Axe)
+0x1C Berserker (Hawkeye) (Handaxe)
+0x1D Berserker (Hawkeye)
+0x1E Fighter (Axe)
+0x1F Fighter (Handaxe)
+0x20 Fighter
+0x21 Warrior (Axe)
+0x22 Warrior (Handaxe)
+0x23 Warrior (Bow)
+0x24 Warrior
+0x25 Archer (Bow)
+0x26 Archer
+0x27 Archer (F) (Bow)
+0x28 Archer (F)
+0x29 Sniper (Bow)
+0x2A Sniper
+0x2B Sniper (F) (Bow)
+0x2C Sniper (F)
+0x2D Mercenary (Sword)
+0x2E Mercenary
+0x2F Hero (Sword)
+0x30 Hero (Axe)
+0x31 Hero (Handaxe)
+0x32 Hero
+0x33 Myrmidon (Sword)
+0x34 Myrmidon
+0x35 Swordmaster (Sword)
+0x36 Swordmaster
+0x37 Swordmaster (Lloyd) (Sword)
+0x38 Swordmaster (Lloyd)
+0x39 Swordmaster (F) (Sword)
+0x3A Swordmaster (F)
+0x3B Cavalier (Lance)
+0x3C Cavalier (Sword)
+0x3D Cavalier
+0x3E Cavalier (F, unused)
+0x3F Assassin (Legault) (Sword)
+0x40 Assassin (Legault)
+0x41 Paladin (Axe)
+0x42 Paladin (Handaxe)
+0x43 Paladin (Sword)
+0x44 Paladin (Lance)
+0x45 Paladin
+0x46 Paladin 2 (Axe)
+0x47 Paladin 2 (Handaxe)
+0x48 Paladin 2 (Sword)
+0x49 Paladin 2 (Lance)
+0x4A Paladin 2 ?
+0x4B Paladin (F) (Axe)
+0x4C Paladin (F) (Handaxe)
+0x4D Paladin (F) (Sword)
+0x4E Paladin (F) (Lance)
+0x4F Paladin (F) 
+0x50 Soldier (Lance)
+0x51 Soldier
+0x52 Knight (Lance)
+0x53 Knight
+0x54 General (Lance)
+0x55 General (Axe)
+0x56 General (Handaxe)
+0x57 General
+0x58 Mage
+0x59 Mage (F)
+0x5A Sage
+0x5B Sage (Staff)
+0x5C Sage (F)
+0x5D Sage (F) (Staff)
+0x5E Sage (Nino)
+0x5F Sage (Nino) (Staff)
+0x60 Monk (Staff)
+0x61 Monk
+0x62 Cleric (Staff)
+0x63 Cleric
+0x64 Monk
+0x65 Bishop
+0x66 Bishop (Staff)
+0x67 Bishop (F)
+0x68 Bishop (F) (Staff)
+0x69 Shaman
+0x6A Druid
+0x6B Druid (Staff)
+0x6C Dark Druid
+0x6D Dark Druid (Staff)
+0x6E Troubadour (Staff)
+0x6F Troubadour
+0x70 Valkyrie
+0x71 Valkyrie (Staff)
+0x72 Archsage
+0x73 Archsage (?)
+0x74 Nomad (Bow)
+0x75 Nomad
+0x76 Nomad Trooper (Sword)
+0x77 Nomad Trooper (Bow)
+0x78 Nomad Trooper
+0x79 Thief (Sword)
+0x7A Thief
+0x7B Thief (Legault) (Sword)
+0x7C Thief (Legault)
+0x7D Thief (F) (Sword)
+0x7E Thief (F)
+0x7F Assassin (Sword)
+0x80 Assassin
+0x81 Pegasus Knight (Lance)
+0x82 Pegasus Knight
+0x83 Falco Knight (Sword)
+0x84 Falco Knight (Lance)
+0x85 Falco Knight
+0x86 Wyvern Rider (Lance)
+0x87 Wyvern Rider
+0x88 Wyvern Lord (Lance)
+0x89 Wyvern Lord (Sword)
+0x8A Wyvern Lord
+0x8B Fire Dragon
+0x8C Ballista (unused)
+0x8D Dancer
+0x8E Bard
+0x8F Monk (Lucius)
+0x90 Hero (Linus) (Sword)
+0x91 Hero (Linus) (Axe)
+0x92 Hero (Linus) (Handaxe)
+0x93 Hero (Linus)
+0x94 Bishop (Lucius)
+0x95 Bishop (Lucius) (Staff)
+0x96 Bishop (Lucius) (No Staff)
+0x97 Bishop (No Staff)
+0x98 Bishop (F) (No Staff)
+0x99 Myrmidon (Guy) (Sword)
+0x9A Myrmidon (Guy)
+0x9B Swordmaster (Guy) (Sword)
+0x9C Swordmaster (Guy)
+0x9D Berserker (Axe)
+0x9E Berserker (Handaxe)
+0x9F Berserker
+0xA0 Magic Seal
+0xA1 Transporter (Tent)
+0xA2 Transporter (Wagon)

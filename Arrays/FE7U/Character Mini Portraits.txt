@@ -1,0 +1,5 @@
+0x00 Default
+0x01 Dragon
+0x02 Ostia/Caelin/Civilian
+0x03 Black Fang/Morph/Bandit
+0x06 ???

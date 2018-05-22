@@ -1,0 +1,10 @@
+0x00 Bern invades Sacae
+0x01 New Crown Princess of Bern
+0x02 Douglas, Lalum and Idoun
+0x03 Idoun and Fa
+0x04 Hector and Eliwood, Roy and Lilina
+0x05 Nomads of Sacae
+0x06 Pegasus Knights of Ilia
+0x07 The Dark Dragon
+0x08 Roy vs. Zephiel
+0x09 Roy gets the Sealed Sword

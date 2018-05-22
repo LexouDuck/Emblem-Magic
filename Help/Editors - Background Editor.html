@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <link rel="stylesheet" href="Emblem Magic.css">
+	<title>Background Editor</title>
+</head>
+<body>
+	<h1>The Background Editor</h1>
+	<p>
+	The Background Editor allows you to view and change the backgrounds in the game - either the ones during dialogue scenes, the battle backgrounds, or the cutscene screens that appear in the game.
+	<br>
+	</p>
+	<h2>The Scene and Battle Background Arrays</h2>
+	<p>
+	Here are the default addresses for the Scene BG Array in each game:<br>
+<table>
+	<tr>
+		<th></th>
+		<th>JAP</th>
+		<th>USA</th>
+		<th>EUR</th>
+	</tr>
+	<tr>
+		<th>FE6</th>
+		<td>0x5C4484</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<th>FE7</th>
+		<td>0xC00798</td>
+		<td>0xB91588</td>
+		<td>0xC556CC</td>
+	</tr>
+	<tr>
+		<th>FE8</th>
+		<td>0x9CD958</td>
+		<td>0x95DD1C</td>
+		<td>0x1059FAC</td>
+	</tr>
+</table>
+	<br>
+	And the default addresses for the Battle BG Array in each game:<br>
+<table>
+	<tr>
+		<th></th>
+		<th>JAP</th>
+		<th>USA</th>
+		<th>EUR</th>
+	</tr>
+	<tr>
+		<th>FE6</th>
+		<td>0x607504</td>
+		<td></td>
+		<td></td>
+	</tr>
+	<tr>
+		<th>FE7</th>
+		<td>0xC4BD70</td>
+		<td>0xBDCA64</td>
+		<td>0xCA3B14</td>
+	</tr>
+	<tr>
+		<th>FE8</th>
+		<td>0x7AACC8</td>
+		<td>0x75A794</td>
+		<td>0x99AFC8</td>
+	</tr>
+</table>
+	<br>
+	Both of these arrays are laid out in the same manner:<br>
+<table>
+	<tr>
+		<th>• All 3 games - 12 bytes long</th>
+	</tr>
+	<tr>
+		<td>
+			4 - Tileset/Image data pointer<br>
+			4 - TSA data pointer<br>
+			4 - Palette pointer<br>
+		</td>
+	</tr>
+</table>
+	</p>
+</body>
+</html>

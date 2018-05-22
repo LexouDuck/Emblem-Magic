@@ -1,0 +1,13 @@
+##command:AFter EVent
+##Event that occurs after another event has happened.
+AFEV, 1, 12, -language:FE8:FE7:FE6 -priority:main -indexMode:8
+##Once the event ID has been marked as 'used', this event can't be invoked.
+##Leaving this as 0 will allow the event to occur whenever otherwise possible.
+	EventID, 2, 2
+##The event which is to occur.
+	EventPointer, 4, 4, -pointer
+##The event ID of the previous event to follow up on.
+	PreviousEventID, 8, 2
+
+AFEV, 0, 4, -priority:main -language:FE8:FE7:FE6 -end -indexMode:8 -noDisassembly
+	0, 0, 4, -fixed

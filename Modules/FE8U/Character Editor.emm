@@ -1,0 +1,533 @@
+FE8U
+Character Editor
+by SpyroDi
+0x803D30
+256
+52
+LIST
+Character List.txt
+
+Character Name
+General
+0
+2
+HEXU(Text Editor)
+NULL
+
+Description Text
+General
+2
+2
+HEXU(Text Editor)
+NULL
+
+Character Number
+General
+4
+1
+LIST
+Character List.txt
+
+Class
+General
+5
+1
+LIST
+Class List.txt
+
+Portrait
+Graphics
+6
+1
+LIST(Portrait Editor)
+Portrait List.txt
+
+Byte 7
+Unused
+7
+1
+HEXU
+NULL
+
+Mini Portrait
+Graphics
+8
+1
+LIST
+NULL
+
+Affinity
+General
+9
+1
+LIST
+Affinity.txt
+
+Byte 10
+Unknown
+10
+1
+HEXU
+NULL
+
+Level
+Base Stats
+11
+1
+NUMU
+NULL
+
+HP
+Base Stats
+12
+1
+NUMS
+NULL
+
+Str
+Base Stats
+13
+1
+NUMS
+NULL
+
+Skl
+Base Stats
+14
+1
+NUMS
+NULL
+
+Spd
+Base Stats
+15
+1
+NUMS
+NULL
+
+Def
+Base Stats
+16
+1
+NUMS
+NULL
+
+Res
+Base Stats
+17
+1
+NUMS
+NULL
+
+Luck
+Base Stats
+18
+1
+NUMS
+NULL
+
+Con
+Base Stats
+19
+1
+NUMS
+NULL
+
+Sword Level
+Weapon Ranks
+20
+1
+LIST
+Weapon Rank.txt
+
+Spear Level
+Weapon Ranks
+21
+1
+LIST
+Weapon Rank.txt
+
+Axe Level
+Weapon Ranks
+22
+1
+LIST
+Weapon Rank.txt
+
+Bow Level
+Weapon Ranks
+23
+1
+LIST
+Weapon Rank.txt
+
+Staff Level
+Weapon Ranks
+24
+1
+LIST
+Weapon Rank.txt
+
+Anima Level
+Weapon Ranks
+25
+1
+LIST
+Weapon Rank.txt
+
+Light Level
+Weapon Ranks
+26
+1
+LIST
+Weapon Rank.txt
+
+Dark Level
+Weapon Ranks
+27
+1
+LIST
+Weapon Rank.txt
+
+HP
+Growth Chances
+28
+1
+NUMU
+NULL
+
+Str
+Growth Chances
+29
+1
+NUMU
+NULL
+
+Skl
+Growth Chances
+30
+1
+NUMU
+NULL
+
+Spd
+Growth Chances
+31
+1
+NUMU
+NULL
+
+Def
+Growth Chances
+32
+1
+NUMU
+NULL
+
+Res
+Growth Chances
+33
+1
+NUMU
+NULL
+
+Luck
+Growth Chances
+34
+1
+NUMU
+NULL
+
+Byte 35
+Unknown
+35
+1
+HEXU
+NULL
+
+Byte 36
+Unknown
+36
+1
+HEXU
+NULL
+
+Byte 37
+Unknown
+37
+1
+HEXU
+NULL
+
+Byte 38
+Unknown
+38
+1
+HEXU
+NULL
+
+Byte 39
+Unknown
+39
+1
+HEXU
+NULL
+
+Can use Ballistae? (Archers)
+Unused
+320b
+1b
+BOOL
+NULL
+
+Critical % Bonus +15
+Unused
+321b
+1b
+BOOL
+NULL
+
+Can play? (Bards)
+Unused
+322b
+1b
+BOOL
+NULL
+
+Can dance? (Dancers)
+Unused
+323b
+1b
+BOOL
+NULL
+
+Can pick locks? (Thiefs)
+Unused
+324b
+1b
+BOOL
+NULL
+
+Can steal? (Thiefs)
+Unused
+325b
+1b
+BOOL
+NULL
+
+Can move again? (Mounted units)
+Unused
+326b
+1b
+BOOL
+NULL
+
+Mounted Aid system
+Unused
+327b
+1b
+BOOL
+NULL
+
+Boss Character
+Attributes
+328b
+1b
+BOOL
+NULL
+
+Female Character
+Attributes
+329b
+1b
+BOOL
+NULL
+
+Lord class
+Unused
+330b
+1b
+BOOL
+NULL
+
+Pegasus class
+Unused
+331b
+1b
+BOOL
+NULL
+
+Dragon class
+Unused
+332b
+1b
+BOOL
+NULL
+
+Horse class
+Unused
+333b
+1b
+BOOL
+NULL
+
+Item Supply class
+Unused
+334b
+1b
+BOOL
+NULL
+
+Promoted class
+Unused
+335b
+1b
+BOOL
+NULL
+
+Glitchy bit
+Unknown
+336b
+1b
+BOOL
+NULL
+
+Armor triangle attack?
+Attributes
+338b
+1b
+BOOL
+NULL
+
+Pegasus triangle attack?
+Attributes
+337b
+1b
+BOOL
+NULL
+
+Cannot be controlled
+Unused
+339b
+1b
+BOOL
+NULL
+
+Max Level 10
+Unused
+340b
+1b
+BOOL
+NULL
+
+Can use Monster weapons?
+Unused
+341b
+1b
+BOOL
+NULL
+
+Can use Shamshir?
+Unused
+342b
+1b
+BOOL
+NULL
+
+Unused weapon lock 1
+Locked Weapons
+343b
+1b
+BOOL
+NULL
+
+Unused weapon lock 2
+Locked Weapons
+344b
+1b
+BOOL
+NULL
+
+Unused weapon lock 3
+Locked Weapons
+345b
+1b
+BOOL
+NULL
+
+Can use Reginleif/Siegmund?
+Unused
+346b
+1b
+BOOL
+NULL
+
+Can use Rapier/Sieglinde?
+Unused
+347b
+1b
+BOOL
+NULL
+
+Summoning
+Unused
+348b
+1b
+BOOL
+NULL
+
+Magic Sealing?
+Unused
+349b
+1b
+BOOL
+NULL
+
+Lethality skill
+Unused
+350b
+1b
+BOOL
+NULL
+
+Give no EXP to opponents?
+Attributes
+351b
+1b
+BOOL
+NULL
+
+Supports Data Pointer
+General
+44
+4
+POIN
+Support Pointers.txt
+
+Byte 48
+Unknown
+48
+1
+HEXU
+NULL
+
+Byte 49
+Unused
+49
+1
+HEXU
+NULL
+
+Byte 50
+Unused
+50
+1
+HEXU
+NULL
+
+Byte 51
+Unused
+51
+1
+HEXU
+NULL

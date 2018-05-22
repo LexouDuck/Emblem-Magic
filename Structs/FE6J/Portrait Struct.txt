@@ -1,0 +1,9 @@
+0x66074C 16
+
+0x00 4 Pointer Main
+0x04 4 Pointer Chibi
+0x08 4 Pointer Palette
+0x0C 1 Byte MouthX
+0x0D 1 Byte MouthY
+0x0E 1 Byte BlinkX
+0x0F 1 Byte BlinkY

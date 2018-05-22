@@ -1,0 +1,10 @@
+0x000000 None
+0xC97E90 Cavalry (Unused)
+0xC97E96 Armored units
+0xC97E9C Armored & Horse units
+0xC97EAD Myrmidons
+0xC97EB7 Horse units
+0xC97EC3 Fire Dragon (Unused)
+0xC97EC5 Dragon units
+0xC97ECB Nergal & Dragons
+0xC97ED2 Flying units

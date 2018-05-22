@@ -1,0 +1,3 @@
+0x000000 None
+0xB896B0 Menu Font
+0xB8B5B0 Text Bubble

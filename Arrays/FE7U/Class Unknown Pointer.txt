@@ -1,0 +1,5 @@
+0x000000 None
+0xBE467F Brigand
+0xBE46C0 Pirate, Corsair
+0xBE4701 Berserker
+0xBE4742 Monk, Cleric, Bishop

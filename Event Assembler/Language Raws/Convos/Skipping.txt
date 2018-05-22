@@ -1,0 +1,35 @@
+##command:LoCK B
+##Makes the 'B' button locked, so it cannot be 'pressed'.
+##This is presumably used to prevent skipping certain texts.
+LCKB, 0x87, 4, -game:FE7 -indexMode:8
+
+##command:LoCK Start
+##Makes the 'Start' button locked, so it cannot be 'pressed'.
+##This is presumably used to prevent skipping certain texts.
+LCKS, 0x89, 4, -game:FE7 -indexMode:8
+
+##command:UnLoCK
+##Unlocks the 'B' and 'Start' button.
+##See the 'LCKB' and 'LCKS' commands for more info.
+ULCK, 0x8A, 4, -game:FE7 -indexMode:8
+
+
+
+##Makes the player unable to press the Start button to skip the event.
+##Alias: NSSP
+NEVENTS, 0x8C, 4, -game:FE7 -indexMode:8
+
+##Makes the player unable to press
+##the Start button to skip the event.
+##Alias: NEVENTS
+NSSP, 0x8C, 4, -game:FE7 -indexMode:8
+
+##Makes the player unable to press
+##the B button to skip the text dialogue.
+##Alias: NCSP
+NCONVOS, 0x8D, 4, -game:FE7 -indexMode:8
+
+##Makes the player unable to press
+##the B button to skip the text dialogue.
+##Alias: NCONVOS
+NCSP, 0x8D, 4, -game:FE7 -indexMode:8

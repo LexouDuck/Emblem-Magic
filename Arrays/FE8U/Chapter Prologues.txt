@@ -1,0 +1,59 @@
+0x00 None
+0x01 Prologue
+0x02 Ch.1
+0x03 Ch.2
+0x04 Ch.3
+0x05 Ch.4 (Zaha Woods)
+0x06 Ch.5x
+0x07 Ch.5
+0x08 Ch.6 (Adlas Plains)
+0x09 Ch.7
+0x0A Ch.8
+0x0B Eirika Ch.9
+0x0C Eirika Ch.10 (Teras Plateau)
+0x0D Eirika Ch.12
+0x0E Eirika Ch.13
+0x0F Eirika Ch.14
+0x10 Eirika Ch.15
+0x11 Eirika Ch.16
+0x12 Eirika Ch.17 (Narube River)
+0x13 Eirika Ch.18 (Neleras Peak)
+0x14 Eirika Ch.19
+0x15 Eirika Ch.20
+0x16 Eirika Final Ch.p1
+0x17 Eirika Final Ch.p2
+0x18 Ephraim Ch.9
+0x19 Ephraim Ch.10 (Bethroen)
+0x1A Ephraim Ch.12
+0x1B Ephraim Ch.13 (Za'abadul Marsh)
+0x1C Ephraim Ch.14
+0x1D Ephraim Ch.15
+0x1E Ephraim Ch.16
+0x1F Ephraim Ch.17 (Narube River)
+0x20 Ephraim Ch.18 (Neleras Peak)
+0x21 Ephraim Ch.19
+0x22 Ephraim Ch.20
+0x23 Ephraim Final Ch.p1
+0x24 Ephraim Final Ch.p2
+0x25 Tower of Valni 1
+0x26 Tower of Valni 2
+0x27 Tower of Valni 3
+0x28 Tower of Valni 4
+0x29 Tower of Valni 5
+0x2A Tower of Valni 6
+0x2B Tower of Valni 7
+0x2C Tower of Valni 8
+0x2D Lagdou Ruins 1
+0x2E Lagdou Ruins 2
+0x2F Lagdou Ruins 3
+0x30 Lagdou Ruins 4
+0x31 Lagdou Ruins 5
+0x32 Lagdou Ruins 6
+0x33 Lagdou Ruins 7
+0x34 Lagdou Ruins 8
+0x35 Lagdou Ruins 9
+0x36 Lagdou Ruins 10
+0x37 Lords split up (glitchy map)
+0x38 Melkaen Coast
+0x39 Eirika Ch.11
+0x3A Ephraim Ch.11

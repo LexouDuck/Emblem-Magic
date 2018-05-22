@@ -1,0 +1,236 @@
+0x00 None
+0x01 [IMG] Fields
+0x02 [PAL] Fields (Normal)
+0x03 [TSA] Fields
+0x04 [MAP] Prologue
+0x05 [ANM] Water (Fields)
+0x06 [CHG] Prologue
+0x07 [EVT] Prologue
+0x08 [MAP] Ch.1
+0x09 [CHG] Ch.1
+0x0A [EVT] Ch.1
+0x0B [MAP] Ch.2
+0x0C [CHG] Ch.2
+0x0D [EVT] Ch.2
+0x0E [IMG] Town & Docks
+0x0F [PAL] Town & Docks
+0x10 [TSA] Town & Docks
+0x11 [MAP] Ch.3
+0x12 [ANM] Water (Town & Docks)
+0x13 [CHG] Ch.3
+0x14 [EVT] Ch.3
+0x15 [MAP] Ch.4
+0x16 [CHG] Ch.4
+0x17 [EVT] Ch.4
+0x18 [IMG] Castle & Shrine
+0x19 [PAL] Castle & Shrine (Water)
+0x1A [TSA] Castle & Shrine
+0x1B [MAP] Ch.5x
+0x1C [ANM] Water (Castle & Shrine)
+0x1D [CHG] Ch.5x
+0x1E [EVT] Ch.5x
+0x1F [MAP] Ch.5
+0x20 [CHG] Ch.5
+0x21 [EVT] Ch.5
+0x22 [MAP] Ch.6
+0x23 [CHG] Ch.6
+0x24 [EVT] Ch.6
+0x25 [MAP] Ch.7
+0x26 [CHG] Ch.7
+0x27 [EVT] Ch.7
+0x28 [MAP] Ch.8
+0x29 [CHG] Ch.8
+0x2A [EVT] Ch.8
+0x2B [MAP] Eirika Ch.9
+0x2C [CHG] Eirika Ch.9
+0x2D [EVT] Eirika Ch.9
+0x2E [IMG] Plains
+0x2F [PAL] Plains
+0x30 [TSA] Plains
+0x31 [MAP] Eirika Ch.10
+0x32 [CHG] Eirika Ch.10
+0x33 [EVT] Eirika Ch.10
+0x34 [PAL] Plains (Caer Pelyn)
+0x35 [MAP] Eirika Ch.12
+0x36 [CHG] Eirika Ch.12
+0x37 [EVT] Eirika Ch.12
+0x38 [PAL] Fields (Bright)
+0x39 [MAP] Eirika Ch.13
+0x3A [CHG] Eirika Ch.13
+0x3B [EVT] Eirika Ch.13 (3B)
+0x3C [IMG] Castle
+0x3D [PAL] Castle (Jehanna)
+0x3E [TSA] Castle
+0x3F [MAP] Eirika Ch.14
+0x40 [CHG] Eirika Ch.14
+0x41 [EVT] Eirika Ch.14
+0x42 [IMG] Desert
+0x43 [PAL] Desert
+0x44 [TSA] Desert
+0x45 [MAP] Ch.15
+0x46 [CHG] Ch.15
+0x47 [EVT] Eirika Ch.15
+0x48 [PAL] Castle & Shrine (Normal)
+0x49 [MAP] Ch.16
+0x4A [CHG] Ch.16
+0x4B [EVT] Eirika Ch.16
+0x4C [PAL] Fields (Yellow River)
+0x4D [MAP] Ch.17
+0x4E [CHG] Ch.17
+0x4F [EVT] Eirika Ch.17
+0x50 [IMG] Lava Cave
+0x51 [PAL] Lava Cave
+0x52 [TSA] Lava Cave
+0x53 [MAP] Ch.18
+0x54 [ANM] Lava (Lava Cave)
+0x55 [CHG] Ch.18
+0x56 [EVT] Eirika Ch.18
+0x57 [PAL] Castle & Shrine (Dark)
+0x58 [MAP] Ch.19
+0x59 [CHG] Ch.19
+0x5A [EVT] Eirika Ch.19
+0x5B [PAL] Fields (Darkling Woods)
+0x5C [MAP] Ch.20
+0x5D [CHG] Ch.20
+0x5E [EVT] Eirika Ch.20
+0x5F [IMG] Dark Shrine
+0x60 [PAL] Dark Shrine
+0x61 [TSA] Dark Shrine
+0x62 [MAP] Eirika Final Ch.p1
+0x63 [CHG] Eirika Final Ch.p1
+0x64 [EVT] Eirika Final Ch.p1
+0x65 [MAP] Eirika Final Ch.p2
+0x66 [CHG] Eirika Final Ch.p2
+0x67 [EVT] Eirika Final Ch.p2
+0x68 [PAL] Castle (Normal)
+0x69 [MAP] Ephraim Ch.9
+0x6A [CHG] Ephraim Ch.9
+0x6B [EVT] Ephraim Ch.9
+0x6C [IMG] Fields & Shrine
+0x6D [PAL] Fields & Shrine
+0x6E [TSA] Fields & Shrine
+0x6F [MAP] Ephraim Ch.10
+0x70 [CHG] Ephraim Ch.10
+0x71 [EVT] Ephraim Ch.10
+0x72 [PAL] Town & Docks (Ship)
+0x73 [MAP] Ephraim Ch.12
+0x74 [CHG] Ephraim Ch.12
+0x75 [EVT] Ephraim Ch.12
+0x76 [MAP] Ephraim Ch.13
+0x77 [CHG] Ephraim Ch.13
+0x78 [EVT] Ephraim Ch.13
+0x79 [IMG] Fortress
+0x7A [PAL] Fortress
+0x7B [TSA] Fortress
+0x7C [MAP] Ephraim Ch.14
+0x7D [ANM] Torches (Forteress)
+0x7E [CHG] Ephraim Ch.14
+0x7F [EVT] Ephraim Ch.14
+0x80 [EVT] Ephraim Ch.15
+0x81 [EVT] Ephraim Ch.16
+0x82 [EVT] Ephraim Ch.17
+0x83 [EVT] Ephraim Ch.18
+0x84 [EVT] Ephraim Ch.19
+0x85 [EVT] Ephraim Ch.20
+0x86 [EVT] Ephraim Final Ch.p1
+0x87 [EVT] Ephraim Final Ch.p2
+0x88 [IMG] Tower of Valni
+0x89 [PAL] Tower of Valni
+0x8A [TSA] Tower of Valni
+0x8B [MAP] Tower of Valni 1
+0x8C [CHG] Tower of Valni 1
+0x8D [EVT] Tower of Valni 1
+0x8E [MAP] Tower of Valni 2
+0x8F [CHG] Tower of Valni 2
+0x90 [EVT] Tower of Valni 2
+0x91 [MAP] Tower of Valni 3
+0x92 [CHG] Tower of Valni 3
+0x93 [EVT] Tower of Valni 3
+0x94 [MAP] Tower of Valni 4
+0x95 [CHG] Tower of Valni 4
+0x96 [EVT] Tower of Valni 4
+0x97 [MAP] Tower of Valni 5
+0x98 [CHG] Tower of Valni 5
+0x99 [EVT] Tower of Valni 5
+0x9A [MAP] Tower of Valni 6
+0x9B [CHG] Tower of Valni 6
+0x9C [EVT] Tower of Valni 6
+0x9D [MAP] Tower of Valni 7
+0x9E [CHG] Tower of Valni 7
+0x9F [EVT] Tower of Valni 7
+0xA0 [MAP] Tower of Valni 8
+0xA1 [CHG] Tower of Valni 8
+0xA2 [EVT] Tower of Valni 8
+0xA3 [PAL] Fields & Shrine (Lagdou ruins)
+0xA4 [MAP] Lagdou Ruins 1
+0xA5 [CHG] Lagdou Ruins 1
+0xA6 [EVT] Lagdou Ruins 1
+0xA7 [MAP] Lagdou Ruins 2
+0xA8 [CHG] Lagdou Ruins 2
+0xA9 [EVT] Lagdou Ruins 2
+0xAA [MAP] Lagdou Ruins 3
+0xAB [CHG] Lagdou Ruins 3
+0xAC [EVT] Lagdou Ruins 3
+0xAD [MAP] Lagdou Ruins 4
+0xAE [CHG] Lagdou Ruins 4
+0xAF [EVT] Lagdou Ruins 4
+0xB0 [MAP] Lagdou Ruins 5
+0xB1 [CHG] Lagdou Ruins 5
+0xB2 [EVT] Lagdou Ruins 5
+0xB3 [MAP] Lagdou Ruins 6
+0xB4 [CHG] Lagdou Ruins 6
+0xB5 [EVT] Lagdou Ruins 6
+0xB6 [MAP] Lagdou Ruins 7
+0xB7 [CHG] Lagdou Ruins 7
+0xB8 [EVT] Lagdou Ruins 7
+0xB9 [PAL] Castle & Water (Lagdou Ruins)
+0xBA [MAP] Lagdou Ruins 8
+0xBB [CHG] Lagdou Ruins 8
+0xBC [EVT] Lagdou Ruins 8
+0xBD [MAP] Lagdou Ruins 9
+0xBE [CHG] Lagdou Ruins 9
+0xBF [EVT] Lagdou Ruins 9
+0xC0 [MAP] Lagdou Ruins 10
+0xC1 [CHG] Lagdou Ruins 10
+0xC2 [EVT] Lagdou Ruins 10
+0xC3 [MAP] Lords split up
+0xC4 [CHG] Lords split up
+0xC5 [EVT] Lords split up
+0xC6 [MAP] Melkaen Coast
+0xC7 [CHG] Melkaen Coast
+0xC8 [EVT] Melkaen Coast
+0xC9 [MAP] Link arena C9
+0xCA [MAP] Debug map 1
+0xCB [???] Debug map 1
+0xCC [MAP] Debug map 2
+0xCD [???] Debug map 2
+0xCE [PAL] Castle (Normal?)
+0xCF [MAP] Eirika Ch.11
+0xD0 [CHG] Eirika Ch.11
+0xD1 [EVT] Eirika Ch.11
+0xD2 [MAP] Ephraim Ch.11
+0xD3 [ANM] Water (Ship)
+0xD4 [CHG] Ephraim Ch.11
+0xD5 [EVT] Ephraim Ch.11
+0xD6 [MAP] Grado Castle
+0xD7 [MAP] Renais Castle
+0xD8 [MAP] Caer Pelyn
+0xD9 [MAP] Renais Throne Room
+0xDA [CHG] Renais Throne Room
+0xDB [MAP] Renais Audience Room
+0xDC [MAP] Renvall Gate
+0xDD [MAP] Grado Borders
+0xDE [MAP] Grado Prison
+0xDF [CHG] Grado Prison
+0xE0 [MAP] Renais Shrine
+0xE1 [CHG] Renais Shrine
+0xE2 [MAP] Rausten Shrine
+0xE3 [CHG] Rausten Shrine
+0xE4 [MAP] Some Path
+0xE5 [MAP] Some Building
+0xE6 [PAL] Fortress (Flashback)
+0xE7 [MAP] Grado Shrine (Flashback)
+0xE8 [MAP] Another Path
+0xE9 [MAP] Grado Shrine
+0xEA [PAL] Town & Docks (Flashback)
+0xEB [MAP] Ch.5 Town (Flashback)

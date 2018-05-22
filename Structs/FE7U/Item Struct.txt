@@ -1,0 +1,24 @@
+0xBE222C 36
+
+0x00 2 UInt16	ItemName
+0x02 2 UInt16	Description
+0x04 2 UInt16	UseItemText
+0x06 1 Byte	ItemNumber
+0x07 1 Byte	WeaponType
+0x08 4 UInt32	Attributes
+0x0C 4 Pointer	StatBonuses
+0x10 4 Pointer	Effectiveness
+0x14 1 Byte	Uses
+0x15 1 Byte	Might
+0x16 1 Byte	Hit%
+0x17 1 Byte	Weight
+0x18 1 Byte	Crit%
+0x19 1 Byte	Range
+0x1A 2 UInt16	Cost
+0x1C 1 Byte	WeaponRank
+0x1D 1 Byte	ItemIcon
+0x1E 1 Byte	ItemEffect
+0x1F 1 Byte	WeaponEffect
+0x20 1 Byte	WeaponExp
+0x21 1 Byte	Unknown
+0x22 2 UInt16	Separator

@@ -1,0 +1,12 @@
+0x8B3C14 16
+
+0x00 1 Byte Character
+0x01 1 Byte Class
+0x02 1 Byte Leader
+0x03 1 Byte Level
+0x04 1 Byte LoadX
+0x05 1 Byte LoadY
+0x06 1 Byte StartX
+0x07 1 Byte StartY
+0x08 4 UInt32 Items
+0x0C 4 UInt32 AI

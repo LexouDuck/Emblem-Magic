@@ -1,0 +1,45 @@
+0x00 Tutorial
+0x01 Ch.1: Breath of Destiny
+0x02 Ch.2: Princess of Bern
+0x03 Ch.3: The Latecomer
+0x04 Ch.4: Federation Crumbling
+0x05 Ch.5: Flame Crest
+0x06 Ch.6: The Trap Is Sprung
+0x07 Ch.7: Ostia's Rebellion
+0x08 Ch.8: Reunion
+0x09 Ch.9: Island of Mists
+0x0A Ch.10A: Fighters
+0x0B Ch.11A: Hero of the West
+0x0C Ch.12: The True Enemy
+0x0D Ch.13: Rescue Mission
+0x0E Ch.14: Arcadia
+0x0F Ch.15: Dragon Girl
+0x10 Ch.16: Reclaim the Capital
+0x11 Ch.17A: Ocean Road
+0x12 Ch.18A: Frozen River
+0x13 Ch.19A: General Winter
+0x14 Ch.20A: Liberation of Ilia
+0x15 Ch.21: Sword of Seals
+0x16 Ch.22: Unfulfilled Dream
+0x17 Ch.23: Apparitions of Bern
+0x18 Ch.24: Truth of Legends
+0x19 Final Ch.: Beyond Darkness
+0x1A Ch.10B: The Space Between
+0x1B Ch.11B: Escape to the Freedom
+0x1C Ch.17B: Cleric's Teachings
+0x1D Ch.18B: The Laws of Sacae
+0x1E Ch.19B: Battle Of Bulgar
+0x1F Ch.20B: The Silver Wolf
+0x20 Ch.8x: The Blazing Blade
+0x21 Ch.12x: Thunder Axe
+0x22 Ch.14x: Hellfire's Truth
+0x23 Ch.16x: Light of Supremacy
+0x24 Ch.20Ax: Lance of Ice and Snow
+0x25 Ch.20Bx: Bow of Hurricanes
+0x26 Ch.21x: Darkness of Oblivion
+0x27 Link Arena
+0x28 Trial Map 1
+0x29 Trial Map 2
+0x2A Trial Map 3
+0x2B Trial Map 4
+0x2C Trial Map 5

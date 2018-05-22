@@ -1,0 +1,18 @@
+# Documentation and other stuff
+Other/
+
+# GBA roms (don't wanna distribute those on github!)
+*.gba
+*.GBA
+
+# Executables & object files
+bin/
+obj/
+.vs
+
+# Nightmare modules
+Modules/old/
+
+# Macintosh hidden files
+*.DS_Store
+*._*
