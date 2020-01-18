@@ -264,11 +264,12 @@ namespace EmblemMagic.Editors
             {
                 int header = ((Core.CurrentROM is FE8 ||
                     (Core.CurrentROM is FE7 && Core.CurrentROM.Version == GameVersion.JAP)) ? 4 : 0);
-                byte[] data_palette = insert.Colors.ToBytes(false);
                 byte[] data_main = insert.Sprites[Portrait.MAIN].Sheet.ToBytes(false);
                 byte[] data_chibi = null;
                 byte[] data_mouth = null;
-                
+                byte[] data_palette = new byte[Palette.LENGTH];
+                Array.Copy(insert.Colors.ToBytes(false), data_palette, insert.Colors.Count * 2);
+
                 var repoints = new List<Tuple<string, Pointer, int>>();
                 var writepos = new List<Pointer>();
 

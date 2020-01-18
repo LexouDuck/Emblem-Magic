@@ -48,7 +48,7 @@ namespace EmblemMagic.Editors
 
 
         /// <summary>
-        /// Gets a string of the current byte index of portrait in the array
+        /// Gets a string of the current byte index of battle anim in the array
         /// </summary>
         string CurrentEntry
         {
@@ -870,7 +870,7 @@ namespace EmblemMagic.Editors
         /// <summary>
         /// Saves a gif of the current anim to the given filepath
         /// </summary>
-        void Core_SaveAnimGIF(string filepath, bool browserFriendly)
+        void Core_SaveAnimGIF(string filepath, int mode, bool browserFriendly)
         {
             try
             {
@@ -903,7 +903,6 @@ namespace EmblemMagic.Editors
                 gif.Add(0x01); // Always 0x01 ? Looping label ?
                 gif.AddRange(new byte[2] { 0x00, 0x00 }); // Loop value, 0x0000 makes it loop forever
                 gif.Add(0x00); // Block Terminator (0x00)
-                int mode = CurrentMode;
                 List<int> wait_frames = new List<int>();
                 for (int i = 0; i < CurrentAnim.AnimCode[mode].Length; i++)
                 {
@@ -913,11 +912,12 @@ namespace EmblemMagic.Editors
                         int index = i - 1;
                         while (index >= 0 && CurrentAnim.AnimCode[mode][index].StartsWith("c")) --index;
                         if (index == -1) Program.ShowMessage("whut");
-                        wait_frames.Add(Util.HexToByte(
+                        else wait_frames.Add(Util.HexToByte(
                             CurrentAnim.AnimCode[mode][index].Substring(
                             CurrentAnim.AnimCode[mode][index].IndexOf(" f") + 2, 2)));
                     }
                 }
+//              MessageBox.Show(string.Join(";", wait_frames));
                 for (byte i = 0; i < Frames[mode].Count; i++)
                 {
                     CurrentAnim.ShowFrame(CurrentPalette, Frames[mode][i], OAM_L_Button.Checked);
@@ -933,7 +933,7 @@ namespace EmblemMagic.Editors
                     }
                     UInt16 duration = (UInt16)(CurrentAnim.Frames[Frames[mode][i]].Duration * (100f / 60f));
                     if (i == 0 || wait_frames.Contains(Frames[mode][i]))
-                        duration = 80;
+                        duration = 60;
                     else if (browserFriendly && duration < 4)
                         duration = 4;
                     // Graphic Control Extension Block:
@@ -1050,13 +1050,39 @@ namespace EmblemMagic.Editors
                 "Browser-friendly GIF File (*.gif)|*.gif|" +
                 "Faithful GIF File (*.gif)|*.gif|" +
                 "All files (*.*)|*.*";
-            saveWindow.FileName = Entry_ArrayBox.Text;
-            if (!View_AllAnimCode.Checked)
-                saveWindow.FileName += " - " + Anim_Mode_ListBox.GetItemText(Anim_Mode_ListBox.SelectedItem);
+            saveWindow.FileName = Entry_ArrayBox.Text + " - " + Anim_Mode_ListBox.GetItemText(Anim_Mode_ListBox.SelectedItem);
 
             if (saveWindow.ShowDialog() == DialogResult.OK)
             {
-                Core_SaveAnimGIF(saveWindow.FileName, saveWindow.FilterIndex == 1);
+                Core_SaveAnimGIF(saveWindow.FileName,
+                    CurrentMode, saveWindow.FilterIndex == 1);
+            }
+        }
+        private void File_SaveAllGIF_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveWindow = new SaveFileDialog();
+            saveWindow.RestoreDirectory = true;
+            saveWindow.OverwritePrompt = true;
+            saveWindow.CreatePrompt = false;
+            saveWindow.FilterIndex = 1;
+            saveWindow.Filter =
+                "Browser-friendly GIF File (*.gif)|*.gif|" +
+                "Faithful GIF File (*.gif)|*.gif|" +
+                "All files (*.*)|*.*";
+            saveWindow.FileName = Entry_ArrayBox.Text;
+
+            if (saveWindow.ShowDialog() == DialogResult.OK)
+            {
+                string filename = saveWindow.FileName;
+                if (filename.EndsWith(".gif"))
+                    filename = filename.Substring(0, filename.Length - 4);
+                for (int mode = 0; mode < Frames.Length; mode++)
+                {
+                    Anim_Mode_ListBox.SelectedIndex = mode;
+                    Core_SaveAnimGIF(filename + " - " + Anim_Mode_ListBox.GetItemText(Anim_Mode_ListBox.SelectedItem) + ".gif",
+                        mode, saveWindow.FilterIndex == 1);
+                }
+                Anim_Mode_ListBox.SelectedIndex = 0;
             }
         }
 

@@ -231,18 +231,17 @@ namespace EmblemMagic.Compression
         /// </summary>
         int GetNextPixel()
         {
-            if (Remaining == 0) return EOF;
-
             --Remaining;
-
-            int temp = Current + 1;
-            if (temp < Pixels.GetUpperBound(0))
+            if (Remaining < 0)
+                return EOF;
+            int temp = Current;
+            if (temp <= Pixels.GetUpperBound(0))
             {
-                byte pix = Pixels[Current++];
+                byte pixel = Pixels[Current++];
 
-                return pix & 0xFF;
+                return (pixel & 0xFF);
             }
-            return 0xFF;
+            return (0xFF);
         }
 
         /// <summary>

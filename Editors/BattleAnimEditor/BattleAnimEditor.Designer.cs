@@ -67,7 +67,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.File_SaveFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.File_SaveFiles = new System.Windows.Forms.ToolStripMenuItem();
-            this.File_SaveGIF = new System.Windows.Forms.ToolStripMenuItem();
+            this.File_SaveAllGIF = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Tool = new System.Windows.Forms.ToolStripMenuItem();
             this.Tool_OpenOAMEditor = new System.Windows.Forms.ToolStripMenuItem();
             this.Tool_OpenPaletteEditor = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,6 +78,7 @@
             this.Item_GroupBox = new System.Windows.Forms.GroupBox();
             this.Item_LayoutPanel = new System.Windows.Forms.Panel();
             this.Item_PointerArrayBox = new EmblemMagic.Components.PointerArrayBox();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.Palette_GroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Palette_Character_PointerBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Palette_Default_PointerBox)).BeginInit();
@@ -469,7 +470,8 @@
             this.toolStripSeparator1,
             this.File_SaveFolder,
             this.File_SaveFiles,
-            this.File_SaveGIF});
+            this.toolStripMenuItem1,
+            this.File_SaveAllGIF});
             this.Menu_File.Name = "Menu_File";
             this.Menu_File.Size = new System.Drawing.Size(37, 20);
             this.Menu_File.Text = "File";
@@ -477,7 +479,7 @@
             // File_Create
             // 
             this.File_Create.Name = "File_Create";
-            this.File_Create.Size = new System.Drawing.Size(232, 22);
+            this.File_Create.Size = new System.Drawing.Size(265, 22);
             this.File_Create.Text = "Create animation...";
             this.File_Create.Click += new System.EventHandler(this.File_Create_Click);
             // 
@@ -485,19 +487,19 @@
             // 
             this.File_Insert.Name = "File_Insert";
             this.File_Insert.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.I)));
-            this.File_Insert.Size = new System.Drawing.Size(232, 22);
+            this.File_Insert.Size = new System.Drawing.Size(265, 22);
             this.File_Insert.Text = "Insert anim from files...";
             this.File_Insert.Click += new System.EventHandler(this.File_Insert_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(229, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(262, 6);
             // 
             // File_SaveFolder
             // 
             this.File_SaveFolder.Name = "File_SaveFolder";
-            this.File_SaveFolder.Size = new System.Drawing.Size(232, 22);
+            this.File_SaveFolder.Size = new System.Drawing.Size(265, 22);
             this.File_SaveFolder.Text = "Save anim to folder...";
             this.File_SaveFolder.Click += new System.EventHandler(this.File_SaveFolder_Click);
             // 
@@ -505,16 +507,18 @@
             // 
             this.File_SaveFiles.Name = "File_SaveFiles";
             this.File_SaveFiles.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.File_SaveFiles.Size = new System.Drawing.Size(232, 22);
+            this.File_SaveFiles.Size = new System.Drawing.Size(265, 22);
             this.File_SaveFiles.Text = "Save anim to files...";
             this.File_SaveFiles.Click += new System.EventHandler(this.File_SaveFiles_Click);
             // 
-            // File_SaveGIF
+            // File_SaveAllGIF
             // 
-            this.File_SaveGIF.Name = "File_SaveGIF";
-            this.File_SaveGIF.Size = new System.Drawing.Size(232, 22);
-            this.File_SaveGIF.Text = "Save anim to GIF...";
-            this.File_SaveGIF.Click += new System.EventHandler(this.File_SaveGIF_Click);
+            this.File_SaveAllGIF.Name = "File_SaveAllGIF";
+            this.File_SaveAllGIF.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.G)));
+            this.File_SaveAllGIF.Size = new System.Drawing.Size(265, 22);
+            this.File_SaveAllGIF.Text = "Save all anims to GIF...";
+            this.File_SaveAllGIF.Click += new System.EventHandler(this.File_SaveAllGIF_Click);
             // 
             // Menu_Tool
             // 
@@ -610,6 +614,14 @@
             this.Item_PointerArrayBox.TabIndex = 0;
             this.Item_PointerArrayBox.ValueChanged += new System.EventHandler(this.Item_PointerArrayBox_ValueChanged);
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(265, 22);
+            this.toolStripMenuItem1.Text = "Save this anim to GIF...";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.File_SaveGIF_Click);
+            // 
             // BattleAnimEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -704,10 +716,11 @@
         private System.Windows.Forms.ToolStripMenuItem View_AllAnimCode;
         private Components.ByteArrayBox Palette_Character_Current_ArrayBox;
         private System.Windows.Forms.ToolStripMenuItem File_SaveFolder;
-        private System.Windows.Forms.ToolStripMenuItem File_SaveGIF;
+        private System.Windows.Forms.ToolStripMenuItem File_SaveAllGIF;
         private System.Windows.Forms.ToolStripMenuItem View_Layered;
         private System.Windows.Forms.GroupBox Item_GroupBox;
         private Components.PointerArrayBox Item_PointerArrayBox;
         private System.Windows.Forms.Panel Item_LayoutPanel;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }

@@ -34,6 +34,9 @@ using System.Windows.Forms;
     - drag/drop reordering on the module editor https://www.codeproject.com/Articles/48411/Using-the-FlowLayoutPanel-and-Reordering-with-Drag
 
     Bugfixes:
+    - Make it so palettes ALWAYS have 16-byte writes, even if they're shorter than that
+    - Clicking 'Cancel' when opening a ROM should actually cancel the file-open
+    - FEH files that share the same path and name as a GBA file should be loaded automatically
     - For some people, the program suddenly stops working (the main window is permanently minimized) and they need to redownload
     - There are 2 prompts when copying in HexEditor, and deciding not to proceed still copies anyways..?
     - Set correct tab index for every control in each editor
@@ -474,8 +477,8 @@ namespace EmblemMagic
             try
             {
                 ROM.OpenFile(path);
-
                 Core_LoadFireEmblem();
+
                 if (FEH.IsEmpty)
                 {
                     if (Core_CheckHackedROM())
