@@ -113,7 +113,7 @@
 0x70 Valkyrie
 0x71 Valkyrie (Staff)
 0x72 Archsage
-0x73 Archsage (?)
+0x73 Archsage (Staff)
 0x74 Nomad (Bow)
 0x75 Nomad
 0x76 Nomad Trooper (Sword)

@@ -930,7 +930,7 @@ namespace EmblemMagic.Editors
                 for (byte i = 0; i < Frames[mode].Count; i++)
                 {
                     CurrentAnim.ShowFrame(CurrentPalette, Frames[mode][i], OAM_L_Button.Checked);
-                    UInt16 duration = (UInt16)(Durations[mode][i] * (100f / 60f));
+                    UInt16 duration = (UInt16)Math.Round(Durations[mode][i] * (100f / 60f));
                     if (i == 0 || wait_frames.Contains(i))
                         duration = 60;
                     else if (browserFriendly && duration < 4)
@@ -1073,7 +1073,7 @@ namespace EmblemMagic.Editors
             saveWindow.RestoreDirectory = true;
             saveWindow.OverwritePrompt = true;
             saveWindow.CreatePrompt = false;
-            saveWindow.FilterIndex = 1;
+            saveWindow.FilterIndex = 2;
             saveWindow.Filter =
                 "Browser-friendly GIF File (*.gif)|*.gif|" +
                 "Faithful GIF File (*.gif)|*.gif|" +
@@ -1467,7 +1467,7 @@ namespace EmblemMagic.Editors
             else
             {
                 Frame_ByteBox.Value++;
-                PlayAnimTimer.Interval = (int)(Durations[CurrentMode][Frame_ByteBox.Value] * 1000f / 60f);
+                PlayAnimTimer.Interval = (int)Math.Round(Durations[CurrentMode][Frame_ByteBox.Value] * 1000f / 60f);
             }
         }
     }
