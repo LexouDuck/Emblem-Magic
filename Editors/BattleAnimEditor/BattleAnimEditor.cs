@@ -904,20 +904,22 @@ namespace EmblemMagic.Editors
                 gif.AddRange(new byte[2] { 0x00, 0x00 }); // Loop value, 0x0000 makes it loop forever
                 gif.Add(0x00); // Block Terminator (0x00)
                 List<int> wait_frames = new List<int>();
+                int wait_frame = 0;
                 for (int i = 0; i < CurrentAnim.AnimCode[mode].Length; i++)
                 {
-                    if (CurrentAnim.AnimCode[mode][i].StartsWith("c01") || // Wait for HP
-                        CurrentAnim.AnimCode[mode][i].StartsWith("c13"))   // Handaxe return
+                    if (CurrentAnim.AnimCode[mode][i].StartsWith("c01") || // Wait for HP deplete
+                        CurrentAnim.AnimCode[mode][i].StartsWith("c13"))   // Wait for Handaxe return
                     {
-                        int index = i - 1;
-                        while (index >= 0 && CurrentAnim.AnimCode[mode][index].StartsWith("c")) --index;
-                        if (index == -1) Program.ShowMessage("whut");
-                        else wait_frames.Add(Util.HexToByte(
-                            CurrentAnim.AnimCode[mode][index].Substring(
-                            CurrentAnim.AnimCode[mode][index].IndexOf(" f") + 2, 2)));
+                        wait_frames.Add(wait_frame - 1);
+                    }
+                    else if (CurrentAnim.AnimCode[mode][i].IndexOf(" f") > 0 &&
+                        !CurrentAnim.AnimCode[mode][i].StartsWith("c") &&
+                        !CurrentAnim.AnimCode[mode][i].StartsWith("#"))
+                    {
+                        wait_frame += 1;
                     }
                 }
-//              MessageBox.Show(string.Join(";", wait_frames));
+                //MessageBox.Show(string.Join(";", wait_frames));
                 for (byte i = 0; i < Frames[mode].Count; i++)
                 {
                     CurrentAnim.ShowFrame(CurrentPalette, Frames[mode][i], OAM_L_Button.Checked);
@@ -932,7 +934,7 @@ namespace EmblemMagic.Editors
                             BattleAnimation.SCREEN_OFFSET_Y);
                     }
                     UInt16 duration = (UInt16)(CurrentAnim.Frames[Frames[mode][i]].Duration * (100f / 60f));
-                    if (i == 0 || wait_frames.Contains(Frames[mode][i]))
+                    if (i == 0 || wait_frames.Contains(i))
                         duration = 60;
                     else if (browserFriendly && duration < 4)
                         duration = 4;
