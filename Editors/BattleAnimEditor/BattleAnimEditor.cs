@@ -41,6 +41,10 @@ namespace EmblemMagic.Editors
         /// </summary>
         List<byte>[] Frames;
         /// <summary>
+        /// The list of frame durations (in 60ths/second) for the current anim mode
+        /// </summary>
+        List<int>[] Durations;
+        /// <summary>
         /// The array of currently existing controls to edit battle anim associations
         /// </summary>
         Control[] Item_Controls;
@@ -252,15 +256,18 @@ namespace EmblemMagic.Editors
 
             string[] animcode;
             Frames = new List<byte>[BattleAnimation.MODES];
+            Durations = new List<int>[BattleAnimation.MODES];
             for (int mode = 0; mode < Frames.Length; mode++)
             {
                 Frames[mode] = new List<byte>();
+                Durations[mode] = new List<int>();
                 animcode = CurrentAnim.AnimCode[mode];
 
                 for (int i = 0; i < animcode.Length; i++)
                 {
                     if (animcode[i][0] >= '0' && animcode[i][0] <= '9')
                     {
+                        Durations[mode].Add(int.Parse(animcode[i].Substring(0, animcode[i].IndexOf(' '))));
                         for (int j = 0; j < animcode[i].Length; j++)
                         {
                             if (animcode[i][j] == 'f' || animcode[i][j] == 'F')
@@ -923,7 +930,7 @@ namespace EmblemMagic.Editors
                 for (byte i = 0; i < Frames[mode].Count; i++)
                 {
                     CurrentAnim.ShowFrame(CurrentPalette, Frames[mode][i], OAM_L_Button.Checked);
-                    UInt16 duration = (UInt16)(CurrentAnim.Frames[Frames[mode][i]].Duration * (100f / 60f));
+                    UInt16 duration = (UInt16)(Durations[mode][i] * (100f / 60f));
                     if (i == 0 || wait_frames.Contains(i))
                         duration = 60;
                     else if (browserFriendly && duration < 4)
@@ -1460,8 +1467,7 @@ namespace EmblemMagic.Editors
             else
             {
                 Frame_ByteBox.Value++;
-                byte frame = Frames[CurrentMode][Frame_ByteBox.Value];
-                PlayAnimTimer.Interval = (int)(1000 * CurrentAnim.Frames[frame].Duration / 60);
+                PlayAnimTimer.Interval = (int)(Durations[CurrentMode][Frame_ByteBox.Value] * 1000f / 60f);
             }
         }
     }

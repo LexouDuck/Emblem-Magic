@@ -650,10 +650,10 @@ namespace EmblemMagic.FireEmblem
                                 result += "\r\n\r\n";
                             else return result;
                         }
-                        else if (layer1[l1][0] != layer2[l2][0])
+                        else if (l1 >= layer1.Length || l2 >= layer2.Length || layer1[l1][0] != layer2[l2][0])
                         {   // sometimes there are 'c' commands in layer2 that aren't in layer1's anim code, and vice-versa
                             // go see the lyn blade lord critical anim for an example, or brigand handaxe attack
-                            if (layer2[l2][0] == 'c')
+                            if (l2 < layer2.Length && layer2[l2][0] == 'c')
                             {
                                 for (int j = 0; j < layer2[l2].Length; j++)
                                 {
@@ -661,7 +661,7 @@ namespace EmblemMagic.FireEmblem
                                 }
                                 l1--;
                             }
-                            else if (layer1[l1][0] == 'c')
+                            else if (l1 < layer1.Length && layer1[l1][0] == 'c')
                             {
                                 for (int j = 0; j < layer1[l1].Length; j++)
                                 {
