@@ -923,6 +923,11 @@ namespace EmblemMagic.Editors
                 for (byte i = 0; i < Frames[mode].Count; i++)
                 {
                     CurrentAnim.ShowFrame(CurrentPalette, Frames[mode][i], OAM_L_Button.Checked);
+                    UInt16 duration = (UInt16)(CurrentAnim.Frames[Frames[mode][i]].Duration * (100f / 60f));
+                    if (i == 0 || wait_frames.Contains(i))
+                        duration = 60;
+                    else if (browserFriendly && duration < 4)
+                        duration = 4;
                     if (!View_AllFrames.Checked && View_Layered.Checked && (mode == 0 || mode == 2 || mode == 8))
                     {
                         BattleAnimFrame frame = CurrentAnim.Frames[Frames[mode + 1][i]];
@@ -933,11 +938,6 @@ namespace EmblemMagic.Editors
                             OAM_L_Button.Checked ? BattleAnimation.SCREEN_OFFSET_X_L : BattleAnimation.SCREEN_OFFSET_X_R,
                             BattleAnimation.SCREEN_OFFSET_Y);
                     }
-                    UInt16 duration = (UInt16)(CurrentAnim.Frames[Frames[mode][i]].Duration * (100f / 60f));
-                    if (i == 0 || wait_frames.Contains(i))
-                        duration = 60;
-                    else if (browserFriendly && duration < 4)
-                        duration = 4;
                     // Graphic Control Extension Block:
                     gif.Add(0x21); // Extension Introducer (0x21)
                     gif.Add(0xF9); // Graphic Control Label (0xF9)
@@ -1078,11 +1078,16 @@ namespace EmblemMagic.Editors
                 string filename = saveWindow.FileName;
                 if (filename.EndsWith(".gif"))
                     filename = filename.Substring(0, filename.Length - 4);
-                for (int mode = 0; mode < Frames.Length; mode++)
+                int length = View_Layered.Checked ? BattleAnimation.Modes_Layered.Length : BattleAnimation.Modes.Length;
+                int mode = 0;
+                for (int i = 0; i < length; i++)
                 {
-                    Anim_Mode_ListBox.SelectedIndex = mode;
+                    Anim_Mode_ListBox.SelectedIndex = i;
                     Core_SaveAnimGIF(filename + " - " + Anim_Mode_ListBox.GetItemText(Anim_Mode_ListBox.SelectedItem) + ".gif",
                         mode, saveWindow.FilterIndex == 1);
+                    if (View_Layered.Checked && (mode == 0 || mode == 2 || mode == 8))
+                        mode++;
+                    mode++;
                 }
                 Anim_Mode_ListBox.SelectedIndex = 0;
             }
