@@ -165,7 +165,7 @@ namespace EmblemMagic.Components
             }
             catch
             {
-                EntryValueBox.Value = 0;
+                EntryComboBox.SelectedItem = null;
             }
 
             EntryValueBox.ValueChanged += UpdateEntryComboBox;

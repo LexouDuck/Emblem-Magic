@@ -36,6 +36,8 @@
             this.File_OpenEMMFile = new System.Windows.Forms.ToolStripMenuItem();
             this.Status_Module = new System.Windows.Forms.ToolStripLabel();
             this.LayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.Offset_Plus_Button = new System.Windows.Forms.Button();
+            this.Offset_Minus_Button = new System.Windows.Forms.Button();
             this.Status.SuspendLayout();
             this.MenuBar.SuspendLayout();
             this.SuspendLayout();
@@ -109,11 +111,35 @@
             this.LayoutPanel.Size = new System.Drawing.Size(322, 210);
             this.LayoutPanel.TabIndex = 2;
             // 
+            // Offset_Plus_Button
+            // 
+            this.Offset_Plus_Button.Location = new System.Drawing.Point(82, 1);
+            this.Offset_Plus_Button.Name = "Offset_Plus_Button";
+            this.Offset_Plus_Button.Size = new System.Drawing.Size(20, 23);
+            this.Offset_Plus_Button.TabIndex = 3;
+            this.Offset_Plus_Button.Text = "+";
+            this.Offset_Plus_Button.UseVisualStyleBackColor = true;
+            this.Offset_Plus_Button.Visible = false;
+            this.Offset_Plus_Button.Click += new System.EventHandler(this.Offset_Plus_Button_Click);
+            // 
+            // Offset_Minus_Button
+            // 
+            this.Offset_Minus_Button.Location = new System.Drawing.Point(56, 1);
+            this.Offset_Minus_Button.Name = "Offset_Minus_Button";
+            this.Offset_Minus_Button.Size = new System.Drawing.Size(20, 23);
+            this.Offset_Minus_Button.TabIndex = 4;
+            this.Offset_Minus_Button.Text = "-";
+            this.Offset_Minus_Button.UseVisualStyleBackColor = true;
+            this.Offset_Minus_Button.Visible = false;
+            this.Offset_Minus_Button.Click += new System.EventHandler(this.Offset_Minus_Button_Click);
+            // 
             // ModuleEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 262);
+            this.Controls.Add(this.Offset_Minus_Button);
+            this.Controls.Add(this.Offset_Plus_Button);
             this.Controls.Add(this.LayoutPanel);
             this.Controls.Add(this.Status);
             this.Controls.Add(this.MenuBar);
@@ -140,5 +166,7 @@
         private System.Windows.Forms.StatusStrip Status;
         private System.Windows.Forms.ToolStripLabel Status_Module;
         private System.Windows.Forms.ToolStripStatusLabel Status_Author;
+        private System.Windows.Forms.Button Offset_Plus_Button;
+        private System.Windows.Forms.Button Offset_Minus_Button;
     }
 }

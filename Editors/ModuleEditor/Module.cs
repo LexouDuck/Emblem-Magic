@@ -89,16 +89,16 @@ namespace EmblemMagic.Editors
 
         public Module(string[] file)
         {
-            Pointer = new Repoint(file[1], ReadAddress(file[3]));
-            EntryLength = int.Parse(file[5]);
-
             if (file[0] != Program.Core.CurrentROM.GetIdentifier())
                 throw new Exception("this Emblem Magic Module is meant for another ROM: " + file[0]);
-            
+
             if (file[7] != "NULL")
             {
                 Entries = new ArrayFile(file[7]);
             }
+            else Entries = null;
+            Pointer = new Repoint(file[1], ReadAddress(file[3], Entries));
+            EntryLength = int.Parse(file[5]);
             Property module = new Property(1,
                 file[1],
                 file[2],
@@ -205,13 +205,17 @@ namespace EmblemMagic.Editors
         /// <summary>
         /// Reads a string hex address and returns the corresponding GBA.Pointer
         /// </summary>
-        static Pointer ReadAddress(string pointer)
+        static Pointer ReadAddress(string pointer, ArrayFile entries)
         {
             Pointer result = Util.StringToAddress(pointer);
             if (result == new Pointer())
-                result = Prompt.ShowPointerDialog(
-                "This module has no address specified.\n Please enter the address at which the data to edit is located.",
-                "Specify Module Pointer");
+            {
+                string caption = "Specify Module Pointer";
+                string text = "This module has no address specified.\n Please enter the address of the data to edit.";
+                result = (entries == null) ?
+                    Prompt.ShowPointerDialog(text, caption) :
+                    Prompt.ShowPointerArrayBoxDialog(text, caption);
+            }
             return result;
         }
     }

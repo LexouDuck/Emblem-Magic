@@ -1,3 +1,4 @@
+0x000000 None
 0x8B3C14 Prologue
 0x8B3D18 Prologue cutscene
 0x8B3F68 Prologue cutscene 2
@@ -61,12 +62,9 @@
 0x8C9CB0 Ephraim Ch.19
 0x8CA63C Ephraim Ch.20
 0x8CB060 Ephraim Final Ch.
-0x8CB060 Tower of Valni 1
 0x8CB918 Tower of Valni 2
 0x8CBF24 Tower of Valni 3
-0x8CC9B8 Tower of Valni 4
 0x8CC9B8 Lagdou Ruins 1
 0x8CEC84 Lagdou Ruins 2
-0x8CEC84 Melkaen Coast
 0x8D1BA0 Debug map 1
 0x8D1D10 Debug map 2

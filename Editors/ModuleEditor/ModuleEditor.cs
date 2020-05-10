@@ -120,7 +120,15 @@ namespace EmblemMagic.Editors
                     Core_LoadModule(path);
                     Core_LoadLayout();
                     Core_LoadEvents();
-                    if (EntrySelector is PointerArrayBox) return;
+                    if (EntrySelector is PointerArrayBox)
+                    {
+                        WriteDisabled = true;
+                        ((PointerArrayBox)EntrySelector).Value = CurrentModule.Pointer.CurrentAddress;
+                        EntrySelector.Location = new Point(EntrySelector.Location.X + 64, EntrySelector.Location.Y);
+                        Offset_Minus_Button.Visible = true;
+                        Offset_Plus_Button.Visible = true;
+                        Core_LoadValues(CurrentModule.Pointer.CurrentAddress);
+                    }
                     else Core_LoadValues(0);
                 }
                 catch (Exception ex)
@@ -164,7 +172,7 @@ namespace EmblemMagic.Editors
             CurrentModule = new Module(file.ToArray());
 
             Status_Module.Text = CurrentModule.Name;
-            Status_Author.Text = CurrentModule.Author;
+            Status_Author.Text = "Author of this module: " + CurrentModule.Author;
 
             EntrySelector = CurrentModule.Entry;
 
@@ -354,9 +362,12 @@ namespace EmblemMagic.Editors
             object[] values;
             try
             {
-                values = (EntrySelector is PointerArrayBox) ?
-                    CurrentModule[new Pointer(entry)] :
-                    CurrentModule[(int)entry];
+                if (EntrySelector is PointerArrayBox)
+                    values = (CurrentModule.Entries == null) ?
+                        CurrentModule[new Pointer(entry)] :
+                        CurrentModule[new Pointer(entry)];
+                else
+                    values = CurrentModule[(int)entry];
             }
             catch (Exception ex)
             {
@@ -375,14 +386,14 @@ namespace EmblemMagic.Editors
                         case PropertyType.TEXT: ((TextBox)ModuleControls[i]).Text = (string)values[i]; break;
                         case PropertyType.HEXT: ((HexBox)ModuleControls[i]).Value = (byte[])values[i]; break;
 
-                        case PropertyType.HEXU: ((NumericUpDown)ModuleControls[i]).Value = (uint)values[i]; break;
-                        case PropertyType.NUMU: ((NumericUpDown)ModuleControls[i]).Value = (uint)values[i]; break;
-                        case PropertyType.NUMS: ((NumericUpDown)ModuleControls[i]).Value = (int)values[i]; break;
+                        case PropertyType.HEXU: ((NumericUpDown)ModuleControls[i]).Value = Convert.ToUInt32(values[i]); break;
+                        case PropertyType.NUMU: ((NumericUpDown)ModuleControls[i]).Value = Convert.ToUInt32(values[i]); break;
+                        case PropertyType.NUMS: ((NumericUpDown)ModuleControls[i]).Value = Convert.ToInt32(values[i]); break;
 
                         case PropertyType.LIST:
                             if (property.FileName == null)
-                                ((ByteBox)ModuleControls[i]).Value = (byte)values[i];
-                            else ((ByteArrayBox)ModuleControls[i]).Value = (byte)values[i]; break;
+                                ((ByteBox)ModuleControls[i]).Value = Convert.ToByte(values[i]);
+                            else ((ByteArrayBox)ModuleControls[i]).Value = Convert.ToByte(values[i]); break;
                         case PropertyType.POIN:
                             if (property.FileName == null)
                                 ((PointerBox)ModuleControls[i]).Value = (GBA.Pointer)values[i];
@@ -396,7 +407,6 @@ namespace EmblemMagic.Editors
                 }
                 i++;
             }
-
             WriteDisabled = false;
         }
 
@@ -497,6 +507,23 @@ namespace EmblemMagic.Editors
             if (openWindow.ShowDialog() == DialogResult.OK)
             {
                 Core_OpenFile(openWindow.FileName);
+            }
+        }
+
+
+
+        private void Offset_Plus_Button_Click(Object sender, EventArgs e)
+        {
+            if (EntrySelector is PointerArrayBox)
+            {
+                ((PointerArrayBox)EntrySelector).Value = new GBA.Pointer(((PointerArrayBox)EntrySelector).Value.Address + (uint)CurrentModule.EntryLength);
+            }
+        }
+        private void Offset_Minus_Button_Click(Object sender, EventArgs e)
+        {
+            if (EntrySelector is PointerArrayBox)
+            {
+                ((PointerArrayBox)EntrySelector).Value = new GBA.Pointer(((PointerArrayBox)EntrySelector).Value.Address - (uint)CurrentModule.EntryLength);
             }
         }
     }

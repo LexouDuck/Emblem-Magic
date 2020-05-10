@@ -2,9 +2,9 @@ FE8U
 Chapter Unit Editor
 Lexou
 0x000000
-6
+99
 20
-LIST
+POIN
 Chapter Unit Pointers.txt
 
 Character Reference Number
@@ -30,21 +30,21 @@ Character List.txt
 
 Starting Level
 General
-31b
+24b
 5b
 NUMU
 NULL
 
 Starting Faction
 General
-25b
+29b
 2b
 LIST
 Factions.txt
 
 Auto-leveled ?
 General
-24b
+31b
 1b
 BOOL
 NULL

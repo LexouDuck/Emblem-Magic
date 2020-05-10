@@ -35,14 +35,59 @@ namespace EmblemMagic
         /// <summary>
         /// Returns a bitshifted number from the given area to bitmask (right-to-left)
         /// </summary>
-        public static Byte GetBits(byte data, int index, int length)
+        public static UInt32 GetBits(byte[] data, int index, int length)
         {
-            if (index < 0 || index >= 8 || length <= 0 || index + length > 8)
-                throw new Exception("bitmask area goes outside the byte. index:" + index + " length: " + length);
-
-            byte mask = (byte)(((0x1 << length) - 1) << index);
-
-            return (byte)((data & mask) >> index);
+            if (length == 0)
+                return (0);
+            if (length < 0)
+                throw new Exception("negative length given.");
+            if (length >= 32)
+                throw new Exception("Length given is too large, must be below 32");
+            if (index < 0 || (index / 8) >= data.Length || ((index + length) / 8) > data.Length)
+                throw new Exception("requested bit area goes outside the byte array.\n" +
+                    "Requested index:" + index + " length: " + length + ", data length is " + data.Length);
+            int start = index >> 3;
+            int end = (index + length) >> 3;
+            if ((index + length) % 8 == 0)
+                end -= 1;
+            uint mask;
+            int bit_index = index % 8;
+            if (start == end)
+            {
+                mask = (uint)((0x1 << length) - 1);
+                if (bit_index + length == 8)
+                    return (data[start] & mask);
+                else
+                    return ((uint)(data[start] >> (8 - bit_index - length)) & mask);
+            }
+            int sublength = length;
+            UInt32 result = 0;
+            for (int i = start; i <= end; i++)
+            {
+                mask = (uint)((0x1 << length) - 1);
+                if (i == start)
+                {
+                    if (sublength > 8) sublength = 8;
+                    if (bit_index + sublength > 8) sublength -= bit_index;
+                    mask = (uint)((0x1 << sublength) - 1);
+                    result |= (data[i] & mask);
+                    result <<= sublength;
+                }
+                else if (i == end)
+                {
+                    sublength = (index + length) % 8;
+                    mask = (uint)((0x1 << sublength) - 1);
+                    if (mask == 0) mask = 0xFF;
+                    result |= (data[i] & mask) >> (8 - sublength);
+                    break;
+                }
+                else
+                {
+                    result |= data[i];
+                    result <<= 8;
+                }
+            }
+            return (result);
         }
         /// <summary>
         /// Returns the given byte with the bits from 'index to 'length' replaced by a bitshifted 'set'.

@@ -1,4 +1,5 @@
-﻿using EmblemMagic.Editors;
+﻿using EmblemMagic.Components;
+using EmblemMagic.Editors;
 using EmblemMagic.Properties;
 using GBA;
 using System;
@@ -112,6 +113,52 @@ namespace EmblemMagic
         public static Pointer ShowPointerDialog(string text, string caption)
         {
             return new Pointer((uint)ShowNumberDialog(text, caption, true, 0, (int)Core.CurrentROMSize));
+        }
+        /// <summary>
+        /// Shows a simple number input prompt, but for a pointer
+        /// </summary>
+        public static Pointer ShowPointerArrayBoxDialog(string text, string caption)
+        {
+            Label label = new Label()
+            {
+                Text = text,
+                Left = 25,
+                Top = 15,
+                AutoSize = false,
+                Size = new Size(250, 30),
+                TextAlign = ContentAlignment.MiddleCenter
+            };
+            Form dialog = new Form()
+            {
+                Width = 300,
+                Height = 100 + label.Height,
+                Text = caption,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                StartPosition = FormStartPosition.CenterScreen
+            };
+            Button confirm = new Button()
+            {
+                Text = "OK",
+                Left = dialog.Width - 100,
+                Top = 25 + label.Height,
+                Width = 60,
+                DialogResult = DialogResult.OK
+            };
+            confirm.Click += (sender, e) => { dialog.Close(); };
+            PointerArrayBox input = new PointerArrayBox()
+            {
+                Left = 20,
+                Top = 25 + label.Height,
+                Width = 160,
+                Maximum = new GBA.Pointer(Core.CurrentROMSize),
+            };
+            input.Load("Chapter Unit Pointers.txt");
+            dialog.Controls.Add(input);
+            dialog.Controls.Add(confirm);
+            dialog.Controls.Add(label);
+            dialog.AcceptButton = confirm;
+
+            return (dialog.ShowDialog() == DialogResult.OK ? input.Value : new GBA.Pointer());
         }
 
         /// <summary>

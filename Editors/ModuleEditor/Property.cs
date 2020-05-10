@@ -12,7 +12,7 @@ namespace EmblemMagic.Editors
     public enum PropertyType
     {
         NULL,   // NULL
-        BOOL,   //      -> CheckBox
+        BOOL,   // BOOL -> CheckBox
         TEXT,   // TEXT -> TextBox
         HEXT,   // HEXA -> HexBox
         HEXU,   // NEHU -> Hex numeric updown
@@ -108,13 +108,12 @@ namespace EmblemMagic.Editors
         /// </summary>
         public object GetValue(byte[] entry)
         {
-            int pos = Position >> 3;
 
             if (Length % 8 == 0)
             {   // if this is a byte entry
                 int length = Length >> 3;
                 byte[] data = new byte[length];
-                Array.Copy(entry, pos, data, 0, length);
+                Array.Copy(entry, Position / 8, data, 0, length);
 
                 switch (ControlType)
                 {
@@ -132,8 +131,8 @@ namespace EmblemMagic.Editors
             }
             else
             {   // so its a bit entry
-                if (Length == 1) return Util.GetBit(entry[pos], BitIndex);
-                else return Util.GetBits(entry[pos], BitIndex, Length);
+                if (Length == 1) return Util.GetBit(entry[Position / 8], BitIndex);
+                else return Util.GetBits(entry, Position, Length);
             }
         }
         /// <summary>
