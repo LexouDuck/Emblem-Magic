@@ -1,5 +1,7 @@
 # Documentation and other stuff
 Other/
+Test/*.sav
+Test/*.feh
 
 # GBA roms (don't wanna distribute those on github!)
 *.gba

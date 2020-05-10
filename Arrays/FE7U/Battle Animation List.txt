@@ -99,9 +99,9 @@
 0x62 Cleric (F) (Staff)
 0x63 Cleric (F)
 0x64 Monk
-0x65 Bishop
+0x65 Bishop (Magic)
 0x66 Bishop (Staff)
-0x67 Bishop (F)
+0x67 Bishop (F) (Magic)
 0x68 Bishop (F) (Staff)
 0x69 Shaman
 0x6A Druid
@@ -146,11 +146,11 @@
 0x91 Hero (Linus) (Axe)
 0x92 Hero (Linus) (Handaxe)
 0x93 Hero (Linus)
-0x94 Bishop (Lucius)
+0x94 Bishop (Lucius) (Magic)
 0x95 Bishop (Lucius) (Staff)
-0x96 Bishop (Lucius) (No Staff)
-0x97 Bishop (No Staff)
-0x98 Bishop (F) (No Staff)
+0x96 Bishop (Lucius)
+0x97 Bishop
+0x98 Bishop (F)
 0x99 Myrmidon (Guy) (Sword)
 0x9A Myrmidon (Guy)
 0x9B Swordmaster (Guy) (Sword)

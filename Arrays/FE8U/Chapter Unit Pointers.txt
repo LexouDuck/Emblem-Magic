@@ -1,0 +1,72 @@
+0x8B3C14 Prologue
+0x8B3D18 Prologue cutscene
+0x8B3F68 Prologue cutscene 2
+0x8B40A0 Ch.1
+0x8B42CC Ch.2
+0x8B4574 Ch.3
+0x8B4904 Ch.4
+0x8B5630 Ch.5
+0x8B5A64 Ch.5x
+0x8B5E94 Ch.5x cutscene
+0x8B5F7C Ch.5x cutscene 2
+0x8B61A8 Ch.6
+0x8B6E78 Ch.7
+0x8B710C Ch.8 cutscene
+0x8B7300 Ch.8
+0x8B78EC Ch.8 cutscene 2
+0x8B7C0C Eirika Ch.9
+0x8B8394 Eirika Ch.9 cutscene
+0x8B8540 Eirika Ch.10
+0x8B9894 Eirika Ch.11
+0x8B9F14 Eirika Ch.11 cutscene
+0x8BA170 Eirika Ch.12
+0x8BA948 Eirika Ch.13
+0x8BB9C4 Eirika Ch.13 cutscene
+0x8BBA58 Eirika Ch.13 cutscene 2
+0x8BBBA8 Eirika Ch.14
+0x8BC350 Eirika Ch.14 cutscene
+0x8BC45C Eirika Ch.14 cutscene 2
+0x8BC4D4 Eirika Ch.14 cutscene 3
+0x8BC610 Eirika Ch.15
+0x8BCE58 Eirika Ch.16
+0x8BD648 Eirika Ch.16 cutscene
+0x8BD810 Eirika Ch.16 cutscene 2
+0x8BDA08 Eirika Ch.16 cutscene 3
+0x8BDAF8 Eirika Ch.16 cutscene 4
+0x8BDC24 Eirika Ch.16 cutscene 5
+0x8BDE58 Eirika Ch.17
+0x8BEFE8 Eirika Ch.18
+0x8C0290 Eirika Ch.19
+0x8C0B90 Eirika Ch.19 cutscene
+0x8C0D74 Eirika Ch.20
+0x8C172C Eirika Ch.20 cutscene
+0x8C181C Eirika Final Ch.
+0x8C1F44 Final Boss
+0x8C22C8 Ephraim Ch.9
+0x8C296C Ephraim Ch.9 cutscene
+0x8C2A00 Ephraim Ch.9 cutscene 2
+0x8C2C54 Ephraim Ch.10
+0x8C3CB4 Ephraim Ch.10 cutscene
+0x8C3E50 Ephraim Ch.11
+0x8C46B8 Ephraim Ch.12
+0x8C4EB4 Ephraim Ch.13
+0x8C5FBC Ephraim Ch.14
+0x8C68B8 Ephraim Ch.14 cutscene
+0x8C69E8 Ephraim Ch.14 cutscene 2
+0x8C6BDC Ephraim Ch.14 cutscene 3
+0x8C6E14 Ephraim Ch.15
+0x8C7648 Ephraim Ch.16
+0x8C7C9C Ephraim Ch.17
+0x8C8AD8 Ephraim Ch.18
+0x8C9CB0 Ephraim Ch.19
+0x8CA63C Ephraim Ch.20
+0x8CB060 Ephraim Final Ch.
+0x8CB060 Tower of Valni 1
+0x8CB918 Tower of Valni 2
+0x8CBF24 Tower of Valni 3
+0x8CC9B8 Tower of Valni 4
+0x8CC9B8 Lagdou Ruins 1
+0x8CEC84 Lagdou Ruins 2
+0x8CEC84 Melkaen Coast
+0x8D1BA0 Debug map 1
+0x8D1D10 Debug map 2

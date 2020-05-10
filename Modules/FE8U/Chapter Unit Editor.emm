@@ -1,9 +1,9 @@
-FE7U
+FE8U
 Chapter Unit Editor
-Kirb
+Lexou
 0x000000
-12
-16
+6
+20
 LIST
 Chapter Unit Pointers.txt
 
@@ -30,21 +30,21 @@ Character List.txt
 
 Starting Level
 General
-24b
+31b
 5b
 NUMU
 NULL
 
 Starting Faction
 General
-29b
+25b
 2b
 LIST
 Factions.txt
 
 Auto-leveled ?
 General
-31b
+24b
 1b
 BOOL
 NULL
@@ -63,72 +63,79 @@ Map Positioning
 NUMU
 NULL
 
-Start at X
-Map Positioning
+Byte 6
+Unknown
 6
 1
 HEXU
 NULL
 
-Start at Y
+Reinforcement Placement ?
 Map Positioning
 7
 1
 HEXU
 NULL
 
+Reinforcement Pointer ?
+Map Positioning
+8
+4
+POIN
+NULL
+
 Slot Item 1
 Starting Items
-8
+12
 1
 LIST
 Item List.txt
 
 Slot Item 2
 Starting Items
-9
+13
 1
 LIST
 Item List.txt
 
 Slot Item 3
 Starting Items
-10
+14
 1
 LIST
 Item List.txt
 
 Slot Item 4
 Starting Items
-11
+15
 1
 LIST
 Item List.txt
 
 AI 1
 NPC Unit AI
-12
+16
 1
 LIST
 AI Byte 1.txt
 
 AI 2
 NPC Unit AI
-13
+17
 1
 LIST
 AI Byte 2.txt
 
 AI 3
 NPC Unit AI
-14
+18
 1
 LIST
 AI Byte 3.txt
 
 AI 4
 NPC Unit AI
-15
+19
 1
 LIST
 AI Byte 4.txt
