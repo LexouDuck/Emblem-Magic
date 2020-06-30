@@ -16,6 +16,11 @@ namespace GBA
         const ushort BITS_G = 0x03E0;
         const ushort BITS_B = 0x7C00;
 
+        const ushort OFFSET_R = 0;
+        const ushort OFFSET_G = 5;
+        const ushort OFFSET_B = 10;
+        const ushort OFFSET_A = 15;
+
         /// <summary>
         /// The 16-bit number that is the GBA.Color itself - this is the only field of this struct.
         /// </summary>
@@ -129,9 +134,12 @@ namespace GBA
         public static UInt32 Get32bitColor(UInt16 color)
         {
             UInt32 result = (color >= ALPHA) ? 0x0 : 0xFF000000;
-            result |= (uint)((color & BITS_B) >>  7);
-            result |= (uint)((color & BITS_G) <<  6);
-            result |= (uint)((color & BITS_R) << 19);
+            uint channel_B = (uint)((color & BITS_B) >> OFFSET_B);
+            uint channel_G = (uint)((color & BITS_G) >> OFFSET_G);
+            uint channel_R = (uint)((color & BITS_R) >> OFFSET_R);
+            result |= (uint)(Math.Round(channel_B * (255.0 / 31.0))) << 0;
+            result |= (uint)(Math.Round(channel_G * (255.0 / 31.0))) << 8;
+            result |= (uint)(Math.Round(channel_R * (255.0 / 31.0))) << 16;
             return result;
         }
 
