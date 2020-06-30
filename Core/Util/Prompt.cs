@@ -324,18 +324,47 @@ namespace EmblemMagic
             MessageBoxButtons.YesNo,
             MessageBoxIcon.Warning);
         }
-        public static DialogResult SearchPointer(Repoint repoint)
+        public static void ResolveUnreferencedPointers(List<Repoint> unreferenced)
         {
-            return MessageBox.Show(
-            "No references to the default pointer for the " + repoint.AssetName +
-            " have been found in this ROM - it must have been repointed.\n\n" +
-
-            "If you know the pointer, please click 'Yes' to enter it.\n" +
-            "Otherwise, you can click 'No' so as to allow the program to search for the pointer on its own.",
-
-            repoint.AssetName + " repointed",
-            MessageBoxButtons.YesNoCancel,
-            MessageBoxIcon.Warning);
+            Tuple<string, Pointer, int>[] pointers = new Tuple<string, Pointer, int>[unreferenced.Count];
+            string[] pointer_names = new string[unreferenced.Count];
+            for (int i = 0; i < unreferenced.Count; i++)
+            {
+                pointers[i] = Tuple.Create(unreferenced[i].AssetName, new Pointer(), (int)unreferenced[i].DefaultAddress);
+                pointer_names[i] = unreferenced[i].AssetName;
+            }
+            FormRepoint Dialog = new FormRepoint("Unreferenced pointers to resolve",
+            (unreferenced.Count == 1 ? "An important pointer " : ("A total of " + unreferenced.Count + " important pointers ")) +
+            " have 0 references in this ROM - " + (unreferenced.Count == 1 ? "it" : "they") + " must have been repointed." +
+            "\n"+"If you know the new value" + (unreferenced.Count == 1 ? " for this pointer" : "s for these pointers") + ", you can enter that in the numerical input boxes below, and click 'Repoint'." +
+            "\n"+"Otherwise, you can click 'Cancel' to allow Emblem Magic to find the new pointer value" + (unreferenced.Count == 1 ? "s" : "")+ " on its own." +
+            "\n"+"If there are any numerical boxes left empty when clicking 'Repoint', Emblem Magic will find the value for those on its own.",
+            pointers,
+            500);
+            DialogResult answer = Dialog.ShowDialog();
+            Pointer address = new GBA.Pointer();
+            for (int i = 0; i < unreferenced.Count; i++)
+            {
+                if (answer == DialogResult.Cancel || Dialog.Boxes[i].Value == 0)
+                {
+                    try
+                    {
+                        DataManager rom = new DataManager();
+                        rom.OpenFile(Core.Path_CleanROM);
+                        address = Core.ReadPointer(rom.Find(unreferenced[i].DefaultAddress.ToBytes(), 4));
+                    }
+                    catch (Exception ex)
+                    {
+                        Program.ShowError("Error while searching for the " + unreferenced[i].AssetName + " pointer.", ex);
+                    }
+                }
+                else if (answer == DialogResult.Yes)
+                {
+                    address = Dialog.Boxes[i].Value;
+                }
+                unreferenced[i].CurrentAddress = address;
+                unreferenced[i].UpdateReferences();
+            }
         }
 
         public static DialogResult ChangeROMSize()

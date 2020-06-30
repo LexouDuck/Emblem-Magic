@@ -381,43 +381,17 @@ namespace EmblemMagic
             else
             {
                 Repoint[] pointers = CurrentROM.GetDefaultPointers();
+                List<Repoint> unreferenced = new List<Repoint>();
                 DialogResult answer;
                 for (int i = 0; i < pointers.Length; i++)
                 {
                     if (pointers[i].References.Length == 0)
-                    {
-                        answer = Prompt.SearchPointer(pointers[i]);
-
-                        if (answer == DialogResult.Cancel) continue;
-                        else
-                        {
-                            Pointer address = new Pointer();
-                            if (answer == DialogResult.Yes)
-                            {
-                                address = Prompt.ShowPointerDialog(
-                                    "Please enter the pointer for the " + pointers[i].AssetName,
-                                    pointers[i].AssetName + " Repointed");
-
-                            }
-                            else if (answer == DialogResult.No)
-                            {
-                                try
-                                {
-                                    DataManager rom = new DataManager();
-                                    rom.OpenFile(Core.Path_CleanROM);
-                                    address = Core.ReadPointer(rom.Find(pointers[i].DefaultAddress.ToBytes(), 4));
-                                }
-                                catch (Exception ex)
-                                {
-                                    Program.ShowError("Error while searching for the " + pointers[i].AssetName + " pointer.", ex);
-                                }
-                            }
-                            pointers[i].CurrentAddress = address;
-                            pointers[i].UpdateReferences();
-                        }
-                    }
+                        unreferenced.Add(pointers[i]);
                 }
-
+                if (unreferenced.Count > 0)
+                {
+                    Prompt.ResolveUnreferencedPointers(unreferenced);
+                }
                 //FEH.Space.Load(CurrentROM.DefaultFreeSpace());
                 FEH.Point.Load(pointers);
             }
