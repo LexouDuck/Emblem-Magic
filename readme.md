@@ -92,7 +92,7 @@ Some other more general editors are accessible from within the other editors, un
 - **OAM Editor** (accessed from the Battle Animation Editor, to change the sprite layout information for a given frame of animation)
 ![](https://i.imgur.com/Ptb0IdR.png)
 
-Download the program here: (also i suggest reading the readme.txt before doing anything)
+Download the program here: _(also, I strongly suggest reading the readme.txt before doing anything !)_
 http://www.mediafire.com/file/8lv5xfzst1055cd/Emblem+Magic+BETA.zip
 
 UPDATE: Second release version of the beta is here, adding quite a few new features
@@ -102,3 +102,5 @@ UPDATE: Second release version of the beta is here, adding quite a few new featu
 - Title Screen Editor
 - And plenty of other stuff (many bugfixes of course), including pretty much all the things said in this thread (like having more shortcuts) and some other things, like the ability to modify batte anim structs within the battle anim editor
 http://www.mediafire.com/file/al2kt7s7ckn2932/Emblem+Magic+BETA+2.zip
+
+UPDATE: Several bugfixes and minor features have been, but no new release... you can compile this latest version yourself though, with Visual Studio and .NET 4.0. I might create a github continous integration routine to compile the program automatically on each commit...
