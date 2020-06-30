@@ -19,7 +19,7 @@ Also, Emblem Magic reads external text files to associate names to array entries
 the ones for the vanilla ROMs).
 
 The Editors range from some very fundamental ROMhacking tools to more specific ones intended for the GBA Fire Emblem games:
-_Note_: The editors in the following which have an "X" instead of a "-" are the more incomplete and WIP ones (I say this, but in fact almost all of them are incomplete in some way).
+_Note_: The editors in the following list which have an "X" before their name are the more incomplete and WIP ones (I say this, but in fact almost all of them are incomplete in some way).
 
 - **Basic ROM Editor** (simple interface to read & write bytes, with LZ77 compression)
 ![](https://i.imgur.com/zXa7QhP.png)
@@ -33,7 +33,7 @@ _Note_: The editors in the following which have an "X" instead of a "-" are the 
 - **ASM Editor** (dissassemble/assemble ASM code, and can somewhat "test run" code line-per-line)
 ![](https://i.imgur.com/gvm4P8k.png)
 
-X **Event Editor** (calls EA from a bundled dll file, the code editor has syntax coloring, mousehover documentation and some more cool functions)
+- X **Event Editor** (calls EA from a bundled dll file, the code editor has syntax coloring, mousehover documentation and some more cool functions)
 ![](https://i.imgur.com/78eDICB.png)
 
 - **Module Editor** (basically like Nightmare, uses .emm text files to load GUI to edit arrays or other data in the ROM - create your own struct editors this way)
@@ -66,16 +66,16 @@ X **Map Tileset Editor** (to change the tilesets of 16x16 tiles used for maps, t
 - **Battle Animation** Editor (to view and change the various battle animations in the game, and the palettes for them)
 ![](https://i.imgur.com/EkwftEq.png)
 
-X **Spell Animation** Editor
+- X **Spell Animation** Editor
 ![No Screenshot](https://i.png)
 
 - **Backgrounds Editor** (to change dialogue scene backgrounds, battle backgrounds, and cutscene CG screens)
 ![](https://i.imgur.com/4LvUHEp.png)
 
-X Title Screen Editor (very unfinished, really just has shortcuts to the Graphics Editor for the 3 sub-images that make up the title screen)
+- X **Title Screen Editor** (very unfinished, really just has shortcuts to the Graphics Editor for the 3 sub-images that make up the title screen)
 ![](https://i.imgur.com/wfljIvf.png)
 
-X **Music Editor** (very unfinished, to change the music and sound-effect tracks used in the game)
+- X **Music Editor** (very unfinished, to change the music and sound-effect tracks used in the game)
 ![](https://i.imgur.com/sTQ7JmE.png)
 
 - **World Map Editor** (pretty simple editor for image-inserting, for the large/small world maps for the game)
@@ -95,8 +95,10 @@ Some other more general editors are accessible from within the other editors, un
 Download the program here: (also i suggest reading the readme.txt before doing anything)
 http://www.mediafire.com/file/8lv5xfzst1055cd/Emblem+Magic+BETA.zip
 
-UPDATE: Second version of the beta is here, adding quite a few new features
-
-
+UPDATE: Second release version of the beta is here, adding quite a few new features
+- Event Editor
+- Item Editor
+- Map Tileset Editor
+- Title Screen Editor
 - And plenty of other stuff (many bugfixes of course), including pretty much all the things said in this thread (like having more shortcuts) and some other things, like the ability to modify batte anim structs within the battle anim editor
 http://www.mediafire.com/file/al2kt7s7ckn2932/Emblem+Magic+BETA+2.zip
