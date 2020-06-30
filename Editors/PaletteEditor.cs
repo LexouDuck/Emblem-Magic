@@ -138,10 +138,10 @@ namespace EmblemMagic.Editors
             Entry = entry;
             Address = address;
             IsCompressed = (amount == 0);
-            if (amount == 0)
+            Current = Core.ReadPalette(address, amount * Palette.LENGTH);
+            if (IsCompressed)
             {
-                Current = Core.ReadPalette(address, 0);
-                amount = (byte)(Current.Count / 16);
+                amount = (byte)(Current.Count / Palette.MAX);
             }
             PaletteAmount = amount;
 
@@ -151,10 +151,8 @@ namespace EmblemMagic.Editors
             SwapButton.Location = new System.Drawing.Point( 13, 170 + 22 * amount);
             LoadButton.Location = new System.Drawing.Point(131, 170 + 22 * amount);
             SaveButton.Location = new System.Drawing.Point(248, 170 + 22 * amount);
-
-
+            
             ColorBoxes = new ColorBox[GBA.Palette.MAX * amount];
-
             for (int i = 0; i < ColorBoxes.Length; i++)
             {
                 ColorBoxes[i] = new ColorBox();

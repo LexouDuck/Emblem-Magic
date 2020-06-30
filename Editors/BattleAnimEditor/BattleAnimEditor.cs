@@ -225,12 +225,25 @@ namespace EmblemMagic.Editors
         {
             try
             {
-                int paletteAmount = 4;
-                Palette palettes = Core.ReadPalette((Pointer)Current["Palettes"], 0);
+                Pointer address;
+                bool is_uncompressed;
+                Palette palettes;
+                int paletteAmount;
+
+                paletteAmount = 4;
+                address = (Pointer)Current["Palettes"];
+                is_uncompressed = (address > 0x80000000);
+                if (address >= 0x80000000)
+                    address -= 0x80000000;
+                palettes = Core.ReadPalette(address, (is_uncompressed ? Palette.LENGTH : 0) * paletteAmount);
                 DefaultPalette = Palette.Split(Palette.Opacify(palettes), paletteAmount);
 
                 paletteAmount = 5;
-                palettes = Core.ReadPalette((Pointer)Palettes["Address"], 0);
+                address = (Pointer)Palettes["Address"];
+                is_uncompressed = (address > 0x80000000);
+                if (address >= 0x80000000)
+                    address -= 0x80000000;
+                palettes = Core.ReadPalette(address, (is_uncompressed ? Palette.LENGTH : 0) * paletteAmount);
                 CharacterPalette = Palette.Split(Palette.Opacify(palettes), paletteAmount);
 
                 Palette_PaletteBox.Load(CurrentPalette);
@@ -328,7 +341,10 @@ namespace EmblemMagic.Editors
 
             try
             {
-                Palette_Character_PointerBox.Value = (Pointer)Palettes["Address"];
+                Pointer address = (Pointer)Palettes["Address"];
+                if (address >= 0x80000000)
+                    address -= 0x80000000;
+                Palette_Character_PointerBox.Value = address;
                 Palette_Character_TextBox.Text = (string)Palettes["Name"];
             }
             catch (Exception ex)
@@ -1114,15 +1130,25 @@ namespace EmblemMagic.Editors
         }
         private void Tool_OpenPaletteEditor_Click(object sender, EventArgs e)
         {
+            Pointer address;
+            bool is_uncompressed;
             if (Palette_Default_Button.Checked)
             {
-                Core.OpenPaletteEditor(this, CurrentEntry, (Pointer)Current["Palettes"], 0);
+                address = (Pointer)Current["Palettes"];
+                is_uncompressed = (address >= 0x80000000);
+                Core.OpenPaletteEditor(this,
+                    CurrentEntry,
+                    (is_uncompressed ? address - 0x80000000 : address),
+                    (is_uncompressed ? 5 : 0));
             }
             else
             {
+                address = (Pointer)Palettes["Address"];
+                is_uncompressed = (address >= 0x80000000);
                 Core.OpenPaletteEditor(this,
                     "Character Palette 0x" + Palette_Character_ArrayBox.Value + " [" + Palette_Character_ArrayBox.Text + "] - ",
-                    Palette_Character_PointerBox.Value, 0);
+                    (is_uncompressed ? address - 0x80000000 : address),
+                    (is_uncompressed ? 5 : 0));
             }
         }
 
