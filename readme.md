@@ -22,75 +22,75 @@ The Editors range from some very fundamental ROMhacking tools to more specific o
 _Note_: The editors in the following which have an "X" instead of a "-" are the more incomplete and WIP ones (I say this, but in fact almost all of them are incomplete in some way).
 
 - **Basic ROM Editor** (simple interface to read & write bytes, with LZ77 compression)
-[](https://i.imgur.com/zXa7QhP.png)
+![](https://i.imgur.com/zXa7QhP.png)
 
 - **Hex Editor** (like any hex editor, really)
-[](https://i.imgur.com/c12seK8.png)
+![](https://i.imgur.com/c12seK8.png)
 
 - **Patch Editor** (for applying various patches to the ROM through FEH files located in the "Patches" folder)
-[](https://i.imgur.com/Iu0RGxa.png)
+![](https://i.imgur.com/Iu0RGxa.png)
 
 - **ASM Editor** (dissassemble/assemble ASM code, and can somewhat "test run" code line-per-line)
-[](https://i.imgur.com/gvm4P8k.png)
+![](https://i.imgur.com/gvm4P8k.png)
 
 X **Event Editor** (calls EA from a bundled dll file, the code editor has syntax coloring, mousehover documentation and some more cool functions)
-[](https://i.imgur.com/78eDICB.png)
+![](https://i.imgur.com/78eDICB.png)
 
 - **Module Editor** (basically like Nightmare, uses .emm text files to load GUI to edit arrays or other data in the ROM - create your own struct editors this way)
-[](https://i.imgur.com/gvm4P8k.png)
+![](https://i.imgur.com/gvm4P8k.png)
 
 - **Text Editor** (to change the text in the game, as well as the fonts used to display text)
-[](https://i.imgur.com/L48DeB2.png)
+![](https://i.imgur.com/L48DeB2.png)
 
 - **Item Editor** (to edit anything pertaining to items, including their stat bonuses or the classes they're effective against)
-[](https://i.imgur.com/ykHkL72.png)
+![](https://i.imgur.com/ykHkL72.png)
 
 X **Map Tileset Editor** (to change the tilesets of 16x16 tiles used for maps, their animations, their terrain associations)
-[](https://i.imgur.com/JHtS290.png)
+![](https://i.imgur.com/JHtS290.png)
 
 - **Map Editor** (to edit the maps for each chapter of the game, as well as the triggerable tile changes for these maps)
-[](https://i.imgur.com/BIYSiKS.png)
+![](https://i.imgur.com/BIYSiKS.png)
 
 - **Graphics Editor** (basically GBAGE, to view and edit images in the ROM)
-[](https://i.imgur.com/dEuiZ0U.png)
+![](https://i.imgur.com/dEuiZ0U.png)
 
 - **Portrait Editor** (to view and edit the different portraits in the game)
-[](https://i.imgur.com/WbAj6zP.png)
+![](https://i.imgur.com/WbAj6zP.png)
 
 - **Map Sprite Editor** (to view and change the sprites of units on the map)
-[](https://i.imgur.com/xdISHav.png)
+![](https://i.imgur.com/xdISHav.png)
 
 - **Battle Screen Editor** (to change the screen frame during battle, or the platforms under the characters' feet)
-[](https://i.imgur.com/bMfjteM.png)
+![](https://i.imgur.com/bMfjteM.png)
 
 - **Battle Animation** Editor (to view and change the various battle animations in the game, and the palettes for them)
-[](https://i.imgur.com/EkwftEq.png)
+![](https://i.imgur.com/EkwftEq.png)
 
 X **Spell Animation** Editor
-[No Screenshot](https://i.png)
+![No Screenshot](https://i.png)
 
 - **Backgrounds Editor** (to change dialogue scene backgrounds, battle backgrounds, and cutscene CG screens)
-[](https://i.imgur.com/4LvUHEp.png)
+![](https://i.imgur.com/4LvUHEp.png)
 
 X Title Screen Editor (very unfinished, really just has shortcuts to the Graphics Editor for the 3 sub-images that make up the title screen)
-[](https://i.imgur.com/wfljIvf.png)
+![](https://i.imgur.com/wfljIvf.png)
 
 X **Music Editor** (very unfinished, to change the music and sound-effect tracks used in the game)
-[](https://i.imgur.com/sTQ7JmE.png)
+![](https://i.imgur.com/sTQ7JmE.png)
 
 - **World Map Editor** (pretty simple editor for image-inserting, for the large/small world maps for the game)
-[](https://i.imgur.com/G7E5h5Y.png)
+![](https://i.imgur.com/G7E5h5Y.png)
 
 Some other more general editors are accessible from within the other editors, under the 'Tools' menu:
 
 - **Palette Editor** (you can also open this by clicking on any palette in any editor)
-[](https://i.imgur.com/kxvL0CC.png)
+![](https://i.imgur.com/kxvL0CC.png)
 
 - **TSA Editor** (to change TSA arrays, these indicate tile layout and associate 16-color palettes to each tile, for more complex images)
-[](https://i.imgur.com/vV78kzr.png)
+![](https://i.imgur.com/vV78kzr.png)
 
 - **OAM Editor** (accessed from the Battle Animation Editor, to change the sprite layout information for a given frame of animation)
-[](https://i.imgur.com/Ptb0IdR.png)
+![](https://i.imgur.com/Ptb0IdR.png)
 
 Download the program here: (also i suggest reading the readme.txt before doing anything)
 http://www.mediafire.com/file/8lv5xfzst1055cd/Emblem+Magic+BETA.zip
