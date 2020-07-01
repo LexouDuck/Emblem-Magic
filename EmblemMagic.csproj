@@ -48,6 +48,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>assets\Icon.ico</ApplicationIcon>
@@ -100,412 +101,412 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\ArrayBox\ByteArrayBox.cs">
+    <Compile Include="src\Components\ArrayBox\ByteArrayBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\ArrayBox\ShortArrayBox.cs">
+    <Compile Include="src\Components\ArrayBox\ShortArrayBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\ArrayBox\PointerArrayBox.cs">
+    <Compile Include="src\Components\ArrayBox\PointerArrayBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\Audio\NativeMethods.cs" />
-    <Compile Include="Components\Audio\PublicEnums.cs" />
-    <Compile Include="Components\Audio\Resources.cs" />
-    <Compile Include="Components\Audio\Volume.cs" />
-    <Compile Include="Components\Audio\WaveFormat.cs" />
-    <Compile Include="Components\Audio\WaveOut.cs" />
-    <Compile Include="Components\Audio\WaveOutDevice.cs" />
-    <Compile Include="Components\Audio\WaveOutMessageReceivedEventArgs.cs" />
-    <Compile Include="Components\Audio\WaveOutSafeHandle.cs" />
-    <Compile Include="Components\CodeBox\CodeBox.cs">
+    <Compile Include="src\Components\Audio\NativeMethods.cs" />
+    <Compile Include="src\Components\Audio\PublicEnums.cs" />
+    <Compile Include="src\Components\Audio\Resources.cs" />
+    <Compile Include="src\Components\Audio\Volume.cs" />
+    <Compile Include="src\Components\Audio\WaveFormat.cs" />
+    <Compile Include="src\Components\Audio\WaveOut.cs" />
+    <Compile Include="src\Components\Audio\WaveOutDevice.cs" />
+    <Compile Include="src\Components\Audio\WaveOutMessageReceivedEventArgs.cs" />
+    <Compile Include="src\Components\Audio\WaveOutSafeHandle.cs" />
+    <Compile Include="src\Components\CodeBox\CodeBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Components\ControlPainting.cs" />
-    <Compile Include="Components\MagicButton\MagicButton.cs">
+    <Compile Include="src\Components\ControlPainting.cs" />
+    <Compile Include="src\Components\MagicButton\MagicButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\NumberBox\ShortBox.cs">
+    <Compile Include="src\Components\NumberBox\ShortBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\NumberBox\ByteBox.cs">
+    <Compile Include="src\Components\NumberBox\ByteBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\ColorBox\ColorBox.cs">
+    <Compile Include="src\Components\ColorBox\ColorBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\ColorBox\ColorBox.Designer.cs">
+    <Compile Include="src\Components\ColorBox\ColorBox.Designer.cs">
       <DependentUpon>ColorBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\GridBox\GridBox.cs">
+    <Compile Include="src\Components\GridBox\GridBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\GridBox\GridBox.Designer.cs">
+    <Compile Include="src\Components\GridBox\GridBox.Designer.cs">
       <DependentUpon>GridBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\GridBox\MapBox.cs">
+    <Compile Include="src\Components\GridBox\MapBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\GridBox\MapBox.Designer.cs">
+    <Compile Include="src\Components\GridBox\MapBox.Designer.cs">
       <DependentUpon>MapBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\HexBox\BuiltInContextMenu.cs">
+    <Compile Include="src\Components\HexBox\BuiltInContextMenu.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\HexBox\ByteProvider\DataBlock.cs" />
-    <Compile Include="Components\HexBox\ByteProvider\DataMap.cs" />
-    <Compile Include="Components\HexBox\ByteProvider\FileDataBlock.cs" />
-    <Compile Include="Components\HexBox\ByteProvider\IByteProvider.cs" />
-    <Compile Include="Components\HexBox\ByteProvider\MemoryDataBlock.cs" />
-    <Compile Include="Components\HexBox\DataByteProvider.cs" />
-    <Compile Include="Components\HexBox\FileByteProvider.cs" />
-    <Compile Include="Components\HexBox\HexBox.cs">
+    <Compile Include="src\Components\HexBox\ByteProvider\DataBlock.cs" />
+    <Compile Include="src\Components\HexBox\ByteProvider\DataMap.cs" />
+    <Compile Include="src\Components\HexBox\ByteProvider\FileDataBlock.cs" />
+    <Compile Include="src\Components\HexBox\ByteProvider\IByteProvider.cs" />
+    <Compile Include="src\Components\HexBox\ByteProvider\MemoryDataBlock.cs" />
+    <Compile Include="src\Components\HexBox\DataByteProvider.cs" />
+    <Compile Include="src\Components\HexBox\FileByteProvider.cs" />
+    <Compile Include="src\Components\HexBox\HexBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\HexBox\Util.cs" />
-    <Compile Include="Components\ImageBox\ImageBox.cs">
+    <Compile Include="src\Components\HexBox\Util.cs" />
+    <Compile Include="src\Components\ImageBox\ImageBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\ArrayBox\ArrayBox.cs">
+    <Compile Include="src\Components\ArrayBox\ArrayBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\ArrayBox\ArrayBox.Designer.cs">
+    <Compile Include="src\Components\ArrayBox\ArrayBox.Designer.cs">
       <DependentUpon>ArrayBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\MarkingBox\MarkingBox.cs">
+    <Compile Include="src\Components\MarkingBox\MarkingBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\MenuStrip\FolderViewStrip.cs">
+    <Compile Include="src\Components\MenuStrip\FolderViewStrip.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\PaletteBox\PaletteBox.cs">
+    <Compile Include="src\Components\PaletteBox\PaletteBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\PaletteBox\PaletteBox.Designer.cs">
+    <Compile Include="src\Components\PaletteBox\PaletteBox.Designer.cs">
       <DependentUpon>PaletteBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="Components\NumberBox\PointerBox.cs">
+    <Compile Include="src\Components\NumberBox\PointerBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\PianoBox\PianoBox.cs">
+    <Compile Include="src\Components\PianoBox\PianoBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\SampleBox\SampleBox.cs">
+    <Compile Include="src\Components\SampleBox\SampleBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\TrackerGrid\TrackerGrid.cs">
+    <Compile Include="src\Components\TrackerGrid\TrackerGrid.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Compression\CRC32.cs" />
-    <Compile Include="Compression\Huffman.cs" />
-    <Compile Include="Compression\LZ77.cs" />
-    <Compile Include="Compression\LZW.cs" />
-    <Compile Include="Compression\VLQ.cs" />
-    <Compile Include="Core\Core.cs" />
-    <Compile Include="Core\Forms\FormAbout.cs">
+    <Compile Include="src\Compression\CRC32.cs" />
+    <Compile Include="src\Compression\Huffman.cs" />
+    <Compile Include="src\Compression\LZ77.cs" />
+    <Compile Include="src\Compression\LZW.cs" />
+    <Compile Include="src\Compression\VLQ.cs" />
+    <Compile Include="src\Core\Core.cs" />
+    <Compile Include="src\Core\Forms\FormAbout.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Core\Forms\FormAbout.Designer.cs">
+    <Compile Include="src\Core\Forms\FormAbout.Designer.cs">
       <DependentUpon>FormAbout.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Forms\FormLoading.cs">
+    <Compile Include="src\Core\Forms\FormLoading.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Core\Forms\FormLoading.Designer.cs">
+    <Compile Include="src\Core\Forms\FormLoading.Designer.cs">
       <DependentUpon>FormLoading.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Forms\FormProperties.cs">
+    <Compile Include="src\Core\Forms\FormProperties.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Core\Forms\FormProperties.Designer.cs">
+    <Compile Include="src\Core\Forms\FormProperties.Designer.cs">
       <DependentUpon>FormProperties.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Forms\FormRepoint.cs">
+    <Compile Include="src\Core\Forms\FormRepoint.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Core\Forms\FormRepoint.Designer.cs">
+    <Compile Include="src\Core\Forms\FormRepoint.Designer.cs">
       <DependentUpon>FormRepoint.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Managers\PointManager\CreateRepointDialog.cs">
+    <Compile Include="src\Core\Managers\PointManager\CreateRepointDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Core\Managers\PointManager\CreateRepointDialog.Designer.cs">
+    <Compile Include="src\Core\Managers\PointManager\CreateRepointDialog.Designer.cs">
       <DependentUpon>CreateRepointDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Managers\PointManager\PointEditor.cs">
+    <Compile Include="src\Core\Managers\PointManager\PointEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Core\Managers\PointManager\PointEditor.Designer.cs">
+    <Compile Include="src\Core\Managers\PointManager\PointEditor.Designer.cs">
       <DependentUpon>PointEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Managers\SpaceManager\MarkSpace.cs">
+    <Compile Include="src\Core\Managers\SpaceManager\MarkSpace.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Core\Managers\SpaceManager\MarkSpace.Designer.cs">
+    <Compile Include="src\Core\Managers\SpaceManager\MarkSpace.Designer.cs">
       <DependentUpon>MarkSpace.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Util\ArrayFile.cs" />
-    <Compile Include="Core\Util\ByteArray.cs" />
-    <Compile Include="Core\Util\StructFile.cs" />
-    <Compile Include="Editors\ASMEditor\ASMEditor.cs">
+    <Compile Include="src\Core\Util\ArrayFile.cs" />
+    <Compile Include="src\Core\Util\ByteArray.cs" />
+    <Compile Include="src\Core\Util\StructFile.cs" />
+    <Compile Include="src\Editors\ASMEditor\ASMEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\ASMEditor\ASMEditor.Designer.cs">
+    <Compile Include="src\Editors\ASMEditor\ASMEditor.Designer.cs">
       <DependentUpon>ASMEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\BackgroundEditor\BackgroundEditor.cs">
+    <Compile Include="src\Editors\BackgroundEditor\BackgroundEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\BackgroundEditor\BackgroundEditor.Designer.cs">
+    <Compile Include="src\Editors\BackgroundEditor\BackgroundEditor.Designer.cs">
       <DependentUpon>BackgroundEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\BattleAnimEditor\BattleAnimEditor.cs">
+    <Compile Include="src\Editors\BattleAnimEditor\BattleAnimEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\BattleAnimEditor\BattleAnimEditor.Designer.cs">
+    <Compile Include="src\Editors\BattleAnimEditor\BattleAnimEditor.Designer.cs">
       <DependentUpon>BattleAnimEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\BattleScreenEditor\BattleScreenEditor.cs">
+    <Compile Include="src\Editors\BattleScreenEditor\BattleScreenEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\BattleScreenEditor\BattleScreenEditor.Designer.cs">
+    <Compile Include="src\Editors\BattleScreenEditor\BattleScreenEditor.Designer.cs">
       <DependentUpon>BattleScreenEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\EventEditor\Event.cs" />
-    <Compile Include="Editors\EventEditor\EventAssemblerIO.cs" />
-    <Compile Include="Editors\EventEditor\EventEditor.cs">
+    <Compile Include="src\Editors\EventEditor\Event.cs" />
+    <Compile Include="src\Editors\EventEditor\EventAssemblerIO.cs" />
+    <Compile Include="src\Editors\EventEditor\EventEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\EventEditor\EventEditor.Designer.cs">
+    <Compile Include="src\Editors\EventEditor\EventEditor.Designer.cs">
       <DependentUpon>EventEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\GraphicsEditor\GraphicsEditor.cs">
+    <Compile Include="src\Editors\GraphicsEditor\GraphicsEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\GraphicsEditor\GraphicsEditor.Designer.cs">
+    <Compile Include="src\Editors\GraphicsEditor\GraphicsEditor.Designer.cs">
       <DependentUpon>GraphicsEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\ItemEditor\ItemEditor.cs">
+    <Compile Include="src\Editors\ItemEditor\ItemEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\ItemEditor\ItemEditor.Designer.cs">
+    <Compile Include="src\Editors\ItemEditor\ItemEditor.Designer.cs">
       <DependentUpon>ItemEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\MapEditor\MapEditor.cs">
+    <Compile Include="src\Editors\MapEditor\MapEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\MapEditor\MapEditor.Designer.cs">
+    <Compile Include="src\Editors\MapEditor\MapEditor.Designer.cs">
       <DependentUpon>MapEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\MapTilesetEditor\MapTilesetEditor.cs">
+    <Compile Include="src\Editors\MapTilesetEditor\MapTilesetEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\MapTilesetEditor\MapTilesetEditor.Designer.cs">
+    <Compile Include="src\Editors\MapTilesetEditor\MapTilesetEditor.Designer.cs">
       <DependentUpon>MapTilesetEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\MusicEditor\InstrumentEditor.cs">
+    <Compile Include="src\Editors\MusicEditor\InstrumentEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\MusicEditor\InstrumentEditor.Designer.cs">
+    <Compile Include="src\Editors\MusicEditor\InstrumentEditor.Designer.cs">
       <DependentUpon>InstrumentEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\MusicEditor\KeyMapEditor.cs">
+    <Compile Include="src\Editors\MusicEditor\KeyMapEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\MusicEditor\KeyMapEditor.Designer.cs">
+    <Compile Include="src\Editors\MusicEditor\KeyMapEditor.Designer.cs">
       <DependentUpon>KeyMapEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\MusicEditor\MusicEditor.cs">
+    <Compile Include="src\Editors\MusicEditor\MusicEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\MusicEditor\MusicEditor.Designer.cs">
+    <Compile Include="src\Editors\MusicEditor\MusicEditor.Designer.cs">
       <DependentUpon>MusicEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\MusicEditor\SampleEditor.cs">
+    <Compile Include="src\Editors\MusicEditor\SampleEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\MusicEditor\SampleEditor.Designer.cs">
+    <Compile Include="src\Editors\MusicEditor\SampleEditor.Designer.cs">
       <DependentUpon>SampleEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\BattleAnimEditor\OAMEditor.cs">
+    <Compile Include="src\Editors\BattleAnimEditor\OAMEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\BattleAnimEditor\OAMEditor.Designer.cs">
+    <Compile Include="src\Editors\BattleAnimEditor\OAMEditor.Designer.cs">
       <DependentUpon>OAMEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\PatchEditor\PatchEditor.cs">
+    <Compile Include="src\Editors\PatchEditor\PatchEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\PatchEditor\PatchEditor.Designer.cs">
+    <Compile Include="src\Editors\PatchEditor\PatchEditor.Designer.cs">
       <DependentUpon>PatchEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\TextEditor\TextEditor.cs">
+    <Compile Include="src\Editors\TextEditor\TextEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\TextEditor\TextEditor.Designer.cs">
+    <Compile Include="src\Editors\TextEditor\TextEditor.Designer.cs">
       <DependentUpon>TextEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\TextEditor\TextFind.cs">
+    <Compile Include="src\Editors\TextEditor\TextFind.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\TextEditor\TextFind.Designer.cs">
+    <Compile Include="src\Editors\TextEditor\TextFind.Designer.cs">
       <DependentUpon>TextFind.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\TextEditor\TextReplace.cs">
+    <Compile Include="src\Editors\TextEditor\TextReplace.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\TextEditor\TextReplace.Designer.cs">
+    <Compile Include="src\Editors\TextEditor\TextReplace.Designer.cs">
       <DependentUpon>TextReplace.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\TitleScreenEditor\TitleScreenEditor.cs">
+    <Compile Include="src\Editors\TitleScreenEditor\TitleScreenEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\TitleScreenEditor\TitleScreenEditor.Designer.cs">
+    <Compile Include="src\Editors\TitleScreenEditor\TitleScreenEditor.Designer.cs">
       <DependentUpon>TitleScreenEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\TSAEditor.cs">
+    <Compile Include="src\Editors\TSAEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\TSAEditor.Designer.cs">
+    <Compile Include="src\Editors\TSAEditor.Designer.cs">
       <DependentUpon>TSAEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\HexEditor\BitInfo.cs" />
-    <Compile Include="Editors\HexEditor\HexFind.cs">
+    <Compile Include="src\Editors\HexEditor\BitInfo.cs" />
+    <Compile Include="src\Editors\HexEditor\HexFind.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\HexEditor\HexFind.Designer.cs">
+    <Compile Include="src\Editors\HexEditor\HexFind.Designer.cs">
       <DependentUpon>HexFind.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\HexEditor\HexGoTo.cs">
+    <Compile Include="src\Editors\HexEditor\HexGoTo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\HexEditor\HexGoTo.Designer.cs">
+    <Compile Include="src\Editors\HexEditor\HexGoTo.Designer.cs">
       <DependentUpon>HexGoTo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\MapSpriteEditor\MapSpriteEditor.cs">
+    <Compile Include="src\Editors\MapSpriteEditor\MapSpriteEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\MapSpriteEditor\MapSpriteEditor.Designer.cs">
+    <Compile Include="src\Editors\MapSpriteEditor\MapSpriteEditor.Designer.cs">
       <DependentUpon>MapSpriteEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\PaletteEditor.cs">
+    <Compile Include="src\Editors\PaletteEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\PaletteEditor.Designer.cs">
+    <Compile Include="src\Editors\PaletteEditor.Designer.cs">
       <DependentUpon>PaletteEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\PortraitEditor\PortraitEditor.cs">
+    <Compile Include="src\Editors\PortraitEditor\PortraitEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\PortraitEditor\PortraitEditor.Designer.cs">
+    <Compile Include="src\Editors\PortraitEditor\PortraitEditor.Designer.cs">
       <DependentUpon>PortraitEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\SpellAnimEditor\SpellAnimEditor.cs">
+    <Compile Include="src\Editors\SpellAnimEditor\SpellAnimEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\SpellAnimEditor\SpellAnimEditor.Designer.cs">
+    <Compile Include="src\Editors\SpellAnimEditor\SpellAnimEditor.Designer.cs">
       <DependentUpon>SpellAnimEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\ModuleEditor\Module.cs" />
-    <Compile Include="Editors\ModuleEditor\ModuleEditor.cs">
+    <Compile Include="src\Editors\ModuleEditor\Module.cs" />
+    <Compile Include="src\Editors\ModuleEditor\ModuleEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\ModuleEditor\ModuleEditor.Designer.cs">
+    <Compile Include="src\Editors\ModuleEditor\ModuleEditor.Designer.cs">
       <DependentUpon>ModuleEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\WorldMapEditor\WorldMapEditor_FE6.cs">
+    <Compile Include="src\Editors\WorldMapEditor\WorldMapEditor_FE6.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\WorldMapEditor\WorldMapEditor_FE6.Designer.cs">
+    <Compile Include="src\Editors\WorldMapEditor\WorldMapEditor_FE6.Designer.cs">
       <DependentUpon>WorldMapEditor_FE6.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\WorldMapEditor\WorldMapEditor_FE8.cs">
+    <Compile Include="src\Editors\WorldMapEditor\WorldMapEditor_FE8.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\WorldMapEditor\WorldMapEditor_FE8.Designer.cs">
+    <Compile Include="src\Editors\WorldMapEditor\WorldMapEditor_FE8.Designer.cs">
       <DependentUpon>WorldMapEditor_FE8.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\WorldMapEditor\WorldMapEditor_FE7.cs">
+    <Compile Include="src\Editors\WorldMapEditor\WorldMapEditor_FE7.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\WorldMapEditor\WorldMapEditor_FE7.Designer.cs">
+    <Compile Include="src\Editors\WorldMapEditor\WorldMapEditor_FE7.Designer.cs">
       <DependentUpon>WorldMapEditor_FE7.cs</DependentUpon>
     </Compile>
-    <Compile Include="FireEmblem\Graphics\Background.cs" />
-    <Compile Include="FireEmblem\Graphics\BattlePlatform.cs" />
-    <Compile Include="FireEmblem\Graphics\BattleScreen.cs" />
-    <Compile Include="FireEmblem\Graphics\MapTileAnim.cs" />
-    <Compile Include="FireEmblem\Graphics\MapTileset.cs" />
-    <Compile Include="FireEmblem\Graphics\SpellCommands.cs" />
-    <Compile Include="FireEmblem\Sound\Audio.cs" />
-    <Compile Include="FireEmblem\Sound\Instrument.cs" />
-    <Compile Include="FireEmblem\Sound\InstrumentArray.cs" />
-    <Compile Include="FireEmblem\Sound\KeyMap.cs" />
-    <Compile Include="FireEmblem\Sound\Music.cs" />
-    <Compile Include="FireEmblem\Sound\MusicHeader.cs" />
-    <Compile Include="FireEmblem\Sound\Sample.cs" />
-    <Compile Include="FireEmblem\Sound\Track.cs" />
-    <Compile Include="FireEmblem\Text\Font.cs" />
-    <Compile Include="FireEmblem\Text\Glyph.cs" />
-    <Compile Include="FireEmblem\Text\Text.cs" />
-    <Compile Include="FireEmblem\Text\TextPreview.cs" />
-    <Compile Include="GBA\OAM_Array.cs" />
-    <Compile Include="GBA\OAM_Maker.cs" />
-    <Compile Include="GBA\Screen.cs" />
-    <Compile Include="GBA\TSA.cs" />
-    <Compile Include="FireEmblem\Graphics\BattleAnimation.cs" />
-    <Compile Include="FireEmblem\Graphics\BattleAnimMaker.cs" />
-    <Compile Include="FireEmblem\Graphics\Map.cs" />
-    <Compile Include="FireEmblem\Graphics\MapChanges.cs" />
-    <Compile Include="FireEmblem\FE6.cs" />
-    <Compile Include="FireEmblem\FE7.cs" />
-    <Compile Include="FireEmblem\FE8.cs" />
-    <Compile Include="FireEmblem\Game.cs" />
-    <Compile Include="FireEmblem\Graphics\MapSprite.cs" />
-    <Compile Include="FireEmblem\Graphics\Portrait.cs" />
-    <Compile Include="FireEmblem\Graphics\SpellAnimation.cs" />
-    <Compile Include="FireEmblem\Graphics\WorldMap_FE6.cs" />
-    <Compile Include="FireEmblem\Graphics\WorldMap_FE7.cs" />
-    <Compile Include="FireEmblem\Graphics\WorldMap_FE8.cs" />
-    <Compile Include="GBA\ASM.cs" />
-    <Compile Include="GBA\Bitmap.cs" />
-    <Compile Include="GBA\Color.cs" />
-    <Compile Include="Components\ImageBox\IDisplayable.cs" />
-    <Compile Include="GBA\OAM.cs" />
-    <Compile Include="GBA\Sprite.cs" />
-    <Compile Include="GBA\Tile.cs" />
-    <Compile Include="GBA\TileMap.cs" />
-    <Compile Include="GBA\Tileset.cs" />
-    <Compile Include="GBA\TileSheet.cs" />
-    <Compile Include="GBA\TSA_Array.cs" />
-    <Compile Include="Core\Managers\PointManager\Repoint.cs" />
-    <Compile Include="Core\Managers\PointManager\PointManager.cs" />
-    <Compile Include="Core\Managers\HackData.cs" />
-    <Compile Include="Core\Managers\MarksManager\Marks.cs" />
-    <Compile Include="Core\Managers\MarksManager\MarksManager.cs" />
-    <Compile Include="Core\Util\Prompt.cs" />
-    <Compile Include="Core\Managers\SpaceManager\SpaceSortingMode.cs" />
-    <Compile Include="Core\Managers\UndoData.cs" />
-    <Compile Include="GBA\TSA_Image.cs" />
-    <Compile Include="Compression\UPS.cs" />
+    <Compile Include="src\FireEmblem\Graphics\Background.cs" />
+    <Compile Include="src\FireEmblem\Graphics\BattlePlatform.cs" />
+    <Compile Include="src\FireEmblem\Graphics\BattleScreen.cs" />
+    <Compile Include="src\FireEmblem\Graphics\MapTileAnim.cs" />
+    <Compile Include="src\FireEmblem\Graphics\MapTileset.cs" />
+    <Compile Include="src\FireEmblem\Graphics\SpellCommands.cs" />
+    <Compile Include="src\FireEmblem\Sound\Audio.cs" />
+    <Compile Include="src\FireEmblem\Sound\Instrument.cs" />
+    <Compile Include="src\FireEmblem\Sound\InstrumentArray.cs" />
+    <Compile Include="src\FireEmblem\Sound\KeyMap.cs" />
+    <Compile Include="src\FireEmblem\Sound\Music.cs" />
+    <Compile Include="src\FireEmblem\Sound\MusicHeader.cs" />
+    <Compile Include="src\FireEmblem\Sound\Sample.cs" />
+    <Compile Include="src\FireEmblem\Sound\Track.cs" />
+    <Compile Include="src\FireEmblem\Text\Font.cs" />
+    <Compile Include="src\FireEmblem\Text\Glyph.cs" />
+    <Compile Include="src\FireEmblem\Text\Text.cs" />
+    <Compile Include="src\FireEmblem\Text\TextPreview.cs" />
+    <Compile Include="src\GBA\OAM_Array.cs" />
+    <Compile Include="src\GBA\OAM_Maker.cs" />
+    <Compile Include="src\GBA\Screen.cs" />
+    <Compile Include="src\GBA\TSA.cs" />
+    <Compile Include="src\FireEmblem\Graphics\BattleAnimation.cs" />
+    <Compile Include="src\FireEmblem\Graphics\BattleAnimMaker.cs" />
+    <Compile Include="src\FireEmblem\Graphics\Map.cs" />
+    <Compile Include="src\FireEmblem\Graphics\MapChanges.cs" />
+    <Compile Include="src\FireEmblem\FE6.cs" />
+    <Compile Include="src\FireEmblem\FE7.cs" />
+    <Compile Include="src\FireEmblem\FE8.cs" />
+    <Compile Include="src\FireEmblem\Game.cs" />
+    <Compile Include="src\FireEmblem\Graphics\MapSprite.cs" />
+    <Compile Include="src\FireEmblem\Graphics\Portrait.cs" />
+    <Compile Include="src\FireEmblem\Graphics\SpellAnimation.cs" />
+    <Compile Include="src\FireEmblem\Graphics\WorldMap_FE6.cs" />
+    <Compile Include="src\FireEmblem\Graphics\WorldMap_FE7.cs" />
+    <Compile Include="src\FireEmblem\Graphics\WorldMap_FE8.cs" />
+    <Compile Include="src\GBA\ASM.cs" />
+    <Compile Include="src\GBA\Bitmap.cs" />
+    <Compile Include="src\GBA\Color.cs" />
+    <Compile Include="src\Components\ImageBox\IDisplayable.cs" />
+    <Compile Include="src\GBA\OAM.cs" />
+    <Compile Include="src\GBA\Sprite.cs" />
+    <Compile Include="src\GBA\Tile.cs" />
+    <Compile Include="src\GBA\TileMap.cs" />
+    <Compile Include="src\GBA\Tileset.cs" />
+    <Compile Include="src\GBA\TileSheet.cs" />
+    <Compile Include="src\GBA\TSA_Array.cs" />
+    <Compile Include="src\Core\Managers\PointManager\Repoint.cs" />
+    <Compile Include="src\Core\Managers\PointManager\PointManager.cs" />
+    <Compile Include="src\Core\Managers\HackData.cs" />
+    <Compile Include="src\Core\Managers\MarksManager\Marks.cs" />
+    <Compile Include="src\Core\Managers\MarksManager\MarksManager.cs" />
+    <Compile Include="src\Core\Util\Prompt.cs" />
+    <Compile Include="src\Core\Managers\SpaceManager\SpaceSortingMode.cs" />
+    <Compile Include="src\Core\Managers\UndoData.cs" />
+    <Compile Include="src\GBA\TSA_Image.cs" />
+    <Compile Include="src\Compression\UPS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Components\MenuStrip\RecentFileMenu.cs">
+    <Compile Include="src\Components\MenuStrip\RecentFileMenu.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Components\SortableBindingList.cs" />
-    <Compile Include="Components\MarkedSpaceBar.cs">
+    <Compile Include="src\Components\SortableBindingList.cs" />
+    <Compile Include="src\Components\MarkedSpaceBar.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Editors\HexEditor\HexEditor.cs">
+    <Compile Include="src\Editors\HexEditor\HexEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\HexEditor\HexEditor.Designer.cs">
+    <Compile Include="src\Editors\HexEditor\HexEditor.Designer.cs">
       <DependentUpon>HexEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Forms\FormOptions.cs">
+    <Compile Include="src\Core\Forms\FormOptions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Core\Forms\FormOptions.Designer.cs">
+    <Compile Include="src\Core\Forms\FormOptions.Designer.cs">
       <DependentUpon>FormOptions.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -513,195 +514,195 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="GBA\Image.cs" />
-    <Compile Include="GBA\SpriteSheet.cs" />
-    <Compile Include="GBA\Palette.cs" />
-    <Compile Include="GBA\Pointer.cs" />
-    <Compile Include="Core\Managers\SpaceManager\Space.cs" />
-    <Compile Include="Core\Managers\SpaceManager\Range.cs" />
-    <Compile Include="Core\Util\UserAction.cs" />
-    <Compile Include="Core\Managers\WriteManager\WriteEditor.cs">
+    <Compile Include="src\GBA\Image.cs" />
+    <Compile Include="src\GBA\SpriteSheet.cs" />
+    <Compile Include="src\GBA\Palette.cs" />
+    <Compile Include="src\GBA\Pointer.cs" />
+    <Compile Include="src\Core\Managers\SpaceManager\Space.cs" />
+    <Compile Include="src\Core\Managers\SpaceManager\Range.cs" />
+    <Compile Include="src\Core\Util\UserAction.cs" />
+    <Compile Include="src\Core\Managers\WriteManager\WriteEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Core\Managers\WriteManager\WriteEditor.Designer.cs">
+    <Compile Include="src\Core\Managers\WriteManager\WriteEditor.Designer.cs">
       <DependentUpon>WriteEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Managers\DataManager.cs" />
-    <Compile Include="Editors\BasicEditor\BasicEditor.cs">
+    <Compile Include="src\Core\Managers\DataManager.cs" />
+    <Compile Include="src\Editors\BasicEditor\BasicEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Editors\BasicEditor\BasicEditor.Designer.cs">
+    <Compile Include="src\Editors\BasicEditor\BasicEditor.Designer.cs">
       <DependentUpon>BasicEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\Editor.cs">
+    <Compile Include="src\Editors\Editor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Core\Managers\SpaceManager\SpaceEditor.cs">
+    <Compile Include="src\Core\Managers\SpaceManager\SpaceEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Core\Managers\SpaceManager\SpaceEditor.Designer.cs">
+    <Compile Include="src\Core\Managers\SpaceManager\SpaceEditor.Designer.cs">
       <DependentUpon>SpaceEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Core\Managers\HackManager.cs" />
-    <Compile Include="Core\Util\Util.cs" />
+    <Compile Include="src\Core\Managers\HackManager.cs" />
+    <Compile Include="src\Core\Util\Util.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Core\Suite.cs">
+    <Compile Include="src\Core\Suite.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Core\Suite.Designer.cs">
+    <Compile Include="src\Core\Suite.Designer.cs">
       <DependentUpon>Suite.cs</DependentUpon>
     </Compile>
-    <Compile Include="Editors\ModuleEditor\Property.cs" />
-    <Compile Include="Core\Managers\SpaceManager\SpaceManager.cs" />
-    <Compile Include="Core\Program.cs" />
-    <Compile Include="Core\Managers\WriteManager\WriteManager.cs" />
-    <Compile Include="Core\Managers\WriteManager\Write.cs" />
-    <Compile Include="Core\Managers\WriteManager\WriteConflict.cs" />
+    <Compile Include="src\Editors\ModuleEditor\Property.cs" />
+    <Compile Include="src\Core\Managers\SpaceManager\SpaceManager.cs" />
+    <Compile Include="src\Core\Program.cs" />
+    <Compile Include="src\Core\Managers\WriteManager\WriteManager.cs" />
+    <Compile Include="src\Core\Managers\WriteManager\Write.cs" />
+    <Compile Include="src\Core\Managers\WriteManager\WriteConflict.cs" />
     <Compile Include="Settings.cs" />
-    <EmbeddedResource Include="Components\ArrayBox\ArrayBox.resx">
+    <EmbeddedResource Include="src\Components\ArrayBox\ArrayBox.resx">
       <DependentUpon>ArrayBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Components\HexBox\HexBox.resx">
+    <EmbeddedResource Include="src\Components\HexBox\HexBox.resx">
       <DependentUpon>HexBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Core\Forms\FormAbout.resx">
+    <EmbeddedResource Include="src\Core\Forms\FormAbout.resx">
       <DependentUpon>FormAbout.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Core\Forms\FormLoading.resx">
+    <EmbeddedResource Include="src\Core\Forms\FormLoading.resx">
       <DependentUpon>FormLoading.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Core\Forms\FormProperties.resx">
+    <EmbeddedResource Include="src\Core\Forms\FormProperties.resx">
       <DependentUpon>FormProperties.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Core\Forms\FormRepoint.resx">
+    <EmbeddedResource Include="src\Core\Forms\FormRepoint.resx">
       <DependentUpon>FormRepoint.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Core\Managers\PointManager\CreateRepointDialog.resx">
+    <EmbeddedResource Include="src\Core\Managers\PointManager\CreateRepointDialog.resx">
       <DependentUpon>CreateRepointDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Core\Managers\PointManager\PointEditor.resx">
+    <EmbeddedResource Include="src\Core\Managers\PointManager\PointEditor.resx">
       <DependentUpon>PointEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Core\Managers\SpaceManager\MarkSpace.resx">
+    <EmbeddedResource Include="src\Core\Managers\SpaceManager\MarkSpace.resx">
       <DependentUpon>MarkSpace.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\ASMEditor\ASMEditor.resx">
+    <EmbeddedResource Include="src\Editors\ASMEditor\ASMEditor.resx">
       <DependentUpon>ASMEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\BackgroundEditor\BackgroundEditor.resx">
+    <EmbeddedResource Include="src\Editors\BackgroundEditor\BackgroundEditor.resx">
       <DependentUpon>BackgroundEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\BattleAnimEditor\BattleAnimEditor.resx">
+    <EmbeddedResource Include="src\Editors\BattleAnimEditor\BattleAnimEditor.resx">
       <DependentUpon>BattleAnimEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\BasicEditor\BasicEditor.resx">
+    <EmbeddedResource Include="src\Editors\BasicEditor\BasicEditor.resx">
       <DependentUpon>BasicEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\BattleScreenEditor\BattleScreenEditor.resx">
+    <EmbeddedResource Include="src\Editors\BattleScreenEditor\BattleScreenEditor.resx">
       <DependentUpon>BattleScreenEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\Editor.resx">
+    <EmbeddedResource Include="src\Editors\Editor.resx">
       <DependentUpon>Editor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\EventEditor\EventEditor.resx">
+    <EmbeddedResource Include="src\Editors\EventEditor\EventEditor.resx">
       <DependentUpon>EventEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\GraphicsEditor\GraphicsEditor.resx">
+    <EmbeddedResource Include="src\Editors\GraphicsEditor\GraphicsEditor.resx">
       <DependentUpon>GraphicsEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\HexEditor\HexFind.resx">
+    <EmbeddedResource Include="src\Editors\HexEditor\HexFind.resx">
       <DependentUpon>HexFind.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\HexEditor\HexGoTo.resx">
+    <EmbeddedResource Include="src\Editors\HexEditor\HexGoTo.resx">
       <DependentUpon>HexGoTo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\HexEditor\HexEditor.resx">
+    <EmbeddedResource Include="src\Editors\HexEditor\HexEditor.resx">
       <DependentUpon>HexEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\ItemEditor\ItemEditor.resx">
+    <EmbeddedResource Include="src\Editors\ItemEditor\ItemEditor.resx">
       <DependentUpon>ItemEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\MapEditor\MapEditor.resx">
+    <EmbeddedResource Include="src\Editors\MapEditor\MapEditor.resx">
       <DependentUpon>MapEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\MapSpriteEditor\MapSpriteEditor.resx">
+    <EmbeddedResource Include="src\Editors\MapSpriteEditor\MapSpriteEditor.resx">
       <DependentUpon>MapSpriteEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\MapTilesetEditor\MapTilesetEditor.resx">
+    <EmbeddedResource Include="src\Editors\MapTilesetEditor\MapTilesetEditor.resx">
       <DependentUpon>MapTilesetEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\MusicEditor\InstrumentEditor.resx">
+    <EmbeddedResource Include="src\Editors\MusicEditor\InstrumentEditor.resx">
       <DependentUpon>InstrumentEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\MusicEditor\KeyMapEditor.resx">
+    <EmbeddedResource Include="src\Editors\MusicEditor\KeyMapEditor.resx">
       <DependentUpon>KeyMapEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\MusicEditor\MusicEditor.resx">
+    <EmbeddedResource Include="src\Editors\MusicEditor\MusicEditor.resx">
       <DependentUpon>MusicEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\MusicEditor\SampleEditor.resx">
+    <EmbeddedResource Include="src\Editors\MusicEditor\SampleEditor.resx">
       <DependentUpon>SampleEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\BattleAnimEditor\OAMEditor.resx">
+    <EmbeddedResource Include="src\Editors\BattleAnimEditor\OAMEditor.resx">
       <DependentUpon>OAMEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\PaletteEditor.resx">
+    <EmbeddedResource Include="src\Editors\PaletteEditor.resx">
       <DependentUpon>PaletteEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\PatchEditor\PatchEditor.resx">
+    <EmbeddedResource Include="src\Editors\PatchEditor\PatchEditor.resx">
       <DependentUpon>PatchEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\PortraitEditor\PortraitEditor.resx">
+    <EmbeddedResource Include="src\Editors\PortraitEditor\PortraitEditor.resx">
       <DependentUpon>PortraitEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\SpellAnimEditor\SpellAnimEditor.resx">
+    <EmbeddedResource Include="src\Editors\SpellAnimEditor\SpellAnimEditor.resx">
       <DependentUpon>SpellAnimEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\TextEditor\TextEditor.resx">
+    <EmbeddedResource Include="src\Editors\TextEditor\TextEditor.resx">
       <DependentUpon>TextEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\TextEditor\TextFind.resx">
+    <EmbeddedResource Include="src\Editors\TextEditor\TextFind.resx">
       <DependentUpon>TextFind.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\TextEditor\TextReplace.resx">
+    <EmbeddedResource Include="src\Editors\TextEditor\TextReplace.resx">
       <DependentUpon>TextReplace.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\TitleScreenEditor\TitleScreenEditor.resx">
+    <EmbeddedResource Include="src\Editors\TitleScreenEditor\TitleScreenEditor.resx">
       <DependentUpon>TitleScreenEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\TSAEditor.resx">
+    <EmbeddedResource Include="src\Editors\TSAEditor.resx">
       <DependentUpon>TSAEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\ModuleEditor\ModuleEditor.resx">
+    <EmbeddedResource Include="src\Editors\ModuleEditor\ModuleEditor.resx">
       <DependentUpon>ModuleEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Core\Managers\SpaceManager\SpaceEditor.resx">
+    <EmbeddedResource Include="src\Core\Managers\SpaceManager\SpaceEditor.resx">
       <DependentUpon>SpaceEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Core\Managers\WriteManager\WriteEditor.resx">
+    <EmbeddedResource Include="src\Core\Managers\WriteManager\WriteEditor.resx">
       <DependentUpon>WriteEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Core\Forms\FormOptions.resx">
+    <EmbeddedResource Include="src\Core\Forms\FormOptions.resx">
       <DependentUpon>FormOptions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\WorldMapEditor\WorldMapEditor_FE6.resx">
+    <EmbeddedResource Include="src\Editors\WorldMapEditor\WorldMapEditor_FE6.resx">
       <DependentUpon>WorldMapEditor_FE6.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\WorldMapEditor\WorldMapEditor_FE8.resx">
+    <EmbeddedResource Include="src\Editors\WorldMapEditor\WorldMapEditor_FE8.resx">
       <DependentUpon>WorldMapEditor_FE8.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editors\WorldMapEditor\WorldMapEditor_FE7.resx">
+    <EmbeddedResource Include="src\Editors\WorldMapEditor\WorldMapEditor_FE7.resx">
       <DependentUpon>WorldMapEditor_FE7.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Core\Suite.resx">
+    <EmbeddedResource Include="src\Core\Suite.resx">
       <DependentUpon>Suite.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
