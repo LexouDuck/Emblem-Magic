@@ -65,7 +65,7 @@ namespace EmblemMagic.Components
             for (int y = 0; y < Height; y++)
             for (int x = 0; x < Width; x++)
             {
-                Display.SetPixel(x, y, (Color)image[x, y]);
+                Display.SetPixel(x, y, (System.Drawing.Color)image.GetColor(x, y));
             }
 
             Hovered = new Point();

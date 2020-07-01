@@ -1,7 +1,9 @@
 ﻿using EmblemMagic.FireEmblem;
+using EmblemMagic.Properties;
 using GBA;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
 
@@ -474,17 +476,14 @@ namespace EmblemMagic.Editors
         {
             try
             {
-                using (var image = new System.Drawing.Bitmap(
+                Core.SaveImage(filepath,
                     CurrentTileset.Width,
-                    CurrentTileset.Height))
-                {
-                    for (int y = 0; y < image.Height; y++)
-                    for (int x = 0; x < image.Width; x++)
+                    CurrentTileset.Height,
+                    CurrentTileset.Palettes,
+                    delegate (int x, int y)
                     {
-                        image.SetPixel(x, y, (System.Drawing.Color)CurrentTileset[x, y]);
-                    }
-                    image.Save(filepath, System.Drawing.Imaging.ImageFormat.Png);
-                }
+                        return (byte)CurrentTileset[x, y];
+                    });
             }
             catch (Exception ex)
             {
@@ -566,7 +565,7 @@ namespace EmblemMagic.Editors
             {
                 if (saveWindow.FileName.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_SaveImage(saveWindow.FileName);
+                    Core_SaveImage(saveWindow.FileName.Remove(saveWindow.FileName.Length - 4));
                     return;
                 }
                 if (saveWindow.FileName.EndsWith(".dmp", StringComparison.OrdinalIgnoreCase))

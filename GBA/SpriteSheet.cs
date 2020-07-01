@@ -11,30 +11,61 @@ namespace GBA
     public class SpriteSheet : IDisplayable
     {
         /// <summary>
-        /// This indexer allows for fast access to pixel data in GBA.Color format - for IDisplayable
+        /// This indexer allows for fast access to pixel data in indexed color format - for IDisplayable
         /// </summary>
-        public Color this[int x, int y]
+        public int this[int x, int y]
         {
             get
             {
-                if (x < 0 || x >= Width)  throw new ArgumentException("X given is out of bounds: " + x);
-                if (y < 0 || y >= Height) throw new ArgumentException("Y given is out of bounds: " + y);
-                
                 int index = GetSpriteIndex(x, y);
                 if (index == -1)
                 {
-                    if (Sprites.Count == 0)
-                        return new Color();
-                    else return Sprites[0].Colors[0];
+                    return 0;
                 }
                 else
                 {
                     x -= Offsets[index].X;
                     y -= Offsets[index].Y;
-
                     return Sprites[index][x, y];
                 }
             }
+        }
+        public Color GetColor(int x, int y)
+        {
+            int index = GetSpriteIndex(x, y);
+            if (index == -1)
+            {
+                if (Sprites.Count == 0)
+                    return new Color();
+                else return Sprites[0].Colors[0];
+            }
+            else
+            {
+                x -= Offsets[index].X;
+                y -= Offsets[index].Y;
+
+                return Sprites[index].GetColor(x, y);
+            }
+        }
+        /// <summary>
+        /// Returns the index of the sprite in this GBA.SpriteSheet that corresponds to the tile coordinates given
+        /// </summary>
+        public int GetSpriteIndex(int x, int y)
+        {
+            if (x < 0 || x >= Width) throw new ArgumentException("X given is out of bounds: " + x);
+            if (y < 0 || y >= Height) throw new ArgumentException("Y given is out of bounds: " + y);
+
+            for (int i = 0; i < Count; i++)
+            {
+                if ((x >= Offsets[i].X) && (x < Offsets[i].X + Sprites[i].Width) &&
+                    (y >= Offsets[i].Y) && (y < Offsets[i].Y + Sprites[i].Height))
+                {
+                    if (Sprites[i].GetColor(x - Offsets[i].X, y - Offsets[i].Y) == Sprites[i].Colors[0])
+                        continue;
+                    else return i;
+                }
+            }
+            return -1;
         }
 
         /// <summary>
@@ -118,24 +149,6 @@ namespace GBA
         {
             Offsets = new List<Point>();
             Sprites = new List<Sprite>();
-        }
-
-        /// <summary>
-        /// Returns the index of the sprite in this GBA.SpriteSheet that corresponds to the tile coordinates given
-        /// </summary>
-        private int GetSpriteIndex(int x, int y)
-        {
-            for (int i = 0; i < Count; i++)
-            {
-                if ((x >= Offsets[i].X) && (x < Offsets[i].X + Sprites[i].Width) &&
-                    (y >= Offsets[i].Y) && (y < Offsets[i].Y + Sprites[i].Height))
-                {
-                    if (Sprites[i][x - Offsets[i].X, y - Offsets[i].Y] == Sprites[i].Colors[0])
-                        continue;
-                    else return i;
-                }
-            }
-            return -1;
         }
     }
 }

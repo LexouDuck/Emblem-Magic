@@ -75,7 +75,7 @@ namespace EmblemMagic.FireEmblem
 
     public class WorldMap_FE8_Large : IDisplayable
     {
-        public Color this[int x, int y]
+        public int this[int x, int y]
         {
             get
             {
@@ -85,8 +85,18 @@ namespace EmblemMagic.FireEmblem
                 int palette = PaletteMap[tileX, tileY];
                 tileX = x % Tile.SIZE;
                 tileY = y % Tile.SIZE;
-                return Palettes[palette][Graphics[index][tileX, tileY]];
+                return palette * Palette.MAX + Graphics[index][tileX, tileY];
             }
+        }
+        public Color GetColor(int x, int y)
+        {
+            int tileX = x / 8;
+            int tileY = y / 8;
+            int index = tileX + tileY * WIDTH;
+            int palette = PaletteMap[tileX, tileY];
+            tileX = x % Tile.SIZE;
+            tileY = y % Tile.SIZE;
+            return Palettes[palette][Graphics[index][tileX, tileY]];
         }
 
         public Int32 Width

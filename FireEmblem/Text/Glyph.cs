@@ -10,14 +10,18 @@ namespace EmblemMagic.FireEmblem
     /// </summary>
     public class Glyph : IDisplayable
     {
-        public Color this[int x, int y]
+        public int this[int x, int y]
         {
             get
             {
                 int index = ((x % 16) / 4) + ((y % 16) * 4);
-
-                return Colors[(Pixels[index] >> ((x % 4) * 2)) & 0x3];
+                return ((Pixels[index] >> ((x % 4) * 2)) & 0x3);
             }
+        }
+        public Color GetColor(int x, int y)
+        {
+            int index = ((x % 16) / 4) + ((y % 16) * 4);
+            return Colors[(Pixels[index] >> ((x % 4) * 2)) & 0x3];
         }
 
         /// <summary>
@@ -82,10 +86,10 @@ namespace EmblemMagic.FireEmblem
             {
                 row = new int[4]
                 {
-                    GetColorIndex(colors, image[x, y]),
-                    GetColorIndex(colors, image[x + 1, y]),
-                    GetColorIndex(colors, image[x + 2, y]),
-                    GetColorIndex(colors, image[x + 3, y])
+                    image[x, y],
+                    image[x + 1, y],
+                    image[x + 2, y],
+                    image[x + 3, y]
                 };
                 for (int i = 0; i < 4; i++)
                 {

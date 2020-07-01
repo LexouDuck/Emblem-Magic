@@ -1,8 +1,11 @@
 ﻿using Compression;
 using EmblemMagic.FireEmblem;
+using EmblemMagic.Properties;
 using GBA;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
 
@@ -397,21 +400,16 @@ namespace EmblemMagic.Editors
                 if (filepath.EndsWith(".gif", StringComparison.OrdinalIgnoreCase))
                     format = System.Drawing.Imaging.ImageFormat.Gif;
                 */
-                using (var image = new System.Drawing.Bitmap(
+                Core.SaveImage(filepath,
                     CurrentPortrait.Width,
-                    CurrentPortrait.Height))
-                {
-                    for (int y = 0; y < image.Height; y++)
-                    for (int x = 0; x < image.Width; x++)
+                    CurrentPortrait.Height,
+                    new Palette[1] { CurrentPortrait.Colors },
+                    delegate(int x, int y)
                     {
-                        image.SetPixel(x, y, (System.Drawing.Color)CurrentPortrait[x, y]);
-                    }
-                    for (int i = 0; i < Palette.MAX; i++)
-                    {
-                        image.SetPixel(i, 0, (System.Drawing.Color)CurrentPortrait.Colors[i]);
-                    }
-                    image.Save(filepath, System.Drawing.Imaging.ImageFormat.Png); //format);
-                }
+                        if (y == 0 && x < Palette.MAX)
+                            return (byte)x;
+                        return (byte)CurrentPortrait[x, y];
+                    });
             }
             catch (Exception ex)
             {
@@ -594,7 +592,7 @@ namespace EmblemMagic.Editors
                     saveWindow.FileName.EndsWith(".bmp", StringComparison.OrdinalIgnoreCase) ||
                     saveWindow.FileName.EndsWith(".gif", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_SaveImage(saveWindow.FileName);
+                    Core_SaveImage(saveWindow.FileName.Remove(saveWindow.FileName.Length - 4));
                     return;
                 }
                 if (saveWindow.FileName.EndsWith(".dmp", StringComparison.OrdinalIgnoreCase))

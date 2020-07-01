@@ -1,8 +1,10 @@
 ﻿using Compression;
 using EmblemMagic.Components;
+using EmblemMagic.Properties;
 using GBA;
 using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
 
@@ -295,17 +297,25 @@ namespace EmblemMagic.Editors
         }
         void Core_SaveImage(string filepath)
         {
-            using (var image = new System.Drawing.Bitmap(
-                Image_ImageBox.Display.Width,
-                Image_ImageBox.Display.Height))
+            byte[] data = Core.ReadData(
+                Palette_PointerBox.Value + (int)Palette_Index_NumBox.Value * Palette.LENGTH,
+                Palette_CheckBox.Checked ? 0 : 16 * Palette.LENGTH);
+            Palette[] palettes = new Palette[16];
+            for (uint i = 0; i < 16; i++)
             {
-                for (int y = 0; y < image.Height; y++)
-                for (int x = 0; x < image.Width; x++)
-                {
-                    image.SetPixel(x, y, (System.Drawing.Color)Image_ImageBox.Display[x, y]);
-                }
-                image.Save(filepath, System.Drawing.Imaging.ImageFormat.Png);
+                palettes[i] = new Palette(data.GetBytes(i * Palette.LENGTH, Palette.LENGTH));
             }
+            Core.SaveImage(filepath,
+                Image_ImageBox.Display.Width,
+                Image_ImageBox.Display.Height,
+                palettes,
+                delegate (int x, int y)
+                {
+                    int palette = 0;
+                    if (TSA_Label.Checked)
+                        palette = ((TSA_Image)Image_ImageBox.Display).GetPaletteIndex(x, y);
+                    return (byte)palettes[palette].Find(Image_ImageBox.Display.GetColor(x, y));
+                });
         }
         void Core_SaveData(string filepath)
         {
@@ -398,7 +408,7 @@ namespace EmblemMagic.Editors
             {
                 if (saveWindow.FileName.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_SaveImage(saveWindow.FileName);
+                    Core_SaveImage(saveWindow.FileName.Remove(saveWindow.FileName.Length - 4));
                     return;
                 }
                 if (saveWindow.FileName.EndsWith(".pal", StringComparison.OrdinalIgnoreCase) ||

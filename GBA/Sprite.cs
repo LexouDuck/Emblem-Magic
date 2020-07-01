@@ -13,13 +13,13 @@ namespace GBA
         /// <summary>
         /// This indexer allows for fast access to pixel data in GBA.Color format - for IDisplayable
         /// </summary>
-        public Color this[int x, int y]
+        public int this[int x, int y]
         {
             get
             {
                 if (Transform == null)
                 {
-                    if (x < 0 || x >= Width)  throw new ArgumentException("X given is out of bounds: " + x);
+                    if (x < 0 || x >= Width) throw new ArgumentException("X given is out of bounds: " + x);
                     if (y < 0 || y >= Height) throw new ArgumentException("Y given is out of bounds: " + y);
 
                     if (FlipH) x = (Width - x - 1);
@@ -30,15 +30,19 @@ namespace GBA
 
                     int index = Tiles[tileX, tileY];
                     if (index < 0 || index >= Sheet.Count)
-                        return Colors[0];
+                        return 0;
 
                     tileX = x % Tile.SIZE;
                     tileY = y % Tile.SIZE;
 
-                    return Colors[Sheet[index][tileX, tileY]];
+                    return Sheet[index][tileX, tileY];
                 }
                 else return Transform[x, y];
             }
+        }
+        public Color GetColor(int x, int y)
+        {
+            return (Colors[this[x, y]]);
         }
         
         /// <summary>

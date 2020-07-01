@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Drawing.Imaging;
 
 namespace EmblemMagic.Editors
 {
@@ -590,16 +591,18 @@ namespace EmblemMagic.Editors
                     File.WriteAllBytes(path + file + ".oam", oam);
                     File.WriteAllBytes(path + file + ".pal", pal);
 
-                    using (System.Drawing.Bitmap image = new System.Drawing.Bitmap(32 * 8, 8 * 8))
+                    using (System.Drawing.Bitmap image = new System.Drawing.Bitmap(32 * 8, 8 * 8, PixelFormat.Format8bppIndexed))
                     {
                         for (int i = 0; i < sheets.Length; i++)
                         {
-                            for (int y = 0; y < image.Height; y++)
-                            for (int x = 0; x < image.Width; x++)
-                            {
-                                image.SetPixel(x, y, (System.Drawing.Color)sheets[i][x, y]);
-                            }
-                            image.Save(path + file + " " + (i + 1) + ".png", System.Drawing.Imaging.ImageFormat.Png);
+                            Core.SaveImage(path + file + " " + (i + 1),
+                                32 * 8,
+                                8 * 8,
+                                new Palette[1] { sheets[i].Colors },
+                                delegate (int x, int y)
+                                {
+                                    return (byte)sheets[i][x, y];
+                                });
                         }
                     }
             }
@@ -782,62 +785,55 @@ namespace EmblemMagic.Editors
                 Palette[] palettes = (Palette_Default_Button.Checked) ? DefaultPalette : CharacterPalette;
                 int width = 16;
                 int height = 4;
-                using (var image = new System.Drawing.Bitmap(width, height))
-                {
-                    for (int y = 0; y < height; y++)
-                    for (int x = 0; x < width; x++)
+                Core.SaveImage(path + "palette",
+                    width,
+                    height,
+                    palettes,
+                    delegate (int x, int y)
                     {
-                        image.SetPixel(x, y, (System.Drawing.Color)palettes[y][x]);
-                    }
-                    image.Save(path + "palette.png", System.Drawing.Imaging.ImageFormat.Png);
-                }
+                        return (byte)(y * Palette.MAX + x);
+                    });
 
                 Size size;
                 for (int i = 0; i < affines.Count; i++)
                 {
                     size = affines[i].Item2.GetDimensions();
-                    width = size.Width * Tile.SIZE;
-                    height = size.Height * Tile.SIZE;
-                    using (var image = new System.Drawing.Bitmap(width, height))
-                    {
-                        GBA.Image tileset = CurrentAnim.Tilesets[affines[i].Item1].ToImage(32, 8, palette);
-                        int offsetX = affines[i].Item2.SheetX * Tile.SIZE;
-                        int offsetY = affines[i].Item2.SheetY * Tile.SIZE;
-                        for (int y = 0; y < height; y++)
-                        for (int x = 0; x < width; x++)
+                    GBA.Image tileset = CurrentAnim.Tilesets[affines[i].Item1].ToImage(32, 8, palette);
+                    int offsetX = affines[i].Item2.SheetX * Tile.SIZE;
+                    int offsetY = affines[i].Item2.SheetY * Tile.SIZE;
+                    Core.SaveImage(path + file + "_affine_" + i,
+                        size.Width * Tile.SIZE,
+                        size.Height * Tile.SIZE,
+                        new Palette[1] { tileset.Colors },
+                        delegate (int x, int y)
                         {
-                            image.SetPixel(x, y, (System.Drawing.Color)tileset[offsetX + x, offsetY + y]);
-                        }
-                        image.Save(path + file + "_affine_" + i + ".png", System.Drawing.Imaging.ImageFormat.Png);
-                    }
+                            return (byte)tileset[offsetX + x, offsetY + y];
+                        });
                 }
-
-                width = CurrentAnim.Width;
-                height = CurrentAnim.Height;
-                using (var image = new System.Drawing.Bitmap(width, height))
+                
+                for (byte i = 0; i < CurrentAnim.Frames.Length; i++)
                 {
-                    for (byte i = 0; i < CurrentAnim.Frames.Length; i++)
+                    if (CurrentAnim.Frames[i] == null)
+                        continue;
+                    if (duplicates[i] != -1)
+                        continue;
+                    CurrentAnim.Clear();
+                    CurrentAnim.AddSprite(CurrentPalette,
+                        CurrentAnim.Tilesets[CurrentAnim.Frames[i].TilesetIndex],
+                        CurrentAnim.Frames[i].OAM_Data_R,
+                        BattleAnimation.SCREEN_OFFSET_X_R,
+                        BattleAnimation.SCREEN_OFFSET_Y,
+                        false);
+                    if (CurrentAnim.Count > 0)
                     {
-                        if (CurrentAnim.Frames[i] == null)
-                            continue;
-                        if (duplicates[i] != -1)
-                            continue;
-                        CurrentAnim.Clear();
-                        CurrentAnim.AddSprite(CurrentPalette,
-                            CurrentAnim.Tilesets[CurrentAnim.Frames[i].TilesetIndex],
-                            CurrentAnim.Frames[i].OAM_Data_R,
-                            BattleAnimation.SCREEN_OFFSET_X_R,
-                            BattleAnimation.SCREEN_OFFSET_Y,
-                            false);
-                        if (CurrentAnim.Count > 0)
-                        {
-                            for (int y = 0; y < height; y++)
-                            for (int x = 0; x < width; x++)
+                        Core.SaveImage(path + file + "_" + i,
+                            CurrentAnim.Width,
+                            CurrentAnim.Height,
+                            new Palette[1] { CurrentPalette },
+                            delegate (int x, int y)
                             {
-                                image.SetPixel(x, y, (System.Drawing.Color)CurrentAnim[x, y]);
-                            }
-                            image.Save(path + file + "_" + i + ".png", System.Drawing.Imaging.ImageFormat.Png);
-                        }
+                                return (byte)CurrentAnim[x, y];
+                            });
                     }
                 }
             }
@@ -872,14 +868,14 @@ namespace EmblemMagic.Editors
                 File.WriteAllBytes(filepath + ".oam", oam);
                 File.WriteAllBytes(filepath + ".pal", pal);
 
-                using (System.Drawing.Bitmap png = new System.Drawing.Bitmap(32 * 8, 8 * 8))
+                using (System.Drawing.Bitmap png = new System.Drawing.Bitmap(32 * 8, 8 * 8, PixelFormat.Format8bppIndexed))
                 {
                     for (int i = 0; i < sheets.Length; i++)
                     {
                         for (int y = 0; y < png.Height; y++)
                         for (int x = 0; x < png.Width; x++)
                         {
-                            png.SetPixel(x, y, (System.Drawing.Color)sheets[i][x, y]);
+                            png.SetPixel(x, y, (System.Drawing.Color)sheets[i].GetColor(x, y));
                         }
                         png.Save(filepath + " " + (i + 1) + ".png", System.Drawing.Imaging.ImageFormat.Png);
                     }
@@ -977,13 +973,10 @@ namespace EmblemMagic.Editors
                     gif.Add(0x00); // Packed field - 0x00 indicates no interlacing, no local color table
                     byte[] pixels = new byte[CurrentAnim.Width * CurrentAnim.Height];
                     int index = 0;
-                    int pixel;
                     for (int y = 0; y < CurrentAnim.Height; y++)
                     for (int x = 0; x < CurrentAnim.Width; x++)
                     {
-                        pixel = CurrentPalette.Find(CurrentAnim[x, y]);
-                        if (pixel == -1) pixel = 0;
-                        pixels[index++] = (byte)pixel;
+                        pixels[index++] = (byte)CurrentAnim[x, y];
                     }
                     gif.AddRange(new LZW(CurrentAnim.Width, CurrentAnim.Height, pixels, 0x04).Compress());
                 }

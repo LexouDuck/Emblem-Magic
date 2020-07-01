@@ -6,9 +6,9 @@
     public interface IDisplayable
     {
         /// <summary>
-        /// This indexer allows for quick access to pixel data in GBA.Color format.
+        /// This function allows for quick access to pixel data in GBA.Color format.
         /// </summary>
-        GBA.Color this[int x, int y] { get; }
+        GBA.Color GetColor(int x, int y);
 
         /// <summary>
         /// The Width of this displayable item

@@ -78,8 +78,7 @@ namespace EmblemMagic.Editors
             {
                 changes.AddChangedData(position, buffer, offset, count);
             }
-            catch (Exception ex)
-            { }
+            catch { }
             position += count;
         }
 

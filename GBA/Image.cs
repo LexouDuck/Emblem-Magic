@@ -14,7 +14,7 @@ namespace GBA
         /// <summary>
         /// This indexer allows for quick access to pixel data in GBA.Color format.
         /// </summary>
-        public Color this[int x, int y]
+        public int this[int x, int y]
         {
             get
             {
@@ -24,11 +24,14 @@ namespace GBA
                 int index = (x / 2) + (y * (Width / 2));
                 if (index < 0 || index >= Bytes.Length)
                     throw new ArgumentException("index is outside of the byte array.");
-                int pixel = (x % 2 == 0) ?
+                return ((x % 2 == 0) ?
                     (Bytes[index] & 0x0F) :
-                    (Bytes[index] & 0xF0) >> 4;
-                return Colors[pixel];
+                    (Bytes[index] & 0xF0) >> 4);
             }
+        }
+        public Color GetColor(int x, int y)
+        {
+            return (Colors[this[x, y]]);
         }
 
         /// <summary>
@@ -156,14 +159,14 @@ namespace GBA
                 for (int y = 0; y < Height; y++)
                 for (int x = 0; x < Width; x += 2)
                 {
-                    color = image[x, y];
+                    color = image.GetColor(x, y);
                     LO_nibble = Colors.Find(color);
                     if (LO_nibble == -1)
                     {
                         LO_nibble = Colors.Count;
                         Colors.Add(color);
                     }
-                    color = image[x + 1, y];
+                    color = image.GetColor(x + 1, y);
                     HI_nibble = Colors.Find(color);
                     if (HI_nibble == -1)
                     {
@@ -179,9 +182,9 @@ namespace GBA
                 for (int y = 0; y < Height; y++)
                 for (int x = 0; x < Width; x += 2)
                 {
-                    color = image[x + 1, y];
+                    color = image.GetColor(x + 1, y);
                     HI_nibble = palette.Find(color);
-                    color = image[x, y];
+                    color = image.GetColor(x, y);
                     LO_nibble = palette.Find(color);
 
                     if (HI_nibble == -1 || LO_nibble == -1)
@@ -209,14 +212,14 @@ namespace GBA
                 for (int y = 0; y < region.Height; y++)
                 for (int x = 0; x < region.Width; x += 2)
                 {
-                    color = image[region.X + x, region.Y + y];
+                    color = image.GetColor(region.X + x, region.Y + y);
                     LO_nibble = Colors.Find(color);
                     if (LO_nibble == -1)
                     {
                         LO_nibble = Colors.Count;
                         Colors.Add(color);
                     }
-                    color = image[region.X + x + 1, region.Y + y];
+                    color = image.GetColor(region.X + x + 1, region.Y + y);
                     HI_nibble = Colors.Find(color);
                     if (HI_nibble == -1)
                     {
@@ -232,9 +235,9 @@ namespace GBA
                 for (int y = 0; y < region.Height; y++)
                 for (int x = 0; x < region.Width; x += 2)
                 {
-                    color = image[region.X + x + 1, region.Y + y];
+                    color = image.GetColor(region.X + x + 1, region.Y + y);
                     HI_nibble = palette.Find(color);
-                    color = image[region.X + x, region.Y + y];
+                    color = image.GetColor(region.X + x, region.Y + y);
                     LO_nibble = palette.Find(color);
 
                     if (HI_nibble == -1 || LO_nibble == -1)
@@ -397,7 +400,7 @@ namespace GBA
             for (int y = 0; y < region.Height; y++)
             for (int x = 0; x < region.Width; x++)
             {
-                result[x, y] = this[region.X + x, region.Y + y];
+                result[x, y] = this.GetColor(region.X + x, region.Y + y);
             }
             return result;
         }

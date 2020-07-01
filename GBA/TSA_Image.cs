@@ -7,7 +7,7 @@ namespace GBA
 {
     public class TSA_Image : IDisplayable
     {
-        public Color this[int x, int y]
+        public int this[int x, int y]
         {
             get
             {
@@ -22,9 +22,34 @@ namespace GBA
                 bool flipV = Tiling[tileX, tileY].FlipV;
                 tileX = flipH ? 7 - x % Tile.SIZE : x % Tile.SIZE;
                 tileY = flipV ? 7 - y % Tile.SIZE : y % Tile.SIZE;
-                int color = tile[tileX, tileY];
-                return Palettes[palette][color];
+                return palette * Palette.MAX + tile[tileX, tileY];
             }
+        }
+        public byte GetPaletteIndex(int x, int y)
+        {
+            if (x < 0 || x >= Width) throw new ArgumentException("X given is out of bounds: " + x);
+            if (y < 0 || y >= Height) throw new ArgumentException("Y given is out of bounds: " + y);
+
+            int tileX = x / Tile.SIZE;
+            int tileY = y / Tile.SIZE;
+            Tile tile = Graphics[Tiling[tileX, tileY].TileIndex];
+            return Tiling[tileX, tileY].Palette;
+        }
+        public Color GetColor(int x, int y)
+        {
+            if (x < 0 || x >= Width) throw new ArgumentException("X given is out of bounds: " + x);
+            if (y < 0 || y >= Height) throw new ArgumentException("Y given is out of bounds: " + y);
+
+            int tileX = x / Tile.SIZE;
+            int tileY = y / Tile.SIZE;
+            Tile tile = Graphics[Tiling[tileX, tileY].TileIndex];
+            int palette = Tiling[tileX, tileY].Palette;
+            bool flipH = Tiling[tileX, tileY].FlipH;
+            bool flipV = Tiling[tileX, tileY].FlipV;
+            tileX = flipH ? 7 - x % Tile.SIZE : x % Tile.SIZE;
+            tileY = flipV ? 7 - y % Tile.SIZE : y % Tile.SIZE;
+            int color = tile[tileX, tileY];
+            return Palettes[palette][color];
         }
         /// <summary>
         /// The width of this TSA_Image, in pixels
@@ -242,11 +267,11 @@ namespace GBA
                     for (int y = 0; y < 8; y++)
                     for (int x = 0; x < 4; x++)
                     {
-                        color = image[tileX * 8 + x * 2, tileY * 8 + y];
+                        color = image.GetColor(tileX * 8 + x * 2, tileY * 8 + y);
                         pixel = GBA.Color.GetNearest(Palettes[index], color);
                         LO_nibble = (pixel == -1) ? (byte)0x00 : (byte)(pixel);
 
-                        color = image[tileX * 8 + x * 2 + 1, tileY * 8 + y];
+                        color = image.GetColor(tileX * 8 + x * 2 + 1, tileY * 8 + y);
                         pixel = GBA.Color.GetNearest(Palettes[index], color);
                         HI_nibble = (pixel == -1) ? (byte)0x00 : (byte)(pixel);
 
@@ -450,11 +475,11 @@ namespace GBA
                     for (int y = 0; y < 8; y++)
                     for (int x = 0; x < 4; x++)
                     {
-                        color = image[tileX * 8 + x * 2, tileY * 8 + y];
+                        color = image.GetColor(tileX * 8 + x * 2, tileY * 8 + y);
                         pixel = GBA.Color.GetNearest(Palettes[index], color);
                         LO_nibble = (pixel == -1) ? (byte)0x00 : (byte)(pixel);
 
-                        color = image[tileX * 8 + x * 2 + 1, tileY * 8 + y];
+                        color = image.GetColor(tileX * 8 + x * 2 + 1, tileY * 8 + y);
                         pixel = GBA.Color.GetNearest(Palettes[index], color);
                         HI_nibble = (pixel == -1) ? (byte)0x00 : (byte)(pixel);
 

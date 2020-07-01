@@ -8,87 +8,83 @@ namespace EmblemMagic.FireEmblem
 {
     public class Map : IDisplayable
     {
-        public Color this[int x, int y]
+        public Color GetColor(int x, int y)
         {
-            get
-            {
-                if (x < 0 || x >= Width)  throw new ArgumentException("X given is out of bounds: " + x);
-                if (y < 0 || y >= Height) throw new ArgumentException("Y given is out of bounds: " + y);
+            if (x < 0 || x >= Width) throw new ArgumentException("X given is out of bounds: " + x);
+            if (y < 0 || y >= Height) throw new ArgumentException("Y given is out of bounds: " + y);
 
-                int tileX = x / 16;
-                int tileY = y / 16;
-                MapTile combo;
-                int index = -1;
-                for (int i = 0; i < ShowChanges.Length; i++)
-                {
-                    if (ShowChanges[i] && Changes.Contains(i, tileX, tileY))
-                        index = i;
-                }
-                if (index == -1)
+            int tileX = x / 16;
+            int tileY = y / 16;
+            MapTile combo;
+            int index = -1;
+            for (int i = 0; i < ShowChanges.Length; i++)
+            {
+                if (ShowChanges[i] && Changes.Contains(i, tileX, tileY))
+                    index = i;
+            }
+            if (index == -1)
+            {
+                combo = Tileset.Tiles[Layout[tileX, tileY]];
+            }
+            else
+            {
+                int tile_index = Changes.GetTile(index, tileX, tileY);
+                if (tile_index == 0)
                 {
                     combo = Tileset.Tiles[Layout[tileX, tileY]];
                 }
                 else
                 {
-                    int tile_index = Changes.GetTile(index, tileX, tileY);
-                    if (tile_index == 0)
-                    {
-                        combo = Tileset.Tiles[Layout[tileX, tileY]];
-                    }
-                    else
-                    {
-                        combo = Tileset.Tiles[tile_index];
-                        if (ShowChanges_TileBorders && (
-                            x % 16 == 0 || x % 16 == 15 ||
-                            y % 16 == 0 || y % 16 == 15))
-                            return new Color(0x7FFF);
-                    }
+                    combo = Tileset.Tiles[tile_index];
+                    if (ShowChanges_TileBorders && (
+                        x % 16 == 0 || x % 16 == 15 ||
+                        y % 16 == 0 || y % 16 == 15))
+                        return new Color(0x7FFF);
                 }
-
-                tileX = x % 16;
-                tileY = y % 16;
-                int tileIndex;
-                int palette;
-                if (tileX < 8 && tileY < 8)
-                {
-                    palette = combo.Palette_00;
-                    tileIndex = combo.ComboTile_00;
-                    if (combo.FlipH_00) tileX = 7 - tileX;
-                    if (combo.FlipV_00) tileY = 7 - tileY;
-                }
-                else if (tileX < 8)
-                {
-                    palette = combo.Palette_01;
-                    tileIndex = combo.ComboTile_01;
-                    tileY -= 8;
-                    if (combo.FlipH_01) tileX = 7 - tileX;
-                    if (combo.FlipV_01) tileY = 7 - tileY;
-                }
-                else if (tileY < 8)
-                {
-                    palette = combo.Palette_10;
-                    tileIndex = combo.ComboTile_10;
-                    tileX -= 8;
-                    if (combo.FlipH_10) tileX = 7 - tileX;
-                    if (combo.FlipV_10) tileY = 7 - tileY;
-                }
-                else
-                {
-                    palette = combo.Palette_11;
-                    tileIndex = combo.ComboTile_11;
-                    tileX -= 8;
-                    tileY -= 8;
-                    if (combo.FlipH_11) tileX = 7 - tileX;
-                    if (combo.FlipV_11) tileY = 7 - tileY;
-                }
-                if (ShowFog) palette += 5;
-                Tile tile = (Tileset.Tileset2 == null) ?
-                    Tileset.Tileset1[tileIndex] :
-                    (tileIndex < 512) ?
-                    Tileset.Tileset1[tileIndex] :
-                    Tileset.Tileset2[tileIndex - 512];
-                return Tileset.Palettes[palette][tile[tileX, tileY]];
             }
+            tileX = x % 16;
+            tileY = y % 16;
+            int tileIndex;
+            int palette;
+            if (tileX < 8 && tileY < 8)
+            {
+                palette = combo.Palette_00;
+                tileIndex = combo.ComboTile_00;
+                if (combo.FlipH_00) tileX = 7 - tileX;
+                if (combo.FlipV_00) tileY = 7 - tileY;
+            }
+            else if (tileX < 8)
+            {
+                palette = combo.Palette_01;
+                tileIndex = combo.ComboTile_01;
+                tileY -= 8;
+                if (combo.FlipH_01) tileX = 7 - tileX;
+                if (combo.FlipV_01) tileY = 7 - tileY;
+            }
+            else if (tileY < 8)
+            {
+                palette = combo.Palette_10;
+                tileIndex = combo.ComboTile_10;
+                tileX -= 8;
+                if (combo.FlipH_10) tileX = 7 - tileX;
+                if (combo.FlipV_10) tileY = 7 - tileY;
+            }
+            else
+            {
+                palette = combo.Palette_11;
+                tileIndex = combo.ComboTile_11;
+                tileX -= 8;
+                tileY -= 8;
+                if (combo.FlipH_11) tileX = 7 - tileX;
+                if (combo.FlipV_11) tileY = 7 - tileY;
+            }
+            if (ShowFog) palette += 5;
+            Tile tile = (Tileset.Tileset2 == null) ?
+                Tileset.Tileset1[tileIndex] :
+                (tileIndex < 512) ?
+                Tileset.Tileset1[tileIndex] :
+                Tileset.Tileset2[tileIndex - 512];
+            return Tileset.Palettes[palette][tile[tileX, tileY]];
         }
 
         public const int PALETTES = 10;

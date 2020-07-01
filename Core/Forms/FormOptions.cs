@@ -99,6 +99,7 @@ namespace EmblemMagic
             }
             Settings.Default.RecentFilesMax = (int)RecentFiles_MaxNumBox.Value;
             Settings.Default.UndoListMax = (int)UndoAndRedo_MaxNumBox.Value;
+            Settings.Default.PreferIndexedBMP = PreferIndexedBMP_CheckBox.Checked;
 
             Settings.Default.Save();
             this.DialogResult = DialogResult.Yes;

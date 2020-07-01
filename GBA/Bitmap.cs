@@ -13,15 +13,15 @@ namespace GBA
         /// <summary>
         /// This indexer allows for quick access to pixel data in GBA.Color format.
         /// </summary>
-        public Color this[int x, int y]
+        public int this[int x, int y]
         {
             get
             {
-                if (x < 0 || x >= Width)  throw new ArgumentException("x given is out of bounds: " + x);
+                if (x < 0 || x >= Width) throw new ArgumentException("x given is out of bounds: " + x);
                 if (y < 0 || y >= Height) throw new ArgumentException("y given is out of bounds: " + y);
-                
+
                 int index = x + y * Width;
-                return Colors[Bytes[index]];
+                return Bytes[index];
             }
             set
             {
@@ -29,11 +29,18 @@ namespace GBA
                 if (y < 0 || y >= Height) throw new ArgumentException("y given is out of bounds: " + y);
 
                 int index = x + y * Width;
-                int pixel = Colors.Find(value);
-                if (pixel == -1) throw new ArgumentException("Color wasn't found in palette: " + value);
-                Bytes[index] = (byte)pixel;
+                if (value == -1) throw new ArgumentException("Color wasn't found in palette: " + value);
+                Bytes[index] = (byte)value;
                 return;
             }
+        }
+        public Color GetColor(int x, int y)
+        {
+            return Colors[this[x, y]];
+        }
+        public void SetColor(int x, int y, Color value)
+        {
+            this[x, y] = Colors.Find(value);
         }
 
         /// <summary>
@@ -73,14 +80,16 @@ namespace GBA
 
             int index = 0;
             int pixel;
+            Color color;
             for (int y = 0; y < Height; y++)
             for (int x = 0; x < Width; x++)
             {
-                pixel = Colors.Find(pixels[x, y]);
+                color = pixels.GetColor(x, y);
+                pixel = Colors.Find(color);
                 if (pixel == -1)
                 {
                     pixel = Colors.Count;
-                    Colors.Add(pixels[x, y]);
+                    Colors.Add(color);
                 }
                 Bytes[index++] = (byte)pixel;
             }
@@ -194,7 +203,7 @@ namespace GBA
             {
                 for (int x = region.X; x < region.Width; x++)
                 {
-                    result[x, y] = this[x, y];
+                    result[x, y] = this.GetColor(x, y);
                     index++;
                 }
             }
@@ -214,7 +223,7 @@ namespace GBA
             {
                 for (int x = region.X; x < region.Width; x++)
                 {
-                    this[x, y] = pixels[x, y];
+                    this.SetColor(x, y, pixels[x, y]);
                 }
             }
         }

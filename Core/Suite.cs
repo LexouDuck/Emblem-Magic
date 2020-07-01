@@ -382,7 +382,6 @@ namespace EmblemMagic
             {
                 Repoint[] pointers = CurrentROM.GetDefaultPointers();
                 List<Repoint> unreferenced = new List<Repoint>();
-                DialogResult answer;
                 for (int i = 0; i < pointers.Length; i++)
                 {
                     if (pointers[i].References.Length == 0)

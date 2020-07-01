@@ -81,7 +81,7 @@ namespace EmblemMagic.Components
                     for (int y = 0; y < Display.Height; y++)
                     for (int x = 0; x < Display.Width; x++)
                     {
-                        pixel = (Color)Display[x, y];
+                        pixel = (Color)Display.GetColor(x, y);
                         color = new SolidBrush(pixel);
 
                         e.Graphics.FillRectangle(color, offsetX + x, offsetY + y, 1, 1);

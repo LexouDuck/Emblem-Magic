@@ -36,13 +36,18 @@ namespace EmblemMagic.FireEmblem
 
     public class WorldMap_FE6_Large : IDisplayable
     {
-        public GBA.Color this[int x, int y]
+        public int this[int x, int y]
         {
             get
             {
-                int i = (((x < 240) ? 0 : 1) + ((y < 160) ? 0 : 2));
-                return Graphics[i][x % 240, y % 160];
+                int i = (((x < Screen.WIDTH) ? 0 : 1) + ((y < Screen.HEIGHT) ? 0 : 2));
+                return Graphics[i][x % Screen.WIDTH, y % Screen.HEIGHT];
             }
+        }
+        public GBA.Color GetColor(int x, int y)
+        {
+            int i = (((x < Screen.WIDTH) ? 0 : 1) + ((y < Screen.HEIGHT) ? 0 : 2));
+            return Graphics[i].GetColor(x % Screen.WIDTH, y % Screen.HEIGHT);
         }
 
         public Int32 Width

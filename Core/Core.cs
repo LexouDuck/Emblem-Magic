@@ -4,6 +4,8 @@ using EmblemMagic.FireEmblem;
 using EmblemMagic.Properties;
 using GBA;
 using System;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 
 namespace EmblemMagic
@@ -483,6 +485,47 @@ namespace EmblemMagic
             if (length == 0) throw new Exception("Data to restore cannot be of length 0.");
 
             Program.Core.Core_UserAction(UserAction.Restore, new Write("", address, new byte[length]));
+        }
+
+        //============================ Input/Output ===============================
+        
+        public static void SaveImage(string filepath, int width, int height, Palette[] palettes, Func<int, int, byte> displayfunc)
+        {
+            using (var image = new System.Drawing.Bitmap(width, height, PixelFormat.Format8bppIndexed))
+            {
+                ColorPalette result_palette = image.Palette;
+                for (int p = 0; p < 16; p++)
+                {
+                    if (p >= palettes.Length)
+                    {
+                        for (int i = 0; i < Palette.MAX; i++)
+                        {
+                            result_palette.Entries[p * Palette.MAX + i] = System.Drawing.Color.Black;
+                        }
+                    }
+                    else for (int i = 0; i < Palette.MAX; i++)
+                    {
+                        result_palette.Entries[p * Palette.MAX + i] = (System.Drawing.Color)palettes[p][i];
+                    }
+                }
+                image.Palette = result_palette;
+                var data = image.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, PixelFormat.Format8bppIndexed);
+                unsafe
+                {
+                    byte* pixeldata = (byte*)data.Scan0.ToPointer();
+                    byte* pixel;
+                    for (int y = 0; y < image.Height; y++)
+                    for (int x = 0; x < image.Width; x++)
+                    {
+                        pixel = pixeldata + y * data.Width + x;
+                        pixel[0] = displayfunc(x, y);
+                    }
+                }
+                image.UnlockBits(data);
+                if (Settings.Default.PreferIndexedBMP)
+                    image.Save(filepath + ".bmp", ImageFormat.Bmp);
+                else image.Save(filepath + ".png", ImageFormat.Png);
+            }
         }
     }
 }

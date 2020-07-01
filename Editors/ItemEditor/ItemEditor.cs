@@ -119,7 +119,7 @@ namespace EmblemMagic.Editors
                     for (int y = 0; y < image.Height; y++)
                     for (int x = 0; x < image.Width; x++)
                     {
-                        image.SetPixel(x, y, (System.Drawing.Color)ItemIcons[x, offset + y]);
+                        image.SetPixel(x, y, (System.Drawing.Color)ItemIcons.GetColor(x, offset + y));
                     }
                     entry = items[(uint)i];
                     icons.Images.Add(entry, new System.Drawing.Bitmap(image));

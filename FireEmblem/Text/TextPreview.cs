@@ -7,16 +7,16 @@ namespace EmblemMagic.FireEmblem
 {
     public class TextPreview : IDisplayable
     {
-        public Color this[int x, int y]
+        public int this[int x, int y]
         {
             get
             {
-                if (Text[x, y] == Glyph.Colors[0])
+                if (Text[x, y] == 0)
                 {
                     if (Bubble == null
                      || Bubble.Tiling[x / 8, y / 8].TileIndex == 0xF
-                     || Bubble[x, y] == Bubble.Palettes[0][0])
-                        return Glyph.Colors[0];
+                     || Bubble[x, y] == 0)
+                        return 0;
                     else return Bubble[x, y];
                 }
                 else return Text[x, y];
@@ -25,6 +25,18 @@ namespace EmblemMagic.FireEmblem
             {
                 throw new NotImplementedException();
             }
+        }
+        public Color GetColor(int x, int y)
+        {
+            if (Text.GetColor(x, y) == Glyph.Colors[0])
+            {
+                if (Bubble == null
+                 || Bubble.Tiling[x / 8, y / 8].TileIndex == 0xF
+                 || Bubble.GetColor(x, y) == Bubble.Palettes[0][0])
+                    return Glyph.Colors[0];
+                else return Bubble.GetColor(x, y);
+            }
+            else return Text.GetColor(x, y);
         }
 
         public int Width
@@ -87,8 +99,13 @@ namespace EmblemMagic.FireEmblem
                         for (int y = 0; y < 16; y++)
                         for (int x = 0; x < 16; x++)
                         {
-                            if (offset_x + length + x < Width && offset_y + y < Height && glyphs[i][j][x, y] != Glyph.Colors[0])
-                                Text[offset_x + length + x, offset_y + y] = glyphs[i][j][x, y];
+                            if (offset_x + length + x < Width && offset_y + y < Height && glyphs[i][j].GetColor(x, y) != Glyph.Colors[0])
+                            {
+                                Text.SetColor(
+                                    offset_x + length + x,
+                                    offset_y + y,
+                                    glyphs[i][j].GetColor(x, y));
+                            }
                         }
                         length += glyphs[i][j].TextWidth;
                     }

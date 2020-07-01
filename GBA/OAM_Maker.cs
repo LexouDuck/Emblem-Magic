@@ -175,7 +175,7 @@ namespace GBA
             for (int y = 0; y < image.Height; y++)
             for (int x = 0; x < image.Width; x++)
             {
-                if (image[x, y] != image.Colors[0])
+                if (image[x, y] != 0)
                 {
                     empty = false;
                     if (x < minX) minX = x; if (y < minY) minY = y;

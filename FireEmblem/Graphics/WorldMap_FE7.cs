@@ -44,7 +44,7 @@ namespace EmblemMagic.FireEmblem
 
     public class WorldMap_FE7_Large : IDisplayable
     {
-        public GBA.Color this[int x, int y]
+        public int this[int x, int y]
         {
             get
             {
@@ -57,12 +57,25 @@ namespace EmblemMagic.FireEmblem
                 int palette = TSA_Sections[index][tileX, tileY].Palette;
                 tileX = (x % 32) % 8;
                 tileY = (y % 32) % 8;
-                return Palettes[palette][Graphics[index][tile][tileX, tileY]];
+                return palette * Palette.MAX + Graphics[index][tile][tileX, tileY];
             }
             set
             {
                 throw new NotImplementedException();
             }
+        }
+        public GBA.Color GetColor(int x, int y)
+        {
+            int tileX = (x / 8) / 32;
+            int tileY = (y / 8) / 32;
+            int index = tileX + tileY * 4;
+            tileX = (x / 8) % 32;
+            tileY = (y / 8) % 32;
+            int tile = TSA_Sections[index][tileX, tileY].TileIndex;
+            int palette = TSA_Sections[index][tileX, tileY].Palette;
+            tileX = (x % 32) % 8;
+            tileY = (y % 32) % 8;
+            return Palettes[palette][Graphics[index][tile][tileX, tileY]];
         }
 
         public Int32 Width

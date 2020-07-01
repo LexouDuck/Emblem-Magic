@@ -128,16 +128,18 @@ namespace GBA
 
                 bool addEveryPixel = (source.Width == 16);
                 int index = 0;
+                Color color;
                 for (int y = 0; y < source.Height; y++)
                 for (int x = 0; x < source.Width; x++)
                 {
-                    if (!addEveryPixel && this.Contains(source[x, y])) continue;
+                    color = source.GetColor(x, y);
+                    if (!addEveryPixel && this.Contains(color)) continue;
                     else
                     {
                         if (this.IsFull) throw new Exception("This palette cannot hold more than " + maximum + " colors.");
                         else
                         {
-                            this.Colors.Add(source[x, y]);
+                            this.Colors.Add(color);
                             index++;
                         }
                     }

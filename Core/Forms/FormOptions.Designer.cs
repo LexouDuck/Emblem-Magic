@@ -67,6 +67,7 @@
             this.Repoint_Label = new System.Windows.Forms.Label();
             this.Repoint_TrackBar = new System.Windows.Forms.TrackBar();
             this.Repoint_GroupBox = new System.Windows.Forms.GroupBox();
+            this.PreferIndexedBMP_CheckBox = new System.Windows.Forms.CheckBox();
             this.Paths_GroupBox.SuspendLayout();
             this.UndoAndRedo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UndoAndRedo_MaxNumBox)).BeginInit();
@@ -341,7 +342,7 @@
             this.UndoAndRedo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.UndoAndRedo.Controls.Add(this.UndoAndRedo_MaxLabel);
             this.UndoAndRedo.Controls.Add(this.UndoAndRedo_MaxNumBox);
-            this.UndoAndRedo.Location = new System.Drawing.Point(211, 447);
+            this.UndoAndRedo.Location = new System.Drawing.Point(211, 467);
             this.UndoAndRedo.Name = "UndoAndRedo";
             this.UndoAndRedo.Size = new System.Drawing.Size(191, 43);
             this.UndoAndRedo.TabIndex = 2;
@@ -370,9 +371,9 @@
             this.RecentFiles.Controls.Add(this.RecentFiles_MaxLabel);
             this.RecentFiles.Controls.Add(this.RecentFiles_MaxNumBox);
             this.RecentFiles.Controls.Add(this.RecentFiles_ClearButton);
-            this.RecentFiles.Location = new System.Drawing.Point(12, 447);
+            this.RecentFiles.Location = new System.Drawing.Point(12, 470);
             this.RecentFiles.Name = "RecentFiles";
-            this.RecentFiles.Size = new System.Drawing.Size(193, 83);
+            this.RecentFiles.Size = new System.Drawing.Size(193, 80);
             this.RecentFiles.TabIndex = 1;
             this.RecentFiles.TabStop = false;
             this.RecentFiles.Text = "Recent Files";
@@ -405,7 +406,7 @@
             // Options_ApplyButton
             // 
             this.Options_ApplyButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Options_ApplyButton.Location = new System.Drawing.Point(303, 496);
+            this.Options_ApplyButton.Location = new System.Drawing.Point(303, 516);
             this.Options_ApplyButton.Name = "Options_ApplyButton";
             this.Options_ApplyButton.Size = new System.Drawing.Size(99, 34);
             this.Options_ApplyButton.TabIndex = 1;
@@ -417,7 +418,7 @@
             // 
             this.Options_CancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Options_CancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.Options_CancelButton.Location = new System.Drawing.Point(211, 496);
+            this.Options_CancelButton.Location = new System.Drawing.Point(211, 516);
             this.Options_CancelButton.Name = "Options_CancelButton";
             this.Options_CancelButton.Size = new System.Drawing.Size(86, 34);
             this.Options_CancelButton.TabIndex = 0;
@@ -481,11 +482,22 @@
             this.Repoint_GroupBox.TabStop = false;
             this.Repoint_GroupBox.Text = "Repoint Prompts";
             // 
+            // checkBox1
+            // 
+            this.PreferIndexedBMP_CheckBox.AutoSize = true;
+            this.PreferIndexedBMP_CheckBox.Location = new System.Drawing.Point(12, 447);
+            this.PreferIndexedBMP_CheckBox.Name = "checkBox1";
+            this.PreferIndexedBMP_CheckBox.Size = new System.Drawing.Size(268, 17);
+            this.PreferIndexedBMP_CheckBox.TabIndex = 6;
+            this.PreferIndexedBMP_CheckBox.Text = "Save images as indexed BMP files rather than PNG";
+            this.PreferIndexedBMP_CheckBox.UseVisualStyleBackColor = true;
+            // 
             // FormOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(414, 542);
+            this.ClientSize = new System.Drawing.Size(414, 562);
+            this.Controls.Add(this.PreferIndexedBMP_CheckBox);
             this.Controls.Add(this.Repoint_GroupBox);
             this.Controls.Add(this.Overwrite_GroupBox);
             this.Controls.Add(this.UndoAndRedo);
@@ -494,9 +506,9 @@
             this.Controls.Add(this.Options_ApplyButton);
             this.Controls.Add(this.Options_CancelButton);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(430, 580);
+            this.MaximumSize = new System.Drawing.Size(430, 600);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(430, 580);
+            this.MinimumSize = new System.Drawing.Size(430, 600);
             this.Name = "FormOptions";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -515,6 +527,7 @@
             this.Repoint_GroupBox.ResumeLayout(false);
             this.Repoint_GroupBox.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -561,5 +574,6 @@
         private System.Windows.Forms.TextBox Paths_CustomStructs_TextBox;
         private System.Windows.Forms.Label Paths_CustomStructs_Label;
         private System.Windows.Forms.Button Paths_CustomStructs_BrowseButton;
+        private System.Windows.Forms.CheckBox PreferIndexedBMP_CheckBox;
     }
 }

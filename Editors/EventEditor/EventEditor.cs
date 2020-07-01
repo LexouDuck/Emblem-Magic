@@ -473,7 +473,7 @@ namespace EmblemMagic.Editors
                                     offsetX + x >= 0 && offsetX + x < result.Width &&
                                     offsetY + y >= 0 && offsetY + y < result.Height)
                                 {
-                                    result[offsetX + x, offsetY + y] = image.Colors[pixel];
+                                    result.SetColor(offsetX + x, offsetY + y, image.Colors[pixel]);
                                 }
                             }
                         }

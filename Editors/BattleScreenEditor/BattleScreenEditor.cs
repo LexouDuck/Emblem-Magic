@@ -1,8 +1,10 @@
 ﻿using EmblemMagic.FireEmblem;
+using EmblemMagic.Properties;
 using GBA;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Forms;
 
@@ -371,17 +373,14 @@ namespace EmblemMagic.Editors
         {
             try
             {
-                using (var image = new System.Drawing.Bitmap(
+                Core.SaveImage(filepath,
                     CurrentScreen.Width,
-                    CurrentScreen.Height))
-                {
-                    for (int y = 0; y < image.Height; y++)
-                    for (int x = 0; x < image.Width; x++)
+                    CurrentScreen.Height,
+                    CurrentScreen.Palettes,
+                    delegate (int x, int y)
                     {
-                        image.SetPixel(x, y, (System.Drawing.Color)CurrentScreen[x, y]);
-                    }
-                    image.Save(filepath, System.Drawing.Imaging.ImageFormat.Png);
-                }
+                        return (byte)CurrentScreen[x, y];
+                    });
             }
             catch (Exception ex)
             {
@@ -456,17 +455,14 @@ namespace EmblemMagic.Editors
         {
             try
             {
-                using (var image = new System.Drawing.Bitmap(
+                Core.SaveImage(filepath,
                     CurrentPlatform.Width,
-                    CurrentPlatform.Height))
-                {
-                    for (int y = 0; y < image.Height; y++)
-                    for (int x = 0; x < image.Width; x++)
+                    CurrentPlatform.Height,
+                    new Palette[1] { CurrentPlatform.Colors },
+                    delegate (int x, int y)
                     {
-                        image.SetPixel(x, y, (System.Drawing.Color)CurrentPlatform[x, y]);
-                    }
-                    image.Save(filepath, System.Drawing.Imaging.ImageFormat.Png);
-                }
+                        return (byte)CurrentPlatform[x, y];
+                    });
             }
             catch (Exception ex)
             {
@@ -568,7 +564,7 @@ namespace EmblemMagic.Editors
             {
                 if (saveWindow.FileName.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_Screen_SaveImage(saveWindow.FileName);
+                    Core_Screen_SaveImage(saveWindow.FileName.Remove(saveWindow.FileName.Length - 4));
                     return;
                 }
                 if (saveWindow.FileName.EndsWith(".dmp", StringComparison.OrdinalIgnoreCase))
@@ -595,7 +591,7 @@ namespace EmblemMagic.Editors
             {
                 if (saveWindow.FileName.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_Platform_SaveImage(saveWindow.FileName);
+                    Core_Platform_SaveImage(saveWindow.FileName.Remove(saveWindow.FileName.Length - 4));
                     return;
                 }
                 if (saveWindow.FileName.EndsWith(".dmp", StringComparison.OrdinalIgnoreCase))

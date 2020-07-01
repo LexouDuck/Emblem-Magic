@@ -8,15 +8,21 @@ namespace EmblemMagic.FireEmblem
 {
     public class Font : IDisplayable
     {
-        public GBA.Color this[int x, int y]
+        public int this[int x, int y]
         {
             get
             {
                 int font_i = (x / 16) + (y / 16) * 16;
-
-                if (Glyphs[font_i] == null) return Glyph.Colors[0];
+                if (Glyphs[font_i] == null)
+                    return 0;
                 else return Glyphs[font_i][x % 16, y % 16];
             }
+        }
+        public GBA.Color GetColor(int x, int y)
+        {
+            int font_i = (x / 16) + (y / 16) * 16;
+            if (Glyphs[font_i] == null) return Glyph.Colors[0];
+            else return Glyphs[font_i].GetColor(x % 16, y % 16);
         }
 
         public int Width

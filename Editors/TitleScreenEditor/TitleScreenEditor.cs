@@ -133,7 +133,7 @@ namespace EmblemMagic.Editors
                 for (int y = 0; y < GBA.Screen.HEIGHT; y++)
                 for (int x = 0; x < GBA.Screen.WIDTH; x++)
                 {
-                    if (mg[x, y] != new GBA.Color())
+                    if (mg[x, y] != 0)
                         result[x, y] = mg[x, y];
                 }
             }
@@ -200,7 +200,7 @@ namespace EmblemMagic.Editors
                 for (int y = 0; y < mg.Height; y++)
                 for (int x = 0; x < mg.Width; x++)
                 {
-                    if (mg[x, y] != mg.Palettes[0][0])
+                    if (mg[x, y] != 0)
                         result[x, 8 + y] = mg[x, y];
                 }
             }
@@ -265,7 +265,7 @@ namespace EmblemMagic.Editors
                 for (int y = 0; y < bg.Height; y++)
                 for (int x = 0; x < bg.Width; x++)
                 {
-                    if (bg[x, y] != bg.Palettes[0][0])
+                    if (bg[x, y] != 0)
                         result[x, y] = bg[x, y];
                 }
             }
@@ -275,7 +275,7 @@ namespace EmblemMagic.Editors
                 for (int y = 0; y < mg.Height; y++)
                 for (int x = 0; x < mg.Width; x++)
                 {
-                    if (mg[x, y] != mg.Palettes[0][0])
+                    if (mg[x, y] != 0)
                         result[x, y] = mg[x, y];
                 }
             }
@@ -339,7 +339,7 @@ namespace EmblemMagic.Editors
                     (image.Bytes[index] & 0x0F) :
                     (image.Bytes[index] & 0xF0) >> 4;
                 if (pixel != 0)
-                    result[offsetX + x, offsetY + y] = image.Colors[pixel];
+                    result.SetColor(offsetX + x, offsetY + y, image.Colors[pixel]);
             }
         }
 

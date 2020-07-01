@@ -76,7 +76,7 @@ namespace EmblemMagic.FireEmblem
     /// </summary>
     public class MapTileset : IDisplayable
     {
-        public Color this[int x, int y]
+        public int this[int x, int y]
         {
             get
             {
@@ -128,8 +128,13 @@ namespace EmblemMagic.FireEmblem
                     (tileIndex < 512) ?
                     Tileset1[tileIndex] :
                     Tileset2[tileIndex - 512];
-                return Palettes[palette][tile[tileX, tileY]];
+                return palette * Palette.MAX + tile[tileX, tileY];
             }
+        }
+        public Color GetColor(int x, int y)
+        {
+            int color = this[x, y];
+            return Palettes[color / Palette.MAX][color % Palette.MAX];
         }
 
         public const int WIDTH = 2;

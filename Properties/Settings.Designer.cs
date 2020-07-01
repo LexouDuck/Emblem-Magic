@@ -144,6 +144,18 @@ namespace EmblemMagic.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PathCustomStructs {
+            get {
+                return ((string)(this["PathCustomStructs"]));
+            }
+            set {
+                this["PathCustomStructs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool UseCustomPathArrays {
             get {
@@ -228,13 +240,13 @@ namespace EmblemMagic.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string PathCustomStructs {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PreferIndexedBMP {
             get {
-                return ((string)(this["PathCustomStructs"]));
+                return ((bool)(this["PreferIndexedBMP"]));
             }
             set {
-                this["PathCustomStructs"] = value;
+                this["PreferIndexedBMP"] = value;
             }
         }
     }
