@@ -60,7 +60,7 @@ namespace EmblemMagic.Editors
                         new Tileset(Core.ReadData(address_bg_tileset, 0)),
                         Core.ReadPalette(address_mg_palette, Palette.LENGTH),
                         new Tileset(Core.ReadData(address_mg_tileset, 0)),
-                        Core.ReadTSA(address_mg_tsa, 30, 20, tsa, true),
+                        Core.ReadTSA(address_mg_tsa, GBA.Screen.W_TILES, GBA.Screen.H_TILES, tsa, true),
                         Core.ReadPalette(address_fg_palette, Palette.LENGTH * 5),
                         new Tileset(Core.ReadData(address_fg_tileset, 0)));
                 }
@@ -185,12 +185,12 @@ namespace EmblemMagic.Editors
 
             if (BG_CheckBox.Checked)
             {
-                GBA.Image bg = bg_tileset.ToImage(30, 21, bg_palette.ToBytes(false));
+                GBA.Image bg = bg_tileset.ToImage(GBA.Screen.W_TILES, GBA.Screen.H_TILES + 1, bg_palette.ToBytes(false));
                 for (int y = 0; y < GBA.Screen.HEIGHT; y++)
                 for (int x = 0; x < GBA.Screen.WIDTH; x++)
                 {
                     if (x < 8 && y < 8)
-                         result[x, y] = bg[x, 160 + y];
+                         result[x, y] = bg[x, GBA.Screen.HEIGHT + y];
                     else result[x, y] = bg[x, y];
                 }
             }
@@ -215,12 +215,12 @@ namespace EmblemMagic.Editors
                 Core_DrawLayer(result, fg, new Rectangle(0, 0, 192, 112), 32, 16);
                 // large 'FIRE EMBLEM' title
                 fg.Colors = palettes[4];
-                Core_DrawLayer(result, fg, new Rectangle(0, 160, 240, 48), 2, jap ? 52 : 54);
-                Core_DrawLayer(result, fg, new Rectangle(0, 112, 240, 48), 0, jap ? 48 : 52);
+                Core_DrawLayer(result, fg, new Rectangle(0, GBA.Screen.HEIGHT,      GBA.Screen.WIDTH, 48), 2, jap ? 52 : 54);
+                Core_DrawLayer(result, fg, new Rectangle(0, GBA.Screen.HEIGHT - 48, GBA.Screen.WIDTH, 48), 0, jap ? 48 : 52);
                 // Nintendo & IS copyrights
                 fg.Colors = palettes[2];
-                Core_DrawLayer(result, fg, new Rectangle(0, 224, 144, 8), eur ?   8 :  16, 144);
-                Core_DrawLayer(result, fg, new Rectangle(0, 232,  96, 8), eur ? 136 : 160, 144);
+                Core_DrawLayer(result, fg, new Rectangle(0, GBA.Screen.WIDTH - 16, GBA.Screen.HEIGHT - 16, 8), eur ?   8 : 16,                GBA.Screen.HEIGHT - 16);
+                Core_DrawLayer(result, fg, new Rectangle(0, GBA.Screen.WIDTH - 8,  GBA.Screen.HEIGHT - 64, 8), eur ? 136 : GBA.Screen.HEIGHT, GBA.Screen.HEIGHT - 16);
                 // 'Press Start'
                 fg.Colors = palettes[1];
                 Core_DrawLayer(result, fg, new Rectangle(128, 208, 96, 16), jap ? 80 : 72, 120);

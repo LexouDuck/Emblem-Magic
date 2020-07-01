@@ -48,8 +48,7 @@ namespace GBA
             bool flipV = Tiling[tileX, tileY].FlipV;
             tileX = flipH ? 7 - x % Tile.SIZE : x % Tile.SIZE;
             tileY = flipV ? 7 - y % Tile.SIZE : y % Tile.SIZE;
-            int color = tile[tileX, tileY];
-            return Palettes[palette][color];
+            return Palettes[palette][tile[tileX, tileY]];
         }
         /// <summary>
         /// The width of this TSA_Image, in pixels
