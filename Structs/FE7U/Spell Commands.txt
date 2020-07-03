@@ -69,6 +69,7 @@ bl $0804FD1C	@ Makes the battle background solid black (called by Ereshkigal)
 
 
 CreateStruct
+bl $08050008			 @ ???
 ldr r0, [pc, #0x**] (=$08______) @ Loads the Loop routine callback into r0
 mov r1, #0x03			 @ r1 becomes 3, presumably an argument for the following call
 bl $08004494			 @ Create6C: Allocates new 6C And starts interpretation (r0 becomes RAM pointer to the 6C struct, r1 is return pointer)

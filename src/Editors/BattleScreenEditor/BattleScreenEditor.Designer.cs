@@ -77,9 +77,9 @@ namespace EmblemMagic.Editors
             this.EntryArrayBox.Location = new System.Drawing.Point(6, 19);
             this.EntryArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.EntryArrayBox.MinimumSize = new System.Drawing.Size(128, 26);
-            this.EntryArrayBox.Name = "EntryArrayBox";
             this.EntryArrayBox.Size = new System.Drawing.Size(244, 26);
             this.EntryArrayBox.TabIndex = 0;
+            this.Help_ToolTip.SetToolTip(this.EntryArrayBox, "Select en entry in the list of battle platforms to view/edit.");
             this.EntryArrayBox.ValueChanged += new System.EventHandler(this.EntryArrayBox_ValueChanged);
             // 
             // Platform_ImageBox
@@ -132,6 +132,9 @@ namespace EmblemMagic.Editors
             this.Platform_Tileset_PointerBox.Name = "Platform_Tileset_PointerBox";
             this.Platform_Tileset_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.Platform_Tileset_PointerBox.TabIndex = 6;
+            this.Help_ToolTip.SetToolTip(this.Platform_Tileset_PointerBox, "Pointer to the tileset pixel data for the currently selected battle platform.\r\nWi" +
+        "ll write to ROM if changed. Is repointed when inserting an image with \"File -> I" +
+        "nsert battle platform...\".");
             this.Platform_Tileset_PointerBox.ValueChanged += new System.EventHandler(this.Platform_Tileset_PointerBox_ValueChanged);
             // 
             // Platform_Palette_PointerBox
@@ -146,6 +149,9 @@ namespace EmblemMagic.Editors
             this.Platform_Palette_PointerBox.Name = "Platform_Palette_PointerBox";
             this.Platform_Palette_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.Platform_Palette_PointerBox.TabIndex = 7;
+            this.Help_ToolTip.SetToolTip(this.Platform_Palette_PointerBox, "Pointer to the palette for the currently selected battle platform sprite.\r\nWill w" +
+        "rite to ROM if changed. Is repointed when inserting an image with \"File -> Inser" +
+        "t battle platform...\".");
             this.Platform_Palette_PointerBox.ValueChanged += new System.EventHandler(this.Platform_Palette_PointerBox_ValueChanged);
             // 
             // Platform_Name_TextBox
@@ -155,6 +161,8 @@ namespace EmblemMagic.Editors
             this.Platform_Name_TextBox.Name = "Platform_Name_TextBox";
             this.Platform_Name_TextBox.Size = new System.Drawing.Size(87, 20);
             this.Platform_Name_TextBox.TabIndex = 8;
+            this.Help_ToolTip.SetToolTip(this.Platform_Name_TextBox, "The name of this battle platform (serves no purpose).\r\nWill write to ROM if chang" +
+        "ed. Max length is 12 characters.");
             this.Platform_Name_TextBox.TextChanged += new System.EventHandler(this.Platform_Name_TextBox_TextChanged);
             // 
             // Platform_PaletteBox
@@ -166,6 +174,8 @@ namespace EmblemMagic.Editors
             this.Platform_PaletteBox.TabIndex = 9;
             this.Platform_PaletteBox.TabStop = false;
             this.Platform_PaletteBox.Text = "paletteBox1";
+            this.Help_ToolTip.SetToolTip(this.Platform_PaletteBox, "The palette for the currently selected battle platform sprite.\r\nClicking in this " +
+        "will open an appropriate PaletteEditor, to modify this palette.");
             this.Platform_PaletteBox.Click += new System.EventHandler(this.Tool_OpenPalette_Platform_Click);
             // 
             // Platform_GroupBox
@@ -292,12 +302,16 @@ namespace EmblemMagic.Editors
             // 
             this.Screen_GridBox.Location = new System.Drawing.Point(12, 27);
             this.Screen_GridBox.Name = "Screen_GridBox";
+            this.Screen_GridBox.Selection = null;
             this.Screen_GridBox.ShowGrid = false;
             this.Screen_GridBox.Size = new System.Drawing.Size(256, 104);
             this.Screen_GridBox.TabIndex = 10;
             this.Screen_GridBox.TabStop = false;
             this.Screen_GridBox.Text = "Screen_GridBox";
             this.Screen_GridBox.TileSize = 8;
+            this.Help_ToolTip.SetToolTip(this.Screen_GridBox, "This ImageBox displays the battle screen frame.\r\nYou can click on this to select " +
+        "one or several tiles (with CTRL & SHIFT), and edit the TSA array data for these " +
+        "tiles.");
             this.Screen_GridBox.SelectionChanged += new System.EventHandler(this.Screen_GridBox_SelectionChanged);
             // 
             // Screen_GroupBox
@@ -325,6 +339,8 @@ namespace EmblemMagic.Editors
             this.Screen_FlipV_CheckBox.Size = new System.Drawing.Size(80, 17);
             this.Screen_FlipV_CheckBox.TabIndex = 7;
             this.Screen_FlipV_CheckBox.Text = "Flip Vertical";
+            this.Help_ToolTip.SetToolTip(this.Screen_FlipV_CheckBox, "Whether or not the currently selected tile is flipped horizontally or not.\r\nWill " +
+        "write to ROM if changed.");
             this.Screen_FlipV_CheckBox.UseVisualStyleBackColor = true;
             this.Screen_FlipV_CheckBox.CheckedChanged += new System.EventHandler(this.Screen_FlipV_CheckBox_CheckedChanged);
             // 
@@ -337,6 +353,8 @@ namespace EmblemMagic.Editors
             this.Screen_PaletteBox.TabIndex = 8;
             this.Screen_PaletteBox.TabStop = false;
             this.Screen_PaletteBox.Text = "paletteBox1";
+            this.Help_ToolTip.SetToolTip(this.Screen_PaletteBox, "The palettes used by the battle screen frame.\r\nClicking on this will open a Palet" +
+        "teEditor, to modify these palettes.");
             this.Screen_PaletteBox.Click += new System.EventHandler(this.Tool_OpenPalette_Screen_Click);
             // 
             // Screen_FlipH_CheckBox
@@ -348,6 +366,8 @@ namespace EmblemMagic.Editors
             this.Screen_FlipH_CheckBox.Size = new System.Drawing.Size(92, 17);
             this.Screen_FlipH_CheckBox.TabIndex = 6;
             this.Screen_FlipH_CheckBox.Text = "Flip Horizontal";
+            this.Help_ToolTip.SetToolTip(this.Screen_FlipH_CheckBox, "Whether or not the currently selected tile is flipped horizontally or not.\r\nWill " +
+        "write to ROM if changed.");
             this.Screen_FlipH_CheckBox.UseVisualStyleBackColor = true;
             this.Screen_FlipH_CheckBox.CheckedChanged += new System.EventHandler(this.Screen_FlipH_CheckBox_CheckedChanged);
             // 
@@ -362,6 +382,8 @@ namespace EmblemMagic.Editors
             this.Screen_TileIndex_NumBox.Name = "Screen_TileIndex_NumBox";
             this.Screen_TileIndex_NumBox.Size = new System.Drawing.Size(57, 20);
             this.Screen_TileIndex_NumBox.TabIndex = 4;
+            this.Help_ToolTip.SetToolTip(this.Screen_TileIndex_NumBox, "The TileID of the currently selected TSA square in the above display.\r\nWill write" +
+        " to ROM if changed.");
             this.Screen_TileIndex_NumBox.ValueChanged += new System.EventHandler(this.Screen_Tile_NumBox_ValueChanged);
             // 
             // Screen_Palette_NumBox
@@ -375,6 +397,8 @@ namespace EmblemMagic.Editors
             this.Screen_Palette_NumBox.Name = "Screen_Palette_NumBox";
             this.Screen_Palette_NumBox.Size = new System.Drawing.Size(57, 20);
             this.Screen_Palette_NumBox.TabIndex = 2;
+            this.Help_ToolTip.SetToolTip(this.Screen_Palette_NumBox, "The palette index for the currently selected TSA tile.\r\nWill write to ROM if chan" +
+        "ged.");
             this.Screen_Palette_NumBox.ValueChanged += new System.EventHandler(this.Screen_Palette_NumBox_ValueChanged);
             // 
             // Screen_Palette_Label

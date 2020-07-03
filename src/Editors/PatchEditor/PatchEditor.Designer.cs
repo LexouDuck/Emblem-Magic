@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.Patch_DataGrid = new System.Windows.Forms.DataGridView();
-            this.Patch_Column_Author = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Patch_Column_PatchName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Patch_Column_Applied = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Author = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_PatchName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column_Applied = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DescriptionPanel = new System.Windows.Forms.Panel();
             this.Patch_Description_Label = new System.Windows.Forms.Label();
             this.RefreshButton = new System.Windows.Forms.Button();
@@ -40,7 +40,7 @@
             this.DescriptionPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // PatchesDataGrid
+            // Patch_DataGrid
             // 
             this.Patch_DataGrid.AllowUserToAddRows = false;
             this.Patch_DataGrid.AllowUserToDeleteRows = false;
@@ -50,12 +50,12 @@
             this.Patch_DataGrid.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Patch_DataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Patch_DataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Patch_Column_Author,
-            this.Patch_Column_PatchName,
-            this.Patch_Column_Applied});
+            this.Column_Author,
+            this.Column_PatchName,
+            this.Column_Applied});
             this.Patch_DataGrid.Location = new System.Drawing.Point(259, 12);
             this.Patch_DataGrid.MultiSelect = false;
-            this.Patch_DataGrid.Name = "PatchesDataGrid";
+            this.Patch_DataGrid.Name = "Patch_DataGrid";
             this.Patch_DataGrid.ReadOnly = true;
             this.Patch_DataGrid.Size = new System.Drawing.Size(433, 299);
             this.Patch_DataGrid.TabIndex = 0;
@@ -64,24 +64,24 @@
             // 
             // Column_Author
             // 
-            this.Patch_Column_Author.HeaderText = "Author";
-            this.Patch_Column_Author.Name = "Column_Author";
-            this.Patch_Column_Author.ReadOnly = true;
+            this.Column_Author.HeaderText = "Author";
+            this.Column_Author.Name = "Column_Author";
+            this.Column_Author.ReadOnly = true;
             // 
             // Column_PatchName
             // 
-            this.Patch_Column_PatchName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Patch_Column_PatchName.HeaderText = "Patch Name";
-            this.Patch_Column_PatchName.Name = "Column_PatchName";
-            this.Patch_Column_PatchName.ReadOnly = true;
+            this.Column_PatchName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column_PatchName.HeaderText = "Patch Name";
+            this.Column_PatchName.Name = "Column_PatchName";
+            this.Column_PatchName.ReadOnly = true;
             // 
             // Column_Applied
             // 
-            this.Patch_Column_Applied.HeaderText = "Is Applied ?";
-            this.Patch_Column_Applied.Name = "Column_Applied";
-            this.Patch_Column_Applied.ReadOnly = true;
-            this.Patch_Column_Applied.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Patch_Column_Applied.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Column_Applied.HeaderText = "Is Applied ?";
+            this.Column_Applied.Name = "Column_Applied";
+            this.Column_Applied.ReadOnly = true;
+            this.Column_Applied.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column_Applied.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // DescriptionPanel
             // 
@@ -95,14 +95,14 @@
             this.DescriptionPanel.Size = new System.Drawing.Size(241, 338);
             this.DescriptionPanel.TabIndex = 1;
             // 
-            // DescriptionLabel
+            // Patch_Description_Label
             // 
             this.Patch_Description_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Patch_Description_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
             this.Patch_Description_Label.Location = new System.Drawing.Point(15, 2);
-            this.Patch_Description_Label.Name = "DescriptionLabel";
+            this.Patch_Description_Label.Name = "Patch_Description_Label";
             this.Patch_Description_Label.Size = new System.Drawing.Size(208, 334);
             this.Patch_Description_Label.TabIndex = 0;
             this.Patch_Description_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -115,6 +115,8 @@
             this.RefreshButton.Size = new System.Drawing.Size(131, 33);
             this.RefreshButton.TabIndex = 2;
             this.RefreshButton.Text = "Refresh List";
+            this.Help_ToolTip.SetToolTip(this.RefreshButton, "Refresh the list of patches, to display new files you\'ve just put inside the \"Pat" +
+        "ches\" folder.");
             this.RefreshButton.UseVisualStyleBackColor = true;
             this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
             // 
@@ -126,6 +128,7 @@
             this.ApplyButton.Size = new System.Drawing.Size(131, 33);
             this.ApplyButton.TabIndex = 3;
             this.ApplyButton.Text = "Apply Selected Patch";
+            this.Help_ToolTip.SetToolTip(this.ApplyButton, "Apply the patch currently selected to the game.\r\nWill write to ROM if clicked.");
             this.ApplyButton.UseVisualStyleBackColor = true;
             this.ApplyButton.Click += new System.EventHandler(this.ApplyButton_Click);
             // 
@@ -157,5 +160,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Patch_Column_Author;
         private System.Windows.Forms.DataGridViewTextBoxColumn Patch_Column_PatchName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Patch_Column_Applied;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Author;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_PatchName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column_Applied;
     }
 }

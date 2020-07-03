@@ -67,6 +67,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.File_SaveFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.File_SaveFiles = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.File_SaveAllGIF = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Tool = new System.Windows.Forms.ToolStripMenuItem();
             this.Tool_OpenOAMEditor = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,7 +79,6 @@
             this.Item_GroupBox = new System.Windows.Forms.GroupBox();
             this.Item_LayoutPanel = new System.Windows.Forms.Panel();
             this.Item_PointerArrayBox = new EmblemMagic.Components.PointerArrayBox();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.Palette_GroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Palette_Character_PointerBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Palette_Default_PointerBox)).BeginInit();
@@ -100,6 +100,8 @@
             this.AnimCode_Apply_Button.Size = new System.Drawing.Size(121, 28);
             this.AnimCode_Apply_Button.TabIndex = 23;
             this.AnimCode_Apply_Button.Text = "Apply code changes";
+            this.Help_ToolTip.SetToolTip(this.AnimCode_Apply_Button, "Apply whichever changes were written in the anim code text area.\r\nWill write to R" +
+        "OM if changed.");
             this.AnimCode_Apply_Button.UseVisualStyleBackColor = true;
             this.AnimCode_Apply_Button.Click += new System.EventHandler(this.AnimCode_Apply_Button_Click);
             // 
@@ -123,17 +125,21 @@
             // 
             // Palette_Character_Current_ArrayBox
             // 
+            this.Palette_Character_Current_ArrayBox.Enabled = false;
             this.Palette_Character_Current_ArrayBox.Location = new System.Drawing.Point(6, 145);
             this.Palette_Character_Current_ArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.Palette_Character_Current_ArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
             this.Palette_Character_Current_ArrayBox.Size = new System.Drawing.Size(152, 26);
             this.Palette_Character_Current_ArrayBox.TabIndex = 23;
+            this.Help_ToolTip.SetToolTip(this.Palette_Character_Current_ArrayBox, "Select which sub-palette of this character palette to view (ally, enemy, NPC, etc" +
+        ")");
             this.Palette_Character_Current_ArrayBox.ValueChanged += new System.EventHandler(this.Palette_Character_Current_ArrayBox_ValueChanged);
             // 
             // Palette_Character_PointerBox
             // 
+            this.Palette_Character_PointerBox.Enabled = false;
             this.Palette_Character_PointerBox.Hexadecimal = true;
-            this.Palette_Character_PointerBox.Location = new System.Drawing.Point(88, 96);
+            this.Palette_Character_PointerBox.Location = new System.Drawing.Point(88, 122);
             this.Palette_Character_PointerBox.Maximum = new decimal(new int[] {
             33554432,
             0,
@@ -142,6 +148,8 @@
             this.Palette_Character_PointerBox.Name = "Palette_Character_PointerBox";
             this.Palette_Character_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.Palette_Character_PointerBox.TabIndex = 22;
+            this.Help_ToolTip.SetToolTip(this.Palette_Character_PointerBox, "Pointer to the currently selected character-specific battle animation palette.\r\nW" +
+        "ill write to ROM if changed. Palette is LZ77 compressed.");
             this.Palette_Character_PointerBox.ValueChanged += new System.EventHandler(this.Palette_Character_PointerBox_ValueChanged);
             // 
             // Palette_Default_Button
@@ -154,6 +162,7 @@
             this.Palette_Default_Button.TabIndex = 10;
             this.Palette_Default_Button.TabStop = true;
             this.Palette_Default_Button.Text = "Default :";
+            this.Help_ToolTip.SetToolTip(this.Palette_Default_Button, "Radio button to view battle animations with the default class palettes.");
             this.Palette_Default_Button.UseVisualStyleBackColor = true;
             this.Palette_Default_Button.CheckedChanged += new System.EventHandler(this.Palette_CheckedChanged);
             // 
@@ -168,6 +177,8 @@
             this.Palette_PaletteBox.TabIndex = 8;
             this.Palette_PaletteBox.TabStop = false;
             this.Palette_PaletteBox.Text = "GBAPaletteBox";
+            this.Help_ToolTip.SetToolTip(this.Palette_PaletteBox, "The current palette selected to display the current battle animation.\r\nClicking o" +
+        "n this will open a \"Palette Editor\" window, to edit the palette.");
             this.Palette_PaletteBox.Click += new System.EventHandler(this.Tool_OpenPaletteEditor_Click);
             // 
             // Palette_Default_PointerBox
@@ -182,35 +193,42 @@
             this.Palette_Default_PointerBox.Name = "Palette_Default_PointerBox";
             this.Palette_Default_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.Palette_Default_PointerBox.TabIndex = 6;
+            this.Help_ToolTip.SetToolTip(this.Palette_Default_PointerBox, resources.GetString("Palette_Default_PointerBox.ToolTip"));
             this.Palette_Default_PointerBox.ValueChanged += new System.EventHandler(this.Palette_Default_PointerBox_ValueChanged);
             // 
             // Palette_Character_ArrayBox
             // 
-            this.Palette_Character_ArrayBox.Location = new System.Drawing.Point(6, 119);
+            this.Palette_Character_ArrayBox.Enabled = false;
+            this.Palette_Character_ArrayBox.Location = new System.Drawing.Point(6, 96);
             this.Palette_Character_ArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.Palette_Character_ArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
             this.Palette_Character_ArrayBox.Size = new System.Drawing.Size(152, 26);
             this.Palette_Character_ArrayBox.TabIndex = 12;
+            this.Help_ToolTip.SetToolTip(this.Palette_Character_ArrayBox, "Select which character battle animation palette to view.");
             this.Palette_Character_ArrayBox.ValueChanged += new System.EventHandler(this.Palette_Character_ArrayBox_ValueChanged);
             // 
             // Palette_Character_TextBox
             // 
+            this.Palette_Character_TextBox.Enabled = false;
             this.Palette_Character_TextBox.Font = new System.Drawing.Font("Consolas", 8F);
             this.Palette_Character_TextBox.Location = new System.Drawing.Point(94, 70);
             this.Palette_Character_TextBox.Name = "Palette_Character_TextBox";
             this.Palette_Character_TextBox.Size = new System.Drawing.Size(64, 20);
             this.Palette_Character_TextBox.TabIndex = 21;
+            this.Help_ToolTip.SetToolTip(this.Palette_Character_TextBox, "The name of the currently selected character battle anim palette. Is useless.\r\nWi" +
+        "ll write to ROM if changed. Max length is 8 characters of text.");
             this.Palette_Character_TextBox.TextChanged += new System.EventHandler(this.Palette_Character_TextBox_TextChanged);
             // 
             // Palette_Character_Button
             // 
             this.Palette_Character_Button.AutoSize = true;
-            this.Palette_Character_Button.Location = new System.Drawing.Point(6, 96);
+            this.Palette_Character_Button.Location = new System.Drawing.Point(6, 122);
             this.Palette_Character_Button.Name = "Palette_Character_Button";
             this.Palette_Character_Button.Size = new System.Drawing.Size(77, 17);
             this.Palette_Character_Button.TabIndex = 11;
             this.Palette_Character_Button.TabStop = true;
             this.Palette_Character_Button.Text = "Character :";
+            this.Help_ToolTip.SetToolTip(this.Palette_Character_Button, "Radio button to view battle animations with a character-specific palette.");
             this.Palette_Character_Button.UseVisualStyleBackColor = true;
             // 
             // Palette_Default_ArrayBox
@@ -220,6 +238,7 @@
             this.Palette_Default_ArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
             this.Palette_Default_ArrayBox.Size = new System.Drawing.Size(152, 26);
             this.Palette_Default_ArrayBox.TabIndex = 9;
+            this.Help_ToolTip.SetToolTip(this.Palette_Default_ArrayBox, "Select which of the different default palettes to view (ally, enemy, NPC, etc).");
             this.Palette_Default_ArrayBox.ValueChanged += new System.EventHandler(this.Palette_Default_ArrayBox_ValueChanged);
             // 
             // Anim_Frame_Label
@@ -243,31 +262,36 @@
             this.Frame_ByteBox.Name = "Frame_ByteBox";
             this.Frame_ByteBox.Size = new System.Drawing.Size(40, 20);
             this.Frame_ByteBox.TabIndex = 18;
+            this.Help_ToolTip.SetToolTip(this.Frame_ByteBox, resources.GetString("Frame_ByteBox.ToolTip"));
             this.Frame_ByteBox.Value = ((byte)(0));
             this.Frame_ByteBox.ValueChanged += new System.EventHandler(this.FrameByteBox_ValueChanged);
             // 
             // OAM_L_Button
             // 
             this.OAM_L_Button.AutoSize = true;
-            this.OAM_L_Button.Location = new System.Drawing.Point(88, 251);
+            this.OAM_L_Button.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.OAM_L_Button.Location = new System.Drawing.Point(6, 250);
             this.OAM_L_Button.Name = "OAM_L_Button";
             this.OAM_L_Button.Size = new System.Drawing.Size(43, 17);
             this.OAM_L_Button.TabIndex = 17;
             this.OAM_L_Button.TabStop = true;
             this.OAM_L_Button.Text = "Left";
+            this.Help_ToolTip.SetToolTip(this.OAM_L_Button, "If checked, view the right-facing-left OAM for this battle animation.");
             this.OAM_L_Button.UseVisualStyleBackColor = true;
             this.OAM_L_Button.CheckedChanged += new System.EventHandler(this.OAM_CheckBox_CheckedChanged);
             // 
             // OAM_R_Button
             // 
             this.OAM_R_Button.AutoSize = true;
+            this.OAM_R_Button.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.OAM_R_Button.Checked = true;
-            this.OAM_R_Button.Location = new System.Drawing.Point(212, 251);
+            this.OAM_R_Button.Location = new System.Drawing.Point(126, 250);
             this.OAM_R_Button.Name = "OAM_R_Button";
             this.OAM_R_Button.Size = new System.Drawing.Size(50, 17);
             this.OAM_R_Button.TabIndex = 16;
             this.OAM_R_Button.TabStop = true;
             this.OAM_R_Button.Text = "Right";
+            this.Help_ToolTip.SetToolTip(this.OAM_R_Button, "If checked, view the right-facing-left OAM for this battle animation.");
             this.OAM_R_Button.UseVisualStyleBackColor = true;
             // 
             // AnimCodeBox
@@ -303,6 +327,9 @@
             this.AnimCodeBox.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("AnimCodeBox.ServiceColors")));
             this.AnimCodeBox.Size = new System.Drawing.Size(220, 140);
             this.AnimCodeBox.TabIndex = 14;
+            this.Help_ToolTip.SetToolTip(this.AnimCodeBox, "This text area is used to view the anim code, and/or modify it on the fly.\r\nThe s" +
+        "yntax is a bit different when calling frame IDs, rather than files (\"fXX\" rather" +
+        " than \"f[file.png]\").");
             this.AnimCodeBox.Zoom = 100;
             // 
             // Anim_Name_Label
@@ -317,7 +344,7 @@
             // AnimData_Label
             // 
             this.AnimData_Label.AutoSize = true;
-            this.AnimData_Label.Location = new System.Drawing.Point(347, 42);
+            this.AnimData_Label.Location = new System.Drawing.Point(347, 234);
             this.AnimData_Label.Name = "AnimData_Label";
             this.AnimData_Label.Size = new System.Drawing.Size(56, 13);
             this.AnimData_Label.TabIndex = 12;
@@ -326,7 +353,7 @@
             // Sections_Label
             // 
             this.Sections_Label.AutoSize = true;
-            this.Sections_Label.Location = new System.Drawing.Point(280, 42);
+            this.Sections_Label.Location = new System.Drawing.Point(280, 234);
             this.Sections_Label.Name = "Sections_Label";
             this.Sections_Label.Size = new System.Drawing.Size(48, 13);
             this.Sections_Label.TabIndex = 11;
@@ -335,10 +362,11 @@
             // Anim_Mode_ListBox
             // 
             this.Anim_Mode_ListBox.FormattingEnabled = true;
-            this.Anim_Mode_ListBox.Location = new System.Drawing.Point(258, 84);
+            this.Anim_Mode_ListBox.Location = new System.Drawing.Point(258, 58);
             this.Anim_Mode_ListBox.Name = "Anim_Mode_ListBox";
-            this.Anim_Mode_ListBox.Size = new System.Drawing.Size(145, 160);
+            this.Anim_Mode_ListBox.Size = new System.Drawing.Size(145, 173);
             this.Anim_Mode_ListBox.TabIndex = 10;
+            this.Help_ToolTip.SetToolTip(this.Anim_Mode_ListBox, resources.GetString("Anim_Mode_ListBox.ToolTip"));
             // 
             // Anim_Name_TextBox
             // 
@@ -347,12 +375,14 @@
             this.Anim_Name_TextBox.Name = "Anim_Name_TextBox";
             this.Anim_Name_TextBox.Size = new System.Drawing.Size(70, 20);
             this.Anim_Name_TextBox.TabIndex = 7;
+            this.Help_ToolTip.SetToolTip(this.Anim_Name_TextBox, "The name written in the ROM for this battle animation. (is essentially useless)\r\n" +
+        "Will write to ROM if changed. Max length is 8 characters/bytes.");
             this.Anim_Name_TextBox.TextChanged += new System.EventHandler(this.Anim_NameTextBox_TextChanged);
             // 
             // OAM_L_PointerBox
             // 
             this.OAM_L_PointerBox.Hexadecimal = true;
-            this.OAM_L_PointerBox.Location = new System.Drawing.Point(12, 250);
+            this.OAM_L_PointerBox.Location = new System.Drawing.Point(55, 250);
             this.OAM_L_PointerBox.Maximum = new decimal(new int[] {
             33554432,
             0,
@@ -361,12 +391,13 @@
             this.OAM_L_PointerBox.Name = "OAM_L_PointerBox";
             this.OAM_L_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.OAM_L_PointerBox.TabIndex = 5;
+            this.Help_ToolTip.SetToolTip(this.OAM_L_PointerBox, resources.GetString("OAM_L_PointerBox.ToolTip"));
             this.OAM_L_PointerBox.ValueChanged += new System.EventHandler(this.OAM_L_PointerBox_ValueChanged);
             // 
             // OAM_R_PointerBox
             // 
             this.OAM_R_PointerBox.Hexadecimal = true;
-            this.OAM_R_PointerBox.Location = new System.Drawing.Point(136, 250);
+            this.OAM_R_PointerBox.Location = new System.Drawing.Point(182, 250);
             this.OAM_R_PointerBox.Maximum = new decimal(new int[] {
             33554432,
             0,
@@ -375,12 +406,13 @@
             this.OAM_R_PointerBox.Name = "OAM_R_PointerBox";
             this.OAM_R_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.OAM_R_PointerBox.TabIndex = 4;
+            this.Help_ToolTip.SetToolTip(this.OAM_R_PointerBox, resources.GetString("OAM_R_PointerBox.ToolTip"));
             this.OAM_R_PointerBox.ValueChanged += new System.EventHandler(this.OAM_R_PointerBox_ValueChanged);
             // 
             // AnimData_PointerBox
             // 
             this.AnimData_PointerBox.Hexadecimal = true;
-            this.AnimData_PointerBox.Location = new System.Drawing.Point(333, 58);
+            this.AnimData_PointerBox.Location = new System.Drawing.Point(333, 250);
             this.AnimData_PointerBox.Maximum = new decimal(new int[] {
             33554432,
             0,
@@ -389,12 +421,13 @@
             this.AnimData_PointerBox.Name = "AnimData_PointerBox";
             this.AnimData_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.AnimData_PointerBox.TabIndex = 3;
+            this.Help_ToolTip.SetToolTip(this.AnimData_PointerBox, resources.GetString("AnimData_PointerBox.ToolTip"));
             this.AnimData_PointerBox.ValueChanged += new System.EventHandler(this.AnimDataPointerBox_ValueChanged);
             // 
             // Sections_PointerBox
             // 
             this.Sections_PointerBox.Hexadecimal = true;
-            this.Sections_PointerBox.Location = new System.Drawing.Point(258, 58);
+            this.Sections_PointerBox.Location = new System.Drawing.Point(258, 250);
             this.Sections_PointerBox.Maximum = new decimal(new int[] {
             33554432,
             0,
@@ -403,6 +436,7 @@
             this.Sections_PointerBox.Name = "Sections_PointerBox";
             this.Sections_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.Sections_PointerBox.TabIndex = 2;
+            this.Help_ToolTip.SetToolTip(this.Sections_PointerBox, resources.GetString("Sections_PointerBox.ToolTip"));
             this.Sections_PointerBox.ValueChanged += new System.EventHandler(this.SectionsPointerBox_ValueChanged);
             // 
             // Entry_ArrayBox
@@ -412,6 +446,7 @@
             this.Entry_ArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
             this.Entry_ArrayBox.Size = new System.Drawing.Size(240, 26);
             this.Entry_ArrayBox.TabIndex = 1;
+            this.Help_ToolTip.SetToolTip(this.Entry_ArrayBox, "Entry Selector - select which battle animation to view/edit");
             this.Entry_ArrayBox.ValueChanged += new System.EventHandler(this.EntryArrayBox_ValueChanged);
             // 
             // Anim_ImageBox
@@ -433,16 +468,21 @@
             this.AnimCode_Reset_Button.Size = new System.Drawing.Size(95, 28);
             this.AnimCode_Reset_Button.TabIndex = 25;
             this.AnimCode_Reset_Button.Text = "Reload code";
+            this.Help_ToolTip.SetToolTip(this.AnimCode_Reset_Button, "Revert the anim code back to its ROM state, removing and modifications written in" +
+        " the anim code text area that haven\'t been aplied.");
             this.AnimCode_Reset_Button.UseVisualStyleBackColor = true;
             this.AnimCode_Reset_Button.Click += new System.EventHandler(this.AnimCode_Reset_Button_Click);
             // 
             // Anim_Play_Button
             // 
-            this.Anim_Play_Button.Location = new System.Drawing.Point(310, 246);
+            this.Anim_Play_Button.Location = new System.Drawing.Point(258, 25);
             this.Anim_Play_Button.Name = "Anim_Play_Button";
-            this.Anim_Play_Button.Size = new System.Drawing.Size(93, 27);
+            this.Anim_Play_Button.Size = new System.Drawing.Size(145, 27);
             this.Anim_Play_Button.TabIndex = 28;
             this.Anim_Play_Button.Text = "Play Animation";
+            this.Help_ToolTip.SetToolTip(this.Anim_Play_Button, "Click on this button to view the currently selected battle animation mode.\r\nThe a" +
+        "nimation might play slower than it actually should, especially if there are affi" +
+        "ne sprite-rotation/scaling effects.");
             this.Anim_Play_Button.UseVisualStyleBackColor = true;
             this.Anim_Play_Button.Click += new System.EventHandler(this.PlayAnimButton_Click);
             // 
@@ -510,6 +550,14 @@
             this.File_SaveFiles.Size = new System.Drawing.Size(265, 22);
             this.File_SaveFiles.Text = "Save anim to files...";
             this.File_SaveFiles.Click += new System.EventHandler(this.File_SaveFiles_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(265, 22);
+            this.toolStripMenuItem1.Text = "Save this anim to GIF...";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.File_SaveGIF_Click);
             // 
             // File_SaveAllGIF
             // 
@@ -602,6 +650,7 @@
             this.Item_LayoutPanel.Name = "Item_LayoutPanel";
             this.Item_LayoutPanel.Size = new System.Drawing.Size(254, 366);
             this.Item_LayoutPanel.TabIndex = 1;
+            this.Help_ToolTip.SetToolTip(this.Item_LayoutPanel, resources.GetString("Item_LayoutPanel.ToolTip"));
             // 
             // Item_PointerArrayBox
             // 
@@ -612,15 +661,8 @@
             this.Item_PointerArrayBox.MinimumSize = new System.Drawing.Size(128, 26);
             this.Item_PointerArrayBox.Size = new System.Drawing.Size(249, 26);
             this.Item_PointerArrayBox.TabIndex = 0;
+            this.Help_ToolTip.SetToolTip(this.Item_PointerArrayBox, resources.GetString("Item_PointerArrayBox.ToolTip"));
             this.Item_PointerArrayBox.ValueChanged += new System.EventHandler(this.Item_PointerArrayBox_ValueChanged);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(265, 22);
-            this.toolStripMenuItem1.Text = "Save this anim to GIF...";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.File_SaveGIF_Click);
             // 
             // BattleAnimEditor
             // 

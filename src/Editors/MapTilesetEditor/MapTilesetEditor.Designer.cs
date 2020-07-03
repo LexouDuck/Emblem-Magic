@@ -196,9 +196,10 @@
             this.Palette_ArrayBox.Location = new System.Drawing.Point(5, 47);
             this.Palette_ArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.Palette_ArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
-            this.Palette_ArrayBox.Name = "Palette_ArrayBox";
             this.Palette_ArrayBox.Size = new System.Drawing.Size(223, 26);
             this.Palette_ArrayBox.TabIndex = 2;
+            this.Help_ToolTip.SetToolTip(this.Palette_ArrayBox, "Select the entry in the map array for the palette data to view/edit.\r\nThis is mea" +
+        "nt to select entries whose names start with [PAL].");
             this.Palette_ArrayBox.ValueChanged += new System.EventHandler(this.ArrayBox_ValueChanged);
             // 
             // Palette_Label
@@ -222,6 +223,8 @@
             this.Palette_PointerBox.Name = "Palette_PointerBox";
             this.Palette_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.Palette_PointerBox.TabIndex = 4;
+            this.Help_ToolTip.SetToolTip(this.Palette_PointerBox, "Pointer to the palette(s) for the tileset to view/edit.\r\nWill write to ROM if cha" +
+        "nged.");
             this.Palette_PointerBox.ValueChanged += new System.EventHandler(this.Palette_PointerBox_ValueChanged);
             // 
             // Tileset1_ArrayBox
@@ -229,9 +232,10 @@
             this.Tileset1_ArrayBox.Location = new System.Drawing.Point(5, 102);
             this.Tileset1_ArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.Tileset1_ArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
-            this.Tileset1_ArrayBox.Name = "Tileset1_ArrayBox";
             this.Tileset1_ArrayBox.Size = new System.Drawing.Size(223, 26);
             this.Tileset1_ArrayBox.TabIndex = 5;
+            this.Help_ToolTip.SetToolTip(this.Tileset1_ArrayBox, "Select the entry in the map array for the tileset/pixel data to view/edit.\r\nThis " +
+        "is meant to select entries whose names start with [IMG].\r\n");
             this.Tileset1_ArrayBox.ValueChanged += new System.EventHandler(this.ArrayBox_ValueChanged);
             // 
             // Tileset1_Label
@@ -264,6 +268,8 @@
             this.Tileset1_PointerBox.Name = "Tileset1_PointerBox";
             this.Tileset1_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.Tileset1_PointerBox.TabIndex = 7;
+            this.Help_ToolTip.SetToolTip(this.Tileset1_PointerBox, "Pointer to the 1st set of tileset/pixel data for this map tileset.\r\nWill write to" +
+        " ROM if changed.");
             this.Tileset1_PointerBox.ValueChanged += new System.EventHandler(this.Tileset1_PointerBox_ValueChanged);
             // 
             // Tileset2_PointerBox
@@ -278,6 +284,8 @@
             this.Tileset2_PointerBox.Name = "Tileset2_PointerBox";
             this.Tileset2_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.Tileset2_PointerBox.TabIndex = 7;
+            this.Help_ToolTip.SetToolTip(this.Tileset2_PointerBox, "Pointer to the 2nd set of tileset/pixel data for this map tileset.\r\nWill write to" +
+        " ROM if changed.");
             this.Tileset2_PointerBox.ValueChanged += new System.EventHandler(this.Tileset2_PointerBox_ValueChanged);
             // 
             // Tileset2_ArrayBox
@@ -285,9 +293,10 @@
             this.Tileset2_ArrayBox.Location = new System.Drawing.Point(5, 160);
             this.Tileset2_ArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.Tileset2_ArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
-            this.Tileset2_ArrayBox.Name = "Tileset2_ArrayBox";
             this.Tileset2_ArrayBox.Size = new System.Drawing.Size(223, 26);
             this.Tileset2_ArrayBox.TabIndex = 6;
+            this.Help_ToolTip.SetToolTip(this.Tileset2_ArrayBox, "Select the entry in the map array for the tileset/pixel data to view/edit.\r\nThis " +
+        "is meant to select entries whose names start with [IMG].");
             this.Tileset2_ArrayBox.ValueChanged += new System.EventHandler(this.ArrayBox_ValueChanged);
             // 
             // TilesetTSA_ArrayBox
@@ -295,9 +304,10 @@
             this.TilesetTSA_ArrayBox.Location = new System.Drawing.Point(5, 215);
             this.TilesetTSA_ArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.TilesetTSA_ArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
-            this.TilesetTSA_ArrayBox.Name = "TilesetTSA_ArrayBox";
             this.TilesetTSA_ArrayBox.Size = new System.Drawing.Size(223, 26);
             this.TilesetTSA_ArrayBox.TabIndex = 8;
+            this.Help_ToolTip.SetToolTip(this.TilesetTSA_ArrayBox, "Select the entry in the map array for the TSA/terrain data to view/edit.\r\nThis is" +
+        " meant to select entries whose names start with [TSA].");
             this.TilesetTSA_ArrayBox.ValueChanged += new System.EventHandler(this.ArrayBox_ValueChanged);
             // 
             // TileTSA_Label
@@ -321,6 +331,8 @@
             this.TilesetTSA_PointerBox.Name = "TilesetTSA_PointerBox";
             this.TilesetTSA_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.TilesetTSA_PointerBox.TabIndex = 10;
+            this.Help_ToolTip.SetToolTip(this.TilesetTSA_PointerBox, "Pointer to the TSA array + map tileset terrain data.\r\nWill write to ROM if change" +
+        "d.");
             this.TilesetTSA_PointerBox.ValueChanged += new System.EventHandler(this.TilesetTSA_PointerBox_ValueChanged);
             // 
             // TileAnim_PointerBox
@@ -335,6 +347,8 @@
             this.TileAnim_PointerBox.Name = "TileAnim_PointerBox";
             this.TileAnim_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.TileAnim_PointerBox.TabIndex = 20;
+            this.Help_ToolTip.SetToolTip(this.TileAnim_PointerBox, "Pointer to the data for this map tileset animation.\r\nWil write to ROM if changed." +
+        "");
             this.TileAnim_PointerBox.ValueChanged += new System.EventHandler(this.TileAnim_PointerBox_ValueChanged);
             // 
             // TileAnim_ArrayBox
@@ -342,9 +356,10 @@
             this.TileAnim_ArrayBox.Location = new System.Drawing.Point(8, 18);
             this.TileAnim_ArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.TileAnim_ArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
-            this.TileAnim_ArrayBox.Name = "TileAnim_ArrayBox";
             this.TileAnim_ArrayBox.Size = new System.Drawing.Size(180, 26);
             this.TileAnim_ArrayBox.TabIndex = 14;
+            this.Help_ToolTip.SetToolTip(this.TileAnim_ArrayBox, "Select map tileset animation to view/edit: this is an entry in the map array, its" +
+        " name should start with [ANM].");
             this.TileAnim_ArrayBox.ValueChanged += new System.EventHandler(this.TileAnim_ArrayBox_ValueChanged);
             // 
             // Terrain_GroupBox
@@ -373,32 +388,33 @@
             this.Terrain_Stat_GroupBox.Size = new System.Drawing.Size(222, 74);
             this.Terrain_Stat_GroupBox.TabIndex = 10;
             this.Terrain_Stat_GroupBox.TabStop = false;
-            this.Terrain_Stat_GroupBox.Text = "Terrain Stat Bonus";
+            this.Terrain_Stat_GroupBox.Text = "Edit Terrain Stat Bonuses";
             // 
             // Terrain_Stat_PointerArrayBox
             // 
-            this.Terrain_Stat_PointerArrayBox.Location = new System.Drawing.Point(10, 38);
+            this.Terrain_Stat_PointerArrayBox.Location = new System.Drawing.Point(10, 16);
             this.Terrain_Stat_PointerArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.Terrain_Stat_PointerArrayBox.MinimumSize = new System.Drawing.Size(128, 26);
-            this.Terrain_Stat_PointerArrayBox.Name = "Terrain_Stat_PointerArrayBox";
             this.Terrain_Stat_PointerArrayBox.Size = new System.Drawing.Size(203, 26);
             this.Terrain_Stat_PointerArrayBox.TabIndex = 7;
+            this.Help_ToolTip.SetToolTip(this.Terrain_Stat_PointerArrayBox, "Select the type of terrain stat buff/debuff to view/edit.");
             this.Terrain_Stat_PointerArrayBox.ValueChanged += new System.EventHandler(this.Terrain_Stat_PointerArrayBox_ValueChanged);
             // 
             // Terrain_Stat_Label
             // 
             this.Terrain_Stat_Label.AutoSize = true;
-            this.Terrain_Stat_Label.Location = new System.Drawing.Point(7, 22);
+            this.Terrain_Stat_Label.Location = new System.Drawing.Point(7, 45);
             this.Terrain_Stat_Label.Name = "Terrain_Stat_Label";
-            this.Terrain_Stat_Label.Size = new System.Drawing.Size(95, 13);
+            this.Terrain_Stat_Label.Size = new System.Drawing.Size(89, 13);
             this.Terrain_Stat_Label.TabIndex = 3;
-            this.Terrain_Stat_Label.Text = "Terrain Stat Type :";
+            this.Terrain_Stat_Label.Text = "Terrain Stat Type";
+            this.Help_ToolTip.SetToolTip(this.Terrain_Stat_Label, "Select the type of terrain stat buff/debuff to view/edit.");
             // 
             // Terrain_Stat_Value_Label
             // 
             this.Terrain_Stat_Value_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Terrain_Stat_Value_Label.AutoSize = true;
-            this.Terrain_Stat_Value_Label.Location = new System.Drawing.Point(105, 14);
+            this.Terrain_Stat_Value_Label.Location = new System.Drawing.Point(105, 50);
             this.Terrain_Stat_Value_Label.Name = "Terrain_Stat_Value_Label";
             this.Terrain_Stat_Value_Label.Size = new System.Drawing.Size(62, 13);
             this.Terrain_Stat_Value_Label.TabIndex = 4;
@@ -408,7 +424,7 @@
             // 
             this.Terrain_Stat_ByteBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Terrain_Stat_ByteBox.Hexadecimal = true;
-            this.Terrain_Stat_ByteBox.Location = new System.Drawing.Point(173, 12);
+            this.Terrain_Stat_ByteBox.Location = new System.Drawing.Point(173, 48);
             this.Terrain_Stat_ByteBox.Maximum = new decimal(new int[] {
             255,
             0,
@@ -417,22 +433,24 @@
             this.Terrain_Stat_ByteBox.Name = "Terrain_Stat_ByteBox";
             this.Terrain_Stat_ByteBox.Size = new System.Drawing.Size(40, 20);
             this.Terrain_Stat_ByteBox.TabIndex = 5;
+            this.Help_ToolTip.SetToolTip(this.Terrain_Stat_ByteBox, "The stat value for the currently selected terrain type.\r\nWill write to ROM if cha" +
+        "nged.");
             this.Terrain_Stat_ByteBox.Value = ((byte)(0));
             this.Terrain_Stat_ByteBox.ValueChanged += new System.EventHandler(this.Terrain_Stat_ByteBox_ValueChanged);
             // 
             // Terrain_Name_Label
             // 
             this.Terrain_Name_Label.AutoSize = true;
-            this.Terrain_Name_Label.Location = new System.Drawing.Point(22, 70);
+            this.Terrain_Name_Label.Location = new System.Drawing.Point(13, 70);
             this.Terrain_Name_Label.Name = "Terrain_Name_Label";
-            this.Terrain_Name_Label.Size = new System.Drawing.Size(130, 13);
+            this.Terrain_Name_Label.Size = new System.Drawing.Size(127, 13);
             this.Terrain_Name_Label.TabIndex = 9;
-            this.Terrain_Name_Label.Text = "Terrain Name Text Index :";
+            this.Terrain_Name_Label.Text = "Terrain Name Text Index:";
             // 
             // Terrain_Name_ShortBox
             // 
             this.Terrain_Name_ShortBox.Hexadecimal = true;
-            this.Terrain_Name_ShortBox.Location = new System.Drawing.Point(158, 68);
+            this.Terrain_Name_ShortBox.Location = new System.Drawing.Point(146, 68);
             this.Terrain_Name_ShortBox.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -441,27 +459,29 @@
             this.Terrain_Name_ShortBox.Name = "Terrain_Name_ShortBox";
             this.Terrain_Name_ShortBox.Size = new System.Drawing.Size(55, 20);
             this.Terrain_Name_ShortBox.TabIndex = 8;
+            this.Help_ToolTip.SetToolTip(this.Terrain_Name_ShortBox, "The text entry for the name of the currently selected terrain type.\r\nWill write t" +
+        "o ROM if changed.");
             this.Terrain_Name_ShortBox.Value = ((ushort)(0));
             this.Terrain_Name_ShortBox.ValueChanged += new System.EventHandler(this.Terrain_Name_ShortBox_ValueChanged);
             // 
             // Terrain_Class_GroupBox
             // 
             this.Terrain_Class_GroupBox.Controls.Add(this.Terrain_Class_Value_Label);
+            this.Terrain_Class_GroupBox.Controls.Add(this.Terrain_Class_PointerArrayBox);
             this.Terrain_Class_GroupBox.Controls.Add(this.Terrain_Class_Label);
             this.Terrain_Class_GroupBox.Controls.Add(this.Terrain_Class_ByteBox);
-            this.Terrain_Class_GroupBox.Controls.Add(this.Terrain_Class_PointerArrayBox);
             this.Terrain_Class_GroupBox.Location = new System.Drawing.Point(6, 174);
             this.Terrain_Class_GroupBox.Name = "Terrain_Class_GroupBox";
             this.Terrain_Class_GroupBox.Size = new System.Drawing.Size(222, 76);
             this.Terrain_Class_GroupBox.TabIndex = 6;
             this.Terrain_Class_GroupBox.TabStop = false;
-            this.Terrain_Class_GroupBox.Text = "Terrain Movement Costs";
+            this.Terrain_Class_GroupBox.Text = "Edit Terrain Movement Costs";
             // 
             // Terrain_Class_Value_Label
             // 
             this.Terrain_Class_Value_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Terrain_Class_Value_Label.AutoSize = true;
-            this.Terrain_Class_Value_Label.Location = new System.Drawing.Point(103, 15);
+            this.Terrain_Class_Value_Label.Location = new System.Drawing.Point(103, 52);
             this.Terrain_Class_Value_Label.Name = "Terrain_Class_Value_Label";
             this.Terrain_Class_Value_Label.Size = new System.Drawing.Size(64, 13);
             this.Terrain_Class_Value_Label.TabIndex = 8;
@@ -470,17 +490,18 @@
             // Terrain_Class_Label
             // 
             this.Terrain_Class_Label.AutoSize = true;
-            this.Terrain_Class_Label.Location = new System.Drawing.Point(7, 23);
+            this.Terrain_Class_Label.Location = new System.Drawing.Point(7, 44);
             this.Terrain_Class_Label.Name = "Terrain_Class_Label";
-            this.Terrain_Class_Label.Size = new System.Drawing.Size(73, 13);
+            this.Terrain_Class_Label.Size = new System.Drawing.Size(67, 13);
             this.Terrain_Class_Label.TabIndex = 8;
-            this.Terrain_Class_Label.Text = "Struct to edit :";
+            this.Terrain_Class_Label.Text = "Struct to edit";
+            this.Help_ToolTip.SetToolTip(this.Terrain_Class_Label, "Select the type of unit whose movement cost to view/edit.");
             // 
             // Terrain_Class_ByteBox
             // 
             this.Terrain_Class_ByteBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Terrain_Class_ByteBox.Hexadecimal = true;
-            this.Terrain_Class_ByteBox.Location = new System.Drawing.Point(173, 13);
+            this.Terrain_Class_ByteBox.Location = new System.Drawing.Point(173, 50);
             this.Terrain_Class_ByteBox.Maximum = new decimal(new int[] {
             255,
             0,
@@ -489,17 +510,19 @@
             this.Terrain_Class_ByteBox.Name = "Terrain_Class_ByteBox";
             this.Terrain_Class_ByteBox.Size = new System.Drawing.Size(40, 20);
             this.Terrain_Class_ByteBox.TabIndex = 9;
+            this.Help_ToolTip.SetToolTip(this.Terrain_Class_ByteBox, "The amount of movement cost for the selected terrain type, and unit type.\r\nWill w" +
+        "rite to ROM if changed.");
             this.Terrain_Class_ByteBox.Value = ((byte)(0));
             this.Terrain_Class_ByteBox.ValueChanged += new System.EventHandler(this.Terrain_Class_ByteBox_ValueChanged);
             // 
             // Terrain_Class_PointerArrayBox
             // 
-            this.Terrain_Class_PointerArrayBox.Location = new System.Drawing.Point(10, 39);
+            this.Terrain_Class_PointerArrayBox.Location = new System.Drawing.Point(10, 18);
             this.Terrain_Class_PointerArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.Terrain_Class_PointerArrayBox.MinimumSize = new System.Drawing.Size(128, 26);
-            this.Terrain_Class_PointerArrayBox.Name = "Terrain_Class_PointerArrayBox";
             this.Terrain_Class_PointerArrayBox.Size = new System.Drawing.Size(203, 26);
             this.Terrain_Class_PointerArrayBox.TabIndex = 0;
+            this.Help_ToolTip.SetToolTip(this.Terrain_Class_PointerArrayBox, "Select the type of unit whose movement cost to view/edit.");
             this.Terrain_Class_PointerArrayBox.ValueChanged += new System.EventHandler(this.Terrain_Class_PointerArrayBox_ValueChanged);
             // 
             // Terrain_Label
@@ -516,9 +539,9 @@
             this.Terrain_ArrayBox.Location = new System.Drawing.Point(16, 36);
             this.Terrain_ArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.Terrain_ArrayBox.MinimumSize = new System.Drawing.Size(128, 26);
-            this.Terrain_ArrayBox.Name = "Terrain_ArrayBox";
             this.Terrain_ArrayBox.Size = new System.Drawing.Size(203, 26);
             this.Terrain_ArrayBox.TabIndex = 0;
+            this.Help_ToolTip.SetToolTip(this.Terrain_ArrayBox, "Select the type of terrain square to view/edit.");
             this.Terrain_ArrayBox.ValueChanged += new System.EventHandler(this.Terrain_ArrayBox_ValueChanged);
             // 
             // TileAnim_Duration_ByteBox
@@ -533,6 +556,8 @@
             this.TileAnim_Duration_ByteBox.Name = "TileAnim_Duration_ByteBox";
             this.TileAnim_Duration_ByteBox.Size = new System.Drawing.Size(40, 20);
             this.TileAnim_Duration_ByteBox.TabIndex = 35;
+            this.Help_ToolTip.SetToolTip(this.TileAnim_Duration_ByteBox, "The amount of time (in amount of frames, 60fps) that this frame of map tileset an" +
+        "imation should last.\r\nWill write to ROM if changed.");
             this.TileAnim_Duration_ByteBox.Value = ((byte)(0));
             this.TileAnim_Duration_ByteBox.ValueChanged += new System.EventHandler(this.TileAnim_Duration_ByteBox_ValueChanged);
             // 
@@ -548,6 +573,8 @@
             this.TileAnim_Length_ByteBox.Name = "TileAnim_Length_ByteBox";
             this.TileAnim_Length_ByteBox.Size = new System.Drawing.Size(40, 20);
             this.TileAnim_Length_ByteBox.TabIndex = 36;
+            this.Help_ToolTip.SetToolTip(this.TileAnim_Length_ByteBox, "The length of the frame data (pointer to this data is just up above).\r\nWill write" +
+        " to ROM if changed.");
             this.TileAnim_Length_ByteBox.Value = ((byte)(0));
             this.TileAnim_Length_ByteBox.ValueChanged += new System.EventHandler(this.TileAnim_Length_ByteBox_ValueChanged);
             // 
@@ -581,6 +608,7 @@
             this.TileAnim_Frame_ByteBox.Name = "TileAnim_Frame_ByteBox";
             this.TileAnim_Frame_ByteBox.Size = new System.Drawing.Size(40, 20);
             this.TileAnim_Frame_ByteBox.TabIndex = 39;
+            this.Help_ToolTip.SetToolTip(this.TileAnim_Frame_ByteBox, "Select the index of the frame to view for this map anim.");
             this.TileAnim_Frame_ByteBox.Value = ((byte)(0));
             this.TileAnim_Frame_ByteBox.ValueChanged += new System.EventHandler(this.TileAnim_Frame_ByteBox_ValueChanged);
             // 
@@ -605,6 +633,8 @@
             this.TileAnim_Data_PointerBox.Name = "TileAnim_Data_PointerBox";
             this.TileAnim_Data_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.TileAnim_Data_PointerBox.TabIndex = 41;
+            this.Help_ToolTip.SetToolTip(this.TileAnim_Data_PointerBox, "Pointer to the data for this frame of map tileset animation.\r\nWill write to ROM i" +
+        "f changed.");
             this.TileAnim_Data_PointerBox.ValueChanged += new System.EventHandler(this.TileAnim_Data_PointerBox_ValueChanged);
             // 
             // TileAnim_GroupBox
@@ -653,6 +683,7 @@
             this.TileAnim_Offset_ByteBox.Name = "TileAnim_Offset_ByteBox";
             this.TileAnim_Offset_ByteBox.Size = new System.Drawing.Size(40, 20);
             this.TileAnim_Offset_ByteBox.TabIndex = 47;
+            this.Help_ToolTip.SetToolTip(this.TileAnim_Offset_ByteBox, "The color offset for this map animation.\r\nWill write to ROM if changed.");
             this.TileAnim_Offset_ByteBox.Value = ((byte)(0));
             this.TileAnim_Offset_ByteBox.ValueChanged += new System.EventHandler(this.TileAnim_Offset_ByteBox_ValueChanged);
             // 
@@ -675,6 +706,8 @@
             this.TileAnim_Tileset_RadioButton.TabIndex = 45;
             this.TileAnim_Tileset_RadioButton.TabStop = true;
             this.TileAnim_Tileset_RadioButton.Text = "Graphics change";
+            this.Help_ToolTip.SetToolTip(this.TileAnim_Tileset_RadioButton, "If checked, then this map tileset anim if a pixel data graphics animation.\r\nWill " +
+        "write to ROM if changed.");
             this.TileAnim_Tileset_RadioButton.UseVisualStyleBackColor = true;
             this.TileAnim_Tileset_RadioButton.Click += new System.EventHandler(this.TileAnim_RadioButton_Click);
             // 
@@ -686,6 +719,8 @@
             this.TileAnim_Palette_RadioButton.Size = new System.Drawing.Size(97, 17);
             this.TileAnim_Palette_RadioButton.TabIndex = 44;
             this.TileAnim_Palette_RadioButton.Text = "Palette change";
+            this.Help_ToolTip.SetToolTip(this.TileAnim_Palette_RadioButton, "If checked, the currently selected map tileset animation is a palette color chang" +
+        "e animation.\r\nWill write to ROM if changed.");
             this.TileAnim_Palette_RadioButton.UseVisualStyleBackColor = true;
             this.TileAnim_Palette_RadioButton.Click += new System.EventHandler(this.TileAnim_RadioButton_Click);
             // 
@@ -699,6 +734,7 @@
             this.TileAnim_ImageBox.TabIndex = 43;
             this.TileAnim_ImageBox.TabStop = false;
             this.TileAnim_ImageBox.Text = "imageBox1";
+            this.Help_ToolTip.SetToolTip(this.TileAnim_ImageBox, "The image display for the pixel data associated to this map tile animation.");
             // 
             // TileAnim_PaletteBox
             // 
@@ -709,6 +745,7 @@
             this.TileAnim_PaletteBox.TabIndex = 42;
             this.TileAnim_PaletteBox.TabStop = false;
             this.TileAnim_PaletteBox.Text = "paletteBox1";
+            this.Help_ToolTip.SetToolTip(this.TileAnim_PaletteBox, "The palette to display the selected map tileset animation.");
             // 
             // Tileset_PaletteBox
             // 
@@ -720,6 +757,8 @@
             this.Tileset_PaletteBox.TabIndex = 47;
             this.Tileset_PaletteBox.TabStop = false;
             this.Tileset_PaletteBox.Text = "paletteBox1";
+            this.Help_ToolTip.SetToolTip(this.Tileset_PaletteBox, "The palette(s) used by this map tileset.\r\nClick on this to open an appropriate Pa" +
+        "letteEditor, to modify this palette.");
             // 
             // Tileset_ImageBox
             // 
@@ -744,6 +783,8 @@
             this.ViewPalette_ByteBox.Name = "ViewPalette_ByteBox";
             this.ViewPalette_ByteBox.Size = new System.Drawing.Size(40, 20);
             this.ViewPalette_ByteBox.TabIndex = 49;
+            this.Help_ToolTip.SetToolTip(this.ViewPalette_ByteBox, "Select the index/offset of the palette to use for displaying the pixel data below" +
+        ".");
             this.ViewPalette_ByteBox.Value = ((byte)(0));
             this.ViewPalette_ByteBox.ValueChanged += new System.EventHandler(this.ViewPalette_ByteBox_ValueChanged);
             // 
@@ -766,6 +807,8 @@
             this.ViewAnimation_CheckBox.Size = new System.Drawing.Size(98, 17);
             this.ViewAnimation_CheckBox.TabIndex = 51;
             this.ViewAnimation_CheckBox.Text = "View Animation";
+            this.Help_ToolTip.SetToolTip(this.ViewAnimation_CheckBox, "If checked, view how map animation data alters the tileset pixel data, in the pix" +
+        "el data preview below.");
             this.ViewAnimation_CheckBox.UseVisualStyleBackColor = true;
             this.ViewAnimation_CheckBox.CheckedChanged += new System.EventHandler(this.ViewAnimation_CheckBox_CheckedChanged);
             // 

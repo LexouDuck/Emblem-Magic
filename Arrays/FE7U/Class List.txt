@@ -1,13 +1,13 @@
 0x00 None
-0x01 Eliwood Lord
-0x02 Lyn Lord
-0x03 Hector Lord
-0x04 Fake Knight Lord
-0x05 Fake Blade Lord 
-0x06 Fake Great Lord
-0x07 Eliwood Knight Lord
-0x08 Lyn Blade Lord
-0x09 Hector Great Lord
+0x01 Lord (Eliwood)
+0x02 Lord (Lyn)
+0x03 Lord (Hector)
+0x04 Knight Lord (Fake)
+0x05 Blade Lord  (Fake)
+0x06 Great Lord (Fake)
+0x07 Knight Lord (Eliwood)
+0x08 Blade Lord (Lyn)
+0x09 Great Lord (Hector)
 0x0A Mercenary
 0x0B Mercenary (F)
 0x0C Hero

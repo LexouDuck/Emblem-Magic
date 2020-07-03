@@ -88,12 +88,12 @@
             this.EditGroupBox.TabStop = false;
             this.EditGroupBox.Text = "Edit Map Sprite Array";
             // 
-            // GBAImageBox
+            // Edit_ImageBox
             // 
             this.Edit_ImageBox.BackColor = System.Drawing.SystemColors.Control;
             this.Edit_ImageBox.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.Edit_ImageBox.Location = new System.Drawing.Point(144, 19);
-            this.Edit_ImageBox.Name = "GBAImageBox";
+            this.Edit_ImageBox.Name = "Edit_ImageBox";
             this.Edit_ImageBox.Size = new System.Drawing.Size(160, 128);
             this.Edit_ImageBox.TabIndex = 0;
             this.Edit_ImageBox.TabStop = false;
@@ -120,6 +120,9 @@
             this.IdlePointerBox.Name = "IdlePointerBox";
             this.IdlePointerBox.Size = new System.Drawing.Size(70, 20);
             this.IdlePointerBox.TabIndex = 1;
+            this.Help_ToolTip.SetToolTip(this.IdlePointerBox, "Pointer to the pixel data for the current \"idle\" map sprite.\r\nWill write to ROM i" +
+        "f changed. Is repointed when inserting a new map sprite with \"File -> Insert ima" +
+        "ge...\".");
             // 
             // SizeLabel
             // 
@@ -142,6 +145,9 @@
             this.WalkPointerBox.Name = "WalkPointerBox";
             this.WalkPointerBox.Size = new System.Drawing.Size(70, 20);
             this.WalkPointerBox.TabIndex = 2;
+            this.Help_ToolTip.SetToolTip(this.WalkPointerBox, "Pointer to the pixel data for the current \"move\" map sprite.\r\nWill write to ROM i" +
+        "f changed. Is repointed when inserting a new map sprite with \"File -> Insert ima" +
+        "ge...\".");
             // 
             // AnimPointerLabel
             // 
@@ -164,6 +170,8 @@
             this.AnimPointerBox.Name = "AnimPointerBox";
             this.AnimPointerBox.Size = new System.Drawing.Size(70, 20);
             this.AnimPointerBox.TabIndex = 3;
+            this.Help_ToolTip.SetToolTip(this.AnimPointerBox, "Pointer to the animation data for the current \"idle\" map sprite.\r\nWill write to R" +
+        "OM if changed.");
             // 
             // WalkPointerLabel
             // 
@@ -180,6 +188,9 @@
             this.SizeComboBox.Name = "SizeComboBox";
             this.SizeComboBox.Size = new System.Drawing.Size(70, 21);
             this.SizeComboBox.TabIndex = 5;
+            this.Help_ToolTip.SetToolTip(this.SizeComboBox, "This dropdown selects the size of the current \"idle\" map sprite.\r\nWill write to R" +
+        "OM if changed. Is changed automatically when inserting a new map sprite with \"Fi" +
+        "le -> Insert image...\".");
             // 
             // IdlePointerLabel
             // 
@@ -202,6 +213,7 @@
             this.UnknownNumberBox.Name = "UnknownNumberBox";
             this.UnknownNumberBox.Size = new System.Drawing.Size(50, 20);
             this.UnknownNumberBox.TabIndex = 6;
+            this.Help_ToolTip.SetToolTip(this.UnknownNumberBox, "An unkown number within each map sprite struct.\r\nWill write to ROM if changed.");
             this.UnknownNumberBox.Value = ((byte)(0));
             this.UnknownNumberBox.ValueChanged += new System.EventHandler(this.Unknown_NumBox_ValueChanged);
             // 
@@ -228,9 +240,9 @@
             this.IdleEntryArrayBox.Location = new System.Drawing.Point(73, 27);
             this.IdleEntryArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.IdleEntryArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
-            this.IdleEntryArrayBox.Name = "IdleEntryArrayBox";
             this.IdleEntryArrayBox.Size = new System.Drawing.Size(249, 26);
             this.IdleEntryArrayBox.TabIndex = 4;
+            this.Help_ToolTip.SetToolTip(this.IdleEntryArrayBox, "Select an \"idle\" map sprite to view/edit.");
             this.IdleEntryArrayBox.ValueChanged += new System.EventHandler(this.EntryArrayBox_ValueChanged);
             // 
             // WalkEntryArrayBox
@@ -238,9 +250,9 @@
             this.WalkEntryArrayBox.Location = new System.Drawing.Point(73, 59);
             this.WalkEntryArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.WalkEntryArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
-            this.WalkEntryArrayBox.Name = "WalkEntryArrayBox";
             this.WalkEntryArrayBox.Size = new System.Drawing.Size(249, 26);
             this.WalkEntryArrayBox.TabIndex = 15;
+            this.Help_ToolTip.SetToolTip(this.WalkEntryArrayBox, "Select the \"move\" map sprite to view/edit.");
             this.WalkEntryArrayBox.ValueChanged += new System.EventHandler(this.EntryArrayBox_ValueChanged);
             // 
             // TestGroupBox
@@ -269,6 +281,7 @@
             this.Test_Selected.Size = new System.Drawing.Size(67, 17);
             this.Test_Selected.TabIndex = 9;
             this.Test_Selected.Text = "Selected";
+            this.Help_ToolTip.SetToolTip(this.Test_Selected, "Check this radio button to view the cursor-hover map sprite anim in the preview.");
             this.Test_Selected.UseVisualStyleBackColor = true;
             this.Test_Selected.CheckedChanged += new System.EventHandler(this.Test_Selected_CheckedChanged);
             // 
@@ -282,6 +295,7 @@
             this.Test_Idle.TabIndex = 8;
             this.Test_Idle.TabStop = true;
             this.Test_Idle.Text = "Standing";
+            this.Help_ToolTip.SetToolTip(this.Test_Idle, "Check this radio button to view the idle map sprite anim in the preview.\r\n");
             this.Test_Idle.UseVisualStyleBackColor = true;
             this.Test_Idle.CheckedChanged += new System.EventHandler(this.Test_Idle_CheckedChanged);
             // 
@@ -290,9 +304,9 @@
             this.PaletteArrayBox.Location = new System.Drawing.Point(79, 62);
             this.PaletteArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.PaletteArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
-            this.PaletteArrayBox.Name = "PaletteArrayBox";
             this.PaletteArrayBox.Size = new System.Drawing.Size(137, 26);
             this.PaletteArrayBox.TabIndex = 7;
+            this.Help_ToolTip.SetToolTip(this.PaletteArrayBox, "Select the map sprite palette to use for displaying the map sprite preview.");
             this.PaletteArrayBox.ValueChanged += new System.EventHandler(this.PaletteArrayBox_ValueChanged);
             // 
             // Test_WalkSide
@@ -303,6 +317,8 @@
             this.Test_WalkSide.Size = new System.Drawing.Size(74, 17);
             this.Test_WalkSide.TabIndex = 6;
             this.Test_WalkSide.Text = "Walk Side";
+            this.Help_ToolTip.SetToolTip(this.Test_WalkSide, "Check this radio button to view the move-to-the-side map sprite anim in the previ" +
+        "ew.");
             this.Test_WalkSide.UseVisualStyleBackColor = true;
             this.Test_WalkSide.CheckedChanged += new System.EventHandler(this.Test_WalkUp_CheckedChanged);
             // 
@@ -314,6 +330,8 @@
             this.Test_WalkUp.Size = new System.Drawing.Size(67, 17);
             this.Test_WalkUp.TabIndex = 5;
             this.Test_WalkUp.Text = "Walk Up";
+            this.Help_ToolTip.SetToolTip(this.Test_WalkUp, "Check this radio button to view the move-upwards map sprite anim in the preview.\r" +
+        "\n");
             this.Test_WalkUp.UseVisualStyleBackColor = true;
             this.Test_WalkUp.CheckedChanged += new System.EventHandler(this.Test_WalkDown_CheckedChanged);
             // 
@@ -325,20 +343,24 @@
             this.Test_WalkDown.Size = new System.Drawing.Size(81, 17);
             this.Test_WalkDown.TabIndex = 4;
             this.Test_WalkDown.Text = "Walk Down";
+            this.Help_ToolTip.SetToolTip(this.Test_WalkDown, "Check this radio button to view the move-downwards map sprite anim in the preview" +
+        ".");
             this.Test_WalkDown.UseVisualStyleBackColor = true;
             this.Test_WalkDown.CheckedChanged += new System.EventHandler(this.Test_WalkSide_CheckedChanged);
             // 
-            // ColorPaletteBox
+            // Test_PaletteBox
             // 
             this.Test_PaletteBox.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.Test_PaletteBox.ColorsPerLine = 8;
             this.Test_PaletteBox.ForeColor = System.Drawing.SystemColors.Control;
             this.Test_PaletteBox.Location = new System.Drawing.Point(222, 64);
-            this.Test_PaletteBox.Name = "ColorPaletteBox";
+            this.Test_PaletteBox.Name = "Test_PaletteBox";
             this.Test_PaletteBox.Size = new System.Drawing.Size(80, 20);
             this.Test_PaletteBox.TabIndex = 1;
             this.Test_PaletteBox.TabStop = false;
             this.Test_PaletteBox.Text = "GBAPaletteBox";
+            this.Help_ToolTip.SetToolTip(this.Test_PaletteBox, "The currently selected map sprite palette.\r\nClick on this to open a PaletteEditor" +
+        ", to modify this palette.");
             this.Test_PaletteBox.Click += new System.EventHandler(this.PaletteBox_Click);
             // 
             // Test_TrackBar
@@ -348,14 +370,15 @@
             this.Test_TrackBar.Name = "Test_TrackBar";
             this.Test_TrackBar.Size = new System.Drawing.Size(104, 45);
             this.Test_TrackBar.TabIndex = 2;
+            this.Help_ToolTip.SetToolTip(this.Test_TrackBar, "This slider selects the frame to display in the map sprite preview.");
             this.Test_TrackBar.ValueChanged += new System.EventHandler(this.Test_TrackBar_ValueChanged);
             // 
-            // TestViewBox
+            // Test_ImageBox
             // 
             this.Test_ImageBox.BackColor = System.Drawing.SystemColors.Control;
             this.Test_ImageBox.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.Test_ImageBox.Location = new System.Drawing.Point(270, 14);
-            this.Test_ImageBox.Name = "TestViewBox";
+            this.Test_ImageBox.Name = "Test_ImageBox";
             this.Test_ImageBox.Size = new System.Drawing.Size(32, 32);
             this.Test_ImageBox.TabIndex = 0;
             this.Test_ImageBox.TabStop = false;

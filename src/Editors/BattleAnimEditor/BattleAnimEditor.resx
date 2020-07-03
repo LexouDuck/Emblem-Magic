@@ -120,6 +120,15 @@
   <metadata name="Help_ToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="Palette_Default_PointerBox.ToolTip" xml:space="preserve">
+    <value>Pointer to the default palette for this battle animation (actually there are several palettes, for default blue/ally, green/NPC, red/enemy, etc).
+Will write to ROM if changed. Is repointed when inserting a new battle anim with "File -&gt; Insert anim...".</value>
+  </data>
+  <data name="Frame_ByteBox.ToolTip" xml:space="preserve">
+    <value>Selects the frame to view. How this number is interpreted depends on the "View -&gt; View by frame number" option.
+By default, the number represents which "line" of the anim code we are at (excluding any "cXX" lines).
+If "View by frame number" is checked, then this number is the actual frame ID, as refenced in the anim code ("fXX/bXX")</value>
+  </data>
   <data name="AnimCodeBox.ServiceColors" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdGYXN0Q29sb3JlZFRleHRCb3gsIFZlcnNpb249Mi4xNi4yMy4w
@@ -138,10 +147,45 @@
         CgAAAAAAAAAAjQABAAH4/////P///woAAAAAAAAAAKQAAQAB9/////z///8KAAAAAAAAAACWAAEACw==
 </value>
   </data>
+  <data name="Anim_Mode_ListBox.ToolTip" xml:space="preserve">
+    <value>This ListBox selects which animation "mode" to view.
+There are 12 animation modes in total, which occur in different battle situations.
+If the option "View -&gt; View two-layer anim modes as one" is checked, then the total number of
+modes becomes 9, because some of the animation modes are fused for easier viewing.</value>
+  </data>
+  <data name="OAM_L_PointerBox.ToolTip" xml:space="preserve">
+    <value>Pointer to the left-side sprite object data for this battle anim (all modes stored in the same compressed block).
+Will write to ROM if changed. Is repointed when inserting a new battle anim with "File -&gt; Insert anim...".</value>
+  </data>
+  <data name="OAM_R_PointerBox.ToolTip" xml:space="preserve">
+    <value>Pointer to the right-side sprite object data for this battle anim (all modes stored in the same compressed block).
+Will write to ROM if changed. Is repointed when inserting a new battle anim with "File -&gt; Insert anim...".
+</value>
+  </data>
+  <data name="AnimData_PointerBox.ToolTip" xml:space="preserve">
+    <value>Pointer to the battle animation data - i.e., the animation code shown in the text area below, in byte form.
+Will write to ROM if changed. Is repointed when inserting a new battle anim with "File -&gt; Insert anim...".</value>
+  </data>
+  <data name="Sections_PointerBox.ToolTip" xml:space="preserve">
+    <value>Pointer to the list of battle animation "section offsets", these are numbers that tell how the anim data/code is split up.
+Will write to ROM if changed. Is repointed when inserting a new battle anim with "File -&gt; Insert anim...".</value>
+  </data>
   <metadata name="PlayAnimTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>140, 17</value>
   </metadata>
   <metadata name="MenuBar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>273, 17</value>
   </metadata>
+  <data name="Item_LayoutPanel.ToolTip" xml:space="preserve">
+    <value>In this panel, the list of class/item associations for a certain class is shown.
+This list is terminated with an entry which is all 0s, so if you want to add another item to the list,
+simply change the values of the last item so that they aren't zeroed out.
+(Doing this might fuse this association list with the following one in the ROM, so maybe consider
+copying the association list data and repointing to elsewhere in the ROM before modifying it.</value>
+  </data>
+  <data name="Item_PointerArrayBox.ToolTip" xml:space="preserve">
+    <value>Select which battle animation association struct should be viewed.
+The battle animation association struct informs the game which class/weapon should use which battle anim.
+This panel on the right of the window is for editing association structs, rather than battle anims themselves.</value>
+  </data>
 </root>

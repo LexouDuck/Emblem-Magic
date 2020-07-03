@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ASMEditor));
             this.Read_AddressBox = new EmblemMagic.Components.PointerBox();
             this.Read_AddressLabel = new System.Windows.Forms.Label();
             this.Read_LengthLabel = new System.Windows.Forms.Label();
@@ -124,6 +125,7 @@
             this.Read_AddressBox.Name = "Read_AddressBox";
             this.Read_AddressBox.Size = new System.Drawing.Size(70, 20);
             this.Read_AddressBox.TabIndex = 5;
+            this.Help_ToolTip.SetToolTip(this.Read_AddressBox, "The address at which to dissassemble ASM code.");
             // 
             // Read_AddressLabel
             // 
@@ -155,6 +157,7 @@
             this.Read_LengthBox.Name = "Read_LengthBox";
             this.Read_LengthBox.Size = new System.Drawing.Size(70, 20);
             this.Read_LengthBox.TabIndex = 6;
+            this.Help_ToolTip.SetToolTip(this.Read_LengthBox, "The length, in bytes, of the data to dissassemble.");
             this.Read_LengthBox.Value = new decimal(new int[] {
             1,
             0,
@@ -169,6 +172,8 @@
             this.Read_ARM_RadioButton.Size = new System.Drawing.Size(49, 17);
             this.Read_ARM_RadioButton.TabIndex = 7;
             this.Read_ARM_RadioButton.Text = "ARM";
+            this.Help_ToolTip.SetToolTip(this.Read_ARM_RadioButton, "If checked, will dissassemble bytecode as ARM assembly. (WIP, not guaranteed to w" +
+        "ork properly)");
             this.Read_ARM_RadioButton.UseVisualStyleBackColor = true;
             // 
             // Read_ThumbRadioButton
@@ -181,6 +186,7 @@
             this.Read_ThumbRadioButton.TabIndex = 8;
             this.Read_ThumbRadioButton.TabStop = true;
             this.Read_ThumbRadioButton.Text = "Thumb";
+            this.Help_ToolTip.SetToolTip(this.Read_ThumbRadioButton, "If checked, will dissassemble bytecode as ARM \"Thumb\" instructions.");
             this.Read_ThumbRadioButton.UseVisualStyleBackColor = true;
             // 
             // Read_OKButton
@@ -190,6 +196,7 @@
             this.Read_OKButton.Size = new System.Drawing.Size(125, 28);
             this.Read_OKButton.TabIndex = 9;
             this.Read_OKButton.Text = "Disassemble";
+            this.Help_ToolTip.SetToolTip(this.Read_OKButton, "Click on this button to dissassemble bytecode into ASM instructions.");
             this.Read_OKButton.UseVisualStyleBackColor = true;
             this.Read_OKButton.Click += new System.EventHandler(this.DissassembleButton_Click);
             // 
@@ -303,6 +310,7 @@
             this.Test_ResetCPUButton.Size = new System.Drawing.Size(133, 28);
             this.Test_ResetCPUButton.TabIndex = 18;
             this.Test_ResetCPUButton.Text = "Reset registers";
+            this.Help_ToolTip.SetToolTip(this.Test_ResetCPUButton, "Sets all the register number boxes to 0.");
             this.Test_ResetCPUButton.UseVisualStyleBackColor = true;
             this.Test_ResetCPUButton.Click += new System.EventHandler(this.Test_ResetCPUButton_Click);
             // 
@@ -314,6 +322,7 @@
             this.Test_ReadLineButton.Size = new System.Drawing.Size(132, 28);
             this.Test_ReadLineButton.TabIndex = 17;
             this.Test_ReadLineButton.Text = "Read selected line";
+            this.Help_ToolTip.SetToolTip(this.Test_ReadLineButton, resources.GetString("Test_ReadLineButton.ToolTip"));
             this.Test_ReadLineButton.UseVisualStyleBackColor = true;
             this.Test_ReadLineButton.Click += new System.EventHandler(this.Test_ReadLineButton_Click);
             // 

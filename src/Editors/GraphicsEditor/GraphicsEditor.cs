@@ -458,12 +458,12 @@ namespace EmblemMagic.Editors
         {
             if (Palette_CheckBox.Checked)
             {
-                Palette_Index_Label.Enabled = false;
+                Palette_Offset_Label.Enabled = false;
                 Palette_Index_NumBox.Enabled = false;
             }
             else
             {
-                Palette_Index_Label.Enabled = true;
+                Palette_Offset_Label.Enabled = true;
                 Palette_Index_NumBox.Enabled = true;
             }
             Core_Update();

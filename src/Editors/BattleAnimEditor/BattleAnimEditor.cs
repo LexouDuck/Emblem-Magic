@@ -156,7 +156,9 @@ namespace EmblemMagic.Editors
                 Anim_Mode_ListBox.SelectedIndexChanged += AnimListBox_SelectedIndexChanged;
 
                 AnimCodeBox.AddSyntax("#.*", SystemColors.ControlDark);
-                AnimCodeBox.AddSyntax("a|b|c|d|f|end", SystemColors.Highlight, FontStyle.Bold);
+                AnimCodeBox.AddSyntax(@"(a|b|c|d|f|end)(?=[0-9a-fA-F][0-9a-fA-F])", SystemColors.Highlight, FontStyle.Bold);
+                AnimCodeBox.AddSyntax(@"(end)", SystemColors.Highlight, FontStyle.Bold);
+                AnimCodeBox.AddSyntax(@"(?<=(a|b|c|d|f))([0-9a-fA-F][0-9a-fA-F])", System.Drawing.Color.SlateBlue);
             }
             catch (Exception ex)
             {
@@ -1274,6 +1276,12 @@ namespace EmblemMagic.Editors
 
         private void Palette_CheckedChanged(object sender, EventArgs e)
         {
+            Palette_Default_ArrayBox.Enabled        = Palette_Default_Button.Checked;
+            Palette_Default_PointerBox.Enabled      = Palette_Default_Button.Checked;
+            Palette_Character_TextBox.Enabled          = Palette_Character_Button.Checked;
+            Palette_Character_ArrayBox.Enabled         = Palette_Character_Button.Checked;
+            Palette_Character_PointerBox.Enabled       = Palette_Character_Button.Checked;
+            Palette_Character_Current_ArrayBox.Enabled = Palette_Character_Button.Checked;
             Core_UpdatePalettes();
             Core_UpdateImageBox();
         }

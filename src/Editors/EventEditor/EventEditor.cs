@@ -49,6 +49,8 @@ namespace EmblemMagic.Editors
                 Help_ToolTip_Timer = new Timer();
                 Help_ToolTip_Timer.Tick += HoverTick;
                 Help_ToolTip_Timer.Interval = 800;
+
+                Chapter_MagicButton.EditorToOpen = "Module:Chapter Editor";
             }
             catch (Exception ex)
             {
@@ -693,9 +695,10 @@ namespace EmblemMagic.Editors
 
 
 
-        private void EntryArrayBox_ValueChanged(Object sender, EventArgs e)
+        private void EntryArrayBox_ValueChanged(object sender, EventArgs e)
         {
             Core_Update();
+            Chapter_MagicButton.EntryToSelect = Entry_ArrayBox.Value;
         }
 
         private void Event_ArrayBox_ValueChanged(object sender, EventArgs e)

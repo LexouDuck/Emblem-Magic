@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BackgroundEditor));
             this.EntryArrayBox = new EmblemMagic.Components.ByteArrayBox();
             this.Background_PaletteBox = new EmblemMagic.Components.PaletteBox();
             this.Background_ImageBox = new EmblemMagic.Components.ImageBox();
@@ -58,9 +59,9 @@
             this.EntryArrayBox.Location = new System.Drawing.Point(12, 45);
             this.EntryArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.EntryArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
-            this.EntryArrayBox.Name = "EntryArrayBox";
             this.EntryArrayBox.Size = new System.Drawing.Size(256, 26);
             this.EntryArrayBox.TabIndex = 0;
+            this.Help_ToolTip.SetToolTip(this.EntryArrayBox, "Select an entry in the list of background images to view/edit.");
             this.EntryArrayBox.ValueChanged += new System.EventHandler(this.EntryArrayBox_ValueChanged);
             // 
             // Background_PaletteBox
@@ -74,6 +75,8 @@
             this.Background_PaletteBox.TabIndex = 5;
             this.Background_PaletteBox.TabStop = false;
             this.Background_PaletteBox.Text = "GBAPaletteBox";
+            this.Help_ToolTip.SetToolTip(this.Background_PaletteBox, "The palette(s) for this background/cutscene image.\r\nClicking on this will open a " +
+        "PaletteEditor, to modify this palette.");
             this.Background_PaletteBox.Click += new System.EventHandler(this.Tool_OpenPaletteEditor_Click);
             // 
             // Background_ImageBox
@@ -99,6 +102,8 @@
             this.Palette_PointerBox.Name = "Palette_PointerBox";
             this.Palette_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.Palette_PointerBox.TabIndex = 4;
+            this.Help_ToolTip.SetToolTip(this.Palette_PointerBox, "Pointer to the palette data for this background image.\r\nWill write to ROM if chan" +
+        "ged. Is repointed when inserting an image with \"File -> Insert image...\".");
             this.Palette_PointerBox.ValueChanged += new System.EventHandler(this.Palette_PointerBox_ValueChanged);
             // 
             // Tileset_PointerBox
@@ -113,6 +118,8 @@
             this.Tileset_PointerBox.Name = "Tileset_PointerBox";
             this.Tileset_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.Tileset_PointerBox.TabIndex = 2;
+            this.Help_ToolTip.SetToolTip(this.Tileset_PointerBox, "Pointer to the tileset pixel data for this background image.\r\nWill write to ROM i" +
+        "f changed. Is repointed when inserting an image with \"File -> Insert image...\".");
             this.Tileset_PointerBox.ValueChanged += new System.EventHandler(this.Tileset_PointerBox_ValueChanged);
             // 
             // TSA_PointerBox
@@ -127,6 +134,7 @@
             this.TSA_PointerBox.Name = "TSA_PointerBox";
             this.TSA_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.TSA_PointerBox.TabIndex = 3;
+            this.Help_ToolTip.SetToolTip(this.TSA_PointerBox, resources.GetString("TSA_PointerBox.ToolTip"));
             this.TSA_PointerBox.ValueChanged += new System.EventHandler(this.TSA_PointerBox_ValueChanged);
             // 
             // Palette_Label
@@ -166,6 +174,8 @@
             this.DialogArray_RadioButton.TabIndex = 9;
             this.DialogArray_RadioButton.TabStop = true;
             this.DialogArray_RadioButton.Text = "Scene BG";
+            this.Help_ToolTip.SetToolTip(this.DialogArray_RadioButton, "If checked, view the list of scene backgrounds. These are the BGs during dialogue" +
+        " cutscenes, villages, etc.");
             this.DialogArray_RadioButton.UseVisualStyleBackColor = true;
             this.DialogArray_RadioButton.Click += new System.EventHandler(this.Array_RadioButton_CheckedChanged);
             // 
@@ -177,6 +187,8 @@
             this.BattleArray_RadioButton.Size = new System.Drawing.Size(70, 17);
             this.BattleArray_RadioButton.TabIndex = 10;
             this.BattleArray_RadioButton.Text = "Battle BG";
+            this.Help_ToolTip.SetToolTip(this.BattleArray_RadioButton, "If checked, view the list of battle backgrounds. These are the backgrounds shown " +
+        "during unit battles.");
             this.BattleArray_RadioButton.UseVisualStyleBackColor = true;
             this.BattleArray_RadioButton.Click += new System.EventHandler(this.Array_RadioButton_CheckedChanged);
             // 
@@ -189,6 +201,8 @@
             this.ScreenArray_RadioButton.TabIndex = 11;
             this.ScreenArray_RadioButton.TabStop = true;
             this.ScreenArray_RadioButton.Text = "Cutscene";
+            this.Help_ToolTip.SetToolTip(this.ScreenArray_RadioButton, "If checked, view the list of story cutscene screens. When and how these are shown" +
+        " depends on the game.");
             this.ScreenArray_RadioButton.UseVisualStyleBackColor = true;
             this.ScreenArray_RadioButton.Click += new System.EventHandler(this.Array_RadioButton_CheckedChanged);
             // 

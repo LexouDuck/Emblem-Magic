@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TextEditor));
             this.EntryNumBox = new EmblemMagic.Components.ShortBox();
             this.Text_PointerBox = new EmblemMagic.Components.PointerBox();
             this.EntryLabel = new System.Windows.Forms.Label();
@@ -68,6 +70,7 @@
             this.Text_ASCII_CheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.EntryNumBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Text_PointerBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Text_CodeBox)).BeginInit();
             this.Font_GroupBox.SuspendLayout();
             this.Glyph_GroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Glyph_Pointer_PointerBox)).BeginInit();
@@ -90,6 +93,7 @@
             this.EntryNumBox.Name = "EntryNumBox";
             this.EntryNumBox.Size = new System.Drawing.Size(56, 20);
             this.EntryNumBox.TabIndex = 0;
+            this.Help_ToolTip.SetToolTip(this.EntryNumBox, "Select a text entry to view/edit. This entry index is an unsigned 16-bit number.");
             this.EntryNumBox.Value = ((ushort)(0));
             this.EntryNumBox.ValueChanged += new System.EventHandler(this.EntryNumBox_ValueChanged);
             // 
@@ -106,6 +110,8 @@
             this.Text_PointerBox.Name = "Text_PointerBox";
             this.Text_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.Text_PointerBox.TabIndex = 1;
+            this.Help_ToolTip.SetToolTip(this.Text_PointerBox, "Pointer to the text data for the current text entry.\r\nWill write to ROM if change" +
+        "d.");
             // 
             // EntryLabel
             // 
@@ -131,14 +137,34 @@
             this.Text_CodeBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.Text_CodeBox.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.Text_CodeBox.AutoScrollMinSize = new System.Drawing.Size(23, 12);
+            this.Text_CodeBox.BackBrush = null;
             this.Text_CodeBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Text_CodeBox.CharHeight = 12;
+            this.Text_CodeBox.CharWidth = 6;
+            this.Text_CodeBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.Text_CodeBox.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
             this.Text_CodeBox.Font = new System.Drawing.Font("Consolas", 8.25F);
+            this.Text_CodeBox.IsReplaceMode = false;
             this.Text_CodeBox.Location = new System.Drawing.Point(12, 53);
             this.Text_CodeBox.Name = "Text_CodeBox";
-            this.Text_CodeBox.SelectionLength = 0;
-            this.Text_CodeBox.SelectionStart = 0;
+            this.Text_CodeBox.Paddings = new System.Windows.Forms.Padding(0);
+            this.Text_CodeBox.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
+            this.Text_CodeBox.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("Text_CodeBox.ServiceColors")));
             this.Text_CodeBox.Size = new System.Drawing.Size(293, 400);
             this.Text_CodeBox.TabIndex = 4;
+            this.Text_CodeBox.Zoom = 100;
             // 
             // Font_GridBox
             // 
@@ -151,6 +177,9 @@
             this.Font_GridBox.TabStop = false;
             this.Font_GridBox.Text = "gridBox1";
             this.Font_GridBox.TileSize = 16;
+            this.Help_ToolTip.SetToolTip(this.Font_GridBox, "This is the font display image. Click on any character in this image to select it" +
+        ".\r\nYou can then modify the font properties for the selected character/glyph with" +
+        " the controls below.");
             this.Font_GridBox.SelectionChanged += new System.EventHandler(this.Font_GridBox_SelectionChanged);
             // 
             // Font_GroupBox
@@ -196,6 +225,7 @@
             this.Glyph_Pointer_PointerBox.Name = "Glyph_Pointer_PointerBox";
             this.Glyph_Pointer_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.Glyph_Pointer_PointerBox.TabIndex = 13;
+            this.Help_ToolTip.SetToolTip(this.Glyph_Pointer_PointerBox, "\r\nWill write to ROM if changed.");
             this.Glyph_Pointer_PointerBox.ValueChanged += new System.EventHandler(this.Glyph_Pointer_PointerBox_ValueChanged);
             // 
             // Glyph_Pointer_Label
@@ -219,6 +249,8 @@
             this.Glyph_Shift_ByteBox.Name = "Glyph_Shift_ByteBox";
             this.Glyph_Shift_ByteBox.Size = new System.Drawing.Size(40, 20);
             this.Glyph_Shift_ByteBox.TabIndex = 10;
+            this.Help_ToolTip.SetToolTip(this.Glyph_Shift_ByteBox, "The character code for Shift-JIS encoding (for japanese fonts, which have many mo" +
+        "re different glyphs)\r\nWill write to ROM if changed.");
             this.Glyph_Shift_ByteBox.Value = ((byte)(0));
             this.Glyph_Shift_ByteBox.ValueChanged += new System.EventHandler(this.Glyph_Shift_ByteBox_ValueChanged);
             // 
@@ -243,6 +275,7 @@
             this.Glyph_Address_PointerBox.Name = "Glyph_Address_PointerBox";
             this.Glyph_Address_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.Glyph_Address_PointerBox.TabIndex = 9;
+            this.Help_ToolTip.SetToolTip(this.Glyph_Address_PointerBox, "The address of this glyph.\r\nWill write to ROM if changed.");
             this.Glyph_Address_PointerBox.ValueChanged += new System.EventHandler(this.Glyph_Address_PointerBox_ValueChanged);
             // 
             // Glyph_Address_Label
@@ -266,6 +299,8 @@
             this.Glyph_Width_ByteBox.Name = "Glyph_Width_ByteBox";
             this.Glyph_Width_ByteBox.Size = new System.Drawing.Size(40, 20);
             this.Glyph_Width_ByteBox.TabIndex = 6;
+            this.Help_ToolTip.SetToolTip(this.Glyph_Width_ByteBox, "The width of this glyph - i.e. the kerning/horizontal spacing for this glyph.\r\nWi" +
+        "ll write to ROM if changed.");
             this.Glyph_Width_ByteBox.Value = ((byte)(0));
             this.Glyph_Width_ByteBox.ValueChanged += new System.EventHandler(this.Glyph_Width_ByteBox_ValueChanged);
             // 
@@ -285,6 +320,7 @@
             this.Font_ComboBox.Name = "Font_ComboBox";
             this.Font_ComboBox.Size = new System.Drawing.Size(138, 21);
             this.Font_ComboBox.TabIndex = 11;
+            this.Help_ToolTip.SetToolTip(this.Font_ComboBox, "The font to view - changing this changes the preview display image above.");
             this.Font_ComboBox.SelectedIndexChanged += new System.EventHandler(this.Font_ComboBox_SelectedIndexChanged);
             // 
             // Font_InsertButton
@@ -294,6 +330,9 @@
             this.Font_InsertButton.Size = new System.Drawing.Size(99, 35);
             this.Font_InsertButton.TabIndex = 10;
             this.Font_InsertButton.Text = "Insert from file...";
+            this.Help_ToolTip.SetToolTip(this.Font_InsertButton, "Click on this button to insert a new font/glyph charset to replace the currently " +
+        "selected one.\r\nWill write to ROM if clicked, after prompting the user for an app" +
+        "ropriate image file.");
             this.Font_InsertButton.UseVisualStyleBackColor = true;
             this.Font_InsertButton.Click += new System.EventHandler(this.Font_InsertButton_Click);
             // 
@@ -305,6 +344,8 @@
             this.Text_Apply_Button.Size = new System.Drawing.Size(126, 37);
             this.Text_Apply_Button.TabIndex = 12;
             this.Text_Apply_Button.Text = "Apply Changes";
+            this.Help_ToolTip.SetToolTip(this.Text_Apply_Button, "Click this button to apply the current changes written in the text area.\r\nWill wr" +
+        "ite to ROM if clicked, and repoint the this text entry.");
             this.Text_Apply_Button.UseVisualStyleBackColor = true;
             this.Text_Apply_Button.Click += new System.EventHandler(this.Text_Apply_Button_Click);
             // 
@@ -316,6 +357,7 @@
             this.Text_Cancel_Button.Size = new System.Drawing.Size(126, 37);
             this.Text_Cancel_Button.TabIndex = 13;
             this.Text_Cancel_Button.Text = "Reload Text";
+            this.Help_ToolTip.SetToolTip(this.Text_Cancel_Button, "Restore the text area to its original state for this text entry.");
             this.Text_Cancel_Button.UseVisualStyleBackColor = true;
             this.Text_Cancel_Button.Click += new System.EventHandler(this.Text_Cancel_Button_Click);
             // 
@@ -446,6 +488,7 @@
             this.Text_Preview_ImageBox.TabIndex = 15;
             this.Text_Preview_ImageBox.TabStop = false;
             this.Text_Preview_ImageBox.Text = "imageBox1";
+            this.Help_ToolTip.SetToolTip(this.Text_Preview_ImageBox, "A preview of how the text will look like ingame.");
             // 
             // Text_Line_NumBox
             // 
@@ -460,6 +503,7 @@
             this.Text_Line_NumBox.Name = "Text_Line_NumBox";
             this.Text_Line_NumBox.Size = new System.Drawing.Size(40, 20);
             this.Text_Line_NumBox.TabIndex = 16;
+            this.Help_ToolTip.SetToolTip(this.Text_Line_NumBox, "The line offset for the preview text bubble display.");
             this.Text_Line_NumBox.Value = ((byte)(0));
             this.Text_Line_NumBox.ValueChanged += new System.EventHandler(this.Text_Line_NumBox_ValueChanged);
             // 
@@ -481,6 +525,7 @@
             this.Text_ASCII_CheckBox.Size = new System.Drawing.Size(53, 17);
             this.Text_ASCII_CheckBox.TabIndex = 18;
             this.Text_ASCII_CheckBox.Text = "ASCII";
+            this.Help_ToolTip.SetToolTip(this.Text_ASCII_CheckBox, resources.GetString("Text_ASCII_CheckBox.ToolTip"));
             this.Text_ASCII_CheckBox.UseVisualStyleBackColor = true;
             this.Text_ASCII_CheckBox.CheckedChanged += new System.EventHandler(this.Text_ASCII_CheckBox_CheckedChanged);
             // 
@@ -508,6 +553,7 @@
             this.Text = "Text Editor";
             ((System.ComponentModel.ISupportInitialize)(this.EntryNumBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Text_PointerBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Text_CodeBox)).EndInit();
             this.Font_GroupBox.ResumeLayout(false);
             this.Glyph_GroupBox.ResumeLayout(false);
             this.Glyph_GroupBox.PerformLayout();

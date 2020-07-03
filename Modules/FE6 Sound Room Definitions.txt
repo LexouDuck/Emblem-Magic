@@ -1,0 +1,66 @@
+0x00 Fire Emblem Theme
+0x01 Deer of the Plains
+0x02 Wild Frontier
+0x03 Distant Lands
+0x04 The Kingdom of Bern
+0x05 Dragon Sanctuary
+0x06 Legendary Inheritance
+0x07 FE Gaiden Enemy Phase
+0x08 Messenger from the Darkness
+0x09 Beyond the Sky
+0x0A One Will
+0x0B Beholding Nature's Beauty
+0x0C Beneath a New Light
+0x0D The Path to Greatness
+0x0E Scars of the Scouring
+0x0F FE Gaiden Player Phase
+0x10 Shadow Approaches
+0x11 Binding Ties
+0x12 Winning Road
+0x13 Poem of the Soft Wind
+0x14 At the Final Dragon
+0x15 Battle for Tomorrow
+0x16 In the Name of Bern
+0x17 Battle for Whom?
+0x18 Priestess in the Dark 
+0x19 Healing
+0x1A Curing
+0x1B To the Heights
+0x1C I - Campaign
+0x1D II - Recapturing the Royal Capital
+0x1E III - Invisible Enemy
+0x1F IV - Final Chapter
+0x20 Prepare to Charge
+0x21 An Unexpected Caller
+0x22 When the Rush Comes
+0x23 Cogs of Fate
+0x24 Distant Utopia
+0x25 Triumph
+0x26 Into the Shadow of Triumph
+0x27 The Dark Priestess
+0x28 The King of Bern
+0x29 Princess of Destiny
+0x2A Suspicious
+0x2B Dignified
+0x2C Melancholic
+0x2D Final Farewell
+0x2E Going My Way
+0x2F Join Us!
+0x30 Epilouge
+0x31 Battle Results
+0x32 After the War
+0x33 Game Over
+0x34 Shop
+0x35 Arena Entrance
+0x36 Arena Battle
+0x37 Happiness Abounds
+0x38 Main Theme Arrangement
+0x39 Shocking Truth I 
+0x3A Shocking Truth II
+0x3B Talking
+0x3C Captivating Dance
+0x3D Prelude - Telling a Legend
+0x3E Eternal Wind
+0x3F What Came Before
+0x40 Attack!
+0x41 Revenge!

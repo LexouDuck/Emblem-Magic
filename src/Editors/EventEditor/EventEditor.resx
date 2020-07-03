@@ -120,6 +120,11 @@
   <metadata name="Help_ToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="MapViewBox.ToolTip" xml:space="preserve">
+    <value>This displays the map for the currently selected chapter.
+You can toggle which unit groups to display with the checkboxes below.
+Clicking on a unit on the map will move the text cursor to the corresponding line in the code (a UNIT command).</value>
+  </data>
   <data name="Event_CodeBox.ServiceColors" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdGYXN0Q29sb3JlZFRleHRCb3gsIFZlcnNpb249Mi4xNi4yMy4w

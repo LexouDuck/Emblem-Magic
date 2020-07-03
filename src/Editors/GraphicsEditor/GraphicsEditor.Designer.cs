@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GraphicsEditor));
             this.Palette_PaletteBox = new EmblemMagic.Components.PaletteBox();
             this.TSA_CheckBox = new System.Windows.Forms.CheckBox();
             this.Tileset_CheckBox = new System.Windows.Forms.CheckBox();
@@ -41,7 +42,7 @@
             this.Width_NumBox = new System.Windows.Forms.NumericUpDown();
             this.Height_NumBox = new System.Windows.Forms.NumericUpDown();
             this.X_Label = new System.Windows.Forms.Label();
-            this.Palette_Index_Label = new System.Windows.Forms.Label();
+            this.Palette_Offset_Label = new System.Windows.Forms.Label();
             this.Palette_Index_NumBox = new System.Windows.Forms.NumericUpDown();
             this.Editor_Menu = new System.Windows.Forms.MenuStrip();
             this.Menu_File = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,6 +93,8 @@
             this.Palette_PaletteBox.TabIndex = 29;
             this.Palette_PaletteBox.TabStop = false;
             this.Palette_PaletteBox.Text = "PaletteBox";
+            this.Help_ToolTip.SetToolTip(this.Palette_PaletteBox, "The color palette(s) to use for displaying graphics pixel data.\r\nClicking on this" +
+        " will open a PaletteEditor, to modify the palette at the current pointer.");
             this.Palette_PaletteBox.Click += new System.EventHandler(this.Tool_OpenPaletteEditor_Click);
             // 
             // TSA_CheckBox
@@ -103,6 +106,8 @@
             this.TSA_CheckBox.Size = new System.Drawing.Size(51, 17);
             this.TSA_CheckBox.TabIndex = 28;
             this.TSA_CheckBox.Text = "LZ77";
+            this.Help_ToolTip.SetToolTip(this.TSA_CheckBox, "Check this if the the TSA data to use is stored compressed (first byte should be " +
+        "0x10).");
             this.TSA_CheckBox.UseVisualStyleBackColor = true;
             this.TSA_CheckBox.CheckedChanged += new System.EventHandler(this.TSA_CheckBox_CheckedChanged);
             // 
@@ -114,6 +119,8 @@
             this.Tileset_CheckBox.Size = new System.Drawing.Size(51, 17);
             this.Tileset_CheckBox.TabIndex = 27;
             this.Tileset_CheckBox.Text = "LZ77";
+            this.Help_ToolTip.SetToolTip(this.Tileset_CheckBox, "Check this if the the tileset/pixel data to use is stored compressed (first byte " +
+        "should be 0x10).\r\n");
             this.Tileset_CheckBox.UseVisualStyleBackColor = true;
             this.Tileset_CheckBox.CheckedChanged += new System.EventHandler(this.Tileset_CheckBox_CheckedChanged);
             // 
@@ -125,6 +132,8 @@
             this.Palette_CheckBox.Size = new System.Drawing.Size(51, 17);
             this.Palette_CheckBox.TabIndex = 26;
             this.Palette_CheckBox.Text = "LZ77";
+            this.Help_ToolTip.SetToolTip(this.Palette_CheckBox, "Check this if the the palette data to use is stored compressed (first byte should" +
+        " be 0x10).\r\n");
             this.Palette_CheckBox.UseVisualStyleBackColor = true;
             this.Palette_CheckBox.CheckedChanged += new System.EventHandler(this.Palette_CheckBox_CheckedChanged);
             // 
@@ -170,6 +179,7 @@
             this.TSA_PointerBox.Name = "TSA_PointerBox";
             this.TSA_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.TSA_PointerBox.TabIndex = 20;
+            this.Help_ToolTip.SetToolTip(this.TSA_PointerBox, "Address of the TSA array data to use for displaying.");
             this.TSA_PointerBox.ValueChanged += new System.EventHandler(this.TSA_PointerBox_ValueChanged);
             // 
             // Tileset_PointerBox
@@ -184,6 +194,7 @@
             this.Tileset_PointerBox.Name = "Tileset_PointerBox";
             this.Tileset_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.Tileset_PointerBox.TabIndex = 19;
+            this.Help_ToolTip.SetToolTip(this.Tileset_PointerBox, "Address of the tileset/pixel data to display.");
             this.Tileset_PointerBox.ValueChanged += new System.EventHandler(this.Tileset_PointerBox_ValueChanged);
             // 
             // Palette_PointerBox
@@ -198,6 +209,7 @@
             this.Palette_PointerBox.Name = "Palette_PointerBox";
             this.Palette_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.Palette_PointerBox.TabIndex = 18;
+            this.Help_ToolTip.SetToolTip(this.Palette_PointerBox, "Address of the palette data to display.");
             this.Palette_PointerBox.ValueChanged += new System.EventHandler(this.Palette_PointerBox_ValueChanged);
             // 
             // Width_NumBox
@@ -216,6 +228,7 @@
             this.Width_NumBox.Name = "Width_NumBox";
             this.Width_NumBox.Size = new System.Drawing.Size(49, 20);
             this.Width_NumBox.TabIndex = 30;
+            this.Help_ToolTip.SetToolTip(this.Width_NumBox, "The amount of columns of tiles with which to display the image.");
             this.Width_NumBox.Value = new decimal(new int[] {
             32,
             0,
@@ -239,6 +252,7 @@
             this.Height_NumBox.Name = "Height_NumBox";
             this.Height_NumBox.Size = new System.Drawing.Size(49, 20);
             this.Height_NumBox.TabIndex = 31;
+            this.Help_ToolTip.SetToolTip(this.Height_NumBox, "The maximum amount of rows of tiles to display.\r\n");
             this.Height_NumBox.Value = new decimal(new int[] {
             32,
             0,
@@ -255,14 +269,14 @@
             this.X_Label.TabIndex = 33;
             this.X_Label.Text = "x";
             // 
-            // Palette_Index_Label
+            // Palette_Offset_Label
             // 
-            this.Palette_Index_Label.AutoSize = true;
-            this.Palette_Index_Label.Location = new System.Drawing.Point(11, 21);
-            this.Palette_Index_Label.Name = "Palette_Index_Label";
-            this.Palette_Index_Label.Size = new System.Drawing.Size(75, 13);
-            this.Palette_Index_Label.TabIndex = 36;
-            this.Palette_Index_Label.Text = "Palette Index :";
+            this.Palette_Offset_Label.AutoSize = true;
+            this.Palette_Offset_Label.Location = new System.Drawing.Point(11, 21);
+            this.Palette_Offset_Label.Name = "Palette_Offset_Label";
+            this.Palette_Offset_Label.Size = new System.Drawing.Size(77, 13);
+            this.Palette_Offset_Label.TabIndex = 36;
+            this.Palette_Offset_Label.Text = "Palette Offset :";
             // 
             // Palette_Index_NumBox
             // 
@@ -275,6 +289,8 @@
             this.Palette_Index_NumBox.Name = "Palette_Index_NumBox";
             this.Palette_Index_NumBox.Size = new System.Drawing.Size(44, 20);
             this.Palette_Index_NumBox.TabIndex = 34;
+            this.Help_ToolTip.SetToolTip(this.Palette_Index_NumBox, "The offset of palette to display - each 1 added means 16 colors further in the da" +
+        "ta.");
             this.Palette_Index_NumBox.ValueChanged += new System.EventHandler(this.Palette_Index_NumBox_ValueChanged);
             // 
             // Editor_Menu
@@ -370,6 +386,7 @@
             this.TSA_Label.Size = new System.Drawing.Size(53, 17);
             this.TSA_Label.TabIndex = 39;
             this.TSA_Label.Text = "TSA :";
+            this.Help_ToolTip.SetToolTip(this.TSA_Label, "If checked, display the image with TSA tile layout info.");
             this.TSA_Label.UseVisualStyleBackColor = true;
             this.TSA_Label.CheckedChanged += new System.EventHandler(this.TSA_Label_CheckedChanged);
             // 
@@ -381,6 +398,8 @@
             this.TSA_FlipRows_CheckBox.Size = new System.Drawing.Size(135, 17);
             this.TSA_FlipRows_CheckBox.TabIndex = 40;
             this.TSA_FlipRows_CheckBox.Text = "Flip TSA rows vertically";
+            this.Help_ToolTip.SetToolTip(this.TSA_FlipRows_CheckBox, "If checked, all the rows of TSA tiles will be aligned bottom-to-top.\r\nSeveral ima" +
+        "ges in the GBA FE games store their TSA array data in this row-inverted manner.");
             this.TSA_FlipRows_CheckBox.UseVisualStyleBackColor = true;
             this.TSA_FlipRows_CheckBox.CheckedChanged += new System.EventHandler(this.TSA_FlipRows_CheckBox_CheckedChanged);
             // 
@@ -424,6 +443,9 @@
             this.Tileset_8bpp_RadioButton.Size = new System.Drawing.Size(71, 17);
             this.Tileset_8bpp_RadioButton.TabIndex = 2;
             this.Tileset_8bpp_RadioButton.Text = "8 bit/pixel";
+            this.Help_ToolTip.SetToolTip(this.Tileset_8bpp_RadioButton, "If selected, interpret the tileset/pixel data as 8bpp (256-color) image.\r\nIn GBA " +
+        "Fire Emblem ROMs, this is quite rare (an exception is the world map in FE6, for " +
+        "example).");
             this.Tileset_8bpp_RadioButton.UseVisualStyleBackColor = true;
             this.Tileset_8bpp_RadioButton.CheckedChanged += new System.EventHandler(this.Tileset_8bpp_RadioButton_CheckedChanged);
             // 
@@ -437,6 +459,8 @@
             this.Tileset_4bpp_RadioButton.TabIndex = 1;
             this.Tileset_4bpp_RadioButton.TabStop = true;
             this.Tileset_4bpp_RadioButton.Text = "4 bit/pixel";
+            this.Help_ToolTip.SetToolTip(this.Tileset_4bpp_RadioButton, "If selected, interpret the tileset/pixel data as 4bpp (16-color) image.\r\nIn GBA F" +
+        "ire Emblem ROMs, this is how most pixel data is stored.");
             this.Tileset_4bpp_RadioButton.UseVisualStyleBackColor = true;
             this.Tileset_4bpp_RadioButton.CheckedChanged += new System.EventHandler(this.Tileset_4bpp_RadioButton_CheckedChanged);
             // 
@@ -448,6 +472,8 @@
             this.Tileset_2bpp_RadioButton.Size = new System.Drawing.Size(71, 17);
             this.Tileset_2bpp_RadioButton.TabIndex = 0;
             this.Tileset_2bpp_RadioButton.Text = "2 bit/pixel";
+            this.Help_ToolTip.SetToolTip(this.Tileset_2bpp_RadioButton, "If selected, interpret the tileset/pixel data as 2bpp (4-color) image.\r\nIn GBA Fi" +
+        "re Emblem ROMs, this is mostly used for font pixel data.");
             this.Tileset_2bpp_RadioButton.UseVisualStyleBackColor = true;
             this.Tileset_2bpp_RadioButton.CheckedChanged += new System.EventHandler(this.Tileset_2bpp_RadioButton_CheckedChanged);
             // 
@@ -456,7 +482,7 @@
             this.Palette_GroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Palette_GroupBox.Controls.Add(this.Palette_Opaque_CheckBox);
             this.Palette_GroupBox.Controls.Add(this.Palette_Index_NumBox);
-            this.Palette_GroupBox.Controls.Add(this.Palette_Index_Label);
+            this.Palette_GroupBox.Controls.Add(this.Palette_Offset_Label);
             this.Palette_GroupBox.Location = new System.Drawing.Point(282, 177);
             this.Palette_GroupBox.Name = "Palette_GroupBox";
             this.Palette_GroupBox.Size = new System.Drawing.Size(148, 65);
@@ -472,6 +498,8 @@
             this.Palette_Opaque_CheckBox.Size = new System.Drawing.Size(125, 17);
             this.Palette_Opaque_CheckBox.TabIndex = 45;
             this.Palette_Opaque_CheckBox.Text = "Force palette opacity";
+            this.Help_ToolTip.SetToolTip(this.Palette_Opaque_CheckBox, "If checked, the alpha bit of colors in the palette will be disregarded, and all c" +
+        "olors be shown as opaque.");
             this.Palette_Opaque_CheckBox.UseVisualStyleBackColor = true;
             this.Palette_Opaque_CheckBox.CheckedChanged += new System.EventHandler(this.Palette_Opaque_CheckBox_CheckedChanged);
             // 
@@ -508,6 +536,7 @@
             this.Prev_Button.Size = new System.Drawing.Size(64, 29);
             this.Prev_Button.TabIndex = 47;
             this.Prev_Button.Text = "Previous";
+            this.Help_ToolTip.SetToolTip(this.Prev_Button, resources.GetString("Prev_Button.ToolTip"));
             this.Prev_Button.UseVisualStyleBackColor = true;
             this.Prev_Button.Click += new System.EventHandler(this.Prev_Button_Click);
             // 
@@ -519,6 +548,7 @@
             this.Next_Button.Size = new System.Drawing.Size(64, 29);
             this.Next_Button.TabIndex = 48;
             this.Next_Button.Text = "Next";
+            this.Help_ToolTip.SetToolTip(this.Next_Button, resources.GetString("Next_Button.ToolTip"));
             this.Next_Button.UseVisualStyleBackColor = true;
             this.Next_Button.Click += new System.EventHandler(this.Next_Button_Click);
             // 
@@ -592,7 +622,7 @@
         private System.Windows.Forms.NumericUpDown Width_NumBox;
         private System.Windows.Forms.NumericUpDown Height_NumBox;
         private System.Windows.Forms.Label X_Label;
-        private System.Windows.Forms.Label Palette_Index_Label;
+        private System.Windows.Forms.Label Palette_Offset_Label;
         private System.Windows.Forms.NumericUpDown Palette_Index_NumBox;
         private System.Windows.Forms.MenuStrip Editor_Menu;
         private System.Windows.Forms.ToolStripMenuItem Menu_File;

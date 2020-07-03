@@ -117,7 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="Editor_Menu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="Help_ToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
+  </metadata>
+  <data name="TSA_PointerBox.ToolTip" xml:space="preserve">
+    <value>Pointer to the TSA data for this background image, if any.
+Will write to ROM if changed. Is repointed when inserting an image with "File -&gt; Insert image...".
+
+TSA stores info on how pixel tiles from the tileset are to be placed in the final image.
+More precisely it's a sequence of (TileID:number, FlipH:boolean, FlipV:boolean, PaletteIndex:number)
+You can view/edit the TSA array by doing CTRL+T, or doing "Tools -&gt; Open TSA Editor".</value>
+  </data>
+  <metadata name="Editor_Menu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>140, 17</value>
   </metadata>
 </root>

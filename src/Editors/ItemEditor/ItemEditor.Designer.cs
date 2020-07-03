@@ -118,6 +118,7 @@
             this.EntryListBox.Name = "EntryListBox";
             this.EntryListBox.Size = new System.Drawing.Size(138, 482);
             this.EntryListBox.TabIndex = 0;
+            this.Help_ToolTip.SetToolTip(this.EntryListBox, "Select an item from the list of items in the game.");
             this.EntryListBox.UseCompatibleStateImageBehavior = false;
             this.EntryListBox.View = System.Windows.Forms.View.SmallIcon;
             this.EntryListBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.EntryListBox_KeyUp);
@@ -231,6 +232,8 @@
             this.ItemName_ShortBox.Name = "ItemName_ShortBox";
             this.ItemName_ShortBox.Size = new System.Drawing.Size(55, 20);
             this.ItemName_ShortBox.TabIndex = 2;
+            this.Help_ToolTip.SetToolTip(this.ItemName_ShortBox, "The text entry which holds the ingame name to display for this item.\r\nWill write " +
+        "to ROM if changed.");
             this.ItemName_ShortBox.Value = ((ushort)(0));
             this.ItemName_ShortBox.ValueChanged += new System.EventHandler(this.ItemName_ShortBox_ValueChanged);
             // 
@@ -247,6 +250,7 @@
             this.Descripton_ShortBox.Name = "Descripton_ShortBox";
             this.Descripton_ShortBox.Size = new System.Drawing.Size(55, 20);
             this.Descripton_ShortBox.TabIndex = 3;
+            this.Help_ToolTip.SetToolTip(this.Descripton_ShortBox, "The text entry for the ingame description of this item.");
             this.Descripton_ShortBox.Value = ((ushort)(0));
             this.Descripton_ShortBox.ValueChanged += new System.EventHandler(this.Descripton_ShortBox_ValueChanged);
             // 
@@ -263,6 +267,7 @@
             this.UseItemText_ShortBox.Name = "UseItemText_ShortBox";
             this.UseItemText_ShortBox.Size = new System.Drawing.Size(55, 20);
             this.UseItemText_ShortBox.TabIndex = 4;
+            this.Help_ToolTip.SetToolTip(this.UseItemText_ShortBox, "The text entry for the text which appears in the \"use item\" ingame menu.");
             this.UseItemText_ShortBox.Value = ((ushort)(0));
             this.UseItemText_ShortBox.ValueChanged += new System.EventHandler(this.UseItemText_ShortBox_ValueChanged);
             // 
@@ -275,6 +280,7 @@
             this.ItemName_MagicButton.Name = "ItemName_MagicButton";
             this.ItemName_MagicButton.Size = new System.Drawing.Size(24, 24);
             this.ItemName_MagicButton.TabIndex = 16;
+            this.Help_ToolTip.SetToolTip(this.ItemName_MagicButton, "This is a shortcut button, it opens a TextEditor for the given entry number.");
             this.ItemName_MagicButton.UseVisualStyleBackColor = true;
             // 
             // Description_MagicButton
@@ -286,6 +292,7 @@
             this.Description_MagicButton.Name = "Description_MagicButton";
             this.Description_MagicButton.Size = new System.Drawing.Size(24, 24);
             this.Description_MagicButton.TabIndex = 17;
+            this.Help_ToolTip.SetToolTip(this.Description_MagicButton, "This is a shortcut button, it opens a TextEditor for the given entry number.");
             this.Description_MagicButton.UseVisualStyleBackColor = true;
             // 
             // UseItemText_MagicButton
@@ -297,6 +304,7 @@
             this.UseItemText_MagicButton.Name = "UseItemText_MagicButton";
             this.UseItemText_MagicButton.Size = new System.Drawing.Size(24, 24);
             this.UseItemText_MagicButton.TabIndex = 18;
+            this.Help_ToolTip.SetToolTip(this.UseItemText_MagicButton, "This is a shortcut button, it opens a TextEditor for the given entry number.");
             this.UseItemText_MagicButton.UseVisualStyleBackColor = true;
             // 
             // ItemNumber_ByteBox
@@ -312,6 +320,7 @@
             this.ItemNumber_ByteBox.Name = "ItemNumber_ByteBox";
             this.ItemNumber_ByteBox.Size = new System.Drawing.Size(40, 20);
             this.ItemNumber_ByteBox.TabIndex = 8;
+            this.Help_ToolTip.SetToolTip(this.ItemNumber_ByteBox, "The number associated with this item.\r\nWil write to ROM if changed.");
             this.ItemNumber_ByteBox.Value = ((byte)(0));
             this.ItemNumber_ByteBox.ValueChanged += new System.EventHandler(this.ItemNumber_ByteBox_ValueChanged);
             // 
@@ -336,6 +345,7 @@
             this.ItemIcon_ByteBox.Name = "ItemIcon_ByteBox";
             this.ItemIcon_ByteBox.Size = new System.Drawing.Size(40, 20);
             this.ItemIcon_ByteBox.TabIndex = 26;
+            this.Help_ToolTip.SetToolTip(this.ItemIcon_ByteBox, "The index for this item icon in the icon sheet.\r\nWill write to ROM if changed.");
             this.ItemIcon_ByteBox.Value = ((byte)(0));
             this.ItemIcon_ByteBox.ValueChanged += new System.EventHandler(this.ItemIcon_ByteBox_ValueChanged);
             // 
@@ -349,6 +359,7 @@
             this.ItemIcon_ImageBox.TabIndex = 19;
             this.ItemIcon_ImageBox.TabStop = false;
             this.ItemIcon_ImageBox.Text = "ItemIcon_ImageBox";
+            this.Help_ToolTip.SetToolTip(this.ItemIcon_ImageBox, "The icon for this item, in 2x pixel resolution.");
             this.ItemIcon_ImageBox.Click += new System.EventHandler(this.ItemIcon_ImageBox_Click);
             // 
             // Type_Label
@@ -376,6 +387,8 @@
             this.Type_ByteArrayBox.MinimumSize = new System.Drawing.Size(128, 26);
             this.Type_ByteArrayBox.Size = new System.Drawing.Size(141, 26);
             this.Type_ByteArrayBox.TabIndex = 9;
+            this.Help_ToolTip.SetToolTip(this.Type_ByteArrayBox, "The kind of item/weapon this is (Sword/Lance/Axe/Book/DragonStone/etc).\r\nWill wri" +
+        "te to ROM if changed.");
             this.Type_ByteArrayBox.ValueChanged += new System.EventHandler(this.Type_ByteArrayBox_ValueChanged);
             // 
             // Rank_ByteArrayBox
@@ -385,6 +398,7 @@
             this.Rank_ByteArrayBox.MinimumSize = new System.Drawing.Size(128, 26);
             this.Rank_ByteArrayBox.Size = new System.Drawing.Size(141, 26);
             this.Rank_ByteArrayBox.TabIndex = 10;
+            this.Help_ToolTip.SetToolTip(this.Rank_ByteArrayBox, "The rank associated with this item/weapon.\r\nWill write to ROM if changed.");
             this.Rank_ByteArrayBox.ValueChanged += new System.EventHandler(this.Rank_ByteArrayBox_ValueChanged);
             // 
             // Stat_Item_GroupBox
@@ -420,6 +434,9 @@
             this.Stat_Cost_Total_NumBox.Name = "Stat_Cost_Total_NumBox";
             this.Stat_Cost_Total_NumBox.Size = new System.Drawing.Size(77, 20);
             this.Stat_Cost_Total_NumBox.TabIndex = 27;
+            this.Help_ToolTip.SetToolTip(this.Stat_Cost_Total_NumBox, "The total cost of this item (cost-per-use * durability = total cost).\r\nWill write" +
+        " to ROM if changed. (This modifies the cost-per-use field, like the input box ab" +
+        "ove).");
             this.Stat_Cost_Total_NumBox.ValueChanged += new System.EventHandler(this.Stat_Cost_Total_NumBox_ValueChanged);
             // 
             // Stat_Cost_Total_Label
@@ -451,6 +468,8 @@
             this.Stat_CostPerUse_NumBox.Name = "Stat_CostPerUse_NumBox";
             this.Stat_CostPerUse_NumBox.Size = new System.Drawing.Size(77, 20);
             this.Stat_CostPerUse_NumBox.TabIndex = 17;
+            this.Help_ToolTip.SetToolTip(this.Stat_CostPerUse_NumBox, "The amount of gold per use that this item is worth.\r\nWill write to ROM if changed" +
+        ". This input edits the same value as the one below.");
             this.Stat_CostPerUse_NumBox.ValueChanged += new System.EventHandler(this.Stat_CostPerUse_NumBox_ValueChanged);
             // 
             // ItemEffect_ByteArrayBox
@@ -460,6 +479,8 @@
             this.ItemEffect_ByteArrayBox.MinimumSize = new System.Drawing.Size(128, 26);
             this.ItemEffect_ByteArrayBox.Size = new System.Drawing.Size(189, 26);
             this.ItemEffect_ByteArrayBox.TabIndex = 20;
+            this.Help_ToolTip.SetToolTip(this.ItemEffect_ByteArrayBox, "The special usage effect ID associated with this item, if there is any.\r\nThis fie" +
+        "ld is mostly used for consumable items and staves, and its 0 otherwise.");
             this.ItemEffect_ByteArrayBox.ValueChanged += new System.EventHandler(this.ItemEffect_ByteArrayBox_ValueChanged);
             // 
             // Stat_CostPerUse_Label
@@ -491,6 +512,7 @@
             this.Stat_Uses_NumBox.Name = "Stat_Uses_NumBox";
             this.Stat_Uses_NumBox.Size = new System.Drawing.Size(56, 20);
             this.Stat_Uses_NumBox.TabIndex = 3;
+            this.Help_ToolTip.SetToolTip(this.Stat_Uses_NumBox, "The durability (amount of uses) of this item.\r\nWill write to ROM if changed.");
             this.Stat_Uses_NumBox.ValueChanged += new System.EventHandler(this.Stat_Uses_NumBox_ValueChanged);
             // 
             // Stat_Exp_Label
@@ -514,6 +536,8 @@
             this.Stat_Exp_NumBox.Name = "Stat_Exp_NumBox";
             this.Stat_Exp_NumBox.Size = new System.Drawing.Size(61, 20);
             this.Stat_Exp_NumBox.TabIndex = 24;
+            this.Help_ToolTip.SetToolTip(this.Stat_Exp_NumBox, "The experience points (for weapon rank level) that using this weapons grants.\r\nWi" +
+        "ll write to ROM if changed.");
             this.Stat_Exp_NumBox.Value = ((byte)(0));
             this.Stat_Exp_NumBox.ValueChanged += new System.EventHandler(this.Stat_Exp_NumBox_ValueChanged);
             // 
@@ -524,6 +548,8 @@
             this.WeaponEffect_ByteArrayBox.MinimumSize = new System.Drawing.Size(128, 26);
             this.WeaponEffect_ByteArrayBox.Size = new System.Drawing.Size(189, 26);
             this.WeaponEffect_ByteArrayBox.TabIndex = 22;
+            this.Help_ToolTip.SetToolTip(this.WeaponEffect_ByteArrayBox, "The special effect/skill (if there is any), specific to this weapon item.\r\nWill w" +
+        "rite to ROM if changed.");
             this.WeaponEffect_ByteArrayBox.ValueChanged += new System.EventHandler(this.WeaponEffect_ByteArrayBox_ValueChanged);
             // 
             // WeaponEffect_Label
@@ -555,6 +581,8 @@
             this.Stat_Crit_NumBox.Name = "Stat_Crit_NumBox";
             this.Stat_Crit_NumBox.Size = new System.Drawing.Size(44, 20);
             this.Stat_Crit_NumBox.TabIndex = 14;
+            this.Help_ToolTip.SetToolTip(this.Stat_Crit_NumBox, "This stat is the percentage of critical chance bonus.\r\nWill write to ROM if chang" +
+        "ed.");
             this.Stat_Crit_NumBox.ValueChanged += new System.EventHandler(this.Stat_Crit_NumBox_ValueChanged);
             // 
             // Stat_Hit_NumBox
@@ -568,6 +596,8 @@
             this.Stat_Hit_NumBox.Name = "Stat_Hit_NumBox";
             this.Stat_Hit_NumBox.Size = new System.Drawing.Size(44, 20);
             this.Stat_Hit_NumBox.TabIndex = 13;
+            this.Help_ToolTip.SetToolTip(this.Stat_Hit_NumBox, "The \"Hit\" stat is the percentage accuracy of the weapon.\r\nWill write to ROM if ch" +
+        "anged.");
             this.Stat_Hit_NumBox.ValueChanged += new System.EventHandler(this.Stat_Hit_NumBox_ValueChanged);
             // 
             // Stat_Weight_NumBox
@@ -581,6 +611,8 @@
             this.Stat_Weight_NumBox.Name = "Stat_Weight_NumBox";
             this.Stat_Weight_NumBox.Size = new System.Drawing.Size(44, 20);
             this.Stat_Weight_NumBox.TabIndex = 12;
+            this.Help_ToolTip.SetToolTip(this.Stat_Weight_NumBox, "The \"Weight\" stat if a weapon is subtracted to the character\'s speed, to calculat" +
+        "e the final \"total speed\" stat.\r\nWill write to ROM if changed.");
             this.Stat_Weight_NumBox.ValueChanged += new System.EventHandler(this.Stat_Weight_NumBox_ValueChanged);
             // 
             // Stat_Might_NumBox
@@ -594,6 +626,8 @@
             this.Stat_Might_NumBox.Name = "Stat_Might_NumBox";
             this.Stat_Might_NumBox.Size = new System.Drawing.Size(44, 20);
             this.Stat_Might_NumBox.TabIndex = 11;
+            this.Help_ToolTip.SetToolTip(this.Stat_Might_NumBox, "The \"Might\" stat is the attack damage of the weapon.\r\nWill write to ROM if change" +
+        "d.");
             this.Stat_Might_NumBox.ValueChanged += new System.EventHandler(this.Stat_Might_NumBox_ValueChanged);
             // 
             // Stat_Range_Min_NumBox
@@ -607,6 +641,8 @@
             this.Stat_Range_Min_NumBox.Name = "Stat_Range_Min_NumBox";
             this.Stat_Range_Min_NumBox.Size = new System.Drawing.Size(37, 20);
             this.Stat_Range_Min_NumBox.TabIndex = 0;
+            this.Help_ToolTip.SetToolTip(this.Stat_Range_Min_NumBox, "The minimum amount of squares at which this weapon can hit.\r\nWill write to ROM if" +
+        " changed.");
             this.Stat_Range_Min_NumBox.ValueChanged += new System.EventHandler(this.Stat_Range_Min_NumBox_ValueChanged);
             // 
             // Stat_Range_Max_NumBox
@@ -620,6 +656,8 @@
             this.Stat_Range_Max_NumBox.Name = "Stat_Range_Max_NumBox";
             this.Stat_Range_Max_NumBox.Size = new System.Drawing.Size(37, 20);
             this.Stat_Range_Max_NumBox.TabIndex = 1;
+            this.Help_ToolTip.SetToolTip(this.Stat_Range_Max_NumBox, "The maximum amount of squares at which this weapon can hit.\r\nWill write to ROM if" +
+        " changed.");
             this.Stat_Range_Max_NumBox.ValueChanged += new System.EventHandler(this.Stat_Range_Max_NumBox_ValueChanged);
             // 
             // Stat_Range_Label
@@ -686,6 +724,8 @@
             this.Attribute_ListBox.Name = "Attribute_ListBox";
             this.Attribute_ListBox.Size = new System.Drawing.Size(192, 454);
             this.Attribute_ListBox.TabIndex = 10;
+            this.Help_ToolTip.SetToolTip(this.Attribute_ListBox, "The list of true/false boolean flags for this item.\r\nWill write to ROM if any che" +
+        "ckbox is changed.");
             this.Attribute_ListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.Attribute_ListBox_ItemCheck);
             // 
             // StatBonus_GroupBox
@@ -723,6 +763,8 @@
             this.StatBonus_PointerArrayBox.MinimumSize = new System.Drawing.Size(128, 26);
             this.StatBonus_PointerArrayBox.Size = new System.Drawing.Size(194, 26);
             this.StatBonus_PointerArrayBox.TabIndex = 15;
+            this.Help_ToolTip.SetToolTip(this.StatBonus_PointerArrayBox, "Select an address at which there is item stat bonus data.\r\nThis is simply a list " +
+        "of numbers, for each stat bonus, or debuff.");
             this.StatBonus_PointerArrayBox.ValueChanged += new System.EventHandler(this.StatBonus_PointerArrayBox_ValueChanged);
             // 
             // Effective_GroupBox
@@ -756,6 +798,8 @@
             this.Effective_PointerArrayBox.MinimumSize = new System.Drawing.Size(128, 26);
             this.Effective_PointerArrayBox.Size = new System.Drawing.Size(194, 26);
             this.Effective_PointerArrayBox.TabIndex = 14;
+            this.Help_ToolTip.SetToolTip(this.Effective_PointerArrayBox, "Select an address at which there is weapon effectiveness data.\r\nThis is simply a " +
+        "list of which classes are weak to this weapon.");
             this.Effective_PointerArrayBox.ValueChanged += new System.EventHandler(this.Effective_PointerArrayBox_ValueChanged);
             // 
             // Stat_Weapon_GroupBox

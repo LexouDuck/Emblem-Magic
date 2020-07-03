@@ -85,6 +85,8 @@
             this.Test_ImageBox.TabIndex = 0;
             this.Test_ImageBox.TabStop = false;
             this.Test_ImageBox.Text = "imageBox1";
+            this.Help_ToolTip.SetToolTip(this.Test_ImageBox, "A preview of the current character portrait. Try changing the values with control" +
+        "s on the right.");
             // 
             // Image_ImageBox
             // 
@@ -109,6 +111,8 @@
             this.Palette_PointerBox.Name = "Palette_PointerBox";
             this.Palette_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.Palette_PointerBox.TabIndex = 5;
+            this.Help_ToolTip.SetToolTip(this.Palette_PointerBox, "Pointer to the palette for this character portrait.\r\nWill write to ROM if changed" +
+        ".");
             this.Palette_PointerBox.ValueChanged += new System.EventHandler(this.Palette_PointerBox_Changed);
             // 
             // Mouth_PointerBox
@@ -123,6 +127,8 @@
             this.Mouth_PointerBox.Name = "Mouth_PointerBox";
             this.Mouth_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.Mouth_PointerBox.TabIndex = 4;
+            this.Help_ToolTip.SetToolTip(this.Mouth_PointerBox, "Pointer to the tileset/pixel data for the mouth frames of this portrait.\r\nWill wr" +
+        "ite to ROM if changed.");
             this.Mouth_PointerBox.ValueChanged += new System.EventHandler(this.Mouth_PointerBox_Changed);
             // 
             // Chibi_PointerBox
@@ -137,6 +143,7 @@
             this.Chibi_PointerBox.Name = "Chibi_PointerBox";
             this.Chibi_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.Chibi_PointerBox.TabIndex = 3;
+            this.Help_ToolTip.SetToolTip(this.Chibi_PointerBox, "Pointer to the chibi mini-portrait pixel data.\r\nWill write to ROM if changed.");
             this.Chibi_PointerBox.ValueChanged += new System.EventHandler(this.Chibi_PointerBox_Changed);
             // 
             // Image_PointerBox
@@ -151,6 +158,8 @@
             this.Image_PointerBox.Name = "Image_PointerBox";
             this.Image_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.Image_PointerBox.TabIndex = 2;
+            this.Help_ToolTip.SetToolTip(this.Image_PointerBox, "Pointer to the main tileset/pixel data for this character portrait.\r\nWill write t" +
+        "o ROM if changed.");
             this.Image_PointerBox.ValueChanged += new System.EventHandler(this.Image_PointerBox_Changed);
             // 
             // Palette_PaletteBox
@@ -201,6 +210,8 @@
             this.EyesClosed_CheckBox.Size = new System.Drawing.Size(120, 17);
             this.EyesClosed_CheckBox.TabIndex = 10;
             this.EyesClosed_CheckBox.Text = "Eyes Always Closed";
+            this.Help_ToolTip.SetToolTip(this.EyesClosed_CheckBox, "If checked, this portrait will be displayed ingame with eyes always closed.\r\nWill" +
+        " write to ROM if changed.");
             this.EyesClosed_CheckBox.UseVisualStyleBackColor = true;
             this.EyesClosed_CheckBox.CheckedChanged += new System.EventHandler(this.EyesClosed_CheckBox_Changed);
             // 
@@ -225,6 +236,8 @@
             this.MouthY_ByteBox.Name = "MouthY_ByteBox";
             this.MouthY_ByteBox.Size = new System.Drawing.Size(38, 20);
             this.MouthY_ByteBox.TabIndex = 7;
+            this.Help_ToolTip.SetToolTip(this.MouthY_ByteBox, "The Y coordinate of the mouth sprite on this portrait.\r\nWill write to ROM if chan" +
+        "ged.");
             this.MouthY_ByteBox.Value = ((byte)(0));
             this.MouthY_ByteBox.ValueChanged += new System.EventHandler(this.MouthY_NumBox_Changed);
             // 
@@ -240,6 +253,8 @@
             this.MouthX_ByteBox.Name = "MouthX_ByteBox";
             this.MouthX_ByteBox.Size = new System.Drawing.Size(38, 20);
             this.MouthX_ByteBox.TabIndex = 6;
+            this.Help_ToolTip.SetToolTip(this.MouthX_ByteBox, "The X coordinate of the mouth sprite on this portrait.\r\nWill write to ROM if chan" +
+        "ged.");
             this.MouthX_ByteBox.Value = ((byte)(0));
             this.MouthX_ByteBox.ValueChanged += new System.EventHandler(this.MouthX_NumBox_Changed);
             // 
@@ -255,6 +270,8 @@
             this.BlinkY_ByteBox.Name = "BlinkY_ByteBox";
             this.BlinkY_ByteBox.Size = new System.Drawing.Size(38, 20);
             this.BlinkY_ByteBox.TabIndex = 9;
+            this.Help_ToolTip.SetToolTip(this.BlinkY_ByteBox, "The Y coordinate for the blinking eyes sprite on this portrait.\r\nWill write to RO" +
+        "M if changed.");
             this.BlinkY_ByteBox.Value = ((byte)(0));
             this.BlinkY_ByteBox.ValueChanged += new System.EventHandler(this.BlinkY_NumBox_Changed);
             // 
@@ -270,6 +287,8 @@
             this.BlinkX_ByteBox.Name = "BlinkX_ByteBox";
             this.BlinkX_ByteBox.Size = new System.Drawing.Size(38, 20);
             this.BlinkX_ByteBox.TabIndex = 8;
+            this.Help_ToolTip.SetToolTip(this.BlinkX_ByteBox, "The X coordinate for the blinking eyes sprite on this portrait.\r\nWill write to RO" +
+        "M if changed.");
             this.BlinkX_ByteBox.Value = ((byte)(0));
             this.BlinkX_ByteBox.ValueChanged += new System.EventHandler(this.BlinkX_NumBox_Changed);
             // 
@@ -350,6 +369,7 @@
             this.Test_Mouth_Frown_RadioButton.Size = new System.Drawing.Size(54, 17);
             this.Test_Mouth_Frown_RadioButton.TabIndex = 14;
             this.Test_Mouth_Frown_RadioButton.Text = "Frown";
+            this.Help_ToolTip.SetToolTip(this.Test_Mouth_Frown_RadioButton, "If checked, display the regular mouth frames.");
             this.Test_Mouth_Frown_RadioButton.UseVisualStyleBackColor = true;
             // 
             // Test_Mouth_Smile_RadioButton
@@ -362,6 +382,7 @@
             this.Test_Mouth_Smile_RadioButton.TabIndex = 13;
             this.Test_Mouth_Smile_RadioButton.TabStop = true;
             this.Test_Mouth_Smile_RadioButton.Text = "Smile";
+            this.Help_ToolTip.SetToolTip(this.Test_Mouth_Smile_RadioButton, "If checked, display the smiling mouth frames.");
             this.Test_Mouth_Smile_RadioButton.UseVisualStyleBackColor = true;
             this.Test_Mouth_Smile_RadioButton.CheckedChanged += new System.EventHandler(this.Test_ViewBox_Changed);
             // 
@@ -372,6 +393,7 @@
             this.Test_Mouth_TrackBar.Name = "Test_Mouth_TrackBar";
             this.Test_Mouth_TrackBar.Size = new System.Drawing.Size(131, 45);
             this.Test_Mouth_TrackBar.TabIndex = 12;
+            this.Help_ToolTip.SetToolTip(this.Test_Mouth_TrackBar, "Select a mouth frame to display in the portrait preview (open-to-closed).");
             this.Test_Mouth_TrackBar.ValueChanged += new System.EventHandler(this.Test_ViewBox_Changed);
             // 
             // Test_Blink_TrackBar
@@ -381,6 +403,7 @@
             this.Test_Blink_TrackBar.Name = "Test_Blink_TrackBar";
             this.Test_Blink_TrackBar.Size = new System.Drawing.Size(92, 45);
             this.Test_Blink_TrackBar.TabIndex = 12;
+            this.Help_ToolTip.SetToolTip(this.Test_Blink_TrackBar, "Select which blinking eyes frame to view in the portrait preview.");
             this.Test_Blink_TrackBar.ValueChanged += new System.EventHandler(this.Test_ViewBox_Changed);
             // 
             // Test_Blink_Label
@@ -432,9 +455,9 @@
             this.EntryArrayBox.Location = new System.Drawing.Point(12, 27);
             this.EntryArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.EntryArrayBox.MinimumSize = new System.Drawing.Size(128, 26);
-            this.EntryArrayBox.Name = "EntryArrayBox";
             this.EntryArrayBox.Size = new System.Drawing.Size(266, 26);
             this.EntryArrayBox.TabIndex = 3;
+            this.Help_ToolTip.SetToolTip(this.EntryArrayBox, "Select an entry in the portrait array to view/edit.");
             this.EntryArrayBox.ValueChanged += new System.EventHandler(this.EntryArrayBox_ValueChanged);
             // 
             // PortraitEditor

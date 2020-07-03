@@ -2,6 +2,9 @@
 Other/
 Test/*.sav
 Test/*.feh
+Test/FE4/
+Test/BattleAnimations/
+Test/MapSprites/
 
 # GBA roms (don't wanna distribute those on github!)
 *.gba

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MapEditor));
             this.Tileset_GridBox = new EmblemMagic.Components.GridBox();
             this.EntryArrayBox = new EmblemMagic.Components.ByteArrayBox();
             this.Palette_ArrayBox = new EmblemMagic.Components.ByteArrayBox();
@@ -118,9 +119,9 @@
             this.EntryArrayBox.Location = new System.Drawing.Point(58, 27);
             this.EntryArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.EntryArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
-            this.EntryArrayBox.Name = "EntryArrayBox";
             this.EntryArrayBox.Size = new System.Drawing.Size(213, 26);
             this.EntryArrayBox.TabIndex = 1;
+            this.Help_ToolTip.SetToolTip(this.EntryArrayBox, "Select the chapter whose map should be edited.");
             this.EntryArrayBox.ValueChanged += new System.EventHandler(this.EntryArrayBox_ValueChanged);
             // 
             // Palette_ArrayBox
@@ -128,9 +129,10 @@
             this.Palette_ArrayBox.Location = new System.Drawing.Point(9, 32);
             this.Palette_ArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.Palette_ArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
-            this.Palette_ArrayBox.Name = "Palette_ArrayBox";
             this.Palette_ArrayBox.Size = new System.Drawing.Size(216, 26);
             this.Palette_ArrayBox.TabIndex = 2;
+            this.Help_ToolTip.SetToolTip(this.Palette_ArrayBox, "Which entry in the map array stores the palette data for this chapter\'s map tiles" +
+        "et. Entry name should start with [PAL].\r\nWill write to ROM if changed.");
             this.Palette_ArrayBox.ValueChanged += new System.EventHandler(this.Palette_ArrayBox_ValueChanged);
             // 
             // Palette_Label
@@ -154,6 +156,7 @@
             this.Palette_PointerBox.Name = "Palette_PointerBox";
             this.Palette_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.Palette_PointerBox.TabIndex = 4;
+            this.Help_ToolTip.SetToolTip(this.Palette_PointerBox, resources.GetString("Palette_PointerBox.ToolTip"));
             this.Palette_PointerBox.ValueChanged += new System.EventHandler(this.Palette_PointerBox_ValueChanged);
             // 
             // Tileset1_PointerBox
@@ -168,6 +171,7 @@
             this.Tileset1_PointerBox.Name = "Tileset1_PointerBox";
             this.Tileset1_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.Tileset1_PointerBox.TabIndex = 7;
+            this.Help_ToolTip.SetToolTip(this.Tileset1_PointerBox, resources.GetString("Tileset1_PointerBox.ToolTip"));
             this.Tileset1_PointerBox.ValueChanged += new System.EventHandler(this.Tileset1_PointerBox_ValueChanged);
             // 
             // Tilesets_Label
@@ -184,9 +188,11 @@
             this.Tileset1_ArrayBox.Location = new System.Drawing.Point(9, 77);
             this.Tileset1_ArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.Tileset1_ArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
-            this.Tileset1_ArrayBox.Name = "Tileset1_ArrayBox";
             this.Tileset1_ArrayBox.Size = new System.Drawing.Size(216, 26);
             this.Tileset1_ArrayBox.TabIndex = 5;
+            this.Help_ToolTip.SetToolTip(this.Tileset1_ArrayBox, "Which entry in the map array stores the 1st set of pixel data for this chapter\'s " +
+        "map tileset. Entry name should start with [IMG].\r\nWill write to ROM if changed.\r" +
+        "\n");
             this.Tileset1_ArrayBox.ValueChanged += new System.EventHandler(this.Tileset1_ArrayBox_ValueChanged);
             // 
             // Tileset2_PointerBox
@@ -201,6 +207,7 @@
             this.Tileset2_PointerBox.Name = "Tileset2_PointerBox";
             this.Tileset2_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.Tileset2_PointerBox.TabIndex = 7;
+            this.Help_ToolTip.SetToolTip(this.Tileset2_PointerBox, resources.GetString("Tileset2_PointerBox.ToolTip"));
             this.Tileset2_PointerBox.ValueChanged += new System.EventHandler(this.Tileset2_PointerBox_ValueChanged);
             // 
             // Tileset2_ArrayBox
@@ -208,9 +215,11 @@
             this.Tileset2_ArrayBox.Location = new System.Drawing.Point(9, 104);
             this.Tileset2_ArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.Tileset2_ArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
-            this.Tileset2_ArrayBox.Name = "Tileset2_ArrayBox";
             this.Tileset2_ArrayBox.Size = new System.Drawing.Size(216, 26);
             this.Tileset2_ArrayBox.TabIndex = 6;
+            this.Help_ToolTip.SetToolTip(this.Tileset2_ArrayBox, "Which entry in the map array stores the 2nd set of pixel data for this chapter\'s " +
+        "map tileset. Entry name should start with [IMG].\r\nWill write to ROM if changed.\r" +
+        "\n");
             this.Tileset2_ArrayBox.ValueChanged += new System.EventHandler(this.Tileset2_ArrayBox_ValueChanged);
             // 
             // TilesetTSA_ArrayBox
@@ -218,9 +227,10 @@
             this.TilesetTSA_ArrayBox.Location = new System.Drawing.Point(307, 32);
             this.TilesetTSA_ArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.TilesetTSA_ArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
-            this.TilesetTSA_ArrayBox.Name = "TilesetTSA_ArrayBox";
             this.TilesetTSA_ArrayBox.Size = new System.Drawing.Size(216, 26);
             this.TilesetTSA_ArrayBox.TabIndex = 8;
+            this.Help_ToolTip.SetToolTip(this.TilesetTSA_ArrayBox, "Which entry in the map array stores the TSA data for this chapter\'s map tileset. " +
+        "Entry name should start with [TSA].\r\nWill write to ROM if changed.\r\n");
             this.TilesetTSA_ArrayBox.ValueChanged += new System.EventHandler(this.TilesetTSA_ArrayBox_ValueChanged);
             // 
             // TilesetTSA_PointerBox
@@ -235,6 +245,7 @@
             this.TilesetTSA_PointerBox.Name = "TilesetTSA_PointerBox";
             this.TilesetTSA_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.TilesetTSA_PointerBox.TabIndex = 10;
+            this.Help_ToolTip.SetToolTip(this.TilesetTSA_PointerBox, resources.GetString("TilesetTSA_PointerBox.ToolTip"));
             this.TilesetTSA_PointerBox.ValueChanged += new System.EventHandler(this.TilesetTSA_PointerBox_ValueChanged);
             // 
             // TileTSA_Label
@@ -256,6 +267,8 @@
             this.Palette_PaletteBox.TabIndex = 11;
             this.Palette_PaletteBox.TabStop = false;
             this.Palette_PaletteBox.Text = "paletteBox1";
+            this.Help_ToolTip.SetToolTip(this.Palette_PaletteBox, "The palette for this map (or rather, for the map tileset that this map uses).\r\nCl" +
+        "ick on this to open a PaletteEditor, to modify this palette.");
             this.Palette_PaletteBox.Click += new System.EventHandler(this.Tool_OpenPaletteEditor_Click);
             // 
             // Map_GridBox
@@ -287,6 +300,7 @@
             this.MapData_PointerBox.Name = "MapData_PointerBox";
             this.MapData_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.MapData_PointerBox.TabIndex = 15;
+            this.Help_ToolTip.SetToolTip(this.MapData_PointerBox, resources.GetString("MapData_PointerBox.ToolTip"));
             this.MapData_PointerBox.ValueChanged += new System.EventHandler(this.MapData_PointerBox_ValueChanged);
             // 
             // MapData_ArrayBox
@@ -296,9 +310,10 @@
             this.MapData_ArrayBox.Location = new System.Drawing.Point(6, 16);
             this.MapData_ArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.MapData_ArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
-            this.MapData_ArrayBox.Name = "MapData_ArrayBox";
             this.MapData_ArrayBox.Size = new System.Drawing.Size(171, 26);
             this.MapData_ArrayBox.TabIndex = 13;
+            this.Help_ToolTip.SetToolTip(this.MapData_ArrayBox, "Which entry of the map array holds map data for this chapter. The entry name shou" +
+        "ld start with [MAP].\r\nWill write to ROM if changed.");
             this.MapData_ArrayBox.ValueChanged += new System.EventHandler(this.MapData_ArrayBox_ValueChanged);
             // 
             // Map_Panel
@@ -337,9 +352,11 @@
             this.TileAnim1_ArrayBox.Location = new System.Drawing.Point(307, 77);
             this.TileAnim1_ArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.TileAnim1_ArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
-            this.TileAnim1_ArrayBox.Name = "TileAnim1_ArrayBox";
             this.TileAnim1_ArrayBox.Size = new System.Drawing.Size(216, 26);
             this.TileAnim1_ArrayBox.TabIndex = 14;
+            this.Help_ToolTip.SetToolTip(this.TileAnim1_ArrayBox, "Which entry in the map array stores the 1st set of animation data for this chapte" +
+        "r\'s map tileset. Entry name should start with [ANM].\r\nWill write to ROM if chang" +
+        "ed.");
             this.TileAnim1_ArrayBox.ValueChanged += new System.EventHandler(this.TileAnim1_ArrayBox_ValueChanged);
             // 
             // TileAnim2_ArrayBox
@@ -347,9 +364,11 @@
             this.TileAnim2_ArrayBox.Location = new System.Drawing.Point(307, 104);
             this.TileAnim2_ArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.TileAnim2_ArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
-            this.TileAnim2_ArrayBox.Name = "TileAnim2_ArrayBox";
             this.TileAnim2_ArrayBox.Size = new System.Drawing.Size(216, 26);
             this.TileAnim2_ArrayBox.TabIndex = 14;
+            this.Help_ToolTip.SetToolTip(this.TileAnim2_ArrayBox, "Which entry in the map array stores the map 2nd set of animation data for this ch" +
+        "apter\'s map tileset. Entry name should start with [ANM].\r\nWill write to ROM if c" +
+        "hanged.");
             this.TileAnim2_ArrayBox.ValueChanged += new System.EventHandler(this.TileAnim2_ArrayBox_ValueChanged);
             // 
             // TileAnim_Label
@@ -373,6 +392,7 @@
             this.TileAnim1_PointerBox.Name = "TileAnim1_PointerBox";
             this.TileAnim1_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.TileAnim1_PointerBox.TabIndex = 20;
+            this.Help_ToolTip.SetToolTip(this.TileAnim1_PointerBox, resources.GetString("TileAnim1_PointerBox.ToolTip"));
             this.TileAnim1_PointerBox.ValueChanged += new System.EventHandler(this.TileAnim1_PointerBox_ValueChanged);
             // 
             // TileAnim2_PointerBox
@@ -387,6 +407,7 @@
             this.TileAnim2_PointerBox.Name = "TileAnim2_PointerBox";
             this.TileAnim2_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.TileAnim2_PointerBox.TabIndex = 21;
+            this.Help_ToolTip.SetToolTip(this.TileAnim2_PointerBox, resources.GetString("TileAnim2_PointerBox.ToolTip"));
             this.TileAnim2_PointerBox.ValueChanged += new System.EventHandler(this.TileAnim2_PointerBox_ValueChanged);
             // 
             // Changes_PointerBox
@@ -402,6 +423,7 @@
             this.Changes_PointerBox.Name = "Changes_PointerBox";
             this.Changes_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.Changes_PointerBox.TabIndex = 24;
+            this.Help_ToolTip.SetToolTip(this.Changes_PointerBox, resources.GetString("Changes_PointerBox.ToolTip"));
             this.Changes_PointerBox.ValueChanged += new System.EventHandler(this.Changes_PointerBox_ValueChanged);
             // 
             // Changes_Label
@@ -420,9 +442,11 @@
             this.Changes_ArrayBox.Location = new System.Drawing.Point(6, 79);
             this.Changes_ArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.Changes_ArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
-            this.Changes_ArrayBox.Name = "Changes_ArrayBox";
             this.Changes_ArrayBox.Size = new System.Drawing.Size(170, 26);
             this.Changes_ArrayBox.TabIndex = 22;
+            this.Help_ToolTip.SetToolTip(this.Changes_ArrayBox, "Which entry of the map array holds the triggerable map tile changes data for this" +
+        " chapter. The entry name should start with [CHG].\r\nWill write to ROM if changed." +
+        "");
             this.Changes_ArrayBox.ValueChanged += new System.EventHandler(this.Changes_ArrayBox_ValueChanged);
             // 
             // Map_Height_NumBox
@@ -542,6 +566,7 @@
             this.Changes_Total_NumBox.Name = "Changes_Total_NumBox";
             this.Changes_Total_NumBox.Size = new System.Drawing.Size(40, 20);
             this.Changes_Total_NumBox.TabIndex = 31;
+            this.Help_ToolTip.SetToolTip(this.Changes_Total_NumBox, "The length of the array of map-tile-change data.");
             this.Changes_Total_NumBox.Value = ((byte)(0));
             // 
             // Changes_Total_Label
@@ -562,6 +587,8 @@
             this.Changes_CheckBox.Size = new System.Drawing.Size(90, 17);
             this.Changes_CheckBox.TabIndex = 29;
             this.Changes_CheckBox.Text = "Edit Change :";
+            this.Help_ToolTip.SetToolTip(this.Changes_CheckBox, "If checked, then changes to the tile map will alter the currently selected map-ti" +
+        "le-changes data.");
             this.Changes_CheckBox.UseVisualStyleBackColor = true;
             this.Changes_CheckBox.CheckedChanged += new System.EventHandler(this.Changes_CheckBox_CheckedChanged);
             // 
@@ -579,6 +606,7 @@
             this.Changes_NumBox.Name = "Changes_NumBox";
             this.Changes_NumBox.Size = new System.Drawing.Size(40, 20);
             this.Changes_NumBox.TabIndex = 28;
+            this.Help_ToolTip.SetToolTip(this.Changes_NumBox, "Select the index of the map-tile-change data to alter.");
             this.Changes_NumBox.Value = ((byte)(0));
             this.Changes_NumBox.ValueChanged += new System.EventHandler(this.Changes_NumBox_ValueChanged);
             // 
@@ -606,7 +634,7 @@
             this.Array_GroupBox.Size = new System.Drawing.Size(607, 136);
             this.Array_GroupBox.TabIndex = 32;
             this.Array_GroupBox.TabStop = false;
-            this.Array_GroupBox.Text = "Edit Chapter Array Map-related Values";
+            this.Array_GroupBox.Text = "Edit Map Tileset values for this Chapter";
             // 
             // Tool_Pick_Button
             // 
@@ -707,6 +735,7 @@
             this.Clear_Button.Size = new System.Drawing.Size(160, 30);
             this.Clear_Button.TabIndex = 37;
             this.Clear_Button.Text = "Clear the entire Map";
+            this.Help_ToolTip.SetToolTip(this.Clear_Button, "Sets every tile in the map to index 0.");
             this.Clear_Button.UseVisualStyleBackColor = true;
             this.Clear_Button.Click += new System.EventHandler(this.Clear_Button_Click);
             // 

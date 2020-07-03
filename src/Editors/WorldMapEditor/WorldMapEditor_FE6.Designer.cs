@@ -69,6 +69,8 @@
             this.SmallMap_InsertButton.Size = new System.Drawing.Size(94, 36);
             this.SmallMap_InsertButton.TabIndex = 2;
             this.SmallMap_InsertButton.Text = "Insert image...";
+            this.Help_ToolTip.SetToolTip(this.SmallMap_InsertButton, "Click on this to insert a new image to replace the ingame world map (small versio" +
+        "n).\r\nWill perform several writes to ROM when clicked.");
             this.SmallMap_InsertButton.UseVisualStyleBackColor = true;
             this.SmallMap_InsertButton.Click += new System.EventHandler(this.SmallMap_InsertButton_Click);
             // 
@@ -92,6 +94,8 @@
             this.SmallMap_PaletteBox.TabIndex = 4;
             this.SmallMap_PaletteBox.TabStop = false;
             this.SmallMap_PaletteBox.Text = "paletteBox2";
+            this.Help_ToolTip.SetToolTip(this.SmallMap_PaletteBox, "The palette used for the world map image (small version).\r\nClick on this to open " +
+        "a PaletteEditor, to modify this palette.");
             this.SmallMap_PaletteBox.Click += new System.EventHandler(this.SmallMap_PaletteBox_Click);
             // 
             // LargeMap_ImageBox
@@ -114,6 +118,8 @@
             this.LargeMap_PaletteBox.TabIndex = 7;
             this.LargeMap_PaletteBox.TabStop = false;
             this.LargeMap_PaletteBox.Text = "LargeMap_TL_PaletteBox";
+            this.Help_ToolTip.SetToolTip(this.LargeMap_PaletteBox, "The palette used for the world map image (large version).\r\nClick on this to open " +
+        "a PaletteEditor, to modify this palette.");
             this.LargeMap_PaletteBox.Click += new System.EventHandler(this.LargeMap_PaletteBox_Click);
             // 
             // SmallMap_GroupBox
@@ -143,6 +149,8 @@
             this.SmallMap_GraphicsPointerBox.Name = "SmallMap_GraphicsPointerBox";
             this.SmallMap_GraphicsPointerBox.Size = new System.Drawing.Size(70, 20);
             this.SmallMap_GraphicsPointerBox.TabIndex = 12;
+            this.Help_ToolTip.SetToolTip(this.SmallMap_GraphicsPointerBox, "Pointer to the pixel data for the small world map image.\r\nWill write to ROM if ch" +
+        "anged. Is repointed when inserting a new image.");
             this.SmallMap_GraphicsPointerBox.ValueChanged += new System.EventHandler(this.SmallMap_GraphicsPointerBox_ValueChanged);
             // 
             // SmallMap_GraphicsLabel
@@ -166,6 +174,8 @@
             this.SmallMap_PalettePointerBox.Name = "SmallMap_PalettePointerBox";
             this.SmallMap_PalettePointerBox.Size = new System.Drawing.Size(70, 20);
             this.SmallMap_PalettePointerBox.TabIndex = 10;
+            this.Help_ToolTip.SetToolTip(this.SmallMap_PalettePointerBox, "Pointer to the palette data for the small world map image.\r\nWill write to ROM if " +
+        "changed. Is repointed when inserting a new image.");
             this.SmallMap_PalettePointerBox.ValueChanged += new System.EventHandler(this.SmallMap_PalettePointerBox_ValueChanged);
             // 
             // SmallMap_PaletteLabel
@@ -237,6 +247,8 @@
             this.LargeMap_BL_GraphicsPointerBox.Name = "LargeMap_BL_GraphicsPointerBox";
             this.LargeMap_BL_GraphicsPointerBox.Size = new System.Drawing.Size(70, 20);
             this.LargeMap_BL_GraphicsPointerBox.TabIndex = 20;
+            this.Help_ToolTip.SetToolTip(this.LargeMap_BL_GraphicsPointerBox, "Pointer to the bottom-left part of pixel data for the large world map.\r\nWill writ" +
+        "e to ROM if changed. Is repointed when inserting a new image.");
             this.LargeMap_BL_GraphicsPointerBox.ValueChanged += new System.EventHandler(this.LargeMap_BL_GraphicsPointerBox_ValueChanged);
             // 
             // LargeMap_TR_GraphicsLabel
@@ -255,6 +267,8 @@
             this.LargeMap_InsertButton.Size = new System.Drawing.Size(119, 36);
             this.LargeMap_InsertButton.TabIndex = 14;
             this.LargeMap_InsertButton.Text = "Insert image...";
+            this.Help_ToolTip.SetToolTip(this.LargeMap_InsertButton, "Click on this to insert a new image to replace the ingame world map (large versio" +
+        "n).\r\nWill perform several writes to ROM when clicked.");
             this.LargeMap_InsertButton.UseVisualStyleBackColor = true;
             this.LargeMap_InsertButton.Click += new System.EventHandler(this.LargeMap_InsertButton_Click);
             // 
@@ -270,6 +284,8 @@
             this.LargeMap_TR_GraphicsPointerBox.Name = "LargeMap_TR_GraphicsPointerBox";
             this.LargeMap_TR_GraphicsPointerBox.Size = new System.Drawing.Size(70, 20);
             this.LargeMap_TR_GraphicsPointerBox.TabIndex = 18;
+            this.Help_ToolTip.SetToolTip(this.LargeMap_TR_GraphicsPointerBox, "Pointer to the top-right part of pixel data for the large world map.\r\nWill write " +
+        "to ROM if changed. Is repointed when inserting a new image.");
             this.LargeMap_TR_GraphicsPointerBox.ValueChanged += new System.EventHandler(this.LargeMap_TR_GraphicsPointerBox_ValueChanged);
             // 
             // LargeMap_PalettePointerBox
@@ -284,6 +300,8 @@
             this.LargeMap_PalettePointerBox.Name = "LargeMap_PalettePointerBox";
             this.LargeMap_PalettePointerBox.Size = new System.Drawing.Size(70, 20);
             this.LargeMap_PalettePointerBox.TabIndex = 16;
+            this.Help_ToolTip.SetToolTip(this.LargeMap_PalettePointerBox, "Pointer to the palette data for the large world map image.\r\nWill write to ROM if " +
+        "changed. Is repointed when inserting a new image.");
             this.LargeMap_PalettePointerBox.ValueChanged += new System.EventHandler(this.LargeMap_TL_PalettePointerBox_ValueChanged);
             // 
             // LargeMap_BR_GraphicsPointerBox
@@ -298,6 +316,8 @@
             this.LargeMap_BR_GraphicsPointerBox.Name = "LargeMap_BR_GraphicsPointerBox";
             this.LargeMap_BR_GraphicsPointerBox.Size = new System.Drawing.Size(70, 20);
             this.LargeMap_BR_GraphicsPointerBox.TabIndex = 22;
+            this.Help_ToolTip.SetToolTip(this.LargeMap_BR_GraphicsPointerBox, "Pointer to the bottom-right part of pixel data for the large world map.\r\nWill wri" +
+        "te to ROM if changed. Is repointed when inserting a new image.");
             this.LargeMap_BR_GraphicsPointerBox.ValueChanged += new System.EventHandler(this.LargeMap_BR_GraphicsPointerBox_ValueChanged);
             // 
             // LargeMap_TL_PaletteLabel
@@ -321,6 +341,8 @@
             this.LargeMap_TL_GraphicsPointerBox.Name = "LargeMap_TL_GraphicsPointerBox";
             this.LargeMap_TL_GraphicsPointerBox.Size = new System.Drawing.Size(70, 20);
             this.LargeMap_TL_GraphicsPointerBox.TabIndex = 14;
+            this.Help_ToolTip.SetToolTip(this.LargeMap_TL_GraphicsPointerBox, "Pointer to the top-left part of pixel data for the large world map.\r\nWill write t" +
+        "o ROM if changed. Is repointed when inserting a new image.");
             this.LargeMap_TL_GraphicsPointerBox.ValueChanged += new System.EventHandler(this.LargeMap_TL_GraphicsPointerBox_ValueChanged);
             // 
             // WorldMapEditor_FE6

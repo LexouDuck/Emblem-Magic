@@ -49,6 +49,8 @@
             this.Menu_Tools = new System.Windows.Forms.ToolStripMenuItem();
             this.Tools_MakeEAtxt = new System.Windows.Forms.ToolStripMenuItem();
             this.Tools_MakeEMtxt = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.Tools_ManageSpace = new System.Windows.Forms.ToolStripMenuItem();
             this.MapSelection_Label = new System.Windows.Forms.ToolStripLabel();
             this.Event_PointerBox = new EmblemMagic.Components.PointerBox();
             this.Event_ArrayBox = new EmblemMagic.Components.ByteArrayBox();
@@ -57,8 +59,7 @@
             this.UnitEvents_Label = new System.Windows.Forms.Label();
             this.MapChanges_Label = new System.Windows.Forms.Label();
             this.MapChanges_ListBox = new System.Windows.Forms.CheckedListBox();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.Tools_ManageSpace = new System.Windows.Forms.ToolStripMenuItem();
+            this.Chapter_MagicButton = new EmblemMagic.Components.MagicButton();
             this.Map_Panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Event_CodeBox)).BeginInit();
             this.MenuStrip.SuspendLayout();
@@ -89,6 +90,7 @@
             this.MapViewBox.TabIndex = 0;
             this.MapViewBox.TabStop = false;
             this.MapViewBox.TileSize = 16;
+            this.Help_ToolTip.SetToolTip(this.MapViewBox, resources.GetString("MapViewBox.ToolTip"));
             this.MapViewBox.SelectionChanged += new System.EventHandler(this.MapViewBox_SelectionChanged);
             // 
             // Entry_Label
@@ -105,8 +107,9 @@
             this.Entry_ArrayBox.Location = new System.Drawing.Point(69, 27);
             this.Entry_ArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.Entry_ArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
-            this.Entry_ArrayBox.Size = new System.Drawing.Size(343, 26);
+            this.Entry_ArrayBox.Size = new System.Drawing.Size(313, 26);
             this.Entry_ArrayBox.TabIndex = 18;
+            this.Help_ToolTip.SetToolTip(this.Entry_ArrayBox, "Select the chapter to view/edit.");
             this.Entry_ArrayBox.ValueChanged += new System.EventHandler(this.EntryArrayBox_ValueChanged);
             // 
             // Event_CodeBox
@@ -171,27 +174,27 @@
             // File_Assemble
             // 
             this.File_Assemble.Name = "File_Assemble";
-            this.File_Assemble.Size = new System.Drawing.Size(188, 22);
-            this.File_Assemble.Text = "Assemble...";
+            this.File_Assemble.Size = new System.Drawing.Size(232, 22);
+            this.File_Assemble.Text = "Assemble event code...";
             this.File_Assemble.Click += new System.EventHandler(this.File_Assemble_Click);
             // 
             // File_Assemble_CurrentText
             // 
             this.File_Assemble_CurrentText.Name = "File_Assemble_CurrentText";
-            this.File_Assemble_CurrentText.Size = new System.Drawing.Size(188, 22);
-            this.File_Assemble_CurrentText.Text = "Assemble current text";
+            this.File_Assemble_CurrentText.Size = new System.Drawing.Size(232, 22);
+            this.File_Assemble_CurrentText.Text = "Assemble current code";
             this.File_Assemble_CurrentText.Click += new System.EventHandler(this.File_Assemble_CurrentText_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(185, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(229, 6);
             // 
             // File_Save
             // 
             this.File_Save.Name = "File_Save";
-            this.File_Save.Size = new System.Drawing.Size(188, 22);
-            this.File_Save.Text = "Save current text as...";
+            this.File_Save.Size = new System.Drawing.Size(232, 22);
+            this.File_Save.Text = "Save current code as text file...";
             this.File_Save.Click += new System.EventHandler(this.File_Save_Click);
             // 
             // Menu_View
@@ -265,6 +268,19 @@
             this.Tools_MakeEMtxt.Text = "Make EmblemMagic array txt file...";
             this.Tools_MakeEMtxt.Click += new System.EventHandler(this.Tools_MakeEMtxt_Click);
             // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(274, 6);
+            // 
+            // Tools_ManageSpace
+            // 
+            this.Tools_ManageSpace.CheckOnClick = true;
+            this.Tools_ManageSpace.Name = "Tools_ManageSpace";
+            this.Tools_ManageSpace.Size = new System.Drawing.Size(277, 22);
+            this.Tools_ManageSpace.Text = "Manage ORG/ASSERTs automatically";
+            this.Tools_ManageSpace.CheckedChanged += new System.EventHandler(this.Tools_ManageSpace_CheckedChanged);
+            // 
             // MapSelection_Label
             // 
             this.MapSelection_Label.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
@@ -285,6 +301,8 @@
             this.Event_PointerBox.Name = "Event_PointerBox";
             this.Event_PointerBox.Size = new System.Drawing.Size(70, 20);
             this.Event_PointerBox.TabIndex = 22;
+            this.Help_ToolTip.SetToolTip(this.Event_PointerBox, "Pointer to the event data within the chapter/map pointer list.\r\nWill write to ROM" +
+        " if changed. Is repointed when inserting event code with \"File -> Assemble...\".");
             this.Event_PointerBox.ValueChanged += new System.EventHandler(this.Event_PointerBox_ValueChanged);
             // 
             // Event_ArrayBox
@@ -294,6 +312,8 @@
             this.Event_ArrayBox.MinimumSize = new System.Drawing.Size(128, 26);
             this.Event_ArrayBox.Size = new System.Drawing.Size(267, 26);
             this.Event_ArrayBox.TabIndex = 23;
+            this.Help_ToolTip.SetToolTip(this.Event_ArrayBox, "The entry in the chapter/map list at which to store the events ([EVT]) for this c" +
+        "hapter.\r\nWill write to ROM if changed.");
             this.Event_ArrayBox.ValueChanged += new System.EventHandler(this.Event_ArrayBox_ValueChanged);
             // 
             // Event_Label
@@ -316,6 +336,8 @@
             this.UnitEvents_ListBox.Size = new System.Drawing.Size(212, 229);
             this.UnitEvents_ListBox.Sorted = true;
             this.UnitEvents_ListBox.TabIndex = 25;
+            this.Help_ToolTip.SetToolTip(this.UnitEvents_ListBox, "The list of unit groups for this chapter map. Uncheck a unit group to hide them f" +
+        "rom the map display.");
             this.UnitEvents_ListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.UnitEvents_ListBox_ItemCheck);
             // 
             // UnitEvents_Label
@@ -349,26 +371,28 @@
             this.MapChanges_ListBox.Size = new System.Drawing.Size(82, 229);
             this.MapChanges_ListBox.Sorted = true;
             this.MapChanges_ListBox.TabIndex = 27;
+            this.Help_ToolTip.SetToolTip(this.MapChanges_ListBox, "The list of triggerable map tile changes for this map. Check them to apply them t" +
+        "o the map display.");
             this.MapChanges_ListBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.MapChanges_ListBox_ItemCheck);
             // 
-            // toolStripSeparator3
+            // Chapter_MagicButton
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(274, 6);
-            // 
-            // Tools_ManageSpace
-            // 
-            this.Tools_ManageSpace.CheckOnClick = true;
-            this.Tools_ManageSpace.Name = "Tools_ManageSpace";
-            this.Tools_ManageSpace.Size = new System.Drawing.Size(277, 22);
-            this.Tools_ManageSpace.Text = "Manage ORG/ASSERTs automatically";
-            this.Tools_ManageSpace.CheckedChanged += new System.EventHandler(this.Tools_ManageSpace_CheckedChanged);
+            this.Chapter_MagicButton.Location = new System.Drawing.Point(388, 27);
+            this.Chapter_MagicButton.MaximumSize = new System.Drawing.Size(24, 24);
+            this.Chapter_MagicButton.MinimumSize = new System.Drawing.Size(24, 24);
+            this.Chapter_MagicButton.Name = "Chapter_MagicButton";
+            this.Chapter_MagicButton.Size = new System.Drawing.Size(24, 24);
+            this.Chapter_MagicButton.TabIndex = 29;
+            this.Help_ToolTip.SetToolTip(this.Chapter_MagicButton, "Click on this to open the Chapter Editor module, to modify chapter data (like mus" +
+        "ic, etc)");
+            this.Chapter_MagicButton.UseVisualStyleBackColor = true;
             // 
             // EventEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(731, 462);
+            this.Controls.Add(this.Chapter_MagicButton);
             this.Controls.Add(this.MapChanges_Label);
             this.Controls.Add(this.MapChanges_ListBox);
             this.Controls.Add(this.UnitEvents_Label);
@@ -426,5 +450,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem Tools_ManageSpace;
+        private Components.MagicButton Chapter_MagicButton;
     }
 }

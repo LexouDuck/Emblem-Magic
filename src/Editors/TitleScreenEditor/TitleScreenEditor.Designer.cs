@@ -41,12 +41,12 @@
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // imageBox1
+            // Test_ImageBox
             // 
             this.Test_ImageBox.BackColor = System.Drawing.SystemColors.Control;
             this.Test_ImageBox.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.Test_ImageBox.Location = new System.Drawing.Point(12, 27);
-            this.Test_ImageBox.Name = "imageBox1";
+            this.Test_ImageBox.Name = "Test_ImageBox";
             this.Test_ImageBox.Size = new System.Drawing.Size(240, 160);
             this.Test_ImageBox.TabIndex = 0;
             this.Test_ImageBox.TabStop = false;
@@ -78,6 +78,7 @@
             this.BG_CheckBox.Size = new System.Drawing.Size(70, 17);
             this.BG_CheckBox.TabIndex = 2;
             this.BG_CheckBox.Text = "BG Layer";
+            this.Help_ToolTip.SetToolTip(this.BG_CheckBox, "If checked, display the background image for the title screen.");
             this.BG_CheckBox.UseVisualStyleBackColor = true;
             this.BG_CheckBox.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
             // 
@@ -91,6 +92,7 @@
             this.MG_CheckBox.Size = new System.Drawing.Size(72, 17);
             this.MG_CheckBox.TabIndex = 3;
             this.MG_CheckBox.Text = "MG Layer";
+            this.Help_ToolTip.SetToolTip(this.MG_CheckBox, "If checked, display the middle layer of the title screen");
             this.MG_CheckBox.UseVisualStyleBackColor = true;
             this.MG_CheckBox.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
             // 
@@ -104,18 +106,21 @@
             this.FG_CheckBox.Size = new System.Drawing.Size(69, 17);
             this.FG_CheckBox.TabIndex = 4;
             this.FG_CheckBox.Text = "FG Layer";
+            this.Help_ToolTip.SetToolTip(this.FG_CheckBox, "If checked, display the foreground layer of the title screen.");
             this.FG_CheckBox.UseVisualStyleBackColor = true;
             this.FG_CheckBox.CheckedChanged += new System.EventHandler(this.CheckBox_CheckedChanged);
             // 
-            // paletteBox1
+            // Test_PaletteBox
             // 
             this.Test_PaletteBox.ColorsPerLine = 16;
             this.Test_PaletteBox.Location = new System.Drawing.Point(12, 193);
-            this.Test_PaletteBox.Name = "paletteBox1";
+            this.Test_PaletteBox.Name = "Test_PaletteBox";
             this.Test_PaletteBox.Size = new System.Drawing.Size(128, 128);
             this.Test_PaletteBox.TabIndex = 5;
             this.Test_PaletteBox.TabStop = false;
             this.Test_PaletteBox.Text = "paletteBox1";
+            this.Help_ToolTip.SetToolTip(this.Test_PaletteBox, "This is the palette(s) used to display the game\'s title screen.\r\nClick on this to" +
+        " open a PaletteEditor, to modify this palette.");
             // 
             // BG_MagicButton
             // 
@@ -125,6 +130,8 @@
             this.BG_MagicButton.Name = "BG_MagicButton";
             this.BG_MagicButton.Size = new System.Drawing.Size(24, 24);
             this.BG_MagicButton.TabIndex = 6;
+            this.Help_ToolTip.SetToolTip(this.BG_MagicButton, "This is a shortcut to the GraphicsEditor, to view/edit the title screen backgroun" +
+        "d layer.");
             this.BG_MagicButton.UseVisualStyleBackColor = true;
             this.BG_MagicButton.Click += new System.EventHandler(this.BG_MagicButton_Click);
             // 
@@ -136,6 +143,8 @@
             this.MG_MagicButton.Name = "MG_MagicButton";
             this.MG_MagicButton.Size = new System.Drawing.Size(24, 24);
             this.MG_MagicButton.TabIndex = 7;
+            this.Help_ToolTip.SetToolTip(this.MG_MagicButton, "This is a shortcut to the GraphicsEditor, to view/edit the title screen middle la" +
+        "yer.\r\n");
             this.MG_MagicButton.UseVisualStyleBackColor = true;
             this.MG_MagicButton.Click += new System.EventHandler(this.MG_MagicButton_Click);
             // 
@@ -147,6 +156,8 @@
             this.FG_MagicButton.Name = "FG_MagicButton";
             this.FG_MagicButton.Size = new System.Drawing.Size(24, 24);
             this.FG_MagicButton.TabIndex = 8;
+            this.Help_ToolTip.SetToolTip(this.FG_MagicButton, "This is a shortcut to the GraphicsEditor, to view/edit the title screen foregroun" +
+        "d layer.\r\n");
             this.FG_MagicButton.UseVisualStyleBackColor = true;
             this.FG_MagicButton.Click += new System.EventHandler(this.FG_MagicButton_Click);
             // 

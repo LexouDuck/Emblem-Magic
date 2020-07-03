@@ -117,10 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="Editor_Menu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="Help_ToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="Palette_PointerBox.ToolTip" xml:space="preserve">
+    <value>Pointer to the palette data for this chapter's map tileset. Entry of the map array, the name should start with [PAL].
+Will write to ROM if changed. Is repointed when inserting a new map with "File -&gt; Insert map...".</value>
+  </data>
+  <data name="Tileset1_PointerBox.ToolTip" xml:space="preserve">
+    <value>Pointer to the 1st set of pixel data for this chapter's map tileset. Entry of the map array, the name should start with [IMG].
+Will write to ROM if changed. Is repointed when inserting a new map with "File -&gt; Insert map...".</value>
+  </data>
+  <data name="Tileset2_PointerBox.ToolTip" xml:space="preserve">
+    <value>Pointer to the 2nd set of pixel data for this chapter's map tileset. Entry of the map array, the name should start with [IMG].
+Will write to ROM if changed. Is repointed when inserting a new map with "File -&gt; Insert map...".</value>
+  </data>
+  <data name="TilesetTSA_PointerBox.ToolTip" xml:space="preserve">
+    <value>Pointer to the TSA &amp; terrain data for this chapter's map tileset. Entry of the map array, the name should start with [TSA].
+Will write to ROM if changed. Is repointed when inserting a new map with "File -&gt; Insert map...".</value>
+  </data>
+  <data name="MapData_PointerBox.ToolTip" xml:space="preserve">
+    <value>Pointer to the map data for this chapter. This is an entry of the map array, whose name should start with [MAP].
+Will write to ROM if changed. Is repointed when inserting a new map with "File -&gt; Insert map...".</value>
+  </data>
+  <data name="TileAnim1_PointerBox.ToolTip" xml:space="preserve">
+    <value>Pointer to the 1st set of animation data for this chapter's map tileset. Entry of the map array, the name should start with [ANM].
+Will write to ROM if changed. Is repointed when inserting a new map with "File -&gt; Insert map...".</value>
+  </data>
+  <data name="TileAnim2_PointerBox.ToolTip" xml:space="preserve">
+    <value>Pointer to the 2nd set of animation data for this chapter's map tileset. Entry of the map array, the name should start with [ANM].
+Will write to ROM if changed. Is repointed when inserting a new map with "File -&gt; Insert map...".
+</value>
+  </data>
+  <data name="Changes_PointerBox.ToolTip" xml:space="preserve">
+    <value>Pointer to the map-tile-changes data for this chapter. This is an entry of the map array, whose name should start with [CHG].
+Will write to ROM if changed. Is repointed when inserting a new map with "File -&gt; Insert map...".</value>
+  </data>
+  <metadata name="Editor_Menu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>140, 17</value>
+  </metadata>
   <metadata name="Map_MouseTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>137, 17</value>
+    <value>260, 17</value>
   </metadata>
 </root>

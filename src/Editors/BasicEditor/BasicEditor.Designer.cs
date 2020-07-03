@@ -71,6 +71,7 @@
             this.Read_LZ77CheckBox.Size = new System.Drawing.Size(112, 17);
             this.Read_LZ77CheckBox.TabIndex = 8;
             this.Read_LZ77CheckBox.Text = "LZ77 Compressed";
+            this.Help_ToolTip.SetToolTip(this.Read_LZ77CheckBox, "If checked, attempt to decompress the data read at \'Address\'");
             this.Read_LZ77CheckBox.UseVisualStyleBackColor = true;
             this.Read_LZ77CheckBox.CheckedChanged += new System.EventHandler(this.Read_LZ77CheckBox_CheckedChanged);
             // 
@@ -114,6 +115,7 @@
             this.Read_AddressBox.Name = "Read_AddressBox";
             this.Read_AddressBox.Size = new System.Drawing.Size(70, 20);
             this.Read_AddressBox.TabIndex = 1;
+            this.Help_ToolTip.SetToolTip(this.Read_AddressBox, "Enter an address at which to read bytes from the open ROM");
             // 
             // Read_LengthBox
             // 
@@ -127,6 +129,7 @@
             this.Read_LengthBox.Name = "Read_LengthBox";
             this.Read_LengthBox.Size = new System.Drawing.Size(70, 20);
             this.Read_LengthBox.TabIndex = 2;
+            this.Help_ToolTip.SetToolTip(this.Read_LengthBox, "Amount of bytes to read when clicking \'Read Data\'");
             this.Read_LengthBox.Value = new decimal(new int[] {
             1,
             0,
@@ -160,6 +163,7 @@
             this.Write_HexBox.ShadowSelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(135)))), ((int)(((byte)(206)))), ((int)(((byte)(235)))));
             this.Write_HexBox.Size = new System.Drawing.Size(309, 124);
             this.Write_HexBox.TabIndex = 5;
+            this.Help_ToolTip.SetToolTip(this.Write_HexBox, "The bytes of data to write at \'Address\'");
             this.Write_HexBox.UseFixedBytesPerLine = true;
             this.Write_HexBox.VScrollBarVisible = true;
             // 
@@ -171,6 +175,7 @@
             this.Write_LZ77CheckBox.Size = new System.Drawing.Size(112, 17);
             this.Write_LZ77CheckBox.TabIndex = 7;
             this.Write_LZ77CheckBox.Text = "LZ77 Compressed";
+            this.Help_ToolTip.SetToolTip(this.Write_LZ77CheckBox, "If checked, the given data will be Lempel-Ziv compressed before writing to ROM");
             this.Write_LZ77CheckBox.UseVisualStyleBackColor = true;
             // 
             // Write_Button
@@ -180,6 +185,7 @@
             this.Write_Button.Size = new System.Drawing.Size(129, 27);
             this.Write_Button.TabIndex = 6;
             this.Write_Button.Text = "Write data";
+            this.Help_ToolTip.SetToolTip(this.Write_Button, "Write the given \'Data\' at \'Address\' in the ROM");
             this.Write_Button.UseVisualStyleBackColor = true;
             this.Write_Button.Click += new System.EventHandler(this.WriteData_Click);
             // 
@@ -195,6 +201,7 @@
             this.Write_AddressBox.Name = "Write_AddressBox";
             this.Write_AddressBox.Size = new System.Drawing.Size(70, 20);
             this.Write_AddressBox.TabIndex = 4;
+            this.Help_ToolTip.SetToolTip(this.Write_AddressBox, "The address at which to write data to the ROM");
             // 
             // Write_AddressLabel
             // 
@@ -214,7 +221,7 @@
             this.label5.Text = "Data to write :";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // OutputBox
+            // Output_TextBox
             // 
             this.Output_TextBox.AcceptsReturn = true;
             this.Output_TextBox.AcceptsTab = true;
@@ -225,11 +232,13 @@
             this.Output_TextBox.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Output_TextBox.Location = new System.Drawing.Point(339, 12);
             this.Output_TextBox.Multiline = true;
-            this.Output_TextBox.Name = "OutputBox";
+            this.Output_TextBox.Name = "Output_TextBox";
             this.Output_TextBox.ReadOnly = true;
             this.Output_TextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.Output_TextBox.Size = new System.Drawing.Size(313, 288);
             this.Output_TextBox.TabIndex = 7;
+            this.Help_ToolTip.SetToolTip(this.Output_TextBox, "The text area is where the output result is printed (the bytes that were read, or" +
+        " the bytes that were written)");
             // 
             // BasicEditor
             // 
