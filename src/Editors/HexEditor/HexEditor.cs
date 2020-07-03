@@ -743,5 +743,18 @@ namespace EmblemMagic.Editors
         {
             Core_ShowGoTo();
         }
+
+        private void MagicButton_Click(Object sender, EventArgs e)
+        {
+            HexBox hexbox = CurrentTabIsROM() ?
+                MainHexBox :
+                FileHexBoxes[CurrentTab];
+            BasicEditor editor = new BasicEditor();
+            Program.Core.Core_OpenEditor(editor);
+
+            Pointer address = new Pointer((uint)hexbox.SelectionStart);
+            int length = (int)hexbox.SelectionLength;
+            editor.Core_SetEntry(address, length, (length > 0 ? Core.ReadData(address, length) : null));
+        }
     }
 }

@@ -28,10 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.Tabs_Control = new System.Windows.Forms.TabControl();
             this.MainTabPage = new System.Windows.Forms.TabPage();
-            this.MainHexBox = new Components.HexBox();
+            this.MainHexBox = new EmblemMagic.Components.HexBox();
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.Status_Position = new System.Windows.Forms.ToolStripStatusLabel();
             this.Status_FileSize = new System.Windows.Forms.ToolStripStatusLabel();
@@ -41,11 +40,11 @@
             this.Menu_File_Open = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_File_RecentFiles = new EmblemMagic.Components.RecentFileMenu();
             this.Menu_Separator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.Menu_File_Apply = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_File_Save = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_File_SaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Separator2 = new System.Windows.Forms.ToolStripSeparator();
             this.Menu_File_Close = new System.Windows.Forms.ToolStripMenuItem();
-            this.Menu_File_Apply = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Edit = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Edit_Cut = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Edit_Copy = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,6 +58,7 @@
             this.Menu_Tool_Find = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Tool_FindNext = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Tool_GoTo = new System.Windows.Forms.ToolStripMenuItem();
+            this.MagicButton = new EmblemMagic.Components.MagicButton();
             this.Tabs_Control.SuspendLayout();
             this.MainTabPage.SuspendLayout();
             this.StatusStrip.SuspendLayout();
@@ -190,10 +190,17 @@
             this.Menu_File_RecentFiles.Text = "Recent Files";
             this.Menu_File_RecentFiles.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.File_Recent_Click);
             // 
-            // Menu_File_Separator1
+            // Menu_Separator1
             // 
-            this.Menu_Separator1.Name = "Menu_File_Separator1";
+            this.Menu_Separator1.Name = "Menu_Separator1";
             this.Menu_Separator1.Size = new System.Drawing.Size(222, 6);
+            // 
+            // Menu_File_Apply
+            // 
+            this.Menu_File_Apply.Name = "Menu_File_Apply";
+            this.Menu_File_Apply.Size = new System.Drawing.Size(225, 22);
+            this.Menu_File_Apply.Text = "Apply ROM changes";
+            this.Menu_File_Apply.Click += new System.EventHandler(this.File_Apply_Click);
             // 
             // Menu_File_Save
             // 
@@ -212,9 +219,9 @@
             this.Menu_File_SaveAs.Text = "Save ROM As...";
             this.Menu_File_SaveAs.Click += new System.EventHandler(this.File_SaveAs_Click);
             // 
-            // Menu_File_Separator2
+            // Menu_Separator2
             // 
-            this.Menu_Separator2.Name = "Menu_File_Separator2";
+            this.Menu_Separator2.Name = "Menu_Separator2";
             this.Menu_Separator2.Size = new System.Drawing.Size(222, 6);
             // 
             // Menu_File_Close
@@ -224,13 +231,6 @@
             this.Menu_File_Close.Size = new System.Drawing.Size(225, 22);
             this.Menu_File_Close.Text = "Close File";
             this.Menu_File_Close.Click += new System.EventHandler(this.File_Close_Click);
-            // 
-            // Menu_File_Apply
-            // 
-            this.Menu_File_Apply.Name = "Menu_File_Apply";
-            this.Menu_File_Apply.Size = new System.Drawing.Size(225, 22);
-            this.Menu_File_Apply.Text = "Apply ROM changes";
-            this.Menu_File_Apply.Click += new System.EventHandler(this.File_Apply_Click);
             // 
             // Menu_Edit
             // 
@@ -271,9 +271,9 @@
             this.Menu_Edit_Paste.Text = "Paste";
             this.Menu_Edit_Paste.Click += new System.EventHandler(this.Edit_Paste_Click);
             // 
-            // toolStripSeparator3
+            // Menu_Separator3
             // 
-            this.Menu_Separator3.Name = "toolStripSeparator3";
+            this.Menu_Separator3.Name = "Menu_Separator3";
             this.Menu_Separator3.Size = new System.Drawing.Size(196, 6);
             // 
             // Menu_Edit_CopyHex
@@ -294,9 +294,9 @@
             this.Menu_Edit_PasteHex.Text = "Paste Hex";
             this.Menu_Edit_PasteHex.Click += new System.EventHandler(this.Edit_PasteHex_Click);
             // 
-            // toolStripSeparator5
+            // Menu_Separator4
             // 
-            this.Menu_Separator4.Name = "toolStripSeparator5";
+            this.Menu_Separator4.Name = "Menu_Separator4";
             this.Menu_Separator4.Size = new System.Drawing.Size(196, 6);
             // 
             // Menu_Edit_SelectAll
@@ -342,12 +342,25 @@
             this.Menu_Tool_GoTo.Text = "Goto...";
             this.Menu_Tool_GoTo.Click += new System.EventHandler(this.Tool_GoTo_Click);
             // 
+            // MagicButton
+            // 
+            this.MagicButton.Location = new System.Drawing.Point(555, 0);
+            this.MagicButton.MaximumSize = new System.Drawing.Size(24, 24);
+            this.MagicButton.MinimumSize = new System.Drawing.Size(24, 24);
+            this.MagicButton.Name = "MagicButton";
+            this.MagicButton.Size = new System.Drawing.Size(24, 24);
+            this.MagicButton.TabIndex = 1;
+            this.Help_ToolTip.SetToolTip(this.MagicButton, "This is a shortcut button to open the Basic ROM Editor at the current address.");
+            this.MagicButton.UseVisualStyleBackColor = true;
+            this.MagicButton.Click += new System.EventHandler(this.MagicButton_Click);
+            // 
             // HexEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(584, 462);
+            this.Controls.Add(this.MagicButton);
             this.Controls.Add(this.Tabs_Control);
             this.Controls.Add(this.StatusStrip);
             this.Controls.Add(this.MenuStrip);
@@ -399,5 +412,6 @@
 
         private System.Windows.Forms.TabControl Tabs_Control;
         private System.Windows.Forms.ToolStripMenuItem Menu_File_Apply;
+        private Components.MagicButton MagicButton;
     }
 }

@@ -57,6 +57,20 @@ namespace EmblemMagic.Editors
             Output_TextBox.ScrollToCaret();
         }
 
+        public void Core_SetEntry(Pointer address, int length = 0, byte[] data = null)
+        {
+            Read_AddressBox.Value = address;
+            Write_AddressBox.Value = address;
+            if (length > 0)
+            {
+                Read_LengthBox.Value = length;
+            }
+            if (data != null && data.Length > 0)
+            {
+                Write_HexBox.Value = data;
+            }
+        }
+
 
 
         private void ReadData_Click(object sender, EventArgs e)
