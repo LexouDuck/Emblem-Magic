@@ -372,7 +372,7 @@ namespace EmblemMagic.Editors
             }
             catch (Exception ex)
             {
-                Program.ShowError("Could not save image.", ex);
+                Program.ShowError("Could not save background image.", ex);
             }
         }
         void Core_SaveData(string filepath)
@@ -392,7 +392,7 @@ namespace EmblemMagic.Editors
             }
             catch (Exception ex)
             {
-                Program.ShowError("Could not save image data.", ex);
+                Program.ShowError("Could not save background image data.", ex);
             }
         }
 

@@ -31,6 +31,8 @@
             this.Test_ImageBox = new EmblemMagic.Components.ImageBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.File_Insert = new System.Windows.Forms.ToolStripMenuItem();
+            this.File_Save = new System.Windows.Forms.ToolStripMenuItem();
             this.BG_CheckBox = new System.Windows.Forms.CheckBox();
             this.MG_CheckBox = new System.Windows.Forms.CheckBox();
             this.FG_CheckBox = new System.Windows.Forms.CheckBox();
@@ -64,9 +66,26 @@
             // 
             // fileToolStripMenuItem
             // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.File_Insert,
+            this.File_Save});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
+            // 
+            // File_Insert
+            // 
+            this.File_Insert.Name = "File_Insert";
+            this.File_Insert.Size = new System.Drawing.Size(152, 22);
+            this.File_Insert.Text = "Insert image...";
+            this.File_Insert.Click += new System.EventHandler(this.File_Insert_Click);
+            // 
+            // File_Save
+            // 
+            this.File_Save.Name = "File_Save";
+            this.File_Save.Size = new System.Drawing.Size(152, 22);
+            this.File_Save.Text = "Save image...";
+            this.File_Save.Click += new System.EventHandler(this.File_Save_Click);
             // 
             // BG_CheckBox
             // 
@@ -197,5 +216,7 @@
         private Components.MagicButton BG_MagicButton;
         private Components.MagicButton MG_MagicButton;
         private Components.MagicButton FG_MagicButton;
+        private System.Windows.Forms.ToolStripMenuItem File_Insert;
+        private System.Windows.Forms.ToolStripMenuItem File_Save;
     }
 }

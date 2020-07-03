@@ -3,12 +3,42 @@ using GBA;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace EmblemMagic.Editors
 {
     public partial class TitleScreenEditor : Editor
     {
+        private GBA.Bitmap _current;
+        public GBA.Bitmap Current
+        {
+            get
+            {
+                return _current;
+            }
+            set
+            {
+                _current = value;
+                Test_ImageBox.Load(value);
+            }
+        }
+        private GBA.Palette _currentPalette;
+        public GBA.Palette CurrentPalette
+        {
+            get
+            {
+                return _currentPalette;
+            }
+            set
+            {
+                _currentPalette = value;
+                Test_PaletteBox.Load(value);
+            }
+        }
+
+
+
         public TitleScreenEditor()
         {
             InitializeComponent();
@@ -21,6 +51,124 @@ namespace EmblemMagic.Editors
         public override void Core_Update()
         {
             Core_LoadTitleScreen();
+        }
+
+        void Core_SaveImage(string filepath)
+        {
+            try
+            {
+                Core.SaveImage(filepath,
+                    Current.Width,
+                    Current.Height,
+                    GBA.Palette.Split(CurrentPalette, 16),
+                    delegate (int x, int y)
+                    {
+                        return (byte)Current[x, y];
+                    });
+            }
+            catch (Exception ex)
+            {
+                Program.ShowError("Could not save title screen image.", ex);
+            }
+        }
+        void Core_SaveData(string filepath)
+        {
+            try
+            {
+                string path = Path.GetDirectoryName(filepath) + '\\';
+                string file = Path.GetFileNameWithoutExtension(filepath);
+
+                if (Core.CurrentROM is FE6)
+                {
+                    string name_mg_palette = "Title Screen MG/FG Palette";
+                    string name_mg_tileset = "Title Screen MG/FG Tileset";
+                    string name_fg_tileset = "Title Screen FG Tileset";
+                    string name_mg_tsa     = "Title Screen MG TSA";
+                    string name_bg_tileset = "Title Screen BG Tileset";
+                    string name_bg_palette = "Title Screen BG Palette";
+
+                    Pointer address_mg_palette = Core.GetPointer(name_mg_palette);
+                    Pointer address_mg_tileset = Core.GetPointer(name_mg_tileset);
+                    Pointer address_fg_tileset = Core.GetPointer(name_fg_tileset);
+                    Pointer address_mg_tsa     = Core.GetPointer(name_mg_tsa);
+                    Pointer address_bg_tileset = Core.GetPointer(name_bg_tileset);
+                    Pointer address_bg_palette = Core.GetPointer(name_bg_palette);
+
+                    File.WriteAllBytes(path + name_mg_palette + ".pal", Core.ReadPalette(address_mg_palette, Palette.LENGTH * 8).ToBytes(false));
+                    File.WriteAllBytes(path + name_mg_tileset + ".dmp", new Tileset(Core.ReadData(address_mg_tileset, 0)).ToBytes(false));
+                    File.WriteAllBytes(path + name_fg_tileset + ".dmp", new Tileset(Core.ReadData(address_fg_tileset, 0)).ToBytes(false));
+                    File.WriteAllBytes(path + name_mg_tsa     + ".tsa", Core.ReadTSA(address_mg_tsa, 32, 20, true, false).ToBytes(false, false));
+                    File.WriteAllBytes(path + name_bg_tileset + ".pal", Core.ReadPalette(address_bg_palette, Palette.LENGTH).ToBytes(false));
+                    File.WriteAllBytes(path + name_bg_palette + ".png", new Tileset(Core.ReadData(address_bg_tileset, 0)).ToBytes(false));
+                }
+                if (Core.CurrentROM is FE7)
+                {
+                    string name_bg_palette = "Title Screen BG Palette";
+                    string name_bg_tileset = "Title Screen BG Tileset";
+                    string name_mg_palette = "Title Screen MG Palette";
+                    string name_mg_tileset = "Title Screen MG Tileset";
+                    string name_mg_tsa     = "Title Screen MG TSA";
+                    string name_fg_palette = "Title Screen FG Palette";
+                    string name_fg_tileset = "Title Screen FG Tileset";
+
+                    Pointer address_bg_palette = Core.GetPointer(name_bg_palette);
+                    Pointer address_bg_tileset = Core.GetPointer(name_bg_tileset);
+                    Pointer address_mg_palette = Core.GetPointer(name_mg_palette);
+                    Pointer address_mg_tileset = Core.GetPointer(name_mg_tileset);
+                    Pointer address_mg_tsa     = Core.GetPointer(name_mg_tsa);
+                    Pointer address_fg_palette = Core.GetPointer(name_fg_palette);
+                    Pointer address_fg_tileset = Core.GetPointer(name_fg_tileset);
+
+                    bool tsa = (Core.CurrentROM.Version != GameVersion.JAP);
+
+                    File.WriteAllBytes(path + name_bg_palette + ".pal", Core.ReadPalette(address_bg_palette, Palette.LENGTH).ToBytes(false));
+                    File.WriteAllBytes(path + name_bg_tileset + ".dmp", new Tileset(Core.ReadData(address_bg_tileset, 0)).ToBytes(false));
+                    File.WriteAllBytes(path + name_mg_palette + ".pal", Core.ReadPalette(address_mg_palette, Palette.LENGTH).ToBytes(false));
+                    File.WriteAllBytes(path + name_mg_tileset + ".dmp", new Tileset(Core.ReadData(address_mg_tileset, 0)).ToBytes(false));
+                    File.WriteAllBytes(path + name_mg_tsa     + ".tsa", Core.ReadTSA(address_mg_tsa, GBA.Screen.W_TILES, GBA.Screen.H_TILES, tsa, true).ToBytes(false, false));
+                    File.WriteAllBytes(path + name_fg_palette + ".pal", Core.ReadPalette(address_fg_palette, Palette.LENGTH * 5).ToBytes(false));
+                    File.WriteAllBytes(path + name_fg_tileset + ".dmp", new Tileset(Core.ReadData(address_fg_tileset, 0)).ToBytes(false));
+                }
+                if (Core.CurrentROM is FE8)
+                {
+                    string name_bg_palette  = "Title Screen BG Palette";
+                    string name_bg_tileset1 = "Title Screen BG Tileset 1";
+                    string name_bg_tileset2 = "Title Screen BG Tileset 2";
+                    string name_bg_tsa      = "Title Screen BG TSA";
+                    string name_mg_palette  = "Title Screen MG Palette";
+                    string name_mg_tileset  = "Title Screen MG Tileset";
+                    string name_mg_tsa      = "Title Screen MG TSA";
+                    string name_fg_palette  = "Title Screen FG Palette";
+                    string name_fg_tileset1 = "Title Screen FG Tileset 1";
+                    string name_fg_tileset2 = "Title Screen FG Tileset 2";
+
+                    Pointer address_bg_palette  = Core.GetPointer(name_bg_palette);
+                    Pointer address_bg_tileset1 = Core.GetPointer(name_bg_tileset1);
+                    Pointer address_bg_tileset2 = Core.GetPointer(name_bg_tileset2);
+                    Pointer address_bg_tsa      = Core.GetPointer(name_bg_tsa);
+                    Pointer address_mg_palette  = Core.GetPointer(name_mg_palette);
+                    Pointer address_mg_tileset  = Core.GetPointer(name_mg_tileset);
+                    Pointer address_mg_tsa      = Core.GetPointer(name_mg_tsa);
+                    Pointer address_fg_palette  = Core.GetPointer(name_fg_palette);
+                    Pointer address_fg_tileset1 = Core.GetPointer(name_fg_tileset1);
+                    Pointer address_fg_tileset2 = Core.GetPointer(name_fg_tileset2);
+
+                    File.WriteAllBytes(path + name_bg_palette  + ".pal", Core.ReadPalette(address_bg_palette, Palette.LENGTH).ToBytes(false));
+                    File.WriteAllBytes(path + name_bg_tileset1 + ".dmp", new Tileset(Core.ReadData(address_bg_tileset1, 0)).ToBytes(false));
+                    File.WriteAllBytes(path + name_bg_tileset2 + ".dmp", new Tileset(Core.ReadData(address_bg_tileset2, 0)).ToBytes(false));
+                    File.WriteAllBytes(path + name_bg_tsa      + ".tsa", Core.ReadTSA(address_bg_tsa, 32, 32, true, false).ToBytes(false, false));
+                    File.WriteAllBytes(path + name_mg_palette  + ".pal", Core.ReadPalette(address_mg_palette, Palette.LENGTH).ToBytes(false));
+                    File.WriteAllBytes(path + name_mg_tileset  + ".dmp", new Tileset(Core.ReadData(address_mg_tileset, 0)).ToBytes(false));
+                    File.WriteAllBytes(path + name_mg_tsa      + ".tsa", Core.ReadTSA(address_mg_tsa, 32, 32, true, false).ToBytes(false, false));
+                    File.WriteAllBytes(path + name_fg_palette  + ".pal", Core.ReadPalette(address_fg_palette, Palette.LENGTH * 5).ToBytes(false));
+                    File.WriteAllBytes(path + name_fg_tileset1 + ".dmp", new Tileset(Core.ReadData(address_fg_tileset1, 0)).ToBytes(false));
+                    File.WriteAllBytes(path + name_fg_tileset2 + ".dmp", new Tileset(Core.ReadData(address_fg_tileset2, 0)).ToBytes(false));
+                }
+            }
+            catch (Exception ex)
+            {
+                Program.ShowError("Could not save title screen image data.", ex);
+            }
         }
 
         void Core_LoadTitleScreen()
@@ -98,7 +246,6 @@ namespace EmblemMagic.Editors
                 Program.ShowError("There has been an error while trying to load the title screen.", ex);
             }
         }
-
         void Core_LoadTitleScreen_FE6(
             Palette mg_palette, Tileset mg_tileset,
             Tileset fg_tileset, TSA_Array mg_tsa,
@@ -113,7 +260,7 @@ namespace EmblemMagic.Editors
             for (int i = 0; i < bg_palette.Count; i++)
             {
                 bg_palette[i] = bg_palette[i].SetAlpha(false);
-                palette.Set(240 + i, bg_palette[i]);
+                palette.Set(GBA.Palette.MAX * 15 + i, bg_palette[i]);
             }
             result = new GBA.Bitmap(GBA.Screen.WIDTH, GBA.Screen.HEIGHT);
             result.Colors = palette;
@@ -124,7 +271,7 @@ namespace EmblemMagic.Editors
                 for (int y = 0; y < GBA.Screen.HEIGHT; y++)
                 for (int x = 0; x < GBA.Screen.WIDTH; x++)
                 {
-                    result[x, y] = bg[x, y];
+                    result[x, y] = GBA.Palette.MAX * 15 + bg[x, y];
                 }
             }
             if (MG_CheckBox.Checked)
@@ -143,8 +290,8 @@ namespace EmblemMagic.Editors
                 GBA.Image fg;
                 // large japanese 'FIRE EMBLEM' title
                 fg = mg_tileset.ToImage(32, 25, palettes[4].ToBytes(false));
-                Core_DrawLayer(result, fg, new Rectangle(0, 152, 240, 48), 0, 48);
-                Core_DrawLayer(result, fg, new Rectangle(0, 104, 240, 48), 0, 40);
+                Core_DrawLayer(result, fg, new Rectangle(0, 152, GBA.Screen.WIDTH, 48), 0, 48);
+                Core_DrawLayer(result, fg, new Rectangle(0, 104, GBA.Screen.WIDTH, 48), 0, 40);
                 // small english 'FIRE EMBLEM'
                 fg = fg_tileset.ToImage(32, 32, palettes[2].ToBytes(false));
                 Core_DrawLayer(result, fg, new Rectangle(0, 0, 128, 16), 99, 27);
@@ -157,9 +304,8 @@ namespace EmblemMagic.Editors
                 fg.Colors = palettes[1];
                 Core_DrawLayer(result, fg, new Rectangle(128, 0, 80, 16), 80, 120);
             }
-
-            Test_ImageBox.Load(result);
-            Test_PaletteBox.Load(palette);
+            Current = result;
+            CurrentPalette = palette;
         }
         void Core_LoadTitleScreen_FE7(
             Palette bg_palette, Tileset bg_tileset,
@@ -170,11 +316,11 @@ namespace EmblemMagic.Editors
             Palette palette = Palette.Empty(256);
             for (int i = 0; i < bg_palette.Count; i++)
             {
-                palette.Set(240 + i, bg_palette[i]);
+                palette.Set(GBA.Palette.MAX * 15 + i, bg_palette[i]);
             }
             for (int i = 0; i < mg_palette.Count; i++)
             {
-                palette.Set(224 + i, mg_palette[i]);
+                palette.Set(GBA.Palette.MAX * 14 + i, mg_palette[i]);
             }
             for (int i = 0; i < fg_palette.Count; i++)
             {
@@ -190,8 +336,8 @@ namespace EmblemMagic.Editors
                 for (int x = 0; x < GBA.Screen.WIDTH; x++)
                 {
                     if (x < 8 && y < 8)
-                         result[x, y] = bg[x, GBA.Screen.HEIGHT + y];
-                    else result[x, y] = bg[x, y];
+                         result[x, y] = GBA.Palette.MAX * 15 + bg[x, GBA.Screen.HEIGHT + y];
+                    else result[x, y] = GBA.Palette.MAX * 15 + bg[x, y];
                 }
             }
             if (MG_CheckBox.Checked)
@@ -201,7 +347,7 @@ namespace EmblemMagic.Editors
                 for (int x = 0; x < mg.Width; x++)
                 {
                     if (mg[x, y] != 0)
-                        result[x, 8 + y] = mg[x, y];
+                        result[x, 8 + y] = GBA.Palette.MAX * 14 + mg[x, y];
                 }
             }
             if (FG_CheckBox.Checked)
@@ -233,8 +379,8 @@ namespace EmblemMagic.Editors
                     Core_DrawLayer(result, fg, new Rectangle(0, 208, 128, 16), 56, 40);
                 }
             }
-            Test_ImageBox.Load(result);
-            Test_PaletteBox.Load(palette);
+            Current = result;
+            CurrentPalette = palette;
         }
         void Core_LoadTitleScreen_FE8(
             Palette  bg_palette, Tileset  bg_tileset, TSA_Array    bg_tsa,
@@ -246,11 +392,11 @@ namespace EmblemMagic.Editors
             for (int i = 0; i < bg_palette.Count; i++)
             {
                 bg_palette[i] = bg_palette[i].SetAlpha(false);
-                palette.Set(240 + i, bg_palette[i]);
+                palette.Set(GBA.Palette.MAX * 15 + i, bg_palette[i]);
             }
             for (int i = 0; i < mg_palette.Count; i++)
             {
-                palette.Set(224 + i, mg_palette[i]);
+                palette.Set(GBA.Palette.MAX * 14 + i, mg_palette[i]);
             }
             for (int i = 0; i < fg_palette.Count; i++)
             {
@@ -266,7 +412,7 @@ namespace EmblemMagic.Editors
                 for (int x = 0; x < bg.Width; x++)
                 {
                     if (bg[x, y] != 0)
-                        result[x, y] = bg[x, y];
+                        result[x, y] = GBA.Palette.MAX * 15 + bg[x, y];
                 }
             }
             if (MG_CheckBox.Checked)
@@ -276,7 +422,7 @@ namespace EmblemMagic.Editors
                 for (int x = 0; x < mg.Width; x++)
                 {
                     if (mg[x, y] != 0)
-                        result[x, y] = mg[x, y];
+                        result[x, y] = GBA.Palette.MAX * 14 + mg[x, y];
                 }
             }
             if (FG_CheckBox.Checked)
@@ -322,9 +468,8 @@ namespace EmblemMagic.Editors
                     Core_DrawLayer(result, fg, new Rectangle(0, 64, 240, 8), 4, 148);
                 }
             }
-
-            Test_ImageBox.Load(result);
-            Test_PaletteBox.Load(palette);
+            Current = result;
+            CurrentPalette = palette;
         }
 
         void Core_DrawLayer(GBA.Bitmap result, GBA.Image image, Rectangle region, int offsetX, int offsetY)
@@ -340,6 +485,40 @@ namespace EmblemMagic.Editors
                     (image.Bytes[index] & 0xF0) >> 4;
                 if (pixel != 0)
                     result.SetColor(offsetX + x, offsetY + y, image.Colors[pixel]);
+            }
+        }
+
+
+
+        private void File_Insert_Click(Object sender, EventArgs e)
+        {
+
+        }
+        private void File_Save_Click(Object sender, EventArgs e)
+        {
+            SaveFileDialog saveWindow = new SaveFileDialog();
+            saveWindow.RestoreDirectory = true;
+            saveWindow.OverwritePrompt = true;
+            saveWindow.CreatePrompt = false;
+            saveWindow.FilterIndex = 1;
+            saveWindow.Filter =
+                "Image file (*.png)|*.png|" +
+                "TSA Image Data (.tsa + .pal + .dmp)|*.tsa;*.pal;*.dmp|" +
+                "All files (*.*)|*.*";
+
+            if (saveWindow.ShowDialog() == DialogResult.OK)
+            {
+                if (saveWindow.FileName.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
+                {
+                    Core_SaveImage(saveWindow.FileName.Remove(saveWindow.FileName.Length - 4));
+                    return;
+                }
+                if (saveWindow.FileName.EndsWith(".tsa", StringComparison.OrdinalIgnoreCase))
+                {
+                    Core_SaveData(saveWindow.FileName);
+                    return;
+                }
+                Program.ShowError("File chosen has invalid extension.\r\n" + saveWindow.FileName);
             }
         }
 
