@@ -54,6 +54,8 @@ namespace EmblemMagic.Editors
                 TilesetTSA_ArrayBox.Load(map_file);
                 Tileset1_ArrayBox.Load(map_file);
                 Tileset2_ArrayBox.Load(map_file);
+
+                Chapter_MagicButton.EditorToOpen = "Module:Chapter Editor";
             }
             catch (Exception ex)
             {
@@ -178,6 +180,8 @@ namespace EmblemMagic.Editors
             TilesetTSA_PointerBox.ValueChanged += TilesetTSA_PointerBox_ValueChanged;
             Tileset1_PointerBox.ValueChanged += Tileset1_PointerBox_ValueChanged;
             Tileset2_PointerBox.ValueChanged += Tileset2_PointerBox_ValueChanged;
+
+            Chapter_MagicButton.EntryToSelect = EntryArrayBox.Value;
         }
         void Core_LoadMapValues()
         {
@@ -824,6 +828,20 @@ namespace EmblemMagic.Editors
             CurrentMap.Layout = new int[CurrentMap.WidthTiles, CurrentMap.HeightTiles];
 
             Core_WriteMap();
+        }
+
+        private void MapTileset_MagicButton_Click(Object sender, EventArgs e)
+        {
+            MapTilesetEditor editor = new MapTilesetEditor();
+            Program.Core.Core_OpenEditor(editor);
+
+            editor.Core_SetEntry(
+                Palette_ArrayBox.Value,
+                Tileset1_ArrayBox.Value,
+                Tileset2_ArrayBox.Value,
+                TilesetTSA_ArrayBox.Value,
+                TileAnim1_ArrayBox.Value,
+                TileAnim2_ArrayBox.Value);
         }
     }
 }

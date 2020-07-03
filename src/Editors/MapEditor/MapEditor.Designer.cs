@@ -64,11 +64,13 @@
             this.Tool_Tile_Button = new System.Windows.Forms.RadioButton();
             this.Tool_Fill_Button = new System.Windows.Forms.RadioButton();
             this.Map_GroupBox = new System.Windows.Forms.GroupBox();
+            this.Chapter_MagicButton = new EmblemMagic.Components.MagicButton();
             this.Changes_Total_NumBox = new EmblemMagic.Components.ByteBox();
             this.Changes_Total_Label = new System.Windows.Forms.Label();
             this.Changes_CheckBox = new System.Windows.Forms.CheckBox();
             this.Changes_NumBox = new EmblemMagic.Components.ByteBox();
             this.Array_GroupBox = new System.Windows.Forms.GroupBox();
+            this.MapTileset_MagicButton = new EmblemMagic.Components.MagicButton();
             this.Tool_Pick_Button = new System.Windows.Forms.RadioButton();
             this.Tool_Erase_Button = new System.Windows.Forms.RadioButton();
             this.Editor_Menu = new System.Windows.Forms.MenuStrip();
@@ -532,6 +534,7 @@
             // Map_GroupBox
             // 
             this.Map_GroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.Map_GroupBox.Controls.Add(this.Chapter_MagicButton);
             this.Map_GroupBox.Controls.Add(this.Changes_Total_NumBox);
             this.Map_GroupBox.Controls.Add(this.Changes_Total_Label);
             this.Map_GroupBox.Controls.Add(this.Changes_CheckBox);
@@ -551,6 +554,18 @@
             this.Map_GroupBox.TabIndex = 31;
             this.Map_GroupBox.TabStop = false;
             this.Map_GroupBox.Text = "Edit Chapter Map";
+            // 
+            // Chapter_MagicButton
+            // 
+            this.Chapter_MagicButton.Location = new System.Drawing.Point(228, 107);
+            this.Chapter_MagicButton.MaximumSize = new System.Drawing.Size(24, 24);
+            this.Chapter_MagicButton.MinimumSize = new System.Drawing.Size(24, 24);
+            this.Chapter_MagicButton.Name = "Chapter_MagicButton";
+            this.Chapter_MagicButton.Size = new System.Drawing.Size(24, 24);
+            this.Chapter_MagicButton.TabIndex = 32;
+            this.Help_ToolTip.SetToolTip(this.Chapter_MagicButton, "Clicking this button opens a Chapter Editor module for the current selected entry" +
+        ".");
+            this.Chapter_MagicButton.UseVisualStyleBackColor = true;
             // 
             // Changes_Total_NumBox
             // 
@@ -613,6 +628,7 @@
             // Array_GroupBox
             // 
             this.Array_GroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Array_GroupBox.Controls.Add(this.MapTileset_MagicButton);
             this.Array_GroupBox.Controls.Add(this.Palette_ArrayBox);
             this.Array_GroupBox.Controls.Add(this.Palette_Label);
             this.Array_GroupBox.Controls.Add(this.Palette_PointerBox);
@@ -635,6 +651,19 @@
             this.Array_GroupBox.TabIndex = 32;
             this.Array_GroupBox.TabStop = false;
             this.Array_GroupBox.Text = "Edit Map Tileset values for this Chapter";
+            // 
+            // MapTileset_MagicButton
+            // 
+            this.MapTileset_MagicButton.Location = new System.Drawing.Point(577, 10);
+            this.MapTileset_MagicButton.MaximumSize = new System.Drawing.Size(24, 24);
+            this.MapTileset_MagicButton.MinimumSize = new System.Drawing.Size(24, 24);
+            this.MapTileset_MagicButton.Name = "MapTileset_MagicButton";
+            this.MapTileset_MagicButton.Size = new System.Drawing.Size(24, 24);
+            this.MapTileset_MagicButton.TabIndex = 33;
+            this.Help_ToolTip.SetToolTip(this.MapTileset_MagicButton, "Clicking this button opens a Map Tileset Editor module for the current selected m" +
+        "ap tileset values.");
+            this.MapTileset_MagicButton.UseVisualStyleBackColor = true;
+            this.MapTileset_MagicButton.Click += new System.EventHandler(this.MapTileset_MagicButton_Click);
             // 
             // Tool_Pick_Button
             // 
@@ -842,5 +871,7 @@
         private System.Windows.Forms.ToolStripMenuItem Menu_Tool;
         private System.Windows.Forms.ToolStripMenuItem Tool_OpenPaletteEditor;
         private System.Windows.Forms.Timer Map_MouseTimer;
+        private Components.MagicButton Chapter_MagicButton;
+        private Components.MagicButton MapTileset_MagicButton;
     }
 }

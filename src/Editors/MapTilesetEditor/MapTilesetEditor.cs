@@ -126,6 +126,23 @@ namespace EmblemMagic.Editors
             Core_LoadPaletteAndSmallTileset();
         }
 
+        public void Core_SetEntry(
+            byte palette,
+            byte tileset_1,
+            byte tileset_2,
+            byte tsa_terrain,
+            byte map_anim_1,
+            byte map_anim_2 = 0)
+        {
+            Palette_ArrayBox.Value = palette;
+            Tileset1_ArrayBox.Value = tileset_1;
+            Tileset2_ArrayBox.Value = tileset_2;
+            TilesetTSA_ArrayBox.Value = tsa_terrain;
+            TileAnim_ArrayBox.Value = map_anim_1;
+            if (map_anim_2 != 0)
+                TileAnim_ArrayBox.Value = map_anim_2;
+        }
+
         void Core_LoadTileset()
         {
             try
