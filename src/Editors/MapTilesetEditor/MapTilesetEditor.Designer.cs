@@ -60,9 +60,9 @@
             this.Terrain_Name_ShortBox = new EmblemMagic.Components.ShortBox();
             this.Terrain_Class_GroupBox = new System.Windows.Forms.GroupBox();
             this.Terrain_Class_Value_Label = new System.Windows.Forms.Label();
+            this.Terrain_Class_PointerArrayBox = new EmblemMagic.Components.PointerArrayBox();
             this.Terrain_Class_Label = new System.Windows.Forms.Label();
             this.Terrain_Class_ByteBox = new EmblemMagic.Components.ByteBox();
-            this.Terrain_Class_PointerArrayBox = new EmblemMagic.Components.PointerArrayBox();
             this.Terrain_Label = new System.Windows.Forms.Label();
             this.Terrain_ArrayBox = new EmblemMagic.Components.ByteArrayBox();
             this.TileAnim_Duration_ByteBox = new EmblemMagic.Components.ByteBox();
@@ -85,6 +85,7 @@
             this.ViewPalette_ByteBox = new EmblemMagic.Components.ByteBox();
             this.ViewPalette_Label = new System.Windows.Forms.Label();
             this.ViewAnimation_CheckBox = new System.Windows.Forms.CheckBox();
+            this.Terrain_Name_MagicButton = new EmblemMagic.Components.MagicButton();
             this.Editor_Menu.SuspendLayout();
             this.Array_GroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Palette_PointerBox)).BeginInit();
@@ -186,14 +187,14 @@
             this.Array_GroupBox.Controls.Add(this.TilesetTSA_PointerBox);
             this.Array_GroupBox.Location = new System.Drawing.Point(530, 34);
             this.Array_GroupBox.Name = "Array_GroupBox";
-            this.Array_GroupBox.Size = new System.Drawing.Size(234, 251);
+            this.Array_GroupBox.Size = new System.Drawing.Size(234, 242);
             this.Array_GroupBox.TabIndex = 33;
             this.Array_GroupBox.TabStop = false;
             this.Array_GroupBox.Text = "Map Data Array";
             // 
             // Palette_ArrayBox
             // 
-            this.Palette_ArrayBox.Location = new System.Drawing.Point(5, 47);
+            this.Palette_ArrayBox.Location = new System.Drawing.Point(6, 19);
             this.Palette_ArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.Palette_ArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
             this.Palette_ArrayBox.Size = new System.Drawing.Size(223, 26);
@@ -205,7 +206,7 @@
             // Palette_Label
             // 
             this.Palette_Label.AutoSize = true;
-            this.Palette_Label.Location = new System.Drawing.Point(5, 31);
+            this.Palette_Label.Location = new System.Drawing.Point(13, 48);
             this.Palette_Label.Name = "Palette_Label";
             this.Palette_Label.Size = new System.Drawing.Size(85, 13);
             this.Palette_Label.TabIndex = 3;
@@ -214,7 +215,7 @@
             // Palette_PointerBox
             // 
             this.Palette_PointerBox.Hexadecimal = true;
-            this.Palette_PointerBox.Location = new System.Drawing.Point(158, 24);
+            this.Palette_PointerBox.Location = new System.Drawing.Point(159, 48);
             this.Palette_PointerBox.Maximum = new decimal(new int[] {
             33554432,
             0,
@@ -229,7 +230,7 @@
             // 
             // Tileset1_ArrayBox
             // 
-            this.Tileset1_ArrayBox.Location = new System.Drawing.Point(5, 102);
+            this.Tileset1_ArrayBox.Location = new System.Drawing.Point(6, 74);
             this.Tileset1_ArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.Tileset1_ArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
             this.Tileset1_ArrayBox.Size = new System.Drawing.Size(223, 26);
@@ -241,7 +242,7 @@
             // Tileset1_Label
             // 
             this.Tileset1_Label.AutoSize = true;
-            this.Tileset1_Label.Location = new System.Drawing.Point(5, 86);
+            this.Tileset1_Label.Location = new System.Drawing.Point(13, 103);
             this.Tileset1_Label.Name = "Tileset1_Label";
             this.Tileset1_Label.Size = new System.Drawing.Size(98, 13);
             this.Tileset1_Label.TabIndex = 6;
@@ -250,7 +251,7 @@
             // Tileset2_Label
             // 
             this.Tileset2_Label.AutoSize = true;
-            this.Tileset2_Label.Location = new System.Drawing.Point(2, 141);
+            this.Tileset2_Label.Location = new System.Drawing.Point(13, 161);
             this.Tileset2_Label.Name = "Tileset2_Label";
             this.Tileset2_Label.Size = new System.Drawing.Size(98, 13);
             this.Tileset2_Label.TabIndex = 19;
@@ -259,7 +260,7 @@
             // Tileset1_PointerBox
             // 
             this.Tileset1_PointerBox.Hexadecimal = true;
-            this.Tileset1_PointerBox.Location = new System.Drawing.Point(158, 79);
+            this.Tileset1_PointerBox.Location = new System.Drawing.Point(159, 103);
             this.Tileset1_PointerBox.Maximum = new decimal(new int[] {
             33554432,
             0,
@@ -275,7 +276,7 @@
             // Tileset2_PointerBox
             // 
             this.Tileset2_PointerBox.Hexadecimal = true;
-            this.Tileset2_PointerBox.Location = new System.Drawing.Point(158, 134);
+            this.Tileset2_PointerBox.Location = new System.Drawing.Point(159, 158);
             this.Tileset2_PointerBox.Maximum = new decimal(new int[] {
             33554432,
             0,
@@ -290,7 +291,7 @@
             // 
             // Tileset2_ArrayBox
             // 
-            this.Tileset2_ArrayBox.Location = new System.Drawing.Point(5, 160);
+            this.Tileset2_ArrayBox.Location = new System.Drawing.Point(6, 132);
             this.Tileset2_ArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.Tileset2_ArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
             this.Tileset2_ArrayBox.Size = new System.Drawing.Size(223, 26);
@@ -301,7 +302,7 @@
             // 
             // TilesetTSA_ArrayBox
             // 
-            this.TilesetTSA_ArrayBox.Location = new System.Drawing.Point(5, 215);
+            this.TilesetTSA_ArrayBox.Location = new System.Drawing.Point(6, 187);
             this.TilesetTSA_ArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.TilesetTSA_ArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
             this.TilesetTSA_ArrayBox.Size = new System.Drawing.Size(223, 26);
@@ -313,7 +314,7 @@
             // TileTSA_Label
             // 
             this.TileTSA_Label.AutoSize = true;
-            this.TileTSA_Label.Location = new System.Drawing.Point(10, 199);
+            this.TileTSA_Label.Location = new System.Drawing.Point(13, 216);
             this.TileTSA_Label.Name = "TileTSA_Label";
             this.TileTSA_Label.Size = new System.Drawing.Size(125, 13);
             this.TileTSA_Label.TabIndex = 9;
@@ -322,7 +323,7 @@
             // TilesetTSA_PointerBox
             // 
             this.TilesetTSA_PointerBox.Hexadecimal = true;
-            this.TilesetTSA_PointerBox.Location = new System.Drawing.Point(158, 192);
+            this.TilesetTSA_PointerBox.Location = new System.Drawing.Point(159, 216);
             this.TilesetTSA_PointerBox.Maximum = new decimal(new int[] {
             33554432,
             0,
@@ -364,6 +365,7 @@
             // 
             // Terrain_GroupBox
             // 
+            this.Terrain_GroupBox.Controls.Add(this.Terrain_Name_MagicButton);
             this.Terrain_GroupBox.Controls.Add(this.Terrain_Stat_GroupBox);
             this.Terrain_GroupBox.Controls.Add(this.Terrain_Name_Label);
             this.Terrain_GroupBox.Controls.Add(this.Terrain_Name_ShortBox);
@@ -450,7 +452,7 @@
             // Terrain_Name_ShortBox
             // 
             this.Terrain_Name_ShortBox.Hexadecimal = true;
-            this.Terrain_Name_ShortBox.Location = new System.Drawing.Point(146, 68);
+            this.Terrain_Name_ShortBox.Location = new System.Drawing.Point(140, 68);
             this.Terrain_Name_ShortBox.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -487,6 +489,16 @@
             this.Terrain_Class_Value_Label.TabIndex = 8;
             this.Terrain_Class_Value_Label.Text = "Move Cost :";
             // 
+            // Terrain_Class_PointerArrayBox
+            // 
+            this.Terrain_Class_PointerArrayBox.Location = new System.Drawing.Point(10, 18);
+            this.Terrain_Class_PointerArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
+            this.Terrain_Class_PointerArrayBox.MinimumSize = new System.Drawing.Size(128, 26);
+            this.Terrain_Class_PointerArrayBox.Size = new System.Drawing.Size(203, 26);
+            this.Terrain_Class_PointerArrayBox.TabIndex = 0;
+            this.Help_ToolTip.SetToolTip(this.Terrain_Class_PointerArrayBox, "Select the type of unit whose movement cost to view/edit.");
+            this.Terrain_Class_PointerArrayBox.ValueChanged += new System.EventHandler(this.Terrain_Class_PointerArrayBox_ValueChanged);
+            // 
             // Terrain_Class_Label
             // 
             this.Terrain_Class_Label.AutoSize = true;
@@ -514,16 +526,6 @@
         "rite to ROM if changed.");
             this.Terrain_Class_ByteBox.Value = ((byte)(0));
             this.Terrain_Class_ByteBox.ValueChanged += new System.EventHandler(this.Terrain_Class_ByteBox_ValueChanged);
-            // 
-            // Terrain_Class_PointerArrayBox
-            // 
-            this.Terrain_Class_PointerArrayBox.Location = new System.Drawing.Point(10, 18);
-            this.Terrain_Class_PointerArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
-            this.Terrain_Class_PointerArrayBox.MinimumSize = new System.Drawing.Size(128, 26);
-            this.Terrain_Class_PointerArrayBox.Size = new System.Drawing.Size(203, 26);
-            this.Terrain_Class_PointerArrayBox.TabIndex = 0;
-            this.Help_ToolTip.SetToolTip(this.Terrain_Class_PointerArrayBox, "Select the type of unit whose movement cost to view/edit.");
-            this.Terrain_Class_PointerArrayBox.ValueChanged += new System.EventHandler(this.Terrain_Class_PointerArrayBox_ValueChanged);
             // 
             // Terrain_Label
             // 
@@ -812,6 +814,18 @@
             this.ViewAnimation_CheckBox.UseVisualStyleBackColor = true;
             this.ViewAnimation_CheckBox.CheckedChanged += new System.EventHandler(this.ViewAnimation_CheckBox_CheckedChanged);
             // 
+            // TerrainName_MagicButton
+            // 
+            this.Terrain_Name_MagicButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.Terrain_Name_MagicButton.Location = new System.Drawing.Point(195, 66);
+            this.Terrain_Name_MagicButton.MaximumSize = new System.Drawing.Size(24, 24);
+            this.Terrain_Name_MagicButton.MinimumSize = new System.Drawing.Size(24, 24);
+            this.Terrain_Name_MagicButton.Name = "TerrainName_MagicButton";
+            this.Terrain_Name_MagicButton.Size = new System.Drawing.Size(24, 24);
+            this.Terrain_Name_MagicButton.TabIndex = 17;
+            this.Help_ToolTip.SetToolTip(this.Terrain_Name_MagicButton, "This is a shortcut button, it opens a TextEditor for the given entry number.");
+            this.Terrain_Name_MagicButton.UseVisualStyleBackColor = true;
+            // 
             // MapTilesetEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -920,5 +934,6 @@
         private Components.ByteBox ViewPalette_ByteBox;
         private System.Windows.Forms.Label ViewPalette_Label;
         private System.Windows.Forms.CheckBox ViewAnimation_CheckBox;
+        private Components.MagicButton Terrain_Name_MagicButton;
     }
 }

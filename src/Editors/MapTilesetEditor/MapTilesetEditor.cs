@@ -76,6 +76,8 @@ namespace EmblemMagic.Editors
                 Tileset2_ArrayBox.Load(tilesets);
                 TilesetTSA_ArrayBox.Load(tsa_array);
                 TileAnim_ArrayBox.Load(tile_anim);
+
+                Terrain_Name_MagicButton.EditorToOpen = "Text Editor";
             }
             catch (Exception ex)
             {
@@ -242,6 +244,8 @@ namespace EmblemMagic.Editors
             Terrain_Name_ShortBox.ValueChanged += Terrain_Name_ShortBox_ValueChanged;
             Terrain_Stat_ByteBox.ValueChanged += Terrain_Stat_ByteBox_ValueChanged;
             Terrain_Class_ByteBox.ValueChanged += Terrain_Class_ByteBox_ValueChanged;
+
+            Terrain_Name_MagicButton.EntryToSelect = Terrain_Name_ShortBox.Value;
         }
         void Core_LoadTileAnim()
         {
@@ -672,6 +676,8 @@ namespace EmblemMagic.Editors
                 Core.GetPointer("Map Terrain Names") + Terrain_ArrayBox.Value * 2,
                 Util.UInt16ToBytes(Terrain_Name_ShortBox.Value, true),
                 CurrentEntry_Terrain + "Name text index changed");
+
+            Terrain_Name_MagicButton.EntryToSelect = Terrain_Name_ShortBox.Value;
         }
 
         private void Terrain_Stat_PointerArrayBox_ValueChanged(object sender, EventArgs e)
