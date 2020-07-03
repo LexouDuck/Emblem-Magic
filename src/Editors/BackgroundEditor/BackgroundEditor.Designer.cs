@@ -48,6 +48,7 @@
             this.Menu_Tool = new System.Windows.Forms.ToolStripMenuItem();
             this.Tool_OpenPaletteEditor = new System.Windows.Forms.ToolStripMenuItem();
             this.Tool_OpenTSAEditor = new System.Windows.Forms.ToolStripMenuItem();
+            this.MagicButton = new EmblemMagic.Components.MagicButton();
             ((System.ComponentModel.ISupportInitialize)(this.Palette_PointerBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Tileset_PointerBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TSA_PointerBox)).BeginInit();
@@ -56,7 +57,7 @@
             // 
             // EntryArrayBox
             // 
-            this.EntryArrayBox.Location = new System.Drawing.Point(12, 45);
+            this.EntryArrayBox.Location = new System.Drawing.Point(14, 43);
             this.EntryArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.EntryArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
             this.EntryArrayBox.Size = new System.Drawing.Size(256, 26);
@@ -69,7 +70,7 @@
             this.Background_PaletteBox.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.Background_PaletteBox.ColorsPerLine = 16;
             this.Background_PaletteBox.ForeColor = System.Drawing.SystemColors.Control;
-            this.Background_PaletteBox.Location = new System.Drawing.Point(12, 241);
+            this.Background_PaletteBox.Location = new System.Drawing.Point(14, 241);
             this.Background_PaletteBox.Name = "Background_PaletteBox";
             this.Background_PaletteBox.Size = new System.Drawing.Size(128, 80);
             this.Background_PaletteBox.TabIndex = 5;
@@ -83,7 +84,7 @@
             // 
             this.Background_ImageBox.BackColor = System.Drawing.SystemColors.Control;
             this.Background_ImageBox.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.Background_ImageBox.Location = new System.Drawing.Point(12, 75);
+            this.Background_ImageBox.Location = new System.Drawing.Point(14, 75);
             this.Background_ImageBox.Name = "Background_ImageBox";
             this.Background_ImageBox.Size = new System.Drawing.Size(256, 160);
             this.Background_ImageBox.TabIndex = 1;
@@ -93,7 +94,7 @@
             // Palette_PointerBox
             // 
             this.Palette_PointerBox.Hexadecimal = true;
-            this.Palette_PointerBox.Location = new System.Drawing.Point(198, 241);
+            this.Palette_PointerBox.Location = new System.Drawing.Point(202, 241);
             this.Palette_PointerBox.Maximum = new decimal(new int[] {
             33554432,
             0,
@@ -109,7 +110,7 @@
             // Tileset_PointerBox
             // 
             this.Tileset_PointerBox.Hexadecimal = true;
-            this.Tileset_PointerBox.Location = new System.Drawing.Point(198, 267);
+            this.Tileset_PointerBox.Location = new System.Drawing.Point(202, 267);
             this.Tileset_PointerBox.Maximum = new decimal(new int[] {
             33554432,
             0,
@@ -125,7 +126,7 @@
             // TSA_PointerBox
             // 
             this.TSA_PointerBox.Hexadecimal = true;
-            this.TSA_PointerBox.Location = new System.Drawing.Point(198, 293);
+            this.TSA_PointerBox.Location = new System.Drawing.Point(202, 293);
             this.TSA_PointerBox.Maximum = new decimal(new int[] {
             33554432,
             0,
@@ -140,35 +141,35 @@
             // Palette_Label
             // 
             this.Palette_Label.AutoSize = true;
-            this.Palette_Label.Location = new System.Drawing.Point(146, 243);
+            this.Palette_Label.Location = new System.Drawing.Point(162, 243);
             this.Palette_Label.Name = "Palette_Label";
-            this.Palette_Label.Size = new System.Drawing.Size(46, 13);
+            this.Palette_Label.Size = new System.Drawing.Size(40, 13);
             this.Palette_Label.TabIndex = 8;
-            this.Palette_Label.Text = "Palette :";
+            this.Palette_Label.Text = "Palette";
             // 
             // Tileset_Label
             // 
             this.Tileset_Label.AutoSize = true;
-            this.Tileset_Label.Location = new System.Drawing.Point(148, 269);
+            this.Tileset_Label.Location = new System.Drawing.Point(164, 269);
             this.Tileset_Label.Name = "Tileset_Label";
-            this.Tileset_Label.Size = new System.Drawing.Size(44, 13);
+            this.Tileset_Label.Size = new System.Drawing.Size(38, 13);
             this.Tileset_Label.TabIndex = 6;
-            this.Tileset_Label.Text = "Tileset :";
+            this.Tileset_Label.Text = "Tileset";
             // 
             // TSA_Label
             // 
             this.TSA_Label.AutoSize = true;
-            this.TSA_Label.Location = new System.Drawing.Point(158, 295);
+            this.TSA_Label.Location = new System.Drawing.Point(174, 295);
             this.TSA_Label.Name = "TSA_Label";
-            this.TSA_Label.Size = new System.Drawing.Size(34, 13);
+            this.TSA_Label.Size = new System.Drawing.Size(28, 13);
             this.TSA_Label.TabIndex = 7;
-            this.TSA_Label.Text = "TSA :";
+            this.TSA_Label.Text = "TSA";
             // 
             // DialogArray_RadioButton
             // 
             this.DialogArray_RadioButton.AutoSize = true;
             this.DialogArray_RadioButton.Checked = true;
-            this.DialogArray_RadioButton.Location = new System.Drawing.Point(12, 27);
+            this.DialogArray_RadioButton.Location = new System.Drawing.Point(14, 27);
             this.DialogArray_RadioButton.Name = "DialogArray_RadioButton";
             this.DialogArray_RadioButton.Size = new System.Drawing.Size(74, 17);
             this.DialogArray_RadioButton.TabIndex = 9;
@@ -213,7 +214,7 @@
             this.Menu_Tool});
             this.Editor_Menu.Location = new System.Drawing.Point(0, 0);
             this.Editor_Menu.Name = "Editor_Menu";
-            this.Editor_Menu.Size = new System.Drawing.Size(280, 24);
+            this.Editor_Menu.Size = new System.Drawing.Size(284, 24);
             this.Editor_Menu.TabIndex = 15;
             this.Editor_Menu.Text = "menuStrip1";
             // 
@@ -267,11 +268,24 @@
             this.Tool_OpenTSAEditor.Text = "Open TSA Editor...";
             this.Tool_OpenTSAEditor.Click += new System.EventHandler(this.Tool_OpenTSAEditor_Click);
             // 
+            // MagicButton
+            // 
+            this.MagicButton.Location = new System.Drawing.Point(148, 297);
+            this.MagicButton.MaximumSize = new System.Drawing.Size(24, 24);
+            this.MagicButton.MinimumSize = new System.Drawing.Size(24, 24);
+            this.MagicButton.Name = "MagicButton";
+            this.MagicButton.Size = new System.Drawing.Size(24, 24);
+            this.MagicButton.TabIndex = 16;
+            this.Help_ToolTip.SetToolTip(this.MagicButton, "This is a shortcut to the GraphicsEditor, to view/edit the background image.");
+            this.MagicButton.UseVisualStyleBackColor = true;
+            this.MagicButton.Click += new System.EventHandler(this.MagicButton_Click);
+            // 
             // BackgroundEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(280, 327);
+            this.ClientSize = new System.Drawing.Size(284, 332);
+            this.Controls.Add(this.MagicButton);
             this.Controls.Add(this.ScreenArray_RadioButton);
             this.Controls.Add(this.BattleArray_RadioButton);
             this.Controls.Add(this.DialogArray_RadioButton);
@@ -287,8 +301,8 @@
             this.Controls.Add(this.Editor_Menu);
             this.MainMenuStrip = this.Editor_Menu;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(296, 365);
-            this.MinimumSize = new System.Drawing.Size(296, 365);
+            this.MaximumSize = new System.Drawing.Size(300, 370);
+            this.MinimumSize = new System.Drawing.Size(300, 370);
             this.Name = "BackgroundEditor";
             this.Text = "Background Editor";
             ((System.ComponentModel.ISupportInitialize)(this.Palette_PointerBox)).EndInit();
@@ -322,5 +336,6 @@
         private System.Windows.Forms.ToolStripMenuItem Menu_Tool;
         private System.Windows.Forms.ToolStripMenuItem Tool_OpenTSAEditor;
         private System.Windows.Forms.ToolStripMenuItem Tool_OpenPaletteEditor;
+        private Components.MagicButton MagicButton;
     }
 }

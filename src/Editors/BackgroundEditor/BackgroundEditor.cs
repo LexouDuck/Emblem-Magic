@@ -521,5 +521,55 @@ namespace EmblemMagic.Editors
                 TSA_PointerBox.Value,
                 CurrentEntry + "TSA repoint: " + TSA_PointerBox.Value);
         }
+
+        private void MagicButton_Click(Object sender, EventArgs e)
+        {
+            GraphicsEditor editor = new GraphicsEditor();
+            Program.Core.Core_OpenEditor(editor);
+
+            Size bgsize = Background.GetBGSize(CurrentType);
+
+            switch (CurrentType)
+            {
+                case BackgroundType.Dialog:
+                    editor.Core_SetEntry(bgsize.Width, bgsize.Height,
+                        (Pointer)Current["Palette"], false,
+                        (Pointer)Current["Tileset"], true,
+                        (Pointer)Current["TSA"], false, true);
+                    break;
+
+                case BackgroundType.Battle:
+                    editor.Core_SetEntry(bgsize.Width, bgsize.Height,
+                        (Pointer)Current["Palette"], true,
+                        (Pointer)Current["Tileset"], true,
+                        (Pointer)Current["TSA"], true, false);
+                    break;
+
+                case BackgroundType.Screen:
+                    if (Core.CurrentROM is FE6)
+                    {
+                        editor.Core_SetEntry(bgsize.Width, bgsize.Height,
+                            (Pointer)Current["Palette"], false,
+                            (Pointer)Current["Tileset"], true);
+                    }
+                    else if (Core.CurrentROM is FE7 && Core.ReadByte(Current.GetAddress(Current.EntryIndex)) == 0x00)
+                    {
+                        editor.Core_SetEntry(bgsize.Width, bgsize.Height,
+                            (Pointer)Current["Palette"], false,
+                            (Pointer)Current["Tileset"], true,
+                            (Pointer)Current["TSA"], false, true);
+                    }
+                    else // its stored in 32x2 strips
+                    {
+                        editor.Core_SetEntry(bgsize.Width, bgsize.Height,
+                            (Pointer)Current["Palette"], false,
+                            (Pointer)Current["Tileset"], true,
+                            (Pointer)Current["TSA"], false, true);
+                    }
+                    break;
+
+                default: throw new Exception("Invalid background type.");
+            }
+        }
     }
 }

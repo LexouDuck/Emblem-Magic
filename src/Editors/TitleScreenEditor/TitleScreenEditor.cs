@@ -267,7 +267,7 @@ namespace EmblemMagic.Editors
 
             if (BG_CheckBox.Checked)
             {
-                GBA.Image bg = bg_tileset.ToImage(32, 20, bg_palette.ToBytes(false));
+                GBA.Image bg = bg_tileset.ToImage(GBA.Screen.W_TILES + 2, GBA.Screen.H_TILES, bg_palette.ToBytes(false));
                 for (int y = 0; y < GBA.Screen.HEIGHT; y++)
                 for (int x = 0; x < GBA.Screen.WIDTH; x++)
                 {
@@ -280,7 +280,7 @@ namespace EmblemMagic.Editors
                 for (int y = 0; y < GBA.Screen.HEIGHT; y++)
                 for (int x = 0; x < GBA.Screen.WIDTH; x++)
                 {
-                    if (mg[x, y] != 0)
+                    if (mg.GetColor(x, y).Value != 0)
                         result[x, y] = mg[x, y];
                 }
             }
@@ -492,7 +492,7 @@ namespace EmblemMagic.Editors
 
         private void File_Insert_Click(Object sender, EventArgs e)
         {
-
+            // TODO
         }
         private void File_Save_Click(Object sender, EventArgs e)
         {
@@ -536,19 +536,19 @@ namespace EmblemMagic.Editors
 
             if (Core.CurrentROM is FE6)
             {
-                editor.Core_SetEntry(
+                editor.Core_SetEntry(GBA.Screen.W_TILES + 2, GBA.Screen.H_TILES,
                     Core.GetPointer("Title Screen BG Palette"), false,
                     Core.GetPointer("Title Screen BG Tileset"), true);
             }
             if (Core.CurrentROM is FE7)
             {
-                editor.Core_SetEntry(
+                editor.Core_SetEntry(GBA.Screen.W_TILES, GBA.Screen.H_TILES + 1,
                     Core.GetPointer("Title Screen BG Palette"), false,
                     Core.GetPointer("Title Screen BG Tileset"), true);
             }
             if (Core.CurrentROM is FE8)
             {
-                editor.Core_SetEntry(
+                editor.Core_SetEntry(GBA.Screen.W_TILES + 2, GBA.Screen.H_TILES,
                     Core.GetPointer("Title Screen BG Palette"), false,
                     Core.GetPointer("Title Screen BG Tileset 1"), true,
                     Core.GetPointer("Title Screen BG TSA"), true, false);
@@ -561,7 +561,7 @@ namespace EmblemMagic.Editors
 
             if (Core.CurrentROM is FE6)
             {
-                editor.Core_SetEntry(
+                editor.Core_SetEntry(GBA.Screen.W_TILES + 2, GBA.Screen.H_TILES,
                     Core.GetPointer("Title Screen MG/FG Palette"), false,
                     Core.GetPointer("Title Screen MG/FG Tileset"), true,
                     Core.GetPointer("Title Screen MG TSA"), true, false);
@@ -569,14 +569,14 @@ namespace EmblemMagic.Editors
             if (Core.CurrentROM is FE7)
             {
                 bool tsa = (Core.CurrentROM.Version != GameVersion.JAP);
-                editor.Core_SetEntry(
+                editor.Core_SetEntry(GBA.Screen.W_TILES + 2, GBA.Screen.H_TILES,
                     Core.GetPointer("Title Screen MG Palette"), false,
                     Core.GetPointer("Title Screen MG Tileset"), true,
                     Core.GetPointer("Title Screen MG TSA"), tsa, true);
             }
             if (Core.CurrentROM is FE8)
             {
-                editor.Core_SetEntry(
+                editor.Core_SetEntry(GBA.Screen.W_TILES + 2, GBA.Screen.H_TILES,
                     Core.GetPointer("Title Screen MG Palette"), false,
                     Core.GetPointer("Title Screen MG Tileset"), true,
                     Core.GetPointer("Title Screen MG TSA"), true, false);
@@ -589,19 +589,19 @@ namespace EmblemMagic.Editors
 
             if (Core.CurrentROM is FE6)
             {
-                editor.Core_SetEntry(
+                editor.Core_SetEntry(32, 25,
                     Core.GetPointer("Title Screen MG/FG Palette"), false,
                     Core.GetPointer("Title Screen FG Tileset"), true);
             }
             if (Core.CurrentROM is FE7)
             {
-                editor.Core_SetEntry(
+                editor.Core_SetEntry(32, 32,
                     Core.GetPointer("Title Screen FG Palette"), false,
                     Core.GetPointer("Title Screen FG Tileset"), true);
             }
             if (Core.CurrentROM is FE8)
             {
-                editor.Core_SetEntry(
+                editor.Core_SetEntry(32, 32,
                     Core.GetPointer("Title Screen FG Palette"), false,
                     Core.GetPointer("Title Screen FG Tileset 1"), true);
             }

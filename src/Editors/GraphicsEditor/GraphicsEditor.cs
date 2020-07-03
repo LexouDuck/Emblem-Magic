@@ -135,6 +135,25 @@ namespace EmblemMagic.Editors
                 TSA_FlipRows_CheckBox.Checked = tsa_flipped;
             }
         }
+        public void Core_SetEntry(int width, int height,
+            Pointer palette, bool palette_compressed,
+            Pointer tileset, bool tileset_compressed,
+            Pointer tsa = new Pointer(), bool tsa_compressed = false, bool tsa_flipped = false)
+        {
+            Width_NumBox.Value = width;
+            Height_NumBox.Value = height;
+            Palette_PointerBox.Value = palette;
+            Palette_CheckBox.Checked = palette_compressed;
+            Tileset_PointerBox.Value = tileset;
+            Tileset_CheckBox.Checked = tileset_compressed;
+            if (tsa != new Pointer())
+            {
+                TSA_Label.Checked = true;
+                TSA_PointerBox.Value = tsa;
+                TSA_CheckBox.Checked = tsa_compressed;
+                TSA_FlipRows_CheckBox.Checked = tsa_flipped;
+            }
+        }
 
         void Core_Insert(
             Palette palette,
