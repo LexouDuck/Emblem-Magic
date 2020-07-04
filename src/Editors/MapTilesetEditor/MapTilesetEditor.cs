@@ -465,19 +465,19 @@ namespace EmblemMagic.Editors
                 string path = Path.GetDirectoryName(filepath) + '\\';
                 string file = Path.GetFileNameWithoutExtension(filepath);
 
-                if (!File.Exists(path + file + ".dmp"))
-                    throw new Exception("Could not find Tileset file:\n" + path + file + ".dmp");
+                if (!File.Exists(path + file + ".chr"))
+                    throw new Exception("Could not find Tileset file:\n" + path + file + ".chr");
                 if (!File.Exists(path + file + ".pal"))
                     throw new Exception("Could not find Palette file:\n" + path + file + ".pal");
                 if (!File.Exists(path + file + ".tsa"))
                     throw new Exception("Could not find TSA and Terrain file:\n" + path + file + ".tsa");
 
-                byte[] data_tileset = File.ReadAllBytes(path + file + ".dmp");
+                byte[] data_tileset = File.ReadAllBytes(path + file + ".chr");
                 byte[] data_palette = File.ReadAllBytes(path + file + ".pal");
                 byte[] data_tsa = File.ReadAllBytes(path + file + ".tsa");
                 uint length = 32 * 32 * Tile.LENGTH;
                 if (data_tileset.Length != length && data_tileset.Length != length * 2)
-                    throw new Exception("Tileset .dmp file has invalid length." +
+                    throw new Exception("Tileset .chr file has invalid length." +
                         "\nIt should be " + length + " or " + length * 2 + " bytes long.");
 
                 tileset = new MapTileset(
@@ -526,7 +526,7 @@ namespace EmblemMagic.Editors
                 byte[] data_palette = Core.ReadData(Palette_PointerBox.Value, Map.PALETTES * Palette.LENGTH);
                 byte[] data_tsa = Core.ReadData(TilesetTSA_PointerBox.Value, 0);
 
-                File.WriteAllBytes(path + file + ".dmp", data_tileset);
+                File.WriteAllBytes(path + file + ".chr", data_tileset);
                 File.WriteAllBytes(path + file + ".pal", data_palette);
                 File.WriteAllBytes(path + file + ".tsa", data_tsa);
             }
@@ -546,7 +546,7 @@ namespace EmblemMagic.Editors
             openWindow.FilterIndex = 1;
             openWindow.Filter =
                 //"Image file (*.png, *.bmp, *.gif)|*.png;*.bmp;*.gif|" +
-                "Image data (.dmp + .pal + .tsa)|*.dmp;*.pal;*.tsa|" +
+                "Image data (.chr + .pal + .tsa)|*.chr;*.pal;*.tsa|" +
                 "All files (*.*)|*.*";
 
             if (openWindow.ShowDialog() == DialogResult.OK)
@@ -560,7 +560,7 @@ namespace EmblemMagic.Editors
                     return;
                 }
                 */
-                if (openWindow.FileName.EndsWith(".dmp", StringComparison.OrdinalIgnoreCase) ||
+                if (openWindow.FileName.EndsWith(".chr", StringComparison.OrdinalIgnoreCase) ||
                     openWindow.FileName.EndsWith(".pal", StringComparison.OrdinalIgnoreCase) ||
                     openWindow.FileName.EndsWith(".tsa", StringComparison.OrdinalIgnoreCase))
                 {
@@ -579,7 +579,7 @@ namespace EmblemMagic.Editors
             saveWindow.FilterIndex = 1;
             saveWindow.Filter =
                 "Image file (*.png, *.bmp, *.gif)|*.png;*.bmp;*.gif|" +
-                "Image data (.dmp + .pal + .tsa)|*.dmp;*.pal;*.tsa|" +
+                "Image data (.chr + .pal + .tsa)|*.chr;*.pal;*.tsa|" +
                 "All files (*.*)|*.*";
 
             if (saveWindow.ShowDialog() == DialogResult.OK)
@@ -589,7 +589,7 @@ namespace EmblemMagic.Editors
                     Core_SaveImage(saveWindow.FileName.Remove(saveWindow.FileName.Length - 4));
                     return;
                 }
-                if (saveWindow.FileName.EndsWith(".dmp", StringComparison.OrdinalIgnoreCase))
+                if (saveWindow.FileName.EndsWith(".chr", StringComparison.OrdinalIgnoreCase))
                 {
                     Core_SaveData(saveWindow.FileName);
                     return;

@@ -336,13 +336,13 @@ namespace EmblemMagic.Editors
 
                 if (!File.Exists(path + file + ".pal"))
                     throw new Exception("Could not find Palette file:\n" + path + file + ".pal");
-                if (!File.Exists(path + file + ".dmp"))
-                    throw new Exception("Could not find Tileset file:\n" + path + file + ".dmp");
+                if (!File.Exists(path + file + ".chr"))
+                    throw new Exception("Could not find Tileset file:\n" + path + file + ".chr");
                 if (!File.Exists(path + file + ".tsa"))
                     throw new Exception("Could not find TSA Array file:\n" + path + file + ".tsa");
 
                 byte[] palette = File.ReadAllBytes(path + file + ".pal");
-                byte[] tileset = File.ReadAllBytes(path + file + ".dmp");
+                byte[] tileset = File.ReadAllBytes(path + file + ".chr");
                 TSA_Array tsa = new TSA_Array(
                         CurrentBackground.Tiling.Width,
                         CurrentBackground.Tiling.Height,
@@ -387,7 +387,7 @@ namespace EmblemMagic.Editors
                 byte[] data_tsa = CurrentBackground.Tiling.ToBytes(false, false);
 
                 File.WriteAllBytes(path + file + ".pal", data_palette);
-                File.WriteAllBytes(path + file + ".dmp", data_tileset);
+                File.WriteAllBytes(path + file + ".chr", data_tileset);
                 File.WriteAllBytes(path + file + ".tsa", data_tsa);
             }
             catch (Exception ex)
@@ -406,7 +406,7 @@ namespace EmblemMagic.Editors
             openWindow.FilterIndex = 1;
             openWindow.Filter =
                 "Image file (*.png, *.bmp, *.gif)|*.png;*.bmp;*.gif|" +
-                "TSA Image Data (.tsa + .pal + .dmp)|*.tsa;*.pal;*.dmp|" +
+                "TSA Image Data (.tsa + .pal + .chr)|*.tsa;*.pal;*.chr|" +
                 "All files (*.*)|*.*";
 
             if (openWindow.ShowDialog() == DialogResult.OK)
@@ -419,7 +419,7 @@ namespace EmblemMagic.Editors
                     return;
                 }
                 if (openWindow.FileName.EndsWith(".pal", StringComparison.OrdinalIgnoreCase) ||
-                    openWindow.FileName.EndsWith(".dmp", StringComparison.OrdinalIgnoreCase) ||
+                    openWindow.FileName.EndsWith(".chr", StringComparison.OrdinalIgnoreCase) ||
                     openWindow.FileName.EndsWith(".tsa", StringComparison.OrdinalIgnoreCase))
                 {
                     Core_InsertData(openWindow.FileName);
@@ -437,7 +437,7 @@ namespace EmblemMagic.Editors
             saveWindow.FilterIndex = 1;
             saveWindow.Filter =
                 "Image file (*.png)|*.png|" +
-                "TSA Image Data (.tsa + .pal + .dmp)|*.tsa;*.pal;*.dmp|" +
+                "TSA Image Data (.tsa + .pal + .chr)|*.tsa;*.pal;*.chr|" +
                 "All files (*.*)|*.*";
 
             if (saveWindow.ShowDialog() == DialogResult.OK)

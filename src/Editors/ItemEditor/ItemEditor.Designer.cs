@@ -152,14 +152,14 @@
             this.File_InsertDMP.Enabled = false;
             this.File_InsertDMP.Name = "File_InsertDMP";
             this.File_InsertDMP.Size = new System.Drawing.Size(219, 22);
-            this.File_InsertDMP.Text = "Insert item from .dmp...";
+            this.File_InsertDMP.Text = "Insert item from .bin...";
             // 
             // File_InsertAll
             // 
             this.File_InsertAll.Enabled = false;
             this.File_InsertAll.Name = "File_InsertAll";
             this.File_InsertAll.Size = new System.Drawing.Size(219, 22);
-            this.File_InsertAll.Text = "Insert all items from .dmp...";
+            this.File_InsertAll.Text = "Insert all items from .bin...";
             // 
             // toolStripSeparator1
             // 
@@ -171,14 +171,14 @@
             this.File_SaveDMP.Enabled = false;
             this.File_SaveDMP.Name = "File_SaveDMP";
             this.File_SaveDMP.Size = new System.Drawing.Size(219, 22);
-            this.File_SaveDMP.Text = "Save .dmp of item...";
+            this.File_SaveDMP.Text = "Save .bin of item...";
             // 
             // File_SaveAll
             // 
             this.File_SaveAll.Enabled = false;
             this.File_SaveAll.Name = "File_SaveAll";
             this.File_SaveAll.Size = new System.Drawing.Size(219, 22);
-            this.File_SaveAll.Text = "Save .dmp of all items...";
+            this.File_SaveAll.Text = "Save .bin of all items...";
             // 
             // ItemName_Label
             // 

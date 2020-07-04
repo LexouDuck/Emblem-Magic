@@ -238,6 +238,8 @@ namespace GBA
             Tileset result = new Tileset(length);
             for (int i = 0; i < length; i++)
             {
+                if (offset + i >= Sheet.Count)
+                    break;
                 result.Add(Sheet[offset + i]);
             }
             return result;

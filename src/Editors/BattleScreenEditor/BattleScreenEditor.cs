@@ -341,14 +341,14 @@ namespace EmblemMagic.Editors
                 string path = Path.GetDirectoryName(filepath) + '\\';
                 string file = Path.GetFileNameWithoutExtension(filepath);
 
-                if (!File.Exists(path + file + ".dmp"))
-                    throw new Exception("Could not find Tileset file:\n" + path + file + ".dmp");
+                if (!File.Exists(path + file + ".chr"))
+                    throw new Exception("Could not find Tileset file:\n" + path + file + ".chr");
                 if (!File.Exists(path + file + ".pal"))
                     throw new Exception("Could not find Palette file:\n" + path + file + ".pal");
                 if (!File.Exists(path + file + ".tsa"))
                     throw new Exception("Could not find TSA file:\n" + path + file + ".tsa");
 
-                byte[] tileset = File.ReadAllBytes(path + file + ".dmp");
+                byte[] tileset = File.ReadAllBytes(path + file + ".chr");
                 byte[] palette = File.ReadAllBytes(path + file + ".pal");
                 TSA_Array tsa = new TSA_Array(
                     BattleScreen.WIDTH,
@@ -357,10 +357,10 @@ namespace EmblemMagic.Editors
 
                 screen = new BattleScreen(
                     palette, tileset, tsa,
-                    new Tileset(File.ReadAllBytes(path + file + " L name.dmp")),
-                    new Tileset(File.ReadAllBytes(path + file + " L weapon.dmp")),
-                    new Tileset(File.ReadAllBytes(path + file + " R name.dmp")),
-                    new Tileset(File.ReadAllBytes(path + file + " R weapon.dmp")));
+                    new Tileset(File.ReadAllBytes(path + file + " L name.chr")),
+                    new Tileset(File.ReadAllBytes(path + file + " L weapon.chr")),
+                    new Tileset(File.ReadAllBytes(path + file + " R name.chr")),
+                    new Tileset(File.ReadAllBytes(path + file + " R weapon.chr")));
             }
             catch (Exception ex)
             {
@@ -398,13 +398,13 @@ namespace EmblemMagic.Editors
                 byte[] data_palette = Palette.Merge(CurrentScreen.Palettes).ToBytes(false);
                 byte[] data_tsa = CurrentScreen.Tiling.ToBytes(false, false);
 
-                File.WriteAllBytes(path + file + ".dmp", data_tileset);
+                File.WriteAllBytes(path + file + ".chr", data_tileset);
                 File.WriteAllBytes(path + file + ".pal", data_palette);
                 File.WriteAllBytes(path + file + ".tsa", data_tsa);
-                File.WriteAllBytes(path + file + " L name.dmp",   CurrentScreen.L_Name.ToBytes(false));
-                File.WriteAllBytes(path + file + " L weapon.dmp", CurrentScreen.L_Weapon.ToBytes(false));
-                File.WriteAllBytes(path + file + " R name.dmp",   CurrentScreen.R_Name.ToBytes(false));
-                File.WriteAllBytes(path + file + " R weapon.dmp", CurrentScreen.R_Weapon.ToBytes(false));
+                File.WriteAllBytes(path + file + " L name.chr",   CurrentScreen.L_Name.ToBytes(false));
+                File.WriteAllBytes(path + file + " L weapon.chr", CurrentScreen.L_Weapon.ToBytes(false));
+                File.WriteAllBytes(path + file + " R name.chr",   CurrentScreen.R_Name.ToBytes(false));
+                File.WriteAllBytes(path + file + " R weapon.chr", CurrentScreen.R_Weapon.ToBytes(false));
             }
             catch (Exception ex)
             {
@@ -434,12 +434,12 @@ namespace EmblemMagic.Editors
                 string path = Path.GetDirectoryName(filepath) + '\\';
                 string file = Path.GetFileNameWithoutExtension(filepath);
 
-                if (!File.Exists(path + file + ".dmp"))
-                    throw new Exception("Could not find Tileset file:\n" + path + file + ".dmp");
+                if (!File.Exists(path + file + ".chr"))
+                    throw new Exception("Could not find Tileset file:\n" + path + file + ".chr");
                 if (!File.Exists(path + file + ".pal"))
                     throw new Exception("Could not find Palette file:\n" + path + file + ".pal");
 
-                byte[] tileset = File.ReadAllBytes(path + file + ".dmp");
+                byte[] tileset = File.ReadAllBytes(path + file + ".chr");
                 byte[] palette = File.ReadAllBytes(path + file + ".pal");
 
                 platform = new BattlePlatform(tileset, palette);
@@ -479,7 +479,7 @@ namespace EmblemMagic.Editors
                 byte[] data_tileset = CurrentPlatform.Sheet.ToBytes(false);
                 byte[] data_palette = CurrentPlatform.Colors.ToBytes(false);
 
-                File.WriteAllBytes(path + file + ".dmp", data_tileset);
+                File.WriteAllBytes(path + file + ".chr", data_tileset);
                 File.WriteAllBytes(path + file + ".pal", data_palette);
             }
             catch (Exception ex)
@@ -498,7 +498,7 @@ namespace EmblemMagic.Editors
             openWindow.FilterIndex = 1;
             openWindow.Filter =
                 "Image file (*.png, *.bmp, *.gif)|*.png;*.bmp;*.gif|" +
-                "Image data (.dmp + .pal + .tsa)|*.dmp;*.pal;*.tsa|" +
+                "Image data (.chr + .pal + .tsa)|*.chr;*.pal;*.tsa|" +
                 "All files (*.*)|*.*";
 
             if (openWindow.ShowDialog() == DialogResult.OK)
@@ -510,7 +510,7 @@ namespace EmblemMagic.Editors
                     Core_Screen_InsertImage(openWindow.FileName);
                     return;
                 }
-                if (openWindow.FileName.EndsWith(".dmp", StringComparison.OrdinalIgnoreCase) ||
+                if (openWindow.FileName.EndsWith(".chr", StringComparison.OrdinalIgnoreCase) ||
                     openWindow.FileName.EndsWith(".pal", StringComparison.OrdinalIgnoreCase) ||
                     openWindow.FileName.EndsWith(".tsa", StringComparison.OrdinalIgnoreCase))
                 {
@@ -528,7 +528,7 @@ namespace EmblemMagic.Editors
             openWindow.FilterIndex = 1;
             openWindow.Filter =
                 "Image file (*.png, *.bmp, *.gif)|*.png;*.bmp;*.gif|" +
-                "Image data (.dmp + .pal)|*.dmp;*.pal|" +
+                "Image data (.chr + .pal)|*.chr;*.pal|" +
                 "All files (*.*)|*.*";
 
             if (openWindow.ShowDialog() == DialogResult.OK)
@@ -540,7 +540,7 @@ namespace EmblemMagic.Editors
                     Core_Platform_InsertImage(openWindow.FileName);
                     return;
                 }
-                if (openWindow.FileName.EndsWith(".dmp", StringComparison.OrdinalIgnoreCase))
+                if (openWindow.FileName.EndsWith(".chr", StringComparison.OrdinalIgnoreCase))
                 {
                     Core_Platform_InsertData(openWindow.FileName);
                     return;
@@ -557,7 +557,7 @@ namespace EmblemMagic.Editors
             saveWindow.FilterIndex = 1;
             saveWindow.Filter =
                 "Image file (*.png, *.bmp, *.gif)|*.png;*.bmp;*.gif|" +
-                "Image data (.dmp + .pal + .tsa)|*.dmp;*.pal;*.tsa|" +
+                "Image data (.chr + .pal + .tsa)|*.chr;*.pal;*.tsa|" +
                 "All files (*.*)|*.*";
 
             if (saveWindow.ShowDialog() == DialogResult.OK)
@@ -567,7 +567,7 @@ namespace EmblemMagic.Editors
                     Core_Screen_SaveImage(saveWindow.FileName.Remove(saveWindow.FileName.Length - 4));
                     return;
                 }
-                if (saveWindow.FileName.EndsWith(".dmp", StringComparison.OrdinalIgnoreCase))
+                if (saveWindow.FileName.EndsWith(".chr", StringComparison.OrdinalIgnoreCase))
                 {
                     Core_Screen_SaveData(saveWindow.FileName);
                     return;
@@ -584,7 +584,7 @@ namespace EmblemMagic.Editors
             saveWindow.FilterIndex = 1;
             saveWindow.Filter =
                 "Image file (*.png, *.bmp, *.gif)|*.png;*.bmp;*.gif|" +
-                "Image data (.dmp + .pal)|*.dmp;*.pal|" +
+                "Image data (.chr + .pal)|*.chr;*.pal|" +
                 "All files (*.*)|*.*";
 
             if (saveWindow.ShowDialog() == DialogResult.OK)
@@ -594,7 +594,7 @@ namespace EmblemMagic.Editors
                     Core_Platform_SaveImage(saveWindow.FileName.Remove(saveWindow.FileName.Length - 4));
                     return;
                 }
-                if (saveWindow.FileName.EndsWith(".dmp", StringComparison.OrdinalIgnoreCase))
+                if (saveWindow.FileName.EndsWith(".chr", StringComparison.OrdinalIgnoreCase))
                 {
                     Core_Platform_SaveData(saveWindow.FileName);
                     return;

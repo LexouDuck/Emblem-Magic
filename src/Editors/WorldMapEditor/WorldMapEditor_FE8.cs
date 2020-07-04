@@ -354,7 +354,7 @@ namespace EmblemMagic.Editors
             OpenFileDialog openWindow = new OpenFileDialog();
             openWindow.Filter =
                 "Image files (*.png, *.bmp, *.gif)|*.png;*.bmp;*.gif|" +
-                "TSA Image Data (.tsa + .pal + .dmp)|*.tsa|" +
+                "TSA Image Data (.tsa + .pal + .chr)|*.tsa|" +
                 "All files (*.*)|*.*";
             openWindow.FilterIndex = 1;
             openWindow.RestoreDirectory = true;
@@ -413,7 +413,7 @@ namespace EmblemMagic.Editors
             OpenFileDialog openWindow = new OpenFileDialog();
             openWindow.Filter =
                 "Image files (*.png, *.bmp, *.gif)|*.png;*.bmp;*.gif|" +
-                "TSA Image Data (.tsa + .pal + .dmp)|*.tsa|" +
+                "TSA Image Data (.tsa + .pal + .chr)|*.tsa|" +
                 "All files (*.*)|*.*";
             openWindow.FilterIndex = 1;
             openWindow.RestoreDirectory = true;

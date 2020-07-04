@@ -554,7 +554,7 @@ namespace EmblemMagic.Editors
             openWindow.FilterIndex = 1;
             openWindow.Filter =
                 "Image file (*.png, *.bmp, *.gif)|*.png;*.bmp;*.gif|" +
-             // "Image data (.dmp + .pal)|*.dmp;*.pal|" +
+             // "Image data (.chr + .pal)|*.chr;*.pal|" +
                 "All files (*.*)|*.*";
 
             if (openWindow.ShowDialog() == DialogResult.OK)
@@ -566,7 +566,7 @@ namespace EmblemMagic.Editors
                     Core_InsertImage(openWindow.FileName);
                     return;
                 }
-                if (openWindow.FileName.EndsWith(".dmp", StringComparison.OrdinalIgnoreCase))
+                if (openWindow.FileName.EndsWith(".chr", StringComparison.OrdinalIgnoreCase))
                 {
                     Core_InsertData(openWindow.FileName);
                     return;
@@ -583,7 +583,7 @@ namespace EmblemMagic.Editors
             saveWindow.FilterIndex = 1;
             saveWindow.Filter =
                 "Image file (*.png, *.bmp, *.gif)|*.png;*.bmp;*.gif|" +
-                // "Image data (.dmp + .pal)|*.dmp;*.pal|" +
+                // "Image data (.chr + .pal)|*.chr;*.pal|" +
                 "All files (*.*)|*.*";
 
             if (saveWindow.ShowDialog() == DialogResult.OK)
@@ -595,7 +595,7 @@ namespace EmblemMagic.Editors
                     Core_SaveImage(saveWindow.FileName.Remove(saveWindow.FileName.Length - 4));
                     return;
                 }
-                if (saveWindow.FileName.EndsWith(".dmp", StringComparison.OrdinalIgnoreCase))
+                if (saveWindow.FileName.EndsWith(".chr", StringComparison.OrdinalIgnoreCase))
                 {
                     Core_SaveData(saveWindow.FileName);
                     return;

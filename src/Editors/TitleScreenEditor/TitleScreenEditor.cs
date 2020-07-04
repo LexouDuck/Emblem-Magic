@@ -95,8 +95,8 @@ namespace EmblemMagic.Editors
                     Pointer address_bg_palette = Core.GetPointer(name_bg_palette);
 
                     File.WriteAllBytes(path + name_mg_palette + ".pal", Core.ReadPalette(address_mg_palette, Palette.LENGTH * 8).ToBytes(false));
-                    File.WriteAllBytes(path + name_mg_tileset + ".dmp", new Tileset(Core.ReadData(address_mg_tileset, 0)).ToBytes(false));
-                    File.WriteAllBytes(path + name_fg_tileset + ".dmp", new Tileset(Core.ReadData(address_fg_tileset, 0)).ToBytes(false));
+                    File.WriteAllBytes(path + name_mg_tileset + ".chr", new Tileset(Core.ReadData(address_mg_tileset, 0)).ToBytes(false));
+                    File.WriteAllBytes(path + name_fg_tileset + ".chr", new Tileset(Core.ReadData(address_fg_tileset, 0)).ToBytes(false));
                     File.WriteAllBytes(path + name_mg_tsa     + ".tsa", Core.ReadTSA(address_mg_tsa, 32, 20, true, false).ToBytes(false, false));
                     File.WriteAllBytes(path + name_bg_tileset + ".pal", Core.ReadPalette(address_bg_palette, Palette.LENGTH).ToBytes(false));
                     File.WriteAllBytes(path + name_bg_palette + ".png", new Tileset(Core.ReadData(address_bg_tileset, 0)).ToBytes(false));
@@ -122,12 +122,12 @@ namespace EmblemMagic.Editors
                     bool tsa = (Core.CurrentROM.Version != GameVersion.JAP);
 
                     File.WriteAllBytes(path + name_bg_palette + ".pal", Core.ReadPalette(address_bg_palette, Palette.LENGTH).ToBytes(false));
-                    File.WriteAllBytes(path + name_bg_tileset + ".dmp", new Tileset(Core.ReadData(address_bg_tileset, 0)).ToBytes(false));
+                    File.WriteAllBytes(path + name_bg_tileset + ".chr", new Tileset(Core.ReadData(address_bg_tileset, 0)).ToBytes(false));
                     File.WriteAllBytes(path + name_mg_palette + ".pal", Core.ReadPalette(address_mg_palette, Palette.LENGTH).ToBytes(false));
-                    File.WriteAllBytes(path + name_mg_tileset + ".dmp", new Tileset(Core.ReadData(address_mg_tileset, 0)).ToBytes(false));
+                    File.WriteAllBytes(path + name_mg_tileset + ".chr", new Tileset(Core.ReadData(address_mg_tileset, 0)).ToBytes(false));
                     File.WriteAllBytes(path + name_mg_tsa     + ".tsa", Core.ReadTSA(address_mg_tsa, GBA.Screen.W_TILES, GBA.Screen.H_TILES, tsa, true).ToBytes(false, false));
                     File.WriteAllBytes(path + name_fg_palette + ".pal", Core.ReadPalette(address_fg_palette, Palette.LENGTH * 5).ToBytes(false));
-                    File.WriteAllBytes(path + name_fg_tileset + ".dmp", new Tileset(Core.ReadData(address_fg_tileset, 0)).ToBytes(false));
+                    File.WriteAllBytes(path + name_fg_tileset + ".chr", new Tileset(Core.ReadData(address_fg_tileset, 0)).ToBytes(false));
                 }
                 if (Core.CurrentROM is FE8)
                 {
@@ -154,15 +154,15 @@ namespace EmblemMagic.Editors
                     Pointer address_fg_tileset2 = Core.GetPointer(name_fg_tileset2);
 
                     File.WriteAllBytes(path + name_bg_palette  + ".pal", Core.ReadPalette(address_bg_palette, Palette.LENGTH).ToBytes(false));
-                    File.WriteAllBytes(path + name_bg_tileset1 + ".dmp", new Tileset(Core.ReadData(address_bg_tileset1, 0)).ToBytes(false));
-                    File.WriteAllBytes(path + name_bg_tileset2 + ".dmp", new Tileset(Core.ReadData(address_bg_tileset2, 0)).ToBytes(false));
+                    File.WriteAllBytes(path + name_bg_tileset1 + ".chr", new Tileset(Core.ReadData(address_bg_tileset1, 0)).ToBytes(false));
+                    File.WriteAllBytes(path + name_bg_tileset2 + ".chr", new Tileset(Core.ReadData(address_bg_tileset2, 0)).ToBytes(false));
                     File.WriteAllBytes(path + name_bg_tsa      + ".tsa", Core.ReadTSA(address_bg_tsa, 32, 32, true, false).ToBytes(false, false));
                     File.WriteAllBytes(path + name_mg_palette  + ".pal", Core.ReadPalette(address_mg_palette, Palette.LENGTH).ToBytes(false));
-                    File.WriteAllBytes(path + name_mg_tileset  + ".dmp", new Tileset(Core.ReadData(address_mg_tileset, 0)).ToBytes(false));
+                    File.WriteAllBytes(path + name_mg_tileset  + ".chr", new Tileset(Core.ReadData(address_mg_tileset, 0)).ToBytes(false));
                     File.WriteAllBytes(path + name_mg_tsa      + ".tsa", Core.ReadTSA(address_mg_tsa, 32, 32, true, false).ToBytes(false, false));
                     File.WriteAllBytes(path + name_fg_palette  + ".pal", Core.ReadPalette(address_fg_palette, Palette.LENGTH * 5).ToBytes(false));
-                    File.WriteAllBytes(path + name_fg_tileset1 + ".dmp", new Tileset(Core.ReadData(address_fg_tileset1, 0)).ToBytes(false));
-                    File.WriteAllBytes(path + name_fg_tileset2 + ".dmp", new Tileset(Core.ReadData(address_fg_tileset2, 0)).ToBytes(false));
+                    File.WriteAllBytes(path + name_fg_tileset1 + ".chr", new Tileset(Core.ReadData(address_fg_tileset1, 0)).ToBytes(false));
+                    File.WriteAllBytes(path + name_fg_tileset2 + ".chr", new Tileset(Core.ReadData(address_fg_tileset2, 0)).ToBytes(false));
                 }
             }
             catch (Exception ex)
@@ -503,7 +503,7 @@ namespace EmblemMagic.Editors
             saveWindow.FilterIndex = 1;
             saveWindow.Filter =
                 "Image file (*.png)|*.png|" +
-                "TSA Image Data (.tsa + .pal + .dmp)|*.tsa;*.pal;*.dmp|" +
+                "TSA Image Data (.tsa + .pal + .chr)|*.tsa;*.pal;*.chr|" +
                 "All files (*.*)|*.*";
 
             if (saveWindow.ShowDialog() == DialogResult.OK)
