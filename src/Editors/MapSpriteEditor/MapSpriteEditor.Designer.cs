@@ -58,6 +58,8 @@
             this.Menu_File = new System.Windows.Forms.ToolStripMenuItem();
             this.File_Insert = new System.Windows.Forms.ToolStripMenuItem();
             this.File_SaveData = new System.Windows.Forms.ToolStripMenuItem();
+            this.Entry_DecrementBoth_Button = new System.Windows.Forms.Button();
+            this.Entry_IncrementBoth_Button = new System.Windows.Forms.Button();
             this.EditGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IdlePointerBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WalkPointerBox)).BeginInit();
@@ -240,7 +242,7 @@
             this.IdleEntryArrayBox.Location = new System.Drawing.Point(73, 27);
             this.IdleEntryArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.IdleEntryArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
-            this.IdleEntryArrayBox.Size = new System.Drawing.Size(249, 26);
+            this.IdleEntryArrayBox.Size = new System.Drawing.Size(214, 26);
             this.IdleEntryArrayBox.TabIndex = 4;
             this.Help_ToolTip.SetToolTip(this.IdleEntryArrayBox, "Select an \"idle\" map sprite to view/edit.");
             this.IdleEntryArrayBox.ValueChanged += new System.EventHandler(this.EntryArrayBox_ValueChanged);
@@ -250,7 +252,7 @@
             this.WalkEntryArrayBox.Location = new System.Drawing.Point(73, 59);
             this.WalkEntryArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.WalkEntryArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
-            this.WalkEntryArrayBox.Size = new System.Drawing.Size(249, 26);
+            this.WalkEntryArrayBox.Size = new System.Drawing.Size(214, 26);
             this.WalkEntryArrayBox.TabIndex = 15;
             this.Help_ToolTip.SetToolTip(this.WalkEntryArrayBox, "Select the \"move\" map sprite to view/edit.");
             this.WalkEntryArrayBox.ValueChanged += new System.EventHandler(this.EntryArrayBox_ValueChanged);
@@ -419,11 +421,37 @@
             this.File_SaveData.Text = "Save image...";
             this.File_SaveData.Click += new System.EventHandler(this.File_Save_Click);
             // 
+            // Entry_DecrementBoth_Button
+            // 
+            this.Entry_DecrementBoth_Button.Location = new System.Drawing.Point(293, 27);
+            this.Entry_DecrementBoth_Button.Name = "Entry_DecrementBoth_Button";
+            this.Entry_DecrementBoth_Button.Size = new System.Drawing.Size(29, 26);
+            this.Entry_DecrementBoth_Button.TabIndex = 18;
+            this.Entry_DecrementBoth_Button.Text = "-";
+            this.Help_ToolTip.SetToolTip(this.Entry_DecrementBoth_Button, "Click on this button to decrement both the current \"idle\" sprite and \"move\" sprit" +
+        "e.");
+            this.Entry_DecrementBoth_Button.UseVisualStyleBackColor = true;
+            this.Entry_DecrementBoth_Button.Click += new System.EventHandler(this.Entry_DecrementBoth_Button_Click);
+            // 
+            // Entry_IncrementBoth_Button
+            // 
+            this.Entry_IncrementBoth_Button.Location = new System.Drawing.Point(293, 59);
+            this.Entry_IncrementBoth_Button.Name = "Entry_IncrementBoth_Button";
+            this.Entry_IncrementBoth_Button.Size = new System.Drawing.Size(29, 26);
+            this.Entry_IncrementBoth_Button.TabIndex = 19;
+            this.Entry_IncrementBoth_Button.Text = "+";
+            this.Help_ToolTip.SetToolTip(this.Entry_IncrementBoth_Button, "Click on this button to increment both the current \"idle\" sprite and \"move\" sprit" +
+        "e.");
+            this.Entry_IncrementBoth_Button.UseVisualStyleBackColor = true;
+            this.Entry_IncrementBoth_Button.Click += new System.EventHandler(this.Entry_IncrementBoth_Button_Click);
+            // 
             // MapSpriteEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 352);
+            this.Controls.Add(this.Entry_IncrementBoth_Button);
+            this.Controls.Add(this.Entry_DecrementBoth_Button);
             this.Controls.Add(this.WalkEntryLabel);
             this.Controls.Add(this.WalkEntryArrayBox);
             this.Controls.Add(this.TestGroupBox);
@@ -485,5 +513,7 @@
         private System.Windows.Forms.ToolStripMenuItem Menu_File;
         private System.Windows.Forms.ToolStripMenuItem File_Insert;
         private System.Windows.Forms.ToolStripMenuItem File_SaveData;
+        private System.Windows.Forms.Button Entry_DecrementBoth_Button;
+        private System.Windows.Forms.Button Entry_IncrementBoth_Button;
     }
 }

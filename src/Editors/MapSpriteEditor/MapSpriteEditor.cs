@@ -485,5 +485,32 @@ namespace EmblemMagic.Editors
                 "Map Sprite Palette 0x" + PaletteArrayBox.Value + " [" + PaletteArrayBox.Text + "] - ",
                 CurrentPaletteAddress, 1);
         }
+
+        private void Entry_DecrementBoth_Button_Click(object sender, EventArgs e)
+        {
+            IdleEntryArrayBox.ValueChanged -= EntryArrayBox_ValueChanged;
+            WalkEntryArrayBox.ValueChanged -= EntryArrayBox_ValueChanged;
+
+            IdleEntryArrayBox.Value -= 1;
+            WalkEntryArrayBox.Value -= 1;
+
+            IdleEntryArrayBox.ValueChanged += EntryArrayBox_ValueChanged;
+            WalkEntryArrayBox.ValueChanged += EntryArrayBox_ValueChanged;
+
+            Core_Update();
+        }
+        private void Entry_IncrementBoth_Button_Click(object sender, EventArgs e)
+        {
+            IdleEntryArrayBox.ValueChanged -= EntryArrayBox_ValueChanged;
+            WalkEntryArrayBox.ValueChanged -= EntryArrayBox_ValueChanged;
+
+            IdleEntryArrayBox.Value += 1;
+            WalkEntryArrayBox.Value += 1;
+
+            IdleEntryArrayBox.ValueChanged += EntryArrayBox_ValueChanged;
+            WalkEntryArrayBox.ValueChanged += EntryArrayBox_ValueChanged;
+
+            Core_Update();
+        }
     }
 }
