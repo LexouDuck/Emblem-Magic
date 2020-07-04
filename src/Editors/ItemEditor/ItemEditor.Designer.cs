@@ -88,6 +88,7 @@
             this.Effective_LayoutPanel = new System.Windows.Forms.Panel();
             this.Effective_PointerArrayBox = new EmblemMagic.Components.PointerArrayBox();
             this.Stat_Weapon_GroupBox = new System.Windows.Forms.GroupBox();
+            this.ItemIcon_MagicButton = new EmblemMagic.Components.MagicButton();
             this.Editor_Menu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemName_ShortBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Descripton_ShortBox)).BeginInit();
@@ -353,7 +354,7 @@
             // 
             this.ItemIcon_ImageBox.BackColor = System.Drawing.SystemColors.Control;
             this.ItemIcon_ImageBox.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.ItemIcon_ImageBox.Location = new System.Drawing.Point(165, 55);
+            this.ItemIcon_ImageBox.Location = new System.Drawing.Point(160, 51);
             this.ItemIcon_ImageBox.Name = "ItemIcon_ImageBox";
             this.ItemIcon_ImageBox.Size = new System.Drawing.Size(32, 32);
             this.ItemIcon_ImageBox.TabIndex = 19;
@@ -828,11 +829,25 @@
             this.Stat_Weapon_GroupBox.TabStop = false;
             this.Stat_Weapon_GroupBox.Text = "Weapon Stats";
             // 
+            // ItemIcon_MagicButton
+            // 
+            this.ItemIcon_MagicButton.Location = new System.Drawing.Point(160, 89);
+            this.ItemIcon_MagicButton.MaximumSize = new System.Drawing.Size(24, 24);
+            this.ItemIcon_MagicButton.MinimumSize = new System.Drawing.Size(24, 24);
+            this.ItemIcon_MagicButton.Name = "ItemIcon_MagicButton";
+            this.ItemIcon_MagicButton.Size = new System.Drawing.Size(24, 24);
+            this.ItemIcon_MagicButton.TabIndex = 29;
+            this.Help_ToolTip.SetToolTip(this.ItemIcon_MagicButton, "This button is a shortcut to a GraphicsEditor, to modify the icon for the current" +
+        "l selected item.");
+            this.ItemIcon_MagicButton.UseVisualStyleBackColor = true;
+            this.ItemIcon_MagicButton.Click += new System.EventHandler(this.ItemIcon_MagicButton_Click);
+            // 
             // ItemEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 521);
+            this.Controls.Add(this.ItemIcon_MagicButton);
             this.Controls.Add(this.Stat_Weapon_GroupBox);
             this.Controls.Add(this.ItemIcon_Label);
             this.Controls.Add(this.Attribute_Label);
@@ -957,5 +972,6 @@
         private System.Windows.Forms.NumericUpDown Stat_Cost_Total_NumBox;
         private System.Windows.Forms.Label Stat_Cost_Total_Label;
         private System.Windows.Forms.GroupBox Stat_Weapon_GroupBox;
+        private Components.MagicButton ItemIcon_MagicButton;
     }
 }

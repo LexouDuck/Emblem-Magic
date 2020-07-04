@@ -496,6 +496,7 @@ namespace EmblemMagic.Editors
         private void EntryListBox_SelectedIndexChanged(Object sender, EventArgs e)
         {
             AwaitingUpdate = true;
+            ItemIcon_MagicButton.Enabled = (EntryListBox.SelectedIndices.Count > 0);
         }
 
 
@@ -1159,6 +1160,25 @@ namespace EmblemMagic.Editors
                     }
                     return;
                 }
+            }
+        }
+
+        private void ItemIcon_MagicButton_Click(Object sender, EventArgs e)
+        {
+            GraphicsEditor editor = new GraphicsEditor();
+            Program.Core.Core_OpenEditor(editor);
+
+            if (EntryListBox.SelectedIndices.Count == 1)
+            {
+                editor.Core_SetEntry(2, 2,
+                    Core.GetPointer("Item Icon Palette"), false,
+                    Core.GetPointer("Item Icon Tileset") + GBA.Tile.LENGTH * 4 * ItemIcon_ByteBox.Value, false);
+            }
+            else
+            {
+                editor.Core_SetEntry(32, 32,
+                    Core.GetPointer("Item Icon Palette"), false,
+                    Core.GetPointer("Item Icon Tileset"), false);
             }
         }
     }
