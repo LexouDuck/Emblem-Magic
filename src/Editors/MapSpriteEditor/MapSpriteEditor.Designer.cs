@@ -31,19 +31,19 @@
             this.EditGroupBox = new System.Windows.Forms.GroupBox();
             this.Edit_ImageBox = new EmblemMagic.Components.ImageBox();
             this.UnkownLabel = new System.Windows.Forms.Label();
-            this.IdlePointerBox = new EmblemMagic.Components.PointerBox();
-            this.SizeLabel = new System.Windows.Forms.Label();
-            this.WalkPointerBox = new EmblemMagic.Components.PointerBox();
+            this.Idle_PointerBox = new EmblemMagic.Components.PointerBox();
+            this.Idle_Size_Label = new System.Windows.Forms.Label();
+            this.Walk_PointerBox = new EmblemMagic.Components.PointerBox();
             this.AnimPointerLabel = new System.Windows.Forms.Label();
             this.AnimPointerBox = new EmblemMagic.Components.PointerBox();
-            this.WalkPointerLabel = new System.Windows.Forms.Label();
-            this.SizeComboBox = new System.Windows.Forms.ComboBox();
-            this.IdlePointerLabel = new System.Windows.Forms.Label();
+            this.MovePointerLabel = new System.Windows.Forms.Label();
+            this.Idle_Size_ComboBox = new System.Windows.Forms.ComboBox();
+            this.Idle_Pointer_Label = new System.Windows.Forms.Label();
             this.UnknownNumberBox = new EmblemMagic.Components.ByteBox();
-            this.IdleEntryLabel = new System.Windows.Forms.Label();
-            this.WalkEntryLabel = new System.Windows.Forms.Label();
-            this.IdleEntryArrayBox = new EmblemMagic.Components.ByteArrayBox();
-            this.WalkEntryArrayBox = new EmblemMagic.Components.ByteArrayBox();
+            this.Idle_Entry_Label = new System.Windows.Forms.Label();
+            this.Walk_Entry_Label = new System.Windows.Forms.Label();
+            this.Idle_EntryArrayBox = new EmblemMagic.Components.ByteArrayBox();
+            this.Move_EntryArrayBox = new EmblemMagic.Components.ByteArrayBox();
             this.TestGroupBox = new System.Windows.Forms.GroupBox();
             this.Test_Selected = new System.Windows.Forms.RadioButton();
             this.Test_Idle = new System.Windows.Forms.RadioButton();
@@ -60,9 +60,11 @@
             this.File_SaveData = new System.Windows.Forms.ToolStripMenuItem();
             this.Entry_DecrementBoth_Button = new System.Windows.Forms.Button();
             this.Entry_IncrementBoth_Button = new System.Windows.Forms.Button();
+            this.Idle_MagicButton = new EmblemMagic.Components.MagicButton();
+            this.Move_MagicButton = new EmblemMagic.Components.MagicButton();
             this.EditGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.IdlePointerBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WalkPointerBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Idle_PointerBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Walk_PointerBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AnimPointerBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UnknownNumberBox)).BeginInit();
             this.TestGroupBox.SuspendLayout();
@@ -74,14 +76,14 @@
             // 
             this.EditGroupBox.Controls.Add(this.Edit_ImageBox);
             this.EditGroupBox.Controls.Add(this.UnkownLabel);
-            this.EditGroupBox.Controls.Add(this.IdlePointerBox);
-            this.EditGroupBox.Controls.Add(this.SizeLabel);
-            this.EditGroupBox.Controls.Add(this.WalkPointerBox);
+            this.EditGroupBox.Controls.Add(this.Idle_PointerBox);
+            this.EditGroupBox.Controls.Add(this.Idle_Size_Label);
+            this.EditGroupBox.Controls.Add(this.Walk_PointerBox);
             this.EditGroupBox.Controls.Add(this.AnimPointerLabel);
             this.EditGroupBox.Controls.Add(this.AnimPointerBox);
-            this.EditGroupBox.Controls.Add(this.WalkPointerLabel);
-            this.EditGroupBox.Controls.Add(this.SizeComboBox);
-            this.EditGroupBox.Controls.Add(this.IdlePointerLabel);
+            this.EditGroupBox.Controls.Add(this.MovePointerLabel);
+            this.EditGroupBox.Controls.Add(this.Idle_Size_ComboBox);
+            this.EditGroupBox.Controls.Add(this.Idle_Pointer_Label);
             this.EditGroupBox.Controls.Add(this.UnknownNumberBox);
             this.EditGroupBox.Location = new System.Drawing.Point(12, 91);
             this.EditGroupBox.Name = "EditGroupBox";
@@ -110,44 +112,44 @@
             this.UnkownLabel.TabIndex = 12;
             this.UnkownLabel.Text = "Unknown :";
             // 
-            // IdlePointerBox
+            // Idle_PointerBox
             // 
-            this.IdlePointerBox.Hexadecimal = true;
-            this.IdlePointerBox.Location = new System.Drawing.Point(68, 45);
-            this.IdlePointerBox.Maximum = new decimal(new int[] {
+            this.Idle_PointerBox.Hexadecimal = true;
+            this.Idle_PointerBox.Location = new System.Drawing.Point(68, 45);
+            this.Idle_PointerBox.Maximum = new decimal(new int[] {
             33554432,
             0,
             0,
             0});
-            this.IdlePointerBox.Name = "IdlePointerBox";
-            this.IdlePointerBox.Size = new System.Drawing.Size(70, 20);
-            this.IdlePointerBox.TabIndex = 1;
-            this.Help_ToolTip.SetToolTip(this.IdlePointerBox, "Pointer to the pixel data for the current \"idle\" map sprite.\r\nWill write to ROM i" +
+            this.Idle_PointerBox.Name = "Idle_PointerBox";
+            this.Idle_PointerBox.Size = new System.Drawing.Size(70, 20);
+            this.Idle_PointerBox.TabIndex = 1;
+            this.Help_ToolTip.SetToolTip(this.Idle_PointerBox, "Pointer to the pixel data for the current \"idle\" map sprite.\r\nWill write to ROM i" +
         "f changed. Is repointed when inserting a new map sprite with \"File -> Insert ima" +
         "ge...\".");
             // 
-            // SizeLabel
+            // Idle_Size_Label
             // 
-            this.SizeLabel.AutoSize = true;
-            this.SizeLabel.Location = new System.Drawing.Point(29, 22);
-            this.SizeLabel.Name = "SizeLabel";
-            this.SizeLabel.Size = new System.Drawing.Size(33, 13);
-            this.SizeLabel.TabIndex = 11;
-            this.SizeLabel.Text = "Size :";
+            this.Idle_Size_Label.AutoSize = true;
+            this.Idle_Size_Label.Location = new System.Drawing.Point(2, 22);
+            this.Idle_Size_Label.Name = "Idle_Size_Label";
+            this.Idle_Size_Label.Size = new System.Drawing.Size(60, 13);
+            this.Idle_Size_Label.TabIndex = 11;
+            this.Idle_Size_Label.Text = "IDLE Size :";
             // 
-            // WalkPointerBox
+            // Walk_PointerBox
             // 
-            this.WalkPointerBox.Hexadecimal = true;
-            this.WalkPointerBox.Location = new System.Drawing.Point(68, 72);
-            this.WalkPointerBox.Maximum = new decimal(new int[] {
+            this.Walk_PointerBox.Hexadecimal = true;
+            this.Walk_PointerBox.Location = new System.Drawing.Point(68, 72);
+            this.Walk_PointerBox.Maximum = new decimal(new int[] {
             33554432,
             0,
             0,
             0});
-            this.WalkPointerBox.Name = "WalkPointerBox";
-            this.WalkPointerBox.Size = new System.Drawing.Size(70, 20);
-            this.WalkPointerBox.TabIndex = 2;
-            this.Help_ToolTip.SetToolTip(this.WalkPointerBox, "Pointer to the pixel data for the current \"move\" map sprite.\r\nWill write to ROM i" +
+            this.Walk_PointerBox.Name = "Walk_PointerBox";
+            this.Walk_PointerBox.Size = new System.Drawing.Size(70, 20);
+            this.Walk_PointerBox.TabIndex = 2;
+            this.Help_ToolTip.SetToolTip(this.Walk_PointerBox, "Pointer to the pixel data for the current \"move\" map sprite.\r\nWill write to ROM i" +
         "f changed. Is repointed when inserting a new map sprite with \"File -> Insert ima" +
         "ge...\".");
             // 
@@ -175,33 +177,33 @@
             this.Help_ToolTip.SetToolTip(this.AnimPointerBox, "Pointer to the animation data for the current \"idle\" map sprite.\r\nWill write to R" +
         "OM if changed.");
             // 
-            // WalkPointerLabel
+            // MovePointerLabel
             // 
-            this.WalkPointerLabel.AutoSize = true;
-            this.WalkPointerLabel.Location = new System.Drawing.Point(24, 74);
-            this.WalkPointerLabel.Name = "WalkPointerLabel";
-            this.WalkPointerLabel.Size = new System.Drawing.Size(38, 13);
-            this.WalkPointerLabel.TabIndex = 9;
-            this.WalkPointerLabel.Text = "Walk :";
+            this.MovePointerLabel.AutoSize = true;
+            this.MovePointerLabel.Location = new System.Drawing.Point(18, 74);
+            this.MovePointerLabel.Name = "MovePointerLabel";
+            this.MovePointerLabel.Size = new System.Drawing.Size(44, 13);
+            this.MovePointerLabel.TabIndex = 9;
+            this.MovePointerLabel.Text = "MOVE :";
             // 
-            // SizeComboBox
+            // Idle_Size_ComboBox
             // 
-            this.SizeComboBox.Location = new System.Drawing.Point(68, 19);
-            this.SizeComboBox.Name = "SizeComboBox";
-            this.SizeComboBox.Size = new System.Drawing.Size(70, 21);
-            this.SizeComboBox.TabIndex = 5;
-            this.Help_ToolTip.SetToolTip(this.SizeComboBox, "This dropdown selects the size of the current \"idle\" map sprite.\r\nWill write to R" +
+            this.Idle_Size_ComboBox.Location = new System.Drawing.Point(68, 19);
+            this.Idle_Size_ComboBox.Name = "Idle_Size_ComboBox";
+            this.Idle_Size_ComboBox.Size = new System.Drawing.Size(70, 21);
+            this.Idle_Size_ComboBox.TabIndex = 5;
+            this.Help_ToolTip.SetToolTip(this.Idle_Size_ComboBox, "This dropdown selects the size of the current \"idle\" map sprite.\r\nWill write to R" +
         "OM if changed. Is changed automatically when inserting a new map sprite with \"Fi" +
         "le -> Insert image...\".");
             // 
-            // IdlePointerLabel
+            // Idle_Pointer_Label
             // 
-            this.IdlePointerLabel.AutoSize = true;
-            this.IdlePointerLabel.Location = new System.Drawing.Point(32, 47);
-            this.IdlePointerLabel.Name = "IdlePointerLabel";
-            this.IdlePointerLabel.Size = new System.Drawing.Size(30, 13);
-            this.IdlePointerLabel.TabIndex = 8;
-            this.IdlePointerLabel.Text = "Idle :";
+            this.Idle_Pointer_Label.AutoSize = true;
+            this.Idle_Pointer_Label.Location = new System.Drawing.Point(25, 47);
+            this.Idle_Pointer_Label.Name = "Idle_Pointer_Label";
+            this.Idle_Pointer_Label.Size = new System.Drawing.Size(37, 13);
+            this.Idle_Pointer_Label.TabIndex = 8;
+            this.Idle_Pointer_Label.Text = "IDLE :";
             // 
             // UnknownNumberBox
             // 
@@ -219,43 +221,43 @@
             this.UnknownNumberBox.Value = ((byte)(0));
             this.UnknownNumberBox.ValueChanged += new System.EventHandler(this.Unknown_NumBox_ValueChanged);
             // 
-            // IdleEntryLabel
+            // Idle_Entry_Label
             // 
-            this.IdleEntryLabel.AutoSize = true;
-            this.IdleEntryLabel.Location = new System.Drawing.Point(12, 31);
-            this.IdleEntryLabel.Name = "IdleEntryLabel";
-            this.IdleEntryLabel.Size = new System.Drawing.Size(57, 13);
-            this.IdleEntryLabel.TabIndex = 7;
-            this.IdleEntryLabel.Text = "Idle Entry :";
+            this.Idle_Entry_Label.AutoSize = true;
+            this.Idle_Entry_Label.Location = new System.Drawing.Point(12, 31);
+            this.Idle_Entry_Label.Name = "Idle_Entry_Label";
+            this.Idle_Entry_Label.Size = new System.Drawing.Size(44, 13);
+            this.Idle_Entry_Label.TabIndex = 7;
+            this.Idle_Entry_Label.Text = "\"IDLE\":";
             // 
-            // WalkEntryLabel
+            // Walk_Entry_Label
             // 
-            this.WalkEntryLabel.AutoSize = true;
-            this.WalkEntryLabel.Location = new System.Drawing.Point(5, 62);
-            this.WalkEntryLabel.Name = "WalkEntryLabel";
-            this.WalkEntryLabel.Size = new System.Drawing.Size(65, 13);
-            this.WalkEntryLabel.TabIndex = 16;
-            this.WalkEntryLabel.Text = "Walk Entry :";
+            this.Walk_Entry_Label.AutoSize = true;
+            this.Walk_Entry_Label.Location = new System.Drawing.Point(5, 62);
+            this.Walk_Entry_Label.Name = "Walk_Entry_Label";
+            this.Walk_Entry_Label.Size = new System.Drawing.Size(51, 13);
+            this.Walk_Entry_Label.TabIndex = 16;
+            this.Walk_Entry_Label.Text = "\"MOVE\":";
             // 
-            // IdleEntryArrayBox
+            // Idle_EntryArrayBox
             // 
-            this.IdleEntryArrayBox.Location = new System.Drawing.Point(73, 27);
-            this.IdleEntryArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
-            this.IdleEntryArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
-            this.IdleEntryArrayBox.Size = new System.Drawing.Size(214, 26);
-            this.IdleEntryArrayBox.TabIndex = 4;
-            this.Help_ToolTip.SetToolTip(this.IdleEntryArrayBox, "Select an \"idle\" map sprite to view/edit.");
-            this.IdleEntryArrayBox.ValueChanged += new System.EventHandler(this.EntryArrayBox_ValueChanged);
+            this.Idle_EntryArrayBox.Location = new System.Drawing.Point(62, 27);
+            this.Idle_EntryArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
+            this.Idle_EntryArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
+            this.Idle_EntryArrayBox.Size = new System.Drawing.Size(225, 26);
+            this.Idle_EntryArrayBox.TabIndex = 4;
+            this.Help_ToolTip.SetToolTip(this.Idle_EntryArrayBox, "Select an \"idle\" map sprite to view/edit.");
+            this.Idle_EntryArrayBox.ValueChanged += new System.EventHandler(this.EntryArrayBox_ValueChanged);
             // 
-            // WalkEntryArrayBox
+            // Move_EntryArrayBox
             // 
-            this.WalkEntryArrayBox.Location = new System.Drawing.Point(73, 59);
-            this.WalkEntryArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
-            this.WalkEntryArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
-            this.WalkEntryArrayBox.Size = new System.Drawing.Size(214, 26);
-            this.WalkEntryArrayBox.TabIndex = 15;
-            this.Help_ToolTip.SetToolTip(this.WalkEntryArrayBox, "Select the \"move\" map sprite to view/edit.");
-            this.WalkEntryArrayBox.ValueChanged += new System.EventHandler(this.EntryArrayBox_ValueChanged);
+            this.Move_EntryArrayBox.Location = new System.Drawing.Point(62, 59);
+            this.Move_EntryArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
+            this.Move_EntryArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
+            this.Move_EntryArrayBox.Size = new System.Drawing.Size(225, 26);
+            this.Move_EntryArrayBox.TabIndex = 15;
+            this.Help_ToolTip.SetToolTip(this.Move_EntryArrayBox, "Select the \"move\" map sprite to view/edit.");
+            this.Move_EntryArrayBox.ValueChanged += new System.EventHandler(this.EntryArrayBox_ValueChanged);
             // 
             // TestGroupBox
             // 
@@ -423,7 +425,7 @@
             // 
             // Entry_DecrementBoth_Button
             // 
-            this.Entry_DecrementBoth_Button.Location = new System.Drawing.Point(293, 27);
+            this.Entry_DecrementBoth_Button.Location = new System.Drawing.Point(258, 0);
             this.Entry_DecrementBoth_Button.Name = "Entry_DecrementBoth_Button";
             this.Entry_DecrementBoth_Button.Size = new System.Drawing.Size(29, 26);
             this.Entry_DecrementBoth_Button.TabIndex = 18;
@@ -435,7 +437,7 @@
             // 
             // Entry_IncrementBoth_Button
             // 
-            this.Entry_IncrementBoth_Button.Location = new System.Drawing.Point(293, 59);
+            this.Entry_IncrementBoth_Button.Location = new System.Drawing.Point(293, 0);
             this.Entry_IncrementBoth_Button.Name = "Entry_IncrementBoth_Button";
             this.Entry_IncrementBoth_Button.Size = new System.Drawing.Size(29, 26);
             this.Entry_IncrementBoth_Button.TabIndex = 19;
@@ -445,19 +447,43 @@
             this.Entry_IncrementBoth_Button.UseVisualStyleBackColor = true;
             this.Entry_IncrementBoth_Button.Click += new System.EventHandler(this.Entry_IncrementBoth_Button_Click);
             // 
+            // Idle_MagicButton
+            // 
+            this.Idle_MagicButton.Location = new System.Drawing.Point(293, 27);
+            this.Idle_MagicButton.MaximumSize = new System.Drawing.Size(24, 24);
+            this.Idle_MagicButton.MinimumSize = new System.Drawing.Size(24, 24);
+            this.Idle_MagicButton.Name = "Idle_MagicButton";
+            this.Idle_MagicButton.Size = new System.Drawing.Size(24, 24);
+            this.Idle_MagicButton.TabIndex = 20;
+            this.Idle_MagicButton.UseVisualStyleBackColor = true;
+            this.Idle_MagicButton.Click += new System.EventHandler(this.Idle_MagicButton_Click);
+            // 
+            // Move_MagicButton
+            // 
+            this.Move_MagicButton.Location = new System.Drawing.Point(293, 59);
+            this.Move_MagicButton.MaximumSize = new System.Drawing.Size(24, 24);
+            this.Move_MagicButton.MinimumSize = new System.Drawing.Size(24, 24);
+            this.Move_MagicButton.Name = "Move_MagicButton";
+            this.Move_MagicButton.Size = new System.Drawing.Size(24, 24);
+            this.Move_MagicButton.TabIndex = 21;
+            this.Move_MagicButton.UseVisualStyleBackColor = true;
+            this.Move_MagicButton.Click += new System.EventHandler(this.Move_MagicButton_Click);
+            // 
             // MapSpriteEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 352);
+            this.Controls.Add(this.Move_MagicButton);
+            this.Controls.Add(this.Idle_MagicButton);
             this.Controls.Add(this.Entry_IncrementBoth_Button);
             this.Controls.Add(this.Entry_DecrementBoth_Button);
-            this.Controls.Add(this.WalkEntryLabel);
-            this.Controls.Add(this.WalkEntryArrayBox);
+            this.Controls.Add(this.Walk_Entry_Label);
+            this.Controls.Add(this.Move_EntryArrayBox);
             this.Controls.Add(this.TestGroupBox);
             this.Controls.Add(this.EditGroupBox);
-            this.Controls.Add(this.IdleEntryLabel);
-            this.Controls.Add(this.IdleEntryArrayBox);
+            this.Controls.Add(this.Idle_Entry_Label);
+            this.Controls.Add(this.Idle_EntryArrayBox);
             this.Controls.Add(this.Editor_Menu);
             this.MainMenuStrip = this.Editor_Menu;
             this.MaximizeBox = false;
@@ -467,8 +493,8 @@
             this.Text = "Map Sprite Editor";
             this.EditGroupBox.ResumeLayout(false);
             this.EditGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.IdlePointerBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WalkPointerBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Idle_PointerBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Walk_PointerBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AnimPointerBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.UnknownNumberBox)).EndInit();
             this.TestGroupBox.ResumeLayout(false);
@@ -484,20 +510,20 @@
         #endregion
 
         private System.Windows.Forms.GroupBox EditGroupBox;
-        private EmblemMagic.Components.ByteArrayBox IdleEntryArrayBox;
-        private EmblemMagic.Components.ByteArrayBox WalkEntryArrayBox;
-        private System.Windows.Forms.Label IdleEntryLabel;
-        private System.Windows.Forms.Label WalkEntryLabel;
+        private EmblemMagic.Components.ByteArrayBox Idle_EntryArrayBox;
+        private EmblemMagic.Components.ByteArrayBox Move_EntryArrayBox;
+        private System.Windows.Forms.Label Idle_Entry_Label;
+        private System.Windows.Forms.Label Walk_Entry_Label;
         private EmblemMagic.Components.PaletteBox Test_PaletteBox;
         private EmblemMagic.Components.ByteArrayBox PaletteArrayBox;
-        private System.Windows.Forms.ComboBox SizeComboBox;
-        private EmblemMagic.Components.PointerBox IdlePointerBox;
-        private EmblemMagic.Components.PointerBox WalkPointerBox;
+        private System.Windows.Forms.ComboBox Idle_Size_ComboBox;
+        private EmblemMagic.Components.PointerBox Idle_PointerBox;
+        private EmblemMagic.Components.PointerBox Walk_PointerBox;
         private EmblemMagic.Components.PointerBox AnimPointerBox;
         private EmblemMagic.Components.ByteBox UnknownNumberBox;
-        private System.Windows.Forms.Label SizeLabel;
-        private System.Windows.Forms.Label IdlePointerLabel;
-        private System.Windows.Forms.Label WalkPointerLabel;
+        private System.Windows.Forms.Label Idle_Size_Label;
+        private System.Windows.Forms.Label Idle_Pointer_Label;
+        private System.Windows.Forms.Label MovePointerLabel;
         private System.Windows.Forms.Label AnimPointerLabel;
         private System.Windows.Forms.Label UnkownLabel;
         private EmblemMagic.Components.ImageBox Edit_ImageBox;
@@ -515,5 +541,7 @@
         private System.Windows.Forms.ToolStripMenuItem File_SaveData;
         private System.Windows.Forms.Button Entry_DecrementBoth_Button;
         private System.Windows.Forms.Button Entry_IncrementBoth_Button;
+        private Components.MagicButton Idle_MagicButton;
+        private Components.MagicButton Move_MagicButton;
     }
 }

@@ -13,7 +13,7 @@ namespace EmblemMagic.Editors
     public partial class MapSpriteEditor : Editor
     {
         public StructFile CurrentIdle;
-        public StructFile CurrentWalk;
+        public StructFile CurrentMove;
         MapSprite CurrentMapSprite;
 
         GBA.Sprite TestSprite;
@@ -30,14 +30,14 @@ namespace EmblemMagic.Editors
         {
             get
             {
-                return "Map Sprite (Idle) 0x" + Util.ByteToHex(IdleEntryArrayBox.Value) + " [" + IdleEntryArrayBox.Text + "] - ";
+                return "Map Sprite (Idle) 0x" + Util.ByteToHex(Idle_EntryArrayBox.Value) + " [" + Idle_EntryArrayBox.Text + "] - ";
             }
         }
         string CurrentWalkEntry
         {
             get
             {
-                return "Map Sprite (Walk) 0x" + Util.ByteToHex(WalkEntryArrayBox.Value) + " [" + WalkEntryArrayBox.Text + "] - ";
+                return "Map Sprite (Walk) 0x" + Util.ByteToHex(Move_EntryArrayBox.Value) + " [" + Move_EntryArrayBox.Text + "] - ";
             }
         }
 
@@ -49,23 +49,23 @@ namespace EmblemMagic.Editors
 
             try
             {
-                IdleEntryArrayBox.Load("Map Sprite List.txt");
-                WalkEntryArrayBox.Load("Class List.txt");
+                Idle_EntryArrayBox.Load("Map Sprite List.txt");
+                Move_EntryArrayBox.Load("Class List.txt");
                 CurrentIdle = new StructFile("Map Sprite Idle Struct.txt");
-                CurrentWalk = new StructFile("Map Sprite Walk Struct.txt");
+                CurrentMove = new StructFile("Map Sprite Walk Struct.txt");
                 CurrentIdle.Address = Core.GetPointer("Map Sprite Idle Array");
-                CurrentWalk.Address = Core.GetPointer("Map Sprite Walk Array");
+                CurrentMove.Address = Core.GetPointer("Map Sprite Walk Array");
 
                 PaletteArrayBox.Load("Map Sprite Palettes.txt");
 
-                SizeComboBox.DataSource = new KeyValuePair<string, byte>[3]
+                Idle_Size_ComboBox.DataSource = new KeyValuePair<string, byte>[3]
                 {
                     new KeyValuePair<string, byte>("16x16", 0x00),
                     new KeyValuePair<string, byte>("16x32", 0x01),
                     new KeyValuePair<string, byte>("32x32", 0x02)
                 };
-                SizeComboBox.ValueMember = "Value";
-                SizeComboBox.DisplayMember = "Key";
+                Idle_Size_ComboBox.ValueMember = "Value";
+                Idle_Size_ComboBox.DisplayMember = "Key";
 
                 CurrentPalette = Core.ReadPalette(Core.CurrentROM.Address_MapSpritePalettes(), GBA.Palette.LENGTH);
 
@@ -81,21 +81,21 @@ namespace EmblemMagic.Editors
 
         public override void Core_SetEntry(uint entry)
         {
-            IdleEntryArrayBox.Value = (byte)entry;
-            WalkEntryArrayBox.Value = (byte)WalkEntryArrayBox.File.FindEntry(IdleEntryArrayBox.Text);
+            Idle_EntryArrayBox.Value = (byte)entry;
+            Move_EntryArrayBox.Value = (byte)Move_EntryArrayBox.File.FindEntry(Idle_EntryArrayBox.Text);
         }
         public override void Core_OnOpen()
         {
-            WalkEntryArrayBox.ValueChanged -= EntryArrayBox_ValueChanged;
-            WalkEntryArrayBox.Value = 1;
-            WalkEntryArrayBox.ValueChanged += EntryArrayBox_ValueChanged;
+            Move_EntryArrayBox.ValueChanged -= EntryArrayBox_ValueChanged;
+            Move_EntryArrayBox.Value = 1;
+            Move_EntryArrayBox.ValueChanged += EntryArrayBox_ValueChanged;
 
             Core_Update();
         }
         public override void Core_Update()
         {
-            CurrentIdle.EntryIndex = IdleEntryArrayBox.Value;
-            CurrentWalk.EntryIndex = WalkEntryArrayBox.Value - 1;
+            CurrentIdle.EntryIndex = Idle_EntryArrayBox.Value;
+            CurrentMove.EntryIndex = Move_EntryArrayBox.Value - 1;
 
             Core_LoadPalette();
             Core_LoadImage();
@@ -123,7 +123,7 @@ namespace EmblemMagic.Editors
             {
                 CurrentMapSprite = new MapSprite(CurrentPalette,
                     Core.ReadData((Pointer)CurrentIdle["Sprite"], 0),
-                    Core.ReadData((Pointer)CurrentWalk["Sprite"], 0),
+                    Core.ReadData((Pointer)CurrentMove["Sprite"], 0),
                     (byte)CurrentIdle["Size"]);
 
                 Edit_ImageBox.Load(CurrentMapSprite);
@@ -184,35 +184,35 @@ namespace EmblemMagic.Editors
         }
         void Core_LoadValues()
         {
-            SizeComboBox.SelectedValueChanged -= Size_ComboBox_ValueChanged;
+            Idle_Size_ComboBox.SelectedValueChanged -= Idle_Size_ComboBox_ValueChanged;
             UnknownNumberBox.ValueChanged -= Unknown_NumBox_ValueChanged;
-            IdlePointerBox.ValueChanged -= Idle_PointerBox_ValueChanged;
-            WalkPointerBox.ValueChanged -= Walk_PointerBox_ValueChanged;
+            Idle_PointerBox.ValueChanged -= Idle_PointerBox_ValueChanged;
+            Walk_PointerBox.ValueChanged -= Walk_PointerBox_ValueChanged;
             AnimPointerBox.ValueChanged -= Anim_PointerBox_ValueChanged;
 
             try
             {
-                SizeComboBox.SelectedValue = (byte)CurrentIdle["Size"];
+                Idle_Size_ComboBox.SelectedValue = (byte)CurrentIdle["Size"];
                 UnknownNumberBox.Value = (byte)CurrentIdle["Unknown"];
-                IdlePointerBox.Value = (Pointer)CurrentIdle["Sprite"];
-                WalkPointerBox.Value = (Pointer)CurrentWalk["Sprite"];
-                AnimPointerBox.Value = (Pointer)CurrentWalk["AnimData"];
+                Idle_PointerBox.Value = (Pointer)CurrentIdle["Sprite"];
+                Walk_PointerBox.Value = (Pointer)CurrentMove["Sprite"];
+                AnimPointerBox.Value = (Pointer)CurrentMove["AnimData"];
             }
             catch (Exception ex)
             {
                 Program.ShowError("There has been an error while trying to load the values.", ex);
 
-                SizeComboBox.SelectedValue = 0;
-                IdlePointerBox.Value = new Pointer();
-                WalkPointerBox.Value = new Pointer();
+                Idle_Size_ComboBox.SelectedValue = 0;
+                Idle_PointerBox.Value = new Pointer();
+                Walk_PointerBox.Value = new Pointer();
                 AnimPointerBox.Value = new Pointer();
                 UnknownNumberBox.Value = 0;
             }
 
-            SizeComboBox.SelectedValueChanged += Size_ComboBox_ValueChanged;
+            Idle_Size_ComboBox.SelectedValueChanged += Idle_Size_ComboBox_ValueChanged;
             UnknownNumberBox.ValueChanged += Unknown_NumBox_ValueChanged;
-            IdlePointerBox.ValueChanged += Idle_PointerBox_ValueChanged;
-            WalkPointerBox.ValueChanged += Walk_PointerBox_ValueChanged;
+            Idle_PointerBox.ValueChanged += Idle_PointerBox_ValueChanged;
+            Walk_PointerBox.ValueChanged += Walk_PointerBox_ValueChanged;
             AnimPointerBox.ValueChanged += Anim_PointerBox_ValueChanged;
         }
         
@@ -229,10 +229,10 @@ namespace EmblemMagic.Editors
                         CurrentIdleEntry,
                     new Tuple<string, Pointer, int>[] {
                         Tuple.Create("Idle Sprite", (Pointer)CurrentIdle["Sprite"], data_idle.Length),
-                        Tuple.Create("Walk Sprite", (Pointer)CurrentWalk["Sprite"], data_walk.Length)},
+                        Tuple.Create("Walk Sprite", (Pointer)CurrentMove["Sprite"], data_walk.Length)},
                     new Pointer[] {
                         CurrentIdle.GetAddress(CurrentIdle.EntryIndex, "Sprite"),
-                        CurrentWalk.GetAddress(CurrentWalk.EntryIndex, "Sprite")});
+                        CurrentMove.GetAddress(CurrentMove.EntryIndex, "Sprite")});
                 if (cancel) return;
 
                 Core.WriteData(this,
@@ -241,7 +241,7 @@ namespace EmblemMagic.Editors
                     CurrentIdleEntry + "Idle Sprite changed");
 
                 Core.WriteData(this,
-                    (Pointer)CurrentWalk["Sprite"],
+                    (Pointer)CurrentMove["Sprite"],
                     data_walk,
                     CurrentWalkEntry + "Walk Sprite changed");
             }
@@ -276,20 +276,20 @@ namespace EmblemMagic.Editors
         {
             string idle_path = null;
             string walk_path = null;
-            if (filepath.EndsWith("idle.dmp", StringComparison.OrdinalIgnoreCase))
+            if (filepath.EndsWith("idle.chr", StringComparison.OrdinalIgnoreCase))
             {
                 idle_path = filepath;
-                walk_path = filepath.Substring(0, filepath.Length - 8) + "walk.dmp";
+                walk_path = filepath.Substring(0, filepath.Length - 8) + "walk.chr";
             }
-            if (filepath.EndsWith("walk.dmp", StringComparison.OrdinalIgnoreCase))
+            if (filepath.EndsWith("walk.chr", StringComparison.OrdinalIgnoreCase))
             {
-                idle_path = filepath.Substring(0, filepath.Length - 8) + "idle.dmp";
+                idle_path = filepath.Substring(0, filepath.Length - 8) + "idle.chr";
                 walk_path = filepath;
             }
             if (idle_path == null || walk_path == null)
             {
                 Program.ShowError("Selected file has invalid name.\r\n" +
-                "Image data files must end with either 'idle.dmp' or 'walk.dmp').");
+                "Image data files must end with either 'idle.chr' or 'walk.chr').");
                 return;
             }
 
@@ -327,8 +327,8 @@ namespace EmblemMagic.Editors
                 byte[] data_idle = CurrentMapSprite.Sprites[MapSprite.IDLE].Sheet.ToBytes(false);
                 byte[] data_walk = CurrentMapSprite.Sprites[MapSprite.WALK].Sheet.ToBytes(false);
 
-                File.WriteAllBytes(path + file + " idle.dmp", data_idle);
-                File.WriteAllBytes(path + file + " walk.dmp", data_walk);
+                File.WriteAllBytes(path + file + " idle.chr", data_idle);
+                File.WriteAllBytes(path + file + " walk.chr", data_walk);
             }
             catch (Exception ex)
             {
@@ -346,7 +346,7 @@ namespace EmblemMagic.Editors
             openWindow.FilterIndex = 1;
             openWindow.Filter =
                 "Image file (*.png, *.bmp, *.gif)|*.png;*.bmp;*.gif|" +
-                "Image data (idle.dmp + walk.dmp)|*.dmp|" +
+                "Image data (idle.chr + walk.chr)|*.chr|" +
                 "All files (*.*)|*.*";
 
             if (openWindow.ShowDialog() == DialogResult.OK)
@@ -358,7 +358,7 @@ namespace EmblemMagic.Editors
                     Core_InsertImage(openWindow.FileName);
                     return;
                 }
-                if (openWindow.FileName.EndsWith(".dmp", StringComparison.OrdinalIgnoreCase))
+                if (openWindow.FileName.EndsWith(".chr", StringComparison.OrdinalIgnoreCase))
                 {
                     Core_InsertData(openWindow.FileName);
                     return;
@@ -375,7 +375,7 @@ namespace EmblemMagic.Editors
             saveWindow.FilterIndex = 1;
             saveWindow.Filter =
                 "Image file (*.png, *.bmp, *.gif)|*.png;*.bmp;*.gif|" +
-                "Image data (idle.dmp + walk.dmp)|*.dmp|" +
+                "Image data (idle.chr + walk.chr)|*.chr|" +
                 "All files (*.*)|*.*";
 
             if (saveWindow.ShowDialog() == DialogResult.OK)
@@ -385,7 +385,7 @@ namespace EmblemMagic.Editors
                     Core_SaveImage(saveWindow.FileName.Remove(saveWindow.FileName.Length - 4));
                     return;
                 }
-                if (saveWindow.FileName.EndsWith(".dmp", StringComparison.OrdinalIgnoreCase))
+                if (saveWindow.FileName.EndsWith(".chr", StringComparison.OrdinalIgnoreCase))
                 {
                     Core_SaveData(saveWindow.FileName);
                     return;
@@ -398,32 +398,58 @@ namespace EmblemMagic.Editors
         {
             Core_Update();
         }
+        private void Entry_DecrementBoth_Button_Click(object sender, EventArgs e)
+        {
+            Idle_EntryArrayBox.ValueChanged -= EntryArrayBox_ValueChanged;
+            Move_EntryArrayBox.ValueChanged -= EntryArrayBox_ValueChanged;
 
-        private void Size_ComboBox_ValueChanged(object sender, EventArgs e)
+            Idle_EntryArrayBox.Value -= 1;
+            Move_EntryArrayBox.Value -= 1;
+
+            Idle_EntryArrayBox.ValueChanged += EntryArrayBox_ValueChanged;
+            Move_EntryArrayBox.ValueChanged += EntryArrayBox_ValueChanged;
+
+            Core_Update();
+        }
+        private void Entry_IncrementBoth_Button_Click(object sender, EventArgs e)
+        {
+            Idle_EntryArrayBox.ValueChanged -= EntryArrayBox_ValueChanged;
+            Move_EntryArrayBox.ValueChanged -= EntryArrayBox_ValueChanged;
+
+            Idle_EntryArrayBox.Value += 1;
+            Move_EntryArrayBox.Value += 1;
+
+            Idle_EntryArrayBox.ValueChanged += EntryArrayBox_ValueChanged;
+            Move_EntryArrayBox.ValueChanged += EntryArrayBox_ValueChanged;
+
+            Core_Update();
+        }
+
+        private void Idle_Size_ComboBox_ValueChanged(object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 CurrentIdle.GetAddress(CurrentIdle.EntryIndex, "Size"),
-                (byte)SizeComboBox.SelectedValue,
+                (byte)Idle_Size_ComboBox.SelectedValue,
                 CurrentIdleEntry + "Size changed");
         }
         private void Idle_PointerBox_ValueChanged(object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 CurrentIdle.GetAddress(CurrentIdle.EntryIndex, "Sprite"),
-                IdlePointerBox.Value,
+                Idle_PointerBox.Value,
                 CurrentIdleEntry + "Sprite repointed");
         }
         private void Walk_PointerBox_ValueChanged(object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                CurrentWalk.GetAddress(CurrentWalk.EntryIndex, "Sprite"),
-                WalkPointerBox.Value,
+                CurrentMove.GetAddress(CurrentMove.EntryIndex, "Sprite"),
+                Walk_PointerBox.Value,
                 CurrentWalkEntry + "Sprite repointed");
         }
         private void Anim_PointerBox_ValueChanged(object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                CurrentWalk.GetAddress(CurrentWalk.EntryIndex, "AnimData"),
+                CurrentMove.GetAddress(CurrentMove.EntryIndex, "AnimData"),
                 AnimPointerBox.Value,
                 CurrentWalkEntry + "Animation repointed");
         }
@@ -486,31 +512,27 @@ namespace EmblemMagic.Editors
                 CurrentPaletteAddress, 1);
         }
 
-        private void Entry_DecrementBoth_Button_Click(object sender, EventArgs e)
+        private void Idle_MagicButton_Click(Object sender, EventArgs e)
         {
-            IdleEntryArrayBox.ValueChanged -= EntryArrayBox_ValueChanged;
-            WalkEntryArrayBox.ValueChanged -= EntryArrayBox_ValueChanged;
+            GraphicsEditor editor = new GraphicsEditor();
+            Program.Core.Core_OpenEditor(editor);
 
-            IdleEntryArrayBox.Value -= 1;
-            WalkEntryArrayBox.Value -= 1;
+            byte size = (byte)CurrentIdle["Size"];
 
-            IdleEntryArrayBox.ValueChanged += EntryArrayBox_ValueChanged;
-            WalkEntryArrayBox.ValueChanged += EntryArrayBox_ValueChanged;
-
-            Core_Update();
+            editor.Core_SetEntry(
+                (size < 0x2 ? 2 : 4),
+                (size < 0x1 ? 2 : 4) * 3,
+                CurrentPaletteAddress, false,
+                (Pointer)CurrentIdle["Sprite"], true);
         }
-        private void Entry_IncrementBoth_Button_Click(object sender, EventArgs e)
+        private void Move_MagicButton_Click(Object sender, EventArgs e)
         {
-            IdleEntryArrayBox.ValueChanged -= EntryArrayBox_ValueChanged;
-            WalkEntryArrayBox.ValueChanged -= EntryArrayBox_ValueChanged;
+            GraphicsEditor editor = new GraphicsEditor();
+            Program.Core.Core_OpenEditor(editor);
 
-            IdleEntryArrayBox.Value += 1;
-            WalkEntryArrayBox.Value += 1;
-
-            IdleEntryArrayBox.ValueChanged += EntryArrayBox_ValueChanged;
-            WalkEntryArrayBox.ValueChanged += EntryArrayBox_ValueChanged;
-
-            Core_Update();
+            editor.Core_SetEntry(4, 60,
+                CurrentPaletteAddress, false,
+                (Pointer)CurrentMove["Sprite"], true);
         }
     }
 }
