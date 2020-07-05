@@ -222,6 +222,7 @@ namespace EmblemMagic.Editors
             catch (Exception ex)
             {
                 Program.ShowError("Could not load the animation.", ex);
+                CurrentAnim = null;
             }
         }
         void Core_LoadPalettes()
@@ -258,6 +259,8 @@ namespace EmblemMagic.Editors
         }
         void Core_LoadAnimCode()
         {
+            if (CurrentAnim == null)
+                return;
             List<Tuple<uint, OAM>> not_used = null; int[] not_used_either = null;
             string result = BattleAnimation.GetAnimationCode(
                     CurrentAnim.AnimCode,
@@ -510,6 +513,8 @@ namespace EmblemMagic.Editors
 
         void Core_UpdateImageBox()
         {
+            try
+            {
                 CurrentAnim.ShowFrame(CurrentPalette, CurrentFrame, OAM_L_Button.Checked);
 
                 if (!View_AllFrames.Checked && View_Layered.Checked &&
@@ -524,8 +529,6 @@ namespace EmblemMagic.Editors
                         BattleAnimation.SCREEN_OFFSET_Y);
                 }
                 Anim_ImageBox.Load(CurrentAnim);
-            try
-            {
             }
             catch (Exception ex)
             {

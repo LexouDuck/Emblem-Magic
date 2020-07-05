@@ -63,6 +63,8 @@ namespace EmblemMagic.Editors
             this.Screen_Palette_NumBox = new System.Windows.Forms.NumericUpDown();
             this.Screen_Palette_Label = new System.Windows.Forms.Label();
             this.Screen_Tile_Label = new System.Windows.Forms.Label();
+            this.Screen_MagicButton = new EmblemMagic.Components.MagicButton();
+            this.Platform_MagicButton = new EmblemMagic.Components.MagicButton();
             ((System.ComponentModel.ISupportInitialize)(this.Platform_Tileset_PointerBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Platform_Palette_PointerBox)).BeginInit();
             this.Platform_GroupBox.SuspendLayout();
@@ -77,7 +79,7 @@ namespace EmblemMagic.Editors
             this.EntryArrayBox.Location = new System.Drawing.Point(6, 19);
             this.EntryArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.EntryArrayBox.MinimumSize = new System.Drawing.Size(128, 26);
-            this.EntryArrayBox.Size = new System.Drawing.Size(244, 26);
+            this.EntryArrayBox.Size = new System.Drawing.Size(214, 26);
             this.EntryArrayBox.TabIndex = 0;
             this.Help_ToolTip.SetToolTip(this.EntryArrayBox, "Select en entry in the list of battle platforms to view/edit.");
             this.EntryArrayBox.ValueChanged += new System.EventHandler(this.EntryArrayBox_ValueChanged);
@@ -180,6 +182,7 @@ namespace EmblemMagic.Editors
             // 
             // Platform_GroupBox
             // 
+            this.Platform_GroupBox.Controls.Add(this.Platform_MagicButton);
             this.Platform_GroupBox.Controls.Add(this.EntryArrayBox);
             this.Platform_GroupBox.Controls.Add(this.Platform_PaletteBox);
             this.Platform_GroupBox.Controls.Add(this.Platform_ImageBox);
@@ -316,6 +319,7 @@ namespace EmblemMagic.Editors
             // 
             // Screen_GroupBox
             // 
+            this.Screen_GroupBox.Controls.Add(this.Screen_MagicButton);
             this.Screen_GroupBox.Controls.Add(this.Screen_FlipV_CheckBox);
             this.Screen_GroupBox.Controls.Add(this.Screen_PaletteBox);
             this.Screen_GroupBox.Controls.Add(this.Screen_FlipH_CheckBox);
@@ -334,7 +338,7 @@ namespace EmblemMagic.Editors
             // 
             this.Screen_FlipV_CheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Screen_FlipV_CheckBox.AutoSize = true;
-            this.Screen_FlipV_CheckBox.Location = new System.Drawing.Point(23, 57);
+            this.Screen_FlipV_CheckBox.Location = new System.Drawing.Point(6, 57);
             this.Screen_FlipV_CheckBox.Name = "Screen_FlipV_CheckBox";
             this.Screen_FlipV_CheckBox.Size = new System.Drawing.Size(80, 17);
             this.Screen_FlipV_CheckBox.TabIndex = 7;
@@ -347,7 +351,7 @@ namespace EmblemMagic.Editors
             // Screen_PaletteBox
             // 
             this.Screen_PaletteBox.ColorsPerLine = 16;
-            this.Screen_PaletteBox.Location = new System.Drawing.Point(122, 42);
+            this.Screen_PaletteBox.Location = new System.Drawing.Point(100, 42);
             this.Screen_PaletteBox.Name = "Screen_PaletteBox";
             this.Screen_PaletteBox.Size = new System.Drawing.Size(128, 32);
             this.Screen_PaletteBox.TabIndex = 8;
@@ -361,7 +365,7 @@ namespace EmblemMagic.Editors
             // 
             this.Screen_FlipH_CheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Screen_FlipH_CheckBox.AutoSize = true;
-            this.Screen_FlipH_CheckBox.Location = new System.Drawing.Point(23, 41);
+            this.Screen_FlipH_CheckBox.Location = new System.Drawing.Point(6, 41);
             this.Screen_FlipH_CheckBox.Name = "Screen_FlipH_CheckBox";
             this.Screen_FlipH_CheckBox.Size = new System.Drawing.Size(92, 17);
             this.Screen_FlipH_CheckBox.TabIndex = 6;
@@ -418,6 +422,32 @@ namespace EmblemMagic.Editors
             this.Screen_Tile_Label.Size = new System.Drawing.Size(58, 13);
             this.Screen_Tile_Label.TabIndex = 5;
             this.Screen_Tile_Label.Text = "Tile index :";
+            // 
+            // Screen_MagicButton
+            // 
+            this.Screen_MagicButton.Location = new System.Drawing.Point(232, 42);
+            this.Screen_MagicButton.MaximumSize = new System.Drawing.Size(24, 24);
+            this.Screen_MagicButton.MinimumSize = new System.Drawing.Size(24, 24);
+            this.Screen_MagicButton.Name = "Screen_MagicButton";
+            this.Screen_MagicButton.Size = new System.Drawing.Size(24, 24);
+            this.Screen_MagicButton.TabIndex = 9;
+            this.Help_ToolTip.SetToolTip(this.Screen_MagicButton, "Clicking on this button opens the GraphicsEditor, to view the raw graphics data o" +
+        "f the battle screen frame.");
+            this.Screen_MagicButton.UseVisualStyleBackColor = true;
+            this.Screen_MagicButton.Click += new System.EventHandler(this.Screen_MagicButton_Click);
+            // 
+            // Platform_MagicButton
+            // 
+            this.Platform_MagicButton.Location = new System.Drawing.Point(226, 18);
+            this.Platform_MagicButton.MaximumSize = new System.Drawing.Size(24, 24);
+            this.Platform_MagicButton.MinimumSize = new System.Drawing.Size(24, 24);
+            this.Platform_MagicButton.Name = "Platform_MagicButton";
+            this.Platform_MagicButton.Size = new System.Drawing.Size(24, 24);
+            this.Platform_MagicButton.TabIndex = 10;
+            this.Help_ToolTip.SetToolTip(this.Platform_MagicButton, "Clicking on this button opens the GraphicsEditor, to view the raw graphics data o" +
+        "f the battle screen frame.");
+            this.Platform_MagicButton.UseVisualStyleBackColor = true;
+            this.Platform_MagicButton.Click += new System.EventHandler(this.Platform_MagicButton_Click);
             // 
             // BattleScreenEditor
             // 
@@ -482,5 +512,7 @@ namespace EmblemMagic.Editors
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripMenuItem File_Insert_Platform;
         private ToolStripMenuItem File_Save_Platform;
+        private Components.MagicButton Platform_MagicButton;
+        private Components.MagicButton Screen_MagicButton;
     }
 }

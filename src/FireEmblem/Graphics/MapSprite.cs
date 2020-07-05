@@ -17,16 +17,16 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// Creates a map sprite from the given data
         /// </summary>
-        public MapSprite(Palette palette, byte[] idle, byte[] walk, byte size)
+        public MapSprite(Palette palette, byte[] idle, byte[] move, byte size)
             : base(WIDTH * Tile.SIZE, HEIGHT * Tile.SIZE)
         {
             if (palette == null) throw new Exception("Map Sprite palette is null.");
             if (idle == null) throw new Exception("Map Sprite idle sheet is null.");
-            if (walk == null) throw new Exception("Map sprite walk sheet is null.");
+            if (move == null) throw new Exception("Map sprite move sheet is null.");
             if (size >= 0x03) throw new Exception("Map Sprite size byte is invalid: " + size);
 
             AddSprite(new Sprite(palette, new Tileset(idle), new TileMap(Map_Idle(size))), 0, 32);
-            AddSprite(new Sprite(palette, new Tileset(walk), new TileMap(Map_Walk())),     32, 0);
+            AddSprite(new Sprite(palette, new Tileset(move), new TileMap(Map_Move())),     32, 0);
         }
         /// <summary>
         /// Creates a Map Sprite from the given image
@@ -38,12 +38,12 @@ namespace EmblemMagic.FireEmblem
                 "Image given has invalid dimensions: it should be " + Width + "x" + Height + " pixels");
 
             Tileset idleTiles = new GBA.Tileset();
-            Tileset walkTiles = new GBA.Tileset();
+            Tileset moveTiles = new GBA.Tileset();
             idleTiles.Parse(image, TileMap.Place(Map_Idle(size), 0, 4, WIDTH, HEIGHT));
-            walkTiles.Parse(image, TileMap.Place(Map_Walk(),     4, 0, WIDTH, HEIGHT));
+            moveTiles.Parse(image, TileMap.Place(Map_Move(),     4, 0, WIDTH, HEIGHT));
 
             AddSprite(new Sprite(image.Colors, idleTiles, new TileMap(Map_Idle(size))), 0 * 8, 4 * 8);
-            AddSprite(new Sprite(image.Colors, walkTiles, new TileMap(Map_Walk())),     4 * 8, 0 * 8);
+            AddSprite(new Sprite(image.Colors, moveTiles, new TileMap(Map_Move())),     4 * 8, 0 * 8);
         }
 
         public static int?[,] Map_Idle(byte size)
@@ -101,7 +101,7 @@ namespace EmblemMagic.FireEmblem
                 default: return new int?[0, 0];
             }
         }
-        public static int?[,] Map_Walk()
+        public static int?[,] Map_Move()
         {
             return TileMap.Convert(new int?[16, 16]
             {

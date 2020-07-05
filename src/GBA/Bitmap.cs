@@ -122,7 +122,7 @@ namespace GBA
                             pixel = Colors.Count;
                             Colors.Add(color);
                         }
-                        else throw new Exception("A color in the bitmap was not found in the palette given.");
+                        else throw new Exception("A color in the bitmap was not found in the palette given: at x=" + x + ", y=" + y);
                     }
                     Bytes[index++] = (byte)pixel;
                 }
@@ -197,34 +197,25 @@ namespace GBA
                 throw new Exception("The requested region is larger than the bitmap.");
 
             Color[,] result = new Color[region.Width, region.Height];
-
-            int index = 0;
-            for (int y = region.Y; y < region.Height; y++)
+            for (int y = 0; y < region.Height; y++)
+            for (int x = 0; x < region.Width; x++)
             {
-                for (int x = region.X; x < region.Width; x++)
-                {
-                    result[x, y] = this.GetColor(x, y);
-                    index++;
-                }
+                result[x + region.X, y + region.Y] = this.GetColor(x, y);
             }
             return result;
         }
         /// <summary>
         /// Sets the pixels in the given region of the GBA.Bitmap
         /// </summary>
-        public void SetPixels(Color[,] pixels, Rectangle region)
+        public void SetPixels(Func<int, int, byte> displayfunc, Rectangle region)
         {
-            if (pixels.Length != region.Width * region.Height)
-                throw new Exception("The array length doesn't match the region size.");
             if (region.X < 0 || region.Y + region.Width > Width || region.Y < 0 || region.Y + region.Height > Height)
                 throw new Exception("The requested region is larger than the bitmap.");
             
-            for (int y = region.Y; y < region.Height; y++)
+            for (int y = 0; y < region.Height; y++)
+            for (int x = 0; x < region.Width; x++)
             {
-                for (int x = region.X; x < region.Width; x++)
-                {
-                    this.SetColor(x, y, pixels[x, y]);
-                }
+                this[x + region.X, y + region.Y] = displayfunc(x, y);
             }
         }
 

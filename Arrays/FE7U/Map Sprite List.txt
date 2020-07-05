@@ -78,7 +78,7 @@
 0x4D Child (F)
 0x4E Transporter (Wagon)
 0x4F Archer in Ballista
-0x50 Acher in Iron Ballista
+0x50 Archer in Iron Ballista
 0x51 Archer in Killer Ballista
 0x52 Empty Ballista
 0x53 Empty Iron Ballista

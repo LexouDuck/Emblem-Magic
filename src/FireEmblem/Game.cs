@@ -196,10 +196,10 @@ namespace EmblemMagic.FireEmblem
         /// </summary>
         public abstract Pointer Address_MapSpriteIdleArray();
         /// <summary>
-        /// Returns the address of the second (walking) map sprite array
+        /// Returns the address of the second (moving) map sprite array
         /// </summary>
         /// <returns></returns>
-        public abstract Pointer Address_MapSpriteWalkArray();
+        public abstract Pointer Address_MapSpriteMoveArray();
         /// <summary>
         /// Returns the address at which the 4 palettes for map sprites is located in this ROM
         /// </summary>

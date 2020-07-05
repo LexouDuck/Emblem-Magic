@@ -709,6 +709,17 @@ namespace EmblemMagic.Editors
             Core_WriteBattleScreenTSA(CurrentScreen.Tiling);
         }
 
+        private void Screen_MagicButton_Click(Object sender, EventArgs e)
+        {
+            GraphicsEditor editor = new GraphicsEditor();
+            Program.Core.Core_OpenEditor(editor);
+
+            editor.Core_SetEntry(15, 34,
+                Core.GetPointer("Battle Screen Palettes"), false,
+                Core.GetPointer("Battle Screen Tileset"), true,
+                Core.GetPointer("Battle Screen TSA"), false, false);
+        }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             Core_LoadScreenValues();
@@ -743,6 +754,16 @@ namespace EmblemMagic.Editors
                 Current.GetAddress(Current.EntryIndex, "Palette"),
                 Platform_Palette_PointerBox.Value,
                 CurrentEntry + "Palette repointed");
+        }
+
+        private void Platform_MagicButton_Click(Object sender, EventArgs e)
+        {
+            GraphicsEditor editor = new GraphicsEditor();
+            Program.Core.Core_OpenEditor(editor);
+
+            editor.Core_SetEntry(32, 4,
+                (Pointer)Current["Palette"], false,
+                (Pointer)Current["Tileset"], true);
         }
     }
 }

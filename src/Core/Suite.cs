@@ -14,9 +14,9 @@ using System.Windows.Forms;
 /* TODO
 
     Features:
-    - ??? Title Screen Editor ???
+    - ??? Title Screen Editor ??? FINISH IT
     - ??? Menu Editor ???
-    - Adding items ot the item array ?
+    - Adding items to the item array ?
     - Control with pretty map sprites for weapon effectiveness, in item editor
     - ASM assembler
     - Music Player

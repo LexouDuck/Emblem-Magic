@@ -1176,7 +1176,11 @@ namespace EmblemMagic.Editors
             }
             else
             {
-                editor.Core_SetEntry(32, 32,
+                int item_icon_count = 0;
+                if (Core.CurrentROM is FE6) item_icon_count = 160;
+                if (Core.CurrentROM is FE7) item_icon_count = 192;
+                if (Core.CurrentROM is FE8) item_icon_count = 224;
+                editor.Core_SetEntry(2, item_icon_count * 2,
                     Core.GetPointer("Item Icon Palette"), false,
                     Core.GetPointer("Item Icon Tileset"), false);
             }

@@ -441,58 +441,50 @@ namespace EmblemMagic.FireEmblem
         /// </summary>
         public static string[] DecompileAnimCode(byte[] animdata, uint offset, BattleAnimFrame[] frames)
         {
-            try
+            List<string> result = new List<string>();
+            int index = 0;
+            for (uint i = offset; i < animdata.Length; i += 4)
             {
-                List<string> result = new List<string>();
-                int index = 0;
-                for (uint i = offset; i < animdata.Length; i += 4)
+                if (animdata[i + 3] == 0x86)
                 {
-                    if (animdata[i + 3] == 0x86)
-                    {
-                        byte duration = animdata[i];
-                        int frame = -1;
-                        Pointer pointer = new Pointer(animdata.GetUInt32(i + 4, false), true, true);
-                        uint OAM_offset = animdata.GetUInt32(i + 8, true);
+                    byte duration = animdata[i];
+                    int frame = -1;
+                    Pointer pointer = new Pointer(animdata.GetUInt32(i + 4, false), true, true);
+                    uint OAM_offset = animdata.GetUInt32(i + 8, true);
 
-                        for (int f = 0; f < frames.Length; f++)
-                        {
-                            if (frames[f] != null &&
-                                frames[f].TilesetIndex == pointer &&
-                                frames[f].OAM_Offset == OAM_offset)
-                            { frame = f; break; }
-                        }
-                        //if (frame == -1) frame = animdata[i + 2];
-                        result.Add(duration + " f" + Util.ByteToHex((byte)frame)); // + " " + pointer + " " + OAM_offset);
-                        i += 8;
-                    }
-                    else if (animdata[i + 3] == 0x85)
+                    for (int f = 0; f < frames.Length; f++)
                     {
-                        result.Add("c" + Util.ByteToHex(animdata[i]));
-                        index = result.Count - 1;
-                        try
-                        {
-                            result[index] += " #" + File.ReadAllLines(Core.Path_Arrays + "Battle Animation Commands.txt")[animdata[i]].Substring(4);
-                        }
-                        catch { continue; }
+                        if (frames[f] != null &&
+                            frames[f].TilesetIndex == pointer &&
+                            frames[f].OAM_Offset == OAM_offset)
+                        { frame = f; break; }
                     }
-                    else if (animdata[i + 3] == 0x80)
-                    {
-                        if (animdata[i] == 0x00 && animdata[i + 1] == 0x00 && animdata[i + 2] == 0x00)
-                        {
-                            result.Add("end");
-                            return result.ToArray();
-                        }
-                        else throw new Exception("Invalid terminator at offset " + i);
-                    }
-                    else throw new Exception("Invalid battle anim command: 0x" + Util.ByteToHex(animdata[i + 3]));
+                    //if (frame == -1) frame = animdata[i + 2];
+                    result.Add(duration + " f" + Util.ByteToHex((byte)frame)); // + " " + pointer + " " + OAM_offset);
+                    i += 8;
                 }
-                throw new Exception("No terminator found.");
+                else if (animdata[i + 3] == 0x85)
+                {
+                    result.Add("c" + Util.ByteToHex(animdata[i]));
+                    index = result.Count - 1;
+                    try
+                    {
+                        result[index] += " #" + File.ReadAllLines(Core.Path_Arrays + "Battle Animation Commands.txt")[animdata[i]].Substring(4);
+                    }
+                    catch { continue; }
+                }
+                else if (animdata[i + 3] == 0x80)
+                {
+                    if (animdata[i] == 0x00 && animdata[i + 1] == 0x00 && animdata[i + 2] == 0x00)
+                    {
+                        result.Add("end");
+                        return result.ToArray();
+                    }
+                    else throw new Exception("Invalid terminator at offset " + i);
+                }
+                else throw new Exception("Invalid battle anim command: 0x" + Util.ByteToHex(animdata[i + 3]));
             }
-            catch (Exception ex)
-            {
-                Program.ShowError("There has been an error while trying to decompile animation code.", ex);
-                return new string[0];
-            }
+            throw new Exception("No terminator found.");
         }
 
         /// <summary>

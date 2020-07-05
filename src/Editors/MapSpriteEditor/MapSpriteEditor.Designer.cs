@@ -33,7 +33,7 @@
             this.UnkownLabel = new System.Windows.Forms.Label();
             this.Idle_PointerBox = new EmblemMagic.Components.PointerBox();
             this.Idle_Size_Label = new System.Windows.Forms.Label();
-            this.Walk_PointerBox = new EmblemMagic.Components.PointerBox();
+            this.Move_PointerBox = new EmblemMagic.Components.PointerBox();
             this.AnimPointerLabel = new System.Windows.Forms.Label();
             this.AnimPointerBox = new EmblemMagic.Components.PointerBox();
             this.MovePointerLabel = new System.Windows.Forms.Label();
@@ -41,16 +41,16 @@
             this.Idle_Pointer_Label = new System.Windows.Forms.Label();
             this.UnknownNumberBox = new EmblemMagic.Components.ByteBox();
             this.Idle_Entry_Label = new System.Windows.Forms.Label();
-            this.Walk_Entry_Label = new System.Windows.Forms.Label();
+            this.Move_Entry_Label = new System.Windows.Forms.Label();
             this.Idle_EntryArrayBox = new EmblemMagic.Components.ByteArrayBox();
             this.Move_EntryArrayBox = new EmblemMagic.Components.ByteArrayBox();
             this.TestGroupBox = new System.Windows.Forms.GroupBox();
             this.Test_Selected = new System.Windows.Forms.RadioButton();
             this.Test_Idle = new System.Windows.Forms.RadioButton();
             this.PaletteArrayBox = new EmblemMagic.Components.ByteArrayBox();
-            this.Test_WalkSide = new System.Windows.Forms.RadioButton();
-            this.Test_WalkUp = new System.Windows.Forms.RadioButton();
-            this.Test_WalkDown = new System.Windows.Forms.RadioButton();
+            this.Test_MoveSide = new System.Windows.Forms.RadioButton();
+            this.Test_MoveUp = new System.Windows.Forms.RadioButton();
+            this.Test_MoveDown = new System.Windows.Forms.RadioButton();
             this.Test_PaletteBox = new EmblemMagic.Components.PaletteBox();
             this.Test_TrackBar = new System.Windows.Forms.TrackBar();
             this.Test_ImageBox = new EmblemMagic.Components.ImageBox();
@@ -58,13 +58,16 @@
             this.Menu_File = new System.Windows.Forms.ToolStripMenuItem();
             this.File_Insert = new System.Windows.Forms.ToolStripMenuItem();
             this.File_SaveData = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.File_Tools = new System.Windows.Forms.ToolStripMenuItem();
             this.Entry_DecrementBoth_Button = new System.Windows.Forms.Button();
             this.Entry_IncrementBoth_Button = new System.Windows.Forms.Button();
             this.Idle_MagicButton = new EmblemMagic.Components.MagicButton();
             this.Move_MagicButton = new EmblemMagic.Components.MagicButton();
+            this.File_Tools_CreateImage = new System.Windows.Forms.ToolStripMenuItem();
             this.EditGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Idle_PointerBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Walk_PointerBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Move_PointerBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AnimPointerBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.UnknownNumberBox)).BeginInit();
             this.TestGroupBox.SuspendLayout();
@@ -78,7 +81,7 @@
             this.EditGroupBox.Controls.Add(this.UnkownLabel);
             this.EditGroupBox.Controls.Add(this.Idle_PointerBox);
             this.EditGroupBox.Controls.Add(this.Idle_Size_Label);
-            this.EditGroupBox.Controls.Add(this.Walk_PointerBox);
+            this.EditGroupBox.Controls.Add(this.Move_PointerBox);
             this.EditGroupBox.Controls.Add(this.AnimPointerLabel);
             this.EditGroupBox.Controls.Add(this.AnimPointerBox);
             this.EditGroupBox.Controls.Add(this.MovePointerLabel);
@@ -137,19 +140,19 @@
             this.Idle_Size_Label.TabIndex = 11;
             this.Idle_Size_Label.Text = "IDLE Size :";
             // 
-            // Walk_PointerBox
+            // Move_PointerBox
             // 
-            this.Walk_PointerBox.Hexadecimal = true;
-            this.Walk_PointerBox.Location = new System.Drawing.Point(68, 72);
-            this.Walk_PointerBox.Maximum = new decimal(new int[] {
+            this.Move_PointerBox.Hexadecimal = true;
+            this.Move_PointerBox.Location = new System.Drawing.Point(68, 72);
+            this.Move_PointerBox.Maximum = new decimal(new int[] {
             33554432,
             0,
             0,
             0});
-            this.Walk_PointerBox.Name = "Walk_PointerBox";
-            this.Walk_PointerBox.Size = new System.Drawing.Size(70, 20);
-            this.Walk_PointerBox.TabIndex = 2;
-            this.Help_ToolTip.SetToolTip(this.Walk_PointerBox, "Pointer to the pixel data for the current \"move\" map sprite.\r\nWill write to ROM i" +
+            this.Move_PointerBox.Name = "Move_PointerBox";
+            this.Move_PointerBox.Size = new System.Drawing.Size(70, 20);
+            this.Move_PointerBox.TabIndex = 2;
+            this.Help_ToolTip.SetToolTip(this.Move_PointerBox, "Pointer to the pixel data for the current \"move\" map sprite.\r\nWill write to ROM i" +
         "f changed. Is repointed when inserting a new map sprite with \"File -> Insert ima" +
         "ge...\".");
             // 
@@ -230,14 +233,14 @@
             this.Idle_Entry_Label.TabIndex = 7;
             this.Idle_Entry_Label.Text = "\"IDLE\":";
             // 
-            // Walk_Entry_Label
+            // Move_Entry_Label
             // 
-            this.Walk_Entry_Label.AutoSize = true;
-            this.Walk_Entry_Label.Location = new System.Drawing.Point(5, 62);
-            this.Walk_Entry_Label.Name = "Walk_Entry_Label";
-            this.Walk_Entry_Label.Size = new System.Drawing.Size(51, 13);
-            this.Walk_Entry_Label.TabIndex = 16;
-            this.Walk_Entry_Label.Text = "\"MOVE\":";
+            this.Move_Entry_Label.AutoSize = true;
+            this.Move_Entry_Label.Location = new System.Drawing.Point(5, 62);
+            this.Move_Entry_Label.Name = "Move_Entry_Label";
+            this.Move_Entry_Label.Size = new System.Drawing.Size(51, 13);
+            this.Move_Entry_Label.TabIndex = 16;
+            this.Move_Entry_Label.Text = "\"MOVE\":";
             // 
             // Idle_EntryArrayBox
             // 
@@ -264,9 +267,9 @@
             this.TestGroupBox.Controls.Add(this.Test_Selected);
             this.TestGroupBox.Controls.Add(this.Test_Idle);
             this.TestGroupBox.Controls.Add(this.PaletteArrayBox);
-            this.TestGroupBox.Controls.Add(this.Test_WalkSide);
-            this.TestGroupBox.Controls.Add(this.Test_WalkUp);
-            this.TestGroupBox.Controls.Add(this.Test_WalkDown);
+            this.TestGroupBox.Controls.Add(this.Test_MoveSide);
+            this.TestGroupBox.Controls.Add(this.Test_MoveUp);
+            this.TestGroupBox.Controls.Add(this.Test_MoveDown);
             this.TestGroupBox.Controls.Add(this.Test_PaletteBox);
             this.TestGroupBox.Controls.Add(this.Test_TrackBar);
             this.TestGroupBox.Controls.Add(this.Test_ImageBox);
@@ -313,44 +316,44 @@
             this.Help_ToolTip.SetToolTip(this.PaletteArrayBox, "Select the map sprite palette to use for displaying the map sprite preview.");
             this.PaletteArrayBox.ValueChanged += new System.EventHandler(this.PaletteArrayBox_ValueChanged);
             // 
-            // Test_WalkSide
+            // Test_MoveSide
             // 
-            this.Test_WalkSide.AutoSize = true;
-            this.Test_WalkSide.Location = new System.Drawing.Point(6, 19);
-            this.Test_WalkSide.Name = "Test_WalkSide";
-            this.Test_WalkSide.Size = new System.Drawing.Size(74, 17);
-            this.Test_WalkSide.TabIndex = 6;
-            this.Test_WalkSide.Text = "Walk Side";
-            this.Help_ToolTip.SetToolTip(this.Test_WalkSide, "Check this radio button to view the move-to-the-side map sprite anim in the previ" +
+            this.Test_MoveSide.AutoSize = true;
+            this.Test_MoveSide.Location = new System.Drawing.Point(6, 19);
+            this.Test_MoveSide.Name = "Test_MoveSide";
+            this.Test_MoveSide.Size = new System.Drawing.Size(74, 17);
+            this.Test_MoveSide.TabIndex = 6;
+            this.Test_MoveSide.Text = "Move Side";
+            this.Help_ToolTip.SetToolTip(this.Test_MoveSide, "Check this radio button to view the move-to-the-side map sprite anim in the previ" +
         "ew.");
-            this.Test_WalkSide.UseVisualStyleBackColor = true;
-            this.Test_WalkSide.CheckedChanged += new System.EventHandler(this.Test_WalkUp_CheckedChanged);
+            this.Test_MoveSide.UseVisualStyleBackColor = true;
+            this.Test_MoveSide.CheckedChanged += new System.EventHandler(this.Test_MoveUp_CheckedChanged);
             // 
-            // Test_WalkUp
+            // Test_MoveUp
             // 
-            this.Test_WalkUp.AutoSize = true;
-            this.Test_WalkUp.Location = new System.Drawing.Point(6, 65);
-            this.Test_WalkUp.Name = "Test_WalkUp";
-            this.Test_WalkUp.Size = new System.Drawing.Size(67, 17);
-            this.Test_WalkUp.TabIndex = 5;
-            this.Test_WalkUp.Text = "Walk Up";
-            this.Help_ToolTip.SetToolTip(this.Test_WalkUp, "Check this radio button to view the move-upwards map sprite anim in the preview.\r" +
+            this.Test_MoveUp.AutoSize = true;
+            this.Test_MoveUp.Location = new System.Drawing.Point(6, 65);
+            this.Test_MoveUp.Name = "Test_MoveUp";
+            this.Test_MoveUp.Size = new System.Drawing.Size(67, 17);
+            this.Test_MoveUp.TabIndex = 5;
+            this.Test_MoveUp.Text = "Move Up";
+            this.Help_ToolTip.SetToolTip(this.Test_MoveUp, "Check this radio button to view the move-upwards map sprite anim in the preview.\r" +
         "\n");
-            this.Test_WalkUp.UseVisualStyleBackColor = true;
-            this.Test_WalkUp.CheckedChanged += new System.EventHandler(this.Test_WalkDown_CheckedChanged);
+            this.Test_MoveUp.UseVisualStyleBackColor = true;
+            this.Test_MoveUp.CheckedChanged += new System.EventHandler(this.Test_MoveDown_CheckedChanged);
             // 
-            // Test_WalkDown
+            // Test_MoveDown
             // 
-            this.Test_WalkDown.AutoSize = true;
-            this.Test_WalkDown.Location = new System.Drawing.Point(6, 42);
-            this.Test_WalkDown.Name = "Test_WalkDown";
-            this.Test_WalkDown.Size = new System.Drawing.Size(81, 17);
-            this.Test_WalkDown.TabIndex = 4;
-            this.Test_WalkDown.Text = "Walk Down";
-            this.Help_ToolTip.SetToolTip(this.Test_WalkDown, "Check this radio button to view the move-downwards map sprite anim in the preview" +
+            this.Test_MoveDown.AutoSize = true;
+            this.Test_MoveDown.Location = new System.Drawing.Point(6, 42);
+            this.Test_MoveDown.Name = "Test_MoveDown";
+            this.Test_MoveDown.Size = new System.Drawing.Size(81, 17);
+            this.Test_MoveDown.TabIndex = 4;
+            this.Test_MoveDown.Text = "Move Down";
+            this.Help_ToolTip.SetToolTip(this.Test_MoveDown, "Check this radio button to view the move-downwards map sprite anim in the preview" +
         ".");
-            this.Test_WalkDown.UseVisualStyleBackColor = true;
-            this.Test_WalkDown.CheckedChanged += new System.EventHandler(this.Test_WalkSide_CheckedChanged);
+            this.Test_MoveDown.UseVisualStyleBackColor = true;
+            this.Test_MoveDown.CheckedChanged += new System.EventHandler(this.Test_MoveSide_CheckedChanged);
             // 
             // Test_PaletteBox
             // 
@@ -391,7 +394,8 @@
             // Editor_Menu
             // 
             this.Editor_Menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Menu_File});
+            this.Menu_File,
+            this.File_Tools});
             this.Editor_Menu.Location = new System.Drawing.Point(0, 0);
             this.Editor_Menu.Name = "Editor_Menu";
             this.Editor_Menu.Size = new System.Drawing.Size(334, 24);
@@ -402,7 +406,8 @@
             // 
             this.Menu_File.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.File_Insert,
-            this.File_SaveData});
+            this.File_SaveData,
+            this.toolStripSeparator1});
             this.Menu_File.Name = "Menu_File";
             this.Menu_File.Size = new System.Drawing.Size(37, 20);
             this.Menu_File.Text = "File";
@@ -422,6 +427,19 @@
             this.File_SaveData.Size = new System.Drawing.Size(185, 22);
             this.File_SaveData.Text = "Save image...";
             this.File_SaveData.Click += new System.EventHandler(this.File_Save_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(182, 6);
+            // 
+            // File_Tools
+            // 
+            this.File_Tools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.File_Tools_CreateImage});
+            this.File_Tools.Name = "File_Tools";
+            this.File_Tools.Size = new System.Drawing.Size(48, 20);
+            this.File_Tools.Text = "Tools";
             // 
             // Entry_DecrementBoth_Button
             // 
@@ -469,6 +487,13 @@
             this.Move_MagicButton.UseVisualStyleBackColor = true;
             this.Move_MagicButton.Click += new System.EventHandler(this.Move_MagicButton_Click);
             // 
+            // File_Tools_CreateImage
+            // 
+            this.File_Tools_CreateImage.Name = "File_Tools_CreateImage";
+            this.File_Tools_CreateImage.Size = new System.Drawing.Size(301, 22);
+            this.File_Tools_CreateImage.Text = "Create map sprite image from idle+move...";
+            this.File_Tools_CreateImage.Click += new System.EventHandler(this.File_Tools_CreateImage_Click);
+            // 
             // MapSpriteEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -478,7 +503,7 @@
             this.Controls.Add(this.Idle_MagicButton);
             this.Controls.Add(this.Entry_IncrementBoth_Button);
             this.Controls.Add(this.Entry_DecrementBoth_Button);
-            this.Controls.Add(this.Walk_Entry_Label);
+            this.Controls.Add(this.Move_Entry_Label);
             this.Controls.Add(this.Move_EntryArrayBox);
             this.Controls.Add(this.TestGroupBox);
             this.Controls.Add(this.EditGroupBox);
@@ -494,7 +519,7 @@
             this.EditGroupBox.ResumeLayout(false);
             this.EditGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Idle_PointerBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Walk_PointerBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Move_PointerBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AnimPointerBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.UnknownNumberBox)).EndInit();
             this.TestGroupBox.ResumeLayout(false);
@@ -513,12 +538,12 @@
         private EmblemMagic.Components.ByteArrayBox Idle_EntryArrayBox;
         private EmblemMagic.Components.ByteArrayBox Move_EntryArrayBox;
         private System.Windows.Forms.Label Idle_Entry_Label;
-        private System.Windows.Forms.Label Walk_Entry_Label;
+        private System.Windows.Forms.Label Move_Entry_Label;
         private EmblemMagic.Components.PaletteBox Test_PaletteBox;
         private EmblemMagic.Components.ByteArrayBox PaletteArrayBox;
         private System.Windows.Forms.ComboBox Idle_Size_ComboBox;
         private EmblemMagic.Components.PointerBox Idle_PointerBox;
-        private EmblemMagic.Components.PointerBox Walk_PointerBox;
+        private EmblemMagic.Components.PointerBox Move_PointerBox;
         private EmblemMagic.Components.PointerBox AnimPointerBox;
         private EmblemMagic.Components.ByteBox UnknownNumberBox;
         private System.Windows.Forms.Label Idle_Size_Label;
@@ -529,9 +554,9 @@
         private EmblemMagic.Components.ImageBox Edit_ImageBox;
         private System.Windows.Forms.GroupBox TestGroupBox;
         private System.Windows.Forms.TrackBar Test_TrackBar;
-        private System.Windows.Forms.RadioButton Test_WalkSide;
-        private System.Windows.Forms.RadioButton Test_WalkUp;
-        private System.Windows.Forms.RadioButton Test_WalkDown;
+        private System.Windows.Forms.RadioButton Test_MoveSide;
+        private System.Windows.Forms.RadioButton Test_MoveUp;
+        private System.Windows.Forms.RadioButton Test_MoveDown;
         private System.Windows.Forms.RadioButton Test_Selected;
         private System.Windows.Forms.RadioButton Test_Idle;
         private EmblemMagic.Components.ImageBox Test_ImageBox;
@@ -543,5 +568,8 @@
         private System.Windows.Forms.Button Entry_IncrementBoth_Button;
         private Components.MagicButton Idle_MagicButton;
         private Components.MagicButton Move_MagicButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem File_Tools;
+        private System.Windows.Forms.ToolStripMenuItem File_Tools_CreateImage;
     }
 }

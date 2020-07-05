@@ -94,7 +94,7 @@ namespace EmblemMagic.FireEmblem
                 new Repoint("Map Terrain Names", Address_MapTerrainNames()),
 
                 new Repoint("Map Sprite Idle Array", Address_MapSpriteIdleArray()),
-                new Repoint("Map Sprite Walk Array", Address_MapSpriteWalkArray()),
+                new Repoint("Map Sprite Move Array", Address_MapSpriteMoveArray()),
                 new Repoint("Map Sprite Palettes", Address_MapSpritePalettes()),
 
                 new Repoint("Dialog Background Array", Address_DialogBackgroundArray()),
@@ -284,7 +284,7 @@ namespace EmblemMagic.FireEmblem
                 default: throw new Exception("Invalid game version.");
             }
         }
-        override public Pointer Address_MapSpriteWalkArray()
+        override public Pointer Address_MapSpriteMoveArray()
         {
             switch (Version)
             {
