@@ -38,6 +38,7 @@
             this.LayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.Offset_Plus_Button = new System.Windows.Forms.Button();
             this.Offset_Minus_Button = new System.Windows.Forms.Button();
+            this.Entry_MagicButton = new EmblemMagic.Components.MagicButton();
             this.Status.SuspendLayout();
             this.MenuBar.SuspendLayout();
             this.SuspendLayout();
@@ -113,7 +114,7 @@
             // 
             // Offset_Plus_Button
             // 
-            this.Offset_Plus_Button.Location = new System.Drawing.Point(82, 1);
+            this.Offset_Plus_Button.Location = new System.Drawing.Point(101, 1);
             this.Offset_Plus_Button.Name = "Offset_Plus_Button";
             this.Offset_Plus_Button.Size = new System.Drawing.Size(20, 23);
             this.Offset_Plus_Button.TabIndex = 3;
@@ -124,7 +125,7 @@
             // 
             // Offset_Minus_Button
             // 
-            this.Offset_Minus_Button.Location = new System.Drawing.Point(56, 1);
+            this.Offset_Minus_Button.Location = new System.Drawing.Point(75, 1);
             this.Offset_Minus_Button.Name = "Offset_Minus_Button";
             this.Offset_Minus_Button.Size = new System.Drawing.Size(20, 23);
             this.Offset_Minus_Button.TabIndex = 4;
@@ -133,11 +134,25 @@
             this.Offset_Minus_Button.Visible = false;
             this.Offset_Minus_Button.Click += new System.EventHandler(this.Offset_Minus_Button_Click);
             // 
+            // Entry_MagicButton
+            // 
+            this.Entry_MagicButton.Location = new System.Drawing.Point(45, 1);
+            this.Entry_MagicButton.MaximumSize = new System.Drawing.Size(24, 24);
+            this.Entry_MagicButton.MinimumSize = new System.Drawing.Size(24, 24);
+            this.Entry_MagicButton.Name = "Entry_MagicButton";
+            this.Entry_MagicButton.Size = new System.Drawing.Size(24, 24);
+            this.Entry_MagicButton.TabIndex = 5;
+            this.Help_ToolTip.SetToolTip(this.Entry_MagicButton, "Click on this button to open the Basic ROM editor (to copy/paste the data for thi" +
+        "s entry, for example).");
+            this.Entry_MagicButton.UseVisualStyleBackColor = true;
+            this.Entry_MagicButton.Click += new System.EventHandler(this.Entry_MagicButton_Click);
+            // 
             // ModuleEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(334, 262);
+            this.Controls.Add(this.Entry_MagicButton);
             this.Controls.Add(this.Offset_Minus_Button);
             this.Controls.Add(this.Offset_Plus_Button);
             this.Controls.Add(this.LayoutPanel);
@@ -168,5 +183,6 @@
         private System.Windows.Forms.ToolStripStatusLabel Status_Author;
         private System.Windows.Forms.Button Offset_Plus_Button;
         private System.Windows.Forms.Button Offset_Minus_Button;
+        private Components.MagicButton Entry_MagicButton;
     }
 }

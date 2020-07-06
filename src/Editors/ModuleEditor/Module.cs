@@ -112,7 +112,7 @@ namespace EmblemMagic.Editors
             if (Entry is NumericUpDown) ((NumericUpDown)Entry).Maximum = ReadNumber(file[4]);
             Entry.Name = "EntrySelector";
             Entry.TabIndex = 2;
-            Entry.Location = new Point(50, (Entries == null) ? 2 : 0);
+            Entry.Location = new Point(80, (Entries == null) ? 2 : 0);
             Entry.MaximumSize = new Size(10000, 26);
             Entry.MinimumSize = new Size(30, 26);
             Entry.Anchor = AnchorStyles.Top | AnchorStyles.Left;

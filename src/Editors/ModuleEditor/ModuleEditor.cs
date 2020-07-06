@@ -89,6 +89,8 @@ namespace EmblemMagic.Editors
             File_OpenModule.LoadFiles(Core.Path_Modules, ".emm");
 
             LayoutPanel.Padding = new Padding(0, 0, SystemInformation.VerticalScrollBarWidth, 0);
+
+            Entry_MagicButton.Enabled = false;
         }
 
 
@@ -130,6 +132,7 @@ namespace EmblemMagic.Editors
                         Core_LoadValues(CurrentModule.Pointer.CurrentAddress);
                     }
                     else Core_LoadValues(0);
+                    Entry_MagicButton.Enabled = true;
                 }
                 catch (Exception ex)
                 {
@@ -525,6 +528,16 @@ namespace EmblemMagic.Editors
             {
                 ((PointerArrayBox)EntrySelector).Value = new GBA.Pointer(((PointerArrayBox)EntrySelector).Value.Address - (uint)CurrentModule.EntryLength);
             }
+        }
+
+        private void Entry_MagicButton_Click(Object sender, EventArgs e)
+        {
+            BasicEditor editor = new BasicEditor();
+            Program.Core.Core_OpenEditor(editor);
+
+            Pointer address = CurrentAddress;
+            int length = CurrentModule.EntryLength;
+            editor.Core_SetEntry(address, length, (length > 0 ? Core.ReadData(address, length) : null));
         }
     }
 }
