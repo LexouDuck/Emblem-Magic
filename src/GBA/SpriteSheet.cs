@@ -150,5 +150,16 @@ namespace GBA
             Offsets = new List<Point>();
             Sprites = new List<Sprite>();
         }
+
+        public bool IsRegionEmpty(Rectangle region)
+        {
+            for (int y = 0; y < region.Height; y++)
+            for (int x = 0; x < region.Width; x++)
+            {
+                if (this[x + region.X, y + region.Y] > 0)
+                    return false;
+            }
+            return true;
+        }
     }
 }

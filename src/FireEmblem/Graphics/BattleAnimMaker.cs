@@ -89,8 +89,11 @@ namespace EmblemMagic.FireEmblem
                 {
                     for (int i = 0; i < file[line].Length; i++)
                     {
+                        // Comments
                         if (file[line][i] == '#') break;
+                        if (file[line][i] == '/' && file[line][i + 1] == '/') break;
 
+                        // Syntax
                         switch (file[line][i])
                         {
                             case ' ': continue;

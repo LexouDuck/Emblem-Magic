@@ -286,7 +286,21 @@ namespace EmblemMagic
         bool Core_CheckHackedROM()
         {
             if (CurrentROM.IsClean) return false;
-
+            string same_filename = ROM.FilePath.Remove(ROM.FilePath.Length - 4) + ".feh";
+            if (File.Exists(same_filename))
+            {
+                try
+                {
+                    FEH.OpenFile(same_filename);
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    if (ex.Message != "ABORT")
+                        Program.ShowError("Could not open the FEH hack file.", ex);
+                    Core_ResetHackManager();
+                }
+            }
             if (Prompt.AskForFEHForHackedROM() == DialogResult.Yes)
             {
                 OpenFileDialog openWindow = new OpenFileDialog();

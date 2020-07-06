@@ -1,16 +1,27 @@
 ﻿using Compression;
 using GBA;
 using System;
+using System.Drawing;
 
 namespace EmblemMagic.FireEmblem
 {
     public class MapSprite : GBA.SpriteSheet
     {
-        public const int WIDTH = 20;
-        public const int HEIGHT = 16;
+        public const int W_TILES = 20;
+        public const int H_TILES = 16;
+
+        public const int WIDTH  = W_TILES * Tile.SIZE;
+        public const int HEIGHT = H_TILES * Tile.SIZE;
 
         public const int IDLE = 0;
         public const int WALK = 1;
+
+        public const int IDLE_SIZE_16x16 = 0x00;
+        public const int IDLE_SIZE_16x32 = 0x01;
+        public const int IDLE_SIZE_32x32 = 0x02;
+
+        // can either 0x00 for 16x16, 0x01 for 16x32, or 0x02 for 32x32
+        public byte IdleSize;
 
 
 
@@ -18,32 +29,48 @@ namespace EmblemMagic.FireEmblem
         /// Creates a map sprite from the given data
         /// </summary>
         public MapSprite(Palette palette, byte[] idle, byte[] move, byte size)
-            : base(WIDTH * Tile.SIZE, HEIGHT * Tile.SIZE)
+            : base(W_TILES * Tile.SIZE, H_TILES * Tile.SIZE)
         {
             if (palette == null) throw new Exception("Map Sprite palette is null.");
             if (idle == null) throw new Exception("Map Sprite idle sheet is null.");
             if (move == null) throw new Exception("Map sprite move sheet is null.");
-            if (size >= 0x03) throw new Exception("Map Sprite size byte is invalid: " + size);
+            if (size > IDLE_SIZE_32x32) throw new Exception("Map Sprite size byte is invalid: " + size);
 
             AddSprite(new Sprite(palette, new Tileset(idle), new TileMap(Map_Idle(size))), 0, 32);
             AddSprite(new Sprite(palette, new Tileset(move), new TileMap(Map_Move())),     32, 0);
+            IdleSize = size;
         }
         /// <summary>
         /// Creates a Map Sprite from the given image
         /// </summary>
-        public MapSprite(byte size, Image image)
-            : base(WIDTH * Tile.SIZE, HEIGHT * Tile.SIZE)
+        public MapSprite(GBA.Image image)
+            : base(WIDTH, HEIGHT)
         {
             if (image.Width != Width || image.Height != Height) throw new Exception(
                 "Image given has invalid dimensions: it should be " + Width + "x" + Height + " pixels");
 
             Tileset idleTiles = new GBA.Tileset();
             Tileset moveTiles = new GBA.Tileset();
-            idleTiles.Parse(image, TileMap.Place(Map_Idle(size), 0, 4, WIDTH, HEIGHT));
-            moveTiles.Parse(image, TileMap.Place(Map_Move(),     4, 0, WIDTH, HEIGHT));
+            byte size = 0x02;
+            if (image.IsRegionEmpty(new Rectangle( 0, 32, Tile.SIZE, HEIGHT - 32)) &&
+                image.IsRegionEmpty(new Rectangle(24, 32, Tile.SIZE, HEIGHT - 32)))
+            {
+                size = 0x01;
+            }
+            else if (
+                image.IsRegionEmpty(new Rectangle(Tile.SIZE,  0, Tile.SIZE * 2, Tile.SIZE * 2)) &&
+                image.IsRegionEmpty(new Rectangle(Tile.SIZE, 32, Tile.SIZE * 2, Tile.SIZE * 2)) &&
+                image.IsRegionEmpty(new Rectangle(Tile.SIZE, 64, Tile.SIZE * 2, Tile.SIZE * 2)))
+            {
+                size = 0x00;
+            }
 
+            idleTiles.Parse(image, TileMap.Place(Map_Idle(size), 0, 4, W_TILES, H_TILES));
+            moveTiles.Parse(image, TileMap.Place(Map_Move(),     4, 0, W_TILES, H_TILES));
+                
             AddSprite(new Sprite(image.Colors, idleTiles, new TileMap(Map_Idle(size))), 0 * 8, 4 * 8);
             AddSprite(new Sprite(image.Colors, moveTiles, new TileMap(Map_Move())),     4 * 8, 0 * 8);
+            IdleSize = size;
         }
 
         public static int?[,] Map_Idle(byte size)

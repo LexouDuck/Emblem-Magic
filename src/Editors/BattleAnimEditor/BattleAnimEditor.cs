@@ -556,6 +556,8 @@ namespace EmblemMagic.Editors
         /// </summary>
         void Core_CreateAnim(string filepath)
         {
+            try
+            {
                 string path = Path.GetDirectoryName(filepath) + "\\";
                 string[] code = File.ReadAllLines(filepath);
 
@@ -601,8 +603,8 @@ namespace EmblemMagic.Editors
                         for (int i = 0; i < sheets.Length; i++)
                         {
                             Core.SaveImage(path + file + " " + (i + 1),
-                                32 * 8,
-                                8 * 8,
+                                GBA.Tile.SIZE * 32,
+                                GBA.Tile.SIZE * 8,
                                 new Palette[1] { sheets[i].Colors },
                                 delegate (int x, int y)
                                 {
@@ -610,9 +612,7 @@ namespace EmblemMagic.Editors
                                 });
                         }
                     }
-            }
-            try
-            {
+                }
             }
             catch (Exception ex)
             {

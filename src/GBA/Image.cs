@@ -279,6 +279,16 @@ namespace GBA
             }
             return true;
         }
+        public bool IsRegionEmpty(Rectangle region)
+        {
+            for (int y = 0; y < region.Height; y++)
+            for (int x = 0; x < region.Width; x++)
+            {
+                if (this[x + region.X, y + region.Y] > 0)
+                    return false;
+            }
+            return true;
+        }
 
         /// <summary>
         /// Returns true if both palette are identical (that means both have the same indexing order)

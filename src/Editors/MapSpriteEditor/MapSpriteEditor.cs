@@ -244,6 +244,11 @@ namespace EmblemMagic.Editors
                     (Pointer)CurrentMove["Sprite"],
                     data_move,
                     CurrentMoveEntry + "Move Sprite changed");
+
+                Core.WriteByte(this,
+                    CurrentIdle.GetAddress(CurrentIdle.EntryIndex, "Size"),
+                    insert.IdleSize,
+                    CurrentIdleEntry + "Size changed");
             }
             catch (Exception ex)
             {
@@ -260,10 +265,10 @@ namespace EmblemMagic.Editors
             {
                 GBA.Image image = new GBA.Image(filepath, CurrentPalette);
 
-                if (image.Width != MapSprite.WIDTH * 8 || image.Height != MapSprite.HEIGHT * 8)
+                if (image.Width != MapSprite.W_TILES * 8 || image.Height != MapSprite.H_TILES * 8)
                     throw new Exception("Image given has invalid dimensions. It must be 160x128");
 
-                mapsprite = new MapSprite((byte)CurrentIdle["Size"], image);
+                mapsprite = new MapSprite(image);
             }
             catch (Exception ex)
             {
@@ -292,12 +297,14 @@ namespace EmblemMagic.Editors
                 "Image data files must end with either 'idle.chr' or 'move.chr').");
                 return;
             }
-
-            Core_Insert(new MapSprite(
-                CurrentPalette,
-                File.ReadAllBytes(idle_path),
-                File.ReadAllBytes(move_path),
-                (byte)CurrentIdle["Size"]));
+            byte[] idle = File.ReadAllBytes(idle_path);
+            byte[] move = File.ReadAllBytes(move_path);
+            byte size = 0xFF;
+                 if (idle.Length == Tile.LENGTH * 4 * 3) size = 0x00;
+            else if (idle.Length == Tile.LENGTH * 8 * 3) size = 0x01;
+            else if (idle.Length == Tile.LENGTH * 16 * 3) size = 0x02;
+            MapSprite result = new MapSprite(CurrentPalette, idle, move, size);
+            Core_Insert(result);
         }
         void Core_SaveImage(string filepath)
         {
@@ -476,8 +483,8 @@ namespace EmblemMagic.Editors
             else return;
 
             GBA.Bitmap result = new GBA.Bitmap(
-                MapSprite.WIDTH * Tile.SIZE,
-                MapSprite.HEIGHT * Tile.SIZE);
+                MapSprite.WIDTH,
+                MapSprite.HEIGHT);
             result.Colors = Core.ReadPalette(Core.CurrentROM.Address_MapSpritePalettes(), GBA.Palette.LENGTH * 8);
             result.SetPixels(delegate (int x, int y) { return ((byte)move[x, y + 32 *  0]); }, new Rectangle( 32,  0, 32, 32 * 4)); // MOVE side
             result.SetPixels(delegate (int x, int y) { return ((byte)move[x, y + 32 *  4]); }, new Rectangle( 64,  0, 32, 32 * 4)); // MOVE down
@@ -514,8 +521,8 @@ namespace EmblemMagic.Editors
                     try
                     {
                         Core.SaveImage(saveWindow.FileName.Remove(saveWindow.FileName.Length - 4),
-                            Tile.SIZE * MapSprite.WIDTH,
-                            Tile.SIZE * MapSprite.HEIGHT,
+                            Tile.SIZE * MapSprite.W_TILES,
+                            Tile.SIZE * MapSprite.H_TILES,
                             Palette.Split(CurrentPalette, 8),
                             delegate (int x, int y)
                             {
