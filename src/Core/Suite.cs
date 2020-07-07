@@ -49,12 +49,13 @@ using System.Windows.Forms;
     - When opening a second ROM, moushover doc in the event editor doesn't work
 
     Keep in mind for release to check:
-    - There is an up-to-date version of the the 'Emblem Magic.chm' HTML help file in the release
     - File_RecentFiles.Enabled field being set to 'false' in Suite.Designer.cs, go delete that line
     - MarkingComboBox "Datasource modified error" because of generated code in designer files, go delete that too
     - Comment out the "#define DEBUG" at the top of this file. this will take care of:
-        - Main Suite window: Disabling the buttons for WIP editors
-        - Event Editor, line 95 or so, absolute folderpath should be changed
+        - Main Suite window (this file): Disabling the "open" buttons for WIP/unfinished Editor windows
+        - ./src/Editors/EventEditor.cs, line 95 or so, absolute folderpath changes to appropriate function call
+    - Do a "Release" build (any CPU) in Visual studio
+    - Run the ./dist.sh shell script (if you're on Windows, use Cygwin), to prepare the "dist" folder for release.
 */
 
 namespace EmblemMagic

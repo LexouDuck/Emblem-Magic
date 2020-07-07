@@ -5,9 +5,9 @@ Test/*.feh
 Test/FE4/
 Test/BattleAnimations/
 Test/MapSprites/
-./Fire Emblem
+FireEmblem.lnk
 
-# GBA roms (don't wanna distribute those on github!)
+# GBA roms (don't wanna distribute those on github, nor anywhere else for that matter)
 *.gba
 *.GBA
 
