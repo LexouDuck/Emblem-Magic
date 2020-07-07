@@ -27,8 +27,7 @@ using System.Windows.Forms;
     - Road-editing, and PaletteMap Editor for FE8 Large World Map
     - A "reorder palette without changing image" tool for the background editor
     - text-based tilemaps so users can change stuff
-    - DMP+PAL portrait saving  
-    - Battle anim editor, make "save to folder" export affine sprites as it should
+    - CHR+PAL imagedata portrait saving
     - Battle Anim Editor, make an "export all" button
     - BAttle anim editor, augment the duration of the "wait for HP" frame on GIF export
     - drag/drop reordering on the module editor https://www.codeproject.com/Articles/48411/Using-the-FlowLayoutPanel-and-Reordering-with-Drag
@@ -36,7 +35,6 @@ using System.Windows.Forms;
     Bugfixes:
     - Make it so palettes ALWAYS have 16-byte writes, even if they're shorter than that
     - Clicking 'Cancel' when opening a ROM should actually cancel the file-open
-    - FEH files that share the same path and name as a GBA file should be loaded automatically
     - For some people, the program suddenly stops working (the main window is permanently minimized) and they need to redownload
     - There are 2 prompts when copying in HexEditor, and deciding not to proceed still copies anyways..?
     - Set correct tab index for every control in each editor
@@ -51,7 +49,7 @@ using System.Windows.Forms;
     - When opening a second ROM, moushover doc in the event editor doesn't work
 
     Keep in mind for release to check:
-    - There is the 'Emblem Magic.chm' HTML help file in the release
+    - There is an up-to-date version of the the 'Emblem Magic.chm' HTML help file in the release
     - File_RecentFiles.Enabled field being set to 'false' in Suite.Designer.cs, go delete that line
     - MarkingComboBox "Datasource modified error" because of generated code in designer files, go delete that too
     - Comment out the "#define DEBUG" at the top of this file. this will take care of:

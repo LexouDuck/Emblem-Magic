@@ -58,9 +58,9 @@ namespace EmblemMagic.FireEmblem
                 size = 0x01;
             }
             else if (
-                image.IsRegionEmpty(new Rectangle(Tile.SIZE,  0, Tile.SIZE * 2, Tile.SIZE * 2)) &&
-                image.IsRegionEmpty(new Rectangle(Tile.SIZE, 32, Tile.SIZE * 2, Tile.SIZE * 2)) &&
-                image.IsRegionEmpty(new Rectangle(Tile.SIZE, 64, Tile.SIZE * 2, Tile.SIZE * 2)))
+                image.IsRegionEmpty(new Rectangle(Tile.SIZE, 32 + 32 * 0, Tile.SIZE * 2, Tile.SIZE * 2)) &&
+                image.IsRegionEmpty(new Rectangle(Tile.SIZE, 32 + 32 * 1, Tile.SIZE * 2, Tile.SIZE * 2)) &&
+                image.IsRegionEmpty(new Rectangle(Tile.SIZE, 32 + 32 * 2, Tile.SIZE * 2, Tile.SIZE * 2)))
             {
                 size = 0x00;
             }

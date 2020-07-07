@@ -1,0 +1,71 @@
+# Modes 1 & 2: Normal Attack
+c03 # Start animation 1
+c07 # Start animation 2
+c01 # Wait for HP
+c06 # Start enemy turn
+c0D # End animation
+end
+
+# Modes 3 & 4: Critical Attack
+c03 # Start animation 1
+c07 # Start animation 2
+c01 # Wait for HP
+c06 # Start enemy turn
+c0D # End animation
+end
+
+
+
+# Mode 5: Normal Attack (ranged)
+c03 # Start animation 1
+c07 # Start animation 2
+c05 # Start spell anim
+c01 # Wait for HP
+c06 # Start enemy turn
+c0D # End animation
+end
+
+# Mode 6: Critical Attack (ranged)
+c03 # Start animation 1
+c07 # Start animation 2
+c05 # Start spell anim
+c01 # Wait for HP
+c06 # Start enemy turn
+c0D # End animation
+end
+
+
+
+# Mode 7: Avoid
+c02 # Start avoid
+c01 # Wait for HP
+c0D # End animation
+end
+
+# Mode 8: Avoid (ranged)
+c02 # Start avoid
+c01 # Wait for HP
+c0D # End animation
+end
+
+
+
+# Modes 9 & 10: Idle
+1 f [0.png]  b [0.png]
+c01 # Wait for HP
+end
+
+# Mode 11: Idle (ranged)
+1 f [0.png]
+c01 # Wait for HP
+end
+
+
+
+# Mode 12: Missed Attack
+c03 # Start animation 1
+c07 # Start animation 2
+c01 # Wait for HP
+c06 # Start enemy turn
+c0D # End animation
+end
