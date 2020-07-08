@@ -21,14 +21,17 @@ using System.Windows.Forms;
     - Spell anims yo
     - Get european version default free space ranges for FE7 and FE8
     - CSV import/export for module editor
-    - Text editor, have text bubble previewing follow bytecode text commands
-    - Road-editing, and PaletteMap Editor for FE8 Large World Map
     - A "reorder palette without changing image" tool for the background editor
     - text-based tilemaps so users can change stuff
-    - CHR+PAL imagedata portrait saving
-    - Battle Anim Editor, make an "export all" button
-    - BAttle anim editor, augment the duration of the "wait for HP" frame on GIF export
-    - drag/drop reordering on the module editor https://www.codeproject.com/Articles/48411/Using-the-FlowLayoutPanel-and-Reordering-with-Drag
+    - FE8 Large World Map: Road-editing, and a specific PaletteMap Editor
+    - Text editor: have text bubble previewing follow bytecode text commands
+    - Portrait Editor: CHR+PAL imagedata portrait saving
+    - Event Editor: unit loading/movement on map
+    - Event Editor: toggle to show AREA events on map (also villages, treasures, etc)
+    - Event Editor: a listbox timeline of all the TURN events for this chapter
+    - Battle Anim Editor: make an "export all" button
+    - Battle Anim editor: augment the duration of the "wait for HP" frame on GIF export
+    - Module Editor: drag-n-drop reordering of UI sections, see https://www.codeproject.com/Articles/48411/Using-the-FlowLayoutPanel-and-Reordering-with-Drag
 
     Bugfixes:
     - Make it so palettes ALWAYS have 16-byte writes, even if they're shorter than that
@@ -49,7 +52,7 @@ using System.Windows.Forms;
     Keep in mind for release to check:
     - File_RecentFiles.Enabled field being set to 'false' in Suite.Designer.cs, go delete that line
     - MarkingComboBox "Datasource modified error" because of generated code in designer files, go delete that too
-    - Comment out the "#define DEBUG" at the top of this file. this will take care of:
+    - The automatically defined "DEBUG" constant (not defined when compiling as 'Release' build in visual studio), will take care of:
         - Main Suite window (this file): Disabling the "open" buttons for WIP/unfinished Editor windows
         - ./src/Editors/EventEditor.cs, line 95 or so, absolute folderpath changes to appropriate function call
     - Do a "Release" build (any CPU) in Visual studio
