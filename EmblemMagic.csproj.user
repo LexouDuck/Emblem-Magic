@@ -15,4 +15,8 @@
     <StartArguments>
     </StartArguments>
   </PropertyGroup>
+  <PropertyGroup>
+    <ReferencePath>
+    </ReferencePath>
+  </PropertyGroup>
 </Project>
