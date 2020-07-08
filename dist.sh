@@ -18,6 +18,8 @@ cp -r ./Utils			./dist/
 cp -r ./EventAssembler	./dist/
 rm -rf ./dist/Modules/old
 rm -rf ./dist/Modules/tmp
+rm -rf ./dist/ROMs/*.gba
+rm -rf ./dist/ROMs/*.GBA
 
 echo "Updating executables and libraries in ./dist/..."
 cp "./Help/Emblem Magic.chm"				./dist/

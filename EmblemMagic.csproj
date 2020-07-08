@@ -80,13 +80,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Core">
-      <HintPath>Event Assembler\Core.exe</HintPath>
+      <HintPath>bin\Release\EventAssembler\Core.exe</HintPath>
     </Reference>
     <Reference Include="FastColoredTextBox">
-      <HintPath>Components\CodeBox\FastColoredTextBox.dll</HintPath>
+      <HintPath>bin\Release\Utils\FastColoredTextBox.dll</HintPath>
     </Reference>
     <Reference Include="Nintenlord">
-      <HintPath>Event Assembler\Nintenlord.dll</HintPath>
+      <HintPath>bin\Release\EventAssembler\Nintenlord.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
