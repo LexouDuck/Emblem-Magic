@@ -99,7 +99,7 @@ namespace EmblemMagic.Editors
                     #else
                         Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program)).Location);
                     #endif
-                    LanguageProcessor = EA.Program.LoadCodes(folder + "\\Event Assembler\\Language Raws", ".txt", true, true);
+                    LanguageProcessor = EA.Program.LoadCodes(folder + "\\EventAssembler\\Language Raws", ".txt", true, true);
                 }
                 Language = EA.Program.Languages[Core.CurrentROM.GetIdentifier().Substring(0, 3)];
                 string keywords = "";
@@ -117,7 +117,7 @@ namespace EmblemMagic.Editors
             }
             catch (Exception ex)
             {
-                Program.ShowError("There has been an error while loading the Event Assembler language codes.", ex);
+                Program.ShowError("There has been an error while loading the EventAssembler language codes.", ex);
             }
         }
         void Core_LoadEventCode()

@@ -76,7 +76,6 @@ function ConvertFEditorAnim_code ()
 		do
 			FILENAME=`echo "$i" | cut -d '.' -f2- | rev | cut -d '.' -f2- | rev | sed -e "s|/|\\\\\\\\\\\\\\\\|g"`
 			SED_STR="s|"$FILENAME".png\]|"$FILENAME"_f.png\]\tb\["$FILENAME"_b.png\]|g"
-			echo $SED_STR
 			sed -i -e $SED_STR	$OUTPUT
 		done
 		printf $COLOR_GREEN"SUCCESS"$COLOR_RESET": ported code output file is "$OUTPUT"\n"
@@ -87,7 +86,7 @@ function ConvertFEditorAnim_palette ()
 {
 	printf $COLOR_RESET"CONVERT palette: from "$1" -> "$COLOR_RED
 	magick convert $1 -colors 16 -unique-colors -scale 100% $OUTDIR"/palette.png" && \
-	printf $COLOR_GREEN"SUCCESS"$COLOR_RESET": output file is "$OUTDIR"/palette.png"
+	printf $COLOR_GREEN"SUCCESS"$COLOR_RESET": output file is "$OUTDIR"/palette.png\n"
 }
 
 ConvertFEditorAnim_frames	"`find ./ -type f -name "*.png" -o -name "*.bmp"`"

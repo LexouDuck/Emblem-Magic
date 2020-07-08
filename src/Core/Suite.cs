@@ -1,6 +1,4 @@
-﻿#define DEBUG
-
-using Compression;
+﻿using Compression;
 using EmblemMagic.Components;
 using EmblemMagic.Editors;
 using EmblemMagic.Properties;

@@ -11,7 +11,7 @@ namespace EmblemMagic.Editors
         public override void PrintAll()
         {
             if (ErrorCount + MessageCount + WarningCount > 0)
-                Prompt.ShowResult("Message logs:", "Event Assembler", this.GetText());
+                Prompt.ShowResult("Message logs:", "EventAssembler", this.GetText());
         }
     }
 
