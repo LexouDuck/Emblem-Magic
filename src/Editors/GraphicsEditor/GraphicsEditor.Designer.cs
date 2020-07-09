@@ -65,9 +65,13 @@
             this.Palette_Opaque_CheckBox = new System.Windows.Forms.CheckBox();
             this.TSA_GroupBox = new System.Windows.Forms.GroupBox();
             this.Size_GroupBox = new System.Windows.Forms.GroupBox();
-            this.Prev_Button = new System.Windows.Forms.Button();
-            this.Next_Button = new System.Windows.Forms.Button();
+            this.Prev_Tileset_Button = new System.Windows.Forms.Button();
+            this.Next_Tileset_Button = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.Next_Palette_Button = new System.Windows.Forms.Button();
+            this.Prev_Palette_Button = new System.Windows.Forms.Button();
+            this.Next_TSA_Button = new System.Windows.Forms.Button();
+            this.Prev_TSA_Button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.TSA_PointerBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Tileset_PointerBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Palette_PointerBox)).BeginInit();
@@ -87,7 +91,7 @@
             // 
             this.Palette_PaletteBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Palette_PaletteBox.ColorsPerLine = 16;
-            this.Palette_PaletteBox.Location = new System.Drawing.Point(436, 161);
+            this.Palette_PaletteBox.Location = new System.Drawing.Point(283, 166);
             this.Palette_PaletteBox.Name = "Palette_PaletteBox";
             this.Palette_PaletteBox.Size = new System.Drawing.Size(128, 128);
             this.Palette_PaletteBox.TabIndex = 29;
@@ -101,7 +105,7 @@
             // 
             this.TSA_CheckBox.AutoSize = true;
             this.TSA_CheckBox.Enabled = false;
-            this.TSA_CheckBox.Location = new System.Drawing.Point(142, 73);
+            this.TSA_CheckBox.Location = new System.Drawing.Point(142, 75);
             this.TSA_CheckBox.Name = "TSA_CheckBox";
             this.TSA_CheckBox.Size = new System.Drawing.Size(51, 17);
             this.TSA_CheckBox.TabIndex = 28;
@@ -114,7 +118,7 @@
             // Tileset_CheckBox
             // 
             this.Tileset_CheckBox.AutoSize = true;
-            this.Tileset_CheckBox.Location = new System.Drawing.Point(142, 46);
+            this.Tileset_CheckBox.Location = new System.Drawing.Point(142, 48);
             this.Tileset_CheckBox.Name = "Tileset_CheckBox";
             this.Tileset_CheckBox.Size = new System.Drawing.Size(51, 17);
             this.Tileset_CheckBox.TabIndex = 27;
@@ -127,7 +131,7 @@
             // Palette_CheckBox
             // 
             this.Palette_CheckBox.AutoSize = true;
-            this.Palette_CheckBox.Location = new System.Drawing.Point(142, 21);
+            this.Palette_CheckBox.Location = new System.Drawing.Point(142, 22);
             this.Palette_CheckBox.Name = "Palette_CheckBox";
             this.Palette_CheckBox.Size = new System.Drawing.Size(51, 17);
             this.Palette_CheckBox.TabIndex = 26;
@@ -406,8 +410,14 @@
             // Address_GroupBox
             // 
             this.Address_GroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Address_GroupBox.Controls.Add(this.Next_TSA_Button);
+            this.Address_GroupBox.Controls.Add(this.Prev_TSA_Button);
+            this.Address_GroupBox.Controls.Add(this.Next_Palette_Button);
+            this.Address_GroupBox.Controls.Add(this.Prev_Palette_Button);
             this.Address_GroupBox.Controls.Add(this.TSA_PointerBox);
+            this.Address_GroupBox.Controls.Add(this.Next_Tileset_Button);
             this.Address_GroupBox.Controls.Add(this.Palette_PointerBox);
+            this.Address_GroupBox.Controls.Add(this.Prev_Tileset_Button);
             this.Address_GroupBox.Controls.Add(this.TSA_Label);
             this.Address_GroupBox.Controls.Add(this.Tileset_PointerBox);
             this.Address_GroupBox.Controls.Add(this.Palette_Label);
@@ -417,32 +427,32 @@
             this.Address_GroupBox.Controls.Add(this.TSA_CheckBox);
             this.Address_GroupBox.Location = new System.Drawing.Point(282, 22);
             this.Address_GroupBox.Name = "Address_GroupBox";
-            this.Address_GroupBox.Size = new System.Drawing.Size(197, 100);
+            this.Address_GroupBox.Size = new System.Drawing.Size(283, 100);
             this.Address_GroupBox.TabIndex = 41;
             this.Address_GroupBox.TabStop = false;
             this.Address_GroupBox.Text = "Display Image Addresses";
             // 
             // Tileset_GroupBox
             // 
-            this.Tileset_GroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Tileset_GroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Tileset_GroupBox.Controls.Add(this.Tileset_8bpp_RadioButton);
             this.Tileset_GroupBox.Controls.Add(this.Tileset_4bpp_RadioButton);
             this.Tileset_GroupBox.Controls.Add(this.Tileset_2bpp_RadioButton);
-            this.Tileset_GroupBox.Location = new System.Drawing.Point(485, 22);
+            this.Tileset_GroupBox.Location = new System.Drawing.Point(283, 122);
             this.Tileset_GroupBox.Name = "Tileset_GroupBox";
-            this.Tileset_GroupBox.Size = new System.Drawing.Size(79, 100);
+            this.Tileset_GroupBox.Size = new System.Drawing.Size(128, 38);
             this.Tileset_GroupBox.TabIndex = 43;
             this.Tileset_GroupBox.TabStop = false;
-            this.Tileset_GroupBox.Text = "Graphics";
+            this.Tileset_GroupBox.Text = "Pixel Encoding (bpp)";
             // 
             // Tileset_8bpp_RadioButton
             // 
             this.Tileset_8bpp_RadioButton.AutoSize = true;
-            this.Tileset_8bpp_RadioButton.Location = new System.Drawing.Point(6, 72);
+            this.Tileset_8bpp_RadioButton.Location = new System.Drawing.Point(90, 14);
             this.Tileset_8bpp_RadioButton.Name = "Tileset_8bpp_RadioButton";
-            this.Tileset_8bpp_RadioButton.Size = new System.Drawing.Size(71, 17);
+            this.Tileset_8bpp_RadioButton.Size = new System.Drawing.Size(31, 17);
             this.Tileset_8bpp_RadioButton.TabIndex = 2;
-            this.Tileset_8bpp_RadioButton.Text = "8 bit/pixel";
+            this.Tileset_8bpp_RadioButton.Text = "8";
             this.Help_ToolTip.SetToolTip(this.Tileset_8bpp_RadioButton, "If selected, interpret the tileset/pixel data as 8bpp (256-color) image.\r\nIn GBA " +
         "Fire Emblem ROMs, this is quite rare (an exception is the world map in FE6, for " +
         "example).");
@@ -453,12 +463,12 @@
             // 
             this.Tileset_4bpp_RadioButton.AutoSize = true;
             this.Tileset_4bpp_RadioButton.Checked = true;
-            this.Tileset_4bpp_RadioButton.Location = new System.Drawing.Point(6, 46);
+            this.Tileset_4bpp_RadioButton.Location = new System.Drawing.Point(53, 14);
             this.Tileset_4bpp_RadioButton.Name = "Tileset_4bpp_RadioButton";
-            this.Tileset_4bpp_RadioButton.Size = new System.Drawing.Size(71, 17);
+            this.Tileset_4bpp_RadioButton.Size = new System.Drawing.Size(31, 17);
             this.Tileset_4bpp_RadioButton.TabIndex = 1;
             this.Tileset_4bpp_RadioButton.TabStop = true;
-            this.Tileset_4bpp_RadioButton.Text = "4 bit/pixel";
+            this.Tileset_4bpp_RadioButton.Text = "4";
             this.Help_ToolTip.SetToolTip(this.Tileset_4bpp_RadioButton, "If selected, interpret the tileset/pixel data as 4bpp (16-color) image.\r\nIn GBA F" +
         "ire Emblem ROMs, this is how most pixel data is stored.");
             this.Tileset_4bpp_RadioButton.UseVisualStyleBackColor = true;
@@ -467,11 +477,11 @@
             // Tileset_2bpp_RadioButton
             // 
             this.Tileset_2bpp_RadioButton.AutoSize = true;
-            this.Tileset_2bpp_RadioButton.Location = new System.Drawing.Point(6, 20);
+            this.Tileset_2bpp_RadioButton.Location = new System.Drawing.Point(16, 14);
             this.Tileset_2bpp_RadioButton.Name = "Tileset_2bpp_RadioButton";
-            this.Tileset_2bpp_RadioButton.Size = new System.Drawing.Size(71, 17);
+            this.Tileset_2bpp_RadioButton.Size = new System.Drawing.Size(31, 17);
             this.Tileset_2bpp_RadioButton.TabIndex = 0;
-            this.Tileset_2bpp_RadioButton.Text = "2 bit/pixel";
+            this.Tileset_2bpp_RadioButton.Text = "2";
             this.Help_ToolTip.SetToolTip(this.Tileset_2bpp_RadioButton, "If selected, interpret the tileset/pixel data as 2bpp (4-color) image.\r\nIn GBA Fi" +
         "re Emblem ROMs, this is mostly used for font pixel data.");
             this.Tileset_2bpp_RadioButton.UseVisualStyleBackColor = true;
@@ -483,7 +493,7 @@
             this.Palette_GroupBox.Controls.Add(this.Palette_Opaque_CheckBox);
             this.Palette_GroupBox.Controls.Add(this.Palette_Index_NumBox);
             this.Palette_GroupBox.Controls.Add(this.Palette_Offset_Label);
-            this.Palette_GroupBox.Location = new System.Drawing.Point(282, 177);
+            this.Palette_GroupBox.Location = new System.Drawing.Point(417, 173);
             this.Palette_GroupBox.Name = "Palette_GroupBox";
             this.Palette_GroupBox.Size = new System.Drawing.Size(148, 65);
             this.Palette_GroupBox.TabIndex = 44;
@@ -508,49 +518,49 @@
             this.TSA_GroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.TSA_GroupBox.Controls.Add(this.TSA_FlipRows_CheckBox);
             this.TSA_GroupBox.Enabled = false;
-            this.TSA_GroupBox.Location = new System.Drawing.Point(282, 248);
+            this.TSA_GroupBox.Location = new System.Drawing.Point(417, 244);
             this.TSA_GroupBox.Name = "TSA_GroupBox";
-            this.TSA_GroupBox.Size = new System.Drawing.Size(148, 41);
+            this.TSA_GroupBox.Size = new System.Drawing.Size(148, 45);
             this.TSA_GroupBox.TabIndex = 45;
             this.TSA_GroupBox.TabStop = false;
             this.TSA_GroupBox.Text = "TSA Options";
             // 
             // Size_GroupBox
             // 
-            this.Size_GroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Size_GroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Size_GroupBox.Controls.Add(this.Width_NumBox);
             this.Size_GroupBox.Controls.Add(this.X_Label);
             this.Size_GroupBox.Controls.Add(this.Height_NumBox);
-            this.Size_GroupBox.Location = new System.Drawing.Point(282, 128);
+            this.Size_GroupBox.Location = new System.Drawing.Point(417, 122);
             this.Size_GroupBox.Name = "Size_GroupBox";
-            this.Size_GroupBox.Size = new System.Drawing.Size(148, 43);
+            this.Size_GroupBox.Size = new System.Drawing.Size(148, 45);
             this.Size_GroupBox.TabIndex = 46;
             this.Size_GroupBox.TabStop = false;
             this.Size_GroupBox.Text = "Display Size (in tiles)";
             // 
-            // Prev_Button
+            // Prev_Tileset_Button
             // 
-            this.Prev_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Prev_Button.Location = new System.Drawing.Point(436, 128);
-            this.Prev_Button.Name = "Prev_Button";
-            this.Prev_Button.Size = new System.Drawing.Size(64, 29);
-            this.Prev_Button.TabIndex = 47;
-            this.Prev_Button.Text = "Previous";
-            this.Help_ToolTip.SetToolTip(this.Prev_Button, resources.GetString("Prev_Button.ToolTip"));
-            this.Prev_Button.UseVisualStyleBackColor = true;
-            this.Prev_Button.Click += new System.EventHandler(this.Prev_Button_Click);
+            this.Prev_Tileset_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Prev_Tileset_Button.Location = new System.Drawing.Point(207, 45);
+            this.Prev_Tileset_Button.Name = "Prev_Tileset_Button";
+            this.Prev_Tileset_Button.Size = new System.Drawing.Size(32, 22);
+            this.Prev_Tileset_Button.TabIndex = 47;
+            this.Prev_Tileset_Button.Text = "<-";
+            this.Help_ToolTip.SetToolTip(this.Prev_Tileset_Button, resources.GetString("Prev_Tileset_Button.ToolTip"));
+            this.Prev_Tileset_Button.UseVisualStyleBackColor = true;
+            this.Prev_Tileset_Button.Click += new System.EventHandler(this.Prev_Tileset_Button_Click);
             // 
-            // Next_Button
+            // Next_Tileset_Button
             // 
-            this.Next_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Next_Button.Location = new System.Drawing.Point(500, 128);
-            this.Next_Button.Name = "Next_Button";
-            this.Next_Button.Size = new System.Drawing.Size(64, 29);
-            this.Next_Button.TabIndex = 48;
-            this.Next_Button.Text = "Next";
-            this.Help_ToolTip.SetToolTip(this.Next_Button, resources.GetString("Next_Button.ToolTip"));
-            this.Next_Button.UseVisualStyleBackColor = true;
-            this.Next_Button.Click += new System.EventHandler(this.Next_Button_Click);
+            this.Next_Tileset_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Next_Tileset_Button.Location = new System.Drawing.Point(245, 45);
+            this.Next_Tileset_Button.Name = "Next_Tileset_Button";
+            this.Next_Tileset_Button.Size = new System.Drawing.Size(32, 22);
+            this.Next_Tileset_Button.TabIndex = 48;
+            this.Next_Tileset_Button.Text = "->";
+            this.Help_ToolTip.SetToolTip(this.Next_Tileset_Button, resources.GetString("Next_Tileset_Button.ToolTip"));
+            this.Next_Tileset_Button.UseVisualStyleBackColor = true;
+            this.Next_Tileset_Button.Click += new System.EventHandler(this.Next_Tileset_Button_Click);
             // 
             // panel1
             // 
@@ -564,20 +574,66 @@
             this.panel1.Size = new System.Drawing.Size(264, 262);
             this.panel1.TabIndex = 49;
             // 
+            // Next_Palette_Button
+            // 
+            this.Next_Palette_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Next_Palette_Button.Location = new System.Drawing.Point(245, 18);
+            this.Next_Palette_Button.Name = "Next_Palette_Button";
+            this.Next_Palette_Button.Size = new System.Drawing.Size(32, 22);
+            this.Next_Palette_Button.TabIndex = 50;
+            this.Next_Palette_Button.Text = "->";
+            this.Help_ToolTip.SetToolTip(this.Next_Palette_Button, resources.GetString("Next_Palette_Button.ToolTip"));
+            this.Next_Palette_Button.UseVisualStyleBackColor = true;
+            this.Next_Palette_Button.Click += new System.EventHandler(this.Next_Palette_Button_Click);
+            // 
+            // Prev_Palette_Button
+            // 
+            this.Prev_Palette_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Prev_Palette_Button.Location = new System.Drawing.Point(207, 18);
+            this.Prev_Palette_Button.Name = "Prev_Palette_Button";
+            this.Prev_Palette_Button.Size = new System.Drawing.Size(32, 22);
+            this.Prev_Palette_Button.TabIndex = 49;
+            this.Prev_Palette_Button.Text = "<-";
+            this.Help_ToolTip.SetToolTip(this.Prev_Palette_Button, resources.GetString("Prev_Palette_Button.ToolTip"));
+            this.Prev_Palette_Button.UseVisualStyleBackColor = true;
+            this.Prev_Palette_Button.Click += new System.EventHandler(this.Prev_Palette_Button_Click);
+            // 
+            // Next_TSA_Button
+            // 
+            this.Next_TSA_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Next_TSA_Button.Location = new System.Drawing.Point(245, 72);
+            this.Next_TSA_Button.Name = "Next_TSA_Button";
+            this.Next_TSA_Button.Size = new System.Drawing.Size(32, 22);
+            this.Next_TSA_Button.TabIndex = 52;
+            this.Next_TSA_Button.Text = "->";
+            this.Help_ToolTip.SetToolTip(this.Next_TSA_Button, resources.GetString("Next_TSA_Button.ToolTip"));
+            this.Next_TSA_Button.UseVisualStyleBackColor = true;
+            this.Next_TSA_Button.Click += new System.EventHandler(this.Next_TSA_Button_Click);
+            // 
+            // Prev_TSA_Button
+            // 
+            this.Prev_TSA_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Prev_TSA_Button.Location = new System.Drawing.Point(207, 72);
+            this.Prev_TSA_Button.Name = "Prev_TSA_Button";
+            this.Prev_TSA_Button.Size = new System.Drawing.Size(32, 22);
+            this.Prev_TSA_Button.TabIndex = 51;
+            this.Prev_TSA_Button.Text = "<-";
+            this.Help_ToolTip.SetToolTip(this.Prev_TSA_Button, resources.GetString("Prev_TSA_Button.ToolTip"));
+            this.Prev_TSA_Button.UseVisualStyleBackColor = true;
+            this.Prev_TSA_Button.Click += new System.EventHandler(this.Prev_TSA_Button_Click);
+            // 
             // GraphicsEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(577, 302);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.Next_Button);
-            this.Controls.Add(this.Prev_Button);
+            this.Controls.Add(this.Tileset_GroupBox);
+            this.Controls.Add(this.Palette_PaletteBox);
             this.Controls.Add(this.Size_GroupBox);
             this.Controls.Add(this.TSA_GroupBox);
             this.Controls.Add(this.Palette_GroupBox);
-            this.Controls.Add(this.Tileset_GroupBox);
             this.Controls.Add(this.Address_GroupBox);
-            this.Controls.Add(this.Palette_PaletteBox);
             this.Controls.Add(this.Editor_Menu);
             this.MainMenuStrip = this.Editor_Menu;
             this.MinimumSize = new System.Drawing.Size(593, 340);
@@ -642,11 +698,15 @@
         private System.Windows.Forms.ToolStripMenuItem Tool_OpenPaletteEditor;
         private System.Windows.Forms.ToolStripMenuItem Tool_OpenTSAEditor;
         private System.Windows.Forms.GroupBox Size_GroupBox;
-        private System.Windows.Forms.Button Prev_Button;
-        private System.Windows.Forms.Button Next_Button;
+        private System.Windows.Forms.Button Prev_Tileset_Button;
+        private System.Windows.Forms.Button Next_Tileset_Button;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripMenuItem Menu_View;
         private System.Windows.Forms.ToolStripMenuItem View_GrayscalePalette;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.Button Next_TSA_Button;
+        private System.Windows.Forms.Button Prev_TSA_Button;
+        private System.Windows.Forms.Button Next_Palette_Button;
+        private System.Windows.Forms.Button Prev_Palette_Button;
     }
 }

@@ -42,10 +42,9 @@ namespace EmblemMagic.Editors
                 Palette_CheckBox.Checked ? 0 : 16 * Palette.LENGTH);
             byte[] tileset = Core.ReadData(
                 Tileset_PointerBox.Value,
-                Tileset_CheckBox.Checked ? 0 :
-                Tileset_8bpp_RadioButton.Checked ?
-                    (int)(Width_NumBox.Value * Height_NumBox.Value * Tile.SIZE * Tile.SIZE) :
-                    (int)(Width_NumBox.Value * Height_NumBox.Value * Tile.LENGTH));
+                Tileset_CheckBox.Checked ? 0 : (Tileset_8bpp_RadioButton.Checked ?
+                    ((int)Width_NumBox.Value * (int)Height_NumBox.Value * Tile.SIZE * Tile.SIZE) :
+                    ((int)Width_NumBox.Value * (int)Height_NumBox.Value * Tile.LENGTH)));
 
             if (Palette_Opaque_CheckBox.Checked)
             {
@@ -75,8 +74,8 @@ namespace EmblemMagic.Editors
                 {
                     image = new TSA_Image(palette, tileset,
                         Core.ReadTSA(TSA_PointerBox.Value,
-                            (int)(Width_NumBox.Value),
-                            (int)(Height_NumBox.Value),
+                            (int)Width_NumBox.Value,
+                            (int)Height_NumBox.Value,
                             TSA_CheckBox.Checked,
                             TSA_FlipRows_CheckBox.Checked));
 
@@ -85,8 +84,8 @@ namespace EmblemMagic.Editors
                 else if (Tileset_8bpp_RadioButton.Checked)
                 {
                     image = new Bitmap(
-                        (int)(Width_NumBox.Value * Tile.SIZE),
-                        (int)(Height_NumBox.Value * Tile.SIZE),
+                        (int)Width_NumBox.Value * Tile.SIZE,
+                        (int)Height_NumBox.Value * Tile.SIZE,
                         View_GrayscalePalette.Checked ?
                             GrayScale.ToBytes(false) :
                             palette,
@@ -97,8 +96,8 @@ namespace EmblemMagic.Editors
                 else
                 {
                     image = new Tileset(tileset).ToImage(
-                        (int)(Width_NumBox.Value),
-                        (int)(Height_NumBox.Value),
+                        (int)Width_NumBox.Value,
+                        (int)Height_NumBox.Value,
                         View_GrayscalePalette.Checked ?
                             GrayScale.ToBytes(false) :
                             palette.GetBytes(0, Palette.LENGTH));
@@ -123,36 +122,59 @@ namespace EmblemMagic.Editors
             Pointer tileset, bool tileset_compressed,
             Pointer tsa = new Pointer(), bool tsa_compressed = false, bool tsa_flipped = false)
         {
+            Palette_PointerBox.ValueChanged      -= Palette_PointerBox_ValueChanged;
+            Palette_CheckBox.CheckedChanged      -= Palette_CheckBox_CheckedChanged;
+            Tileset_PointerBox.ValueChanged      -= Tileset_PointerBox_ValueChanged;
+            Tileset_CheckBox.CheckedChanged      -= Tileset_CheckBox_CheckedChanged;
+            TSA_PointerBox.ValueChanged          -= TSA_PointerBox_ValueChanged;     
+            TSA_CheckBox.CheckedChanged          -= TSA_CheckBox_CheckedChanged;
+            TSA_FlipRows_CheckBox.CheckedChanged -= TSA_FlipRows_CheckBox_CheckedChanged;
+
             Palette_PointerBox.Value = palette;
             Palette_CheckBox.Checked = palette_compressed;
+            Palette_Offset_Label.Enabled = !Palette_CheckBox.Checked;
+            Palette_Index_NumBox.Enabled = !Palette_CheckBox.Checked;
             Tileset_PointerBox.Value = tileset;
             Tileset_CheckBox.Checked = tileset_compressed;
             if (tsa != new Pointer())
             {
                 TSA_Label.Checked = true;
+                TSA_PointerBox.Enabled = true;
+                TSA_CheckBox.Enabled = true;
+                TSA_GroupBox.Enabled = true;
                 TSA_PointerBox.Value = tsa;
                 TSA_CheckBox.Checked = tsa_compressed;
                 TSA_FlipRows_CheckBox.Checked = tsa_flipped;
             }
+
+            Palette_PointerBox.ValueChanged      += Palette_PointerBox_ValueChanged;
+            Palette_CheckBox.CheckedChanged      += Palette_CheckBox_CheckedChanged;
+            Tileset_PointerBox.ValueChanged      += Tileset_PointerBox_ValueChanged;
+            Tileset_CheckBox.CheckedChanged      += Tileset_CheckBox_CheckedChanged;
+            TSA_PointerBox.ValueChanged          += TSA_PointerBox_ValueChanged;     
+            TSA_CheckBox.CheckedChanged          += TSA_CheckBox_CheckedChanged;
+            TSA_FlipRows_CheckBox.CheckedChanged += TSA_FlipRows_CheckBox_CheckedChanged;
+
+            Core_Update();
         }
         public void Core_SetEntry(int width, int height,
             Pointer palette, bool palette_compressed,
             Pointer tileset, bool tileset_compressed,
             Pointer tsa = new Pointer(), bool tsa_compressed = false, bool tsa_flipped = false)
         {
+            Width_NumBox.ValueChanged  -= Width_NumBox_ValueChanged;
+            Height_NumBox.ValueChanged -= Height_NumBox_ValueChanged;
+
             Width_NumBox.Value = width;
             Height_NumBox.Value = height;
-            Palette_PointerBox.Value = palette;
-            Palette_CheckBox.Checked = palette_compressed;
-            Tileset_PointerBox.Value = tileset;
-            Tileset_CheckBox.Checked = tileset_compressed;
-            if (tsa != new Pointer())
-            {
-                TSA_Label.Checked = true;
-                TSA_PointerBox.Value = tsa;
-                TSA_CheckBox.Checked = tsa_compressed;
-                TSA_FlipRows_CheckBox.Checked = tsa_flipped;
-            }
+
+            Width_NumBox.ValueChanged += Width_NumBox_ValueChanged;
+            Height_NumBox.ValueChanged += Height_NumBox_ValueChanged;
+
+            Core_SetEntry(
+                palette, palette_compressed,
+                tileset, tileset_compressed,
+                tsa, tsa_compressed, tsa_flipped);
         }
 
         void Core_Insert(
@@ -375,6 +397,47 @@ namespace EmblemMagic.Editors
             }
         }
 
+        void Core_FindPrevLZ77Address(PointerBox pointerBox)
+        {
+            for (Pointer address = (pointerBox.Value - 4) - (pointerBox.Value % 4);
+                 address >= 0;
+                 address -= 4)
+            {
+                if (Core.ReadByte(address) == 0x10)
+                {
+                    uint header = Util.BytesToUInt32(Core.ReadData(address, 4), true);
+                    header >>= 8;
+                    if ((header % 0x20 == 0)
+                     && (header <= 0x8000)
+                     && (header > 0))
+                    {
+                        pointerBox.Value = address;
+                        return;
+                    }
+                }
+            }
+        }
+        void Core_FindNextLZ77Address(PointerBox pointerBox)
+        {
+            for (Pointer address = (pointerBox.Value + 4) + (pointerBox.Value % 4);
+                address < Core.CurrentROMSize;
+                address += 4)
+            {
+                if (Core.ReadByte(address) == 0x10)
+                {
+                    uint header = Util.BytesToUInt32(Core.ReadData(address, 4), true);
+                    header >>= 8;
+                    if ((header % 0x20 == 0)
+                     && (header <= 0x8000)
+                     && (header > 0))
+                    {
+                        pointerBox.Value = address;
+                        return;
+                    }
+                }
+            }
+        }
+
 
 
         private void File_Insert_Click(Object sender, EventArgs e)
@@ -475,16 +538,9 @@ namespace EmblemMagic.Editors
         }
         private void Palette_CheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (Palette_CheckBox.Checked)
-            {
-                Palette_Offset_Label.Enabled = false;
-                Palette_Index_NumBox.Enabled = false;
-            }
-            else
-            {
-                Palette_Offset_Label.Enabled = true;
-                Palette_Index_NumBox.Enabled = true;
-            }
+            Palette_Offset_Label.Enabled = !Palette_CheckBox.Checked;
+            Palette_Index_NumBox.Enabled = !Palette_CheckBox.Checked;
+
             Core_Update();
         }
         private void Tileset_PointerBox_ValueChanged(object sender, EventArgs e)
@@ -594,45 +650,29 @@ namespace EmblemMagic.Editors
             Core_Update();
         }
 
-        private void Prev_Button_Click(object sender, EventArgs e)
+        private void Prev_Palette_Button_Click(object sender, EventArgs e)
         {
-            for (Pointer address = (Tileset_PointerBox.Value - 4) - (Tileset_PointerBox.Value % 4);
-                 address >= 0;
-                 address -= 4)
-            {
-                if (Core.ReadByte(address) == 0x10)
-                {
-                    uint header = Util.BytesToUInt32(Core.ReadData(address, 4), true);
-                    header >>= 8;
-                    if ((header % 0x20 == 0)
-                     && (header <= 0x8000)
-                     && (header > 0))
-                    {
-                        Tileset_PointerBox.Value = address;
-                        return;
-                    }
-                }
-            }
+            Core_FindPrevLZ77Address(Palette_PointerBox);
         }
-        private void Next_Button_Click(object sender, EventArgs e)
+        private void Next_Palette_Button_Click(object sender, EventArgs e)
         {
-            for (Pointer address = (Tileset_PointerBox.Value + 4) + (Tileset_PointerBox.Value % 4);
-                address < Core.CurrentROMSize;
-                address += 4)
-            {
-                if (Core.ReadByte(address) == 0x10)
-                {
-                    uint header = Util.BytesToUInt32(Core.ReadData(address, 4), true);
-                    header >>= 8;
-                    if ((header % 0x20 == 0)
-                     && (header <= 0x8000)
-                     && (header > 0))
-                    {
-                        Tileset_PointerBox.Value = address;
-                        return;
-                    }
-                }
-            }
+            Core_FindNextLZ77Address(Palette_PointerBox);
+        }
+        private void Prev_Tileset_Button_Click(object sender, EventArgs e)
+        {
+            Core_FindPrevLZ77Address(Tileset_PointerBox);
+        }
+        private void Next_Tileset_Button_Click(object sender, EventArgs e)
+        {
+            Core_FindNextLZ77Address(Tileset_PointerBox);
+        }
+        private void Prev_TSA_Button_Click(object sender, EventArgs e)
+        {
+            Core_FindPrevLZ77Address(TSA_PointerBox);
+        }
+        private void Next_TSA_Button_Click(object sender, EventArgs e)
+        {
+            Core_FindNextLZ77Address(TSA_PointerBox);
         }
     }
 }
