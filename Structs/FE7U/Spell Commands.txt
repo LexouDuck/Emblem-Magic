@@ -35,13 +35,13 @@ bx r0			@ End routine
 
 
 goto_b
-b $08______		@ branch
+b _________		@ branch
 
 goto_beq
-beq $08______		@ branch if equal
+beq _________		@ branch if equal
 
 goto_bne
-bne $08______		@ branch if not equal
+bne _________		@ branch if not equal
 
 
 
@@ -70,35 +70,30 @@ bl $0804FD1C	@ Makes the battle background solid black (called by Ereshkigal)
 
 CreateStruct
 bl $08050008			 @ ???
-ldr r0, [pc, #0x**] (=$08______) @ Loads the Loop routine callback into r0
+ldr r0, [pc, #0x**] (=_________) @ Loads the Loop routine callback into r0
 mov r1, #0x03			 @ r1 becomes 3, presumably an argument for the following call
 bl $08004494			 @ Create6C: Allocates new 6C And starts interpretation (r0 becomes RAM pointer to the 6C struct, r1 is return pointer)
 
 
 
 StartAnimation
-str r4, [r0, #0x5C]	@ stores AIS pointer into the 6C struct
-mov r1, #0x00		@ clears r1
+str r4, [r0, #0x5C]	@ stores AIS pointer into the 6C_struct
+
+StartAnimation
+mov r4, r0		@ so r4 is the 6C_struct pointer now
+str r5, [r4, #0x5C]	@ stores AIS pointer into the 6C struct
+
+@ mov r1, #0x00		@ (Fire does this)
+@ mov r2, #0x00		@ (Fortify does this)
+
+SetCurrentFrame
+mov r1, #____		@ clears r1
 strh r1, [r0, #0x2C]	@ sets the current frame as 0
 
-StartAnimation
-mov r4, r0		@ so r4 is the 6CStruct pointer now
-str r5, [r4, #0x5C]	@ stores AIS pointer into the 6C struct
-mov r0, #0x00		@ clears r0
+SetCurrentFrame
+mov r0, #____		@ clears r0
 strh r0, [r4, #0x2C]	@ sets the current frame as 0
 
-StartAnimation
-mov r4, r0		@ 
-str r5, [r4, #0x5C]	@ 
-mov r1, #0x00		@ (Fire does this)
-mov r0, #0x00		@ 
-strh r0, [r4, #0x2C]	@ 
-
-StartAnimation
-str r4, [r0, #0x5C]	@
-mov r2, #0x00		@ (Fortify does this)
-mov r1, #0x00		@
-strh r1, [r0, #0x2C]	@
 
 
 
@@ -113,21 +108,69 @@ strb r0, [r4, #0x00]	@
 
 
 
-LoadSpritePalette
-ldr r0, [pc, #0x**] (=$08______)@ loads palette pointer
+LoadSprite_Palette
+ldr r0, [pc, #0x**] (=_________)@ r0 = palette_pointer
 mov r1, #0x20			@ r1 = 0x20 (palette length in bytes)
 bl $080505F0			@ "load palette" routine
 
-LoadSpriteTileset
-ldr r0, [pc, #0x**] (=$08______)@ loads tileset pointer into r0
+LoadSprite_Tileset
+ldr r0, [pc, #0x**] (=_________)@ r0 = tileset_pointer
 mov r1, #0x80			@ prepare r1 as second argument for the following call
 lsl r1, r1, #0x05		@ r1 = 0x1000 (tileset length in bytes)
 bl $080505C8			@ "load tileset" routine
 
-LoadSpriteTilesetSmall
-ldr r0, [pc, #0x**] (=$08______)@ loads tileset pointer into r0
+LoadSprite_Tileset_Small
+ldr r0, [pc, #0x**] (=_________)@ r0 = tileset_pointer
 mov r1, #0x60			@ r1 = 0x60 (tileset length in bytes)
 bl $080505C8			@ "load tileset" routine
+
+
+
+Load_Palette
+ldr r0, [pc, #0x**] (=_________)@ r0 = palette_pointer
+add r4, r4, r0			@ 
+mov r0, r4			@ 
+mov r1, #0x20			@ r1 = 0x20 (palette length in bytes)
+bl $08050634			@ "load palette for array of tileset+TSA images" routine ???
+
+Load_Palette
+ldr r0, [pc, #0x**] (=_________)@
+mov r1, #0x20			@
+bl $08050634			@ "load palette for array of tileset+TSA images" routine ???
+
+
+
+LoadArray_Palette
+ldr r0, [pc, #0x**] (=_________)@ 
+str r0, [r_, #0x58]		@ 
+
+LoadArray_Palette
+ldr r1, [pc, #0x**] (=_________)@ 
+str r1, [r_, #0x58]		@ 
+
+
+LoadArray_Tileset
+ldr r0, [pc, #0x**] (=_________)@ 
+str r0, [r_, #0x54]		@ 
+
+LoadArray_Tileset
+ldr r1, [pc, #0x**] (=_________)@ 
+str r1, [r_, #0x54]		@ 
+
+
+LoadArray_TSA
+ldr r1, [pc, #0x**] (=_________)@ 
+str r1, [r_, #0x4C]		@ 
+
+LoadArray_TSA
+ldr r0, [pc, #0x**] (=_________)@ 
+str r0, [r_, #0x4C]		@ 
+
+
+
+SetSpellCodeFunction
+str r0, [r1, #0x00]		@
+ldr r0, [pc, #0x**] (=_________)@
 
 
 
@@ -177,11 +220,11 @@ strh r0, [r*, #0x2C]	@ stores new frame number
 CheckFrame
 lsl r0, r0, #0x10	@ 
 asr r0, r0, #0x10	@ 
-cmp r0, #0x__		@ 
+cmp r0, #____		@ 
 
 CheckFrame
 ldrh r0, [r*, #0x2C]	@
-cmp r0, #0x__		@
+cmp r0, #____		@
 
 
 
@@ -214,6 +257,6 @@ bl $080502EC		@ Nosferatu calls this (to increase caster HP too, i suppose)
 
 
 PlayAudio	@ 
-mov r0, #0x__	@ r0 becomes the music routine ID
+mov r0, #____	@ r0 becomes the music routine ID
 mov r3, #0x01	@ r3 becomes 'true' ("force playback" argument perhaps ?)
 bl $080681E4	@ Play Music/SFX routine

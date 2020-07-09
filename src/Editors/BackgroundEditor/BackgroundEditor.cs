@@ -525,10 +525,8 @@ namespace EmblemMagic.Editors
         private void MagicButton_Click(Object sender, EventArgs e)
         {
             GraphicsEditor editor = new GraphicsEditor();
-            Program.Core.Core_OpenEditor(editor);
 
             Size bgsize = Background.GetBGSize(CurrentType);
-
             switch (CurrentType)
             {
                 case BackgroundType.Dialog:
@@ -570,6 +568,7 @@ namespace EmblemMagic.Editors
 
                 default: throw new Exception("Invalid background type.");
             }
+            Program.Core.Core_OpenEditor(editor);
         }
     }
 }

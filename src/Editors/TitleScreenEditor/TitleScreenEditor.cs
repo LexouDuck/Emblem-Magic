@@ -532,7 +532,6 @@ namespace EmblemMagic.Editors
         private void BG_MagicButton_Click(object sender, EventArgs e)
         {
             GraphicsEditor editor = new GraphicsEditor();
-            Program.Core.Core_OpenEditor(editor);
 
             if (Core.CurrentROM is FE6)
             {
@@ -553,11 +552,12 @@ namespace EmblemMagic.Editors
                     Core.GetPointer("Title Screen BG Tileset 1"), true,
                     Core.GetPointer("Title Screen BG TSA"), true, false);
             }
+
+            Program.Core.Core_OpenEditor(editor);
         }
         private void MG_MagicButton_Click(object sender, EventArgs e)
         {
             GraphicsEditor editor = new GraphicsEditor();
-            Program.Core.Core_OpenEditor(editor);
 
             if (Core.CurrentROM is FE6)
             {
@@ -581,11 +581,12 @@ namespace EmblemMagic.Editors
                     Core.GetPointer("Title Screen MG Tileset"), true,
                     Core.GetPointer("Title Screen MG TSA"), true, false);
             }
+
+            Program.Core.Core_OpenEditor(editor);
         }
         private void FG_MagicButton_Click(object sender, EventArgs e)
         {
             GraphicsEditor editor = new GraphicsEditor();
-            Program.Core.Core_OpenEditor(editor);
 
             if (Core.CurrentROM is FE6)
             {
@@ -605,6 +606,8 @@ namespace EmblemMagic.Editors
                     Core.GetPointer("Title Screen FG Palette"), false,
                     Core.GetPointer("Title Screen FG Tileset 1"), true);
             }
+
+            Program.Core.Core_OpenEditor(editor);
         }
     }
 }

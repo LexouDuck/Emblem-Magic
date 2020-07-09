@@ -141,7 +141,7 @@ namespace EmblemMagic
         /// <summary>
         /// Takes in a byte and returns a 2-length string of that byte as hex.
         /// </summary>
-        public static String ByteToHex(byte data)
+        public static string ByteToHex(byte data)
         {
             string result = "";
             int HI_nibble = data >> 4;
@@ -158,7 +158,7 @@ namespace EmblemMagic
         /// <summary>
         /// Takes a 2-length string and returns the corresponding byte
         /// </summary>
-        public static Byte HexToByte(String oneByte)
+        public static Byte HexToByte(string oneByte)
         {
             if (oneByte.Length != 2) throw new Exception("given string has a length different than 2");
 
@@ -170,7 +170,7 @@ namespace EmblemMagic
         /// <summary>
         /// Takes a byte array and returns a simple hex string of the given data
         /// </summary>
-        public static String BytesToHex(byte[] data)
+        public static string BytesToHex(byte[] data)
         {
             string result = "";
             for (int i = 0; i < data.Length; i++)
@@ -182,7 +182,7 @@ namespace EmblemMagic
         /// <summary>
         /// Returns a byte array by parsing the given unspaced hex string
         /// </summary>
-        public static Byte[] HexToBytes(String hex)
+        public static Byte[] HexToBytes(string hex)
         {
             byte[] result = new byte[hex.Length / 2];
             string buffer;
@@ -199,7 +199,7 @@ namespace EmblemMagic
         /// <summary>
         /// Returns a one-line spaced hex respresentation of the given byte array - like "FF AB F0 00"
         /// </summary>
-        public static String BytesToSpacedHex(byte[] data)
+        public static string BytesToSpacedHex(byte[] data)
         {
             string acc = "";
             foreach (byte hex in data)
@@ -320,21 +320,21 @@ namespace EmblemMagic
         /// <summary>
         /// Returns a 4-length hex string of the given unsigned 16-bit integer
         /// </summary>
-        public static String UInt16ToHex(UInt16 value)
+        public static string UInt16ToHex(UInt16 value)
         {
             return IntToHex(value).PadLeft(4, '0');
         }
         /// <summary>
         /// Returns an 8-length hex string of the given unsigned 32-bit integer
         /// </summary>
-        public static String UInt32ToHex(UInt32 value)
+        public static string UInt32ToHex(UInt32 value)
         {
             return IntToHex(value).PadLeft(8, '0');
         }
         /// <summary>
         /// Returns an unsigned int corresponding to the given string hex, removes "0x" if necessary
         /// </summary>
-        public static UInt32 HexToInt(String hex)
+        public static UInt32 HexToInt(string hex)
         {
             if (hex.StartsWith("0x") || hex.StartsWith("0X"))
                 hex = hex.Substring(2);
@@ -350,7 +350,7 @@ namespace EmblemMagic
         /// <summary>
         /// Returns a variable-length hexadecimal string of the given int
         /// </summary>
-        public static String IntToHex(uint value)
+        public static string IntToHex(uint value)
         {
             string result = "";
             for (int i = 0; i < 8; i++)
@@ -365,7 +365,7 @@ namespace EmblemMagic
         /// <summary>
         /// Returns a string represting a hex address, like "0x0000FF" - works with 32-bit ints
         /// </summary>
-        public static String AddressToString(uint address, int fixedLength = 0)
+        public static string AddressToString(uint address, int fixedLength = 0)
         {
             string result = UInt32ToHex(address);
             string zeros = "";
@@ -384,7 +384,13 @@ namespace EmblemMagic
         public static Pointer StringToAddress(string address)
         {
             if (address == null) throw new Exception("Address given is null.");
-            string result = address.Contains("0x") ? address.Remove(0, 2) : address;
+            string result;
+            if (address.StartsWith("0x"))
+                result = address.Substring(2);
+            else if (address.StartsWith("$"))
+                result = address.Substring(1);
+            else
+                result = address;
             if (result.Length > 8) throw new Exception("The given offset is longer than Int32 permits.");
             return new Pointer(HexToInt(result));
         }

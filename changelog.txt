@@ -1,0 +1,99 @@
+
+
+
+Version 0.8 (BETA 3)
+====================
+- Added tooltip mouse-hover descriptions to every button and control in Emblem Magic, to ease in users.
+- Added README.txt files to each subfolder, to explain what the folder's purpose is (and also to ease in users as to how Emblem Magic is supposed to be used)
+- Added useful 'MagicButton' shortcuts in many editors (these are the small square buttons with the FE mage icon). Here is a more detailed list of what was added:
+	ItemEditor -> shortcut to GraphicsEditor (for the current item icon- or, if none selected, the sheet of all icons)
+	MapTilesetEditor -> shortcut to TextEditor (for the tile terrain name)
+	MapEditor -> shortcut to MapTilesetEditor
+	MapEditor -> shortcut to Module: ChapterEditor
+	MapSpriteEditor -> shortcut to GraphicsEditor, for both the 'idle' spritesheet and the 'move' spritesheet
+	ModuleEditor -> shortcut to the BasicROMEditor (to read/write the entire current entry, or simply to view its address/length/bytes)
+- Fixed the 16bit-to-32bit color conversion formula (as suggested by Glenwing).
+- Changed the file extension Emblem Magic refers to for pixel data: before it was the vague and non-descript '.dmp' filetype, whereas now it's '.chr' (this file extension is what Nintendo devs typically use to describe tileset/pixel data).
+- Added option to "prefer indexed BMPs over PNGs", which changes the export format of images in all editors (as suggested by Glenwing).
+- Made the error prompting more friendly - especially when opening a ROM, and having to resolve unreferenced pointers (instead of having one popup for each such pointer, it's one big prompt window)
+- Moved dependency executables & libraries to more appropriate subfolders (Core.exe is now in the EventAssembler folder, where it should be, etc)
+- BattleAnimEditor: fixed GIF exporting (frame durations fixed, two-layer-view export, stray bottom-right pixel bug fixed)
+- BattleAnimEditor: added button to export GIFs for each anim mode of the current anim, all at once
+- BattleAnimEditor: fixed crash caused by anim code in two-layer modes not being identical/aligned.
+- BattleAnimEditor: added support for uncompressed battle anim character palettes (if the pointer has the first bit set, like the Anti-Huffman patch)
+- BattleAnimEditor: made a couple of shell scripts to ease Emblem Magic's compatibility with other insertable formats:
+	./Utils/BattleAnims/ConvertFEditorAnim_folder.sh -> converts a FEditor "Frames" folder (image files and animcode .txt file)
+	./Utils/BattleAnims/ConvertFEditorAnim_animfiles.sh -> converts a FEditor compiled anim (.dmp animdata, 'img Sheet 1.png' tilesheet images, and the extensionless OAMdata file)
+- MapSpriteEditor: Added increment/decrement buttons, to change the currently selected entries for both the 'idle' and 'move' arrays at once.
+- MapSpriteEditor: Map sprite 'idle' size (16x16, 16x32, or 32x32) is now auto-calculated upon insertion
+- MapSpriteEditor: Added functionality to convert MapSprites from the ingame format (2 images, 'idle' and 'move') to EmblemMagic format (1 image, 160x128)
+- MapSpriteEditor: Added the map sprite anim data .bin files to './Utils/MapSprites/' (useful if you wish to insert a dancer class or something).
+- PatchEditor: Added the FE8U version of the "Anti-Huffman Text Patch" to the 'Patches' folder
+- ModuleEditor: Added Chapter Unit Editor.emm module for FE8.
+- ModuleEditor: fixed several problems concerning bit-index module fields (like if it traverses several distinct bytes, etc)
+- ModuleEditor: POIN entry selector lists (for structs found at arbitrary addresses, rather than contiguous arrays) now work much better (open the Chapter Unit Editor to see what I mean by this)
+- TitleScreenEditor: implemented 'File -> Save image...' functionality for this editor.
+- TitleScreenEditor: small fixes concerning certain localized versions (particularly FE7E and FE8E)
+- And of course, various small bugfixes all over the place (for more detail, check the commit messages on the Emblem Magic github page: https://github.com/lexouduck/Emblem-Magic ).
+
+
+
+Version 0.7 (BETA 2)
+====================
+- Event Editor (calls EA from a bundled dll file, the code editor has syntax coloring, mousehover documentation and some more cool functions)
+- Item Editor (to edit anything pertaining to items, including their stat bonuses or the classes they’re effective against)
+- X Title Screen Editor (very unfinished, really just has shortcuts to the Graphics Editor for the 3 sub-images that make up the title screen)
+- And plenty of other stuff:
+	- Several bugfixes, as usual
+	- Added more 'MagicButton' shortcuts
+	- side-panel to modify battle animation class/item association structs within the BattleAnimEditor
+
+
+
+Version 0.8 (BETA 1)
+====================
+This is a copy/paste of the original forum post on FEUniverse:
+"""
+Emblem Magic is an all-in-one ROMhacking/editing tool for the GBA Fire Emblem games, that I’ve been making this past year.
+I wanted it to be more complete than it is now before releasing it, but i’m going to be extremely busy this next month, and i had set this deadline for myself beforehand.
+As such, there isn’t much in the way of guides as to how to use the program, so i hope that it won’t be too confusing for users.
+In any case, you can think of this of more of a public beta than an actual release: so bug reports are rather welcome, and so are feature suggestions.
+
+So, Emblem Magic includes a set of different editors, as well as some core functionalities to better allow the user to manage the changes made to the ROM.
+These core tools include:
+
+- a history of writes done to the ROM (thanks to which the user can use Ctrl+Z/Ctrl+Y to undo/redo changes)
+- an editor to manage which areas of the ROM are marked (by default the markings “FREE” and “USED” exist, but the user can create their own marking types)
+- tools for easier repointing (the user can choose whether the program should prompt them to repoint upon insertion or not, for instance)
+
+All this information can be stored by the user in an FEH file (FEH stands for Fire Emblem Hack); also note that with this file, the ROMhack can be recreated from an approriate clean ROM.
+Also, Emblem Magic reads external text files to associate names to array entries in the ROM (kinda like the dropdowns from Nightmare, and the user can have their own set of text files, seperate from
+the ones for the vanilla ROMs).
+
+The "Editors" range from the most fundamental ROMhacking tools to more specific ones intended for the GBA FE games:
+The ones that have an “X” instead of a “-” are the more incomplete ones (I say this, but in fact almost all of them are incomplete in some way).
+
+- Basic ROM Editor (read/write bytes, potentially with LZ77 compression)
+- Hex Editor (like any hex editor, really)
+- Patch Editor (for applying various patches to the ROM through FEH files in the “Patches” folder)
+- ASM Editor (dissassemble/assemble ASM code, and can somewhat “test run” code line-per-line)
+X Event Editor
+- Module Editor (basically Nightmare, uses “EMM” text files to load GUI to edit arrays or other data in the ROM)
+- World Map Editor (pretty simple image inserting for the large/small world maps for the game)
+X Map Tileset Editor (to change the tilesets of 16x16 tiles used for maps, their animations, their terrain associations)
+- Map Editor (to edit the maps for each chapter of the game, as well as the triggerable tile changes for these maps)
+- Graphics Editor (basically GBAGE, to view and edit images in the ROM)
+- Portrait Editor (to view and edit the different portraits in the game)
+- Map Sprite Editor (to view and change the sprites of units on the map)
+- Battle Screen Editor (to change the screen frame during battle, or the platforms under the characters’ feet)
+- Battle Animation Editor (to view and change the various battle animations in the game, and the palettes for them)
+X Spell Animation Editor
+- Backgrounds Editor (to change dialogue scene backgrounds, battle backgrounds, and cutscene CG screens)
+- Text Editor (to change the text in the game, as well as the fonts used to display text)
+X Music Editor (to change the music and sound-effect tracks used in the game)
+
+Some other editors are "contextual", that is to say they're only accessible from within the other editors (under the ‘Tools’ menu):
+- Palette Editor (you can also open this by clicking on a palette in an editor)
+- TSA Editor (to change TSA arrays, these indicate tile layout and associate 16-color palettes to each tile, for more complex images)
+- OAM Editor (accessed from the Battle Animation Editor, to change the sprite layout information for a given frame of animation)
+"""

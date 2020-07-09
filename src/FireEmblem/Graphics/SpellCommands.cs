@@ -87,12 +87,12 @@ namespace EmblemMagic.FireEmblem
         public string Get(ASM.Instruction[] asm, ref int index)
         {
             string result = "";
-            string argument = "";
+            List<string> arguments;
             bool match;
             foreach (var command in Commands)
             {
                 match = false;
-                argument = "";
+                arguments = new List<string>();
                 for (int i = 0; i < command.ASM_Code.Length; i++)
                 {
                     for (int j = 0; j < asm[index + i].Code.Length; j++)
@@ -107,7 +107,17 @@ namespace EmblemMagic.FireEmblem
                         }
                         else if (match && command.ASM_Code[i][j] == '_')
                         {
-                            argument += asm[index + i].Code[j];
+                            string argument = "";
+                            int c = 0;
+                            while (j + c < command.ASM_Code[i].Length && command.ASM_Code[i][j + c] == '_')
+                            {
+                                argument += asm[index + i].Code[j + c];
+                                c += 1;
+                            }
+                            if (argument.Length == 1)
+                                arguments.Insert(0, argument);
+                            else arguments.Add(argument);
+                            j += c;
                         }
                         else goto Continue;
                     }
@@ -116,8 +126,16 @@ namespace EmblemMagic.FireEmblem
                 {
                     index += command.ASM_Code.Length - 1; // skip the correct amount of lines
                     result = command.Name;
-                    if (argument.Length != 0)
-                        result += "(0x" + argument + ")";
+                    if (arguments.Count == 0)
+                        return result;
+                    result += "(";
+                    for (int i = 0; i < arguments.Count; i++)
+                    {
+                        result += arguments[i];
+                        if (i < arguments.Count - 1)
+                            result += ", ";
+                    }
+                    result += ")";
                     return result;
                 }
                 Continue: continue;

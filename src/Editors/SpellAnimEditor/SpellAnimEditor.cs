@@ -4,6 +4,7 @@ using GBA;
 using System;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace EmblemMagic.Editors
 {
@@ -11,6 +12,15 @@ namespace EmblemMagic.Editors
     {
         SpellAnimation CurrentAnim;
         SpellCommands Commands;
+
+        List<Pointer> CurrentArray_Palette = new List<Pointer>();
+        List<Pointer> CurrentArray_Tileset = new List<Pointer>();
+        List<Pointer> CurrentArray_TSA     = new List<Pointer>();
+        int CurrentIndex_Palette = 0;
+        int CurrentIndex_Tileset = 0;
+        int CurrentIndex_TSA     = 0;
+
+
 
         public SpellAnimEditor()
         {
@@ -42,6 +52,9 @@ namespace EmblemMagic.Editors
         }
         public override void Core_Update()
         {
+            CurrentArray_Palette = new List<Pointer>();
+            CurrentArray_Tileset = new List<Pointer>();
+            CurrentArray_TSA     = new List<Pointer>();
             try
             {
                 Pointer address = Core.ReadPointer(Core.GetPointer("Spell Animation Array") + 4 * EntryArrayBox.Value);
@@ -52,8 +65,8 @@ namespace EmblemMagic.Editors
             {
                 Program.ShowError("There has been an error while trying to load this spell animation.", ex);
             }
-
             Core_LoadAnimCode();
+            Core_FindAndDisplayGraphics();
             Core_LoadValues();
         }
 
@@ -103,7 +116,6 @@ namespace EmblemMagic.Editors
                     image = new Tileset(tileset).ToImage(
                             WIDTH, HEIGHT, palette.GetBytes(0, Palette.LENGTH));
                 }
-
                 Spell_PaletteBox.Load(new Palette(palette, Palette.MAX * 16));
                 Spell_ImageBox.Load(image);
             }
@@ -111,6 +123,26 @@ namespace EmblemMagic.Editors
             {
                 Program.ShowError("There has been an error while trying to load the image.", ex);
             }
+        }
+        void Core_FindAndDisplayGraphics()
+        {
+            Core_FindAllInAnimCode("_Palette(", CurrentArray_Palette);
+            Core_FindAllInAnimCode("_Tileset(", CurrentArray_Tileset);
+            Core_FindAllInAnimCode("_TSA(",     CurrentArray_TSA);
+
+            Palette_CheckBox.Checked = (CurrentArray_Palette.Count > 0 && Core.ReadByte(CurrentArray_Palette[0]) == 0x10);
+            Tileset_CheckBox.Checked = (CurrentArray_Tileset.Count > 0 && Core.ReadByte(CurrentArray_Tileset[0]) == 0x10);
+            if (CurrentArray_TSA.Count > 0)
+            {
+                TSA_Label.Checked = true;
+                if (Core.ReadByte(CurrentArray_TSA[0]) == 0x10)
+                    TSA_CheckBox.Checked = true;
+                else TSA_CheckBox.Checked = false;
+            }
+            else TSA_Label.Checked = false;
+
+            Core_UpdatePrevNextButtons();
+            Core_UpdateDisplay();
         }
         void Core_LoadAnimCode()
         {
@@ -133,9 +165,9 @@ namespace EmblemMagic.Editors
                 ASM_ListBox.DataSource = new string[0];
             }
 
-                AnimCodeBox.Text = string.Join("\r\n", CurrentAnim.GetAnimCode(Commands));
             try
             {
+                AnimCodeBox.Text = string.Join("\r\n", CurrentAnim.GetAnimCode(Commands));
             }
             catch (Exception ex)
             {
@@ -157,6 +189,115 @@ namespace EmblemMagic.Editors
 
                 Looped_CheckBox.Checked = false;
                 Name_TextBox.Text = "";
+            }
+        }
+        void Core_FindAllInAnimCode(string match, List<Pointer> currentArray)
+        {
+            List<int> results = new List<int>();
+            Pointer address = new Pointer();
+            bool is_array = false;
+            int index = 0;
+            for (int i = 0; i < AnimCodeBox.Text.Length; i = index + 3)
+            {
+                index = AnimCodeBox.Text.IndexOf(match, i);
+                if (index < 0)
+                    return;
+                if (AnimCodeBox.Text.Substring(index - 5, 5) == "Array")
+                    is_array = true;
+                index = AnimCodeBox.Text.IndexOf(")\r\n", index);
+                if (index < 0)
+                    return;
+                int index_of_pointer_arg;
+                index_of_pointer_arg = AnimCodeBox.Text.LastIndexOf("$08", index) + 3;
+                if (index_of_pointer_arg < 0)
+                    continue; // TODO throw exception here ?
+                address = new Pointer(Util.StringToAddress(AnimCodeBox.Text.Substring(index_of_pointer_arg, index - index_of_pointer_arg)));
+                if (is_array)
+                {
+                    for (int j = 0; j < 8 /* TODO change this */; j += 4)
+                    {
+                        try
+                        {
+                            currentArray.Add(Core.ReadPointer(address + j));
+                        }
+                        catch (Exception ex)
+                        {
+                            break;
+                        }
+                    }
+                }
+                else currentArray.Add(address);
+            }
+        }
+        void Core_UpdatePrevNextButtons()
+        {
+            try
+            {
+                if (CurrentArray_Palette.Count == 0)
+                {
+                    Palette_PointerBox.Value = new GBA.Pointer();
+                    Palette_Prev_Button.Enabled = false;
+                    Palette_Next_Button.Enabled = false;
+                }
+                else
+                {
+                    Palette_PointerBox.Value    = CurrentArray_Palette[0];
+                    Palette_Prev_Button.Enabled = CurrentIndex_Palette > 0;
+                    Palette_Next_Button.Enabled = CurrentIndex_Palette < CurrentArray_Palette.Count - 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                Program.ShowError("Error while updating Palette controls: ", ex);
+                Palette_PointerBox.Value = new GBA.Pointer();
+                Palette_Prev_Button.Enabled = false;
+                Palette_Next_Button.Enabled = false;
+            }
+
+            try
+            {
+                if (CurrentArray_Tileset.Count == 0)
+                {
+                    Tileset_PointerBox.Value = new GBA.Pointer();
+                    Tileset_Prev_Button.Enabled = false;
+                    Tileset_Next_Button.Enabled = false;
+                }
+                else
+                {
+                    Tileset_PointerBox.Value    = CurrentArray_Tileset[0];
+                    Tileset_Prev_Button.Enabled = CurrentIndex_Tileset > 0;
+                    Tileset_Next_Button.Enabled = CurrentIndex_Tileset < CurrentArray_Tileset.Count - 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                Program.ShowError("Error while updating Palette controls: ", ex);
+                Tileset_PointerBox.Value = new GBA.Pointer();
+                Tileset_Prev_Button.Enabled = false;
+                Tileset_Next_Button.Enabled = false;
+            }
+
+            try
+            {
+                if (CurrentArray_TSA.Count == 0)
+                {
+                    TSA_PointerBox.Value = new GBA.Pointer();
+                    TSA_Prev_Button.Enabled = false;
+                    TSA_Next_Button.Enabled = false;
+                }
+                else
+                {
+                    TSA_PointerBox.Value    = CurrentArray_TSA[0];
+                    TSA_Prev_Button.Enabled = CurrentIndex_TSA > 0;
+                    TSA_Next_Button.Enabled = CurrentIndex_TSA < CurrentArray_TSA.Count - 1;
+                }
+            }
+            catch (Exception ex)
+            {
+                Program.ShowError("Error while updating Palette controls: ", ex);
+                TSA_PointerBox.Value = new GBA.Pointer();
+                TSA_Prev_Button.Enabled = false;
+                TSA_Next_Button.Enabled = false;
             }
         }
 
@@ -200,6 +341,73 @@ namespace EmblemMagic.Editors
                 TSA_CheckBox.Enabled = false;
             }
             Core_Update();
+        }
+
+        private void MagicButton_Click(Object sender, EventArgs e)
+        {
+            GraphicsEditor editor = new GraphicsEditor();
+
+            editor.Core_SetEntry(GBA.Screen.W_TILES, GBA.Screen.H_TILES,
+                Palette_PointerBox.Value, Palette_CheckBox.Checked,
+                Tileset_PointerBox.Value, Tileset_CheckBox.Checked,
+                TSA_PointerBox.Value,     TSA_CheckBox.Checked, true);
+
+            Program.Core.Core_OpenEditor(editor);
+        }
+
+        private void Palette_Prev_Button_Click(Object sender, EventArgs e)
+        {
+            if (CurrentIndex_Palette == 0)
+                return;
+            CurrentIndex_Palette -= 1;
+            Palette_PointerBox.Value = CurrentArray_Palette[CurrentIndex_Palette];
+            Core_UpdatePrevNextButtons();
+            Core_UpdateDisplay();
+        }
+        private void Palette_Next_Button_Click(Object sender, EventArgs e)
+        {
+            if (CurrentIndex_Palette == CurrentArray_Palette.Count - 1)
+                return;
+            CurrentIndex_Palette += 1;
+            Palette_PointerBox.Value = CurrentArray_Palette[CurrentIndex_Palette];
+            Core_UpdatePrevNextButtons();
+            Core_UpdateDisplay();
+        }
+        private void Tileset_Prev_Button_Click(Object sender, EventArgs e)
+        {
+            if (CurrentIndex_Tileset == 0)
+                return;
+            CurrentIndex_Tileset -= 1;
+            Tileset_PointerBox.Value = CurrentArray_Tileset[CurrentIndex_Tileset];
+            Core_UpdatePrevNextButtons();
+            Core_UpdateDisplay();
+        }
+        private void Tileset_Next_Button_Click(Object sender, EventArgs e)
+        {
+            if (CurrentIndex_Tileset == CurrentArray_Tileset.Count - 1)
+                return;
+            CurrentIndex_Tileset += 1;
+            Tileset_PointerBox.Value = CurrentArray_Tileset[CurrentIndex_Tileset];
+            Core_UpdatePrevNextButtons();
+            Core_UpdateDisplay();
+        }
+        private void TSA_Prev_Button_Click(Object sender, EventArgs e)
+        {
+            if (CurrentIndex_TSA == 0)
+                return;
+            CurrentIndex_TSA -= 1;
+            TSA_PointerBox.Value = CurrentArray_TSA[CurrentIndex_TSA];
+            Core_UpdatePrevNextButtons();
+            Core_UpdateDisplay();
+        }
+        private void TSA_Next_Button_Click(Object sender, EventArgs e)
+        {
+            if (CurrentIndex_TSA == CurrentArray_TSA.Count - 1)
+                return;
+            CurrentIndex_TSA += 1;
+            TSA_PointerBox.Value = CurrentArray_TSA[CurrentIndex_TSA];
+            Core_UpdatePrevNextButtons();
+            Core_UpdateDisplay();
         }
     }
 }

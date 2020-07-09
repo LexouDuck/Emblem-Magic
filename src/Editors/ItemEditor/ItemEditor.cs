@@ -1166,7 +1166,6 @@ namespace EmblemMagic.Editors
         private void ItemIcon_MagicButton_Click(Object sender, EventArgs e)
         {
             GraphicsEditor editor = new GraphicsEditor();
-            Program.Core.Core_OpenEditor(editor);
 
             if (EntryListBox.SelectedIndices.Count == 1)
             {
@@ -1184,6 +1183,8 @@ namespace EmblemMagic.Editors
                     Core.GetPointer("Item Icon Palette"), false,
                     Core.GetPointer("Item Icon Tileset"), false);
             }
+
+            Program.Core.Core_OpenEditor(editor);
         }
     }
 }

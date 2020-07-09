@@ -129,10 +129,14 @@ Journeyman
 Cyclops
 Draco Zombie
 
+
+
 ============
  AnimType_03
 ============
 Hector Great Lord
+
+
 
 ============
  AnimType_04
@@ -141,16 +145,22 @@ Wyvern Lord
 Wyvern Lord (F)
 Fleet
 
+
+
 ============
  AnimType_05
 ============
 Dancer (FE7)
+
+
 
 ============
  AnimType_06
 ============
 Dancer (FE6)
 Dancer (FE8)
+
+
 
 ============
  AnimType_07
@@ -159,21 +169,29 @@ Bard (FE7)
 Bard (FE6)
 Bard (FE8)
 
+
+
 ============
  AnimType_08
 ============
 Roy Lord
 Roy Great Lord
 
+
+
 ============
  AnimType_09
 ============
 Fire Dragon (FE6)
 
+
+
 ============
  AnimType_10
 ============
 Divine Dragon (FE6)
+
+
 
 ============
  AnimType_11

@@ -53,6 +53,8 @@ namespace EmblemMagic.Editors
         }
         public override void Core_Update()
         {
+            try
+            {
                 List.Clear();
                 Patches.Clear();
                 string[] files = Directory.GetFiles(Core.Path_Patches);
@@ -70,9 +72,7 @@ namespace EmblemMagic.Editors
                             patch.HackName,
                             patch.IsApplied()));
                     }
-            }
-            try
-            {
+                }
             }
             catch (Exception ex)
             {

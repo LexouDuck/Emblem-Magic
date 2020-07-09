@@ -666,7 +666,6 @@ namespace EmblemMagic.Editors
         private void Idle_MagicButton_Click(Object sender, EventArgs e)
         {
             GraphicsEditor editor = new GraphicsEditor();
-            Program.Core.Core_OpenEditor(editor);
 
             byte size = (byte)CurrentIdle["Size"];
 
@@ -675,15 +674,18 @@ namespace EmblemMagic.Editors
                 (size < 0x1 ? 2 : 4) * 3,
                 CurrentPaletteAddress, false,
                 (Pointer)CurrentIdle["Sprite"], true);
+
+            Program.Core.Core_OpenEditor(editor);
         }
         private void Move_MagicButton_Click(Object sender, EventArgs e)
         {
             GraphicsEditor editor = new GraphicsEditor();
-            Program.Core.Core_OpenEditor(editor);
 
             editor.Core_SetEntry(4, 60,
                 CurrentPaletteAddress, false,
                 (Pointer)CurrentMove["Sprite"], true);
+
+            Program.Core.Core_OpenEditor(editor);
         }
     }
 }

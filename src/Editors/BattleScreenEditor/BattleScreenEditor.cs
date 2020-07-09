@@ -64,6 +64,8 @@ namespace EmblemMagic.Editors
 
         void Core_LoadScreen()
         {
+            try
+            {
                 byte[] tileset = Core.ReadData(Core.GetPointer("Battle Screen Tileset"), 0);
                 byte[] palettes = Core.ReadData(Core.GetPointer("Battle Screen Palettes"), 4 * Palette.LENGTH);
                 TSA_Array tsa = Core.ReadTSA(Core.GetPointer("Battle Screen TSA"), 16, 32, false, false);
@@ -77,8 +79,6 @@ namespace EmblemMagic.Editors
 
                 Screen_GridBox.Load(CurrentScreen);
                 Screen_PaletteBox.Load(new Palette(palettes, 4 * Palette.MAX));
-            try
-            {
             }
             catch (Exception ex)
             {
@@ -712,12 +712,13 @@ namespace EmblemMagic.Editors
         private void Screen_MagicButton_Click(Object sender, EventArgs e)
         {
             GraphicsEditor editor = new GraphicsEditor();
-            Program.Core.Core_OpenEditor(editor);
 
             editor.Core_SetEntry(15, 34,
                 Core.GetPointer("Battle Screen Palettes"), false,
                 Core.GetPointer("Battle Screen Tileset"), true,
                 Core.GetPointer("Battle Screen TSA"), false, false);
+
+            Program.Core.Core_OpenEditor(editor);
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -759,11 +760,12 @@ namespace EmblemMagic.Editors
         private void Platform_MagicButton_Click(Object sender, EventArgs e)
         {
             GraphicsEditor editor = new GraphicsEditor();
-            Program.Core.Core_OpenEditor(editor);
 
             editor.Core_SetEntry(32, 4,
                 (Pointer)Current["Palette"], false,
                 (Pointer)Current["Tileset"], true);
+
+            Program.Core.Core_OpenEditor(editor);
         }
     }
 }
