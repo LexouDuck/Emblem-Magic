@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpellAnimEditor));
             this.EntryArrayBox = new EmblemMagic.Components.ByteArrayBox();
-            this.Constructor_PointerBox = new EmblemMagic.Components.PointerBox();
             this.Palette_PointerBox = new EmblemMagic.Components.PointerBox();
             this.Tileset_PointerBox = new EmblemMagic.Components.PointerBox();
             this.TSA_PointerBox = new EmblemMagic.Components.PointerBox();
@@ -44,17 +43,9 @@
             this.Tileset_CheckBox = new System.Windows.Forms.CheckBox();
             this.TSA_CheckBox = new System.Windows.Forms.CheckBox();
             this.Spell_PaletteBox = new EmblemMagic.Components.PaletteBox();
-            this.ASM_ListBox = new System.Windows.Forms.ListBox();
-            this.Constructor_Label = new System.Windows.Forms.RadioButton();
-            this.button1 = new System.Windows.Forms.Button();
             this.Name_TextBox = new System.Windows.Forms.TextBox();
             this.Looped_CheckBox = new System.Windows.Forms.CheckBox();
             this.Name_Label = new System.Windows.Forms.Label();
-            this.LoopRoutine_PointerBox = new EmblemMagic.Components.PointerBox();
-            this.LoopRoutine_Label = new System.Windows.Forms.RadioButton();
-            this.AnimLoading_PointerBox = new EmblemMagic.Components.PointerBox();
-            this.AnimLoading_Label = new System.Windows.Forms.RadioButton();
-            this.AnimCodeBox = new EmblemMagic.Components.CodeBox();
             this.MagicButton = new EmblemMagic.Components.MagicButton();
             this.Palette_Prev_Button = new System.Windows.Forms.Button();
             this.Palette_Next_Button = new System.Windows.Forms.Button();
@@ -64,47 +55,55 @@
             this.TSA_Prev_Button = new System.Windows.Forms.Button();
             this.Height_NumberBox = new System.Windows.Forms.NumericUpDown();
             this.Width_NumberBox = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.Height_Label = new System.Windows.Forms.Label();
+            this.Width_Label = new System.Windows.Forms.Label();
             this.Next_Button = new System.Windows.Forms.Button();
             this.Prev_Button = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.Constructor_PointerBox)).BeginInit();
+            this.Menu = new System.Windows.Forms.MenuStrip();
+            this.Menu_File = new System.Windows.Forms.ToolStripMenuItem();
+            this.File_OpenFolder = new System.Windows.Forms.ToolStripMenuItem();
+            this.File_OpenFiles = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.File_SaveFolder = new System.Windows.Forms.ToolStripMenuItem();
+            this.File_SaveFiles = new System.Windows.Forms.ToolStripMenuItem();
+            this.Menu_Tools = new System.Windows.Forms.ToolStripMenuItem();
+            this.Menu_View = new System.Windows.Forms.ToolStripMenuItem();
+            this.View_PureASM = new System.Windows.Forms.ToolStripMenuItem();
+            this.Anim_CodeBox = new EmblemMagic.Components.CodeBox();
+            this.CopyASM_Button = new System.Windows.Forms.Button();
+            this.AnimLoading_Label = new System.Windows.Forms.RadioButton();
+            this.AnimLoading_PointerBox = new EmblemMagic.Components.PointerBox();
+            this.LoopRoutine_Label = new System.Windows.Forms.RadioButton();
+            this.Constructor_Label = new System.Windows.Forms.RadioButton();
+            this.ASM_ListBox = new System.Windows.Forms.ListBox();
+            this.LoopRoutine_PointerBox = new EmblemMagic.Components.PointerBox();
+            this.Constructor_PointerBox = new EmblemMagic.Components.PointerBox();
+            this.Functions_ListBox = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.Palette_PointerBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Tileset_PointerBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TSA_PointerBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LoopRoutine_PointerBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.AnimLoading_PointerBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.AnimCodeBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Height_NumberBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Width_NumberBox)).BeginInit();
+            this.Menu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Anim_CodeBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AnimLoading_PointerBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LoopRoutine_PointerBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Constructor_PointerBox)).BeginInit();
             this.SuspendLayout();
             // 
             // EntryArrayBox
             // 
-            this.EntryArrayBox.Location = new System.Drawing.Point(12, 12);
+            this.EntryArrayBox.Location = new System.Drawing.Point(12, 31);
             this.EntryArrayBox.MaximumSize = new System.Drawing.Size(10000, 26);
             this.EntryArrayBox.MinimumSize = new System.Drawing.Size(100, 26);
-            this.EntryArrayBox.Size = new System.Drawing.Size(234, 26);
+            this.EntryArrayBox.Size = new System.Drawing.Size(243, 26);
             this.EntryArrayBox.TabIndex = 0;
-            // 
-            // Constructor_PointerBox
-            // 
-            this.Constructor_PointerBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Constructor_PointerBox.Hexadecimal = true;
-            this.Constructor_PointerBox.Location = new System.Drawing.Point(650, 4);
-            this.Constructor_PointerBox.Maximum = new decimal(new int[] {
-            33554432,
-            0,
-            0,
-            0});
-            this.Constructor_PointerBox.Name = "Constructor_PointerBox";
-            this.Constructor_PointerBox.Size = new System.Drawing.Size(70, 20);
-            this.Constructor_PointerBox.TabIndex = 1;
             // 
             // Palette_PointerBox
             // 
+            this.Palette_PointerBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Palette_PointerBox.Hexadecimal = true;
-            this.Palette_PointerBox.Location = new System.Drawing.Point(69, 250);
+            this.Palette_PointerBox.Location = new System.Drawing.Point(482, 228);
             this.Palette_PointerBox.Maximum = new decimal(new int[] {
             33554432,
             0,
@@ -116,8 +115,9 @@
             // 
             // Tileset_PointerBox
             // 
+            this.Tileset_PointerBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Tileset_PointerBox.Hexadecimal = true;
-            this.Tileset_PointerBox.Location = new System.Drawing.Point(69, 276);
+            this.Tileset_PointerBox.Location = new System.Drawing.Point(482, 254);
             this.Tileset_PointerBox.Maximum = new decimal(new int[] {
             33554432,
             0,
@@ -129,8 +129,9 @@
             // 
             // TSA_PointerBox
             // 
+            this.TSA_PointerBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.TSA_PointerBox.Hexadecimal = true;
-            this.TSA_PointerBox.Location = new System.Drawing.Point(69, 303);
+            this.TSA_PointerBox.Location = new System.Drawing.Point(482, 281);
             this.TSA_PointerBox.Maximum = new decimal(new int[] {
             33554432,
             0,
@@ -142,8 +143,9 @@
             // 
             // Palette_Label
             // 
+            this.Palette_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Palette_Label.AutoSize = true;
-            this.Palette_Label.Location = new System.Drawing.Point(22, 252);
+            this.Palette_Label.Location = new System.Drawing.Point(435, 230);
             this.Palette_Label.Name = "Palette_Label";
             this.Palette_Label.Size = new System.Drawing.Size(46, 13);
             this.Palette_Label.TabIndex = 6;
@@ -151,8 +153,9 @@
             // 
             // Tileset_Label
             // 
+            this.Tileset_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Tileset_Label.AutoSize = true;
-            this.Tileset_Label.Location = new System.Drawing.Point(24, 278);
+            this.Tileset_Label.Location = new System.Drawing.Point(437, 256);
             this.Tileset_Label.Name = "Tileset_Label";
             this.Tileset_Label.Size = new System.Drawing.Size(44, 13);
             this.Tileset_Label.TabIndex = 7;
@@ -160,8 +163,9 @@
             // 
             // TSA_Label
             // 
+            this.TSA_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.TSA_Label.AutoSize = true;
-            this.TSA_Label.Location = new System.Drawing.Point(15, 306);
+            this.TSA_Label.Location = new System.Drawing.Point(428, 284);
             this.TSA_Label.Name = "TSA_Label";
             this.TSA_Label.Size = new System.Drawing.Size(53, 17);
             this.TSA_Label.TabIndex = 8;
@@ -170,9 +174,10 @@
             // 
             // Spell_ImageBox
             // 
+            this.Spell_ImageBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Spell_ImageBox.BackColor = System.Drawing.SystemColors.Control;
             this.Spell_ImageBox.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.Spell_ImageBox.Location = new System.Drawing.Point(12, 78);
+            this.Spell_ImageBox.Location = new System.Drawing.Point(440, 31);
             this.Spell_ImageBox.Name = "Spell_ImageBox";
             this.Spell_ImageBox.Size = new System.Drawing.Size(256, 160);
             this.Spell_ImageBox.TabIndex = 10;
@@ -181,18 +186,20 @@
             // 
             // Refresh_Button
             // 
-            this.Refresh_Button.Location = new System.Drawing.Point(273, 78);
+            this.Refresh_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Refresh_Button.Location = new System.Drawing.Point(526, 316);
             this.Refresh_Button.Name = "Refresh_Button";
-            this.Refresh_Button.Size = new System.Drawing.Size(46, 43);
+            this.Refresh_Button.Size = new System.Drawing.Size(52, 46);
             this.Refresh_Button.TabIndex = 13;
-            this.Refresh_Button.Text = "Load Image";
+            this.Refresh_Button.Text = "Refresh Image";
             this.Refresh_Button.UseVisualStyleBackColor = true;
             this.Refresh_Button.Click += new System.EventHandler(this.Refresh_Button_Click);
             // 
             // Palette_CheckBox
             // 
+            this.Palette_CheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Palette_CheckBox.AutoSize = true;
-            this.Palette_CheckBox.Location = new System.Drawing.Point(145, 251);
+            this.Palette_CheckBox.Location = new System.Drawing.Point(558, 229);
             this.Palette_CheckBox.Name = "Palette_CheckBox";
             this.Palette_CheckBox.Size = new System.Drawing.Size(51, 17);
             this.Palette_CheckBox.TabIndex = 14;
@@ -201,8 +208,9 @@
             // 
             // Tileset_CheckBox
             // 
+            this.Tileset_CheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Tileset_CheckBox.AutoSize = true;
-            this.Tileset_CheckBox.Location = new System.Drawing.Point(145, 278);
+            this.Tileset_CheckBox.Location = new System.Drawing.Point(558, 256);
             this.Tileset_CheckBox.Name = "Tileset_CheckBox";
             this.Tileset_CheckBox.Size = new System.Drawing.Size(51, 17);
             this.Tileset_CheckBox.TabIndex = 15;
@@ -211,8 +219,9 @@
             // 
             // TSA_CheckBox
             // 
+            this.TSA_CheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.TSA_CheckBox.AutoSize = true;
-            this.TSA_CheckBox.Location = new System.Drawing.Point(145, 304);
+            this.TSA_CheckBox.Location = new System.Drawing.Point(558, 282);
             this.TSA_CheckBox.Name = "TSA_CheckBox";
             this.TSA_CheckBox.Size = new System.Drawing.Size(51, 17);
             this.TSA_CheckBox.TabIndex = 16;
@@ -221,52 +230,18 @@
             // 
             // Spell_PaletteBox
             // 
+            this.Spell_PaletteBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Spell_PaletteBox.ColorsPerLine = 16;
-            this.Spell_PaletteBox.Location = new System.Drawing.Point(325, 9);
+            this.Spell_PaletteBox.Location = new System.Drawing.Point(592, 316);
             this.Spell_PaletteBox.Name = "Spell_PaletteBox";
             this.Spell_PaletteBox.Size = new System.Drawing.Size(128, 64);
             this.Spell_PaletteBox.TabIndex = 17;
             this.Spell_PaletteBox.TabStop = false;
             this.Spell_PaletteBox.Text = "paletteBox1";
             // 
-            // ASM_ListBox
-            // 
-            this.ASM_ListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ASM_ListBox.Font = new System.Drawing.Font("Consolas", 8.25F);
-            this.ASM_ListBox.FormattingEnabled = true;
-            this.ASM_ListBox.Location = new System.Drawing.Point(325, 79);
-            this.ASM_ListBox.Name = "ASM_ListBox";
-            this.ASM_ListBox.Size = new System.Drawing.Size(395, 498);
-            this.ASM_ListBox.TabIndex = 19;
-            // 
-            // Constructor_Label
-            // 
-            this.Constructor_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Constructor_Label.AutoSize = true;
-            this.Constructor_Label.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.Constructor_Label.Checked = true;
-            this.Constructor_Label.Location = new System.Drawing.Point(559, 4);
-            this.Constructor_Label.Name = "Constructor_Label";
-            this.Constructor_Label.Size = new System.Drawing.Size(85, 17);
-            this.Constructor_Label.TabIndex = 21;
-            this.Constructor_Label.TabStop = true;
-            this.Constructor_Label.Text = "Constructor :";
-            this.Constructor_Label.Click += new System.EventHandler(this.ASM_Label_CheckedChanged);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(497, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(46, 54);
-            this.button1.TabIndex = 28;
-            this.button1.Text = "Copy ASM";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.CopyASM_Click);
-            // 
             // Name_TextBox
             // 
-            this.Name_TextBox.Location = new System.Drawing.Point(69, 53);
+            this.Name_TextBox.Location = new System.Drawing.Point(79, 63);
             this.Name_TextBox.Name = "Name_TextBox";
             this.Name_TextBox.Size = new System.Drawing.Size(108, 20);
             this.Name_TextBox.TabIndex = 30;
@@ -274,7 +249,7 @@
             // Looped_CheckBox
             // 
             this.Looped_CheckBox.AutoSize = true;
-            this.Looped_CheckBox.Location = new System.Drawing.Point(183, 55);
+            this.Looped_CheckBox.Location = new System.Drawing.Point(193, 65);
             this.Looped_CheckBox.Name = "Looped_CheckBox";
             this.Looped_CheckBox.Size = new System.Drawing.Size(62, 17);
             this.Looped_CheckBox.TabIndex = 31;
@@ -284,101 +259,16 @@
             // Name_Label
             // 
             this.Name_Label.AutoSize = true;
-            this.Name_Label.Location = new System.Drawing.Point(22, 56);
+            this.Name_Label.Location = new System.Drawing.Point(32, 66);
             this.Name_Label.Name = "Name_Label";
             this.Name_Label.Size = new System.Drawing.Size(41, 13);
             this.Name_Label.TabIndex = 32;
             this.Name_Label.Text = "Name :";
             // 
-            // LoopRoutine_PointerBox
-            // 
-            this.LoopRoutine_PointerBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LoopRoutine_PointerBox.Hexadecimal = true;
-            this.LoopRoutine_PointerBox.Location = new System.Drawing.Point(650, 30);
-            this.LoopRoutine_PointerBox.Maximum = new decimal(new int[] {
-            33554432,
-            0,
-            0,
-            0});
-            this.LoopRoutine_PointerBox.Name = "LoopRoutine_PointerBox";
-            this.LoopRoutine_PointerBox.Size = new System.Drawing.Size(70, 20);
-            this.LoopRoutine_PointerBox.TabIndex = 18;
-            // 
-            // LoopRoutine_Label
-            // 
-            this.LoopRoutine_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LoopRoutine_Label.AutoSize = true;
-            this.LoopRoutine_Label.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.LoopRoutine_Label.Location = new System.Drawing.Point(549, 30);
-            this.LoopRoutine_Label.Name = "LoopRoutine_Label";
-            this.LoopRoutine_Label.Size = new System.Drawing.Size(95, 17);
-            this.LoopRoutine_Label.TabIndex = 23;
-            this.LoopRoutine_Label.Text = "Loop Routine :";
-            this.LoopRoutine_Label.Click += new System.EventHandler(this.ASM_Label_CheckedChanged);
-            // 
-            // AnimLoading_PointerBox
-            // 
-            this.AnimLoading_PointerBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.AnimLoading_PointerBox.Hexadecimal = true;
-            this.AnimLoading_PointerBox.Location = new System.Drawing.Point(650, 56);
-            this.AnimLoading_PointerBox.Maximum = new decimal(new int[] {
-            33554432,
-            0,
-            0,
-            0});
-            this.AnimLoading_PointerBox.Name = "AnimLoading_PointerBox";
-            this.AnimLoading_PointerBox.Size = new System.Drawing.Size(70, 20);
-            this.AnimLoading_PointerBox.TabIndex = 24;
-            // 
-            // AnimLoading_Label
-            // 
-            this.AnimLoading_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.AnimLoading_Label.AutoSize = true;
-            this.AnimLoading_Label.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.AnimLoading_Label.Location = new System.Drawing.Point(549, 56);
-            this.AnimLoading_Label.Name = "AnimLoading_Label";
-            this.AnimLoading_Label.Size = new System.Drawing.Size(95, 17);
-            this.AnimLoading_Label.TabIndex = 27;
-            this.AnimLoading_Label.Text = "Anim Loading :";
-            this.AnimLoading_Label.Click += new System.EventHandler(this.ASM_Label_CheckedChanged);
-            // 
-            // AnimCodeBox
-            // 
-            this.AnimCodeBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.AnimCodeBox.AutoCompleteBracketsList = new char[] {
-        '(',
-        ')',
-        '{',
-        '}',
-        '[',
-        ']',
-        '\"',
-        '\"',
-        '\'',
-        '\''};
-            this.AnimCodeBox.AutoScrollMinSize = new System.Drawing.Size(23, 12);
-            this.AnimCodeBox.BackBrush = null;
-            this.AnimCodeBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.AnimCodeBox.CharHeight = 12;
-            this.AnimCodeBox.CharWidth = 6;
-            this.AnimCodeBox.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.AnimCodeBox.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.AnimCodeBox.Font = new System.Drawing.Font("Consolas", 8F);
-            this.AnimCodeBox.IsReplaceMode = false;
-            this.AnimCodeBox.Location = new System.Drawing.Point(13, 329);
-            this.AnimCodeBox.Name = "AnimCodeBox";
-            this.AnimCodeBox.Paddings = new System.Windows.Forms.Padding(0);
-            this.AnimCodeBox.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
-            this.AnimCodeBox.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("AnimCodeBox.ServiceColors")));
-            this.AnimCodeBox.Size = new System.Drawing.Size(306, 248);
-            this.AnimCodeBox.TabIndex = 33;
-            this.AnimCodeBox.Zoom = 100;
-            // 
             // MagicButton
             // 
-            this.MagicButton.Location = new System.Drawing.Point(295, 127);
+            this.MagicButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.MagicButton.Location = new System.Drawing.Point(554, 368);
             this.MagicButton.MaximumSize = new System.Drawing.Size(24, 24);
             this.MagicButton.MinimumSize = new System.Drawing.Size(24, 24);
             this.MagicButton.Name = "MagicButton";
@@ -389,9 +279,10 @@
             // 
             // Palette_Prev_Button
             // 
-            this.Palette_Prev_Button.Location = new System.Drawing.Point(228, 250);
+            this.Palette_Prev_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Palette_Prev_Button.Location = new System.Drawing.Point(641, 229);
             this.Palette_Prev_Button.Name = "Palette_Prev_Button";
-            this.Palette_Prev_Button.Size = new System.Drawing.Size(30, 20);
+            this.Palette_Prev_Button.Size = new System.Drawing.Size(24, 20);
             this.Palette_Prev_Button.TabIndex = 35;
             this.Palette_Prev_Button.Text = "<-";
             this.Palette_Prev_Button.UseVisualStyleBackColor = true;
@@ -399,9 +290,10 @@
             // 
             // Palette_Next_Button
             // 
-            this.Palette_Next_Button.Location = new System.Drawing.Point(264, 250);
+            this.Palette_Next_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Palette_Next_Button.Location = new System.Drawing.Point(671, 229);
             this.Palette_Next_Button.Name = "Palette_Next_Button";
-            this.Palette_Next_Button.Size = new System.Drawing.Size(30, 20);
+            this.Palette_Next_Button.Size = new System.Drawing.Size(24, 20);
             this.Palette_Next_Button.TabIndex = 36;
             this.Palette_Next_Button.Text = "->";
             this.Palette_Next_Button.UseVisualStyleBackColor = true;
@@ -409,9 +301,10 @@
             // 
             // Tileset_Next_Button
             // 
-            this.Tileset_Next_Button.Location = new System.Drawing.Point(264, 276);
+            this.Tileset_Next_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Tileset_Next_Button.Location = new System.Drawing.Point(671, 255);
             this.Tileset_Next_Button.Name = "Tileset_Next_Button";
-            this.Tileset_Next_Button.Size = new System.Drawing.Size(30, 20);
+            this.Tileset_Next_Button.Size = new System.Drawing.Size(24, 20);
             this.Tileset_Next_Button.TabIndex = 38;
             this.Tileset_Next_Button.Text = "->";
             this.Tileset_Next_Button.UseVisualStyleBackColor = true;
@@ -419,9 +312,10 @@
             // 
             // Tileset_Prev_Button
             // 
-            this.Tileset_Prev_Button.Location = new System.Drawing.Point(228, 276);
+            this.Tileset_Prev_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Tileset_Prev_Button.Location = new System.Drawing.Point(641, 255);
             this.Tileset_Prev_Button.Name = "Tileset_Prev_Button";
-            this.Tileset_Prev_Button.Size = new System.Drawing.Size(30, 20);
+            this.Tileset_Prev_Button.Size = new System.Drawing.Size(24, 20);
             this.Tileset_Prev_Button.TabIndex = 37;
             this.Tileset_Prev_Button.Text = "<-";
             this.Tileset_Prev_Button.UseVisualStyleBackColor = true;
@@ -429,9 +323,10 @@
             // 
             // TSA_Next_Button
             // 
-            this.TSA_Next_Button.Location = new System.Drawing.Point(264, 302);
+            this.TSA_Next_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.TSA_Next_Button.Location = new System.Drawing.Point(671, 281);
             this.TSA_Next_Button.Name = "TSA_Next_Button";
-            this.TSA_Next_Button.Size = new System.Drawing.Size(30, 20);
+            this.TSA_Next_Button.Size = new System.Drawing.Size(24, 20);
             this.TSA_Next_Button.TabIndex = 40;
             this.TSA_Next_Button.Text = "->";
             this.TSA_Next_Button.UseVisualStyleBackColor = true;
@@ -439,9 +334,10 @@
             // 
             // TSA_Prev_Button
             // 
-            this.TSA_Prev_Button.Location = new System.Drawing.Point(228, 302);
+            this.TSA_Prev_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.TSA_Prev_Button.Location = new System.Drawing.Point(641, 281);
             this.TSA_Prev_Button.Name = "TSA_Prev_Button";
-            this.TSA_Prev_Button.Size = new System.Drawing.Size(30, 20);
+            this.TSA_Prev_Button.Size = new System.Drawing.Size(24, 20);
             this.TSA_Prev_Button.TabIndex = 39;
             this.TSA_Prev_Button.Text = "<-";
             this.TSA_Prev_Button.UseVisualStyleBackColor = true;
@@ -449,7 +345,8 @@
             // 
             // Height_NumberBox
             // 
-            this.Height_NumberBox.Location = new System.Drawing.Point(273, 52);
+            this.Height_NumberBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Height_NumberBox.Location = new System.Drawing.Point(474, 342);
             this.Height_NumberBox.Maximum = new decimal(new int[] {
             20,
             0,
@@ -467,7 +364,8 @@
             // 
             // Width_NumberBox
             // 
-            this.Width_NumberBox.Location = new System.Drawing.Point(273, 27);
+            this.Width_NumberBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Width_NumberBox.Location = new System.Drawing.Point(474, 316);
             this.Width_NumberBox.Maximum = new decimal(new int[] {
             32,
             0,
@@ -483,29 +381,32 @@
             0});
             this.Width_NumberBox.ValueChanged += new System.EventHandler(this.Width_NumberBox_ValueChanged);
             // 
-            // label1
+            // Height_Label
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(252, 54);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(15, 13);
-            this.label1.TabIndex = 43;
-            this.label1.Text = "H";
+            this.Height_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Height_Label.AutoSize = true;
+            this.Height_Label.Location = new System.Drawing.Point(424, 344);
+            this.Height_Label.Name = "Height_Label";
+            this.Height_Label.Size = new System.Drawing.Size(44, 13);
+            this.Height_Label.TabIndex = 43;
+            this.Height_Label.Text = "Height :";
             // 
-            // label2
+            // Width_Label
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(252, 30);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(18, 13);
-            this.label2.TabIndex = 44;
-            this.label2.Text = "W";
+            this.Width_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Width_Label.AutoSize = true;
+            this.Width_Label.Location = new System.Drawing.Point(427, 318);
+            this.Width_Label.Name = "Width_Label";
+            this.Width_Label.Size = new System.Drawing.Size(41, 13);
+            this.Width_Label.TabIndex = 44;
+            this.Width_Label.Text = "Width :";
             // 
             // Next_Button
             // 
-            this.Next_Button.Location = new System.Drawing.Point(300, 251);
+            this.Next_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Next_Button.Location = new System.Drawing.Point(701, 228);
             this.Next_Button.Name = "Next_Button";
-            this.Next_Button.Size = new System.Drawing.Size(19, 70);
+            this.Next_Button.Size = new System.Drawing.Size(19, 73);
             this.Next_Button.TabIndex = 45;
             this.Next_Button.Text = ">";
             this.Next_Button.UseVisualStyleBackColor = true;
@@ -513,23 +414,247 @@
             // 
             // Prev_Button
             // 
-            this.Prev_Button.Location = new System.Drawing.Point(203, 250);
+            this.Prev_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Prev_Button.Location = new System.Drawing.Point(616, 228);
             this.Prev_Button.Name = "Prev_Button";
-            this.Prev_Button.Size = new System.Drawing.Size(19, 71);
+            this.Prev_Button.Size = new System.Drawing.Size(19, 73);
             this.Prev_Button.TabIndex = 46;
             this.Prev_Button.Text = "<";
             this.Prev_Button.UseVisualStyleBackColor = true;
             this.Prev_Button.Click += new System.EventHandler(this.Prev_Button_Click);
             // 
+            // Menu
+            // 
+            this.Menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Menu_File,
+            this.Menu_Tools,
+            this.Menu_View});
+            this.Menu.Location = new System.Drawing.Point(0, 0);
+            this.Menu.Name = "Menu";
+            this.Menu.Size = new System.Drawing.Size(732, 24);
+            this.Menu.TabIndex = 47;
+            this.Menu.Text = "menuStrip1";
+            // 
+            // Menu_File
+            // 
+            this.Menu_File.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.File_OpenFolder,
+            this.File_OpenFiles,
+            this.toolStripSeparator1,
+            this.File_SaveFolder,
+            this.File_SaveFiles});
+            this.Menu_File.Name = "Menu_File";
+            this.Menu_File.Size = new System.Drawing.Size(37, 20);
+            this.Menu_File.Text = "File";
+            // 
+            // File_OpenFolder
+            // 
+            this.File_OpenFolder.Name = "File_OpenFolder";
+            this.File_OpenFolder.Size = new System.Drawing.Size(276, 22);
+            this.File_OpenFolder.Text = "Compile anim from folder and script...";
+            // 
+            // File_OpenFiles
+            // 
+            this.File_OpenFiles.Name = "File_OpenFiles";
+            this.File_OpenFiles.Size = new System.Drawing.Size(276, 22);
+            this.File_OpenFiles.Text = "Insert anim from compiled files...";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(273, 6);
+            // 
+            // File_SaveFolder
+            // 
+            this.File_SaveFolder.Name = "File_SaveFolder";
+            this.File_SaveFolder.Size = new System.Drawing.Size(276, 22);
+            this.File_SaveFolder.Text = "Save current anim to folder...";
+            // 
+            // File_SaveFiles
+            // 
+            this.File_SaveFiles.Name = "File_SaveFiles";
+            this.File_SaveFiles.Size = new System.Drawing.Size(276, 22);
+            this.File_SaveFiles.Text = "Save current anim as compiled files...";
+            // 
+            // Menu_Tools
+            // 
+            this.Menu_Tools.Name = "Menu_Tools";
+            this.Menu_Tools.Size = new System.Drawing.Size(48, 20);
+            this.Menu_Tools.Text = "Tools";
+            // 
+            // Menu_View
+            // 
+            this.Menu_View.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.View_PureASM});
+            this.Menu_View.Name = "Menu_View";
+            this.Menu_View.Size = new System.Drawing.Size(44, 20);
+            this.Menu_View.Text = "View";
+            // 
+            // View_PureASM
+            // 
+            this.View_PureASM.CheckOnClick = true;
+            this.View_PureASM.Name = "View_PureASM";
+            this.View_PureASM.Size = new System.Drawing.Size(313, 22);
+            this.View_PureASM.Text = "View ASM dissassembly instead of anim code";
+            this.View_PureASM.Click += new System.EventHandler(this.View_PureASM_Click);
+            // 
+            // Anim_CodeBox
+            // 
+            this.Anim_CodeBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Anim_CodeBox.AutoCompleteBracketsList = new char[] {
+        '(',
+        ')',
+        '{',
+        '}',
+        '[',
+        ']',
+        '\"',
+        '\"',
+        '\'',
+        '\''};
+            this.Anim_CodeBox.AutoScrollMinSize = new System.Drawing.Size(23, 12);
+            this.Anim_CodeBox.BackBrush = null;
+            this.Anim_CodeBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Anim_CodeBox.CharHeight = 12;
+            this.Anim_CodeBox.CharWidth = 6;
+            this.Anim_CodeBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.Anim_CodeBox.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.Anim_CodeBox.Font = new System.Drawing.Font("Consolas", 8F);
+            this.Anim_CodeBox.IsReplaceMode = false;
+            this.Anim_CodeBox.Location = new System.Drawing.Point(12, 168);
+            this.Anim_CodeBox.Name = "Anim_CodeBox";
+            this.Anim_CodeBox.Paddings = new System.Windows.Forms.Padding(0);
+            this.Anim_CodeBox.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(51)))), ((int)(((byte)(153)))), ((int)(((byte)(255)))));
+            this.Anim_CodeBox.ServiceColors = ((FastColoredTextBoxNS.ServiceColors)(resources.GetObject("Anim_CodeBox.ServiceColors")));
+            this.Anim_CodeBox.Size = new System.Drawing.Size(396, 212);
+            this.Anim_CodeBox.TabIndex = 56;
+            this.Anim_CodeBox.Zoom = 100;
+            // 
+            // CopyASM_Button
+            // 
+            this.CopyASM_Button.Location = new System.Drawing.Point(360, 126);
+            this.CopyASM_Button.Name = "CopyASM_Button";
+            this.CopyASM_Button.Size = new System.Drawing.Size(48, 36);
+            this.CopyASM_Button.TabIndex = 55;
+            this.CopyASM_Button.Text = "Copy ASM";
+            this.CopyASM_Button.UseVisualStyleBackColor = true;
+            // 
+            // AnimLoading_Label
+            // 
+            this.AnimLoading_Label.AutoSize = true;
+            this.AnimLoading_Label.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.AnimLoading_Label.Location = new System.Drawing.Point(16, 141);
+            this.AnimLoading_Label.Name = "AnimLoading_Label";
+            this.AnimLoading_Label.Size = new System.Drawing.Size(95, 17);
+            this.AnimLoading_Label.TabIndex = 54;
+            this.AnimLoading_Label.Text = "Anim Loading :";
+            // 
+            // AnimLoading_PointerBox
+            // 
+            this.AnimLoading_PointerBox.Hexadecimal = true;
+            this.AnimLoading_PointerBox.Location = new System.Drawing.Point(117, 141);
+            this.AnimLoading_PointerBox.Maximum = new decimal(new int[] {
+            33554432,
+            0,
+            0,
+            0});
+            this.AnimLoading_PointerBox.Name = "AnimLoading_PointerBox";
+            this.AnimLoading_PointerBox.Size = new System.Drawing.Size(70, 20);
+            this.AnimLoading_PointerBox.TabIndex = 53;
+            // 
+            // LoopRoutine_Label
+            // 
+            this.LoopRoutine_Label.AutoSize = true;
+            this.LoopRoutine_Label.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.LoopRoutine_Label.Location = new System.Drawing.Point(16, 115);
+            this.LoopRoutine_Label.Name = "LoopRoutine_Label";
+            this.LoopRoutine_Label.Size = new System.Drawing.Size(95, 17);
+            this.LoopRoutine_Label.TabIndex = 52;
+            this.LoopRoutine_Label.Text = "Loop Routine :";
+            // 
+            // Constructor_Label
+            // 
+            this.Constructor_Label.AutoSize = true;
+            this.Constructor_Label.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.Constructor_Label.Checked = true;
+            this.Constructor_Label.Location = new System.Drawing.Point(26, 89);
+            this.Constructor_Label.Name = "Constructor_Label";
+            this.Constructor_Label.Size = new System.Drawing.Size(85, 17);
+            this.Constructor_Label.TabIndex = 51;
+            this.Constructor_Label.TabStop = true;
+            this.Constructor_Label.Text = "Constructor :";
+            // 
+            // ASM_ListBox
+            // 
+            this.ASM_ListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ASM_ListBox.Font = new System.Drawing.Font("Consolas", 8.25F);
+            this.ASM_ListBox.FormattingEnabled = true;
+            this.ASM_ListBox.Location = new System.Drawing.Point(12, 168);
+            this.ASM_ListBox.Name = "ASM_ListBox";
+            this.ASM_ListBox.Size = new System.Drawing.Size(395, 212);
+            this.ASM_ListBox.TabIndex = 50;
+            this.ASM_ListBox.Visible = false;
+            // 
+            // LoopRoutine_PointerBox
+            // 
+            this.LoopRoutine_PointerBox.Hexadecimal = true;
+            this.LoopRoutine_PointerBox.Location = new System.Drawing.Point(117, 115);
+            this.LoopRoutine_PointerBox.Maximum = new decimal(new int[] {
+            33554432,
+            0,
+            0,
+            0});
+            this.LoopRoutine_PointerBox.Name = "LoopRoutine_PointerBox";
+            this.LoopRoutine_PointerBox.Size = new System.Drawing.Size(70, 20);
+            this.LoopRoutine_PointerBox.TabIndex = 49;
+            // 
+            // Constructor_PointerBox
+            // 
+            this.Constructor_PointerBox.Hexadecimal = true;
+            this.Constructor_PointerBox.Location = new System.Drawing.Point(117, 89);
+            this.Constructor_PointerBox.Maximum = new decimal(new int[] {
+            33554432,
+            0,
+            0,
+            0});
+            this.Constructor_PointerBox.Name = "Constructor_PointerBox";
+            this.Constructor_PointerBox.Size = new System.Drawing.Size(70, 20);
+            this.Constructor_PointerBox.TabIndex = 48;
+            // 
+            // Functions_ListBox
+            // 
+            this.Functions_ListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Functions_ListBox.FormattingEnabled = true;
+            this.Functions_ListBox.Location = new System.Drawing.Point(193, 93);
+            this.Functions_ListBox.Name = "Functions_ListBox";
+            this.Functions_ListBox.ScrollAlwaysVisible = true;
+            this.Functions_ListBox.Size = new System.Drawing.Size(161, 69);
+            this.Functions_ListBox.TabIndex = 57;
+            // 
             // SpellAnimEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(732, 592);
+            this.ClientSize = new System.Drawing.Size(732, 393);
+            this.Controls.Add(this.Functions_ListBox);
+            this.Controls.Add(this.Anim_CodeBox);
+            this.Controls.Add(this.CopyASM_Button);
+            this.Controls.Add(this.AnimLoading_Label);
+            this.Controls.Add(this.AnimLoading_PointerBox);
+            this.Controls.Add(this.LoopRoutine_Label);
+            this.Controls.Add(this.Constructor_Label);
+            this.Controls.Add(this.ASM_ListBox);
+            this.Controls.Add(this.LoopRoutine_PointerBox);
+            this.Controls.Add(this.Constructor_PointerBox);
             this.Controls.Add(this.Prev_Button);
             this.Controls.Add(this.Next_Button);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.Width_Label);
+            this.Controls.Add(this.Height_Label);
             this.Controls.Add(this.Width_NumberBox);
             this.Controls.Add(this.Height_NumberBox);
             this.Controls.Add(this.TSA_Next_Button);
@@ -539,17 +664,9 @@
             this.Controls.Add(this.Palette_Next_Button);
             this.Controls.Add(this.Palette_Prev_Button);
             this.Controls.Add(this.MagicButton);
-            this.Controls.Add(this.AnimCodeBox);
             this.Controls.Add(this.Name_Label);
             this.Controls.Add(this.Looped_CheckBox);
             this.Controls.Add(this.Name_TextBox);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.AnimLoading_Label);
-            this.Controls.Add(this.AnimLoading_PointerBox);
-            this.Controls.Add(this.LoopRoutine_Label);
-            this.Controls.Add(this.Constructor_Label);
-            this.Controls.Add(this.ASM_ListBox);
-            this.Controls.Add(this.LoopRoutine_PointerBox);
             this.Controls.Add(this.Spell_PaletteBox);
             this.Controls.Add(this.TSA_CheckBox);
             this.Controls.Add(this.Tileset_CheckBox);
@@ -562,19 +679,23 @@
             this.Controls.Add(this.TSA_PointerBox);
             this.Controls.Add(this.Tileset_PointerBox);
             this.Controls.Add(this.Palette_PointerBox);
-            this.Controls.Add(this.Constructor_PointerBox);
             this.Controls.Add(this.EntryArrayBox);
+            this.Controls.Add(this.Menu);
+            this.MainMenuStrip = this.Menu;
+            this.MinimumSize = new System.Drawing.Size(748, 431);
             this.Name = "SpellAnimEditor";
             this.Text = "SpellAnimEditor";
-            ((System.ComponentModel.ISupportInitialize)(this.Constructor_PointerBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Palette_PointerBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Tileset_PointerBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TSA_PointerBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.LoopRoutine_PointerBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.AnimLoading_PointerBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.AnimCodeBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Height_NumberBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Width_NumberBox)).EndInit();
+            this.Menu.ResumeLayout(false);
+            this.Menu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Anim_CodeBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.AnimLoading_PointerBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.LoopRoutine_PointerBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Constructor_PointerBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -583,7 +704,6 @@
         #endregion
 
         private Components.ByteArrayBox EntryArrayBox;
-        private Components.PointerBox Constructor_PointerBox;
         private Components.PointerBox Palette_PointerBox;
         private Components.PointerBox Tileset_PointerBox;
         private Components.PointerBox TSA_PointerBox;
@@ -596,17 +716,9 @@
         private System.Windows.Forms.CheckBox Tileset_CheckBox;
         private System.Windows.Forms.CheckBox TSA_CheckBox;
         private Components.PaletteBox Spell_PaletteBox;
-        private System.Windows.Forms.ListBox ASM_ListBox;
-        private System.Windows.Forms.RadioButton Constructor_Label;
-        private System.Windows.Forms.RadioButton LoopRoutine_Label;
-        private System.Windows.Forms.RadioButton AnimLoading_Label;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox Name_TextBox;
         private System.Windows.Forms.CheckBox Looped_CheckBox;
         private System.Windows.Forms.Label Name_Label;
-        private Components.PointerBox LoopRoutine_PointerBox;
-        private Components.PointerBox AnimLoading_PointerBox;
-        private Components.CodeBox AnimCodeBox;
         private Components.MagicButton MagicButton;
         private System.Windows.Forms.Button Palette_Prev_Button;
         private System.Windows.Forms.Button Palette_Next_Button;
@@ -616,9 +728,29 @@
         private System.Windows.Forms.Button TSA_Prev_Button;
         private System.Windows.Forms.NumericUpDown Height_NumberBox;
         private System.Windows.Forms.NumericUpDown Width_NumberBox;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label Height_Label;
+        private System.Windows.Forms.Label Width_Label;
         private System.Windows.Forms.Button Next_Button;
         private System.Windows.Forms.Button Prev_Button;
+        private System.Windows.Forms.MenuStrip Menu;
+        private Components.CodeBox Anim_CodeBox;
+        private System.Windows.Forms.Button CopyASM_Button;
+        private System.Windows.Forms.RadioButton AnimLoading_Label;
+        private Components.PointerBox AnimLoading_PointerBox;
+        private System.Windows.Forms.RadioButton LoopRoutine_Label;
+        private System.Windows.Forms.RadioButton Constructor_Label;
+        private System.Windows.Forms.ListBox ASM_ListBox;
+        private Components.PointerBox LoopRoutine_PointerBox;
+        private Components.PointerBox Constructor_PointerBox;
+        private System.Windows.Forms.ListBox Functions_ListBox;
+        private System.Windows.Forms.ToolStripMenuItem Menu_File;
+        private System.Windows.Forms.ToolStripMenuItem File_OpenFolder;
+        private System.Windows.Forms.ToolStripMenuItem File_OpenFiles;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem File_SaveFolder;
+        private System.Windows.Forms.ToolStripMenuItem File_SaveFiles;
+        private System.Windows.Forms.ToolStripMenuItem Menu_Tools;
+        private System.Windows.Forms.ToolStripMenuItem Menu_View;
+        private System.Windows.Forms.ToolStripMenuItem View_PureASM;
     }
 }

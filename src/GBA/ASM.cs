@@ -1079,15 +1079,15 @@ namespace GBA
 
         struct Opcode
         {
-            public uint Mask;
+            public uint BitMask;
             public uint CodeValue;
             public string Format;
 
-            public Opcode(uint mask, uint instruction, string formatCode)
+            public Opcode(uint bitmask, uint instruction, string formatstring)
             {
-                this.Mask = mask;
+                this.BitMask = bitmask;
                 this.CodeValue = instruction;
-                this.Format = formatCode;
+                this.Format = formatstring;
             }
         };
 
@@ -1108,63 +1108,63 @@ namespace GBA
         static Opcode[] Opcodes_ARM = new Opcode[]
         {
             // Undefined
-            new Opcode (0x0E000010, 0x06000010, "[ undefined ]"),
+            new Opcode(0x0E000010, 0x06000010, "[ undefined ]"),
             // Branch instructions
-            new Opcode (0x0F000000, 0x0A000000, "b%c %o(0,24,2)"),
-            new Opcode (0x0F000000, 0x0B000000, "bl%c %o(0,24,2)"),
-            new Opcode (0x0FFFFFF0, 0x012FFF10, "bx%c %r(0)"),
-            new Opcode (0x0FFFFFF0, 0x012FFF30, "blx%c %r(0)"),
-            new Opcode (0x0F000000, 0x0F000000, "swi%c %q"),
-            new Opcode (0xFF000000, 0xE1000000, "bkpt %q"),
+            new Opcode(0x0F000000, 0x0A000000, "b%c %o(0,24,2)"),
+            new Opcode(0x0F000000, 0x0B000000, "bl%c %o(0,24,2)"),
+            new Opcode(0x0FFFFFF0, 0x012FFF10, "bx%c %r(0)"),
+            new Opcode(0x0FFFFFF0, 0x012FFF30, "blx%c %r(0)"),
+            new Opcode(0x0F000000, 0x0F000000, "swi%c %q"),
+            new Opcode(0xFF000000, 0xE1000000, "bkpt %q"),
             // Data processing (ALU)
-            new Opcode (0x0DE00000, 0x00000000, "and%c%s %r(12), %r(16), %n"),
-            new Opcode (0x0DE00000, 0x00200000, "eor%c%s %r(12), %r(16), %n"),
-            new Opcode (0x0DE00000, 0x00400000, "sub%c%s %r(12), %r(16), %n"),
-            new Opcode (0x0DE00000, 0x00600000, "rsb%c%s %r(12), %r(16), %n"),
-            new Opcode (0x0DE00000, 0x00800000, "add%c%s %r(12), %r(16), %n"),
-            new Opcode (0x0DE00000, 0x00A00000, "adc%c%s %r(12), %r(16), %n"),
-            new Opcode (0x0DE00000, 0x00C00000, "sbc%c%s %r(12), %r(16), %n"),
-            new Opcode (0x0DE00000, 0x00E00000, "rsc%c%s %r(12), %r(16), %n"),
-            new Opcode (0x0DE00000, 0x01000000, "tst%c %r(16), %n"),
-            new Opcode (0x0DE00000, 0x01200000, "teq%c %r(16), %n"),
-            new Opcode (0x0DE00000, 0x01400000, "cmp%c %r(16), %n"),
-            new Opcode (0x0DE00000, 0x01600000, "cmn%c %r(16), %n"),
-            new Opcode (0x0DE00000, 0x01800000, "orr%c%s %r(12), %r(16), %n"),
-            new Opcode (0x0DE00000, 0x01A00000, "mov%c%s %r(12), %n"),
-            new Opcode (0x0DE00000, 0x01C00000, "bic%c%s %r(12), %r(16), %n"),
-            new Opcode (0x0DE00000, 0x01E00000, "mvn%c%s %r(12), %n"),
+            new Opcode(0x0DE00000, 0x00000000, "and%c%s %r(12), %r(16), %n"),
+            new Opcode(0x0DE00000, 0x00200000, "eor%c%s %r(12), %r(16), %n"),
+            new Opcode(0x0DE00000, 0x00400000, "sub%c%s %r(12), %r(16), %n"),
+            new Opcode(0x0DE00000, 0x00600000, "rsb%c%s %r(12), %r(16), %n"),
+            new Opcode(0x0DE00000, 0x00800000, "add%c%s %r(12), %r(16), %n"),
+            new Opcode(0x0DE00000, 0x00A00000, "adc%c%s %r(12), %r(16), %n"),
+            new Opcode(0x0DE00000, 0x00C00000, "sbc%c%s %r(12), %r(16), %n"),
+            new Opcode(0x0DE00000, 0x00E00000, "rsc%c%s %r(12), %r(16), %n"),
+            new Opcode(0x0DE00000, 0x01000000, "tst%c %r(16), %n"),
+            new Opcode(0x0DE00000, 0x01200000, "teq%c %r(16), %n"),
+            new Opcode(0x0DE00000, 0x01400000, "cmp%c %r(16), %n"),
+            new Opcode(0x0DE00000, 0x01600000, "cmn%c %r(16), %n"),
+            new Opcode(0x0DE00000, 0x01800000, "orr%c%s %r(12), %r(16), %n"),
+            new Opcode(0x0DE00000, 0x01A00000, "mov%c%s %r(12), %n"),
+            new Opcode(0x0DE00000, 0x01C00000, "bic%c%s %r(12), %r(16), %n"),
+            new Opcode(0x0DE00000, 0x01E00000, "mvn%c%s %r(12), %n"),
             // Multiply and Multiply-Accumulate instructions
-            new Opcode (0x0FE000F0, 0x00000090, "mul%c%s %r(16), %r(0), %r(8)"),
-            new Opcode (0x0FE000F0, 0x00200090, "mla%c%s %r(16), %r(0), %r(8), %r(12)"),
-            new Opcode (0x0FA000F0, 0x00800090, "%umull%c%s %r(12), %r(16), %r(0), %r(8)"),
-            new Opcode (0x0FA000F0, 0x00A00090, "%umlal%c%s %r(12), %r(16), %r(0), %r(8)"),
+            new Opcode(0x0FE000F0, 0x00000090, "mul%c%s %r(16), %r(0), %r(8)"),
+            new Opcode(0x0FE000F0, 0x00200090, "mla%c%s %r(16), %r(0), %r(8), %r(12)"),
+            new Opcode(0x0FA000F0, 0x00800090, "%umull%c%s %r(12), %r(16), %r(0), %r(8)"),
+            new Opcode(0x0FA000F0, 0x00A00090, "%umlal%c%s %r(12), %r(16), %r(0), %r(8)"),
             // PSR transfer
-            new Opcode (0x0FBF0FFF, 0x010F0000, "mrs%c %r(12), %x"),
-            new Opcode (0x0FB0F000, 0x0120F000, "msr%c %X, %r(0)"),
-            new Opcode (0x0FB0FFF0, 0x0160F000, "msr%c %X, [%i(0,8,0), lsl %i(8,4,1)]"),
+            new Opcode(0x0FBF0FFF, 0x010F0000, "mrs%c %r(12), %x"),
+            new Opcode(0x0FB0F000, 0x0120F000, "msr%c %X, %r(0)"),
+            new Opcode(0x0FB0FFF0, 0x0160F000, "msr%c %X, [%i(0,8,0), lsl %i(8,4,1)]"),
             // Load/Store instructions
-            new Opcode (0x0FB00FF0, 0x01000090, "swp%c%b(22) %r(12), %r(0), [%r(16)]"),
-            new Opcode (0x0FB000F0, 0x01000090, "[ ??? ]"),
-            new Opcode (0x0C100000, 0x04000000, "str%c%b(22)%t %r(12), %a"),
-            new Opcode (0x0C100000, 0x04100000, "ldr%c%b(22)%t %r(12), %a"),
+            new Opcode(0x0FB00FF0, 0x01000090, "swp%c%b(22) %r(12), %r(0), [%r(16)]"),
+            new Opcode(0x0FB000F0, 0x01000090, "[ ??? ]"),
+            new Opcode(0x0C100000, 0x04000000, "str%c%b(22)%t %r(12), %a"),
+            new Opcode(0x0C100000, 0x04100000, "ldr%c%b(22)%t %r(12), %a"),
             // Halfword, Doubleword, and signed load/store
-            new Opcode (0x0E5000F0, 0x000000B0, "str%ch %r(12), %A"),
-            new Opcode (0x0E5000F0, 0x000000D0, "ldr%cd %r(12), %A"),
-            new Opcode (0x0E5000F0, 0x000000F0, "str%cd %r(12), %A"),
-            new Opcode (0x0E5000F0, 0x001000B0, "ldr%ch %r(12), %A"),
-            new Opcode (0x0E5000F0, 0x001000D0, "ldr%csb %r(12), %A"),
-            new Opcode (0x0E5000F0, 0x001000F0, "ldr%csh %r(12), %A"),
+            new Opcode(0x0E5000F0, 0x000000B0, "str%ch %r(12), %A"),
+            new Opcode(0x0E5000F0, 0x000000D0, "ldr%cd %r(12), %A"),
+            new Opcode(0x0E5000F0, 0x000000F0, "str%cd %r(12), %A"),
+            new Opcode(0x0E5000F0, 0x001000B0, "ldr%ch %r(12), %A"),
+            new Opcode(0x0E5000F0, 0x001000D0, "ldr%csb %r(12), %A"),
+            new Opcode(0x0E5000F0, 0x001000F0, "ldr%csh %r(12), %A"),
             // Multiple load/store instructions
-            new Opcode (0x0E100000, 0x08000000, "stm%c%m %r(16)%w, %l%U"),
-            new Opcode (0x0E100000, 0x08100000, "ldm%c%m %r(16)%w, %l%U"),
+            new Opcode(0x0E100000, 0x08000000, "stm%c%m %r(16)%w, %l%U"),
+            new Opcode(0x0E100000, 0x08100000, "ldm%c%m %r(16)%w, %l%U"),
             // Coprocessor instructions
-            new Opcode (0x0F100010, 0x0E000010, "mcr%c %p, %O, %r(12), %C(16), %C(0)"),
-            new Opcode (0x0F100010, 0x0E100010, "mrc%c %p, %O, %r(12), %C(16), %C(0)"),
-            new Opcode (0x0F000010, 0x0E000000, "cdp%c %p, %O, %C(12), %C(16), %C(0)"),
-            new Opcode (0x0E100000, 0x0C000000, "stc%c%L %p, %C(12), %o(0,8,2)"),
-            new Opcode (0x0E100000, 0x0C000000, "stc%c%L %p, %C(12), %o(0,8,2)"),
+            new Opcode(0x0F100010, 0x0E000010, "mcr%c %p, %O, %r(12), %C(16), %C(0)"),
+            new Opcode(0x0F100010, 0x0E100010, "mrc%c %p, %O, %r(12), %C(16), %C(0)"),
+            new Opcode(0x0F000010, 0x0E000000, "cdp%c %p, %O, %C(12), %C(16), %C(0)"),
+            new Opcode(0x0E100000, 0x0C000000, "stc%c%L %p, %C(12), %o(0,8,2)"),
+            new Opcode(0x0E100000, 0x0C000000, "stc%c%L %p, %C(12), %o(0,8,2)"),
             // Unknown
-            new Opcode (0x00000000, 0x00000000, "[ ??? ]")
+            new Opcode(0x00000000, 0x00000000, "[ ??? ]")
         };
         
         public static Instruction[] Disassemble_ARM(byte[] data, Pointer pc)
@@ -1178,7 +1178,7 @@ namespace GBA
                 UInt32 opcode = data.GetUInt32(i, true);
 
                 int index = 0;
-                while ((Opcodes_ARM[index].Mask & opcode) != Opcodes_ARM[index].CodeValue)
+                while ((Opcodes_ARM[index].BitMask & opcode) != Opcodes_ARM[index].CodeValue)
                     index++;
 
                 int j = 0;
@@ -1559,94 +1559,94 @@ namespace GBA
         /// </summary>
         static Opcode[] Opcodes_Thumb = new Opcode[]
         {
-            new Opcode (0xFFFF, 0x0000, "nop"),
+            new Opcode(0xFFFF, 0x0000, "nop"),
             // Format 1 - move shifted register
-            new Opcode (0xF800, 0x0800, "lsr %r(0), %r(3), %i(6,5,0)"),
-            new Opcode (0xF800, 0x0000, "lsl %r(0), %r(3), %i(6,5,0)"),
-            new Opcode (0xF800, 0x1000, "asr %r(0), %r(3), %i(6,5,0)"),
+            new Opcode(0xF800, 0x0800, "lsr %r(0), %r(3), %i(6,5,0)"),
+            new Opcode(0xF800, 0x0000, "lsl %r(0), %r(3), %i(6,5,0)"),
+            new Opcode(0xF800, 0x1000, "asr %r(0), %r(3), %i(6,5,0)"),
             // Format 2 - add/subtract
-            new Opcode (0xFE00, 0x1800, "add %r(0), %r(3), %r(6)"),
-            new Opcode (0xFE00, 0x1A00, "sub %r(0), %r(3), %r(6)"),
-            new Opcode (0xFFC0, 0x1C00, "mov %r(0), %r(3)"),
-            new Opcode (0xFE00, 0x1C00, "add %r(0), %r(3), %i(6,3,0)"),
-            new Opcode (0xFE00, 0x1E00, "sub %r(0), %r(3), %i(6,3,0)"),
+            new Opcode(0xFE00, 0x1800, "add %r(0), %r(3), %r(6)"),
+            new Opcode(0xFE00, 0x1A00, "sub %r(0), %r(3), %r(6)"),
+            new Opcode(0xFFC0, 0x1C00, "mov %r(0), %r(3)"),
+            new Opcode(0xFE00, 0x1C00, "add %r(0), %r(3), %i(6,3,0)"),
+            new Opcode(0xFE00, 0x1E00, "sub %r(0), %r(3), %i(6,3,0)"),
             // Format 3 - move/compare/add/subtract immediate
-            new Opcode (0xF800, 0x2000, "mov %r(8), %i(0,8,0)"),
-            new Opcode (0xF800, 0x2800, "cmp %r(8), %i(0,8,0)"),
-            new Opcode (0xF800, 0x3000, "add %r(8), %i(0,8,0)"),
-            new Opcode (0xF800, 0x3800, "sub %r(8), %i(0,8,0)"),
+            new Opcode(0xF800, 0x2000, "mov %r(8), %i(0,8,0)"),
+            new Opcode(0xF800, 0x2800, "cmp %r(8), %i(0,8,0)"),
+            new Opcode(0xF800, 0x3000, "add %r(8), %i(0,8,0)"),
+            new Opcode(0xF800, 0x3800, "sub %r(8), %i(0,8,0)"),
             // Format 4 - ALU operations
-            new Opcode (0xFFC0, 0x4000, "and %r(0), %r(3)"),
-            new Opcode (0xFFC0, 0x4040, "eor %r(0), %r(3)"),
-            new Opcode (0xFFC0, 0x4080, "lsl %r(0), %r(3)"),
-            new Opcode (0xFFC0, 0x40C0, "lsr %r(0), %r(3)"),
-            new Opcode (0xFFC0, 0x4100, "asr %r(0), %r(3)"),
-            new Opcode (0xFFC0, 0x4140, "adc %r(0), %r(3)"),
-            new Opcode (0xFFC0, 0x4180, "sbc %r(0), %r(3)"),
-            new Opcode (0xFFC0, 0x41C0, "ror %r(0), %r(3)"),
-            new Opcode (0xFFC0, 0x4200, "tst %r(0), %r(3)"),
-            new Opcode (0xFFC0, 0x4240, "neg %r(0), %r(3)"),
-            new Opcode (0xFFC0, 0x4280, "cmp %r(0), %r(3)"),
-            new Opcode (0xFFC0, 0x42C0, "cmn %r(0), %r(3)"),
-            new Opcode (0xFFC0, 0x4300, "orr %r(0), %r(3)"),
-            new Opcode (0xFFC0, 0x4340, "mul %r(0), %r(3)"),
-            new Opcode (0xFFC0, 0x4380, "bic %r(0), %r(3)"),
-            new Opcode (0xFFC0, 0x43C0, "mvn %r(0), %r(3)"),
+            new Opcode(0xFFC0, 0x4000, "and %r(0), %r(3)"),
+            new Opcode(0xFFC0, 0x4040, "eor %r(0), %r(3)"),
+            new Opcode(0xFFC0, 0x4080, "lsl %r(0), %r(3)"),
+            new Opcode(0xFFC0, 0x40C0, "lsr %r(0), %r(3)"),
+            new Opcode(0xFFC0, 0x4100, "asr %r(0), %r(3)"),
+            new Opcode(0xFFC0, 0x4140, "adc %r(0), %r(3)"),
+            new Opcode(0xFFC0, 0x4180, "sbc %r(0), %r(3)"),
+            new Opcode(0xFFC0, 0x41C0, "ror %r(0), %r(3)"),
+            new Opcode(0xFFC0, 0x4200, "tst %r(0), %r(3)"),
+            new Opcode(0xFFC0, 0x4240, "neg %r(0), %r(3)"),
+            new Opcode(0xFFC0, 0x4280, "cmp %r(0), %r(3)"),
+            new Opcode(0xFFC0, 0x42C0, "cmn %r(0), %r(3)"),
+            new Opcode(0xFFC0, 0x4300, "orr %r(0), %r(3)"),
+            new Opcode(0xFFC0, 0x4340, "mul %r(0), %r(3)"),
+            new Opcode(0xFFC0, 0x4380, "bic %r(0), %r(3)"),
+            new Opcode(0xFFC0, 0x43C0, "mvn %r(0), %r(3)"),
             // Format 5 - Hi register operations / branch exchange
-            new Opcode (0xFF80, 0x4700, "bx %h(3,6)"),
-            new Opcode (0xFCC0, 0x4400, "[ ??? ]"),
-            new Opcode (0xFF00, 0x4400, "add %h(0,7), %h(3,6)"),
-            new Opcode (0xFF00, 0x4500, "cmp %h(0,7), %h(3,6)"),
-            new Opcode (0xFF00, 0x4600, "mov %h(0,7), %h(3,6)"),
+            new Opcode(0xFF80, 0x4700, "bx %h(3,6)"),
+            new Opcode(0xFCC0, 0x4400, "?"),
+            new Opcode(0xFF00, 0x4400, "add %h(0,7), %h(3,6)"),
+            new Opcode(0xFF00, 0x4500, "cmp %h(0,7), %h(3,6)"),
+            new Opcode(0xFF00, 0x4600, "mov %h(0,7), %h(3,6)"),
             // Format 6 - Load PC-relative immediate
-            new Opcode (0xF800, 0x4800, "ldr %r(8), [pc, %i(0,8,2)] %e"),
+            new Opcode(0xF800, 0x4800, "ldr %r(8), [pc, %i(0,8,2)] %e"),
             // Format 7 - load/store with register offset
-            new Opcode (0xFA00, 0x5000, "str%b(10) %r(0), [%r(3), %r(6)]"),
-            new Opcode (0xFA00, 0x5800, "ldr%b(10) %r(0), [%r(3), %r(6)]"),
+            new Opcode(0xFA00, 0x5000, "str%b(10) %r(0), [%r(3), %r(6)]"),
+            new Opcode(0xFA00, 0x5800, "ldr%b(10) %r(0), [%r(3), %r(6)]"),
             // Format 8 - load/store sign extended byte/halfword
-            new Opcode (0xFE00, 0x5200, "strh %r(0), [%r(3), %r(6)]"),
-            new Opcode (0xFE00, 0x5A00, "ldsb %r(0), [%r(3), %r(6)]"),
-            new Opcode (0xFE00, 0x5600, "ldrh %r(0), [%r(3), %r(6)]"),
-            new Opcode (0xFE00, 0x5E00, "ldsh %r(0), [%r(3), %r(6)]"),
+            new Opcode(0xFE00, 0x5200, "strh %r(0), [%r(3), %r(6)]"),
+            new Opcode(0xFE00, 0x5A00, "ldsb %r(0), [%r(3), %r(6)]"),
+            new Opcode(0xFE00, 0x5600, "ldrh %r(0), [%r(3), %r(6)]"),
+            new Opcode(0xFE00, 0x5E00, "ldsh %r(0), [%r(3), %r(6)]"),
             // Format 9 - load/store with immediate offset
-            new Opcode (0xF800, 0x6000, "str %r(0), [%r(3), %i(6,5,2)]"),
-            new Opcode (0xF800, 0x6800, "ldr %r(0), [%r(3), %i(6,5,2)]"),
-            new Opcode (0xF800, 0x7000, "strb %r(0), [%r(3), %i(6,5,0)]"),
-            new Opcode (0xF800, 0x7800, "ldrb %r(0), [%r(3), %i(6,5,0)]"),
+            new Opcode(0xF800, 0x6000, "str %r(0), [%r(3), %i(6,5,2)]"),
+            new Opcode(0xF800, 0x6800, "ldr %r(0), [%r(3), %i(6,5,2)]"),
+            new Opcode(0xF800, 0x7000, "strb %r(0), [%r(3), %i(6,5,0)]"),
+            new Opcode(0xF800, 0x7800, "ldrb %r(0), [%r(3), %i(6,5,0)]"),
             // Format 10 - load/store halfword
-            new Opcode (0xF800, 0x8000, "strh %r(0), [%r(3), %i(6,5,1)]"),
-            new Opcode (0xF800, 0x8800, "ldrh %r(0), [%r(3), %i(6,5,1)]"),
+            new Opcode(0xF800, 0x8000, "strh %r(0), [%r(3), %i(6,5,1)]"),
+            new Opcode(0xF800, 0x8800, "ldrh %r(0), [%r(3), %i(6,5,1)]"),
             // Format 11 - load/store SP-relative
-            new Opcode (0xF800, 0x9000, "str %r(8), [sp, %i(0,8,2)]"),
-            new Opcode (0xF800, 0x9800, "ldr %r(8), [sp, %i(0,8,2)]"),
+            new Opcode(0xF800, 0x9000, "str %r(8), [sp, %i(0,8,2)]"),
+            new Opcode(0xF800, 0x9800, "ldr %r(8), [sp, %i(0,8,2)]"),
             // Format 12 - get relative address
-            new Opcode (0xF800, 0xA000, "add %r(8), pc, %i(0,8,2) %e"),
-            new Opcode (0xF800, 0xA800, "add %r(8), sp, %i(0,8,2)"),
+            new Opcode(0xF800, 0xA000, "add %r(8), pc, %i(0,8,2) %e"),
+            new Opcode(0xF800, 0xA800, "add %r(8), sp, %i(0,8,2)"),
             // Format 13 - add offset to stack pointer
-            new Opcode (0xFF80, 0xB000, "add sp, %i(0,7,2)"),
-            new Opcode (0xFF80, 0xB080, "add sp, -%i(0,7,2)"),
+            new Opcode(0xFF80, 0xB000, "add sp, %i(0,7,2)"),
+            new Opcode(0xFF80, 0xB080, "add sp, -%i(0,7,2)"),
             // Format 14 - push/pop registers
-            new Opcode (0xFFFF, 0xB500, "push {lr}"),
-            new Opcode (0xFF00, 0xB400, "push {%l}"),
-            new Opcode (0xFF00, 0xB500, "push {%l,lr}"),
-            new Opcode (0xFFFF, 0xBD00, "pop {pc}"),
-            new Opcode (0xFF00, 0xBD00, "pop {%l,pc}"),
-            new Opcode (0xFF00, 0xBC00, "pop {%l}"),
+            new Opcode(0xFFFF, 0xB500, "push {lr}"),
+            new Opcode(0xFF00, 0xB400, "push {%l}"),
+            new Opcode(0xFF00, 0xB500, "push {%l,lr}"),
+            new Opcode(0xFFFF, 0xBD00, "pop {pc}"),
+            new Opcode(0xFF00, 0xBD00, "pop {%l,pc}"),
+            new Opcode(0xFF00, 0xBC00, "pop {%l}"),
             // Format 15 - multiple load/store
-            new Opcode (0xF800, 0xC000, "stmia %r(8)!, {%l}"),
-            new Opcode (0xF800, 0xC800, "ldmia %r(8)!, {%l}"),
+            new Opcode(0xF800, 0xC000, "stmia %r(8)!, {%l}"),
+            new Opcode(0xF800, 0xC800, "ldmia %r(8)!, {%l}"),
             // Format 16 - conditional branch
-            new Opcode (0xF000, 0xD000, "b%c %o(0,8,1)"),
+            new Opcode(0xF000, 0xD000, "b%c %o(0,8,1)"),
             // Format 18 - unconditional branch
-            new Opcode (0xF800, 0xE000, "b %o(0,11,1)"),
+            new Opcode(0xF800, 0xE000, "b %o(0,11,1)"),
             // Format 19 - long branch with link
-            new Opcode (0xF800, 0xF000, "bl%p"),
-            new Opcode (0xF800, 0xF800, "blh %P"),
+            new Opcode(0xF800, 0xF000, "bl%p"),
+            new Opcode(0xF800, 0xF800, "blh %P"),
             // Format 17 - software interrupt and breakpoint
-            new Opcode (0xFF00, 0xDF00, "swi %i(0,8,0)"),
-            new Opcode (0xFF00, 0xBE00, "bkpt %i(0,8,0)"),
+            new Opcode(0xFF00, 0xDF00, "swi %i(0,8,0)"),
+            new Opcode(0xFF00, 0xBE00, "bkpt %i(0,8,0)"),
             // Unknown
-            new Opcode (0x0000, 0x0000, "[ ??? ]")
+            new Opcode(0x0000, 0x0000, "???")
         };
 
         public static Instruction[] Disassemble_Thumb(byte[] data, Pointer pc)
@@ -1660,7 +1660,7 @@ namespace GBA
                 UInt16 opcode = data.GetUInt16(i, true);
 
                 int index = 0;
-                while ((Opcodes_Thumb[index].Mask & opcode) != Opcodes_Thumb[index].CodeValue)
+                while ((Opcodes_Thumb[index].BitMask & opcode) != Opcodes_Thumb[index].CodeValue)
                     index++;
 
                 int j = 0;
@@ -1897,6 +1897,47 @@ namespace GBA
                 result <<= 1;
                 result += 1;
             }
+            return result;
+        }
+
+        public static string GetInstructionsRegex_Thumb()
+        {
+            string result = null;
+            string instruction;
+            int length;
+            int index;
+            foreach (Opcode opcode in Opcodes_Thumb)
+            {
+                if (result == null)
+                    result = "(";
+                else result += "|";
+                length = opcode.Format.IndexOf(' ');
+                if (length < 0) length = opcode.Format.Length;
+                instruction = opcode.Format.Substring(0, length);
+                if (instruction.Contains("?"))
+                    continue;
+                index = instruction.IndexOf('%');
+                if (index >= 0)
+                {
+                    char format_char = instruction[index + 1];
+                    instruction = instruction.Remove(index, 2);
+                    switch (format_char)
+                    {
+                        case 'c':
+                            foreach (string flag in Conditions)
+                            {
+                                result += instruction.Insert(index, flag) + "|";
+                            }
+                            result += instruction.Insert(index, "al");
+                            continue;
+                        case 'b': instruction = instruction.Remove(index);
+                                    result += instruction + "|"; result += instruction.Insert(index, "b"); continue;
+                        case 'p':   result += instruction + "|"; result += instruction.Insert(index, "x"); continue;
+                    }
+                }
+                else result += instruction;
+            }
+            result += ") ";
             return result;
         }
     }

@@ -32,10 +32,12 @@ namespace EmblemMagic.Editors
                 EntryArrayBox.ValueChanged += EntryArrayBox_ValueChanged;
 
                 Commands = new SpellCommands("Spell Commands.txt");
-                AnimCodeBox.KeyDown += new KeyEventHandler(TextBox_SelectAll);
-                AnimCodeBox.AddSyntax(Commands.GetRegex(), SystemColors.Highlight);
-                AnimCodeBox.AddSyntax("return|label.*", SystemColors.ControlDark);
-                AnimCodeBox.AddSyntax("@.*", SystemColors.ControlDark);
+                Anim_CodeBox.KeyDown += new KeyEventHandler(TextBox_SelectAll);
+                Anim_CodeBox.AddSyntax(ASM.GetInstructionsRegex_Thumb(), System.Drawing.Color.Black, FontStyle.Bold | FontStyle.Italic);
+                Anim_CodeBox.AddSyntax(Commands.GetRegex(), SystemColors.Highlight);
+                Anim_CodeBox.AddSyntax(@"((\b[0-9]+)|((\b0x|\$)[0-9a-fA-F]+))\b", System.Drawing.Color.SlateBlue);
+                Anim_CodeBox.AddSyntax("return|label.*", SystemColors.ControlDark);
+                Anim_CodeBox.AddSyntax("@.*", SystemColors.ControlDark);
             }
             catch (Exception ex)
             {
@@ -130,23 +132,23 @@ namespace EmblemMagic.Editors
                 bool is_array = false;
                 bool is_sprite = false;
                 int index = 0;
-                for (int i = 0; i < AnimCodeBox.Text.Length; i = index + 3)
+                for (int i = 0; i < Anim_CodeBox.Text.Length; i = index + 3)
                 {
-                    index = AnimCodeBox.Text.IndexOf(match, i);
+                    index = Anim_CodeBox.Text.IndexOf(match, i);
                     if (index < 0)
                         break;
-                    if (AnimCodeBox.Text.Substring(index - 5, 5) == "Array")
+                    if (Anim_CodeBox.Text.Substring(index - 5, 5) == "Array")
                         is_array = true;
-                    if (AnimCodeBox.Text.Substring(index - 6, 6) == "Sprite")
+                    if (Anim_CodeBox.Text.Substring(index - 6, 6) == "Sprite")
                         is_sprite = true;
-                    index = AnimCodeBox.Text.IndexOf(")\r\n", index);
+                    index = Anim_CodeBox.Text.IndexOf(")\r\n", index);
                     if (index < 0)
                         break;
                     int index_of_pointer_arg;
-                    index_of_pointer_arg = AnimCodeBox.Text.LastIndexOf("$08", index) + 3;
+                    index_of_pointer_arg = Anim_CodeBox.Text.LastIndexOf("$08", index) + 3;
                     if (index_of_pointer_arg < 0)
                         continue; // TODO throw exception here ?
-                    address = new Pointer(Util.StringToAddress(AnimCodeBox.Text.Substring(index_of_pointer_arg, index - index_of_pointer_arg)));
+                    address = new Pointer(Util.StringToAddress(Anim_CodeBox.Text.Substring(index_of_pointer_arg, index - index_of_pointer_arg)));
                     if (is_array)
                     {
                         // TODO change this loop's exit condition for something more reliable
@@ -237,12 +239,12 @@ namespace EmblemMagic.Editors
 
             try
             {
-                AnimCodeBox.Text = string.Join("\r\n", CurrentAnim.GetAnimCode(Commands));
+                Anim_CodeBox.Text = string.Join("\r\n", CurrentAnim.GetAnimCode(Commands));
             }
             catch (Exception ex)
             {
                 Program.ShowError("Could not load anim code.", ex);
-                AnimCodeBox.Text = "";
+                Anim_CodeBox.Text = "";
             }
         }
         void Core_LoadValues()
@@ -349,6 +351,26 @@ namespace EmblemMagic.Editors
                 Palette_PointerBox.Value = new GBA.Pointer();
                 Palette_Prev_Button.Enabled = false;
                 Palette_Next_Button.Enabled = false;
+            }
+        }
+
+
+
+        private void View_PureASM_Click(Object sender, EventArgs e)
+        {
+            if (View_PureASM.Checked)
+            {
+                Anim_CodeBox.Visible = false;
+                Anim_CodeBox.Enabled = false;
+                ASM_ListBox.Visible = true;
+                ASM_ListBox.Enabled = true;
+            }
+            else
+            {
+                Anim_CodeBox.Visible = true;
+                Anim_CodeBox.Enabled = true;
+                ASM_ListBox.Visible = false;
+                ASM_ListBox.Enabled = false;
             }
         }
 
