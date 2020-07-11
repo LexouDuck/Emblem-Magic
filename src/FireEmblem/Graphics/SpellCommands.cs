@@ -114,7 +114,7 @@ namespace EmblemMagic.FireEmblem
                                 argument += asm[index + i].Code[j + c];
                                 c += 1;
                             }
-                            if (argument.Length == 1)
+                            if (argument.Length <= 2)
                                 arguments.Insert(0, argument);
                             else arguments.Add(argument);
                             j += c;

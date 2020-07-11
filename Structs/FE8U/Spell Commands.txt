@@ -118,13 +118,13 @@ add r0, #0x01			@
 LoadSprite_Palette
 ldr r0, [pc, #0x**] (=_________)@ r0 = palette_pointer
 mov r1, #0x20			@ r1 = 0x20 (palette length in bytes)
-bl $080505F0			@ "load palette" routine
+bl $08055800			@ "load palette" routine
 
 LoadSprite_Tileset
 ldr r0, [pc, #0x**] (=_________)@ r0 = tileset_pointer
 mov r1, #0x80			@ prepare r1 as second argument for the following call
 lsl r1, r1, #0x05		@ r1 = 0x1000 (tileset length in bytes)
-bl $080505C8			@ "load tileset" routine
+bl $080557D8			@ "load tileset" routine
 
 LoadSprite_Tileset_Small
 ldr r0, [pc, #0x**] (=_________)@ r0 = tileset_pointer
@@ -138,19 +138,19 @@ ldr r0, [pc, #0x**] (=_________)@ r0 = palette_pointer
 add r4, r4, r0			@ 
 mov r0, r4			@ 
 mov r1, #0x20			@ r1 = 0x20 (palette_length, in bytes)
-bl $08050634			@ "load palette for array of tileset+TSA images" routine ???
+bl $08055844			@ "load palette for array of tileset+TSA images" routine ???
 
 Load_Palette
 ldr r0, [pc, #0x**] (=_________)@ r0 = palette_pointer
 mov r1, #0x20			@ r1 = 0x20 (palette_length, in bytes)
-bl $08050634			@ "load palette for array of tileset+TSA images" routine ???
+bl $08055844			@ "load palette for array of tileset+TSA images" routine ???
 
 
 Load_Tileset
 ldr r0, [pc, #0x**] (=_________)@ 
 mov r1, #0x__			@ 
 lsl r1, r1, #0x__		@ 
-bl $0805060C			@ 
+bl $0805581C			@ 
 
 
 Load_TSA
