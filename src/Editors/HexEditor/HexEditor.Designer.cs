@@ -33,8 +33,8 @@
             this.MainHexBox = new EmblemMagic.Components.HexBox();
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.Status_Position = new System.Windows.Forms.ToolStripStatusLabel();
-            this.Status_FileSize = new System.Windows.Forms.ToolStripStatusLabel();
-            this.Status_BitViewer = new System.Windows.Forms.ToolStripStatusLabel();
+            this.Status_Bits = new System.Windows.Forms.ToolStripStatusLabel();
+            this.Status_Ints = new System.Windows.Forms.ToolStripStatusLabel();
             this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.Menu_File = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_File_Open = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,6 +59,7 @@
             this.Menu_Tool_FindNext = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Tool_GoTo = new System.Windows.Forms.ToolStripMenuItem();
             this.MagicButton = new EmblemMagic.Components.MagicButton();
+            this.Status_File = new System.Windows.Forms.Label();
             this.Tabs_Control.SuspendLayout();
             this.MainTabPage.SuspendLayout();
             this.StatusStrip.SuspendLayout();
@@ -120,8 +121,8 @@
             this.StatusStrip.BackColor = System.Drawing.SystemColors.Control;
             this.StatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Status_Position,
-            this.Status_FileSize,
-            this.Status_BitViewer});
+            this.Status_Bits,
+            this.Status_Ints});
             this.StatusStrip.Location = new System.Drawing.Point(0, 440);
             this.StatusStrip.Name = "StatusStrip";
             this.StatusStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
@@ -131,21 +132,24 @@
             // 
             // Status_Position
             // 
+            this.Status_Position.AutoSize = false;
             this.Status_Position.Margin = new System.Windows.Forms.Padding(5, 3, 0, 2);
             this.Status_Position.Name = "Status_Position";
-            this.Status_Position.Padding = new System.Windows.Forms.Padding(7, 0, 0, 0);
-            this.Status_Position.Size = new System.Drawing.Size(7, 17);
+            this.Status_Position.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
+            this.Status_Position.Size = new System.Drawing.Size(200, 17);
             // 
-            // Status_FileSize
+            // Status_Bits
             // 
-            this.Status_FileSize.Name = "Status_FileSize";
-            this.Status_FileSize.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Status_FileSize.Size = new System.Drawing.Size(8, 17);
+            this.Status_Bits.AutoSize = false;
+            this.Status_Bits.Name = "Status_Bits";
+            this.Status_Bits.Padding = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.Status_Bits.Size = new System.Drawing.Size(100, 17);
             // 
-            // Status_BitViewer
+            // Status_Ints
             // 
-            this.Status_BitViewer.Name = "Status_BitViewer";
-            this.Status_BitViewer.Size = new System.Drawing.Size(0, 17);
+            this.Status_Ints.Name = "Status_Ints";
+            this.Status_Ints.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.Status_Ints.Size = new System.Drawing.Size(5, 17);
             // 
             // MenuStrip
             // 
@@ -344,7 +348,8 @@
             // 
             // MagicButton
             // 
-            this.MagicButton.Location = new System.Drawing.Point(555, 0);
+            this.MagicButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.MagicButton.Location = new System.Drawing.Point(558, 22);
             this.MagicButton.MaximumSize = new System.Drawing.Size(24, 24);
             this.MagicButton.MinimumSize = new System.Drawing.Size(24, 24);
             this.MagicButton.Name = "MagicButton";
@@ -354,12 +359,24 @@
             this.MagicButton.UseVisualStyleBackColor = true;
             this.MagicButton.Click += new System.EventHandler(this.MagicButton_Click);
             // 
+            // Status_File
+            // 
+            this.Status_File.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Status_File.Location = new System.Drawing.Point(137, 1);
+            this.Status_File.Name = "Status_File";
+            this.Status_File.Size = new System.Drawing.Size(443, 20);
+            this.Status_File.TabIndex = 5;
+            this.Status_File.Text = "ROM.gba - 16MB (16777216 bytes) | Path: C:/path/ROM.gba";
+            this.Status_File.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // HexEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(584, 462);
+            this.Controls.Add(this.Status_File);
             this.Controls.Add(this.MagicButton);
             this.Controls.Add(this.Tabs_Control);
             this.Controls.Add(this.StatusStrip);
@@ -402,8 +419,8 @@
 
         private System.Windows.Forms.StatusStrip StatusStrip;
         private System.Windows.Forms.ToolStripStatusLabel Status_Position;
-        private System.Windows.Forms.ToolStripStatusLabel Status_BitViewer;
-        private System.Windows.Forms.ToolStripStatusLabel Status_FileSize;
+        private System.Windows.Forms.ToolStripStatusLabel Status_Ints;
+        private System.Windows.Forms.ToolStripStatusLabel Status_Bits;
 
         private System.Windows.Forms.ToolStripSeparator Menu_Separator1;
         private System.Windows.Forms.ToolStripSeparator Menu_Separator2;
@@ -413,5 +430,6 @@
         private System.Windows.Forms.TabControl Tabs_Control;
         private System.Windows.Forms.ToolStripMenuItem Menu_File_Apply;
         private Components.MagicButton MagicButton;
+        private System.Windows.Forms.Label Status_File;
     }
 }

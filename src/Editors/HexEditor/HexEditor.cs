@@ -467,7 +467,7 @@ namespace EmblemMagic.Editors
             if (bitInfo != null)
             {
                 byte currentByteNotNull = (byte)currentByte;
-                result = "Bits of Byte n° " + selection + " :  " + bitInfo.ToString();
+                result = "Bits: " + bitInfo.ToString();
             }
 
             return result;
@@ -572,12 +572,22 @@ namespace EmblemMagic.Editors
             HexBox hexbox =  CurrentTabIsROM() ?
                 MainHexBox :
                 FileHexBoxes[CurrentTab];
-
-            Status_Position.Text = string.Format("Ln {0}    Col {1}    ", hexbox.CurrentLine, hexbox.CurrentPositionInLine);
-
-            Status_FileSize.Text = Util.GetDisplayBytes(hexbox.ByteProvider.Length);
-
-            Status_BitViewer.Text = Core_ShowBits();
+            Pointer address = new Pointer((uint)hexbox.SelectionStart);
+            uint length = (uint)hexbox.SelectionLength;
+            Status_File.Text = Program.Core.ROM.FileName + " - " + Util.GetDisplayBytes(hexbox.ByteProvider.Length) +
+                " | Path: " + Program.Core.ROM.FilePath;
+            Status_Position.Text = "Address: " + address + " | " + (length == 0 ? "No selection" : ("Selected: 0x" + Util.IntToHex(length)));
+            Status_Bits.Text = Core_ShowBits();
+            UInt16 uint16 = (UInt16)(Core.ReadByte(address) |
+                (Core.ReadByte(address + 1) << 8));
+            UInt32 uint32 = (UInt32)(Core.ReadByte(address) |
+                (Core.ReadByte(address + 1) << 8) |
+                (Core.ReadByte(address + 2) << 16) |
+                (Core.ReadByte(address + 3) << 24));
+            Status_Ints.Text = (address > Core.CurrentROMSize - 4) ? "" : (
+                "UInt16: " + Util.UInt16ToHex(uint16) + " (" + uint16 + ")" + " | " +
+                "UInt32: " + Util.UInt32ToHex(uint32) + " (" + uint32 + ")"
+            );
         }
 
 
@@ -598,10 +608,12 @@ namespace EmblemMagic.Editors
         void HexBox_SelectionStartChanged(object sender, EventArgs e)
         {
             Update_EditMenu();
+            Update_StatusLabel();
         }
         void HexBox_SelectionLengthChanged(object sender, EventArgs e)
         {
             Update_EditMenu();
+            Update_StatusLabel();
         }
 
         void HexBox_ByteProvider_Changed(object sender, EventArgs e)
