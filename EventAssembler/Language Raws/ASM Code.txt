@@ -1,4 +1,15 @@
+
+# FE6
+
 ##This command calls an ASM routine at 'Pointer'.
+##aliases:ASMC
+CALL_ASM, 0x17, 8, -language:FE6 -repeatable -indexMode:8
+##Address of the ASM routine to execute.
+##Thumb routines should have 1 added.
+	Pointer, 4, 4, -pointer:ASM
+
+##This command calls an ASM routine at 'Pointer'.
+##aliases:CALL_ASM
 ASMC, 0x17, 8, -language:FE6 -repeatable -indexMode:8
 ##Address of the ASM routine to execute.
 ##Thumb routines should have 1 added.
@@ -6,7 +17,17 @@ ASMC, 0x17, 8, -language:FE6 -repeatable -indexMode:8
 
 
 
+# FE7
+
 ##This command calls an ASM routine at 'Pointer'.
+##aliases:ASMC
+CALL_ASM, 0x3E, 8, -language:FE7 -repeatable -indexMode:8
+##Address of the ASM routine to execute.
+##Thumb routines should have 1 added.
+	Pointer, 4, 4, -pointer:ASM
+
+##This command calls an ASM routine at 'Pointer'.
+##aliases:CALL_ASM
 ASMC, 0x3E, 8, -language:FE7 -repeatable -indexMode:8
 ##Address of the ASM routine to execute.
 ##Thumb routines should have 1 added.
@@ -14,13 +35,32 @@ ASMC, 0x3E, 8, -language:FE7 -repeatable -indexMode:8
 
 
 
+# FE8
+
 ##This command calls an ASM routine at 'Pointer'.
+##aliases:ASMC
+CALL_ASM, 0xD40, 8, -language:FE8 -repeatable -indexMode:8
+##Address of the ASM routine to execute.
+##Thumb routines should have 1 added.
+	Pointer, 4, 4, -pointer:ASM
+
+##This command calls an ASM routine at 'Pointer'.
+##aliases:CALL_ASM
 ASMC, 0xD40, 8, -language:FE8 -repeatable -indexMode:8
 ##Address of the ASM routine to execute.
 ##Thumb routines should have 1 added.
 	Pointer, 4, 4, -pointer:ASM
 
 ##This command calls an ASM routine at 'Pointer'
+##aliases:CALL_ASM_IFN8
+##if bit 0x8 in event execution bitfield is not set.
+CALL_ASM_IFN8, 0xD41, 8, -language:FE8 -repeatable -indexMode:8
+##Address of the ASM routine to execute.
+##Thumb routines should have 1 added.
+	Pointer, 4, 4, -pointer:ASM
+
+##This command calls an ASM routine at 'Pointer'
+##aliases:CALL_ASM_IFN8
 ##if bit 0x8 in event execution bitfield is not set.
 ASMC2, 0xD41, 8, -language:FE8 -repeatable -indexMode:8
 ##Address of the ASM routine to execute.

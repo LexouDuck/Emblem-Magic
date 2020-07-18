@@ -1,4 +1,19 @@
+
+# FE8
+
+##command:FADE effect START
 ##Preparing to change colors of something (units, background,etc)
+##aliases:STARTFADE
+FADE_START, 0x1860, 12, -game:FE8 -indexMode:8
+	0, 2, 2, -fixed
+	0, 4, 2, -fixed
+	0, 6, 2, -fixed
+	0, 8, 2, -fixed
+	0, 10, 2, -fixed
+
+##command:FADE effect START
+##Preparing to change colors of something (units, background,etc)
+##aliases:FADE_START
 STARTFADE, 0x1860, 12, -game:FE8 -indexMode:8
 	0, 2, 2, -fixed
 	0, 4, 2, -fixed
@@ -6,7 +21,19 @@ STARTFADE, 0x1860, 12, -game:FE8 -indexMode:8
 	0, 8, 2, -fixed
 	0, 10, 2, -fixed
 
+##command:FADE effect END
 ##Used after fading back to normal colors
+##aliases:ENDFADE
+FADE_END, 0x1861, 12, -game:FE8 -indexMode:8
+	0, 2, 2, -fixed
+	0, 4, 2, -fixed
+	0, 6, 2, -fixed
+	0, 8, 2, -fixed
+	0, 10, 2, -fixed
+
+##command:FADE effect END
+##Used after fading back to normal colors
+##aliases:FADE_END
 ENDFADE, 0x1861, 12, -game:FE8 -indexMode:8
 	0, 2, 2, -fixed
 	0, 4, 2, -fixed
@@ -14,7 +41,29 @@ ENDFADE, 0x1861, 12, -game:FE8 -indexMode:8
 	0, 8, 2, -fixed
 	0, 10, 2, -fixed
 
+
+##command:FADE COLORS (rgb tint)
 ##Smoothly alters colors of certains things to the given RGB levels.
+##aliases:FADECOLORS
+FADE_COLORS, 0x1862, 12, -game:FE8 -indexMode:8
+##Determine which things should have their colors change.
+##Known values are:
+##0x11D for all enemy units,
+##0xA06 for background,
+##0x000 for everything
+	Target, 2, 2
+##The speed at which the colors should fade
+	Speed, 4, 2
+##Amount of red in the final color
+	Red, 6, 2
+##Amount of green in the final color
+	Green, 8, 2
+##Amount of blue in the final color
+	Blue, 10, 2
+
+##command:FADE COLORS (rgb tint)
+##Smoothly alters colors of certains things to the given RGB levels.
+##aliases:FADE_COLORS
 FADECOLORS, 0x1862, 12, -game:FE8 -indexMode:8
 ##Determine which things should have their colors change.
 ##Known values are:
@@ -31,22 +80,41 @@ FADECOLORS, 0x1862, 12, -game:FE8 -indexMode:8
 ##Amount of blue in the final color
 	Blue, 10, 2
 
+
+
+##command:EARTHQUAKE effect START
 ##Performs an earthquake animation effect
 EARTHQUAKE_START, 0x4220, 4, -game:FE8 -indexMode:8
 	Value1, 2, 2
 
+##command:EARTHQUAKE effect END
 ##Stops an earthquake animation effect
 EARTHQUAKE_END, 0x422F, 4, -game:FE8 -indexMode:8
 	0, 2, 2, -fixed
 
-##Makes a glowing X underneath the given character.
-GLOWING_CROSS, 0x4520, 4, -game:FE8 -indexMode:8
-	Character, 2, 2
 
+
+##command:GLOWING CROSS effect
+##Makes a glowing X underneath the given character.
+##aliases:GLOWINGCROSS_START
+GLOWINGCROSS, 0x4520, 4, -game:FE8 -indexMode:8
+##The character underneath whom the glowing cross should appear.
+	CharacterID, 2, 2
+
+##command:GLOWING CROSS effect
+##Makes a glowing X underneath the given character.
+##aliases:GLOWINGCROSS
+GLOWINGCROSS_START, 0x4520, 4, -game:FE8 -indexMode:8
+##The character underneath whom the glowing cross should appear.
+	CharacterID, 2, 2
+
+##command:END_GLOWING_CROSS
 ##Removes the glowing X underneath the given character.
-END_GLOWING_CROSS, 0x452F, 4, -game:FE8 -indexMode:8
+GLOWINGCROSS_END, 0x452F, 4, -game:FE8 -indexMode:8
 	0, 2, 2, -fixed
+
+
 
 BREAKING_SACRED_STONE, 0x4420, 4, -game:FE8 -indexMode:8
 ##Character to play animation over
-	Character, 2, 2
+	CharacterID, 2, 2

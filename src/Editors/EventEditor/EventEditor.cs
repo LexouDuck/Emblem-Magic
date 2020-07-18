@@ -94,11 +94,11 @@ namespace EmblemMagic.Editors
                 if (!EA.Program.CodesLoaded || LanguageProcessor == null)
                 {
                     string folder =
-                    #if (DEBUG)
-                        "D:\\Lexou\\Projects\\Emblem Magic\\EventAssembler";
-                    #else
-                        Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program)).Location);
-                    #endif
+#if (DEBUG)
+"D:\\Lexou\\Projects\\EmblemMagic\\EventAssembler";
+#else
+Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program)).Location);
+#endif
                     LanguageProcessor = EA.Program.LoadCodes(folder + "\\Language Raws", ".txt", true, true);
                 }
                 Language = EA.Program.Languages[Core.CurrentROM.GetIdentifier().Substring(0, 3)];
@@ -112,7 +112,7 @@ namespace EmblemMagic.Editors
                 Event_CodeBox.AddSyntax("(//).*", SystemColors.ControlDark);
                 Event_CodeBox.AddSyntax("#.* ", System.Drawing.Color.LimeGreen, FontStyle.Italic);
                 Event_CodeBox.AddSyntax(keywords.TrimEnd('|'), SystemColors.Highlight, FontStyle.Bold);
-                Event_CodeBox.AddSyntax(@"(\$[0-9a-fA-F]+|\b(0x[0-9a-fA-F]+|[0-9]+))", System.Drawing.Color.SlateBlue);
+                Event_CodeBox.AddSyntax(@"((\b[0-9]+)|((\b0x|\$)[0-9a-fA-F]+))\b", System.Drawing.Color.SlateBlue);
                 Event_CodeBox.AddCollapse(":\r\n", "\r\n\r\n");
             }
             catch (Exception ex)
@@ -145,7 +145,9 @@ namespace EmblemMagic.Editors
                 if (Tools_ManageSpace.Checked)
                     Core_LoadEventCode_ManageSpace(ref result);
                 if (View_ArrayDefinitions.Checked)
-                    Core_LoadEventCode_ArrayDefinitions(ref result);
+                    EventAssemblerIO.LoadEventCode_ArrayDefinitions(ref result);
+                if (View_HelperMacros.Checked)
+                    EventAssemblerIO.LoadEventCode_HelperMacros(ref result);
                 Core_LoadEventCode_MapUnitGroups();
                 Event_CodeBox.Text = result;
             }
@@ -258,38 +260,6 @@ namespace EmblemMagic.Editors
                 }
             }
             return result;
-        }
-        void Core_LoadEventCode_ArrayDefinitions(ref string code)
-        {
-            ArrayFile characters = new ArrayFile("Character List.txt");
-            ArrayFile classes = new ArrayFile("Class List.txt");
-            string command = "UNIT";
-            string replace;
-            byte character;
-            byte charclass;
-            int index = 0;
-            int new_index;
-            int length;
-            while ((new_index = code.IndexOf("\n" + command + " ", index)) > index)
-            {
-                index = new_index + command.Length + 2;
-
-                index = code.IndexOf("0x", index) + 2;
-                length = code.IndexOf(' ', index) - index;
-                character = (byte)Util.HexToInt(code.Substring(index, length));
-                replace = EventAssemblerIO.ReplaceSpacesAndSpecialChars(characters[character]);
-                index -= 2; length += 2;
-                code = code.Remove(index, length);
-                code = code.Insert(index, replace);
-
-                index = code.IndexOf("0x", index) + 2;
-                length = code.IndexOf(' ', index) - index;
-                charclass = (byte)Util.HexToInt(code.Substring(index, length));
-                index -= 2; length += 2;
-                code = code.Remove(index, length);
-                replace = EventAssemblerIO.ReplaceSpacesAndSpecialChars(classes[charclass]);
-                code = code.Insert(index, replace);
-            }
         }
         void Core_LoadEventCode_ManageSpace(ref string code)
         {
@@ -488,6 +458,42 @@ namespace EmblemMagic.Editors
             }
         }
 
+        string Core_GetAllArrayDefines()
+        {
+            string result = "#define None 0\r\n";
+            string define;
+            ArrayFile definitions;
+            string[] files = new string[]
+            {
+                "Dialog Background List.txt",
+                "Cutscene Screen List.txt",
+                "Music List.txt",
+                "Chapter List.txt",
+                "Character List.txt",
+                "Class List.txt",
+                "Item List.txt",
+            };
+            //FileInfo[] files = new DirectoryInfo(Core.Path_Arrays).GetFiles("*.txt");
+            //foreach (FileInfo file in files)
+            foreach (string file in files)
+            {
+                if (file.EndsWith("Commands.txt"))
+                    continue;
+                definitions = new ArrayFile(file);
+                result += "\r\n";
+                result += "// " + "file.Name\r\n";
+                for (uint i = 0; i <= definitions.LastEntry; i++)
+                {
+                    define = EventAssemblerIO.ReplaceSpacesAndSpecialChars(definitions[i]);
+                    if (define.Equals("None"))
+                        continue;
+                    if (define.Length > 1)
+                        result += "#define " + define + "\t" + i + "\r\n";
+                }
+            }
+            return result;
+        }
+
         
 
         private void File_Assemble_Click(object sender, EventArgs e)
@@ -530,9 +536,10 @@ namespace EmblemMagic.Editors
         {
             Core.SuspendUpdate();
 
+            string code = Core_GetAllArrayDefines() + Event_CodeBox.Text;
             EA_Log log = new EA_Log();
             ROM_Stream stream = new ROM_Stream(this);
-            using (TextReader text = new StringReader(Event_CodeBox.Text))
+            using (TextReader text = new StringReader(code))
             using (BinaryWriter output = new BinaryWriter(stream))
             {
                 stream.Description = "EventAssembler [" + Entry_ArrayBox.Text + "]";
@@ -804,7 +811,7 @@ namespace EmblemMagic.Editors
             }
             catch (Exception ex)
             {
-                Program.ShowError("There has been an error while loading the mousehover tooltip documentation.", ex);
+                //Program.ShowError("There has been an error while loading the mousehover tooltip documentation.", ex);
             }
         }
 

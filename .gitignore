@@ -6,6 +6,7 @@ Test/FE4/
 Test/BattleAnimations/
 Test/MapSprites/
 FireEmblem.lnk
+EventAssembler/Tools/*.exe
 
 # GBA roms (don't wanna distribute those on github, nor anywhere else for that matter)
 *.gba

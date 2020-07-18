@@ -5,7 +5,7 @@ CAM1, 0xB, 8, -game:FE6 -indexMode:8
 
 CAM1, 0xC, 8, -game:FE6 -indexMode:8
 ##Character to move the camera to.
-	Character, 4, 4
+	CharacterID, 4, 4
 
 ##Allows camera to move automatically with units during events.
 CMON, 0x15, 4, -game:FE6 -indexMode:8
@@ -22,7 +22,7 @@ CAM1, 0x22, 4, -game:FE7 -indexMode:8
 
 CAM1, 0x20, 4, -game:FE7 -indexMode:8
 ##Character to move the camera to.
-	Character, 2, 2
+	CharacterID, 2, 2
 
 ##Moves the camera on the chapter map.
 CAM2, 0x1F, 4, -game:FE7 -indexMode:8
@@ -44,4 +44,4 @@ CAM1, 0x2628, 4, -game:FE8 -indexMode:8
 
 CAM1, 0x2621, 4, -game:FE8 -indexMode:8
 ##Character to move the camera to.
-	Character, 2, 2
+	CharacterID, 2, 2

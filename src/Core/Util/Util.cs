@@ -470,6 +470,13 @@ namespace EmblemMagic
             }
         }
 
+        public static Boolean IsHexDigit(char c)
+        {
+            return (('0' <= c && c <= '9') ||
+                    ('A' <= c && c <= 'F') ||
+                    ('a' <= c && c <= 'f'));
+        }
+
         public static List<bool> IntToBits(int i, int arrayLength)
         {
             List<bool> bits = new List<bool>();

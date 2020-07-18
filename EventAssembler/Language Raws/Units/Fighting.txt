@@ -1,3 +1,6 @@
+
+# FE6
+
 ##Causes a scripted battle between 2 units.
 FIGH, 0x49, 20, -game:FE6 -indexMode:8
 ##Character ID of the attacker.
@@ -10,8 +13,11 @@ FIGH, 0x49, 20, -game:FE6 -indexMode:8
 	BattleParameters, 16, 4, coordinate:4
 
 FIGH, 0x49, 20, -game:FE6 -indexMode:8
+##Character ID of the attacker.
 	Attacker, 4, 4
+##Character ID of the defender.
 	Defender, 8, 4
+##Pointer to BLDT codes that determine how fight goes.
 	BattleDataPointer, 12, 4, -pointer:battleData
 ##Sets the first byte of battle parameters
 	BattleParameter1, 16, 1
@@ -23,6 +29,8 @@ FIGH, 0x49, 20, -game:FE6 -indexMode:8
 	BattleParameter4, 19, 1
 
 
+
+# FE7
 
 ##Causes a scripted battle between 2 units.
 FIGH, 0x97, 20, -game:FE7 -indexMode:8
@@ -49,6 +57,8 @@ FIGH, 0x97, 20, -game:FE7 -indexMode:8
 	BattleParameter4, 19, 1
 
 
+
+# FE8
 
 ##Starts a scripted battle between 2 units.
 FIG1, 0x3F40, 8, -game:FE8 -indexMode:8
@@ -70,6 +80,8 @@ FIG2, 0x3F41, 8, -game:FE8 -indexMode:8
 
 
 
+# FE6 & FE7
+
 ##Controls an individual attack in a battle through a set
 ##of different flags stored in 4 bytes.
 ##The parameterless version signals the end of a BLDT list
@@ -86,7 +98,7 @@ BLDT, 0, 32, -game:FE6:FE7 -priority:battleData -indexMode:1
 ##If next attack is launched immediately.
 	NextAttack_Immediate, 3, 1, -preferredBase:2
 ##If the next attack is by the same character.
-	NextAttack_SameChar, 4, 1, -preferredBase:2
+	NextAttack_SameCharacterID, 4, 1, -preferredBase:2
 	Unknown, 5, 1, -preferredBase:2
 ##If the attack poisons the opponent.
 	Poison, 6, 1, -preferredBase:2

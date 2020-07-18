@@ -1,73 +1,134 @@
+
+# FE6
+
+##command:LOAD units 1
+##Loads one or several unit groups.
+##aliases:LOU1
+LOAD1, 0x12, 8, -game:FE6 -repeatable -indexMode:8
+##Pointer to UNIT code sequence to load.
+	UnitPointer, 4, 4, -pointer:unit
+
 ##command:LOad Units 1
 ##Loads one or several unit groups.
+##aliases:LOAD1
 LOU1, 0x12, 8, -game:FE6 -repeatable -indexMode:8
+##Pointer to UNIT code sequence to load.
+	UnitPointer, 4, 4, -pointer:unit
+
+##command:LOAD units 2
+##Loads one or several unit groups.
+##aliases:LOU2
+LOAD2, 0x13, 8, -game:FE6 -repeatable -indexMode:8
 ##Pointer to UNIT code sequence to load.
 	UnitPointer, 4, 4, -pointer:unit
 
 ##command:LOad Units 2
 ##Loads one or several unit groups.
+##aliases:LOAD2
 LOU2, 0x13, 8, -game:FE6 -repeatable -indexMode:8
 ##Pointer to UNIT code sequence to load.
 	UnitPointer, 4, 4, -pointer:unit
 
 
 
+# FE7
+
+##command:LOAD units 1
+##Loads one or several unit groups.
+##aliases:LOU1
+LOAD1, 0x32, 8, -game:FE7 -repeatable -indexMode:8
+##Pointer to UNIT code sequence to load.
+	UnitPointer, 4, 4, -pointer:unit
+
 ##command:LOad Units 1
 ##Loads one or several unit groups.
+##aliases:LOAD1
 LOU1, 0x32, 8, -game:FE7 -repeatable -indexMode:8
 ##Pointer to UNIT code sequence to load.
 	UnitPointer, 4, 4, -pointer:unit
 
 ##command:LOad Units 2
 ##Loads one or several unit groups.
+##aliases:LOU2
+LOAD2, 0x36, 8, -game:FE7 -repeatable -indexMode:8
+##Pointer to UNIT code sequence to load.
+	Unit pointer, 4, 4, -pointer:unit
+
+##command:LOad Units 2
+##Loads one or several unit groups.
+##aliases:LOAD2
 LOU2, 0x36, 8, -game:FE7 -repeatable -indexMode:8
 ##Pointer to UNIT code sequence to load.
 	Unit pointer, 4, 4, -pointer:unit
 
+
+
+##command:LOAD units 1 for game MODEs
 ##Loads different unit groups for different game modes.
+##aliases:LOUMODE1
+LOAD1_MODE, 0x35, 20, -game:FE7 -indexMode:8
+##Units to load in Eliwood Normal mode.
+	UnitPointer_EN, 4, 4, -pointer:unit
+##Units to load in Eliwood Hard mode.
+	UnitPointer_EH, 8, 4, -pointer:unit
+##Units to load in Hector Normal mode.
+	UnitPointer_HN, 12, 4, -pointer:unit
+##Units to load in Hector Hard mode.
+	UnitPointer_HH, 16, 4, -pointer:unit
+
+##command:LOad Units 1 for game MODEs
+##Loads different unit groups for different game modes.
+##aliases:LOAD2_MODE
 LOUMODE1, 0x35, 20, -game:FE7 -indexMode:8
 ##Units to load in Eliwood Normal mode.
-	UnitPointer_ENM, 4, 4, -pointer:unit
+	UnitPointer_EN, 4, 4, -pointer:unit
 ##Units to load in Eliwood Hard mode.
-	UnitPointer_EHM, 8, 4, -pointer:unit
+	UnitPointer_EH, 8, 4, -pointer:unit
 ##Units to load in Hector Normal mode.
-	UnitPointer_HNM, 12, 4, -pointer:unit
+	UnitPointer_HN, 12, 4, -pointer:unit
 ##Units to load in Hector Hard mode.
-	UnitPointer_HHM, 16, 4, -pointer:unit
+	UnitPointer_HH, 16, 4, -pointer:unit
 
+##command:LOAD units 2 for game MODEs
 ##Loads different unit groups for different game modes.
+##aliases:LOUMODE2
+LOAD2_MODE, 0x38, 20, -game:FE7 -indexMode:8
+##Units to load in Eliwood Normal mode.
+	UnitPointer_EN, 4, 4, -pointer:unit
+##Units to load in Eliwood Hard mode.
+	UnitPointer_EH, 8, 4, -pointer:unit
+##Units to load in Hector Normal mode.
+	UnitPointer_HN, 12, 4, -pointer:unit
+##Units to load in Hector Hard mode.
+	UnitPointer_HH, 16, 4, -pointer:unit
+
+##command:LOad Units 2 for game MODEs
+##Loads different unit groups for different game modes.
+##aliases:LOAD2_MODE
 LOUMODE2, 0x38, 20, -game:FE7 -indexMode:8
 ##Units to load in Eliwood Normal mode.
-	UnitPointer_ENM, 4, 4, -pointer:unit
+	UnitPointer_EN, 4, 4, -pointer:unit
 ##Units to load in Eliwood Hard mode.
-	UnitPointer_EHM, 8, 4, -pointer:unit
+	UnitPointer_EH, 8, 4, -pointer:unit
 ##Units to load in Hector Normal mode.
-	UnitPointer_HNM, 12, 4, -pointer:unit
+	UnitPointer_HN, 12, 4, -pointer:unit
 ##Units to load in Hector Hard mode.
-	UnitPointer_HHM, 16, 4, -pointer:unit
+	UnitPointer_HH, 16, 4, -pointer:unit
 
-##command:LOad unit EVent
-##Loads a single unit onto the map.
-##Alias: LOADSINGLEUNIT
-LOEV, 0x39, 12, -game:FE7 -indexMode:8
-##Character to load.
-	CharID, 4, 2
-##Class of the unit to load.
-	ClassID, 6, 2
-##Position to load the unit to.
-	Position, 8, 4, -coordinate:2 -preferredBase:10
-
-##Loads a single unit onto the map.
-##Alias: LOEV
-LOADSINGLEUNIT, 0x39, 12, -game:FE7 -indexMode:8
-##Character to load.
-	CharID, 4, 2
-##Class of the unit to load.
-	ClassID, 6, 2
-##Position to load the unit to.
-	Position, 8, 4, -coordinate:2 -preferredBase:10
-
+##command:LOAD units 1, FILTERed by game mode
 ##Loads units only if the current game mode matches the filter.
+##aliases:LOUFILTERED
+LOAD1_FILTER, 0x34, 12, -game:FE7 -indexMode:8
+##Filtering value. The format for this number is as such:
+##Lowest byte = Mode, 01 = Lyn, 02 = Eliwood, 03 = Hector
+##If ModeFilter > 0xFFFF => Hard mode only
+	ModeFilter, 4, 4 
+##Pointer to UNIT codes to load.
+	UnitPointer, 8, 4, -pointer:unit
+
+##command:LOad Units 1, FILTERED by game mode
+##Loads units only if the current game mode matches the filter.
+##aliases:LOAD1_FILTER
 LOUFILTERED, 0x34, 12, -game:FE7 -indexMode:8
 ##Filtering value. The format for this number is as such:
 ##Lowest byte = Mode, 01 = Lyn, 02 = Eliwood, 03 = Hector
@@ -76,7 +137,20 @@ LOUFILTERED, 0x34, 12, -game:FE7 -indexMode:8
 ##Pointer to UNIT codes to load.
 	UnitPointer, 8, 4, -pointer:unit
 
+##command:LOAD units 2, FILTERed by game mode
 ##Loads units only if the current game mode matches the filter.
+##aliases:LOUFILTERED2
+LOAD2_FILTER, 0x37, 12, -game:FE7 -indexMode:8
+##Filtering value. The format for this number is as such:
+##Lowest byte = Mode, 01 = Lyn, 02 = Eliwood, 03 = Hector
+##If ModeFilter > 0xFFFF => Hard mode only
+	ModeFilter, 4, 4 
+##Pointer to UNIT codes to load.
+	UnitPointer, 8, 4, -pointer:unit
+
+##command:LOad Units 2, FILTERED by game mode
+##Loads units only if the current game mode matches the filter.
+##aliases:LOAD2_FILTER
 LOUFILTERED2, 0x37, 12, -game:FE7 -indexMode:8
 ##Filtering value. The format for this number is as such:
 ##Lowest byte = Mode, 01 = Lyn, 02 = Eliwood, 03 = Hector
@@ -86,6 +160,31 @@ LOUFILTERED2, 0x37, 12, -game:FE7 -indexMode:8
 	UnitPointer, 8, 4, -pointer:unit
 
 
+
+##Loads a single unit onto the map.
+##aliases:LOEV
+LOADUNIT, 0x39, 12, -game:FE7 -indexMode:8
+##Character to load.
+	CharacterID, 4, 2
+##Class of the unit to load.
+	ClassID, 6, 2
+##Position to load the unit to.
+	Position, 8, 4, -coordinate:2 -preferredBase:10
+
+##command:LOad unit EVent
+##Loads a single unit onto the map.
+##aliases:LOADUNIT
+LOEV, 0x39, 12, -game:FE7 -indexMode:8
+##Character to load.
+	CharacterID, 4, 2
+##Class of the unit to load.
+	ClassID, 6, 2
+##Position to load the unit to.
+	Position, 8, 4, -coordinate:2 -preferredBase:10
+
+
+
+# FE8
 
 ##Loads a group of units onto the map
 LOAD1, 0x2C40, 8, -game:FE8 -indexMode:8 

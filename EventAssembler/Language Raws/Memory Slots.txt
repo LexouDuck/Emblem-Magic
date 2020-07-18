@@ -7,7 +7,7 @@
 ##Stores value to the given MemorySlot.
 ##To be precise, this command sets a word at
 ##$030004B8 + (MemorySlot*4). Last MemorySlot is 0xD.
-##Aliases: SVAL, SMOV
+##aliases:SVAL, SMOV
 SETVAL, 0x0540, 8, -game:FE8 -indexMode:8
 ##The Memory Slot at which to store the given value.
 	MemorySlot, 2, 2
@@ -17,7 +17,7 @@ SETVAL, 0x0540, 8, -game:FE8 -indexMode:8
 ##Stores value to the given MemorySlot.
 ##To be precise, this command sets a word at
 ##$030004B8 + (MemorySlot*4). Last MemorySlot is 0xD.
-##Aliases: SETVAL, SMOV
+##aliases:SETVAL, SMOV
 SVAL, 0x0540, 8, -game:FE8 -indexMode:8
 ##The Memory Slot at which to store the given value.
 	MemorySlot, 2, 2
@@ -27,7 +27,7 @@ SVAL, 0x0540, 8, -game:FE8 -indexMode:8
 ##Stores value to the given MemorySlot.
 ##To be precise, this command sets a word at
 ##$030004B8 + (MemorySlot*4). Last MemorySlot is 0xD.
-##Aliases: SETVAL, SVAL
+##aliases:SETVAL, SVAL
 SMOV, 0x0540, 8, -game:FE8 -indexMode:8
 ##The Memory Slot at which to store the given value.
 	MemorySlot, 2, 2
@@ -100,7 +100,7 @@ SXOR, 0x0627, 4, -game:FE8 -indexMode:8
 
 ##command:Slots:Logical Shift Left
 ##Bitshifts the value in MemorySlot Y by (value in MemorySlot X) bits.
-##Alias: SLOTS_LEFTSHIFT
+##aliases:SLOTS_LEFTSHIFT
 SLSL, 0x0628, 4, -game:FE8 -indexMode:8
 ##The MemorySlots to use for this operation.
 ##The format for this parameter is '0x0XYZ', where
@@ -108,7 +108,7 @@ SLSL, 0x0628, 4, -game:FE8 -indexMode:8
 	MemorySlots, 2, 2
 
 ##Bitshifts the value in MemorySlot Y by (value in MemorySlot X) bits.
-##Alias: SLSL
+##aliases:SLSL
 SLOTS_LEFTSHIFT, 0x0628, 4, -game:FE8 -indexMode:8
 ##The MemorySlots to use for this operation.
 ##The format for this parameter is '0x0XYZ', where
@@ -117,7 +117,7 @@ SLOTS_LEFTSHIFT, 0x0628, 4, -game:FE8 -indexMode:8
 
 ##command:Slots:Logical Shift Right
 ##Bitshifts the value in MemorySlot Y by (value in MemorySlot X) bits.
-##Alias: SLOTS_RIGHTSHIFT
+##aliases:SLOTS_RIGHTSHIFT
 SLSR, 0x0629, 4, -game:FE8 -indexMode:8
 ##The MemorySlots to use for this operation.
 ##The format for this parameter is '0x0XYZ', where
@@ -125,7 +125,7 @@ SLSR, 0x0629, 4, -game:FE8 -indexMode:8
 	MemorySlots, 2, 2
 
 ##Bitshifts the value in MemorySlot Y by (value in MemorySlot X) bits.
-##Alias: SLSR
+##aliases:SLSR
 SLOTS_RIGHTSHIFT, 0x0629, 4, -game:FE8 -indexMode:8
 ##The MemorySlots to use for this operation.
 ##The format for this parameter is '0x0XYZ', where

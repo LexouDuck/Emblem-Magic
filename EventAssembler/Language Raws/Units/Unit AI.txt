@@ -1,13 +1,19 @@
+
+# FE6
+
 ##Changes the AI of a unit.
 CHAI, 0x32, 12, -game:FE6 -indexMode:8
 ##Character whose AI should change.
 ##Any unit with a matching character ID is affected.
-	Character, 4, 2
+	CharacterID, 4, 2
 ##The new 4 bytes of AI for this character.
 	AI, 8, 4, -coordinate:4
 
+##Changes the AI of a unit.
 CHAI, 0x32, 12, -game:FE6 -indexMode:8
-	Character, 4, 2
+##Character whose AI should change.
+##Any unit with a matching character ID is affected.
+	CharacterID, 4, 2
 ##Changes the first AI byte
 	AI_1, 8, 1
 ##Changes the second AI byte
@@ -17,15 +23,18 @@ CHAI, 0x32, 12, -game:FE6 -indexMode:8
 ##Changes the fourth AI byte
 	AI_4, 11, 1
 
+##Changes the AI of a unit.
 CHAI, 0x32, 12, -game:FE6 -indexMode:8
-	Character, 4, 2
+	CharacterID, 4, 2
 	AI, 8, 4
 
+##Changes the AI of a unit.
 CHAI, 0x33, 12, -game:FE6 -indexMode:8
 ##Position of the unit whose AI should change.
 	Position, 4, 4, coordinates:2 -preferredBase:10
 	AI, 8, 4, -coordinate:4
 
+##Changes the AI of a unit.
 CHAI, 0x33, 12, -game:FE6 -indexMode:8
 	Position, 4, 4, coordinates:2 -preferredBase:10
 	AI_1, 8, 1
@@ -33,59 +42,79 @@ CHAI, 0x33, 12, -game:FE6 -indexMode:8
 	AI_3, 10, 1
 	AI_4, 11, 1
 
+##Changes the AI of a unit.
 CHAI, 0x33, 12, -game:FE6 -indexMode:8
 	Position, 4, 4, coordinates:2 -preferredBase:10
 	AI, 8, 4
 
 
+
+# FE7
 
 ##Changes the AI of a unit.
 CHAI, 0x74, 12, -game:FE7 -indexMode:8
 ##Character whose AI should change.
-	Character, 4, 2
+	CharacterID, 4, 2
 ##The new 4 bytes of AI for this character.
 	AI, 8, 4, -coordinate:4
 
+##Changes the AI of a unit.
 CHAI, 0x74, 12, -game:FE7 -indexMode:8
-	Character, 4, 2
-##Changes the first AI byte
-	AI_1, 8, 1
-##Changes the second AI byte
-	AI_2, 9, 1
-##Changes the third AI byte
-	AI_3, 10, 1
-##Changes the fourth AI byte
-	AI_4, 11, 1
-
-CHAI, 0x74, 12, -game:FE7 -indexMode:8
-	Character, 4, 2
+##Character whose AI should change.
+	CharacterID, 4, 2
+##The new 4 bytes of AI for this character.
 	AI, 8, 4
 
+##Changes the AI of a unit.
+CHAI, 0x74, 12, -game:FE7 -indexMode:8
+##Character whose AI should change.
+	CharacterID, 4, 2
+##Sets the first AI byte
+	AI_1, 8, 1
+##Sets the second AI byte
+	AI_2, 9, 1
+##Sets the third AI byte
+	AI_3, 10, 1
+##Sets the fourth AI byte
+	AI_4, 11, 1
 
+##Changes the AI of a unit.
 CHAI, 0x75, 12, -game:FE7 -indexMode:8
 ##Position of the unit whose AI should change.
 	Position, 4, 4, -coordinate:2 -preferredBase:10
+##The new 4 bytes of AI for this character.
 	AI, 8, 4, -coordinate:4
 
+##Changes the AI of a unit.
 CHAI, 0x75, 12, -game:FE7 -indexMode:8
+##Position of the unit whose AI should change.
 	Position, 4, 4, -coordinate:2 -preferredBase:10
-	AI_1, 8, 1
-	AI_2, 9, 1
-	AI_3, 10, 1
-	AI_4, 11, 1
-
-CHAI, 0x75, 12, -game:FE7 -indexMode:8
-	Position, 4, 4, -coordinate:2 -preferredBase:10
+##The new 4 bytes of AI for this character.
 	AI, 8, 4
 
+##Changes the AI of a unit.
+CHAI, 0x75, 12, -game:FE7 -indexMode:8
+##Position of the unit whose AI should change.
+	Position, 4, 4, -coordinate:2 -preferredBase:10
+##Sets the first AI byte
+	AI_1, 8, 1
+##Sets the second AI byte
+	AI_2, 9, 1
+##Sets the third AI byte
+	AI_3, 10, 1
+##Sets the fourth AI byte
+	AI_4, 11, 1
 
+
+
+# FE8
 
 ##Changes the AI of a unit to the value in Memory Slot 0x1.
 ##Format is SETVAL 0x1 0x2211 for AI Bytes 2 and 1. Bytes 3-4 can't be changed.
 CHAI, 0x3920, 4, -game:FE8 -indexMode:8
 ##Character whose AI should change.
 ##Any unit with a matching character ID is affected.
-	Character, 2, 2
+	CharacterID, 2, 2
 
 CHAI, 0x3921, 4, -game:FE8 -indexMode:8
 ##Position of the unit whose AI should change.

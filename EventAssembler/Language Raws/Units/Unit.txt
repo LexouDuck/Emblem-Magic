@@ -1,8 +1,11 @@
+
+# FE6 & FE7
+
 ##This code sets up unit data to be loaded onto the chapter map.
 ##The parameterless version signals the end of a UNIT list.
 UNIT, 0, 16, -game:FE6:FE7 -priority:unit -indexMode:8
 ##Character ID byte of this unit.
-	CharID, 0, 1
+	CharacterID, 0, 1
 ##Class ID byte of this unit.
 	ClassID, 1, 1
 ##Leader character ID for this unit. The leader character
@@ -15,14 +18,14 @@ UNIT, 0, 16, -game:FE6:FE7 -priority:unit -indexMode:8
 ##Position at which to load this unit.
 	LoadPosition, 4, 2, -coordinate:2 -preferredBase:10
 ##Position to move this unit to after loading.
-	StartPosition,  6, 2, -coordinate:2 -preferredBase:10
+	StartPosition, 6, 2, -coordinate:2 -preferredBase:10
 ##The item inventory that this unit starts with.
 	Items, 8, 4, -coordinate:1-4
 ##The AI of this unit upon loading.
 	AI, 12, 4, -coordinate:1-4
 
 UNIT, 0, 16, -game:FE6:FE7 -priority:unit -indexMode:8
-	CharID, 0, 1
+	CharacterID, 0, 1
 	ClassID, 1, 1
 	Leader, 2, 1
 	UnitLevelData, 3, 1
@@ -49,11 +52,13 @@ UNIT, 0, 16, -game:FE6:FE7 -priority:unit -end -indexMode:8
 
 
 
+# FE8
+
 ##This code sets up unit data to be loaded onto the chapter map.
 ##The parameterless version signals the end of a UNIT list.
 UNIT, 0, 160, -game:FE8 -priority:unit
 ##Character ID byte of this unit.
-	CharID, 0, 8
+	CharacterID, 0, 8
 ##Class ID byte of this unit.
 	ClassID, 8, 8
 ##Leader character ID for this unit. The leader character
@@ -78,7 +83,7 @@ UNIT, 0, 160, -game:FE8 -priority:unit
 	AI, 128, 32, -coordinate:1-4
     
 UNIT, 0, 160, -game:FE8 -priority:unit
-	CharID, 0, 8
+	CharacterID, 0, 8
 	ClassID, 8, 8
 	Leader, 16, 8
 	UnitLevelData, 24, 8
@@ -118,7 +123,7 @@ REDA, 0, 64, -game:FE8 -priority:reinforcementData
 ##Speed of the movement.
 	Speed, 16, 8
 ##Unit that this unit is rescuing. 0 if there is none.
-	RescueChar, 24, 8
+	RescueCharacterID, 24, 8
 	0xFFFF, 32, 16, -fixed
 ##Amount of time to pass before executing this code.
 	Delay, 48, 8, -preferredBase:10
@@ -127,7 +132,7 @@ REDA, 0, 64, -game:FE8 -priority:reinforcementData
 	Destination, 0, 12, coordinate:2 -preferredBase:10
 	Flags, 12, 4, -preferredBase:2
 	Speed, 16, 8
-	RescueChar, 24, 8
+	RescueCharacterID, 24, 8
 ##Unknown, is usually 0xFFFF.
 	Unknown, 32, 16
 	Delay, 48, 8, -preferredBase:10

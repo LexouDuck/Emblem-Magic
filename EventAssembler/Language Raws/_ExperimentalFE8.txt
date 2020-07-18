@@ -132,7 +132,7 @@ _0xC220, 0xC220, 4, -game:FE8 -indexMode:8
 ##Unit condition codes
 ##Can hardlock the game, don't use this
 _0x3427, 0x3427, 4, -game:FE8 -indexMode:8
-	Character, 2, 2
+	CharacterID, 2, 2
 
 ##Unknown MemorySlot-related operation
 SLOTS_UNKNOWN, 0x0624, 4, -game:FE8 -indexMode:8

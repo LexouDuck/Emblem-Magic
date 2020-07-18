@@ -46,6 +46,7 @@
             this.View_Units = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.View_ArrayDefinitions = new System.Windows.Forms.ToolStripMenuItem();
+            this.View_HelperMacros = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Tools = new System.Windows.Forms.ToolStripMenuItem();
             this.Tools_MakeEAtxt = new System.Windows.Forms.ToolStripMenuItem();
             this.Tools_MakeEMtxt = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,8 +69,7 @@
             // 
             // Map_Panel
             // 
-            this.Map_Panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.Map_Panel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Map_Panel.AutoScroll = true;
             this.Map_Panel.Controls.Add(this.MapViewBox);
@@ -114,8 +114,9 @@
             // 
             // Event_CodeBox
             // 
-            this.Event_CodeBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.Event_CodeBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.Event_CodeBox.AutoCompleteBracketsList = new char[] {
         '(',
         ')',
@@ -203,7 +204,8 @@
             this.View_Grid,
             this.View_Units,
             this.toolStripSeparator1,
-            this.View_ArrayDefinitions});
+            this.View_ArrayDefinitions,
+            this.View_HelperMacros});
             this.Menu_View.Name = "Menu_View";
             this.Menu_View.Size = new System.Drawing.Size(44, 20);
             this.Menu_View.Text = "View";
@@ -243,6 +245,14 @@
             this.View_ArrayDefinitions.Text = "View code with array definitions";
             this.View_ArrayDefinitions.CheckedChanged += new System.EventHandler(this.View_ArrayDefinitions_CheckedChanged);
             // 
+            // View_HelperMacros
+            // 
+            this.View_HelperMacros.Checked = true;
+            this.View_HelperMacros.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.View_HelperMacros.Name = "View_HelperMacros";
+            this.View_HelperMacros.Size = new System.Drawing.Size(242, 22);
+            this.View_HelperMacros.Text = "View code with helper macros";
+            // 
             // Menu_Tools
             // 
             this.Menu_Tools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -275,7 +285,9 @@
             // 
             // Tools_ManageSpace
             // 
+            this.Tools_ManageSpace.Checked = true;
             this.Tools_ManageSpace.CheckOnClick = true;
+            this.Tools_ManageSpace.CheckState = System.Windows.Forms.CheckState.Checked;
             this.Tools_ManageSpace.Name = "Tools_ManageSpace";
             this.Tools_ManageSpace.Size = new System.Drawing.Size(277, 22);
             this.Tools_ManageSpace.Text = "Manage ORG/ASSERTs automatically";
@@ -451,5 +463,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem Tools_ManageSpace;
         private Components.MagicButton Chapter_MagicButton;
+        private System.Windows.Forms.ToolStripMenuItem View_HelperMacros;
     }
 }

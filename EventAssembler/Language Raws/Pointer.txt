@@ -1,9 +1,32 @@
-##Sets a GBA pointer pointing to 'Offset'.
-POIN, 0, 4, -game:FE6:FE7:FE8 -repeatable -priority:pointer -indexMode:8
-##Offset to point to.
-	Offset, 0, 4, -pointer:unknown
 
-##Sets a GBA pointer pointing to 'Offset' without requiring word alignment.
+##Sets a GBA pointer pointing to 'Address'.
+##aliases:POIN
+POINTER, 0, 4, -game:FE6:FE7:FE8 -repeatable -priority:pointer -indexMode:8
+##Address to point to.
+	Address, 0, 4, -pointer:unknown
+
+##Sets a GBA pointer pointing to 'Address'.
+##aliases:POINTER
+POIN, 0, 4, -game:FE6:FE7:FE8 -repeatable -priority:pointer -indexMode:8
+##Address to point to.
+	Address, 0, 4, -pointer:unknown
+
+
+
+##Sets a GBA pointer pointing to 'Address' without requiring word alignment.
+##aliases:POIN_NOALIGN, POIN2
+POINTER_NOALIGN, 0, 4, -game:FE6:FE7:FE8 -repeatable -priority:pointer -indexMode:8 -offsetMod:1
+##Address to point to.
+	Address, 0, 4, -pointer:unknown
+
+##Sets a GBA pointer pointing to 'Address' without requiring word alignment.
+##aliases:POINTER_NOALIGN, POIN2
+POIN_NOALIGN, 0, 4, -game:FE6:FE7:FE8 -repeatable -priority:pointer -indexMode:8 -offsetMod:1
+##Address to point to.
+	Address, 0, 4, -pointer:unknown
+
+##Sets a GBA pointer pointing to 'Address' without requiring word alignment.
+##aliases:POINTER_NOALIGN, POIN_NOALIGN
 POIN2, 0, 4, -game:FE6:FE7:FE8 -repeatable -priority:pointer -indexMode:8 -offsetMod:1
-##Offset to point to.
-	Offset, 0, 4, -pointer:unknown
+##Address to point to.
+	Address, 0, 4, -pointer:unknown
