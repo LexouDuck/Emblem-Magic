@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"NEXT",
+				"NEXT_CHAPTER"
+			],
+			[
 				"Avial",
 				"AvialError\tinterface"
 			],
@@ -510,24 +514,9 @@
 			[
 				"CHECK",
 				"CHECK_JUSTRELEASED"
-			],
-			[
-				"CHEC",
-				"CHECK_JUSTPRESSED"
 			]
 		]
 	},
-	"buffers":
-	[
-		{
-			"file": "dist.sh",
-			"settings":
-			{
-				"buffer_size": 940,
-				"line_ending": "Unix"
-			}
-		}
-	],
 	"build_system": "",
 	"build_system_choices":
 	[
@@ -699,29 +688,68 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
-	"expanded_folders":
-	[
-		"/D/Lexou/Projects/EmblemMagic",
-		"/D/Lexou/Projects/EmblemMagic/EventAssembler"
-	],
 	"file_history":
 	[
-		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Chapter/Camera.txt",
+		"/D/Lexou/Projects/EmblemMagic/Other/EventAssembler/README2.txt",
+		"/C/Users/Lexou/Downloads/Event-Assembler-master/Event Assembler/Event Assembler/README2.txt",
+		"/C/Users/Lexou/Desktop/test.s",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Chapter/Next Chapter.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Main Codes/Location Events.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Chapter/Map Loading.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Convos/Text Specials.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Convos/Text.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Convos/Skipping.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Convos/Backgrounds.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Units/Unit Affiliation.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Chapter/Beginning Blackness.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Chapter/Cursor.txt",
 		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Chapter/Give Items.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Chapter/Map Changes.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Conditional/Character conditions.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Main Codes/After Event.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Music and Sound/Music.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Music and Sound/Sound.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Units/Fighting.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Units/Moving.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/World Map/Camera.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/World Map/Map Sprites.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/World Map/Portraits.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/World Map/World Map.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/World Map/Text.txt",
+		"/C/Users/Lexou/Downloads/Event-Assembler-master/Event Assembler/Event Assembler/bin/Release/Language raws/Chapter/Items.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Units/Warp.txt",
+		"/C/Users/Lexou/Downloads/Event-Assembler-master/Event Assembler/Event Assembler/bin/Release/Language raws/Units/Warp.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Units/Unit.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Main Codes/Event IDs.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Conditional/Basic branches.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/README2.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/README.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Language.readme",
+		"/C/Users/Lexou/Downloads/Event-Assembler-master/Event Assembler/Event Assembler/bin/Release/Language raws/Conditional/Basic.txt",
+		"/C/Users/Lexou/Downloads/Event-Assembler-master/Event Assembler/Event Assembler/bin/Release/Language raws/Units/End of unit changing.txt",
+		"/C/Users/Lexou/Downloads/Event-Assembler-master/Event Assembler/Event Assembler/bin/Release/Language raws/Units/Change affiliation.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Units/Promote.txt",
+		"/C/Users/Lexou/Downloads/Event-Assembler-master/Event Assembler/Event Assembler/bin/Release/Language raws/Units/Promote.txt",
+		"/C/Users/Lexou/Downloads/Event-Assembler-master/Event Assembler/Event Assembler/bin/Release/Language raws/Music and sound/Change music.txt",
+		"/C/Users/Lexou/Downloads/Event-Assembler-master/Event Assembler/Event Assembler/bin/Release/Language raws/Music and sound/Change volume.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Random.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Music and Sound/Music Volume.txt",
+		"/C/Users/Lexou/Downloads/Event-Assembler-master/Event Assembler/Event Assembler/bin/Release/Language raws/Chapter/Camera.txt",
+		"/D/Lexou/Projects/EmblemMagic/Test/balrog.event",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Syntax/EVENT_tmlanguage.zip",
+		"/D/Lexou/Projects/EmblemMagic/dist.sh",
+		"/D/Lexou/Projects/EmblemMagic/project.sublime-project",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Chapter/Camera.txt",
 		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Chapter/Give Money.txt",
 		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Chapter/Location Events.txt",
 		"/C/Users/Lexou/Downloads/Event-Assembler-master/Event Assembler/Event Assembler/bin/Release/Language raws/Language.raws",
 		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Convos/Fade In and Out.txt",
 		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Chapter/Character Events.txt",
 		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Chapter/After Event.txt",
-		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Chapter/Beginning Blackness.txt",
 		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Convos/Return to Map.txt",
-		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Convos/Text.txt",
-		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Convos/Skipping.txt",
 		"/D/Lexou/Documents/Work/LEDR/API/Typescript/src/api.ts",
 		"/D/Lexou/Documents/Work/LEDR/API/Typescript/src/socket.ts",
 		"/D/Lexou/Documents/Work/LEDR/API/Typescript/src/server.ts",
-		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Convos/Backgrounds.txt",
 		"/D/Lexou/Documents/Work/LEDR/API/Typescript/src/deserialize.ts",
 		"/D/Lexou/Documents/Work/LEDR/API/Typescript/test/simple_cli.ts",
 		"/D/Lexou/Documents/Work/LEDR/API/Typescript/src/utils.ts",
@@ -789,61 +817,18 @@
 		"/D/Lexou/Documents/Work/CerebroLex/justype/README.md",
 		"/D/Lexou/Documents/Work/LEDR/Avesterra_JS_Example/built/index.js",
 		"/D/Lexou/Documents/Work/LEDR/Avesterra_JS_Example/.gitignore",
-		"/D/Lexou/Documents/Work/CerebroLex/justype/.gitignore",
-		"/D/Lexou/Documents/Work/LEDR/API/C/src/utils/dprintf.c",
-		"/D/Lexou/Documents/Work/LEDR/API/C/src/utils/dprintf.h",
-		"/D/Lexou/Documents/Work/LEDR/API/C/src/utils/logger.c",
-		"/D/Lexou/Documents/Work/LEDR/API/C/tests/util.c",
-		"/D/Lexou/Documents/Work/LEDR/API/C/src/utils/logger.h",
-		"/D/Lexou/Documents/Work/LEDR/API/C/src/utils/socket.h",
-		"/D/Lexou/Documents/Work/LEDR/API/C/src/avesterra/hgtp_session.c",
-		"/D/Lexou/Documents/Work/LEDR/API/C/src/utils/strptime.h",
-		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test.h",
-		"/D/Lexou/Documents/Work/LEDR/API/C/hdr/help.h",
-		"/D/Lexou/Documents/Work/LEDR/API/C/hdr/enums.h",
-		"/D/Lexou/Documents/Work/LEDR/API/C/hdr/avial_utils.h",
-		"/D/Lexou/Documents/Work/LEDR/API/C/hdr/avial.h",
-		"/D/Lexou/Documents/Work/LEDR/API/C/hdr/avesterra.h",
-		"/D/Lexou/Documents/Work/LEDR/API/C/hdr/args.h",
-		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_toolkit.c",
-		"/D/Lexou/Documents/Work/LEDR/API/C/hdr/avial_kwargs.h",
-		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_registry.c",
-		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_outlet.c",
-		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_attribute.c",
-		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_property.c",
-		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_event.c",
-		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_attachment.c",
-		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_label.c",
-		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_value.c",
-		"/D/Lexou/Documents/Work/LEDR/API/C/src/utils/json_utils.c",
-		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_comprehensive.c",
-		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_misc.c",
-		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_entity.c",
-		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_session.c",
-		"/D/Lexou/Documents/Work/LEDR/API/C/Makefile",
-		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_annotation.c",
-		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_data.c",
-		"/D/Lexou/Documents/Work/LEDR/API/Python/avesterra-2.5.3/avesterra/avial.py",
-		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_connection.c",
-		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_schema.c",
-		"/D/Lexou/Documents/Work/LEDR/API/Python/avesterra-2.5.3/avesterra/tests/cleaner.py",
-		"/D/Lexou/Documents/Work/LEDR/API/C/lib/libft/hdr/libft_memory.h",
-		"/D/Lexou/Documents/Work/LEDR/API/Python/avesterra-2.5.3/avesterra/tests/test_avial_event.py",
-		"/D/Lexou/Documents/Work/LEDR/API/C/lib/libft/hdr/libft_string.h",
-		"/D/Lexou/Documents/Work/LEDR/API/C/lib/libft/src/string/ft_strmerge.c",
-		"/D/Lexou/Documents/Work/LEDR/API/C/lib/libft/hdr/libft_random.h",
-		"/D/Lexou/Documents/Work/LEDR/API/C/lib/libft/src/string/ft_strnew.c",
-		"/D/Lexou/Documents/Work/LEDR/API/Python/avesterra-2.5.3/avesterra/tests/common.py"
+		"/D/Lexou/Documents/Work/CerebroLex/justype/.gitignore"
 	],
 	"find":
 	{
-		"height": 22.0
+		"height": 39.0
 	},
 	"find_in_files":
 	{
 		"height": 239.0,
 		"where_history":
 		[
+			"D:\\Lexou\\Projects\\EmblemMagic\\EventAssembler\\Language Raws"
 		]
 	},
 	"find_state":
@@ -851,13 +836,26 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"commnad:",
+			"0x28, 8, -game:FE6",
+			"0x29, 8, -game:FE6",
+			"Character defender.",
+			"Character attacker.",
+			"ID of the ",
+			"GIVEITEM",
+			"CU\\w\\w, 0x",
+			"SETEVENT_USED,",
+			"Changes a character's ",
+			"Changes units affiliation",
+			"MUSS/MUSIC_SWITCH music switch command."
 		],
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": false,
+		"regex": true,
 		"replace_history":
 		[
+			""
 		],
 		"reverse": false,
 		"show_context": true,
@@ -865,43 +863,6 @@
 		"whole_word": false,
 		"wrap": true
 	},
-	"groups":
-	[
-		{
-			"selected": 0,
-			"sheets":
-			[
-				{
-					"buffer": 0,
-					"file": "dist.sh",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 940,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/ShellScriptImproved/Shell-Unix-Generic.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
-			]
-		}
-	],
 	"incremental_find":
 	{
 		"height": 22.0
@@ -950,7 +911,6 @@
 		"height": 90.0
 	},
 	"pinned_build_system": "",
-	"project": "project.sublime-project",
 	"replace":
 	{
 		"height": 40.0
@@ -983,7 +943,6 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
 	"settings":
 	{
 	},

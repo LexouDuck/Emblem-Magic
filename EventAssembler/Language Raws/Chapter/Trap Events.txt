@@ -1,25 +1,56 @@
-##command:BaLliSTa
+
+# FE7 & FE8
+
+##command:END TRAP
+##Stops an ongoing trap object.
+END_TRAP, 0, 1, -language:FE7:FE8 -unsafe -priority:ballista -end -indexMode:8 -offsetMod:1
+	0x00, 0, 1, -fixed
+
+
+
+##command:BALLISTA
 ##Sets Ballista data to be loaded onto the map.
 ##The parameterless version signals the end of a BLST list.
-BLST, 0, 6, -language:FE7:FE8 -unsafe -priority:ballista -indexMode:8 -offsetMod:1
-	0x01, 0, 1, -fixed 
+##aliases:BLST
+BALLISTA, 0, 6, -language:FE7:FE8 -unsafe -priority:ballista -indexMode:8 -offsetMod:1
+	0x01, 0, 1, -fixed
 ##Position of the ballista
 	Position, 1, 2, -coordinates:2 -preferredBase:10
 ##Type of the ballista
 	Type, 3, 1
 
+##command:BaLliSTa
+##Sets Ballista data to be loaded onto the map.
+##The parameterless version signals the end of a BLST list.
+##aliases:BALLISTA
+BLST, 0, 6, -language:FE7:FE8 -unsafe -priority:ballista -indexMode:8 -offsetMod:1
+	0x01, 0, 1, -fixed
+##Position of the ballista
+	Position, 1, 2, -coordinates:2 -preferredBase:10
+##Type of the ballista
+	Type, 3, 1
+
+##command:BALLISTA END of list
+##Sets Ballista data to be loaded onto the map.
+##The parameterless version signals the end of a BLST list.
+##aliases:BLST
+BALLISTA_END, 0, 1, -language:FE7:FE8 -unsafe -priority:ballista -end -indexMode:8 -offsetMod:1 -noDisassembly
+	0x00, 0, 1, -fixed
+
+##command:BaLliSTa
+##Sets Ballista data to be loaded onto the map.
+##The parameterless version signals the end of a BLST list.
+##aliases:BALLISTA_END
 BLST, 0, 1, -language:FE7:FE8 -unsafe -priority:ballista -end -indexMode:8 -offsetMod:1 -noDisassembly
-	0x00, 0, 1, -fixed 
+	0x00, 0, 1, -fixed
 
 
 
-##Stops an ongoing trap object.
-END_TRAP, 0, 1, -language:FE7:FE8 -unsafe -priority:ballista -end -indexMode:8 -offsetMod:1
-	0x00, 0, 1, -fixed 
-
+##command:TRAP: FIRE
 ##Sets a Fire trap of a certain size at the given position.
-FIRE, 0, 6, -language:FE7:FE8 -unsafe -priority:ballista -indexMode:8 -offsetMod:1
-	0x04, 0, 1, -fixed 
+##aliases:FIRE
+TRAP_FIRE, 0, 6, -language:FE7:FE8 -unsafe -priority:ballista -indexMode:8 -offsetMod:1
+	0x04, 0, 1, -fixed
 ##Position of the trap
 	Position, 1, 2, -coordinates:2 -preferredBase:10
 ##Type of the trap
@@ -27,9 +58,27 @@ FIRE, 0, 6, -language:FE7:FE8 -unsafe -priority:ballista -indexMode:8 -offsetMod
 ##Size of the trap
 	Size, 4, 2, -coordinates:2 -preferredBase:10
 
+##command:FIRE trap
+##Sets a Fire trap of a certain size at the given position.
+##aliases:TRAP_FIRE
+FIRE, 0, 6, -language:FE7:FE8 -unsafe -priority:ballista -indexMode:8 -offsetMod:1
+	0x04, 0, 1, -fixed
+##Position of the trap
+	Position, 1, 2, -coordinates:2 -preferredBase:10
+##Type of the trap
+	Type, 3, 1
+##Size of the trap
+	Size, 4, 2, -coordinates:2 -preferredBase:10
+
+
+
+# FE7
+
+##command:TRAP: GAS
 ##Sets a Gas trap of a certain size at the given position.
-GAST, 0, 6, -language:FE7 -unsafe -priority:ballista -indexMode:8 -offsetMod:1
-	0x05, 0, 1, -fixed 
+##aliases:GAST
+TRAP_GAS, 0, 6, -language:FE7 -unsafe -priority:ballista -indexMode:8 -offsetMod:1
+	0x05, 0, 1, -fixed
 ##Position of the trap
 	Position, 1, 2, -coordinates:2 -preferredBase:10
 ##Direction of the trap
@@ -37,17 +86,61 @@ GAST, 0, 6, -language:FE7 -unsafe -priority:ballista -indexMode:8 -offsetMod:1
 ##Size of the trap
 	Size, 4, 2, -coordinates:2 -preferredBase:10
 
+##command:GAS Trap
+##Sets a Gas trap of a certain size at the given position.
+##aliases:TRAP_GAS
+GAST, 0, 6, -language:FE7 -unsafe -priority:ballista -indexMode:8 -offsetMod:1
+	0x05, 0, 1, -fixed
+##Position of the trap
+	Position, 1, 2, -coordinates:2 -preferredBase:10
+##Direction of the trap
+	Direction, 3, 1
+##Size of the trap
+	Size, 4, 2, -coordinates:2 -preferredBase:10
+
+
+
+# FE8
+
+##command:TRAP: ARROW
 ##Sets an Arrow trap of a certain size at the given position.
-ARROW, 0, 6, -language:FE8 -unsafe -priority:ballista -indexMode:8 -offsetMod:1
-	0x07, 0, 1, -fixed 
+##aliases:ARROW
+TRAP_ARROW, 0, 6, -language:FE8 -unsafe -priority:ballista -indexMode:8 -offsetMod:1
+	0x07, 0, 1, -fixed
 ##Position of the trap
 	X coordinate, 1, 1, -coordinates:2 -preferredBase:10
 ##Size of the trap
 	Size, 4, 2, -coordinates:2 -preferredBase:10
 
+##command:ARROW trap
+##Sets an Arrow trap of a certain size at the given position.
+##aliases:TRAP_ARROW
+ARROW, 0, 6, -language:FE8 -unsafe -priority:ballista -indexMode:8 -offsetMod:1
+	0x07, 0, 1, -fixed
+##Position of the trap
+	X coordinate, 1, 1, -coordinates:2 -preferredBase:10
+##Size of the trap
+	Size, 4, 2, -coordinates:2 -preferredBase:10
+
+
+
+##command:TRAP: gorgon EGG
 ##Sets a Gorgon egg at the given position
+##aliases:EGG
+TRAP_EGG, 0, 6, -language:FE8 -unsafe -priority:ballista -indexMode:8 -offsetMod:1
+	0x0C, 0, 1, -fixed
+##Position of the trap
+	Position, 1, 2, -coordinates:2 -preferredBase:10
+##(Direction of the trap)
+	Unused1, 4, 1
+##(Size of the trap)
+	Unused2, 5, 1
+
+##command:gorgon EGG
+##Sets a Gorgon egg at the given position
+##aliases:TRAP_EGG
 EGG, 0, 6, -language:FE8 -unsafe -priority:ballista -indexMode:8 -offsetMod:1
-	0x0C, 0, 1, -fixed 
+	0x0C, 0, 1, -fixed
 ##Position of the trap
 	Position, 1, 2, -coordinates:2 -preferredBase:10
 ##(Direction of the trap)

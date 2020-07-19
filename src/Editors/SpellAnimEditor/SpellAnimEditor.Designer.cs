@@ -59,7 +59,7 @@
             this.Width_Label = new System.Windows.Forms.Label();
             this.Next_Button = new System.Windows.Forms.Button();
             this.Prev_Button = new System.Windows.Forms.Button();
-            this.Menu = new System.Windows.Forms.MenuStrip();
+            this.MenuStrip = new System.Windows.Forms.MenuStrip();
             this.Menu_File = new System.Windows.Forms.ToolStripMenuItem();
             this.File_OpenFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.File_OpenFiles = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,7 +84,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.TSA_PointerBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Height_NumberBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Width_NumberBox)).BeginInit();
-            this.Menu.SuspendLayout();
+            this.MenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Anim_CodeBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AnimLoading_PointerBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LoopRoutine_PointerBox)).BeginInit();
@@ -425,15 +425,15 @@
             // 
             // Menu
             // 
-            this.Menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Menu_File,
             this.Menu_Tools,
             this.Menu_View});
-            this.Menu.Location = new System.Drawing.Point(0, 0);
-            this.Menu.Name = "Menu";
-            this.Menu.Size = new System.Drawing.Size(732, 24);
-            this.Menu.TabIndex = 47;
-            this.Menu.Text = "menuStrip1";
+            this.MenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.MenuStrip.Name = "Menu";
+            this.MenuStrip.Size = new System.Drawing.Size(732, 24);
+            this.MenuStrip.TabIndex = 47;
+            this.MenuStrip.Text = "menuStrip1";
             // 
             // Menu_File
             // 
@@ -680,8 +680,8 @@
             this.Controls.Add(this.Tileset_PointerBox);
             this.Controls.Add(this.Palette_PointerBox);
             this.Controls.Add(this.EntryArrayBox);
-            this.Controls.Add(this.Menu);
-            this.MainMenuStrip = this.Menu;
+            this.Controls.Add(this.MenuStrip);
+            this.MainMenuStrip = this.MenuStrip;
             this.MinimumSize = new System.Drawing.Size(748, 431);
             this.Name = "SpellAnimEditor";
             this.Text = "SpellAnimEditor";
@@ -690,8 +690,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.TSA_PointerBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Height_NumberBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Width_NumberBox)).EndInit();
-            this.Menu.ResumeLayout(false);
-            this.Menu.PerformLayout();
+            this.MenuStrip.ResumeLayout(false);
+            this.MenuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Anim_CodeBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AnimLoading_PointerBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LoopRoutine_PointerBox)).EndInit();
@@ -732,7 +732,7 @@
         private System.Windows.Forms.Label Width_Label;
         private System.Windows.Forms.Button Next_Button;
         private System.Windows.Forms.Button Prev_Button;
-        private System.Windows.Forms.MenuStrip Menu;
+        private System.Windows.Forms.MenuStrip MenuStrip;
         private Components.CodeBox Anim_CodeBox;
         private System.Windows.Forms.Button CopyASM_Button;
         private System.Windows.Forms.RadioButton AnimLoading_Label;
