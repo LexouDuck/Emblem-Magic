@@ -1,3 +1,6 @@
+
+# FE8
+
 ##Sets the position of the camera on the large world map.
 WM_SETCAM, 0x8340, 8, -game:FE8 -indexMode:8
 	0, 2, 2, -fixed
@@ -29,7 +32,7 @@ WM_MOVECAMTO, 0x8780, 16, -game:FE8 -indexMode:8
 ##The position the camera should move from.
 ##[-1, -1] will set coords to the current position.
 	Position, 4, 4, -coordinates:2, -preferredBase:10
-##The ID of the world map location to move to.
+##The world map location to move to.
 	LocationID, 8, 2
 ##The speed at which the camera should move.
 	Speed, 10, 2

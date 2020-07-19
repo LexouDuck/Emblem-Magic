@@ -1,3 +1,6 @@
+
+# FE7
+
 ##Places or moves a map sprite on the world map.
 WM_PUTSPRITE, 0xB7, 20, -game:FE7 -indexMode:8
 ##The ID to give this object on the world map.
@@ -17,12 +20,14 @@ WM_PUTSPRITE, 0xB7, 20, -game:FE7 -indexMode:8
 
 ##Removes a map sprite from the world map.
 WM_REMSPRITE, 0xB8, 12, -game:FE7 -indexMode:8
-##The unique object ID of the map sprite to
+##The unique object map sprite to
 ##remove from the world map.
 	MapObjectID, 4, 2
 	Unknown, 8, 4
 
 
+
+# FE8
 
 ##Places or moves a map sprite on the world map.
 WM_PUTSPRITE, 0x9E60, 12, -game:FE8 -indexMode:8
@@ -37,7 +42,7 @@ WM_PUTSPRITE, 0x9E60, 12, -game:FE8 -indexMode:8
 
 ##Removes a map sprite from the world map.
 WM_REMSPRITE, 0xA040, 8, -game:FE8 -indexMode:8
-##The unique object ID of the map sprite to
+##The unique object map sprite to
 ##remove from the world map.
 	MapObjectID, 4, 2
 

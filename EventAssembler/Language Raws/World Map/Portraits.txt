@@ -1,3 +1,6 @@
+
+# FE6
+
 ##Displays a portrait over the world map.
 WM_SHOWPORTRAIT, 0x51, 16, -game:FE6 -indexMode:8
 ##The ID to give this object on the world map.
@@ -5,17 +8,19 @@ WM_SHOWPORTRAIT, 0x51, 16, -game:FE6 -indexMode:8
 	MapObjectID, 4, 4
 ##Position at which to display the portrait (in pixels).
 	Position, 8, 4, -coordinates:2 -preferredBase:10
-##The ID of the portrait to display.
+##The portrait to display.
 	PortraitID, 12, 4
 
 
+
+# FE7
 
 ##Displays a portrait over the world map.
 WM_SHOWPORTRAIT, 0xB1, 20, -game:FE7 -indexMode:8
 ##The ID to give this object on the world map.
 ##All items shown at once must have a unique ID.
 	MapObjectID, 4, 1
-##The ID of the portrait to display.
+##The portrait to display.
 	PortraitID, 8, 1
 ##Horizontal position of the portrait (in pixels).
 	Position, 12, 1, -preferredBase:10
@@ -26,7 +31,7 @@ WM_SHOWPORTRAIT, 0xB1, 20, -game:FE7 -indexMode:8
 
 ##Removes a portrait over the world map.
 WM_REMOVEPORTRAIT, 0xB2, 16, -game:FE7 -indexMode:8
-##The ID of the portrait to remove.
+##The portrait to remove.
 	PortraitID, 4, 1
 ##The way to remove the portrait from the screen, namely
 ##the direction in which the portrait should go to dissappear.
@@ -36,9 +41,11 @@ WM_REMOVEPORTRAIT, 0xB2, 16, -game:FE7 -indexMode:8
 
 
 
+# FE8
+
 ##Displays a portrait over the world map.
 WM_SHOWPORTRAIT, 0xC460, 12, -game:FE8 -indexMode:8
-##The ID of the portrait to display.
+##The portrait to display.
 	PortraitID, 6, 1
 ##Horizontal position of the portrait (in pixels).
 	Position, 8, 2, -preferredBase:10

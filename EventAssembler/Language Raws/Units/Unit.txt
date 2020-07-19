@@ -114,7 +114,25 @@ UNIT, 0, 20, -game:FE8 -priority:unit -end -indexMode:8
 
 
 
+##command: REinforcement DAta
 ##Controls how units move right after getting loaded to the map.
+##aliases:REDA
+UNIT_MOVE, 0, 64, -game:FE8 -priority:reinforcementData
+##Position to move the unit to.
+	Destination, 0, 12, coordinate:2 -preferredBase:10
+##Flags of the movement.
+	Flags, 12, 4, -preferredBase:2
+##Speed of the movement.
+	Speed, 16, 8
+##Unit that this unit is rescuing. 0 if there is none.
+	RescueCharacterID, 24, 8
+	0xFFFF, 32, 16, -fixed
+##Amount of time to pass before executing this code.
+	Delay, 48, 8, -preferredBase:10
+
+##command: REinforcement DAta
+##Controls how units move right after getting loaded to the map.
+##aliases:UNIT_MOVE
 REDA, 0, 64, -game:FE8 -priority:reinforcementData
 ##Position to move the unit to.
 	Destination, 0, 12, coordinate:2 -preferredBase:10
@@ -126,6 +144,15 @@ REDA, 0, 64, -game:FE8 -priority:reinforcementData
 	RescueCharacterID, 24, 8
 	0xFFFF, 32, 16, -fixed
 ##Amount of time to pass before executing this code.
+	Delay, 48, 8, -preferredBase:10
+
+UNIT_MOVE, 0, 64, -game:FE8 -priority:reinforcementData
+	Destination, 0, 12, coordinate:2 -preferredBase:10
+	Flags, 12, 4, -preferredBase:2
+	Speed, 16, 8
+	RescueCharacterID, 24, 8
+##Unknown, is usually 0xFFFF.
+	Unknown, 32, 16
 	Delay, 48, 8, -preferredBase:10
 
 REDA, 0, 64, -game:FE8 -priority:reinforcementData

@@ -1,6 +1,7 @@
 
 #FE7
 
+##command:WARP unit
 ##Performs a warp animation on a unit.
 ##This code does not actually move the unit.
 WARP, 0xCC, 12, -game:FE7 -indexMode:8
@@ -10,24 +11,28 @@ WARP, 0xCC, 12, -game:FE7 -indexMode:8
 ##goes from up to down) or out (other way around)
 	In or out, 8, 1
 
-
-
+##command: WARP unit
+##Performs a warp animation on the given character.
+##This code does not actually move the unit.
 WARP, 0xCD, 12, -game:FE7 -indexMode:8
 ##Character to do the warp animation on.
 	CharacterID, 4, 4
+##Whether warp animation is for warping in (animation 
+##goes from up to down) or out (other way around)
 	In or out, 8, 1
 
 
 
 # FE8
 
+##command:WARP unit OUT of the map
 ##Performs a warping departure animation at
 ##the coordinates stored in rB
 WARP_OUT, 0x4120, 4, -game:FE8 -indexMode:8
 	0xFFFF, 2, 2, -fixed
 
-
-##Performs a warping departure animation at
+##command:WARP unit IN to the map
+##Performs a warping arrival animation at
 ##the coordinates stored in rB
 WARP_IN, 0x4121, 4, -game:FE8 -indexMode:8
 	0xFFFF, 2, 2, -fixed

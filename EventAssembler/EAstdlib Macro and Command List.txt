@@ -6,7 +6,6 @@ to use them.
 -------------------------------------------------
 -----------EA Standard Library Macros------------
 -------------------------------------------------
-The corresponding FE6/FE7/FE8 definitions are automatically included unless you define _NO_FE#_DEFINITIONS_ where # is 6, 7, or 8.
 
 
 Chapter Pointer List Editors
@@ -22,36 +21,6 @@ Chapter Pointer List Editors
   Parameters:
    id = ID in the array of pointers to overwrite.
    offset = Offset of event data.
-
-Escape Point Helpers
- FE7:
-  EscapePointPointerTable(entry, pointer)
-  NPCEscapePointPointerTable(entry, pointer)
- FE8:
-  EscapePointPointerTable(entry, pointer)
-  NPCEscapePointPointerTable(entry, pointer)
-  
-  Points the given chapter's escape points, for enemies and NPCs respctively, to the given pointer.
-  
-  Parameters:
-   entry = the chapter event id number to define tiles for
-   pointer = pointer to escape tile list
-  
- FE7:
-  EscapePoint(xLoc, yLoc, exitAnimation)
-  TerminateEscapePoints
-  EscapePointEnd
- FE8:
-  EscapePoint(xLoc, yLoc, exitAnimation)
-  TerminateEscapePoints
-  EscapePointEnd
-  
-  Define escape points with EscapePoint, then TerminateEscapePoints (or EscapePointEnd) when you're done. Make a pointer before the list and use it for your PointerTable.
-  
-  Parameters:
-   xLoc = x-coordinate of the escape point
-   yLoc = y-coordinate of the escape point
-   exitAnimation = one of MoveLeft, MoveRight, MoveUp, MoveDown, or NoMove
 
 World Map Pointer Table List Editors
  FE7:

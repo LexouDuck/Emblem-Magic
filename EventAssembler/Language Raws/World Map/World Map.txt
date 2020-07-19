@@ -1,3 +1,6 @@
+
+# FE6
+
 ##Zoom/nove to position in the larger world map.
 ZOOMTO, 0x4F, 8, -game:FE6 -indexMode:8
 ##Position in pixels to move.
@@ -8,10 +11,10 @@ ZOOMOUT, 0x50, 4, -game:FE6 -indexMode:8
 
 ##Highlights a country on the world map.
 HIGHLIGHT, 0x5B, 8, -game:FE6 -indexMode:8
-##Object ID of the highlighting.
-##All items shown at once must have an unique ID.
+##The highlighting object to display.
+##All items shown simultaneously must have an unique ID.
 	MapObjectID, 4, 2
-##ID of the country to highlight.
+##country to highlight.
 	Country ID, 6, 2
 
 ##Shows an arrow.
@@ -23,7 +26,7 @@ SHOWARROW, 0x5A, 8, -game:FE6 -indexMode:8
 
 ##Places a highlighted dot on the world map.
 PLACEDOT, 0x5E, 16, -game:FE6 -indexMode:8
-##Map object ID of the dot.
+##Map object dot.
 ##All items shown at once must have an unique ID.
 	MapObjectID, 4, 4
 ##Position of the dot in pixels on the world map.
@@ -43,7 +46,7 @@ REMOVE1, 0x52, 8, -game:FE6 -indexMode:8
 
 ##Places a flag on the world map.
 PLACEFLAG, 0x60, 16, -game:FE6 -indexMode:8
-##Map ID of the flag.
+##Map flag.
 ##All items shown at once must have an unique ID.
 	MapObjectID, 4, 4
 ##Position of the flag on the world map in pixels.
@@ -63,9 +66,11 @@ REMOVE3, 0x63, 8, -game:FE6 -indexMode:8
 
 
 
+# FE7
+
 ##Loads a map to use.
 LOADWM, 0xAC, 16, -game:FE7 -indexMode:8
-##The ID of the map to load.
+##The map to load.
 	MapID, 4, 2
 ##Position of the camera on the map (in pixels).
 	Position, 8, 4, coordinates:2 -preferredBase:10
@@ -76,7 +81,7 @@ LOADWM, 0xAC, 16, -game:FE7 -indexMode:8
 FADETOWM, 0xC8, 16, -game:FE7 -indexMode:8
 ##Position of the camera on the map (in pixels).
 	Position, 4, 4, coordinates:2 -preferredBase:10
-##The ID of the map to fade to.
+##The map to fade to.
 	MapID, 8, 2
 	Unknown, 10, 2
 	Unknown2, 12, 4
@@ -88,7 +93,7 @@ HIGHLIGHT, 0xB9, 16, -game:FE7 -indexMode:8
 
 ##Creates a flashing dot on the map.
 PLACEDOT, 0xBD, 20, -game:FE7 -indexMode:8
-##The map object ID of the dot.
+##The map object dot.
 	MapObjectID, 4, 1
 ##Position of the dot on the world map (in pixels).
 	Position, 8, 4, coordinates:2 -preferredBase:10
@@ -101,6 +106,8 @@ RIPPLE, 0xC9, 8, -game:FE7 -indexMode:8
 	Position, 4, 4, coordinates:2 -preferredBase:10
 
 
+
+# FE8
 
 #Draws a path on the world map of the given ID.
 #Path data starts at $8206674, and path graphical data is defined by data starting at $8A97FC4.

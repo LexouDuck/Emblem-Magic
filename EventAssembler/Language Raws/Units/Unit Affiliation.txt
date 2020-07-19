@@ -1,7 +1,8 @@
 
 # FE6
 
-##Changes a character's affiliation (ally, enemy, npc).
+##command:UNIT SET TEAM/affiliation
+##Changes the given unit's affiliation (ally, enemy, npc).
 ##aliases:CUSI
 UNIT_SETTEAM, 0x2B, 12, -game:FE6 -indexMode:8
 ##Character whose affiliation should change.
@@ -9,7 +10,8 @@ UNIT_SETTEAM, 0x2B, 12, -game:FE6 -indexMode:8
 ##Affiliation to change to.
 	Affiliation, 8, 2
 
-##Changes a character's affiliation (ally, enemy, npc).
+##command:Change Unit: Set affiliation Index
+##Changes the given unit's affiliation (ally, enemy, npc).
 ##aliases:UNIT_SETTEAM
 CUSI, 0x2B, 12, -game:FE6 -indexMode:8
 ##Character whose affiliation should change.
@@ -21,7 +23,8 @@ CUSI, 0x2B, 12, -game:FE6 -indexMode:8
 
 # FE7
 
-##Changes a character's affiliation (ally, enemy, npc).
+##command:UNIT SET TEAM/affiliation
+##Changes the given unit's affiliation (ally, enemy, npc).
 ##aliases:CUSI
 UNIT_SETTEAM, 0x65, 12, -game:FE7 -indexMode:8
 ##Character whose affiliation should change.
@@ -29,7 +32,8 @@ UNIT_SETTEAM, 0x65, 12, -game:FE7 -indexMode:8
 ##Affiliation to change to.
 	Affiliation, 8, 2
 
-##Changes a character's affiliation (ally, enemy, npc).
+##command:Change Unit: Set affiliation Index
+##Changes the given unit's affiliation (ally, enemy, npc).
 ##aliases:UNIT_SETTEAM
 CUSI, 0x65, 12, -game:FE7 -indexMode:8
 ##Character whose affiliation should change.
@@ -41,37 +45,43 @@ CUSI, 0x65, 12, -game:FE7 -indexMode:8
 
 # FE8
 
-##Changes units affiliation to ally.
+##command:UNIT SET TEAM/affiliation to ALLY
+##Changes the given unit's affiliation to ally.
 ##aliases:CUSA
 UNIT_SETTEAM_ALLY, 0x3422, 4, -game:FE8 -indexMode:8
 ##Character whose affiliation to change.
 	CharacterID, 2, 2
 
-##Changes units affiliation to ally.
+##command:Change Unit: Set affiliation to Ally
+##Changes the given unit's affiliation to ally.
 ##aliases:UNIT_SETTEAM_ALLY
 CUSA, 0x3422, 4, -game:FE8 -indexMode:8
 ##Character whose affiliation to change.
 	CharacterID, 2, 2
 
-##Changes units affiliation to enemy.
+##command:UNIT SET TEAM/affiliation to ENEMY
+##Changes the given unit's affiliation to enemy.
 ##aliases:CUSE
 UNIT_SETTEAM_ENEMY, 0x3424, 4, -game:FE8 -indexMode:8
 ##Character whose affiliation to change.
 	CharacterID, 2, 2
 
-##Changes units affiliation to enemy.
+##command:Change Unit: Set affiliation to Enemy
+##Changes the given unit's affiliation to enemy.
 ##aliases:UNIT_SETTEAM_ENEMY
 CUSE, 0x3424, 4, -game:FE8 -indexMode:8
 ##Character whose affiliation to change.
 	CharacterID, 2, 2
 
-##Changes units affiliation to neutral.
+##command:UNIT SET TEAM/affiliation to NEUTRAL
+##Changes the given unit's affiliation to neutral.
 ##aliases:CUSN
 UNIT_SETTEAM_NEUTRAL, 0x3423, 4, -game:FE8 -indexMode:8
 ##Character whose affiliation to change.
 	CharacterID, 2, 2
 
-##Changes units affiliation to neutral.
+##command:Change Unit: Set affiliation to Neutral
+##Changes the given unit's affiliation to neutral.
 ##aliases:UNIT_SETTEAM_NEUTRAL
 CUSN, 0x3423, 4, -game:FE8 -indexMode:8
 ##Character whose affiliation to change.

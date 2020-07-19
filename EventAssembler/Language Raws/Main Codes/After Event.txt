@@ -1,0 +1,44 @@
+
+##command:AFTER EVENT
+##Sets an event to occur after another event has happened.
+##seealso:AFTEREVENT_END
+##aliases:AFEV
+AFTEREVENT, 1, 12, -language:FE8:FE7:FE6 -priority:main -indexMode:8
+##The 'EventID' number to assign for this "after event".
+##If non-zero, then the event will only run once (with a unique number for each event).
+##Once a certain event has been run, it is marked as 'used', and then it can't be invoked.
+##Giving a value of '0' will allow the event to occur whenever otherwise possible.
+	EventID, 2, 2
+##The event which is to occur after 'PreviousEventID'.
+	EventPointer, 4, 4, -pointer
+##The previous event: 'EventPointer' will run after this event.
+	PreviousEventID, 8, 2
+
+##command:AFter EVent
+##Sets an event to occur after another event has happened.
+##The parameterless version signals the end of an "after event" list.
+##aliases:AFTEREVENT
+AFEV, 1, 12, -language:FE8:FE7:FE6 -priority:main -indexMode:8
+##The 'EventID' number to assign for this "after event".
+##If non-zero, then the event will only run once (with a unique number for each event).
+##Once a certain event has been run, it is marked as 'used', and then it can't be invoked.
+##Giving a value of '0' will allow the event to occur whenever otherwise possible.
+	EventID, 2, 2
+##The event which is to occur after 'PreviousEventID'.
+	EventPointer, 4, 4, -pointer
+##The previous event: 'EventPointer' will run after this event.
+	PreviousEventID, 8, 2
+
+
+##command:AFTER EVENT
+##Signals the end of an "after event" list (ie: a list of AFEV/AFTEREVENT commands).
+##aliases:AFEV
+AFTEREVENT_END, 0, 4, -priority:main -language:FE8:FE7:FE6 -end -indexMode:8 -noDisassembly
+	0, 0, 4, -fixed
+
+##command:AFter EVent
+##Sets an event to occur after another event has happened. The parameterless version
+##signals the end of an "after event" list (ie: a list of AFEV/AFTEREVENT commands).
+##aliases:AFTEREVENT_END
+AFEV, 0, 4, -priority:main -language:FE8:FE7:FE6 -end -indexMode:8 -noDisassembly
+	0, 0, 4, -fixed

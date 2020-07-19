@@ -1,8 +1,21 @@
 
 # FE8
 
+##command:UNIT PROMOTE
 ##Promotes a unit.
+##aliases:PROM
 UNIT_PROMOTE, 0x4040, 8, -game:FE8 -indexMode:8
+##Character to promote.
+	CharacterID, 2, 2
+##Class to promote the unit to.
+	ClassID, 4, 2
+##Promotion item
+	ItemID, 6, 2
+
+##command:unit PROMote
+##Promotes a unit.
+##aliases:UNIT_PROMOTE
+PROM, 0x4040, 8, -game:FE8 -indexMode:8
 ##Character to promote.
 	CharacterID, 2, 2
 ##Class to promote the unit to.

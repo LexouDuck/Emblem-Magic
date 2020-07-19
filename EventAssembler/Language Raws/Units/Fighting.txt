@@ -1,21 +1,58 @@
 
 # FE6
 
+##command:scripted FIGHT sequence
 ##Causes a scripted battle between 2 units.
-FIGH, 0x49, 20, -game:FE6 -indexMode:8
-##Character ID of the attacker.
+##aliases:FIGH
+FIGHT, 0x49, 20, -game:FE6 -indexMode:8
+##Character who initiates the battle.
 	Attacker, 4, 4
-##Character ID of the defender.
+##Character who is targeted by 'Attacker'.
 	Defender, 8, 4
 ##Pointer to BLDT codes that determine how fight goes.
 	BattleDataPointer, 12, 4, -pointer:battleData
 ##Controls additional details about the battle.
 	BattleParameters, 16, 4, coordinate:4
 
+##command:scripted FIGHt sequence
+##Causes a scripted battle between 2 units.
+##aliases:FIGHT
 FIGH, 0x49, 20, -game:FE6 -indexMode:8
-##Character ID of the attacker.
+##Character who initiates the battle.
 	Attacker, 4, 4
-##Character ID of the defender.
+##Character who is targeted by 'Attacker'.
+	Defender, 8, 4
+##Pointer to BLDT codes that determine how fight goes.
+	BattleDataPointer, 12, 4, -pointer:battleData
+##Controls additional details about the battle.
+	BattleParameters, 16, 4, coordinate:4
+
+##command:scripted FIGHT sequence
+##Causes a scripted battle between 2 units.
+##aliases:FIGH
+FIGHT, 0x49, 20, -game:FE6 -indexMode:8
+##Character who initiates the battle.
+	Attacker, 4, 4
+##Character who is targeted by 'Attacker'.
+	Defender, 8, 4
+##Pointer to BLDT codes that determine how fight goes.
+	BattleDataPointer, 12, 4, -pointer:battleData
+##Sets the first byte of battle parameters
+	BattleParameter1, 16, 1
+##Sets the second byte of battle parameters
+	BattleParameter2, 17, 1
+##Sets the third byte of battle parameters
+	BattleParameter3, 18, 1
+##Sets the fourth byte of battle parameters
+	BattleParameter4, 19, 1
+
+##command:scripted FIGHt sequence
+##Causes a scripted battle between 2 units.
+##aliases:FIGHT
+FIGH, 0x49, 20, -game:FE6 -indexMode:8
+##Character who initiates the battle.
+	Attacker, 4, 4
+##Character who is targeted by 'Attacker'.
 	Defender, 8, 4
 ##Pointer to BLDT codes that determine how fight goes.
 	BattleDataPointer, 12, 4, -pointer:battleData
@@ -32,17 +69,51 @@ FIGH, 0x49, 20, -game:FE6 -indexMode:8
 
 # FE7
 
+##command:scripted FIGHT sequence
 ##Causes a scripted battle between 2 units.
-FIGH, 0x97, 20, -game:FE7 -indexMode:8
-##Character ID of the attacker.
+##aliases:FIGH
+FIGHT, 0x97, 20, -game:FE7 -indexMode:8
+##Character who initiates the battle.
 	Attacker, 4, 2
-##Character ID of the defender.
+##Character who is targeted by 'Attacker'.
 	Defender, 8, 2
 ##Pointer to BLDT codes that determine how fight goes.
 	BattleDataPointer, 12, 4, -pointer:battleData
 ##Controls additional details about the battle.
 	BattleParameters, 16, 4, coordinate:4
 
+##command:scripted FIGHt sequence
+##Causes a scripted battle between 2 units.
+##aliases:FIGHT
+FIGH, 0x97, 20, -game:FE7 -indexMode:8
+##Character who initiates the battle.
+	Attacker, 4, 2
+##Character who is targeted by 'Attacker'.
+	Defender, 8, 2
+##Pointer to BLDT codes that determine how fight goes.
+	BattleDataPointer, 12, 4, -pointer:battleData
+##Controls additional details about the battle.
+	BattleParameters, 16, 4, coordinate:4
+
+##command:scripted FIGHT sequence
+##Causes a scripted battle between 2 units.
+##aliases:FIGH
+FIGHT, 0x97, 20, -game:FE7 -indexMode:8
+	Attacker, 4, 2
+	Defender, 8, 2
+	BattleDataPointer, 12, 4, -pointer:battleData
+##Sets the first byte of battle parameters
+	BattleParameter1, 16, 1
+##Sets the second byte of battle parameters
+	BattleParameter2, 17, 1
+##Sets the third byte of battle parameters
+	BattleParameter3, 18, 1
+##Sets the fourth byte of battle parameters
+	BattleParameter4, 19, 1
+
+##command:scripted FIGHt sequence
+##Causes a scripted battle between 2 units.
+##aliases:FIGHT
 FIGH, 0x97, 20, -game:FE7 -indexMode:8
 	Attacker, 4, 2
 	Defender, 8, 2
@@ -60,20 +131,46 @@ FIGH, 0x97, 20, -game:FE7 -indexMode:8
 
 # FE8
 
+##command:scripted FIGHT sequence 1
 ##Starts a scripted battle between 2 units.
-FIG1, 0x3F40, 8, -game:FE8 -indexMode:8
-##Character ID of the attacker.
+##aliases:FIG1
+FIGHT, 0x3F40, 8, -game:FE8 -indexMode:8
+##Character who initiates the battle.
 	Attacker, 2, 2
-##Character ID of the defender.
+##Character who is targeted by 'Attacker'.
 	Defender, 4, 2
 ##Unknown
 	Unknown, 6, 2
 
+##command:scripted FIGht sequence 1
 ##Starts a scripted battle between 2 units.
-FIG2, 0x3F41, 8, -game:FE8 -indexMode:8
-##Character ID of the attacker.
+##aliases:FIGHT
+FIG1, 0x3F40, 8, -game:FE8 -indexMode:8
+##Character who initiates the battle.
 	Attacker, 2, 2
-##Character ID of the defender.
+##Character who is targeted by 'Attacker'.
+	Defender, 4, 2
+##Unknown
+	Unknown, 6, 2
+
+##command:scripted FIGHT sequence 2
+##Starts a scripted battle between 2 units.
+##aliases:FIG2
+FIGHT2, 0x3F41, 8, -game:FE8 -indexMode:8
+##Character who initiates the battle.
+	Attacker, 2, 2
+##Character who is targeted by 'Attacker'.
+	Defender, 4, 2
+##Unknown
+	Unknown, 6, 2
+
+##command:scripted FIGht sequence 2
+##Starts a scripted battle between 2 units.
+##aliases:FIGHT2
+FIG2, 0x3F41, 8, -game:FE8 -indexMode:8
+##Character who initiates the battle.
+	Attacker, 2, 2
+##Character who is targeted by 'Attacker'.
 	Defender, 4, 2
 ##Unknown
 	Unknown, 6, 2
@@ -82,13 +179,70 @@ FIG2, 0x3F41, 8, -game:FE8 -indexMode:8
 
 # FE6 & FE7
 
+##command:BATTLE data
 ##Controls an individual attack in a battle through a set
 ##of different flags stored in 4 bytes.
-##The parameterless version signals the end of a BLDT list
+##aliases:BLDT
+BATTLE, 0, 32, -game:FE6:FE7 -priority:battleData -repeatable -indexMode:1
+##The flags that decide how the battle is to turn out
+	BattleData, 0, 4
+
+##command:BattLe DaTa
+##Controls an individual attack in a battle through a set
+##of different flags stored in 4 bytes.
+##aliases:BATTLE
 BLDT, 0, 32, -game:FE6:FE7 -priority:battleData -repeatable -indexMode:1
 ##The flags that decide how the battle is to turn out
 	BattleData, 0, 4
 
+##command:BATTLE data
+##Controls an individual attack in a battle through a set
+##of different flags stored in 4 bytes.
+##aliases:BLDT
+BATTLE, 0, 32, -game:FE6:FE7 -priority:battleData -indexMode:1
+##If the attack is critical.
+	Critical, 0, 1, -preferredBase:2
+##If the attack misses.
+	Miss, 1, 1, -preferredBase:2
+	Unknown, 2, 1, -preferredBase:2
+##If next attack is launched immediately.
+	NextAttack_Immediate, 3, 1, -preferredBase:2
+##If the next attack is by the same character.
+	NextAttack_SameCharacterID, 4, 1, -preferredBase:2
+	Unknown, 5, 1, -preferredBase:2
+##If the attack poisons the opponent.
+	Poison, 6, 1, -preferredBase:2
+##If the attack damages the attacker.
+	DevilReversal, 7, 1, -preferredBase:2
+##If the attack restores HP to the attacker.
+	RestoreHP, 8, 1, -preferredBase:2
+##If the attack halves the defender's HP.
+	HalveHP, 9, 1, -preferredBase:2
+	Unknown, 10, 1, -preferredBase:2
+##If the attack is like the assassin's silencer.
+	Silencer, 11, 1, -preferredBase:2
+	Unknown, 12, 1, -preferredBase:2
+	Unknown, 13, 1, -preferredBase:2
+	Unknown, 14, 1, -preferredBase:2
+	Unknown, 15, 1, -preferredBase:2
+##If the attack is the last in battle.
+	Last attack, 16, 1, -preferredBase:2
+	Unknown, 17, 1, -preferredBase:2
+	Unknown, 18, 1, -preferredBase:2
+##If the defender is the one attacking instead of attacker.
+	DefenderAttacks, 19, 1, -preferredBase:2
+	Unknown, 20, 1, -preferredBase:2
+	Unknown, 21, 1, -preferredBase:2
+	Unknown, 22, 1, -preferredBase:2
+##Signals the end of the battle.
+	EndBattle, 23, 1, -preferredBase:2
+##Amount of damage that the attack does.
+	Damage, 24, 8, -preferredBase:10
+
+##command:BattLe DaTa
+##Controls an individual attack in a battle through a set
+##of different flags stored in 4 bytes.
+##aliases:BATTLE
 BLDT, 0, 32, -game:FE6:FE7 -priority:battleData -indexMode:1
 ##If the attack is critical.
 	Critical, 0, 1, -preferredBase:2
@@ -129,5 +283,18 @@ BLDT, 0, 32, -game:FE6:FE7 -priority:battleData -indexMode:1
 ##Amount of damage that the attack does.
 	Damage, 24, 8, -preferredBase:10
 
+##command:BattLe DaTa
+##Controls an individual attack in a battle through a set
+##of different flags stored in 4 bytes.
+##The parameterless version signals the end of a BLDT list
+##aliases:BLDT
+BATTLE_END, 0, 4, -game:FE6:FE7 -indexMode:8 -priority:battleData -end
+	0x800000, 0, 4, -fixed
+
+##command:BattLe DaTa
+##Controls an individual attack in a battle through a set
+##of different flags stored in 4 bytes.
+##The parameterless version signals the end of a BLDT list
+##aliases:BATTLE_END
 BLDT, 0, 4, -game:FE6:FE7 -indexMode:8 -priority:battleData -end
 	0x800000, 0, 4, -fixed

@@ -33,7 +33,7 @@ ULCK, 0x8A, 4, -game:FE7 -indexMode:8
 
 
 
-##command:
+##command:NO SKIPping EVENT
 ##Makes the player unable to press
 ##the Start button to skip the event.
 ##aliases:NSSP
@@ -45,7 +45,7 @@ NOSKIP_EVENT, 0x8C, 4, -game:FE7 -indexMode:8
 ##aliases:NOSKIP_EVENT
 NSSP, 0x8C, 4, -game:FE7 -indexMode:8
 
-##command:
+##command:NO SKIPping CONVOs
 ##Makes the player unable to press
 ##the B button to skip the text dialogue.
 ##aliases:NCSP

@@ -1,0 +1,300 @@
+
+# FE7
+
+##command:do TEXT SCROLL
+##Scrolls the text.
+##aliases:SCRO
+TEXT_SCROLL, 0x14, 4, -game:FE7 -indexMode:8
+
+##command:SCROll text
+##Scrolls the text.
+##aliases:TEXT_SCROLL
+SCRO, 0x14, 4, -game:FE7 -indexMode:8
+
+
+##command:display TEXt (6)
+##Displays text with a specific text bubble type
+##and position on the screen.
+TEX6, 0xA7, 12, -game:FE7 -indexMode:8
+##The type of text bubble to display.
+	BubbleType, 2, 2
+##Position at which to display the text bubble.
+##Position [0,0] means the center of the screen.
+	TextPosition, 4, 4, coordinates:2 -preferredBase:10
+##The text to display.
+	TextID, 8, 2
+
+##command:display TEXt (e)
+##Displays text at a specific position onscreen.
+TEX8, 0xD7, 12, -game:FE7 -indexMode:8
+##The text to display.
+	TextID, 4, 2
+##Position at which to display the text.
+	TextPosition, 8, 4, coordinates:2 -preferredBase:10
+
+
+##command:display TEXT IF MODE is eliwood else hector
+##Displays text depending on the current game mode.
+##aliases:TEXTIFEM
+TEXT_IF_MODE, 0x0F, 12, -game:FE7 -indexMode:8
+##Text to display if Eliwood mode.
+	TextID 1, 4, 2
+##Text to display if Hector mode.
+	TextID 2, 8, 2
+
+##command:display TEXT IF Eliwood Mode
+##Displays text depending on the current game mode.
+##aliases:TEXT_IF_MODE
+TEXTIFEM, 0x0F, 12, -game:FE7 -indexMode:8
+##Text to display if Eliwood mode.
+	TextID 1, 4, 2
+##Text to display if Hector mode.
+	TextID 2, 8, 2
+
+##command:TEXT CONTINUE IF MODE is eliwood else hector
+##Continues displaying text depending on the mode,
+##without resetting text bubbles and/or portraits.
+##aliases:MORETEXTIFEM
+TEXT_CONTINUE_IF_MODE, 0x12, 12, -game:FE7 -indexMode:8
+##Text to display if Eliwood mode.
+	TextID 1, 4, 2
+##Text to display if Hector mode.
+	TextID 2, 8, 2
+
+##command:display MORE TEXT IF Eliwood Mode
+##Continues displaying text depending on the mode,
+##without resetting text bubbles and/or portraits.
+##aliases:TEXT_CONTINUE_IF_MODE
+MORETEXTIFEM, 0x12, 12, -game:FE7 -indexMode:8
+##Text to display if Eliwood mode.
+	TextID 1, 4, 2
+##Text to display if Hector mode.
+	TextID 2, 8, 2
+
+
+##command:display TEXT IF TACTician is Female
+##Displays seperate text depending on whether
+##the tactician's gender is male or female.
+##aliases:TEXTIFTACTF
+TEXT_IF_TACTF, 0x18, 12, -game:FE7 -indexMode:8
+##Text to display if tactician is male.
+	TextID 1, 4, 2
+##Text to display if tactician is female.
+	TextID 2, 8, 2
+
+##command:display TEXT IF TACTician is Female
+##Displays seperate text depending on whether
+##the tactician's gender is male or female.
+##aliases:TEXT_IF_TACTF
+TEXTIFTACTF, 0x18, 12, -game:FE7 -indexMode:8
+##Text to display if tactician is male.
+	TextID 1, 4, 2
+##Text to display if tactician is female.
+	TextID 2, 8, 2
+
+##command:TEXT CONTINUE IF TACTician is Female
+##Follows up a previous 'TEXTIFTACTF' command,
+##to display another text entry without resetting
+##the current text bubbles and/or portraits.
+##aliases:MORETEXTIFTACTF
+TEXT_CONTINUE_IF_TACTF, 0x19, 12, -game:FE7 -indexMode:8
+##Text to display if the tactician is male.
+	TextID 1, 4, 2
+##Text to display if the tactician is female.
+	TextID 2, 8, 2
+
+##command:display MORE TEXT IF TACTician is Female
+##Follows up a previous 'TEXTIFTACTF' command,
+##to display another text entry without resetting
+##the current text bubbles and/or portraits.
+##aliases:TEXT_CONTINUE_IF_TACTF
+MORETEXTIFTACTF, 0x19, 12, -game:FE7 -indexMode:8
+##Text to display if the tactician is male.
+	TextID 1, 4, 2
+##Text to display if the tactician is female.
+	TextID 2, 8, 2
+
+
+##command:display TEXT IF EVENT ID is 'used'
+##Displays text depending on whether the given
+##event ID is set as 'used' or not.
+##aliases:TEXTIFEVENTID
+TEXT_IF_EVENTID, 0x1A, 16, -game:FE7 -indexMode:8
+##The event ID to check.
+	EventID, 4, 1
+##Text to display if event ID is 'used'.
+	TextID 1, 8, 2
+##Text to display if event ID is 'unused'.
+	TextID 2, 12, 2
+
+##command:display TEXT IF EVENT ID is 'used'
+##Displays text depending on whether the given
+##event ID is set as 'used' or not.
+##aliases:TEXT_IF_EVENTID
+TEXTIFEVENTID, 0x1A, 16, -game:FE7 -indexMode:8
+##The event ID to check.
+	EventID, 4, 1
+##Text to display if event ID is 'used'.
+	TextID 1, 8, 2
+##Text to display if event ID is 'unused'.
+	TextID 2, 12, 2
+
+##command:TEXT CONTINUE IF EVENT ID is 'used'
+##Follows up a previous 'TEXTIFEVENTID' command,
+##to display another text entry without resetting
+##the current text bubbles and/or portraits.
+##aliases:MORETEXTIFEVENTID
+TEXT_CONTINUE_IF_EVENTID, 0x1B, 16, -game:FE7 -indexMode:8
+##The event ID to check.
+	EventID, 4, 4
+##Text to display if event ID is used.
+	TextID 1, 8, 2
+##Text to display if event ID is unused.
+	TextID 2, 12, 2
+
+##command:display MORE TEXT IF EVENT ID is 'used'
+##Follows up a previous 'TEXTIFEVENTID' command,
+##to display another text entry without resetting
+##the current text bubbles and/or portraits.
+##aliases:TEXT_CONTINUE_IF_EVENTID
+MORETEXTIFEVENTID, 0x1B, 16, -game:FE7 -indexMode:8
+##The event ID to check.
+	EventID, 4, 4
+##Text to display if event ID is used.
+	TextID 1, 8, 2
+##Text to display if event ID is unused.
+	TextID 2, 12, 2
+
+
+##command:display TEXT IF ASM routine returns 0/1
+##Displays text depending on the return value
+##of the given ASM routine.
+##aliases:TEXTIFASM
+TEXT_IF_ASM, 0x1C, 16, -game:FE7 -indexMode:8
+##The address of the ASM routine to execute.
+##The return value determines which text to display.
+##Thumb routines must have 1 added to their offset.
+	ASM_Pointer, 4, 4, -pointer:ASM
+##Text to display if routine returns 0.
+	TextID 1, 8, 2
+##Text to display if routine returns 1.
+	TextID 2, 12, 2
+
+##command:display TEXT IF ASM routine returns 0/1
+##Displays text depending on the return value
+##of the given ASM routine.
+##aliases:TEXT_IF_ASM
+TEXTIFASM, 0x1C, 16, -game:FE7 -indexMode:8
+##The address of the ASM routine to execute.
+##The return value determines which text to display.
+##Thumb routines must have 1 added to their offset.
+	ASM_Pointer, 4, 4, -pointer:ASM
+##Text to display if routine returns 0.
+	TextID 1, 8, 2
+##Text to display if routine returns 1.
+	TextID 2, 12, 2
+
+##command:TEXT CONTINUE IF ASM routine returns 0/1
+##Follows up a previous 'TEXTIFASM' command,
+##to display another text entry without resetting
+##the current text bubbles and/or portraits.
+##aliases:MORETEXTIFASM
+TEXT_CONTINUE_IF_ASM, 0x1D, 16, -game:FE7 -indexMode:8
+##The address of the ASM routine to execute.
+##The return value determines which text to display.
+##Thumb routines must have 1 added to their offset.
+	ASM_Pointer, 4, 4, -pointer:ASM
+##Text to display if routine returns 0.
+	TextID 1, 8, 2
+##Text to display if routine returns 1.
+	TextID 2, 12, 2
+
+##command:display MORE TEXT IF ASM routine returns 0/1
+##Follows up a previous 'TEXTIFASM' command,
+##to display another text entry without resetting
+##the current text bubbles and/or portraits.
+##aliases:TEXT_CONTINUE_IF_ASM
+MORETEXTIFASM, 0x1D, 16, -game:FE7 -indexMode:8
+##The address of the ASM routine to execute.
+##The return value determines which text to display.
+##Thumb routines must have 1 added to their offset.
+	ASM_Pointer, 4, 4, -pointer:ASM
+##Text to display if routine returns 0.
+	TextID 1, 8, 2
+##Text to display if routine returns 1.
+	TextID 2, 12, 2
+
+
+
+# FE8
+
+##command:display TEXTBOX (TUTORIAL)
+##Displays a yellow-ish text box used for tutorials.
+##The text box will be centered in the middle of the screen
+##if this command is preceded by 'SETVAL 0xB 0xFFFFFFFF'.
+##aliases:TUTORIALTEXTBOXSTART
+TEXTBOX_TUTORIAL, 0x1A23, 4, -game:FE8 -indexMode:8
+
+##command:TUTORIAL TEXTBOX START
+##Displays a yellow-ish text box used for tutorials.
+##The text box will be centered in the middle of the screen
+##if this command is preceded by 'SETVAL 0xB 0xFFFFFFFF'.
+##aliases:TEXTBOX_TUTORIAL
+TUTORIALTEXTBOXSTART, 0x1A23, 4, -game:FE8 -indexMode:8
+
+
+##command:display TEXTBOX AT coordinates
+##Displays a text box at specific coordinates
+##Set the position with a preceding 'SETVAL 0xB 0xXX00YY',
+##where X and Y are the coordinates.
+##aliases:SOLOTEXTBOXSTART
+TEXTBOX_AT, 0x1A24, 4, -game:FE8 -indexMode:8
+
+##command:SOLO TEXTBOX START (coords)
+##Displays a text box at specific coordinates
+##Set the position with a preceding 'SETVAL 0xB 0xXX00YY',
+##where X and Y are the coordinates.
+##aliases:TEXTBOX_AT
+SOLOTEXTBOXSTART, 0x1A24, 4, -game:FE8 -indexMode:8
+
+
+##command:display NOTIFY textbox
+##Brings up a notification box (like when getting an item),
+##on which some text is displayed, and a sound is played.
+##aliases:NOTIFY
+TEXTBOX_NOTIFY, 0x3A40, 8, -game:FE8 -indexMode:8
+##The text to display.
+	TextID, 2, 2
+##The sound effect (or music track) to play.
+	MusicID, 4, 2
+	0, 6, 2, -fixed
+
+##command:display NOTIFY box
+##Brings up a notification box (like when getting an item),
+##on which some text is displayed, and a sound is played.
+##aliases:TEXTBOX_NOTIFY
+NOTIFY, 0x3A40, 8, -game:FE8 -indexMode:8
+##The text to display.
+	TextID, 2, 2
+##The sound effect (or music track) to play.
+	MusicID, 4, 2
+	0, 6, 2, -fixed
+
+
+##command:display TEXTBOX (BROWN)
+##Displays text in a brown text box.
+##aliases:BROWNBOXTEXT
+TEXTBOX_BROWN, 0x3A41, 8, -game:FE8 -indexMode:8
+##The text to display.
+	TextID, 2, 2
+##The position at which to display the brown text box.
+	TextPosition, 4, 4, coordinates:2 -preferredBase:10
+
+##command:display BROWN BOX TEXT
+##Displays text in a brown text box.
+##aliases:TEXTBOX_BROWN
+BROWNBOXTEXT, 0x3A41, 8, -game:FE8 -indexMode:8
+##The text to display.
+	TextID, 2, 2
+##The position at which to display the brown text box.
+	TextPosition, 4, 4, coordinates:2 -preferredBase:10

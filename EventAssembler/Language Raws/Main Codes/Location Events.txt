@@ -1,0 +1,254 @@
+
+##command:rectangle AREA location event
+##Location-based event that occurs when an ally unit lands on a given rectangular area of tiles.
+AREA, 0x0B, 12, -language:FE8:FE7:FE6 -priority:main -indexMode:8
+##Once the event ID has been marked as 'used', this event can't be invoked.
+##Leaving this as 0 will allow the event to occur whenever otherwise possible.
+	EventID, 2, 2
+##Event to occur once the area has been "trespassed".
+	EventPointer, 4, 4, -pointer
+##Top-left corner of the area rectangle (in tiles).
+	Corner_TL, 8, 2, -coordinates:2 -preferredBase:10
+##Bottom-right corner of the area rectangle (in tiles).
+	Corner_BR, 10, 2, -coordinates:2 -preferredBase:10
+
+AREA, 0, 4, -priority:main -language:FE8:FE7:FE6 -end -indexMode:8 -noDisassembly
+	0, 0, 4, -fixed
+
+
+
+##command:TILE location-based event
+##Location based events that happen when a unit is placed on a certain
+##position and the player selects the correct command from the menu.
+##Leaving Event pointer out and having the event ID as 3 causes the
+##event to automatically call the ending scene of the chapter.
+##aliases:LOCA
+TILE, 0x05, 12, -priority:main -language:FE8:FE7:FE6 -indexMode:8
+##Once the event ID has been marked as 'used', this event can't be invoked.
+##Leaving this as 0 will allow the event to occur whenever otherwise possible.
+	EventID, 2, 2
+##Event to occur after the menu command has been selected.
+	EventPointer, 4, 4, -pointer
+##Position of this location event on the map.
+	Position, 8, 2, -coordinates:2 -preferredBase:10
+##Command in the menu to use.
+	Command, 10, 2
+
+##command:tile LOCAtion-based event
+##Location based events that happen when a unit is placed on a certain
+##position and the player selects the correct command from the menu.
+##Leaving Event pointer out and having the event ID as 3 causes the
+##event to automatically call the ending scene of the chapter.
+##aliases:TILE
+LOCA, 0x05, 12, -priority:main -language:FE8:FE7:FE6 -indexMode:8
+##Once the event ID has been marked as 'used', this event can't be invoked.
+##Leaving this as 0 will allow the event to occur whenever otherwise possible.
+	EventID, 2, 2
+##Event to occur after the menu command has been selected.
+	EventPointer, 4, 4, -pointer
+##Position of this location event on the map.
+	Position, 8, 2, -coordinates:2 -preferredBase:10
+##Command in the menu to use.
+	Command, 10, 2
+
+##aliases:LOCA
+TILE, 0x05, 12, -priority:main -language:FE8:FE7:FE6 -indexMode:8
+	EventID, 2, 2
+	1, 4, 4, -fixed
+	Position, 8, 2, -coordinates:2 -preferredBase:10
+	Command, 10, 2
+
+##aliases:TILE
+LOCA, 0x05, 12, -priority:main -language:FE8:FE7:FE6 -indexMode:8
+	EventID, 2, 2
+	1, 4, 4, -fixed
+	Position, 8, 2, -coordinates:2 -preferredBase:10
+	Command, 10, 2
+
+##aliases:LOCA
+TILE, 0, 4, -priority:main -language:FE8:FE7:FE6 -end -indexMode:8 -noDisassembly
+	0, 0, 4, -fixed
+
+##aliases:TILE
+LOCA, 0, 4, -priority:main -language:FE8:FE7:FE6 -end -indexMode:8 -noDisassembly
+	0, 0, 4, -fixed
+
+
+
+##command:VILLAGE tile location event
+##The location-based event used for visiting villages.
+##A nearby map change happens automatically after this event.
+##aliases:VILL
+VILLAGE, 0x06, 12, -priority:main -language:FE8:FE7:FE6 -indexMode:8
+##Once the event ID has been marked as 'used', this event can't be invoked.
+##Leaving this as 0 will allow the event to occur whenever otherwise possible.
+	EventID, 2, 2
+##Event to occur after the menu command has been selected.
+	EventPointer, 4, 4, -pointer
+##Position of the event (or in other words, village gate).
+	Position, 8, 2, -coordinates:2 -preferredBase:10
+##Command in the menu to use. 
+	Command, 10, 2
+
+##command:VILLage tile location event
+##The location-based event used for visiting villages.
+##A nearby map change happens automatically after this event.
+##aliases:VILLAGE
+VILL, 0x06, 12, -priority:main -language:FE8:FE7:FE6 -indexMode:8
+##Once the event ID has been marked as 'used', this event can't be invoked.
+##Leaving this as 0 will allow the event to occur whenever otherwise possible.
+	EventID, 2, 2
+##Event to occur after the menu command has been selected.
+	EventPointer, 4, 4, -pointer
+##Position of the event (or in other words, village gate).
+	Position, 8, 2, -coordinates:2 -preferredBase:10
+##Command in the menu to use. 
+	Command, 10, 2
+
+##aliases:VILL
+VILLAGE, 0, 4, -priority:main -language:FE8:FE7:FE6 -end -indexMode:8 -noDisassembly
+	0, 0, 4, -fixed
+
+##aliases:VILLAGE
+VILL, 0, 4, -priority:main -language:FE8:FE7:FE6 -end -indexMode:8 -noDisassembly
+	0, 0, 4, -fixed
+
+
+
+##command:CHEST tile location event
+##Location-based event that gives items or money and causes a map change.
+##aliases:CHES
+CHEST, 0x07, 12, -priority:main -language:FE8:FE7:FE6 -indexMode:8
+##Once the event ID has been marked as 'used', this event can't be invoked.
+##Leaving this as 0 will allow the event to occur whenever otherwise possible.
+	EventID, 2, 2
+##Chest data that determines both item and amount of money you get.
+	ChestData, 4, 4
+##Position of the event on the map (the position of the chest).
+	Position, 8, 2, -coordinates:2 -preferredBase:10
+##Command in the menu to use.
+	Command, 10, 2
+
+##command:CHESt tile location event
+##Location-based event that gives items or money and causes a map change.
+##aliases:CHEST
+CHES, 0x07, 12, -priority:main -language:FE8:FE7:FE6 -indexMode:8
+##Once the event ID has been marked as 'used', this event can't be invoked.
+##Leaving this as 0 will allow the event to occur whenever otherwise possible.
+	EventID, 2, 2
+##Chest data that determines both item and amount of money you get.
+	ChestData, 4, 4
+##Position of the event on the map (the position of the chest).
+	Position, 8, 2, -coordinates:2 -preferredBase:10
+##Command in the menu to use.
+	Command, 10, 2
+
+##aliases:CHES
+CHEST, 0, 4, -priority:main -language:FE8:FE7:FE6 -end -indexMode:8 -noDisassembly
+	0, 0, 4, -fixed
+
+##aliases:CHEST
+CHES, 0, 4, -priority:main -language:FE8:FE7:FE6 -end -indexMode:8 -noDisassembly
+	0, 0, 4, -fixed
+
+
+
+##command:CHEST tile location event, with RANDOM item contents
+##Random chest location event, the probabilities of each item
+##are set with the list at 'ItemListPointer'
+##aliases:CHESRANDOM
+CHEST_RANDOM, 0x05, 12, -priority:main -language:FE8:FE7:FE6 -indexMode:8
+##Once the event ID has been marked as 'used', this event can't be invoked.
+##Leaving this as 0 will allow the event to occur whenever otherwise possible.
+	EventID, 2, 2
+##Pointer to the item/probability list for this chest.
+##The list is of format (ItemID, Chance%) for each possible item and terminated by 00 00.
+##Chances for all items should add up to 100%.
+	ItemListPointer, 4, 4
+##Position of this event on the map (the position of the chest).
+	Position, 8, 2, -coordinates:2 -preferredBase:10
+##(Chest menu command for location event)
+	20, 10, 2, -fixed
+
+##command:CHESt tile location event, with RANDOM item contents
+##Random chest location event, the probabilities of each item
+##are set with the list at 'ItemListPointer'
+##aliases:CHEST_RANDOM
+CHESRANDOM, 0x05, 12, -priority:main -language:FE8:FE7:FE6 -indexMode:8
+##Once the event ID has been marked as 'used', this event can't be invoked.
+##Leaving this as 0 will allow the event to occur whenever otherwise possible.
+	EventID, 2, 2
+##Pointer to the item/probability list for this chest.
+##The list is of format (ItemID, Chance%) for each possible item and terminated by 00 00.
+##Chances for all items should add up to 100%.
+	ItemListPointer, 4, 4
+##Position of this event on the map (the position of the chest).
+	Position, 8, 2, -coordinates:2 -preferredBase:10
+##(Chest menu command for location event)
+	20, 10, 2, -fixed
+
+
+
+##command:DOOR tile location event
+##Location-based event triggered by a unit being placed on it and
+##selecting the correct menu command.
+##Causes an automatic nearby map change if no EventPointer is specified. 
+DOOR, 0x08, 12, -priority:main -language:FE8:FE7:FE6 -indexMode:8
+##Once the event ID has been marked as 'used', this event can't be invoked.
+##Leaving this as 0 will allow the event to occur whenever otherwise possible.
+	EventID, 2, 2
+##Event to occur after the menu command has been selected.
+##Map change does not automatically happen if this parameter is used.
+	EventPointer, 4, 4, -pointer
+##Position of the door.
+	Position, 8, 2, -coordinates:2 -preferredBase:10
+##Command in the menu to use.
+	Command, 10, 2
+
+##command:DOOR tile location event
+DOOR, 0x08, 12, -priority:main -language:FE8:FE7:FE6 -indexMode:8
+	EventID, 2, 2
+	1, 4, 4, -fixed
+	Position, 8, 2, -coordinates:2 -preferredBase:10
+	Command, 10, 2
+
+##command:DOOR tile location event
+DOOR, 0, 4, -priority:main -language:FE8:FE7:FE6 -end -indexMode:8 -noDisassembly
+	0, 0, 4, -fixed
+
+
+
+##command:SHOP location event
+##Location-based event that takes the player to a shop to buy items.
+SHOP, 0x0A, 12, -priority:main -language:FE8:FE7:FE6 -indexMode:8
+##Once the event ID has been marked as 'used', this event can't be invoked.
+##Leaving this as 0 will allow the event to occur whenever otherwise possible.
+	EventID, 2, 2
+##Pointer to SHLI code that lists the items that this shop sells.
+	ShopListPointer, 4, 4, -pointer:shopList
+##Position of the event aka the position of the shop.
+	Position, 8, 2, -coordinates:2 -preferredBase:10
+##The command in the menu to use to enter the shop. This also
+##determines whether this is a secret shop, armory or vendor.
+	Command, 10, 2
+
+##command:SHOP location event
+##Location-based event that takes the player to a shop to buy items.
+SHOP, 0, 4, -priority:main -language:FE8:FE7:FE6 -end -indexMode:8 -noDisassembly
+	0, 0, 4, -fixed
+
+
+
+##command:define SHOP LIST
+##Sets the list of items used by a shop.
+##aliases:SHLI
+SHOP_LIST, 0, 0, -game:FE6:FE7:FE8 -indexMode:8 -terminatingList:00 -end -priority:shopList -offsetMod:1
+##Item for sale in the shop.
+	ItemID, 0, 2
+
+##command:define SHop LIst
+##Sets the list of items used by a shop.
+##aliases:SHOP_LIST
+SHLI, 0, 0, -game:FE6:FE7:FE8 -indexMode:8 -terminatingList:00 -end -priority:shopList -offsetMod:1
+##Item for sale in the shop.
+	ItemID, 0, 2

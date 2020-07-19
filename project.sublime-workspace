@@ -1,0 +1,999 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Avial",
+				"AvialError\tinterface"
+			],
+			[
+				"Aviale",
+				"AvialError"
+			],
+			[
+				"NET",
+				"HGTP_NETWORK\tenum member"
+			],
+			[
+				"Err",
+				"Error_Avial\talias"
+			],
+			[
+				"er",
+				"error_message\tconst"
+			],
+			[
+				"in",
+				"indexOf\tmethod"
+			],
+			[
+				"cha",
+				"charAt\tmethod"
+			],
+			[
+				"ER",
+				"Error\tvar"
+			],
+			[
+				"Sock",
+				"Socket_SendAndReceive"
+			],
+			[
+				"SendAnd",
+				"Socket_SendAndNoWait"
+			],
+			[
+				"send",
+				"SendMessage"
+			],
+			[
+				"reply",
+				"Reply\talias"
+			],
+			[
+				"server",
+				"server_reply\tconst"
+			],
+			[
+				"Aves",
+				"AvesTerraSocket\tclass"
+			],
+			[
+				"C",
+				"Connect\tmethod"
+			],
+			[
+				"Socket",
+				"Socket_Connect"
+			],
+			[
+				"serv",
+				"server_reply\tlet"
+			],
+			[
+				"asy",
+				"async_func\tconst"
+			],
+			[
+				"func",
+				"function\tkeyword"
+			],
+			[
+				"I",
+				"INTERCHANGE\tenum member"
+			],
+			[
+				"typ",
+				"type\tproperty"
+			],
+			[
+				"NULL",
+				"NULL_INDEX"
+			],
+			[
+				"get",
+				"getTime"
+			],
+			[
+				"AvesT",
+				"AvesTerraServer\talias"
+			],
+			[
+				"sub",
+				"substring\tmethod"
+			],
+			[
+				"margin",
+				"margin-bottom\tproperty"
+			],
+			[
+				"Ave",
+				"AvesTerraSocket\talias"
+			],
+			[
+				"type",
+				"type_tag"
+			],
+			[
+				"ASSERT",
+				"ASSERT_VALUE_TYPE"
+			],
+			[
+				"Avial_D",
+				"Avial_Delete_Registry"
+			],
+			[
+				"Avi",
+				"Avial_Delete_Entity"
+			],
+			[
+				"StringTo",
+				"StringTo_Value"
+			],
+			[
+				"WJEOB",
+				"WJEObjectF"
+			],
+			[
+				"WJE",
+				"WJE_GET"
+			],
+			[
+				"pat",
+				"path_to_array"
+			],
+			[
+				"AS",
+				"ASSERT_EQUAL"
+			],
+			[
+				"TES",
+				"TEST_AVIAL_INIT_JACK_STORE_ENTITY"
+			],
+			[
+				"int",
+				"integer"
+			],
+			[
+				"LIBDI",
+				"LIBDIR_LIBFT"
+			],
+			[
+				"E",
+				"EXCEPTION_AVIAL_INVALIDVALUE"
+			],
+			[
+				"NULL_",
+				"NULL_VALUE"
+			],
+			[
+				"entit",
+				"entity_available"
+			],
+			[
+				"Log",
+				"Log_SoftwareError"
+			],
+			[
+				"tax",
+				"taxonomy_registry"
+			],
+			[
+				"s",
+				"s_ret_attachment"
+			],
+			[
+				"ene",
+				"entity_available"
+			],
+			[
+				"EXCEPTI",
+				"EXCEPTION_ARGS"
+			],
+			[
+				"N",
+				"NAME_PROGRAM"
+			],
+			[
+				"s_",
+				"s_value"
+			],
+			[
+				"ATAP",
+				"ATAPI_Activate"
+			],
+			[
+				"LIBDIR_",
+				"LIBDIR_WJELEMENT"
+			],
+			[
+				"FT_String",
+				"FT_StringDelete"
+			],
+			[
+				"val",
+				"value_as_string"
+			],
+			[
+				"FT_String_",
+				"FT_String_To_U32"
+			],
+			[
+				"NAM",
+				"NAME_LIB_AVIAL"
+			],
+			[
+				"NAME_LI",
+				"NAME_LIB_HGTP"
+			],
+			[
+				"FT",
+				"FT_StringArrayDelete"
+			],
+			[
+				"COMMA",
+				"COMMAND_CODE"
+			],
+			[
+				"COMM",
+				"COMMAND_UPPERCASE"
+			],
+			[
+				"mess",
+				"message_code"
+			],
+			[
+				"Coll",
+				"Collide_Hitboxes"
+			],
+			[
+				"inc",
+				"include"
+			],
+			[
+				"ma",
+				"mass"
+			],
+			[
+				"is",
+				"isGroupLayer\twarning"
+			],
+			[
+				"Uint",
+				"Uint8Array\twarning"
+			],
+			[
+				"fra",
+				"frame_index"
+			],
+			[
+				"UINT",
+				"Uint8Array\twarning"
+			],
+			[
+				"ce",
+				"center_other"
+			],
+			[
+				"center",
+				"center_self"
+			],
+			[
+				"SY",
+				"SYPHA_ACTION_NONE"
+			],
+			[
+				"syph",
+				"sypha_charge"
+			],
+			[
+				"DAMA",
+				"DAMAGE_TYPE_THUNDER"
+			],
+			[
+				"chara",
+				"character"
+			],
+			[
+				"Sp",
+				"Sprite_IsPlayer"
+			],
+			[
+				"Upda",
+				"Update_Players"
+			],
+			[
+				"PP",
+				"PPU_SetPalette"
+			],
+			[
+				"de",
+				"debuff_counter"
+			],
+			[
+				"SPRI",
+				"SPRITE_IN_FRONT"
+			],
+			[
+				"debuff",
+				"debuff_current"
+			],
+			[
+				"DEB",
+				"DEBUFF_DECREMENT_WET"
+			],
+			[
+				"MARIA",
+				"MARIA_ACTION_SHIELD"
+			],
+			[
+				"ALUC",
+				"ALUCARD_ACTION_SHIELD"
+			],
+			[
+				"tes",
+				"test_res"
+			],
+			[
+				"ex",
+				"expected_res"
+			],
+			[
+				"power",
+				"powers_neg"
+			],
+			[
+				"FLOAT_EX",
+				"FLOAT_EXPONENT_BIAS"
+			],
+			[
+				"ft_",
+				"ft_sqrt_2_pow_n"
+			],
+			[
+				"ft_lo",
+				"ft_float_get_mantissa"
+			],
+			[
+				"FLOAT",
+				"FLOAT_MANTISSA"
+			],
+			[
+				"sprite_cou",
+				"sprite_count_skipped"
+			],
+			[
+				"sprit",
+				"sprite_skip_index"
+			],
+			[
+				"spr",
+				"sprite_skip_index"
+			],
+			[
+				"sprite_skip",
+				"sprite_skip_amount"
+			],
+			[
+				"sprite_",
+				"sprite_count_drawn"
+			],
+			[
+				"resu",
+				"result_libc"
+			],
+			[
+				"result_",
+				"result_libft"
+			],
+			[
+				"PPU_Get",
+				"PPU_GetSpriteIndex"
+			],
+			[
+				"Input_Check",
+				"Input_CheckJoypad"
+			],
+			[
+				"Pla",
+				"Player_trevor"
+			],
+			[
+				"test_s",
+				"test_suites"
+			],
+			[
+				"wind",
+				"window_w"
+			],
+			[
+				"wo",
+				"window"
+			],
+			[
+				"window",
+				"window_w"
+			],
+			[
+				"CONFIG_WIND",
+				"CONFIG_WINDOW_VSYNC"
+			],
+			[
+				"Player_Check",
+				"Player_CheckCollisions"
+			],
+			[
+				"HIT",
+				"HITBOX_ATTACK_WOLFCHARGE"
+			],
+			[
+				"RICHTER_ACTIO",
+				"RICHTER_ACTION_FLAIL"
+			],
+			[
+				"Pl",
+				"Player_maria"
+			],
+			[
+				"Sub",
+				"subweapon_maria"
+			],
+			[
+				"subw",
+				"subweapon"
+			],
+			[
+				"Playe",
+				"Player_alucard"
+			],
+			[
+				"HI",
+				"HITBOX_NONE"
+			],
+			[
+				"on",
+				"onfloor"
+			],
+			[
+				"ANI",
+				"ANIM_PLAYER_ALUCARD_SPELL_WOLF_BITE"
+			],
+			[
+				"HITBO",
+				"HITBOX_ATTACK_WOLFBITE"
+			],
+			[
+				"INPUT",
+				"INPUT_ALTBIND"
+			],
+			[
+				"key",
+				"keysym"
+			],
+			[
+				"INPU",
+				"INPUT_ALTBIND"
+			],
+			[
+				"IN",
+				"INPUT_ALTBIND"
+			],
+			[
+				"CONF",
+				"CONFIG_SECTION_INPUT_INDEX"
+			],
+			[
+				"CONFIGTA",
+				"CONFIGTAB_INPUTS"
+			],
+			[
+				"bind",
+				"bindings"
+			],
+			[
+				"SDL_Joy",
+				"SDL_JoystickID"
+			],
+			[
+				"Plyaer",
+				"Player_alucard"
+			],
+			[
+				"JOY",
+				"JOYPAD_RIGHT"
+			],
+			[
+				"Ini",
+				"Init_Input_Config"
+			],
+			[
+				"CHECK",
+				"CHECK_JUSTRELEASED"
+			],
+			[
+				"CHEC",
+				"CHECK_JUSTPRESSED"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "dist.sh",
+			"settings":
+			{
+				"buffer_size": 940,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"previ",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"avial",
+				"Avial JSON quote char backslash escaping (needs lines to end with a backslash character to work)"
+			],
+			[
+				"previe",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"obj",
+				"NES Screen Tool metasprite OBJ c code cleaner"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"NES",
+				"NES Screen Tool metasprite OBJ c code cleaner"
+			],
+			[
+				"NES obj",
+				"NES Screen Tool metasprite OBJ c code cleaner"
+			],
+			[
+				"nes",
+				"NES Screen Tool metasprite OBJ c code cleaner"
+			],
+			[
+				"Nes",
+				"NES Screen Tool metasprite OBJ c code cleaner"
+			],
+			[
+				"pack ins",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"remov",
+				"Package Control: Remove Package"
+			],
+			[
+				"pack",
+				"Package Control: Remove Package"
+			],
+			[
+				"htmlif",
+				"HTMLify: non-breaking spaces"
+			],
+			[
+				"html",
+				"HTMLify: ampersands"
+			],
+			[
+				"htmlify",
+				"HTMLify: non-breaking spaces"
+			],
+			[
+				"htm",
+				"HTMLify: non-breaking spaces"
+			],
+			[
+				"pkg",
+				"Package Control: Install Package"
+			],
+			[
+				"prv",
+				"PackageResourceViewer: View Package Resource"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"scope",
+				"Scope Hunter: Toggle Instant Scoper"
+			],
+			[
+				"instant ",
+				"Scope Hunter: Toggle Instant Scoper"
+			],
+			[
+				"pkgrv",
+				"PackageResourceViewer: View Package Resource"
+			],
+			[
+				"pkc inst",
+				"Package Control: Install Package"
+			],
+			[
+				"pkgdev",
+				"PackageDev: New Color Scheme"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: re",
+				"Package Control: Remove Package"
+			],
+			[
+				"pkgctrl inst",
+				"Package Control: Install Package"
+			],
+			[
+				"packageresou",
+				"PackageResourceViewer: Edit Package Resource"
+			],
+			[
+				"package instal",
+				"Package Control: Install Package"
+			],
+			[
+				"packagedev",
+				"Package Control: Discover Packages"
+			],
+			[
+				"upp",
+				"Convert Case: Upper Case"
+			]
+		],
+		"width": 492.0
+	},
+	"console":
+	{
+		"height": 414.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/D/Lexou/Projects/EmblemMagic",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler"
+	],
+	"file_history":
+	[
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Chapter/Camera.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Chapter/Give Items.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Chapter/Give Money.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Chapter/Location Events.txt",
+		"/C/Users/Lexou/Downloads/Event-Assembler-master/Event Assembler/Event Assembler/bin/Release/Language raws/Language.raws",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Convos/Fade In and Out.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Chapter/Character Events.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Chapter/After Event.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Chapter/Beginning Blackness.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Convos/Return to Map.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Convos/Text.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Convos/Skipping.txt",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/src/api.ts",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/src/socket.ts",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/src/server.ts",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Convos/Backgrounds.txt",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/src/deserialize.ts",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/test/simple_cli.ts",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/src/utils.ts",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/src/avial_event.ts",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/src/avial_entity.ts",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/src/avial_outlet.ts",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/src/avial_property.ts",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/src/avial_registry.ts",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/src/serialize.ts",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/src/avial_value.ts",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/src/avial_attribute.ts",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/src/avial_connection.ts",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/src/types.ts",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/src/avert_contact_types.ts",
+		"/D/Lexou/Documents/Work/LEDR/API/C/src/avesterra/hgtp_utils.c",
+		"/D/Lexou/Documents/Work/LEDR/API/C/src/avesterra/env.c",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/tsconfig.json",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/src/index.ts",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/src/avert_contact.ts",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/src/types_args.ts",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/package.json",
+		"/D/Lexou/Documents/Work/CerebroLex/justype/src/redux/store-utils.ts",
+		"/D/Lexou/Documents/Work/LEDR/SPOT/ledrspot/.gitignore",
+		"/D/Lexou/Documents/Work/LEDR/SPOT/ledrspot/package.json",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/test/value.ts",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/build/types_args.js",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/build/server.js",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/build/index.js",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/index.js",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/package-lock.json",
+		"/D/Lexou/Projects/Emblem Magic/Test/FE4/Arrays/Class List.txt",
+		"/D/Lexou/Projects/Emblem Magic/Test/FE4/Arrays/Character List.txt",
+		"/D/Lexou/Projects/Emblem Magic/Test/FE4/Arrays/Battle Animation List.txt",
+		"/D/Lexou/Projects/Emblem Magic/Event Assembler/EA Standard Library/FE7 Definitions.event",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/node_modules/typescript/lib/lib.es5.d.ts",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/src/taxonomy.ts",
+		"/C/Users/Lexou/AppData/Roaming/Sublime Text 3/Packages/User/Default.sublime-commands",
+		"/C/Users/Lexou/AppData/Roaming/Sublime Text 3/Packages/User/reg_replace_rules.sublime-settings",
+		"/C/Users/Lexou/Downloads/TMR-comments.html",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/AvesTerraTS/server.ts",
+		"/C/Users/Lexou/Downloads/server.ts",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/Procfile",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/README.md",
+		"/D/Lexou/Documents/Work/LEDR/API/Typescript/AvesTerraJS/AvesTerraServer.js",
+		"/D/Lexou/Documents/Work/LEDR/Avesterra_JS_Example/AvesTerraTS/server.ts",
+		"/D/Lexou/Documents/Work/LEDR/Avesterra_JS_Example/AvesTerraTS/socket.ts",
+		"/D/Lexou/Documents/Work/LEDR/Avesterra_JS_Example/AvesTerraTS/types.ts",
+		"/D/Lexou/Documents/Work/LEDR/Avesterra_JS_Example/tslint.json",
+		"/D/Lexou/Documents/Work/LEDR/Avesterra_JS_Example/AvesTerraTS/taxonomy.ts",
+		"/D/Lexou/Documents/Work/LEDR/Avesterra_JS_Example/AvesTerraTS/serialize.ts",
+		"/D/Lexou/Documents/Work/LEDR/Avesterra_JS_Example/AvesTerraTS/index.ts",
+		"/D/Lexou/Documents/Work/LEDR/Avesterra_JS_Example/AvesTerraTS/deserialize.ts",
+		"/D/Lexou/Documents/Work/LEDR/Avesterra_JS_Example/AvesTerraTS/api.ts",
+		"/D/Lexou/Documents/Work/LEDR/Avesterra_JS_Example/package.json",
+		"/D/Lexou/Documents/Work/LEDR/Avesterra_JS_Example/tsconfig.json",
+		"/D/Lexou/Documents/Work/LEDR/Avesterra_JS_Example/node_modules/@types/express/index.d.ts",
+		"/D/Lexou/Documents/Work/LEDR/Avesterra_JS_Example/node_modules/@types/cors/index.d.ts",
+		"/D/Lexou/Documents/Work/LEDR/Avesterra_JS_Example/node_modules/@types/express-serve-static-core/index.d.ts",
+		"/D/Lexou/Documents/Work/LEDR/Avesterra_JS_Example/node_modules/@types/connect/index.d.ts",
+		"/D/Lexou/Documents/Work/LEDR/Avesterra_JS_Example/build/index.js.map",
+		"/D/Lexou/Documents/Work/CerebroLex/justype/tslint.json",
+		"/D/Lexou/Documents/Work/CerebroLex/justype/tsconfig.json",
+		"/D/Lexou/Documents/Work/CerebroLex/justype/package.json",
+		"/D/Lexou/Documents/Work/LEDR/API/C/README.md",
+		"/D/Lexou/Documents/Work/CerebroLex/justype/README.md",
+		"/D/Lexou/Documents/Work/LEDR/Avesterra_JS_Example/built/index.js",
+		"/D/Lexou/Documents/Work/LEDR/Avesterra_JS_Example/.gitignore",
+		"/D/Lexou/Documents/Work/CerebroLex/justype/.gitignore",
+		"/D/Lexou/Documents/Work/LEDR/API/C/src/utils/dprintf.c",
+		"/D/Lexou/Documents/Work/LEDR/API/C/src/utils/dprintf.h",
+		"/D/Lexou/Documents/Work/LEDR/API/C/src/utils/logger.c",
+		"/D/Lexou/Documents/Work/LEDR/API/C/tests/util.c",
+		"/D/Lexou/Documents/Work/LEDR/API/C/src/utils/logger.h",
+		"/D/Lexou/Documents/Work/LEDR/API/C/src/utils/socket.h",
+		"/D/Lexou/Documents/Work/LEDR/API/C/src/avesterra/hgtp_session.c",
+		"/D/Lexou/Documents/Work/LEDR/API/C/src/utils/strptime.h",
+		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test.h",
+		"/D/Lexou/Documents/Work/LEDR/API/C/hdr/help.h",
+		"/D/Lexou/Documents/Work/LEDR/API/C/hdr/enums.h",
+		"/D/Lexou/Documents/Work/LEDR/API/C/hdr/avial_utils.h",
+		"/D/Lexou/Documents/Work/LEDR/API/C/hdr/avial.h",
+		"/D/Lexou/Documents/Work/LEDR/API/C/hdr/avesterra.h",
+		"/D/Lexou/Documents/Work/LEDR/API/C/hdr/args.h",
+		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_toolkit.c",
+		"/D/Lexou/Documents/Work/LEDR/API/C/hdr/avial_kwargs.h",
+		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_registry.c",
+		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_outlet.c",
+		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_attribute.c",
+		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_property.c",
+		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_event.c",
+		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_attachment.c",
+		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_label.c",
+		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_value.c",
+		"/D/Lexou/Documents/Work/LEDR/API/C/src/utils/json_utils.c",
+		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_comprehensive.c",
+		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_misc.c",
+		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_entity.c",
+		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_session.c",
+		"/D/Lexou/Documents/Work/LEDR/API/C/Makefile",
+		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_annotation.c",
+		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_data.c",
+		"/D/Lexou/Documents/Work/LEDR/API/Python/avesterra-2.5.3/avesterra/avial.py",
+		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_connection.c",
+		"/D/Lexou/Documents/Work/LEDR/API/C/tests/test_avial_schema.c",
+		"/D/Lexou/Documents/Work/LEDR/API/Python/avesterra-2.5.3/avesterra/tests/cleaner.py",
+		"/D/Lexou/Documents/Work/LEDR/API/C/lib/libft/hdr/libft_memory.h",
+		"/D/Lexou/Documents/Work/LEDR/API/Python/avesterra-2.5.3/avesterra/tests/test_avial_event.py",
+		"/D/Lexou/Documents/Work/LEDR/API/C/lib/libft/hdr/libft_string.h",
+		"/D/Lexou/Documents/Work/LEDR/API/C/lib/libft/src/string/ft_strmerge.c",
+		"/D/Lexou/Documents/Work/LEDR/API/C/lib/libft/hdr/libft_random.h",
+		"/D/Lexou/Documents/Work/LEDR/API/C/lib/libft/src/string/ft_strnew.c",
+		"/D/Lexou/Documents/Work/LEDR/API/Python/avesterra-2.5.3/avesterra/tests/common.py"
+	],
+	"find":
+	{
+		"height": 22.0
+	},
+	"find_in_files":
+	{
+		"height": 239.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "dist.sh",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 940,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/ShellScriptImproved/Shell-Unix-Generic.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 22.0
+	},
+	"input":
+	{
+		"height": 209.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.SublimeLinter":
+	{
+		"height": 0.0
+	},
+	"output.doc":
+	{
+		"height": 0.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.scopehunter.results":
+	{
+		"height": 90.0
+	},
+	"pinned_build_system": "",
+	"project": "project.sublime-project",
+	"replace":
+	{
+		"height": 40.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 278.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
