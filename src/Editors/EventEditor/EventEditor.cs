@@ -95,7 +95,7 @@ namespace EmblemMagic.Editors
                 {
                     string folder =
 #if (DEBUG)
-"D:\\Lexou\\Projects\\EmblemMagic\\EventAssembler";
+"D:\\Lexou\\Projects\\EmblemMagic\\EventAssembler\\Event Assembler\\Event Assembler";
 #else
 Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program)).Location);
 #endif
