@@ -1,49 +1,46 @@
 #!/bin/bash
-echo "Deleting folders in ./dist/..."
-rm -rf ./dist/Arrays
-rm -rf ./dist/Structs
-rm -rf ./dist/Modules
-rm -rf ./dist/Patches
-rm -rf ./dist/ROMs
-rm -rf ./dist/Utils
-rm -rf ./dist/EventAssembler
+DIST="./dist"
+echo "Deleting $DIST folder..."
+rm -rf $DIST/
+mkdir $DIST
 
-echo "Updating folders in ./dist/..."
-cp -r ./Arrays			./dist/
-cp -r ./Structs			./dist/
-cp -r ./Patches			./dist/
-cp -r ./Utils			./dist/
-cp -r ./Modules			./dist/
-rm -rf ./dist/Modules/old
-rm -rf ./dist/Modules/tmp
-cp -r ./ROMs			./dist/
-rm -rf ./dist/ROMs/*.gba
-rm -rf ./dist/ROMs/*.GBA
+echo "Updating files/folders in $DIST/..."
+cp -r ./Arrays			$DIST/
+cp -r ./Structs			$DIST/
+cp -r ./Modules			$DIST/
+cp -r ./Patches			$DIST/
+cp -r ./Utils			$DIST/
+cp -r ./ROMs			$DIST/
+rm -rf $DIST/Modules/old
+rm -rf $DIST/Modules/tmp
+rm -rf $DIST/ROMs/*.gba
+rm -rf $DIST/ROMs/*.GBA
 
-EA_FOLDER=./EventAssembler/Event\ Assembler/Event\ Assembler/
-mkdir ./dist/EventAssembler/
-cp		"./README*.txt"								./dist/EventAssembler/
-cp -r	$FOLDER"Language Raws"						./dist/EventAssembler/
-cp -r	$FOLDER"EA Standard Library"				./dist/EventAssembler/
-cp -r	$FOLDER"Extensions"							./dist/EventAssembler/
-cp -r	$FOLDER"Scripts"							./dist/EventAssembler/
-cp -r	$FOLDER"Syntax"								./dist/EventAssembler/
-cp		$FOLDER"*.event"							./dist/EventAssembler/
-cp		$FOLDER"*.txt"								./dist/EventAssembler/
-cp		$FOLDER"bin/Release/Core.exe"				./dist/EventAssembler/
-cp		$FOLDER"bin/Release/Event Assembler.exe"	./dist/EventAssembler/
-cp		$FOLDER"bin/Release/Nintenlord.dll"			./dist/EventAssembler/
-cp		$FOLDER"bin/Release/Nintenlord.Forms.dll"	./dist/EventAssembler/
+mkdir $DIST/EventAssembler/
+FOLDER="./EventAssembler/Event Assembler/Event Assembler"
+find "./EventAssembler/" -maxdepth 1 -name "README*" | while read f ; do cp "$f" $DIST/EventAssembler/ ; done
+find "$FOLDER"			 -maxdepth 1 -name "*.event" | while read f ; do cp "$f" $DIST/EventAssembler/ ; done
+find "$FOLDER"			 -maxdepth 1 -name "*.txt"	 | while read f ; do cp "$f" $DIST/EventAssembler/ ; done
+cp -r	"$FOLDER/Language Raws"						$DIST/EventAssembler/
+cp -r	"$FOLDER/EA Standard Library"				$DIST/EventAssembler/
+cp -r	"$FOLDER/Extensions"						$DIST/EventAssembler/
+cp -r	"$FOLDER/Scripts"							$DIST/EventAssembler/
+cp -r	"$FOLDER/Syntax"							$DIST/EventAssembler/
+cp 		"$FOLDER/bin/Release/Core.exe"				$DIST/EventAssembler/
+cp 		"$FOLDER/bin/Release/Event Assembler.exe"	$DIST/EventAssembler/
+cp 		"$FOLDER/bin/Release/Nintenlord.dll"		$DIST/EventAssembler/
+cp 		"$FOLDER/bin/Release/Nintenlord.Forms.dll"	$DIST/EventAssembler/
 
 
-echo "Updating executables and libraries in ./dist/..."
-cp "./Help/Emblem Magic.chm"				./dist/
-cp "./bin/Release/Emblem Magic.exe"			./dist/
-cp "./bin/Release/Emblem Magic.exe.config"	./dist/
-cp "./bin/Release/FastColoredTextBox.dll"	./dist/Utils/
+echo "Updating executables and libraries in $DIST/..."
+cp "./README_dist.txt"							$DIST/README.txt
+cp "./Help/Emblem Magic.chm"					$DIST/
+cp "./bin/Release/Emblem Magic.exe"				$DIST/
+cp "./bin/Release/Emblem Magic.exe.config"		$DIST/
+cp "./bin/Release/Utils/FastColoredTextBox.dll"	$DIST/Utils/
 
 echo "Packaging .zip file..."
-rm ./dist/EmblemMagic.zip
-zip -r ./dist/EmblemMagic.zip ./dist/
+rm $DIST/EmblemMagic.zip
+zip -r $DIST/EmblemMagic.zip $DIST/
 
-echo "Done! The distributable .zip file is ./dist/EmblemMagic.zip"
+echo "Done! The distributable .zip file is $DIST/EmblemMagic.zip"
