@@ -186,12 +186,12 @@ namespace EmblemMagic.Editors
     {
         Editor owner;
         int position;
-        Nintenlord.Collections.IDataChange<byte> changes;
+        Nintenlord.Collections.DataChange.IDataChange<byte> changes;
 
         public ROM_Stream(Editor parent) : base()
         {
             owner = parent;
-            changes = new Nintenlord.Collections.DataChange<byte>();
+            changes = new Nintenlord.Collections.DataChange.DataChange<byte>();
         }
 
         public string Description;

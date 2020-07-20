@@ -11,15 +11,30 @@ rm -rf ./dist/EventAssembler
 echo "Updating folders in ./dist/..."
 cp -r ./Arrays			./dist/
 cp -r ./Structs			./dist/
-cp -r ./Modules			./dist/
 cp -r ./Patches			./dist/
-cp -r ./ROMs			./dist/
 cp -r ./Utils			./dist/
-cp -r ./EventAssembler	./dist/
+cp -r ./Modules			./dist/
 rm -rf ./dist/Modules/old
 rm -rf ./dist/Modules/tmp
+cp -r ./ROMs			./dist/
 rm -rf ./dist/ROMs/*.gba
 rm -rf ./dist/ROMs/*.GBA
+
+EA_FOLDER=./EventAssembler/Event\ Assembler/Event\ Assembler/
+mkdir ./dist/EventAssembler/
+cp		"./README*.txt"								./dist/EventAssembler/
+cp -r	$FOLDER"Language Raws"						./dist/EventAssembler/
+cp -r	$FOLDER"EA Standard Library"				./dist/EventAssembler/
+cp -r	$FOLDER"Extensions"							./dist/EventAssembler/
+cp -r	$FOLDER"Scripts"							./dist/EventAssembler/
+cp -r	$FOLDER"Syntax"								./dist/EventAssembler/
+cp		$FOLDER"*.event"							./dist/EventAssembler/
+cp		$FOLDER"*.txt"								./dist/EventAssembler/
+cp		$FOLDER"bin/Release/Core.exe"				./dist/EventAssembler/
+cp		$FOLDER"bin/Release/Event Assembler.exe"	./dist/EventAssembler/
+cp		$FOLDER"bin/Release/Nintenlord.dll"			./dist/EventAssembler/
+cp		$FOLDER"bin/Release/Nintenlord.Forms.dll"	./dist/EventAssembler/
+
 
 echo "Updating executables and libraries in ./dist/..."
 cp "./Help/Emblem Magic.chm"				./dist/

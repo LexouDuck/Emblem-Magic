@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"EV",
+				"EventAssembler"
+			],
+			[
+				"E",
+				"EventAssembler"
+			],
+			[
 				"NEXT",
 				"NEXT_CHAPTER"
 			],
@@ -162,10 +170,6 @@
 			[
 				"LIBDI",
 				"LIBDIR_LIBFT"
-			],
-			[
-				"E",
-				"EXCEPTION_AVIAL_INVALIDVALUE"
 			],
 			[
 				"NULL_",
@@ -510,10 +514,6 @@
 			[
 				"Ini",
 				"Init_Input_Config"
-			],
-			[
-				"CHECK",
-				"CHECK_JUSTRELEASED"
 			]
 		]
 	},
@@ -690,6 +690,9 @@
 	},
 	"file_history":
 	[
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Units/Killing.txt",
+		"/D/Lexou/Projects/EmblemMagic/EventAssembler/Language Raws/Main Codes/Others.txt",
+		"/D/Lexou/Projects/EmblemMagic/Other/EventAssembler-repo/Event Assembler/Event Assembler/Language Raws/FireEmblem.lang",
 		"/D/Lexou/Projects/EmblemMagic/Other/EventAssembler/README2.txt",
 		"/C/Users/Lexou/Downloads/Event-Assembler-master/Event Assembler/Event Assembler/README2.txt",
 		"/C/Users/Lexou/Desktop/test.s",
@@ -814,10 +817,7 @@
 		"/D/Lexou/Documents/Work/CerebroLex/justype/tsconfig.json",
 		"/D/Lexou/Documents/Work/CerebroLex/justype/package.json",
 		"/D/Lexou/Documents/Work/LEDR/API/C/README.md",
-		"/D/Lexou/Documents/Work/CerebroLex/justype/README.md",
-		"/D/Lexou/Documents/Work/LEDR/Avesterra_JS_Example/built/index.js",
-		"/D/Lexou/Documents/Work/LEDR/Avesterra_JS_Example/.gitignore",
-		"/D/Lexou/Documents/Work/CerebroLex/justype/.gitignore"
+		"/D/Lexou/Documents/Work/CerebroLex/justype/README.md"
 	],
 	"find":
 	{
