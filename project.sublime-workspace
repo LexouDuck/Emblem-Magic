@@ -821,7 +821,7 @@
 	],
 	"find":
 	{
-		"height": 39.0
+		"height": 50.0
 	},
 	"find_in_files":
 	{
@@ -836,6 +836,7 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"./dist/",
 			"commnad:",
 			"0x28, 8, -game:FE6",
 			"0x29, 8, -game:FE6",
@@ -852,7 +853,7 @@
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": true,
+		"regex": false,
 		"replace_history":
 		[
 			""
@@ -865,7 +866,7 @@
 	},
 	"incremental_find":
 	{
-		"height": 22.0
+		"height": 38.0
 	},
 	"input":
 	{
@@ -913,7 +914,7 @@
 	"pinned_build_system": "",
 	"replace":
 	{
-		"height": 40.0
+		"height": 72.0
 	},
 	"save_all_on_build": true,
 	"select_file":

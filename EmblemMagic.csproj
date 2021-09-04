@@ -1,18 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{327F07D4-2E3C-4A9B-B42D-C5505292567A}</ProjectGuid>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EmblemMagic</RootNamespace>
     <AssemblyName>Emblem Magic</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -27,28 +18,22 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>assets\Icon.ico</ApplicationIcon>
@@ -58,26 +43,25 @@
     </StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
     <DefineConstants>CODE_ANALYSIS;DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
-    <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="dist\**" />
+    <Compile Remove="Other\**" />
+    <Compile Remove="Test\**" />
+    <EmbeddedResource Remove="dist\**" />
+    <EmbeddedResource Remove="Other\**" />
+    <EmbeddedResource Remove="Test\**" />
+    <None Remove="dist\**" />
+    <None Remove="Other\**" />
+    <None Remove="Test\**" />
+  </ItemGroup>
   <ItemGroup>
     <Reference Include="Core">
       <HintPath>bin\Release\EventAssembler\Core.exe</HintPath>
@@ -88,632 +72,81 @@
     <Reference Include="Nintenlord">
       <HintPath>bin\Release\EventAssembler\Nintenlord.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Windows.Forms.DataVisualization" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\Components\ArrayBox\ByteArrayBox.cs">
+    <Compile Update="src\Components\ArrayBox\ByteArrayBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="src\Components\ArrayBox\ShortArrayBox.cs">
+    <Compile Update="src\Components\ArrayBox\ShortArrayBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="src\Components\ArrayBox\PointerArrayBox.cs">
+    <Compile Update="src\Components\ArrayBox\PointerArrayBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="src\Components\Audio\NativeMethods.cs" />
-    <Compile Include="src\Components\Audio\PublicEnums.cs" />
-    <Compile Include="src\Components\Audio\Resources.cs" />
-    <Compile Include="src\Components\Audio\Volume.cs" />
-    <Compile Include="src\Components\Audio\WaveFormat.cs" />
-    <Compile Include="src\Components\Audio\WaveOut.cs" />
-    <Compile Include="src\Components\Audio\WaveOutDevice.cs" />
-    <Compile Include="src\Components\Audio\WaveOutMessageReceivedEventArgs.cs" />
-    <Compile Include="src\Components\Audio\WaveOutSafeHandle.cs" />
-    <Compile Include="src\Components\CodeBox\CodeBox.cs">
+    <Compile Update="src\Components\CodeBox\CodeBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="src\Components\ControlPainting.cs" />
-    <Compile Include="src\Components\MagicButton\MagicButton.cs">
+    <Compile Update="src\Components\MagicButton\MagicButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="src\Components\NumberBox\ShortBox.cs">
+    <Compile Update="src\Components\NumberBox\ShortBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="src\Components\NumberBox\ByteBox.cs">
+    <Compile Update="src\Components\NumberBox\ByteBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="src\Components\ColorBox\ColorBox.cs">
+    <Compile Update="src\Components\ColorBox\ColorBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="src\Components\ColorBox\ColorBox.Designer.cs">
-      <DependentUpon>ColorBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Components\GridBox\GridBox.cs">
+    <Compile Update="src\Components\GridBox\GridBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="src\Components\GridBox\GridBox.Designer.cs">
-      <DependentUpon>GridBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Components\GridBox\MapBox.cs">
+    <Compile Update="src\Components\GridBox\MapBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="src\Components\GridBox\MapBox.Designer.cs">
-      <DependentUpon>MapBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Components\HexBox\BuiltInContextMenu.cs">
+    <Compile Update="src\Components\HexBox\BuiltInContextMenu.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="src\Components\HexBox\ByteProvider\DataBlock.cs" />
-    <Compile Include="src\Components\HexBox\ByteProvider\DataMap.cs" />
-    <Compile Include="src\Components\HexBox\ByteProvider\FileDataBlock.cs" />
-    <Compile Include="src\Components\HexBox\ByteProvider\IByteProvider.cs" />
-    <Compile Include="src\Components\HexBox\ByteProvider\MemoryDataBlock.cs" />
-    <Compile Include="src\Components\HexBox\DataByteProvider.cs" />
-    <Compile Include="src\Components\HexBox\FileByteProvider.cs" />
-    <Compile Include="src\Components\HexBox\HexBox.cs">
+    <Compile Update="src\Components\HexBox\HexBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="src\Components\HexBox\Util.cs" />
-    <Compile Include="src\Components\ImageBox\ImageBox.cs">
+    <Compile Update="src\Components\ImageBox\ImageBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="src\Components\ArrayBox\ArrayBox.cs">
+    <Compile Update="src\Components\ArrayBox\ArrayBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="src\Components\ArrayBox\ArrayBox.Designer.cs">
-      <DependentUpon>ArrayBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Components\MarkingBox\MarkingBox.cs">
+    <Compile Update="src\Components\MarkingBox\MarkingBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="src\Components\MenuStrip\FolderViewStrip.cs">
+    <Compile Update="src\Components\MenuStrip\FolderViewStrip.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="src\Components\PaletteBox\PaletteBox.cs">
+    <Compile Update="src\Components\PaletteBox\PaletteBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="src\Components\PaletteBox\PaletteBox.Designer.cs">
-      <DependentUpon>PaletteBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Components\NumberBox\PointerBox.cs">
+    <Compile Update="src\Components\NumberBox\PointerBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="src\Components\PianoBox\PianoBox.cs">
+    <Compile Update="src\Components\PianoBox\PianoBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="src\Components\SampleBox\SampleBox.cs">
+    <Compile Update="src\Components\SampleBox\SampleBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="src\Components\TrackerGrid\TrackerGrid.cs">
+    <Compile Update="src\Components\TrackerGrid\TrackerGrid.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="src\Compression\CRC32.cs" />
-    <Compile Include="src\Compression\Huffman.cs" />
-    <Compile Include="src\Compression\LZ77.cs" />
-    <Compile Include="src\Compression\LZW.cs" />
-    <Compile Include="src\Compression\VLQ.cs" />
-    <Compile Include="src\Core\Core.cs" />
-    <Compile Include="src\Core\Forms\FormAbout.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Core\Forms\FormAbout.Designer.cs">
-      <DependentUpon>FormAbout.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Core\Forms\FormLoading.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Core\Forms\FormLoading.Designer.cs">
-      <DependentUpon>FormLoading.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Core\Forms\FormProperties.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Core\Forms\FormProperties.Designer.cs">
-      <DependentUpon>FormProperties.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Core\Forms\FormRepoint.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Core\Forms\FormRepoint.Designer.cs">
-      <DependentUpon>FormRepoint.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Core\Managers\PointManager\CreateRepointDialog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Core\Managers\PointManager\CreateRepointDialog.Designer.cs">
-      <DependentUpon>CreateRepointDialog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Core\Managers\PointManager\PointEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Core\Managers\PointManager\PointEditor.Designer.cs">
-      <DependentUpon>PointEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Core\Managers\SpaceManager\MarkSpace.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Core\Managers\SpaceManager\MarkSpace.Designer.cs">
-      <DependentUpon>MarkSpace.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Core\Util\ArrayFile.cs" />
-    <Compile Include="src\Core\Util\ByteArray.cs" />
-    <Compile Include="src\Core\Util\StructFile.cs" />
-    <Compile Include="src\Editors\ASMEditor\ASMEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\ASMEditor\ASMEditor.Designer.cs">
-      <DependentUpon>ASMEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\BackgroundEditor\BackgroundEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\BackgroundEditor\BackgroundEditor.Designer.cs">
-      <DependentUpon>BackgroundEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\BattleAnimEditor\BattleAnimEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\BattleAnimEditor\BattleAnimEditor.Designer.cs">
-      <DependentUpon>BattleAnimEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\BattleScreenEditor\BattleScreenEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\BattleScreenEditor\BattleScreenEditor.Designer.cs">
-      <DependentUpon>BattleScreenEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\EventEditor\Event.cs" />
-    <Compile Include="src\Editors\EventEditor\EventAssemblerIO.cs" />
-    <Compile Include="src\Editors\EventEditor\EventEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\EventEditor\EventEditor.Designer.cs">
-      <DependentUpon>EventEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\GraphicsEditor\GraphicsEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\GraphicsEditor\GraphicsEditor.Designer.cs">
-      <DependentUpon>GraphicsEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\ItemEditor\ItemEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\ItemEditor\ItemEditor.Designer.cs">
-      <DependentUpon>ItemEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\MapEditor\MapEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\MapEditor\MapEditor.Designer.cs">
-      <DependentUpon>MapEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\MapTilesetEditor\MapTilesetEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\MapTilesetEditor\MapTilesetEditor.Designer.cs">
-      <DependentUpon>MapTilesetEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\MusicEditor\InstrumentEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\MusicEditor\InstrumentEditor.Designer.cs">
-      <DependentUpon>InstrumentEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\MusicEditor\KeyMapEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\MusicEditor\KeyMapEditor.Designer.cs">
-      <DependentUpon>KeyMapEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\MusicEditor\MusicEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\MusicEditor\MusicEditor.Designer.cs">
-      <DependentUpon>MusicEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\MusicEditor\SampleEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\MusicEditor\SampleEditor.Designer.cs">
-      <DependentUpon>SampleEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\BattleAnimEditor\OAMEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\BattleAnimEditor\OAMEditor.Designer.cs">
-      <DependentUpon>OAMEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\PatchEditor\PatchEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\PatchEditor\PatchEditor.Designer.cs">
-      <DependentUpon>PatchEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\TextEditor\TextEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\TextEditor\TextEditor.Designer.cs">
-      <DependentUpon>TextEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\TextEditor\TextFind.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\TextEditor\TextFind.Designer.cs">
-      <DependentUpon>TextFind.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\TextEditor\TextReplace.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\TextEditor\TextReplace.Designer.cs">
-      <DependentUpon>TextReplace.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\TitleScreenEditor\TitleScreenEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\TitleScreenEditor\TitleScreenEditor.Designer.cs">
-      <DependentUpon>TitleScreenEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\TSAEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\TSAEditor.Designer.cs">
-      <DependentUpon>TSAEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\HexEditor\BitInfo.cs" />
-    <Compile Include="src\Editors\HexEditor\HexFind.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\HexEditor\HexFind.Designer.cs">
-      <DependentUpon>HexFind.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\HexEditor\HexGoTo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\HexEditor\HexGoTo.Designer.cs">
-      <DependentUpon>HexGoTo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\MapSpriteEditor\MapSpriteEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\MapSpriteEditor\MapSpriteEditor.Designer.cs">
-      <DependentUpon>MapSpriteEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\PaletteEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\PaletteEditor.Designer.cs">
-      <DependentUpon>PaletteEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\PortraitEditor\PortraitEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\PortraitEditor\PortraitEditor.Designer.cs">
-      <DependentUpon>PortraitEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\SpellAnimEditor\SpellAnimEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\SpellAnimEditor\SpellAnimEditor.Designer.cs">
-      <DependentUpon>SpellAnimEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\ModuleEditor\Module.cs" />
-    <Compile Include="src\Editors\ModuleEditor\ModuleEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\ModuleEditor\ModuleEditor.Designer.cs">
-      <DependentUpon>ModuleEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\WorldMapEditor\WorldMapEditor_FE6.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\WorldMapEditor\WorldMapEditor_FE6.Designer.cs">
-      <DependentUpon>WorldMapEditor_FE6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\WorldMapEditor\WorldMapEditor_FE8.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\WorldMapEditor\WorldMapEditor_FE8.Designer.cs">
-      <DependentUpon>WorldMapEditor_FE8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\WorldMapEditor\WorldMapEditor_FE7.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\WorldMapEditor\WorldMapEditor_FE7.Designer.cs">
-      <DependentUpon>WorldMapEditor_FE7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\FireEmblem\Graphics\Background.cs" />
-    <Compile Include="src\FireEmblem\Graphics\BattlePlatform.cs" />
-    <Compile Include="src\FireEmblem\Graphics\BattleScreen.cs" />
-    <Compile Include="src\FireEmblem\Graphics\MapTileAnim.cs" />
-    <Compile Include="src\FireEmblem\Graphics\MapTileset.cs" />
-    <Compile Include="src\FireEmblem\Graphics\SpellCommands.cs" />
-    <Compile Include="src\FireEmblem\Sound\Audio.cs" />
-    <Compile Include="src\FireEmblem\Sound\Instrument.cs" />
-    <Compile Include="src\FireEmblem\Sound\InstrumentArray.cs" />
-    <Compile Include="src\FireEmblem\Sound\KeyMap.cs" />
-    <Compile Include="src\FireEmblem\Sound\Music.cs" />
-    <Compile Include="src\FireEmblem\Sound\MusicHeader.cs" />
-    <Compile Include="src\FireEmblem\Sound\Sample.cs" />
-    <Compile Include="src\FireEmblem\Sound\Track.cs" />
-    <Compile Include="src\FireEmblem\Text\Font.cs" />
-    <Compile Include="src\FireEmblem\Text\Glyph.cs" />
-    <Compile Include="src\FireEmblem\Text\Text.cs" />
-    <Compile Include="src\FireEmblem\Text\TextPreview.cs" />
-    <Compile Include="src\GBA\OAM_Array.cs" />
-    <Compile Include="src\GBA\OAM_Maker.cs" />
-    <Compile Include="src\GBA\Screen.cs" />
-    <Compile Include="src\GBA\TSA.cs" />
-    <Compile Include="src\FireEmblem\Graphics\BattleAnimation.cs" />
-    <Compile Include="src\FireEmblem\Graphics\BattleAnimMaker.cs" />
-    <Compile Include="src\FireEmblem\Graphics\Map.cs" />
-    <Compile Include="src\FireEmblem\Graphics\MapChanges.cs" />
-    <Compile Include="src\FireEmblem\FE6.cs" />
-    <Compile Include="src\FireEmblem\FE7.cs" />
-    <Compile Include="src\FireEmblem\FE8.cs" />
-    <Compile Include="src\FireEmblem\Game.cs" />
-    <Compile Include="src\FireEmblem\Graphics\MapSprite.cs" />
-    <Compile Include="src\FireEmblem\Graphics\Portrait.cs" />
-    <Compile Include="src\FireEmblem\Graphics\SpellAnimation.cs" />
-    <Compile Include="src\FireEmblem\Graphics\WorldMap_FE6.cs" />
-    <Compile Include="src\FireEmblem\Graphics\WorldMap_FE7.cs" />
-    <Compile Include="src\FireEmblem\Graphics\WorldMap_FE8.cs" />
-    <Compile Include="src\GBA\ASM.cs" />
-    <Compile Include="src\GBA\Bitmap.cs" />
-    <Compile Include="src\GBA\Color.cs" />
-    <Compile Include="src\Components\ImageBox\IDisplayable.cs" />
-    <Compile Include="src\GBA\OAM.cs" />
-    <Compile Include="src\GBA\Sprite.cs" />
-    <Compile Include="src\GBA\Tile.cs" />
-    <Compile Include="src\GBA\TileMap.cs" />
-    <Compile Include="src\GBA\Tileset.cs" />
-    <Compile Include="src\GBA\TileSheet.cs" />
-    <Compile Include="src\GBA\TSA_Array.cs" />
-    <Compile Include="src\Core\Managers\PointManager\Repoint.cs" />
-    <Compile Include="src\Core\Managers\PointManager\PointManager.cs" />
-    <Compile Include="src\Core\Managers\HackData.cs" />
-    <Compile Include="src\Core\Managers\MarksManager\Marks.cs" />
-    <Compile Include="src\Core\Managers\MarksManager\MarksManager.cs" />
-    <Compile Include="src\Core\Util\Prompt.cs" />
-    <Compile Include="src\Core\Managers\SpaceManager\SpaceSortingMode.cs" />
-    <Compile Include="src\Core\Managers\UndoData.cs" />
-    <Compile Include="src\GBA\TSA_Image.cs" />
-    <Compile Include="src\Compression\UPS.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\Components\MenuStrip\RecentFileMenu.cs">
+    <Compile Update="src\Components\MenuStrip\RecentFileMenu.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="src\Components\SortableBindingList.cs" />
-    <Compile Include="src\Components\MarkedSpaceBar.cs">
+    <Compile Update="src\Components\MarkedSpaceBar.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="src\Editors\HexEditor\HexEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\HexEditor\HexEditor.Designer.cs">
-      <DependentUpon>HexEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Core\Forms\FormOptions.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Core\Forms\FormOptions.Designer.cs">
-      <DependentUpon>FormOptions.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="src\GBA\Image.cs" />
-    <Compile Include="src\GBA\SpriteSheet.cs" />
-    <Compile Include="src\GBA\Palette.cs" />
-    <Compile Include="src\GBA\Pointer.cs" />
-    <Compile Include="src\Core\Managers\SpaceManager\Space.cs" />
-    <Compile Include="src\Core\Managers\SpaceManager\Range.cs" />
-    <Compile Include="src\Core\Util\UserAction.cs" />
-    <Compile Include="src\Core\Managers\WriteManager\WriteEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Core\Managers\WriteManager\WriteEditor.Designer.cs">
-      <DependentUpon>WriteEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Core\Managers\DataManager.cs" />
-    <Compile Include="src\Editors\BasicEditor\BasicEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Editors\BasicEditor\BasicEditor.Designer.cs">
-      <DependentUpon>BasicEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\Editor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Core\Managers\SpaceManager\SpaceEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Core\Managers\SpaceManager\SpaceEditor.Designer.cs">
-      <DependentUpon>SpaceEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Core\Managers\HackManager.cs" />
-    <Compile Include="src\Core\Util\Util.cs" />
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>Settings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="src\Core\Suite.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Core\Suite.Designer.cs">
-      <DependentUpon>Suite.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Editors\ModuleEditor\Property.cs" />
-    <Compile Include="src\Core\Managers\SpaceManager\SpaceManager.cs" />
-    <Compile Include="src\Core\Program.cs" />
-    <Compile Include="src\Core\Managers\WriteManager\WriteManager.cs" />
-    <Compile Include="src\Core\Managers\WriteManager\Write.cs" />
-    <Compile Include="src\Core\Managers\WriteManager\WriteConflict.cs" />
-    <Compile Include="Settings.cs" />
-    <EmbeddedResource Include="src\Components\ArrayBox\ArrayBox.resx">
-      <DependentUpon>ArrayBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Components\HexBox\HexBox.resx">
-      <DependentUpon>HexBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Core\Forms\FormAbout.resx">
-      <DependentUpon>FormAbout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Core\Forms\FormLoading.resx">
-      <DependentUpon>FormLoading.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Core\Forms\FormProperties.resx">
-      <DependentUpon>FormProperties.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Core\Forms\FormRepoint.resx">
-      <DependentUpon>FormRepoint.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Core\Managers\PointManager\CreateRepointDialog.resx">
-      <DependentUpon>CreateRepointDialog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Core\Managers\PointManager\PointEditor.resx">
-      <DependentUpon>PointEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Core\Managers\SpaceManager\MarkSpace.resx">
-      <DependentUpon>MarkSpace.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\ASMEditor\ASMEditor.resx">
-      <DependentUpon>ASMEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\BackgroundEditor\BackgroundEditor.resx">
-      <DependentUpon>BackgroundEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\BattleAnimEditor\BattleAnimEditor.resx">
-      <DependentUpon>BattleAnimEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\BasicEditor\BasicEditor.resx">
-      <DependentUpon>BasicEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\BattleScreenEditor\BattleScreenEditor.resx">
-      <DependentUpon>BattleScreenEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\Editor.resx">
-      <DependentUpon>Editor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\EventEditor\EventEditor.resx">
-      <DependentUpon>EventEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\GraphicsEditor\GraphicsEditor.resx">
-      <DependentUpon>GraphicsEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\HexEditor\HexFind.resx">
-      <DependentUpon>HexFind.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\HexEditor\HexGoTo.resx">
-      <DependentUpon>HexGoTo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\HexEditor\HexEditor.resx">
-      <DependentUpon>HexEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\ItemEditor\ItemEditor.resx">
-      <DependentUpon>ItemEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\MapEditor\MapEditor.resx">
-      <DependentUpon>MapEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\MapSpriteEditor\MapSpriteEditor.resx">
-      <DependentUpon>MapSpriteEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\MapTilesetEditor\MapTilesetEditor.resx">
-      <DependentUpon>MapTilesetEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\MusicEditor\InstrumentEditor.resx">
-      <DependentUpon>InstrumentEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\MusicEditor\KeyMapEditor.resx">
-      <DependentUpon>KeyMapEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\MusicEditor\MusicEditor.resx">
-      <DependentUpon>MusicEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\MusicEditor\SampleEditor.resx">
-      <DependentUpon>SampleEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\BattleAnimEditor\OAMEditor.resx">
-      <DependentUpon>OAMEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\PaletteEditor.resx">
-      <DependentUpon>PaletteEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\PatchEditor\PatchEditor.resx">
-      <DependentUpon>PatchEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\PortraitEditor\PortraitEditor.resx">
-      <DependentUpon>PortraitEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\SpellAnimEditor\SpellAnimEditor.resx">
-      <DependentUpon>SpellAnimEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\TextEditor\TextEditor.resx">
-      <DependentUpon>TextEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\TextEditor\TextFind.resx">
-      <DependentUpon>TextFind.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\TextEditor\TextReplace.resx">
-      <DependentUpon>TextReplace.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\TitleScreenEditor\TitleScreenEditor.resx">
-      <DependentUpon>TitleScreenEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\TSAEditor.resx">
-      <DependentUpon>TSAEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\ModuleEditor\ModuleEditor.resx">
-      <DependentUpon>ModuleEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Core\Managers\SpaceManager\SpaceEditor.resx">
-      <DependentUpon>SpaceEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Core\Managers\WriteManager\WriteEditor.resx">
-      <DependentUpon>WriteEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Core\Forms\FormOptions.resx">
-      <DependentUpon>FormOptions.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\WorldMapEditor\WorldMapEditor_FE6.resx">
-      <DependentUpon>WorldMapEditor_FE6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\WorldMapEditor\WorldMapEditor_FE8.resx">
-      <DependentUpon>WorldMapEditor_FE8.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Editors\WorldMapEditor\WorldMapEditor_FE7.resx">
-      <DependentUpon>WorldMapEditor_FE7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Core\Suite.resx">
-      <DependentUpon>Suite.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="Properties\DataSources\Modules.WriteModule.datasource" />
     <None Include="Properties\DataSources\Write.datasource" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\Icon.ico" />
@@ -730,13 +163,362 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.242703">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="5.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="EventAssembler\Event Assembler\Core\AssemblyInfo.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\IParameterized.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\LanguageProcessor.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Code.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\DummyCodeLanguage.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\EACodeLanguage.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\EACodeLanguageDisassembler.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\EAExpressionAssembler.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\BinaryOperator`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Code`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Division`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\EAExpressionType.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Folding.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\IExpression`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Minus`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Modulus`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Multiply`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\RawData.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Scope`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Sum`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Symbol`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\TokenParser.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Tree\ArithmeticShiftRight.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Tree\Assignment.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Tree\BitShiftLeft`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Tree\BitShiftRight`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Tree\BitwiseAnd`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Tree\BitwiseOr`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Tree\BitwiseXor`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Tree\ExpressionList`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Tree\LabelExpression.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\ValueExpression`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\FE6CodeLanguage.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\FE7CodeLanguage.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\FE8CodeLanguage.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Lexer\Token.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Lexer\Tokeniser.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Lexer\TokenScanner.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Lexer\TokenType.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Parser\AssignmentParser.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Parser\Base64Parser.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Parser\CodeParser.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Parser\LabelParser.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Parser\MathParser.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Parser\ParseHelpers.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Parser\Parsers.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Parser\ScopeParser.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Parser\StatementSeparatorParser.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Parser\TokenTypeParser.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Priority.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Types\MetaType.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Types\Type.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\ParameterizedHelpers.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\PreprocessingInputStream.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\BuiltInMacros\BuildVector.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\BuiltInMacros\CurrentFile.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\BuiltInMacros\CurrentLine.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\BuiltInMacros\DeconstructVector.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\BuiltInMacros\InsertText.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\BuiltInMacros\IsDefined.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\BuiltInMacros\Pool.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\BuiltInMacros\Signum.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\BuiltInMacros\Switch.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\BuiltInMacros\VectorLength.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\BuiltInMacros\VectorToParameter.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\DependencyMakingIncludeListener.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\Define.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\DumpPool.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\EasterEgg.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\Else.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\EndIf.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\IDirective.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\IfDefined.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\IfNotDefined.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\Include.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\IncludeBinary.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\IncludeExternal.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\IncludeToolBinary.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\IncludeToolEvent.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\IncludeToolEventAlias.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\RunTool.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\ToolDirectiveBase.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\Undefine.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\DummyIncludeListener.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\IDirectivePreprocessor.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\IIncludeListener.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\IMacro.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\IPreprocessor.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\NopPreprocessor.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Preprocessor.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\ScopeStructure`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\StringReplacers\IStringReplacer.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\StringReplacers\NewReplacer.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\StringReplacers\OriginalReplacer.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Templates\CodeTemplate.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Templates\CodeTemplateStorer.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Templates\GenericFE8Ender.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Templates\GenericFE8Template.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Templates\ICodeTemplate.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Templates\ICodeTemplateStorer.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Templates\IFixedDocString.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Templates\TemplateComparer.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Templates\TemplateParameter.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Templates\TerminatingStringTemplate.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Collections\DefineCollection.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Collections\DefineCollectionOld.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Collections\DefineCollectionOptimized.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Collections\IDefineCollection.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\CoreInfo.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\DisassemblyMode.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\GBA\GBAPointerMaker.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\HighlightingHelper.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\IncludeToolEventAlias.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\IO\Input\IInputByteStream.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\IO\Input\IInputStream.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\IO\Input\InputHelpers.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\IO\Input\IPositionableInputStream.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\IO\IOHelpers.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\IO\Logs\ILog.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\IO\Logs\MessageLog.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\IO\Logs\TextWriterMessageLog.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\IO\Output\BinaryStreamOutput.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\IO\Output\IBinaryOutput.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\IPointerMaker.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Program.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Properties\Resources.Designer.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Event Assembler\Program.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Event Assembler\Properties\AssemblyInfo.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Event Assembler\UserInterface\EnumChooser.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Event Assembler\UserInterface\EnumChooser.Designer.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Event Assembler\UserInterface\EnumChooserForm.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Event Assembler\UserInterface\EnumChooserForm.Designer.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Event Assembler\UserInterface\FormHelpers.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Event Assembler\UserInterface\MainForm.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Event Assembler\UserInterface\MainForm.Designer.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Event Assembler\UserInterface\TextShower.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Event Assembler\UserInterface\TextShower.Designer.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\NigthmareListToEAdefinitions\Program.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\NigthmareListToEAdefinitions\Properties\AssemblyInfo.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\ReadBinaryAndWriteText\Properties\AssemblyInfo.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\ReadBinaryAndWriteText\Properties\Resources.Designer.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\BitmapHelpers.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\ColorHelpers.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\ControlsDisabler.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\Geonetry\RectangleEdges.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\Geonetry\RectangleExtensions.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\Geonetry\Vectors\Color5bpc.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\Geonetry\Vectors\IPrimitiveVector.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\Geonetry\Vectors\IRGBAColor.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\Geonetry\Vectors\IRGBColor.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\Properties\AssemblyInfo.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\Properties\Resources.Designer.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\Properties\Settings.Designer.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\ToolStripsDisabler.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\Vectors\Color5bpc.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\Vectors\IPrimitiveVector.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\Vectors\IRGBAColor.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\Vectors\IRGBColor.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Algebra\IGroup.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\ArrayBuilder.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\ArrayExtensions.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\CollectionExtensions.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\DataChange\DataChange.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\DataChange\IDataChange.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\DataChange\IIndexOverlay.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\DataChange\IndexOverlay.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Dictionaries\ArrayDictionary.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Dictionaries\DictionaryOfEnumerablesEnumarator.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Dictionaries\SerializableDictionary.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Dictionaries\TriDictionary.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\IContainer.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\IPriorityQueue.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\LinkedListHelpers.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Lists\LinkedArrayList.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Lists\ListExtensions.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Lists\ListSlidingWindow.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Lists\StringWrapper.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Lists\SubList.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Lists\SublistEnumerator.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\SkipList.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\SkipListNode.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\SkipListPriorityQueue.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Trees\BinaryTree.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Trees\BinaryTree2.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Trees\BinaryTreeNode.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Trees\ITree.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Trees\IValuedTree.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Trees\Leaf.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Trees\RoseTree.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Trees\TreeHelpers.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\DotNetZip\Zlib\Crc32.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\DotNetZip\Zlib\Deflate.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\DotNetZip\Zlib\GZipStream.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\DotNetZip\Zlib\Inflate.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\DotNetZip\Zlib\InfTree.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\DotNetZip\Zlib\Tree.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\DotNetZip\Zlib\Zlib.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\DotNetZip\Zlib\ZlibBaseStream.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\DotNetZip\Zlib\ZlibCodec.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\DotNetZip\Zlib\ZlibConstants.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\DotNetZip\Zlib\ZlibStream.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\CompleteStateMachine.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\ContextFreeGrammar.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\DeterministicFiniteAutomaton.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\HistoryKeepingStateMachine.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\IStateMachine.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\PushdownAutomata.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\RegularExpression\RegExHelpers.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\RegularExpression\Tree\Choise.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\RegularExpression\Tree\Concatenation.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\RegularExpression\Tree\Empty.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\RegularExpression\Tree\EmptyWord.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\RegularExpression\Tree\IRegExExpressionTree.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\RegularExpression\Tree\KleeneClosure.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\RegularExpression\Tree\Letter.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\RegularExpression\Tree\RegExNodeTypes.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\Colouring\IColouredGraph.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\DictionaryBasedGraph.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\GraphHelpers.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\GraphTravelling.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\ICostCollection.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\IEditableGraph.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\IGraph.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\IHeurestic.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\IWeighedGraph.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\MatrixGraph.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\NeighbourhoodGraph.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\PathFinding\A Star.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\PathFinding\Dijkstra algorithm.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\PathFinding\DijkstraBasedHeurestic.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\TransposeGraph.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\Bits\BitReader.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\Bits\BitWriter.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\ChangeStream.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\CommentRemovingTextReader.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\FilePosition.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\IFilePositionable.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\IOHelpers.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\Scanners\CharacterScanner.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\Scanners\EnumerableScanner.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\Scanners\IScanner.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\Scanners\IStoringScanner.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\Scanners\ListScanner.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\Scanners\SingletonScanner.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\Scanners\StringScanner.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\StreamExtensions.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\MemoryManagement\IAllocator.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\MemoryManagement\IFreeMemoryManager.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\MemoryManagement\IMemoryPointer.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\MemoryManagement\OffsetSizePair.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\CharacterParsers\CharacterParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\CharacterParsers\DigitParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\CharacterParsers\LetterOrDigitParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\CharacterParsers\LetterParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\CharacterParsers\LowercaseParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\CharacterParsers\MathOperatorParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\CharacterParsers\UppercaseParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\CharacterParsers\WhiteSpaceParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\FunctionParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\IParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\LazyParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\Match.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\MonadicParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\Parser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\BetweenParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\BinaryParsers\CombineParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\BinaryParsers\OrParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\ChoiseParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\CountParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\EndBy1Parser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\EndByParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\Many1Parser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\ManyParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\ManyTillParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\OptionParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\RepeatingParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\SeparatedBy1Parser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\SeparatedByParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\SkipMany1Parser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\SkipManyParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\TransformParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\UnaryParsers\AlwaysParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\UnaryParsers\EqualsParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\UnaryParsers\FailAlwaysParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\UnaryParsers\NameParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\UnaryParsers\NoneOfParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\UnaryParsers\NothingParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\UnaryParsers\OneOfParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\UnaryParsers\ReturnParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\UnaryParsers\SafeFailureCheckerParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\UnaryParsers\SatisfyParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\UnaryParsers\SequenceParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\UnaryParsers\TryParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserHelpers.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParsingEventArgs.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ReversePolishNotation.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Properties\AssemblyInfo.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\RandomDistributions\FuncDistribution.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\RandomDistributions\IDistribution.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\RandomDistributions\NormalDistribution.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\RandomDistributions\UniformDistribution.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\RandomDistributions\WeibullDistribution.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\CanCauseError.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\CommandLineArgsHandler.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\DisjointPair.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\EnumExtensions.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\ExceptionHelpers.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\FixedPointInteger.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\FunctionComparer.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\FunctionExtensions.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\IInitiadable.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\INamed.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\IRecyclable.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\LamdaComparer.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\LazyHelpers.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\MicsUtilities.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\PairExtensions.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\Primitives\BooleanHelpers.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\Primitives\ByteExtensions.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\Primitives\CharacterExtensions.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\Primitives\CharacterPair.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\Primitives\FloatingPointExtensions.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\Primitives\IntegerExtensions.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\Reference.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\RememberPreviousValue.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\ReverseComparer.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\SerialazitionExtension.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\SharedDirtyBuffer.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\Strings\NaturalComparer.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\Strings\Parser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\Strings\RegexHelper.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\Strings\StringEqualityComparer.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\Strings\StringExtensions.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\TimeSpanHelper.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\TypeHelpers.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\UpdateOnce.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\UpdateOnDemand.cs" />
+    <Compile Remove="src\Components\Test.cs" />
+    <EmbeddedResource Remove="EventAssembler\Event Assembler\Core\Properties\Resources.resx" />
+    <EmbeddedResource Remove="EventAssembler\Event Assembler\Event Assembler\UserInterface\EnumChooser.resx" />
+    <EmbeddedResource Remove="EventAssembler\Event Assembler\Event Assembler\UserInterface\EnumChooserForm.resx" />
+    <EmbeddedResource Remove="EventAssembler\Event Assembler\Event Assembler\UserInterface\MainForm.resx" />
+    <EmbeddedResource Remove="EventAssembler\Event Assembler\Event Assembler\UserInterface\TextShower.resx" />
+    <EmbeddedResource Remove="EventAssembler\Event Assembler\ReadBinaryAndWriteText\Properties\Resources.resx" />
+    <EmbeddedResource Remove="EventAssembler\Nintenlord.Forms\Properties\Resources.resx" />
+  </ItemGroup>
 </Project>
