@@ -1,3 +1,3 @@
 [submodule "EventAssembler"]
-	path = EventAssembler
+	path = EmblemMagic/EventAssembler
 	url = https://github.com/lexouduck/Event-Assembler.git
