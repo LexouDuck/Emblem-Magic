@@ -1,0 +1,26 @@
+# Documentation and other stuff
+Other/
+Test/*.sav
+Test/*.feh
+Test/FE4/
+Test/BattleAnimations/
+Test/MapSprites/
+EventAssembler/Tools/*.exe
+*.lnk
+
+# GBA roms (don't wanna distribute those on github, nor anywhere else for that matter)
+*.gba
+*.GBA
+
+# Executables & object files
+bin/
+obj/
+dist/
+.vs
+
+# Nightmare modules
+Modules/old/
+
+# Macintosh hidden files
+*.DS_Store
+*._*

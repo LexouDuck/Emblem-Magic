@@ -1,0 +1,214 @@
+
+# FE6
+
+##command: MOVE unit
+##Moves a unit on the chapter map.
+MOVE, 0x0D, 12, -game:FE6 -indexMode:8
+##Position of the unit to move.
+	OldPosition, 4, 4, coordinates:2 -preferredBase:10 -signed
+##Position to move the unit to.
+	NewPosition, 8, 4, coordinates:2 -preferredBase:10 -signed
+
+##command: MOVE unit
+##Moves a unit on the chapter map.
+MOVE, 0x0F, 12, -game:FE6 -indexMode:8
+##Character unit to move.
+	CharacterID, 4, 2
+##The new position to which this character should move.
+	Position, 8, 4, -coordinate:2 -preferredBase:10 -signed
+
+##command: MOVE unit
+##Moves a unit on the chapter map.
+MOVE, 0x10, 12, -game:FE6 -indexMode:8
+##Character unit to move.
+	CharacterID, 4, 4
+##Pointer to MOMA/MOVE_MANUAL codes that control moving.
+	MoveManualPointer, 8, 4, -pointer:moveManual
+
+##command: MOVE unit NEXT TO another unit
+##Moves a character next to another character.
+MOVE_NEXTTO, 0x11, 12, -game:FE6 -indexMode:8
+##Character unit to move.
+	CharacterID, 4, 4
+##Destination character to move next to.
+	TargetCharacterID, 8, 4	
+
+
+
+# FE7
+
+##command: MOVE unit
+##Moves a unit on the chapter map.
+MOVE, 0x23, 12, -game:FE7 -indexMode:8
+##Position of the unit to move.
+	OldPosition, 4, 4, -coordinate:2 -preferredBase:10 -signed
+##Position to move the unit to.
+	NewPosition, 8, 4, -coordinate:2 -preferredBase:10 -signed
+
+##command: MOVE unit
+##Moves a unit on the chapter map.
+MOVE, 0x24, 16, -game:FE7 -indexMode:8
+##Position of the unit to move.
+	OldPosition, 4, 4, -coordinate:2 -preferredBase:10 -signed
+##Position to move the unit to.
+	NewPosition, 8, 4, -coordinate:2 -preferredBase:10 -signed
+##The speed at which the unit should move.
+	Speed, 12, 4, -preferredBase:10
+
+##command: MOVE unit
+##Moves a unit on the chapter map.
+MOVE, 0x25, 12, -game:FE7 -indexMode:8
+##Position of the unit to move.
+	OldPosition, 4, 4, -coordinate:2 -preferredBase:10 -signed
+##Pointer to MOMA/MOVE_MANUAL codes that control moving.
+	MoveManualPointer, 8, 4, -pointer:moveManual
+
+##command: MOVE unit
+##Moves a unit on the chapter map.
+MOVE, 0x26, 12, -game:FE7 -indexMode:8
+##Character unit to move.
+	CharacterID, 4, 2
+##The new position to which this character should move.
+	Position, 8, 4, -coordinate:2 -preferredBase:10 -signed
+
+##command: MOVE unit
+##Moves a unit on the chapter map.
+MOVE, 0x27, 16, -game:FE7 -indexMode:8
+##Character unit to move.
+	CharacterID, 4, 2
+##The new position to which this character should move.
+	Position, 8, 4, -coordinate:2 -preferredBase:10 -signed
+##The speed at which the unit should move.
+	Speed, 12, 4, -preferredBase:10
+
+##command: MOVE unit
+##Moves a unit on the chapter map.
+MOVE, 0x28, 12, -game:FE7 -indexMode:8
+##Character unit to move.
+	CharacterID, 4, 2
+##Pointer to MOMA/MOVE_MANUAL codes that control moving.
+	MoveManualPointer, 8, 4, -pointer:moveManual
+
+##command: MOVE unit
+##Moves a unit on the chapter map.
+MOVE, 0x2B, 16, -game:FE7 -indexMode:8
+##Character unit to move.
+	CharacterID, 4, 1
+##The speed at which the unit should move.
+	Speed, 6, 1
+##The new position to which this character should move.
+	Position, 8, 4, -coordinates:2 -preferredBase:10 -signed
+##Pointer to MOMA/MOVE_MANUAL codes that control moving.
+	MoveManualPointer, 12, 4, -pointer:moveManual
+
+##command: MOVE unit NEXT TO another unit
+##Moves a character next to another character.
+MOVE_NEXTTO, 0x29, 12, -game:FE7 -indexMode:8
+##Character unit to move.
+	CharacterID, 4, 4
+##Destination character to move next to.
+	TargetCharacterID, 8, 4	
+
+##command: MOVE the MAIN CHARacter unit
+##Moves the main character.
+MOVE_MAINCHAR, 0x2A, 8, -game:FE7 -indexMode:8
+##Position to move the main character to.
+	Position, 4, 4, -coordinates:2 -preferredBase:10 -signed
+
+
+
+##command:Reposition unit
+##Move unit without showing movement animations.
+##aliases:REPOS
+UNIT_REPOSITION, 0x2E, 12, -game:FE7 -indexMode:8
+##Position of the unit to move.
+	OldPosition, 4, 4, -coordinate:2 -preferredBase:10 -signed
+##Position to move the unit to.
+	NewPosition, 8, 4, -coordinate:2 -preferredBase:10 -signed
+
+##command:REPOSition unit
+##Move unit without showing movement animations.
+##aliases:UNIT_REPOSITION
+REPOS, 0x2E, 12, -game:FE7 -indexMode:8
+##Position of the unit to move.
+	OldPosition, 4, 4, -coordinate:2 -preferredBase:10 -signed
+##Position to move the unit to.
+	NewPosition, 8, 4, -coordinate:2 -preferredBase:10 -signed
+
+##command:Reposition unit
+##Move unit without showing movement animations.
+##aliases:REPOS
+UNIT_REPOSITION, 0x2F, 12, -game:FE7 -indexMode:8
+##Character unit to move.
+	CharacterID, 4, 4
+##The new position to which this character should move.
+	Position, 8, 4, -coordinates:2 -preferredBase:10 -signed
+
+##command:REPOSition unit
+##Move unit without showing movement animations.
+##aliases:UNIT_REPOSITION
+REPOS, 0x2F, 12, -game:FE7 -indexMode:8
+##Character unit to move.
+	CharacterID, 4, 4
+##The new position to which this character should move.
+	Position, 8, 4, -coordinates:2 -preferredBase:10 -signed
+
+
+
+# FE8
+
+##command:MOVE unit
+##Moves a unit on the chapter map.
+MOVE, 0x2F40, 8, -game:FE8 -indexMode:8
+##The speed at which the unit should move.
+	Speed, 2, 2
+##Character unit to move.
+	CharacterID, 4, 2
+##The new position to which this character should move.
+	Position, 6, 2, -coordinate:2 -preferredBase:10
+
+##command:MOVE unit ONTO another character's tile
+##Moves a character onto the same tile as another character
+MOVE_ONTO, 0x2F41, 8, -game:FE8 -indexMode:8
+##The speed at which the unit should move.
+	Speed, 2, 2
+##Character unit to move.
+	CharacterID, 4, 2
+##Destination character to move to.
+	TargetCharacterID, 6, 2
+
+##command:MOVE unit 1 STEP in the given direction
+#Moves a character to one of the 4 adjacent tiles.
+MOVE_1STEP, 0x2F42, 8, -game:FE8 -indexMode:8
+##The speed at which the unit should move.
+	Speed, 2, 2
+##Character unit to move.
+	CharacterID, 4, 2
+##The direction in which to move.
+	Direction, 6, 2
+
+##command:MOVE unit, FORCED destination
+##Tutorial movement command, forces the user to select a specfic movement destination.
+MOVE_FORCED, 0x2F43, 8, -game:FE8 -indexMode:8
+	Value1, 2, 2
+##Character unit to move.
+	CharacterID, 4, 2
+	Value3, 6, 2
+
+
+
+# FE6 & FE7
+
+##command:MOVE unit MANUALly
+##Moves a unit on the map in a specific way.
+##aliases:MOMA
+MOVE_MANUAL, 0, 1, -game:FE6:FE7 -indexMode:8 -terminatingList:04 -end -priority:moveManual -offsetMod:1
+##Action to perform (can be moving, speed changing and other stuff).
+	Action, 0, 1
+
+##command:MOve unit MAnually
+##Moves a unit on the map in a specific way.
+##aliases:MOVE_MANUAL
+MOMA, 0, 1, -game:FE6:FE7 -indexMode:8 -terminatingList:04 -end -priority:moveManual -offsetMod:1
+##Action to perform (can be moving, speed changing and other stuff).
+	Action, 0, 1

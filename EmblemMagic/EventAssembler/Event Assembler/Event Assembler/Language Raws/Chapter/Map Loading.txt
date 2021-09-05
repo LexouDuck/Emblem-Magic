@@ -1,0 +1,78 @@
+
+# FE6
+
+##command:LOAD new MAP
+##Loads a new map during the event.
+##aliases:LOMA
+MAP_LOAD, 0x3F, 16, -game:FE6 -indexMode:8
+##The chapter whose map should be loaded.
+	ChapterID, 4, 4
+##Starting position of the camera on the new map.
+	Position, 8, 8, coordinates:2 -preferredBase:10
+
+##command:LOad MAp
+##Loads a new map during the event.
+##aliases:MAP_LOAD
+LOMA, 0x3F, 16, -game:FE6 -indexMode:8
+##The chapter whose map should be loaded.
+	ChapterID, 4, 4
+##Starting position of the camera on the new map.
+	Position, 8, 8, coordinates:2 -preferredBase:10
+
+##command:HIDE current MAP
+##Hides the map and all the units.
+HIDE_MAP, 0x47, 4, -game:FE6 -indexMode:8
+
+##command:SHOW current MAP
+##Shows the map and units after a 'HIDEMAP'.
+SHOW_MAP, 0x48, 4, -game:FE6 -indexMode:8
+
+
+
+# FE7
+
+##command:LOAD new MAP
+##Loads a new map during the event.
+##aliases:LOMA
+MAP_LOAD, 0x84, 16, -game:FE7 -indexMode:8
+##The chapter whose map should be loaded.
+	ChapterID, 4, 2
+##Starting position of the camera on the new map.
+	Position, 8, 8, coordinate:2 -preferredBase:10
+
+##command:LOad MAp
+##Loads a new map during the event.
+##aliases:MAP_LOAD
+LOMA, 0x84, 16, -game:FE7 -indexMode:8
+##The chapter whose map should be loaded.
+	ChapterID, 4, 2
+##Starting position of the camera on the new map.
+	Position, 8, 8, coordinate:2 -preferredBase:10
+
+##command:HIDE current MAP
+##Hides the map and all the units.
+HIDE_MAP, 0x92, 4, -game:FE7 -indexMode:8
+
+##command:SHOW current MAP
+##Shows the map and units after a 'HIDEMAP'.
+SHOW_MAP, 0x93, 4, -game:FE7 -indexMode:8
+
+
+
+# FE8
+
+##command:LOAD new MAP
+##Loads a new map during the event.
+##Use SETVAL 0xB 0xYY00XX beforehand to set where the camera starts
+##aliases:LOMA
+MAP_LOAD, 0x2520, 4, -game:FE8 -indexMode:8
+##The chapter whose map should be loaded.
+	ChapterID, 2, 1
+
+##command:LOad MAp
+##Loads a new map during the event.
+##Use SETVAL 0xB 0xYY00XX beforehand to set where the camera starts
+##aliases:MAP_LOAD
+LOMA, 0x2520, 4, -game:FE8 -indexMode:8
+##The chapter whose map should be loaded.
+	ChapterID, 2, 1

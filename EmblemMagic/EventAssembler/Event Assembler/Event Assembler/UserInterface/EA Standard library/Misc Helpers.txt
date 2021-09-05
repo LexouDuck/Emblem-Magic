@@ -1,0 +1,20 @@
+
+//Causes game over
+//FE6 doesn't have GOTO, so JUMP is used instead
+#ifdef _FE6_
+#define GameOver "JUMP 0x66AC6C"
+#endif
+
+#ifdef _FE7_
+#define GameOver "GOTO 0xCA749C"
+#endif
+
+#ifdef _FE8_
+#define GameOver "GOTO 0x592104"
+#endif
+
+//Special effects
+#ifdef _FE7_
+#define QuintessenceEffect "ASMC 0x7D711; STAL 0x3C; ASMC 0x7D7B5; STAL 0x3C; ASMC 0x6CCB9; ASMC 0x7D771"
+#define Rumble "ASMC $7D645"
+#endif

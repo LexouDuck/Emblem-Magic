@@ -1,0 +1,145 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="src\Magic\Components\Test.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="FastColoredTextBox">
+      <HintPath>src\Magic\Components\CodeBox\FastColoredTextBox.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="src\Magic\Components\ArrayBox\ArrayBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Components\ArrayBox\ByteArrayBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Components\ArrayBox\PointerArrayBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Components\ArrayBox\ShortArrayBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Components\CodeBox\CodeBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Components\ColorBox\ColorBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Components\GridBox\GridBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Components\GridBox\MapBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Components\HexBox\BuiltInContextMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Components\HexBox\HexBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Components\ImageBox\ImageBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Components\MagicButton\MagicButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Components\MarkedSpaceBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Components\MarkingBox\MarkingBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Components\MenuStrip\FolderViewStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Components\MenuStrip\RecentFileMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Components\NumberBox\ByteBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Components\NumberBox\PointerBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Components\NumberBox\ShortBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Components\PaletteBox\PaletteBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Components\PianoBox\PianoBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Components\SampleBox\SampleBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Components\TrackerGrid\TrackerGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Editors\Editor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Editors\HexEditor\HexFind.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Editors\HexEditor\HexGoTo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Editors\PaletteEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Editors\TSAEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Forms\FormAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Forms\FormLoading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Forms\FormOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Forms\FormProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Forms\FormRepoint.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Managers\PointManager\CreateRepointDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Managers\PointManager\PointEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Managers\SpaceManager\MarkSpace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Managers\SpaceManager\SpaceEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Managers\WriteManager\WriteEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
+</Project>

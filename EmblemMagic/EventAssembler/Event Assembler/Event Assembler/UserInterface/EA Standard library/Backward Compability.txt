@@ -1,0 +1,22 @@
+#define Empty " "
+
+#ifdef _FE7_
+#define IFEV IFEF
+
+//Old world map codes
+
+#define PTBU TEXTBOXTOTOP
+#define PTBD TEXTBOXTOBOTTOM
+#define CTEW REMOVETEXTBOX
+#define LOPR SHOWPORTRAIT
+#define REPR REMOVEPORTRAIT
+#define LWMA LOADWM
+#define FAMA FADETOWM
+#define LWMC HIGHLIGHT
+#define FLDT PLACEDOT
+#define SWMD STARTWM
+#define REPL RIPPLE
+#define CMSP PUTSPRITE
+#define RMSP REMSPRITE
+
+#endif

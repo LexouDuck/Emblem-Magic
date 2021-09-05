@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectView>ShowAllFiles</ProjectView>
+    <PublishUrlHistory>publish\</PublishUrlHistory>
+    <InstallUrlHistory />
+    <SupportUrlHistory />
+    <UpdateUrlHistory />
+    <BootstrapperUrlHistory />
+    <ErrorReportUrlHistory />
+    <FallbackCulture>en-US</FallbackCulture>
+    <VerifyUploadedFiles>false</VerifyUploadedFiles>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <StartArguments>
+    </StartArguments>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ReferencePath>
+    </ReferencePath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="src\App.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Editors\BackgroundEditor\BackgroundEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Editors\BattleAnimEditor\BattleAnimEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Editors\BattleScreenEditor\BattleScreenEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Editors\EventEditor\EventEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Editors\ItemEditor\ItemEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Editors\MagicButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="src\Editors\MapEditor\MapEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Editors\MapSpriteEditor\MapSpriteEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Editors\MapTilesetEditor\MapTilesetEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Editors\MusicEditor\InstrumentEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Editors\MusicEditor\KeyMapEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Editors\MusicEditor\MusicEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Editors\MusicEditor\SampleEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Editors\PortraitEditor\PortraitEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Editors\SpellAnimEditor\SpellAnimEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Editors\TextEditor\TextEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Editors\TextEditor\TextFind.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Editors\TextEditor\TextReplace.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Editors\TitleScreenEditor\TitleScreenEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Editors\WorldMapEditor\WorldMapEditor_FE6.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Editors\WorldMapEditor\WorldMapEditor_FE7.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Editors\WorldMapEditor\WorldMapEditor_FE8.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>

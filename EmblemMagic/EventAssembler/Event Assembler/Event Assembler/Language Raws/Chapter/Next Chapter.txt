@@ -1,0 +1,116 @@
+
+# FE6
+
+##command:go to NEXT CHAPTER
+##Switches to another chapter, going through the save-dialog beforehand.
+##aliases:MNCH
+NEXT_CHAPTER, 0x3D, 8, -game:FE6 -indexMode:8
+##Chapter to advance to.
+	ChapterID, 4, 4
+
+##command:Move to Next CHapter
+##Switches to another chapter, going through the save-dialog beforehand.
+##aliases:NEXT_CHAPTER
+MNCH, 0x3D, 8, -game:FE6 -indexMode:8
+##Chapter to advance to.
+	ChapterID, 4, 4
+
+
+
+# FE7
+
+##command:go to NEXT CHAPTER
+##Switches to another chapter, going through the save-dialog beforehand.
+##aliases:MNCH
+NEXT_CHAPTER, 0x81, 4, -game:FE7 -indexMode:8
+##Chapter to advance to.
+	ChapterID, 2, 2
+
+##command:Move to Next CHapter
+##Switches to another chapter, going through the save-dialog beforehand.
+##aliases:NEXT_CHAPTER
+MNCH, 0x81, 4, -game:FE7 -indexMode:8
+##Chapter to advance to.
+	ChapterID, 2, 2
+
+
+
+# FE8
+
+##command:go to NEXT CHAPTER
+##Switches to another chapter, going through the save-dialog beforehand.
+##aliases:MNCH
+NEXT_CHAPTER, 0x2A21, 4, -game:FE8 -indexMode:8
+##Chapter to advance to.
+	ChapterID, 2, 2
+
+##command:Move to Next CHapter
+##Switches to another chapter, going through the save-dialog beforehand.
+##aliases:NEXT_CHAPTER
+MNCH, 0x2A21, 4, -game:FE8 -indexMode:8
+##Chapter to advance to.
+	ChapterID, 2, 2
+
+
+##command:go to NEXT CHAPTER with NO SAVE dialog
+##Switches to a chapter directly, without going through the save-dialog.
+##aliases:MNC2
+NEXT_CHAPTER_NOSAVE, 0x2A22, 4, -game:FE8 -indexMode:8
+##Chapter to advance to.
+	ChapterID, 2, 2
+
+##command:Move to Next Chapter (2)
+##Switches to a chapter directly, without going through the save-dialog.
+##aliases:NEXT_CHAPTER_NOSAVE
+MNC2, 0x2A22, 4, -game:FE8 -indexMode:8
+##Chapter to advance to.
+	ChapterID, 2, 2
+
+
+##command:go to NEXT CHAPTER with no save, for DUNGEON
+##Switches to a chapter directly, without going through the usual save-dialog.
+##This command is used for "multi-part" chapters, typically dungeons.
+##(Used by Valni, Lagdou and both "Final Ch. Part 1")
+##aliases:MNC3
+NEXT_CHAPTER_DUNGEON, 0x2A23, 4, -game:FE8 -indexMode:8
+##The chapter to advance to.
+##If 0xFFFF, will use the value in MemorySlot 0x2.
+	ChapterID, 2, 2
+
+##command:Move to Next Chapter (3)
+##Switches to a chapter directly, without going through the usual save-dialog.
+##This command is used for "multi-part" chapters, typically dungeons.
+##(Used by Valni, Lagdou and both "Final Ch. Part 1")
+##aliases:NEXT_CHAPTER_DUNGEON
+MNC3, 0x2A23, 4, -game:FE8 -indexMode:8
+##The chapter to advance to.
+##If 0xFFFF, will use the value in MemorySlot 0x2.
+	ChapterID, 2, 2
+
+
+##command:go to NEXT CHAPTER, for END of game
+##Concludes the final chapter of the game (roll credits, etc).
+##(Used by both "Final Ch. Part 2", with parameter 0)
+##aliases:MNC4
+NEXT_CHAPTER_END, 0x2A24, 4, -game:FE8 -indexMode:8
+	Value1, 2, 2
+
+##command:Move to Next Chapter (4)
+##Concludes the final chapter of the game (roll credits, etc).
+##(Used by both "Final Ch. Part 2", with parameter 0)
+##aliases:NEXT_CHAPTER_END
+MNC4, 0x2A24, 4, -game:FE8 -indexMode:8
+	Value1, 2, 2
+
+
+##command:Move to (Next) Title Screen
+##This makes the game return to the Title Screen.
+##aliases:MNTS
+TITLE_SCREEN, 0x2A20, 4, -game:FE8 -indexMode:8
+	Value1, 2, 2
+
+##command:Move to (Next) Title Screen
+##This makes the game return to the Title Screen.
+##aliases:TITLE_SCREEN
+MNTS, 0x2A20, 4, -game:FE8 -indexMode:8
+	Value1, 2, 2

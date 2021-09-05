@@ -1,0 +1,176 @@
+
+
+# FE6
+
+##command:SET EVENT number to USED
+##Marks a certain event ID as 'used'.
+##aliases:ENUT
+SETEVENT_USED, 0x34, 8, -game:FE6 -indexMode:8
+##Event ID to set as 'used'.
+	EventID, 4, 4
+
+##command:Event Number Used: True
+##Marks a certain event ID as 'used'.
+##aliases:SETEVENT_USED
+ENUT, 0x34, 8, -game:FE6 -indexMode:8
+##Event ID to set as 'used'.
+	EventID, 4, 4
+
+##command:SET EVENT number to USED
+##Marks a certain event ID as 'unused'.
+##aliases:ENUF
+SETEVENT_UNUSED, 0x35, 8, -game:FE6 -indexMode:8
+##Event ID to set as 'unused'.
+	EventID, 4, 4
+
+##command:Event Number Used: False
+##Marks a certain event ID as 'unused'.
+##aliases:SETEVENT_UNUSED
+ENUF, 0x35, 8, -game:FE6 -indexMode:8
+##Event ID to set as 'unused'.
+	EventID, 4, 4
+
+
+
+# FE7
+
+##command:SET EVENT number to USED
+##Marks a certain event ID as 'used'.
+##aliases:ENUT
+SETEVENT_USED, 0x76, 4, -game:FE7 -indexMode:8
+##Event ID to set as 'used'.
+	EventID, 2, 2
+
+##command:Event Number Used: True
+##Marks a certain event ID as 'used'.
+##aliases:SETEVENT_USED
+ENUT, 0x76, 4, -game:FE7 -indexMode:8
+##Event ID to set as 'used'.
+	EventID, 2, 2
+
+##command:SET EVENT number to USED
+##Marks a certain event ID as 'unused'.
+##aliases:ENUF
+SETEVENT_UNUSED, 0x77, 4, -game:FE7 -indexMode:8
+##Event ID to set as 'unused'.
+	EventID, 2, 2
+
+##command:Event Number Used: False
+##Marks a certain event ID as 'unused'.
+##aliases:SETEVENT_UNUSED
+ENUF, 0x77, 4, -game:FE7 -indexMode:8
+##Event ID to set as 'unused'.
+	EventID, 2, 2
+
+
+
+# FE8
+
+##command:SET EVENT number to USED
+##Marks a certain event ID as 'used'.
+##aliases:ENUT
+SETEVENT_USED, 0x0229, 4, -game:FE8 -indexMode:8
+##Event ID to set as 'used'.
+	EventID, 2, 2
+
+##command:Event Number Used: True
+##Marks a certain event ID as 'used'.
+##aliases:SETEVENT_USED
+ENUT, 0x0229, 4, -game:FE8 -indexMode:8
+##Event ID to set as 'used'.
+	EventID, 2, 2
+
+##command:SET EVENT number to USED
+##Marks a certain event ID as 'unused'.
+##aliases:ENUF
+SETEVENT_UNUSED, 0x0221, 4, -game:FE8 -indexMode:8
+##Event ID to set as 'unused'.
+	EventID, 2, 2
+
+##command:Event Number Used: False
+##Marks a certain event ID as 'unused'.
+##aliases:SETEVENT_UNUSED
+ENUF, 0x0221, 4, -game:FE8 -indexMode:8
+##Event ID to set as 'unused'.
+	EventID, 2, 2
+
+
+##command:Event Number Used: True (memorySLOT 2)
+##Marks the event ID stored in MemorySlot 2 as 'used'.
+##aliases:ENUT_SLOT2
+SETEVENT_USED_SLOT2, 0x0229, 4, -game:FE8 -indexMode:8
+	0xFFFF, 2, 2, -fixed
+
+##command:Event Number Used: True (memorySLOT 2)
+##Marks the event ID stored in MemorySlot 2 as 'used'.
+##aliases:SETEVENT_USED_SLOT2
+ENUT_SLOT2, 0x0229, 4, -game:FE8 -indexMode:8
+	0xFFFF, 2, 2, -fixed
+
+##command:Event Number Used: False (memorySLOT 2)
+##Marks the event ID stored in MemorySlot 2 as 'unused'.
+##aliases:ENUF_SLOT2
+SETEVENT_UNUSED_SLOT2, 0x0221, 4, -game:FE8 -indexMode:8
+	0xFFFF, 2, 2, -fixed
+
+##command:Event Number Used: False (memorySLOT 2)
+##Marks the event ID stored in MemorySlot 2 as 'unused'.
+##aliases:SETEVENT_UNUSED_SLOT2
+ENUF_SLOT2, 0x0221, 4, -game:FE8 -indexMode:8
+	0xFFFF, 2, 2, -fixed
+
+
+
+##command:set EVent BIT to 0
+##Clears the (param+1)th bit in event execution bitfield.
+##aliases:EVBIT_F,EVBIT_FALSE
+EVBIT_0, 0x0220, 4, -game:FE8 -indexMode:8
+##Index of the bit to set to 0 (cannot be higher than 0xF).
+	BitIndex, 2, 2
+
+##command:set EVent BIT to False
+##Clears the (param+1)th bit in event execution bitfield.
+##aliases:EVBIT_0,EVBIT_FALSE
+EVBIT_F, 0x0220, 4, -game:FE8 -indexMode:8
+##Index of the bit to set to 0 (cannot be higher than 0xF).
+	BitIndex, 2, 2
+
+##command:set EVent BIT to FALSE
+##Clears the (param+1)th bit in event execution bitfield.
+##aliases:EVBIT_0,EVBIT_F,
+EVBIT_FALSE, 0x0220, 4, -game:FE8 -indexMode:8
+##Index of the bit to set to 0 (cannot be higher than 0xF).
+	BitIndex, 2, 2
+
+
+##command:set EVent BIT to 1
+##Sets the (param+1)th bit in event execution bitfield.
+##aliases:EVBIT_T,EVBIT_TRUE
+EVBIT_1, 0x0228, 4, -game:FE8 -indexMode:8
+##Index of the bit to set to 1 (cannot be higher than 0xF).
+	BitIndex, 2, 2
+
+##command:set EVent BIT to True
+##Sets the (param+1)th bit in event execution bitfield.
+##aliases:EVBIT_1,EVBIT_TRUE
+EVBIT_T, 0x0228, 4, -game:FE8 -indexMode:8
+##Index of the bit to set to 1 (cannot be higher than 0xF).
+	BitIndex, 2, 2
+
+##command:set EVent BIT to TRUE
+##Sets the (param+1)th bit in event execution bitfield.
+##aliases:EVBIT_1,EVBIT_T,
+EVBIT_TRUE, 0x0228, 4, -game:FE8 -indexMode:8
+##Index of the bit to set to 1 (cannot be higher than 0xF).
+	BitIndex, 2, 2
+
+
+##This command sets and clears multiple bits in the event execution bitfield.
+##What it precisely does is indicated by the 'Operation' parameter.
+##	param 0x0: ANDS with 0xFFBF (FFDF,FFEF,FFBF), clearing bits 5-7
+##	param 0x1: ORRs with 0x70 (10,20,40), setting bits 5-7
+##	param 0x2: Sets bit 7, clears bits 5-6
+##	param 0x3: Sets bit 5, clears bits 6-7
+##	param 0x4: Sets bits 5-6, clears bit 7
+EVBIT_MODIFY, 0x1020, 4, -game:FE8 -indexMode:8
+	Operation, 2, 2

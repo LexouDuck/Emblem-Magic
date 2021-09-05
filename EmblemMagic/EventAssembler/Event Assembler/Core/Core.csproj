@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: E:\crazycolorz5\Dropbox\Unified FE Hacking\ToolBox\EA V9.12.1\Core.exe-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{224C71E2-5E52-4910-910A-6FA9C2F937BE}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>Core</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>Nintenlord.Event_Assembler.Core</RootNamespace>
+    <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>11.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Code\Language\Expression\Tree\ArithmeticShiftRight.cs" />
+    <Compile Include="Code\Language\Parser\AssignmentParser.cs" />
+    <Compile Include="Code\Language\Parser\CodeParser.cs" />
+    <Compile Include="Code\Language\Parser\LabelParser.cs" />
+    <Compile Include="Code\Language\Parser\ParseHelpers.cs" />
+    <Compile Include="Code\Language\Parser\StatementSeparatorParser.cs" />
+    <Compile Include="Code\Preprocessors\Directives\EasterEgg.cs" />
+    <Compile Include="Code\Preprocessors\Directives\ToolDirectiveBase.cs" />
+    <Compile Include="Code\Preprocessors\Directives\IncludeToolEvent.cs" />
+    <Compile Include="Code\Preprocessors\Directives\IncludeToolEventAlias.cs" />
+    <Compile Include="Code\Preprocessors\Directives\RunTool.cs" />
+    <Compile Include="Code\Preprocessors\Directives\IncludeToolBinary.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="HighlightingHelper.cs" />
+    <Compile Include="IPointerMaker.cs" />
+    <Compile Include="DisassemblyMode.cs" />
+    <Compile Include="CoreInfo.cs" />
+    <Compile Include="Collections\IDefineCollection.cs" />
+    <Compile Include="Collections\DefineCollectionOptimized.cs" />
+    <Compile Include="Code\IParameterized.cs" />
+    <Compile Include="Code\ScopeStructure`1.cs" />
+    <Compile Include="Code\LanguageProcessor.cs" />
+    <Compile Include="Code\ParameterizedHelpers.cs" />
+    <Compile Include="Code\PreprocessingInputStream.cs" />
+    <Compile Include="Code\Preprocessors\IMacro.cs" />
+    <Compile Include="Code\Preprocessors\IPreprocessor.cs" />
+    <Compile Include="Code\Preprocessors\IDirectivePreprocessor.cs" />
+    <Compile Include="Code\Preprocessors\NopPreprocessor.cs" />
+    <Compile Include="Code\Preprocessors\Preprocessor.cs" />
+    <Compile Include="Code\Preprocessors\BuiltInMacros\VectorToParameter.cs" />
+    <Compile Include="Code\Preprocessors\BuiltInMacros\BuildVector.cs" />
+    <Compile Include="Code\Preprocessors\BuiltInMacros\InsertText.cs" />
+    <Compile Include="Code\Preprocessors\BuiltInMacros\CurrentFile.cs" />
+    <Compile Include="Code\Preprocessors\BuiltInMacros\VectorLength.cs" />
+    <Compile Include="Code\Preprocessors\BuiltInMacros\Pool.cs" />
+    <Compile Include="Code\Preprocessors\BuiltInMacros\IsDefined.cs" />
+    <Compile Include="Code\Preprocessors\BuiltInMacros\CurrentLine.cs" />
+    <Compile Include="Code\Preprocessors\BuiltInMacros\DeconstructVector.cs" />
+    <Compile Include="Code\Preprocessors\BuiltInMacros\Switch.cs" />
+    <Compile Include="Code\Preprocessors\BuiltInMacros\Signum.cs" />
+    <Compile Include="Code\Preprocessors\Directives\IDirective.cs" />
+    <Compile Include="Code\Preprocessors\Directives\EndIf.cs" />
+    <Compile Include="Code\Preprocessors\Directives\IncludeBinary.cs" />
+    <Compile Include="Code\Preprocessors\Directives\Else.cs" />
+    <Compile Include="Code\Preprocessors\Directives\IfNotDefined.cs" />
+    <Compile Include="Code\Preprocessors\Directives\Undefine.cs" />
+    <Compile Include="Code\Preprocessors\Directives\IfDefined.cs" />
+    <Compile Include="Code\Preprocessors\Directives\Include.cs" />
+    <Compile Include="Code\Preprocessors\Directives\Define.cs" />
+    <Compile Include="Code\Preprocessors\Directives\DumpPool.cs" />
+    <Compile Include="Code\Templates\ICodeTemplateStorer.cs" />
+    <Compile Include="Code\Templates\CodeTemplateStorer.cs" />
+    <Compile Include="Code\Templates\ICodeTemplate.cs" />
+    <Compile Include="Code\Templates\TemplateComparer.cs" />
+    <Compile Include="Code\Templates\TerminatingStringTemplate.cs" />
+    <Compile Include="Code\Templates\CodeTemplate.cs" />
+    <Compile Include="Code\Templates\IFixedDocString.cs" />
+    <Compile Include="Code\Templates\TemplateParameter.cs" />
+    <Compile Include="Code\Language\EACodeLanguage.cs" />
+    <Compile Include="Code\Language\FE6CodeLanguage.cs" />
+    <Compile Include="Code\Language\FE7CodeLanguage.cs" />
+    <Compile Include="Code\Language\Priority.cs" />
+    <Compile Include="Code\Language\EAExpressionAssembler.cs" />
+    <Compile Include="Code\Language\EACodeLanguageDisassembler.cs" />
+    <Compile Include="Code\Language\Code.cs" />
+    <Compile Include="Code\Language\FE8CodeLanguage.cs" />
+    <Compile Include="Code\Language\Lexer\TokenScanner.cs" />
+    <Compile Include="Code\Language\Lexer\TokenType.cs" />
+    <Compile Include="Code\Language\Lexer\Token.cs" />
+    <Compile Include="Code\Language\Lexer\Tokeniser.cs" />
+    <Compile Include="Code\Language\Expression\EAExpressionType.cs" />
+    <Compile Include="Code\Language\Expression\IExpression`1.cs" />
+    <Compile Include="Code\Language\Expression\BinaryOperator`1.cs" />
+    <Compile Include="Code\Language\Expression\Sum`1.cs" />
+    <Compile Include="Code\Language\Expression\Modulus`1.cs" />
+    <Compile Include="Code\Language\Expression\Minus`1.cs" />
+    <Compile Include="Code\Language\Expression\Folding.cs" />
+    <Compile Include="Code\Language\Expression\ValueExpression`1.cs" />
+    <Compile Include="Code\Language\Expression\Code`1.cs" />
+    <Compile Include="Code\Language\Expression\Multiply`1.cs" />
+    <Compile Include="Code\Language\Expression\Symbol`1.cs" />
+    <Compile Include="Code\Language\Expression\TokenParser.cs" />
+    <Compile Include="Code\Language\Expression\Division`1.cs" />
+    <Compile Include="Code\Language\Expression\Scope`1.cs" />
+    <Compile Include="Code\Language\Expression\Tree\BitShiftLeft`1.cs" />
+    <Compile Include="Code\Language\Expression\Tree\BitwiseXor`1.cs" />
+    <Compile Include="Code\Language\Expression\Tree\ExpressionList`1.cs" />
+    <Compile Include="Code\Language\Expression\Tree\LabelExpression.cs" />
+    <Compile Include="Code\Language\Expression\Tree\BitwiseAnd`1.cs" />
+    <Compile Include="Code\Language\Expression\Tree\BitwiseOr`1.cs" />
+    <Compile Include="Code\Language\Expression\Tree\Assignment.cs" />
+    <Compile Include="Code\Language\Expression\Tree\BitShiftRight`1.cs" />
+    <Compile Include="Code\Language\Parser\MathParser.cs" />
+    <Compile Include="Code\Language\Parser\TokenTypeParser.cs" />
+    <Compile Include="Code\Language\Parser\Parsers.cs" />
+    <Compile Include="Code\Language\Parser\ScopeParser.cs" />
+    <Compile Include="Code\Language\Types\MetaType.cs" />
+    <Compile Include="Code\Language\Types\Type.cs" />
+    <Compile Include="Code\StringReplacers\IStringReplacer.cs" />
+    <Compile Include="Code\StringReplacers\OriginalReplacer.cs" />
+    <Compile Include="Code\StringReplacers\NewReplacer.cs" />
+    <Compile Include="IO\IOHelpers.cs" />
+    <Compile Include="IO\Input\InputHelpers.cs" />
+    <Compile Include="IO\Input\IPositionableInputStream.cs" />
+    <Compile Include="IO\Input\IInputStream.cs" />
+    <Compile Include="IO\Input\IInputByteStream.cs" />
+    <Compile Include="IO\Logs\ILog.cs" />
+    <Compile Include="IO\Logs\MessageLog.cs" />
+    <Compile Include="IO\Logs\TextWriterMessageLog.cs" />
+    <Compile Include="IO\Output\IBinaryOutput.cs" />
+    <Compile Include="IO\Output\BinaryStreamOutput.cs" />
+    <Compile Include="GBA\GBAPointerMaker.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Language\Expression\RawData.cs" />
+    <Compile Include="Code\Language\Parser\Base64Parser.cs" />
+    <Compile Include="Code\Preprocessors\IIncludeListener.cs" />
+    <Compile Include="Code\Preprocessors\DummyIncludeListener.cs" />
+    <Compile Include="Code\Preprocessors\DependencyMakingIncludeListener.cs" />
+    <Compile Include="Code\Language\DummyCodeLanguage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Nintenlord\Nintenlord.csproj">
+      <Project>{8FA48EF8-3E11-494A-B587-592D7C22EFDF}</Project>
+      <Name>Nintenlord</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

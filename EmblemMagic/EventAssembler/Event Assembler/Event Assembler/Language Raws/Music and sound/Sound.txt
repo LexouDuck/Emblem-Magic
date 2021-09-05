@@ -1,0 +1,53 @@
+
+# FE6
+
+##command:play SOUND
+##Plays a sound effect.
+##aliases:SOUN
+SOUND, 0x3C, 8, -game:FE6 -indexMode:8
+##The sound effect to play.
+	MusicID, 4, 4
+
+##command:play SOUNd
+##Plays a sound effect.
+##aliases:SOUND
+SOUN, 0x3C, 8, -game:FE6 -indexMode:8
+##The sound effect to play.
+	MusicID, 4, 4
+
+
+
+# FE7
+
+##command:play SOUND
+##Plays a sound effect.
+##aliases:SOUN
+SOUND, 0x7F, 4, -game:FE7 -indexMode:8
+##The sound effect to play.
+	MusicID, 2, 2
+
+##command:play SOUNd
+##Plays a sound effect.
+##aliases:SOUND
+SOUN, 0x7F, 4, -game:FE7 -indexMode:8
+##The sound effect to play.
+	MusicID, 2, 2
+
+
+
+# FE8
+
+##command:play SOUND
+##Plays a sound effect.
+##aliases:SOUN
+SOUND, 0x1620, 4, -game:FE8 -indexMode:8
+##The sound effect to play.
+	MusicID, 2, 2
+
+##command:play SOUNd
+##Plays a sound effect.
+##aliases:SOUND
+SOUN, 0x1620, 4, -game:FE8 -indexMode:8
+##The sound effect to play.
+	MusicID, 2, 2
+	

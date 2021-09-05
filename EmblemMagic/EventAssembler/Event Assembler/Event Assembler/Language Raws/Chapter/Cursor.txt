@@ -1,0 +1,157 @@
+
+# FE6
+
+##command:CURsor Flash
+##Flashes cursor at the given position.
+##aliases:CURF
+CURSOR_FLASH, 0x2C, 8, -game:FE6 -indexMode:8
+##Position to flash cursor on.
+	Position, 4, 4, -coordinates:2 -preferredBase:10
+
+##command:CURsor Flash
+##Flashes cursor at the given position.
+##aliases:CURSOR_FLASH
+CURF, 0x2C, 8, -game:FE6 -indexMode:8
+##Position to flash cursor on.
+	Position, 4, 4, -coordinates:2 -preferredBase:10
+
+##command:CURsor Flash
+##Flashes cursor over the given unit character.
+##aliases:CURF
+CURSOR_FLASH, 0x2D, 8, -game:FE6 -indexMode:8
+##Character to flash cursor on.
+	CharacterID, 4, 2
+
+##command:CURsor Flash
+##Flashes cursor over the given unit character.
+##aliases:CURSOR_FLASH
+CURF, 0x2D, 8, -game:FE6 -indexMode:8
+##Character to flash cursor on.
+	CharacterID, 4, 2
+
+
+##command:CUrsor MOve
+##Moves the cursor to the given position.
+##aliases:CUMO
+CURSOR_MOVE, 0x2E, 8, -game:FE6 -indexMode:8
+##Position to move cursor to.
+	Position, 4, 4, -coordinates:2 -preferredBase:10
+
+##command:CUrsor MOve
+##Moves the cursor to the given position.
+##aliases:CURSOR_MOVE
+CUMO, 0x2E, 8, -game:FE6 -indexMode:8
+##Position to move cursor to.
+	Position, 4, 4, -coordinates:2 -preferredBase:10
+
+
+##command:CUrsor REmove
+##Removes the cursor.
+##aliases:CURE
+CURSOR_REMOVE, 0x2F, 4, -game:FE6 -indexMode:8
+
+##command:CUrsor REmove
+##Removes the cursor.
+##aliases:CURSOR_REMOVE
+CURE, 0x2F, 4, -game:FE6 -indexMode:8
+
+
+
+# FE7
+
+##command:CURsor Flash
+##Flashes cursor at the given position.
+##aliases:CURF
+CURSOR_FLASH, 0x66, 8, -game:FE7 -indexMode:8
+##Position to flash cursor on.
+	Position, 4, 4, -coordinates:2 -preferredBase:10
+
+##command:CURsor Flash
+##Flashes cursor at the given position.
+##aliases:CURSOR_FLASH
+CURF, 0x66, 8, -game:FE7 -indexMode:8
+##Position to flash cursor on.
+	Position, 4, 4, -coordinates:2 -preferredBase:10
+
+##command:CURsor Flash
+##Flashes cursor over the given unit character.
+##aliases:CURF
+CURSOR_FLASH, 0x67, 8, -game:FE7 -indexMode:8
+##Character to flash cursor on.
+	CharacterID, 4, 2
+
+##command:CURsor Flash
+##Flashes cursor over the given unit character.
+##aliases:CURSOR_FLASH
+CURF, 0x67, 8, -game:FE7 -indexMode:8
+##Character to flash cursor on.
+	CharacterID, 4, 2
+
+
+##command:CUrsor MOve
+##Moves the cursor to the given position.
+##aliases:CUMO
+CURSOR_MOVE, 0x68, 8, -game:FE7 -indexMode:8
+##Position to move cursor to.
+	Position, 4, 4, -coordinates:2 -preferredBase:10
+
+##command:CUrsor MOve
+##Moves the cursor to the given position.
+##aliases:CURSOR_MOVE
+CUMO, 0x68, 8, -game:FE7 -indexMode:8
+##Position to move cursor to.
+	Position, 4, 4, -coordinates:2 -preferredBase:10
+
+
+##command:CUrsor REmove
+##Removes the cursor.
+##aliases:CURE
+CURSOR_REMOVE, 0x69, 4, -game:FE7 -indexMode:8
+
+##command:CUrsor REmove
+##Removes the cursor.
+##aliases:CURSOR_REMOVE
+CURE, 0x69, 4, -game:FE7 -indexMode:8
+
+
+
+# FE8
+
+##command:CUrsor MOve
+##Moves the cursor to the given position.
+##aliases:CUMO
+CURSOR_MOVE, 0x3B20, 4, -game:FE8 -indexMode:8
+##Position to move cursor to.
+	Position, 2, 2, -coordinate:2 -preferredBase:10
+
+##command:CUrsor MOve
+##Moves the cursor to the given position.
+##aliases:CURSOR_MOVE
+CUMO, 0x3B20, 4, -game:FE8 -indexMode:8
+##Position to move cursor to.
+	Position, 2, 2, -coordinate:2 -preferredBase:10
+
+##command:CUrsor MOve
+##Moves the cursor over to the given unit character.
+##aliases:CUMO
+CURSOR_MOVE, 0x3B21, 4, -game:FE8 -indexMode:8
+##Character to move cursor on.
+	CharacterID, 2, 2
+
+##command:CUrsor MOve
+##Moves the cursor over to the given unit character.
+##aliases:CURSOR_MOVE
+CUMO, 0x3B21, 4, -game:FE8 -indexMode:8
+##Character to move cursor on.
+	CharacterID, 2, 2
+
+
+##command:CUrsor REmove
+##Removes the cursor.
+##aliases:CURE
+CURSOR_REMOVE, 0x3B22, 4, -game:FE8 -indexMode:8
+
+##command:CUrsor REmove
+##Removes the cursor.
+##aliases:CURSOR_REMOVE
+CURE, 0x3B22, 4, -game:FE8 -indexMode:8

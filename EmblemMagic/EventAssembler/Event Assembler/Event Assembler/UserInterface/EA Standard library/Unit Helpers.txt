@@ -1,0 +1,163 @@
+
+//Move manual helpers
+#ifdef _FE7_
+#define up 3
+#define down 2
+#define left 0
+#define right 1
+#define highlight(time) "9 time"
+#define notice 0xA
+#define speed(newSpeed) "0xC newSpeed"
+#endif
+
+
+//Unit data level helpers
+#ifdef _FE6_
+#define Ally 0
+#define NPC 1
+#define Enemy 2
+#define Level(level,side,autoLevel) level*8+side*2+autoLevel
+#endif
+
+#ifdef _FE7_
+#define Predetermined 0x50
+#define Ally 0
+#define NPC 1
+#define Enemy 2
+#define Level(level,side,autoLevel) level*8+side*2+autoLevel
+#endif
+
+#ifdef _FE8_
+#define Predetermined 0x50
+#define Ally 0
+#define NPC 1
+#define Enemy 2
+#define Level(level,side,autoLevel) level*8+side*2+autoLevel
+#endif
+
+//Unit flags
+#ifdef _FE8_
+#define MonsterTemplate 1
+#define DropItem 2
+#define DunnoFlag1 4
+#define DunnoFlag2 8
+#endif
+
+
+//Warp effect, under construction
+#ifdef _FE7_
+#define WarpIn(Char,Class,X,Y)	"WARP [X,Y] 1; LOEV Char Class [X,Y]; CODE $42; POIN $20AB9"
+#define WarpIn(UnitPtr,X,Y)		"WARP [X,Y] 1; LOU1 UnitPtr; CODE $42; POIN $20AB9"
+//#define WarpOut(X,Y)			"WARP [X,Y] 0; DISA [X,Y]; CODE $42; POIN $20AB9"
+#define WarpOut(Char)			"WARP Char  0; DISA Char; CODE $42; POIN $20AB9"
+#endif
+
+#ifdef _FE8_
+//#define WarpIn(Char,Class,X,Y) "CODE 0x40 0x2F 2 0; CODE Char; GOTO $; DISA Char"
+//#define WarpIn(UnitPtr,X,Y)	"CODE 0x40 0x2F 2 0; CODE Char; GOTO $; LOU1 UnitPtr"
+//#define WarpOut(X,Y)			"CODE "
+#define WarpOut(Char)			"CODE 0x40 0x2F 2 0; CODE Char; GOTO $; DISA Char"
+#endif
+
+
+//For compability, time ignored
+#ifdef _FE6_
+#define FlashCursor(X,Y,time) "CURF [X,Y]"
+#define FlashCursor(character,time) "CURF character"
+#endif
+
+//For compability, time ignored
+#ifdef _FE7_
+#define FlashCursor(X,Y,time) "CURF [X,Y]"
+#define FlashCursor(character,time) "CURF character"
+#endif
+
+//CURF replacer for FE8
+#ifdef _FE8_
+#define FlashCursor(X,Y,time) "CUMO [X,Y]; STAL time; CURE"
+#define FlashCursor(character,time) "CUMO character; STAL time; CURE"
+#endif
+
+
+//Battle data helpers
+#ifdef _FE6_
+#define AttackerHit(damage,lastAttack) 			"BLDT 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 lastAttack 0 0 0 0 0 0 0 damage"
+#define DefenderHit(damage,lastAttack) 			"BLDT 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 lastAttack 0 0 1 0 0 0 0 damage"
+#define AttackerPoison(damage,lastAttack) 		"BLDT 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 lastAttack 0 0 0 0 0 0 0 damage"
+#define DefenderPoison(damage,lastAttack) 		"BLDT 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 lastAttack 0 0 1 0 0 0 0 damage"
+#define AttackerHurtItself(damage,lastAttack) 	"BLDT 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 lastAttack 0 0 0 0 0 0 0 damage"
+#define DefenderHurtItself(damage,lastAttack) 	"BLDT 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 lastAttack 0 0 1 0 0 0 0 damage"
+#define AttackerMiss(lastAttack) 				"BLDT 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 lastAttack 0 0 0 0 0 0 0 0"
+#define DefenderMiss(lastAttack) 				"BLDT 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 lastAttack 0 0 1 0 0 0 0 0"
+#define AttackerCritical(damage,lastAttack) 	"BLDT 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 lastAttack 0 0 0 0 0 0 0 damage"
+#define DefenderCritical(damage,lastAttack) 	"BLDT 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 lastAttack 0 0 1 0 0 0 0 damage"
+#define AttackerNoDamage(lastAttack) 			"BLDT 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 lastAttack 0 0 0 0 0 0 0 0"
+#define DefenderNoDamage(lastAttack) 			"BLDT 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 lastAttack 0 0 1 0 0 0 0 0"
+#define EndOfBattle 							 BLDT
+#endif
+
+#ifdef _FE7_
+#define AttackerHit(damage,lastAttack) 			"BLDT 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 lastAttack 0 0 0 0 0 0 0 damage"
+#define DefenderHit(damage,lastAttack) 			"BLDT 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 lastAttack 0 0 1 0 0 0 0 damage"
+#define AttackerPoison(damage,lastAttack) 		"BLDT 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 lastAttack 0 0 0 0 0 0 0 damage"
+#define DefenderPoison(damage,lastAttack) 		"BLDT 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 lastAttack 0 0 1 0 0 0 0 damage"
+#define AttackerHurtItself(damage,lastAttack) 	"BLDT 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 lastAttack 0 0 0 0 0 0 0 damage"
+#define DefenderHurtItself(damage,lastAttack) 	"BLDT 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 lastAttack 0 0 1 0 0 0 0 damage"
+#define AttackerMiss(lastAttack) 				"BLDT 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 lastAttack 0 0 0 0 0 0 0 0"
+#define DefenderMiss(lastAttack) 				"BLDT 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 lastAttack 0 0 1 0 0 0 0 0"
+#define AttackerCritical(damage,lastAttack) 	"BLDT 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 lastAttack 0 0 0 0 0 0 0 damage"
+#define DefenderCritical(damage,lastAttack) 	"BLDT 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 lastAttack 0 0 1 0 0 0 0 damage"
+#define AttackerNoDamage(lastAttack) 			"BLDT 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 lastAttack 0 0 0 0 0 0 0 0"
+#define DefenderNoDamage(lastAttack) 			"BLDT 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 lastAttack 0 0 1 0 0 0 0 0"
+#define AttackerSilencer(lastAttack) 			"BLDT 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 lastAttack 0 0 0 0 0 0 0 0"
+#define DefenderSilencer(lastAttack) 			"BLDT 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 lastAttack 0 0 1 0 0 0 0 0"
+#define EndOfBattle 							 BLDT
+#endif
+
+
+//AI helpers
+#ifdef _FE7_
+#define NoAI 				[0x00,0x00,0x00,0x00]
+#define PursueWithoutHeed 	[0x00,0x02,0x02,0x00]
+#define GuardTile 			[0x03,0x03,0x09,0x20]
+#define Guard 				[0x00,0x03,0x00,0x20]
+#define AttackInRange 		[0x00,0x03,0x09,0x00]
+#define DestroyVillages 	[0x00,0x04,0x01,0x00]
+#define HealUnits 			[0x0F,0x04,0x00,0x00]
+#define StealFromUnits 		[0x10,0x05,0x09,0x00]
+#define StealFromChests 	[0x06,0x05,0x09,0x00]
+#define TalkToLord 			[0x06,0x0B,0x0A,0x00]
+#define AttackWall 			[0x00,0x1B,0x01,0x00]
+#define SeizeThrone 		[0x00,0x1E,0x00,0x00]
+#endif
+
+
+//Side changers
+#ifdef _FE7_
+#define TurnAlly(char) "CUSI char 0x00"
+#define TurnEnemy(char) "CUSI char 0xA7"
+#define TurnNPC(char) "CUSI char 0x37"
+#endif
+
+#ifdef _FE8_
+#define TurnAlly(char) "CUSA char"
+#define TurnEnemy(char) "CUSE char"
+#define TurnNPC(char) "CUSN char"
+#endif
+
+#ifdef _FE6_
+#define MoveOff(char,X,Y) "MOVE char [X,Y]; ENUN; DISA char"
+#endif
+
+#ifdef _FE7_
+#define Rescue(char,rescuer) "DISA char; ENUN; UNCM rescuer 0x10; STAL 0x10"
+#define MoveOff(char,X,Y) "MOVE char [X,Y]; ENUN; DISA char"
+#define UnitsInvisible "ASMC 0x7A939; ASMC 0x7A9D5"
+#define PromoteMainChar "ASMC 0x79AF5"
+#define UnitClear "ASMC $7A8B9"
+#endif
+
+
+#ifdef _FE8_
+#define MoveOff(char,X,Y) "MOVE char [X,Y]; ENUN; DISA char"
+#endif

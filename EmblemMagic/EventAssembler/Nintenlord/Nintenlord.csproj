@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8FA48EF8-3E11-494A-B587-592D7C22EFDF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nintenlord</RootNamespace>
+    <AssemblyName>Nintenlord</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Algebra\IGroup.cs" />
+    <Compile Include="Collections\ArrayBuilder.cs" />
+    <Compile Include="Collections\ArrayExtensions.cs" />
+    <Compile Include="Collections\CollectionExtensions.cs" />
+    <Compile Include="Collections\DataChange\DataChange.cs" />
+    <Compile Include="Collections\DataChange\IDataChange.cs" />
+    <Compile Include="Collections\DataChange\IIndexOverlay.cs" />
+    <Compile Include="Collections\DataChange\IndexOverlay.cs" />
+    <Compile Include="Collections\Dictionaries\ArrayDictionary.cs" />
+    <Compile Include="Collections\Dictionaries\DictionaryOfEnumerablesEnumarator.cs" />
+    <Compile Include="Collections\Dictionaries\SerializableDictionary.cs" />
+    <Compile Include="Collections\Dictionaries\TriDictionary.cs" />
+    <Compile Include="Collections\LinkedListHelpers.cs" />
+    <Compile Include="Collections\Lists\LinkedArrayList.cs" />
+    <Compile Include="Collections\Lists\ListExtensions.cs" />
+    <Compile Include="Collections\Lists\ListSlidingWindow.cs" />
+    <Compile Include="Collections\Lists\StringWrapper.cs" />
+    <Compile Include="Collections\Lists\SubList.cs" />
+    <Compile Include="Collections\Lists\SublistEnumerator.cs" />
+    <Compile Include="Collections\Trees\BinaryTree.cs" />
+    <Compile Include="Collections\Trees\BinaryTree2.cs" />
+    <Compile Include="Collections\Trees\BinaryTreeNode.cs" />
+    <Compile Include="Collections\Trees\ITree.cs" />
+    <Compile Include="Collections\Trees\IValuedTree.cs" />
+    <Compile Include="Collections\Trees\Leaf.cs" />
+    <Compile Include="Collections\Trees\RoseTree.cs" />
+    <Compile Include="Collections\Trees\TreeHelpers.cs" />
+    <Compile Include="Collections\IContainer.cs" />
+    <Compile Include="Collections\IPriorityQueue.cs" />
+    <Compile Include="Collections\SkipList.cs" />
+    <Compile Include="Collections\SkipListNode.cs" />
+    <Compile Include="Collections\SkipListPriorityQueue.cs" />
+    <Compile Include="DotNetZip\Zlib\Crc32.cs" />
+    <Compile Include="DotNetZip\Zlib\Deflate.cs" />
+    <Compile Include="DotNetZip\Zlib\GZipStream.cs" />
+    <Compile Include="DotNetZip\Zlib\Inflate.cs" />
+    <Compile Include="DotNetZip\Zlib\InfTree.cs" />
+    <Compile Include="DotNetZip\Zlib\Tree.cs" />
+    <Compile Include="DotNetZip\Zlib\Zlib.cs" />
+    <Compile Include="DotNetZip\Zlib\ZlibBaseStream.cs" />
+    <Compile Include="DotNetZip\Zlib\ZlibCodec.cs" />
+    <Compile Include="DotNetZip\Zlib\ZlibConstants.cs" />
+    <Compile Include="DotNetZip\Zlib\ZlibStream.cs" />
+    <Compile Include="Grammars\CompleteStateMachine.cs" />
+    <Compile Include="Grammars\ContextFreeGrammar.cs" />
+    <Compile Include="Grammars\DeterministicFiniteAutomaton.cs" />
+    <Compile Include="Grammars\HistoryKeepingStateMachine.cs" />
+    <Compile Include="Grammars\IStateMachine.cs" />
+    <Compile Include="Grammars\PushdownAutomata.cs" />
+    <Compile Include="Grammars\RegularExpression\RegExHelpers.cs" />
+    <Compile Include="Grammars\RegularExpression\Tree\Choise.cs" />
+    <Compile Include="Grammars\RegularExpression\Tree\Concatenation.cs" />
+    <Compile Include="Grammars\RegularExpression\Tree\Empty.cs" />
+    <Compile Include="Grammars\RegularExpression\Tree\EmptyWord.cs" />
+    <Compile Include="Grammars\RegularExpression\Tree\KleeneClosure.cs" />
+    <Compile Include="Grammars\RegularExpression\Tree\Letter.cs" />
+    <Compile Include="Grammars\RegularExpression\Tree\IRegExExpressionTree.cs" />
+    <Compile Include="Grammars\RegularExpression\Tree\RegExNodeTypes.cs" />
+    <Compile Include="Graph\Colouring\IColouredGraph.cs" />
+    <Compile Include="Graph\DictionaryBasedGraph.cs" />
+    <Compile Include="Graph\GraphTravelling.cs" />
+    <Compile Include="Graph\IEditableGraph.cs" />
+    <Compile Include="Graph\MatrixGraph.cs" />
+    <Compile Include="Graph\GraphHelpers.cs" />
+    <Compile Include="Graph\ICostCollection.cs" />
+    <Compile Include="Graph\IGraph.cs" />
+    <Compile Include="Graph\IHeurestic.cs" />
+    <Compile Include="Graph\IWeighedGraph.cs" />
+    <Compile Include="Graph\NeighbourhoodGraph.cs" />
+    <Compile Include="Graph\PathFinding\A Star.cs" />
+    <Compile Include="Graph\PathFinding\Dijkstra algorithm.cs" />
+    <Compile Include="Graph\PathFinding\DijkstraBasedHeurestic.cs" />
+    <Compile Include="Graph\TransposeGraph.cs" />
+    <Compile Include="IO\Bits\BitReader.cs" />
+    <Compile Include="IO\Bits\BitWriter.cs" />
+    <Compile Include="IO\ChangeStream.cs" />
+    <Compile Include="IO\CommentRemovingTextReader.cs" />
+    <Compile Include="IO\FilePosition.cs" />
+    <Compile Include="IO\IFilePositionable.cs" />
+    <Compile Include="IO\IOHelpers.cs" />
+    <Compile Include="IO\Scanners\CharacterScanner.cs" />
+    <Compile Include="IO\Scanners\EnumerableScanner.cs" />
+    <Compile Include="IO\Scanners\IScanner.cs" />
+    <Compile Include="IO\Scanners\IStoringScanner.cs" />
+    <Compile Include="IO\Scanners\ListScanner.cs" />
+    <Compile Include="IO\Scanners\SingletonScanner.cs" />
+    <Compile Include="IO\Scanners\StringScanner.cs" />
+    <Compile Include="IO\StreamExtensions.cs" />
+    <Compile Include="MemoryManagement\IAllocator.cs" />
+    <Compile Include="MemoryManagement\IFreeMemoryManager.cs" />
+    <Compile Include="MemoryManagement\IMemoryPointer.cs" />
+    <Compile Include="MemoryManagement\OffsetSizePair.cs" />
+    <Compile Include="Parser\CharacterParsers\CharacterParser.cs" />
+    <Compile Include="Parser\FunctionParser.cs" />
+    <Compile Include="Parser\LazyParser.cs" />
+    <Compile Include="Parser\ParserCombinators\BinaryParsers\CombineParser.cs" />
+    <Compile Include="Parser\ParserCombinators\BinaryParsers\OrParser.cs" />
+    <Compile Include="Parser\CharacterParsers\DigitParser.cs" />
+    <Compile Include="Parser\CharacterParsers\LetterOrDigitParser.cs" />
+    <Compile Include="Parser\CharacterParsers\LetterParser.cs" />
+    <Compile Include="Parser\CharacterParsers\LowercaseParser.cs" />
+    <Compile Include="Parser\CharacterParsers\MathOperatorParser.cs" />
+    <Compile Include="Parser\CharacterParsers\UppercaseParser.cs" />
+    <Compile Include="Parser\CharacterParsers\WhiteSpaceParser.cs" />
+    <Compile Include="Parser\IParser.cs" />
+    <Compile Include="Parser\Match.cs" />
+    <Compile Include="Parser\Parser.cs" />
+    <Compile Include="Parser\ParserCombinators\BetweenParser.cs" />
+    <Compile Include="Parser\ParserCombinators\ChoiseParser.cs" />
+    <Compile Include="Parser\ParserCombinators\CountParser.cs" />
+    <Compile Include="Parser\ParserCombinators\EndBy1Parser.cs" />
+    <Compile Include="Parser\ParserCombinators\EndByParser.cs" />
+    <Compile Include="Parser\ParserCombinators\Many1Parser.cs" />
+    <Compile Include="Parser\ParserCombinators\ManyParser.cs" />
+    <Compile Include="Parser\ParserCombinators\ManyTillParser.cs" />
+    <Compile Include="Parser\ParserCombinators\OptionParser.cs" />
+    <Compile Include="Parser\ParserCombinators\RepeatingParser.cs" />
+    <Compile Include="Parser\ParserCombinators\SeparatedBy1Parser.cs" />
+    <Compile Include="Parser\ParserCombinators\SeparatedByParser.cs" />
+    <Compile Include="Parser\ParserCombinators\SkipMany1Parser.cs" />
+    <Compile Include="Parser\ParserCombinators\SkipManyParser.cs" />
+    <Compile Include="Parser\ParserCombinators\TransformParser.cs" />
+    <Compile Include="Parser\ParserCombinators\UnaryParsers\SequenceParser.cs" />
+    <Compile Include="Parser\ParserHelpers.cs" />
+    <Compile Include="Parser\ParsingEventArgs.cs" />
+    <Compile Include="Parser\ReversePolishNotation.cs" />
+    <Compile Include="Parser\ParserCombinators\UnaryParsers\AlwaysParser.cs" />
+    <Compile Include="Parser\ParserCombinators\UnaryParsers\EqualsParser.cs" />
+    <Compile Include="Parser\ParserCombinators\UnaryParsers\FailAlwaysParser.cs" />
+    <Compile Include="Parser\ParserCombinators\UnaryParsers\NameParser.cs" />
+    <Compile Include="Parser\ParserCombinators\UnaryParsers\NoneOfParser.cs" />
+    <Compile Include="Parser\ParserCombinators\UnaryParsers\NothingParser.cs" />
+    <Compile Include="Parser\ParserCombinators\UnaryParsers\OneOfParser.cs" />
+    <Compile Include="Parser\ParserCombinators\UnaryParsers\ReturnParser.cs" />
+    <Compile Include="Parser\ParserCombinators\UnaryParsers\SafeFailureCheckerParser.cs" />
+    <Compile Include="Parser\ParserCombinators\UnaryParsers\SatisfyParser.cs" />
+    <Compile Include="Parser\ParserCombinators\UnaryParsers\TryParser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomDistributions\FuncDistribution.cs" />
+    <Compile Include="RandomDistributions\IDistribution.cs" />
+    <Compile Include="RandomDistributions\NormalDistribution.cs" />
+    <Compile Include="RandomDistributions\UniformDistribution.cs" />
+    <Compile Include="RandomDistributions\WeibullDistribution.cs" />
+    <Compile Include="Utility\CanCauseError.cs" />
+    <Compile Include="Utility\CommandLineArgsHandler.cs" />
+    <Compile Include="Utility\DisjointPair.cs" />
+    <Compile Include="Utility\EnumExtensions.cs" />
+    <Compile Include="Utility\ExceptionHelpers.cs" />
+    <Compile Include="Utility\FixedPointInteger.cs" />
+    <Compile Include="Utility\FunctionComparer.cs" />
+    <Compile Include="Utility\IInitiadable.cs" />
+    <Compile Include="Utility\INamed.cs" />
+    <Compile Include="Utility\IRecyclable.cs" />
+    <Compile Include="Utility\LamdaComparer.cs" />
+    <Compile Include="Utility\LazyHelpers.cs" />
+    <Compile Include="Utility\MicsUtilities.cs" />
+    <Compile Include="Utility\PairExtensions.cs" />
+    <Compile Include="Utility\Primitives\BooleanHelpers.cs" />
+    <Compile Include="Utility\Primitives\ByteExtensions.cs" />
+    <Compile Include="Utility\Primitives\CharacterExtensions.cs" />
+    <Compile Include="Utility\Primitives\CharacterPair.cs" />
+    <Compile Include="Utility\Primitives\FloatingPointExtensions.cs" />
+    <Compile Include="Utility\Primitives\IntegerExtensions.cs" />
+    <Compile Include="Utility\Reference.cs" />
+    <Compile Include="Utility\RememberPreviousValue.cs" />
+    <Compile Include="Utility\ReverseComparer.cs" />
+    <Compile Include="Utility\SerialazitionExtension.cs" />
+    <Compile Include="Utility\SharedDirtyBuffer.cs" />
+    <Compile Include="Utility\Strings\NaturalComparer.cs" />
+    <Compile Include="Utility\Strings\Parser.cs" />
+    <Compile Include="Utility\Strings\RegexHelper.cs" />
+    <Compile Include="Utility\Strings\StringEqualityComparer.cs" />
+    <Compile Include="Utility\Strings\StringExtensions.cs" />
+    <Compile Include="Utility\TimeSpanHelper.cs" />
+    <Compile Include="Utility\FunctionExtensions.cs" />
+    <Compile Include="Utility\TypeHelpers.cs" />
+    <Compile Include="Utility\UpdateOnce.cs" />
+    <Compile Include="Utility\UpdateOnDemand.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DotNetZip\License.txt" />
+    <Content Include="DotNetZip\Zlib\LICENSE.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Parser\MonadicParser.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,458 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>Emblem Magic</AssemblyName>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>assets\Icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>CODE_ANALYSIS;DEBUG;TRACE</DefineConstants>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <CodeAnalysisRuleSet>ManagedMinimumRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="dist\**" />
+    <Compile Remove="Other\**" />
+    <Compile Remove="Test\**" />
+    <EmbeddedResource Remove="dist\**" />
+    <EmbeddedResource Remove="Other\**" />
+    <EmbeddedResource Remove="Test\**" />
+    <None Remove="dist\**" />
+    <None Remove="Other\**" />
+    <None Remove="Test\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Core">
+      <HintPath>bin\Release\EventAssembler\Core.exe</HintPath>
+    </Reference>
+    <Reference Include="FastColoredTextBox">
+      <HintPath>bin\Release\Utils\FastColoredTextBox.dll</HintPath>
+    </Reference>
+    <Reference Include="Nintenlord">
+      <HintPath>bin\Release\EventAssembler\Nintenlord.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\Modules.WriteModule.datasource" />
+    <None Include="Properties\DataSources\Write.datasource" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.242703">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="5.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="EventAssembler\Event Assembler\Core\AssemblyInfo.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\IParameterized.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\LanguageProcessor.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Code.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\DummyCodeLanguage.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\EACodeLanguage.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\EACodeLanguageDisassembler.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\EAExpressionAssembler.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\BinaryOperator`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Code`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Division`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\EAExpressionType.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Folding.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\IExpression`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Minus`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Modulus`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Multiply`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\RawData.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Scope`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Sum`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Symbol`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\TokenParser.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Tree\ArithmeticShiftRight.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Tree\Assignment.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Tree\BitShiftLeft`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Tree\BitShiftRight`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Tree\BitwiseAnd`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Tree\BitwiseOr`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Tree\BitwiseXor`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Tree\ExpressionList`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\Tree\LabelExpression.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Expression\ValueExpression`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\FE6CodeLanguage.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\FE7CodeLanguage.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\FE8CodeLanguage.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Lexer\Token.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Lexer\Tokeniser.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Lexer\TokenScanner.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Lexer\TokenType.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Parser\AssignmentParser.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Parser\Base64Parser.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Parser\CodeParser.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Parser\LabelParser.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Parser\MathParser.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Parser\ParseHelpers.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Parser\Parsers.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Parser\ScopeParser.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Parser\StatementSeparatorParser.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Parser\TokenTypeParser.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Priority.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Types\MetaType.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Language\Types\Type.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\ParameterizedHelpers.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\PreprocessingInputStream.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\BuiltInMacros\BuildVector.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\BuiltInMacros\CurrentFile.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\BuiltInMacros\CurrentLine.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\BuiltInMacros\DeconstructVector.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\BuiltInMacros\InsertText.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\BuiltInMacros\IsDefined.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\BuiltInMacros\Pool.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\BuiltInMacros\Signum.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\BuiltInMacros\Switch.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\BuiltInMacros\VectorLength.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\BuiltInMacros\VectorToParameter.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\DependencyMakingIncludeListener.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\Define.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\DumpPool.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\EasterEgg.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\Else.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\EndIf.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\IDirective.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\IfDefined.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\IfNotDefined.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\Include.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\IncludeBinary.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\IncludeExternal.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\IncludeToolBinary.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\IncludeToolEvent.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\IncludeToolEventAlias.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\RunTool.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\ToolDirectiveBase.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Directives\Undefine.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\DummyIncludeListener.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\IDirectivePreprocessor.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\IIncludeListener.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\IMacro.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\IPreprocessor.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\NopPreprocessor.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Preprocessors\Preprocessor.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\ScopeStructure`1.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\StringReplacers\IStringReplacer.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\StringReplacers\NewReplacer.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\StringReplacers\OriginalReplacer.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Templates\CodeTemplate.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Templates\CodeTemplateStorer.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Templates\GenericFE8Ender.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Templates\GenericFE8Template.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Templates\ICodeTemplate.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Templates\ICodeTemplateStorer.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Templates\IFixedDocString.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Templates\TemplateComparer.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Templates\TemplateParameter.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Code\Templates\TerminatingStringTemplate.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Collections\DefineCollection.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Collections\DefineCollectionOld.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Collections\DefineCollectionOptimized.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Collections\IDefineCollection.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\CoreInfo.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\DisassemblyMode.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\GBA\GBAPointerMaker.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\HighlightingHelper.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\IncludeToolEventAlias.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\IO\Input\IInputByteStream.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\IO\Input\IInputStream.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\IO\Input\InputHelpers.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\IO\Input\IPositionableInputStream.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\IO\IOHelpers.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\IO\Logs\ILog.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\IO\Logs\MessageLog.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\IO\Logs\TextWriterMessageLog.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\IO\Output\BinaryStreamOutput.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\IO\Output\IBinaryOutput.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\IPointerMaker.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Program.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Core\Properties\Resources.Designer.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Event Assembler\Program.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Event Assembler\Properties\AssemblyInfo.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Event Assembler\UserInterface\EnumChooser.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Event Assembler\UserInterface\EnumChooser.Designer.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Event Assembler\UserInterface\EnumChooserForm.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Event Assembler\UserInterface\EnumChooserForm.Designer.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Event Assembler\UserInterface\FormHelpers.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Event Assembler\UserInterface\MainForm.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Event Assembler\UserInterface\MainForm.Designer.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Event Assembler\UserInterface\TextShower.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\Event Assembler\UserInterface\TextShower.Designer.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\NigthmareListToEAdefinitions\Program.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\NigthmareListToEAdefinitions\Properties\AssemblyInfo.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\ReadBinaryAndWriteText\Properties\AssemblyInfo.cs" />
+    <Compile Remove="EventAssembler\Event Assembler\ReadBinaryAndWriteText\Properties\Resources.Designer.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\BitmapHelpers.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\ColorHelpers.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\ControlsDisabler.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\Geonetry\RectangleEdges.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\Geonetry\RectangleExtensions.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\Geonetry\Vectors\Color5bpc.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\Geonetry\Vectors\IPrimitiveVector.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\Geonetry\Vectors\IRGBAColor.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\Geonetry\Vectors\IRGBColor.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\Properties\AssemblyInfo.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\Properties\Resources.Designer.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\Properties\Settings.Designer.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\ToolStripsDisabler.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\Vectors\Color5bpc.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\Vectors\IPrimitiveVector.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\Vectors\IRGBAColor.cs" />
+    <Compile Remove="EventAssembler\Nintenlord.Forms\Vectors\IRGBColor.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Algebra\IGroup.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\ArrayBuilder.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\ArrayExtensions.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\CollectionExtensions.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\DataChange\DataChange.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\DataChange\IDataChange.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\DataChange\IIndexOverlay.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\DataChange\IndexOverlay.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Dictionaries\ArrayDictionary.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Dictionaries\DictionaryOfEnumerablesEnumarator.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Dictionaries\SerializableDictionary.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Dictionaries\TriDictionary.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\IContainer.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\IPriorityQueue.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\LinkedListHelpers.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Lists\LinkedArrayList.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Lists\ListExtensions.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Lists\ListSlidingWindow.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Lists\StringWrapper.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Lists\SubList.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Lists\SublistEnumerator.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\SkipList.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\SkipListNode.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\SkipListPriorityQueue.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Trees\BinaryTree.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Trees\BinaryTree2.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Trees\BinaryTreeNode.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Trees\ITree.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Trees\IValuedTree.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Trees\Leaf.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Trees\RoseTree.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Collections\Trees\TreeHelpers.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\DotNetZip\Zlib\Crc32.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\DotNetZip\Zlib\Deflate.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\DotNetZip\Zlib\GZipStream.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\DotNetZip\Zlib\Inflate.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\DotNetZip\Zlib\InfTree.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\DotNetZip\Zlib\Tree.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\DotNetZip\Zlib\Zlib.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\DotNetZip\Zlib\ZlibBaseStream.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\DotNetZip\Zlib\ZlibCodec.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\DotNetZip\Zlib\ZlibConstants.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\DotNetZip\Zlib\ZlibStream.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\CompleteStateMachine.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\ContextFreeGrammar.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\DeterministicFiniteAutomaton.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\HistoryKeepingStateMachine.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\IStateMachine.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\PushdownAutomata.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\RegularExpression\RegExHelpers.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\RegularExpression\Tree\Choise.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\RegularExpression\Tree\Concatenation.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\RegularExpression\Tree\Empty.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\RegularExpression\Tree\EmptyWord.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\RegularExpression\Tree\IRegExExpressionTree.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\RegularExpression\Tree\KleeneClosure.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\RegularExpression\Tree\Letter.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Grammars\RegularExpression\Tree\RegExNodeTypes.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\Colouring\IColouredGraph.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\DictionaryBasedGraph.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\GraphHelpers.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\GraphTravelling.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\ICostCollection.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\IEditableGraph.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\IGraph.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\IHeurestic.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\IWeighedGraph.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\MatrixGraph.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\NeighbourhoodGraph.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\PathFinding\A Star.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\PathFinding\Dijkstra algorithm.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\PathFinding\DijkstraBasedHeurestic.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Graph\TransposeGraph.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\Bits\BitReader.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\Bits\BitWriter.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\ChangeStream.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\CommentRemovingTextReader.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\FilePosition.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\IFilePositionable.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\IOHelpers.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\Scanners\CharacterScanner.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\Scanners\EnumerableScanner.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\Scanners\IScanner.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\Scanners\IStoringScanner.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\Scanners\ListScanner.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\Scanners\SingletonScanner.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\Scanners\StringScanner.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\IO\StreamExtensions.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\MemoryManagement\IAllocator.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\MemoryManagement\IFreeMemoryManager.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\MemoryManagement\IMemoryPointer.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\MemoryManagement\OffsetSizePair.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\CharacterParsers\CharacterParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\CharacterParsers\DigitParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\CharacterParsers\LetterOrDigitParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\CharacterParsers\LetterParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\CharacterParsers\LowercaseParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\CharacterParsers\MathOperatorParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\CharacterParsers\UppercaseParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\CharacterParsers\WhiteSpaceParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\FunctionParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\IParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\LazyParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\Match.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\MonadicParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\Parser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\BetweenParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\BinaryParsers\CombineParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\BinaryParsers\OrParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\ChoiseParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\CountParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\EndBy1Parser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\EndByParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\Many1Parser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\ManyParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\ManyTillParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\OptionParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\RepeatingParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\SeparatedBy1Parser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\SeparatedByParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\SkipMany1Parser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\SkipManyParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\TransformParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\UnaryParsers\AlwaysParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\UnaryParsers\EqualsParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\UnaryParsers\FailAlwaysParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\UnaryParsers\NameParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\UnaryParsers\NoneOfParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\UnaryParsers\NothingParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\UnaryParsers\OneOfParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\UnaryParsers\ReturnParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\UnaryParsers\SafeFailureCheckerParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\UnaryParsers\SatisfyParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\UnaryParsers\SequenceParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserCombinators\UnaryParsers\TryParser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParserHelpers.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ParsingEventArgs.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Parser\ReversePolishNotation.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Properties\AssemblyInfo.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\RandomDistributions\FuncDistribution.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\RandomDistributions\IDistribution.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\RandomDistributions\NormalDistribution.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\RandomDistributions\UniformDistribution.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\RandomDistributions\WeibullDistribution.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\CanCauseError.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\CommandLineArgsHandler.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\DisjointPair.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\EnumExtensions.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\ExceptionHelpers.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\FixedPointInteger.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\FunctionComparer.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\FunctionExtensions.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\IInitiadable.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\INamed.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\IRecyclable.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\LamdaComparer.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\LazyHelpers.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\MicsUtilities.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\PairExtensions.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\Primitives\BooleanHelpers.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\Primitives\ByteExtensions.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\Primitives\CharacterExtensions.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\Primitives\CharacterPair.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\Primitives\FloatingPointExtensions.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\Primitives\IntegerExtensions.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\Reference.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\RememberPreviousValue.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\ReverseComparer.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\SerialazitionExtension.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\SharedDirtyBuffer.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\Strings\NaturalComparer.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\Strings\Parser.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\Strings\RegexHelper.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\Strings\StringEqualityComparer.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\Strings\StringExtensions.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\TimeSpanHelper.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\TypeHelpers.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\UpdateOnce.cs" />
+    <Compile Remove="EventAssembler\Nintenlord\Utility\UpdateOnDemand.cs" />
+    <EmbeddedResource Remove="EventAssembler\Event Assembler\Core\Properties\Resources.resx" />
+    <EmbeddedResource Remove="EventAssembler\Event Assembler\Event Assembler\UserInterface\EnumChooser.resx" />
+    <EmbeddedResource Remove="EventAssembler\Event Assembler\Event Assembler\UserInterface\EnumChooserForm.resx" />
+    <EmbeddedResource Remove="EventAssembler\Event Assembler\Event Assembler\UserInterface\MainForm.resx" />
+    <EmbeddedResource Remove="EventAssembler\Event Assembler\Event Assembler\UserInterface\TextShower.resx" />
+    <EmbeddedResource Remove="EventAssembler\Event Assembler\ReadBinaryAndWriteText\Properties\Resources.resx" />
+    <EmbeddedResource Remove="EventAssembler\Nintenlord.Forms\Properties\Resources.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ROMhack\ROMhack.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="src\Editors\MagicButton.cs" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,84 @@
+
+# FE6
+
+##Removes character from the map.
+##aliases:DISA
+UNIT_DISSAPPEAR, 0x30, 8, -game:FE6 -indexMode:8
+##Character to remove.
+	CharacterID, 4, 4
+
+##Removes character from the map.
+##aliases:UNIT_DISSAPPEAR
+DISA, 0x30, 8, -game:FE6 -indexMode:8
+##Character to remove.
+	CharacterID, 4, 4
+
+
+
+# FE7
+
+##Removes character from the map.
+##aliases:DISA
+UNIT_DISSAPPEAR, 0x6A, 8, -game:FE7 -indexMode:8
+##Position of the character to remove.
+	Position, 4, 4, -coordinates:2
+
+##Removes character from the map.
+##aliases:UNIT_DISSAPPEAR
+DISA, 0x6A, 8, -game:FE7 -indexMode:8
+##Position of the character to remove.
+	Position, 4, 4, -coordinates:2
+
+##Removes character from the map.
+##aliases:DISA
+UNIT_DISSAPPEAR, 0x6B, 8, -game:FE7 -indexMode:8
+##Character to remove.
+	CharacterID, 4, 2
+
+##Removes character from the map.
+##aliases:UNIT_DISSAPPEAR
+DISA, 0x6B, 8, -game:FE7 -indexMode:8
+##Character to remove.
+	CharacterID, 4, 2
+
+
+
+# FE8
+
+##Removes character from the map.
+##aliases:DISA
+UNIT_DISSAPPEAR, 0x342F, 4, -game:FE8 -indexMode:8
+##Character to remove.
+	CharacterID, 2, 2
+
+##Removes character from the map.
+##aliases:UNIT_DISSAPPEAR
+DISA, 0x342F, 4, -game:FE8 -indexMode:8
+##Character to remove.
+	CharacterID, 2, 2
+
+##Removes unit from party until next loaded. Used on Eirika/Ephraim at the lord split.
+##aliases:REMU
+UNIT_REMOVE, 0x3420, 4, -game:FE8 -indexMode:8
+##Character to remove.
+	CharacterID, 2, 2
+
+##Removes unit from party until next loaded. Used on Eirika/Ephraim at the lord split.
+##aliases:UNIT_REMOVE
+REMU, 0x3420, 4, -game:FE8 -indexMode:8
+##Character to remove.
+	CharacterID, 2, 2
+
+
+
+##Clears all ally units from the map
+CLEA, 0x342A, 4, -game:FE8 -indexMode:8
+	CharacterID, 2, 2
+
+##Clears all  units from the map
+CLEN, 0x342B, 4, -game:FE8 -indexMode:8
+	CharacterID, 2, 2
+
+##Clears all  units from the map
+CLEE, 0x342C, 4, -game:FE8 -indexMode:8
+	CharacterID, 2, 2

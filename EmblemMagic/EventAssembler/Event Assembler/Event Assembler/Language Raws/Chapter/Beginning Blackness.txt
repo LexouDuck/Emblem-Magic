@@ -1,0 +1,16 @@
+
+# FE7
+
+##command:OUT OF beginning BLACKness
+##Takes chapter out of the blackness in the beginning.
+##Whether or not that blackness is there
+##is set with the Chapter Editor module.
+##aliases:OOBB
+OUT_OF_BLACK, 0xC, 4, -game:FE7 -indexMode:8
+
+##command:Out Of Beginning Blackness
+##Takes chapter out of the blackness in the beginning.
+##Whether or not that blackness is there
+##is set with the Chapter Editor module.
+##aliases:OUT_OF_BLACK
+OOBB, 0xC, 4, -game:FE7 -indexMode:8

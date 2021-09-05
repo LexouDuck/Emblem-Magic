@@ -1,0 +1,41 @@
+
+//Fallen text loaders
+#ifdef _FE7_
+#define ShowLynModeFallenText "GOTO $CC0928; _0x9A"
+
+//For Eliwood and Hector modes
+#define ShowFallenText "GOTO $CC0C14; _0x9A"
+#endif
+
+//Game ending helpers
+#ifdef _FE7_
+#define LynModeEnding "JUMP $CC0F30"
+#endif
+
+
+//Basic moving to a chapter.
+//Do not use with gaidens.
+#ifdef _FE6_
+#define MoveToChapter(chapter) "STAL 64; MNCH chapter; STAL 1; _0x1; ENDA"
+#endif
+
+#ifdef _FE7_
+#define MoveToChapter(chapter) "FADI 4; HIDEMAP; BACG 0x5B; MNCH chapter; STAL 1; _0x1; ENDA"
+#endif
+
+#ifdef _FE8_
+//Shockingly, FE8 does this the simplest way.
+#define MoveToChapter(chapter) "MNCH chapter; ENDA"
+#endif
+
+
+//Gaidens, under construction
+/*
+#ifdef _FE7_
+#define GaidenHelper(ifcode, condID, elseID, askingText, nextCH, gaidenCH) "ifcode; FADI 4; HIDEMAP; _0x87; BACG 0x5B; FADU 128; SHOWMAP; STAL 2; ASMC 0x15591; TEX6 0x7 [0,0] askingText; _ASM0x42 0x83181; _0x89; IFYN 0x21; MNCH gaidenCH; STAL 1; _0x1; ELSE elseID; ENIF condID; FADI 4; HIDEMAP; BACG 0x5B; ENIF 0x21; MNCH nextCH; STAL 1; _0x1; ENIF elseID; ENDA"
+
+#define FreeGaiden(askingText, nextCH, gaidenCH) "FADI 4; HIDEMAP; _0x87; BACG 0x5B; FADU 128; SHOWMAP; STAL 2; ASMC 0x15591; TEX6 0x7 [0,0] askingText; _ASM0x42 0x83181; _0x89; IFYN 0x21; MNCH gaidenCH; STAL 1; _0x1; FADI 4; HIDEMAP; BACG 0x5B; ENIF 0x21; MNCH nextCH; STAL 1; _0x1; ENIF 0x22; ENDA"
+#define TurnGaiden(turn, askingText, nextCH, gaidenCH) "GaidenHelper(IFTU 0x20 turn, 0x20, 0x22, askingText, nextCH, gaidenCH)"
+#define EventIDGaiden(eventID, askingText, nextCH, gaidenCH) "GaidenHelper(IFEF 0x20 eventID, 0x20, 0x22, askingText, nextCH, gaidenCH)"
+#endif
+*/

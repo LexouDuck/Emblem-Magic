@@ -1,0 +1,37 @@
+
+# FE6
+
+##command:GIVE MONEY to player
+##Gives money to the player.
+##aliases:MONE
+GIVE_MONEY, 0x28, 8, -game:FE6 -indexMode:8
+##Amount of money to give.
+	MoneyAmount, 4, 2, -preferredBase:10
+
+##command:give MONEy to player
+##Gives money to the player.
+##aliases:GIVE_MONEY
+MONE, 0x28, 8, -game:FE6 -indexMode:8
+##Amount of money to give.
+	MoneyAmount, 4, 2, -preferredBase:10
+
+
+# FE7
+
+##command:GIVE MONEY to player
+##Gives money to the player.
+##aliases:MONE
+GIVE_MONEY, 0x5E, 8, -game:FE7 -indexMode:8
+##Determines the way money is given.
+	VillageOrCutscene, 2, 2
+##Amount of money to give.
+	MoneyAmount, 4, 2, -preferredBase:10
+
+##command:give MONEy to player
+##Gives money to the player.
+##aliases:GIVE_MONEY
+MONE, 0x5E, 8, -game:FE7 -indexMode:8
+##Determines the way money is given.
+	VillageOrCutscene, 2, 2
+##Amount of money to give.
+	MoneyAmount, 4, 2, -preferredBase:10

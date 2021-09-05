@@ -1,0 +1,165 @@
+
+# FE6 & FE7
+
+##This code sets up unit data to be loaded onto the chapter map.
+##The parameterless version signals the end of a UNIT list.
+UNIT, 0, 16, -game:FE6:FE7 -priority:unit -indexMode:8
+##Character ID byte of this unit.
+	CharacterID, 0, 1
+##Class ID byte of this unit.
+	ClassID, 1, 1
+##Leader character ID for this unit. The leader character
+##is usually either the main lord or enemy boss.
+	Leader, 2, 1
+##This byte stores the level of the unit, the side
+##they're on (ally, enemy, npc) and whether or not
+##this unit is to be loaded with autoleveling.
+	UnitLevelData, 3, 1
+##Position at which to load this unit.
+	LoadPosition, 4, 2, -coordinate:2 -preferredBase:10
+##Position to move this unit to after loading.
+	StartPosition, 6, 2, -coordinate:2 -preferredBase:10
+##The item inventory that this unit starts with.
+	Items, 8, 4, -coordinate:1-4
+##The AI of this unit upon loading.
+	AI, 12, 4, -coordinate:1-4
+
+UNIT, 0, 16, -game:FE6:FE7 -priority:unit -indexMode:8
+	CharacterID, 0, 1
+	ClassID, 1, 1
+	Leader, 2, 1
+	UnitLevelData, 3, 1
+	LoadPosition, 4, 2, -coordinate:2 -preferredBase:10
+	StartPosition,  6, 2, -coordinate:2 -preferredBase:10
+##The first item in this unit's inventory
+	Item1, 8, 1
+##The second item in this unit's inventory
+	Item2, 9, 1
+##The third item in this unit's inventory
+	Item3, 10, 1
+##The fourth item in this unit's inventory
+	Item4, 11, 1
+	AI_1, 12, 1
+	AI_2, 13, 1
+	AI_3, 14, 1
+	AI_4, 15, 1
+
+UNIT, 0, 16, -game:FE6:FE7 -priority:unit -end -indexMode:8
+	0x0, 0, 4, -fixed
+	0x0, 4, 4, -fixed
+	0x0, 8, 4, -fixed
+	0x0, 12, 4, -fixed
+
+
+
+# FE8
+
+##This code sets up unit data to be loaded onto the chapter map.
+##The parameterless version signals the end of a UNIT list.
+UNIT, 0, 160, -game:FE8 -priority:unit
+##Character ID byte of this unit.
+	CharacterID, 0, 8
+##Class ID byte of this unit.
+	ClassID, 8, 8
+##Leader character ID for this unit. The leader character
+##is usually either the main lord or enemy boss.
+	Leader, 16, 8
+##This byte stores the level of the unit, the side
+##they're on (ally, enemy, npc) and whether or not
+##this unit is to be loaded with autoleveling.
+	UnitLevelData, 24, 8
+##Position at which to load this unit.
+	LoadPosition, 32, 12, -coordinate:2 -preferredBase:10
+##Controls other details about this unit, like item drops
+##and how the unit data is to be interpreted.
+	Flags, 44, 4, -preferredBase:2
+##Unknown, is usually 0.
+	Byte1, 48, 8
+##Amount of REDA codes to use when loading this unit.
+	MoveDataCount, 56, 8
+##Pointer to REDA data which handles unit movement upon loading.
+	MoveDataPointer, 64, 32, -pointer:reinforcementData
+	Items, 96, 32, -coordinate:1-4
+	AI, 128, 32, -coordinate:1-4
+    
+UNIT, 0, 160, -game:FE8 -priority:unit
+	CharacterID, 0, 8
+	ClassID, 8, 8
+	Leader, 16, 8
+	UnitLevelData, 24, 8
+	LoadPosition, 32, 12, -coordinate:2 -preferredBase:10
+	Flags, 44, 4, -preferredBase:2
+	Byte1, 48, 8
+	MoveDataCount, 56, 8
+	MoveDataPointer, 64, 32, -pointer:reinforcementData
+##The first item in this unit's inventory
+	Item1, 96, 8
+##The second item in this unit's inventory
+	Item2, 104, 8
+##The third item in this unit's inventory
+	Item3, 112, 8
+##The fourth item in this unit's inventory
+	Item4, 120, 8
+	AI_1, 128, 8
+	AI_2, 136, 8
+	AI_3, 144, 8
+	AI_4, 152, 8
+
+UNIT, 0, 20, -game:FE8 -priority:unit -end -indexMode:8
+	0x0, 0, 4, -fixed
+	0x0, 4, 4, -fixed
+	0x0, 8, 4, -fixed
+	0x0, 12, 4, -fixed
+	0x0, 16, 4, -fixed
+
+
+
+##command: REinforcement DAta
+##Controls how units move right after getting loaded to the map.
+##aliases:REDA
+UNIT_MOVE, 0, 64, -game:FE8 -priority:reinforcementData
+##Position to move the unit to.
+	Destination, 0, 12, coordinate:2 -preferredBase:10
+##Flags of the movement.
+	Flags, 12, 4, -preferredBase:2
+##Speed of the movement.
+	Speed, 16, 8
+##Unit that this unit is rescuing. 0 if there is none.
+	RescueCharacterID, 24, 8
+	0xFFFF, 32, 16, -fixed
+##Amount of time to pass before executing this code.
+	Delay, 48, 8, -preferredBase:10
+
+##command: REinforcement DAta
+##Controls how units move right after getting loaded to the map.
+##aliases:UNIT_MOVE
+REDA, 0, 64, -game:FE8 -priority:reinforcementData
+##Position to move the unit to.
+	Destination, 0, 12, coordinate:2 -preferredBase:10
+##Flags of the movement.
+	Flags, 12, 4, -preferredBase:2
+##Speed of the movement.
+	Speed, 16, 8
+##Unit that this unit is rescuing. 0 if there is none.
+	RescueCharacterID, 24, 8
+	0xFFFF, 32, 16, -fixed
+##Amount of time to pass before executing this code.
+	Delay, 48, 8, -preferredBase:10
+
+UNIT_MOVE, 0, 64, -game:FE8 -priority:reinforcementData
+	Destination, 0, 12, coordinate:2 -preferredBase:10
+	Flags, 12, 4, -preferredBase:2
+	Speed, 16, 8
+	RescueCharacterID, 24, 8
+##Unknown, is usually 0xFFFF.
+	Unknown, 32, 16
+	Delay, 48, 8, -preferredBase:10
+
+REDA, 0, 64, -game:FE8 -priority:reinforcementData
+	Destination, 0, 12, coordinate:2 -preferredBase:10
+	Flags, 12, 4, -preferredBase:2
+	Speed, 16, 8
+	RescueCharacterID, 24, 8
+##Unknown, is usually 0xFFFF.
+	Unknown, 32, 16
+	Delay, 48, 8, -preferredBase:10
