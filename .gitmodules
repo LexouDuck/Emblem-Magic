@@ -1,3 +1,3 @@
-[submodule "EventAssembler"]
+[submodule "EmblemMagic/EventAssembler"]
 	path = EmblemMagic/EventAssembler
-	url = https://github.com/lexouduck/Event-Assembler.git
+	url = git@github.com:LexouDuck/Event-Assembler.git
