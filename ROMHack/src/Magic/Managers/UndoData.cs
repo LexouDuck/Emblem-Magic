@@ -28,7 +28,7 @@ namespace Magic
         /// </summary>
         public List<WriteConflict> Conflicts { get; private set; }
 
-        public UndoRedo(UserAction action, Write associatedWrite, byte[] oldData, List<WriteConflict> conflict)
+        public UndoRedo(UserAction action, Write associatedWrite, Byte[] oldData, List<WriteConflict> conflict)
         {
             Action = action;
             Associated = associatedWrite;

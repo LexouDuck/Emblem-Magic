@@ -7,7 +7,7 @@ namespace Magic
     /// </summary>
     public class Repoint
     {
-        public string AssetName { get; set; }
+        public System.String AssetName { get; set; }
         public Pointer DefaultAddress { get; set; }
         public Pointer CurrentAddress { get; set; }
         public Pointer[] References { get; set; }
@@ -15,7 +15,7 @@ namespace Magic
         /// <summary>
         /// Usual constructor
         /// </summary>
-        public Repoint(string assetName, Pointer defaultAddress)
+        public Repoint(System.String assetName, Pointer defaultAddress)
         {
             AssetName = assetName;
 
@@ -27,7 +27,7 @@ namespace Magic
         /// <summary>
         /// Called when loading an FEH file
         /// </summary>
-        public Repoint(string assetName, uint defaultAddress, uint currentAddress)
+        public Repoint(System.String assetName, System.UInt32 defaultAddress, System.UInt32 currentAddress)
         {
             AssetName = assetName;
 

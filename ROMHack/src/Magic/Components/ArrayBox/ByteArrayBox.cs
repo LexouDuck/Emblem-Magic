@@ -4,14 +4,14 @@ using System.Windows.Forms;
 
 namespace Magic.Components
 {
-    public class ByteArrayBox : ArrayBox<byte>
+    public class ByteArrayBox : ArrayBox<Byte>
     {
         /// <summary>
         /// Gets or sets this ArrayBox's NumberBox value.
         /// </summary>
         [DesignerSerializationVisibility
         (DesignerSerializationVisibility.Hidden)]
-        public override byte Value
+        public override Byte Value
         {
             get
             {

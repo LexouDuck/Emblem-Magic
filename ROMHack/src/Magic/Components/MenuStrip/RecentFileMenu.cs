@@ -11,21 +11,21 @@ namespace Magic.Components
         /// <summary>
         /// The full path + filename and extension the file in question.
         /// </summary>
-        public string FileName { get; set; }
+        public String FileName { get; set; }
         /// <summary>
         /// Gets the text to display on the MenuItem
         /// </summary>
-        public override string Text
+        public override String Text
         {
             get
             {
                 ToolStripMenuItem parent = (ToolStripMenuItem)this.OwnerItem;
-                int index = parent.DropDownItems.IndexOf(this);
+                Int32 index = parent.DropDownItems.IndexOf(this);
                 return (index + 1) + " - " + FileName;
             }
         }
 
-        public RecentFileMenuItem(string fileName)
+        public RecentFileMenuItem(String fileName)
         {
             FileName = fileName;
         }
@@ -35,7 +35,7 @@ namespace Magic.Components
 
     public sealed class RecentFileMenu : ToolStripMenuItem
     {
-        public const int Maximum = 25;
+        public const Int32 Maximum = 25;
         
         public RecentFileMenu()
         {
@@ -58,8 +58,8 @@ namespace Magic.Components
 
             DropDownItems.Clear();
 
-            int count = Math.Min(Settings.Default.RecentFilesMax, Settings.Default.RecentFiles.Count);
-            for(int i = 0; i < count; i++)
+            Int32 count = Math.Min(Settings.Default.RecentFilesMax, Settings.Default.RecentFiles.Count);
+            for(Int32 i = 0; i < count; i++)
             {
                 DropDownItems.Add(new RecentFileMenuItem(Settings.Default.RecentFiles[i]));
             }
@@ -76,10 +76,10 @@ namespace Magic.Components
         /// <summary>
         /// Adds a file to this RecentFileMenu
         /// </summary>
-        public void AddFile(string fileName)
+        public void AddFile(String fileName)
         {
             // check if the file is already in the collection
-            int alreadyIn = GetIndex(fileName);
+            Int32 alreadyIn = GetIndex(fileName);
             if (alreadyIn > 0) // remove it
             {
                 Settings.Default.RecentFiles.RemoveAt(alreadyIn);
@@ -111,12 +111,12 @@ namespace Magic.Components
         /// <summary>
         /// Gets the index of the filename in this RecentFileMenu, or -1 if not found
         /// </summary>
-        int GetIndex(string fileName)
+        Int32 GetIndex(String fileName)
         {
-            for (int i = 0; i < Settings.Default.RecentFiles.Count; i++)
+            for (Int32 i = 0; i < Settings.Default.RecentFiles.Count; i++)
             {
-                string currentFile = Settings.Default.RecentFiles[i];
-                if (string.Equals(currentFile, fileName, StringComparison.OrdinalIgnoreCase))
+                String currentFile = Settings.Default.RecentFiles[i];
+                if (String.Equals(currentFile, fileName, StringComparison.OrdinalIgnoreCase))
                 {
                     return i;
                 }
@@ -124,7 +124,7 @@ namespace Magic.Components
             return -1;
         }
         
-        void Settings_Changed(object sender, PropertyChangedEventArgs e)
+        void Settings_Changed(Object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "RecentFilesMax")
             {
@@ -143,7 +143,7 @@ namespace Magic.Components
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
+        protected override void Dispose(Boolean disposing)
         {
             if (disposing && (components != null))
             {

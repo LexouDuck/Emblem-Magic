@@ -31,8 +31,8 @@ namespace EmblemMagic.Editors
 
         List<Event> EventList = new List<Event>();
 
-        static int UNIT_argX = (Core.CurrentROM is FE8) ? 4 : 6;
-        static int UNIT_argY = (Core.CurrentROM is FE8) ? 5 : 7;
+        static Int32 UNIT_argX = (Core.CurrentROM is FE8) ? 4 : 6;
+        static Int32 UNIT_argY = (Core.CurrentROM is FE8) ? 5 : 7;
 
 
 
@@ -94,7 +94,7 @@ namespace EmblemMagic.Editors
             {
                 if (!EA.Program.CodesLoaded || LanguageProcessor == null)
                 {
-                    string folder =
+                    String folder =
 #if (DEBUG)
 "D:\\Lexou\\Projects\\EmblemMagic\\EventAssembler\\Event Assembler\\Event Assembler";
 #else
@@ -103,9 +103,9 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
                     LanguageProcessor = EA.Program.LoadCodes(folder + "\\Language Raws", ".txt", true, true);
                 }
                 Language = EA.Program.Languages[Core.CurrentROM.GetIdentifier().Substring(0, 3)];
-                string keywords = "";
-                IEnumerable<string> codes = Language.GetCodeNames();
-                foreach (string code in codes)
+                String keywords = "";
+                IEnumerable<String> codes = Language.GetCodeNames();
+                foreach (String code in codes)
                 {
                     keywords += code;
                     keywords += "( |\r\n)|";
@@ -141,7 +141,7 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
                         log.PrintAll();
                     }
                 }
-                string result = stringbuilder.ToString().TrimStart('\r', '\n');
+                String result = stringbuilder.ToString().TrimStart('\r', '\n');
                 EventList = Core_LoadEventCode_EventLabels(ref result);
                 if (Tools_ManageSpace.Checked)
                     Core_LoadEventCode_ManageSpace(ref result);
@@ -157,10 +157,10 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
                 UI.ShowError("There has been an error while loading the event code.", ex);
             }
         }
-        List<Event> Core_LoadEventCode_EventLabels(ref string code)
+        List<Event> Core_LoadEventCode_EventLabels(ref String code)
         {
             List<Event> result = new List<Event>();
-            string[] commands = new string[]
+            String[] commands = new String[]
             {
                 "TURN",
                 "AFEV",
@@ -183,15 +183,15 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
 
                 "UNIT"
             };
-            string[] args;
-            uint[] arguments;
+            String[] args;
+            UInt32[] arguments;
 
-            string label;
-            int label_arg;
-            int index;
-            int new_index;
-            int length;
-            foreach (string command in commands)
+            String label;
+            Int32 label_arg;
+            Int32 index;
+            Int32 new_index;
+            Int32 length;
+            foreach (String command in commands)
             {
                 index = 0;
                 while ((new_index = code.IndexOf("\n" + command + " ", index)) > index)
@@ -199,16 +199,16 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
                     index = new_index + command.Length + 2;
                     length = code.IndexOf("\r\n", index) - index;
                     args = code.Substring(index, length).Split(
-                        new char[] { ' ', ',', '[', ']', '\t' },
+                        new Char[] { ' ', ',', '[', ']', '\t' },
                         StringSplitOptions.RemoveEmptyEntries);
-                    arguments = new uint[args.Length];
+                    arguments = new UInt32[args.Length];
                     label = null;
                     label_arg = -1;
-                    for (int i = 0; i < args.Length; i++)
+                    for (Int32 i = 0; i < args.Length; i++)
                     {
                         if (args[i].Length >= 5 && args[i].Substring(0, 5) == "label")
                         {
-                            bool label_suffix = false;
+                            Boolean label_suffix = false;
                             label_arg = i;
                             switch (command)
                             {
@@ -229,8 +229,8 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
                             }
                             if (label_suffix)
                             {
-                                int name_end = code.LastIndexOf(':', index);
-                                int name_start = code.LastIndexOf('\n', name_end) + 1;
+                                Int32 name_end = code.LastIndexOf(':', index);
+                                Int32 name_start = code.LastIndexOf('\n', name_end) + 1;
                                 label = code.Substring(name_start, name_end - name_start) + label;
                             }
                         }
@@ -240,14 +240,14 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
                         }
                         else try
                         {
-                            arguments[i] = uint.Parse(args[i]);
+                            arguments[i] = UInt32.Parse(args[i]);
                         }
                         catch { continue; }
                     }
                     if (command == "UNIT")
                     {
-                        int name_end = code.LastIndexOf(':', index);
-                        int name_start = code.LastIndexOf('\n', name_end) + 1;
+                        Int32 name_end = code.LastIndexOf(':', index);
+                        Int32 name_start = code.LastIndexOf('\n', name_end) + 1;
                         label = code.Substring(name_start, name_end - name_start);
                     }
                     if (label != null && label_arg != -1)
@@ -262,11 +262,11 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
             }
             return result;
         }
-        void Core_LoadEventCode_ManageSpace(ref string code)
+        void Core_LoadEventCode_ManageSpace(ref String code)
         {
-            int index = 0;
-            int new_index;
-            int length;
+            Int32 index = 0;
+            Int32 new_index;
+            Int32 length;
             if (code.StartsWith("ORG "))
             {
                 length = code.IndexOf("\r\n") + 2;
@@ -291,8 +291,8 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
         {
             UnitEvents_ListBox.ItemCheck -= UnitEvents_ListBox_ItemCheck;
             UnitEvents_ListBox.Items.Clear();
-            bool display_units;
-            for (int i = 0; i < EventList.Count; i++)
+            Boolean display_units;
+            for (Int32 i = 0; i < EventList.Count; i++)
             {
                 if (EventList[i].Command == "UNIT" && EventList[i].Label != null)
                 {
@@ -315,12 +315,12 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
         void Core_LoadMap()
         {
             Pointer address = Core.GetPointer("Map Data Array");
-            Pointer poin_palette    = Core.ReadPointer(address + 4 * (byte)Current["Palette"]);
-            Pointer poin_tileset1   = Core.ReadPointer(address + 4 * (byte)Current["Tileset1"]);
-            Pointer poin_tileset2   = Core.ReadPointer(address + 4 * (byte)Current["Tileset2"]);
-            Pointer poin_tsa        = Core.ReadPointer(address + 4 * (byte)Current["TSA"]);
-            Pointer poin_mapdata    = Core.ReadPointer(address + 4 * (byte)Current["Map"]);
-            Pointer poin_mapchanges = Core.ReadPointer(address + 4 * (byte)Current["MapChanges"]);
+            Pointer poin_palette    = Core.ReadPointer(address + 4 * (Byte)Current["Palette"]);
+            Pointer poin_tileset1   = Core.ReadPointer(address + 4 * (Byte)Current["Tileset1"]);
+            Pointer poin_tileset2   = Core.ReadPointer(address + 4 * (Byte)Current["Tileset2"]);
+            Pointer poin_tsa        = Core.ReadPointer(address + 4 * (Byte)Current["TSA"]);
+            Pointer poin_mapdata    = Core.ReadPointer(address + 4 * (Byte)Current["Map"]);
+            Pointer poin_mapchanges = Core.ReadPointer(address + 4 * (Byte)Current["MapChanges"]);
 
             MapTileset map_tileset;
             try
@@ -354,13 +354,13 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
                 MapChanges_ListBox.ItemCheck -= MapChanges_ListBox_ItemCheck;
                 if (MapChanges_ListBox.Items.Count > 0)
                 {
-                    for (int i = 0; i < CurrentMap.ShowChanges.Length; i++)
+                    for (Int32 i = 0; i < CurrentMap.ShowChanges.Length; i++)
                     {
                         CurrentMap.ShowChanges[i] = MapChanges_ListBox.GetItemChecked(i);
                     }
                     MapChanges_ListBox.Items.Clear();
                 }
-                for (int i = 0; i < CurrentMap.Changes.Count; i++)
+                for (Int32 i = 0; i < CurrentMap.Changes.Count; i++)
                 {
                     MapChanges_ListBox.Items.Add(
                         "0x" + Util.ByteToHex(CurrentMap.Changes.GetNumber(i)),
@@ -386,25 +386,25 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
                 Pointer address_mapsprites = Core.GetPointer("Map Sprite Idle Array");
                 Pointer address_classes = Core.GetPointer("Class Array");
                 Pointer address;
-                byte palette_index;
-                byte palette_amount = 4;
+                Byte palette_index;
+                Byte palette_amount = 4;
                 address = Core.GetPointer("Map Sprite Palettes");
-                byte[][] palettes = new byte[palette_amount][];
-                for (int i = 0; i < palette_amount; i++)
+                Byte[][] palettes = new Byte[palette_amount][];
+                for (Int32 i = 0; i < palette_amount; i++)
                 {
                     palettes[i] = Core.ReadData(address + i * Palette.LENGTH, Palette.LENGTH);
                     result.Colors.Add(new Palette(palettes[i]));
                 }
-                int class_length = (Core.CurrentROM is FE6 ? 72 : 84);
+                Int32 class_length = (Core.CurrentROM is FE6 ? 72 : 84);
                 GBA.Image image;
-                byte unitclass;
-                byte mapsprite;
-                byte size;
+                Byte unitclass;
+                Byte mapsprite;
+                Byte size;
                 Tileset tileset;
-                int offsetX;
-                int offsetY;
-                int index;
-                for (int i = 0; i < EventList.Count; i++)
+                Int32 offsetX;
+                Int32 offsetY;
+                Int32 index;
+                for (Int32 i = 0; i < EventList.Count; i++)
                 {
                     if (EventList[i].Command == "UNIT" &&
                         EventList[i].Label != null)
@@ -414,12 +414,12 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
                             continue;
                         else if (!UnitEvents_ListBox.GetItemChecked(index))
                             continue;
-                        unitclass = (byte)EventList[i].Arguments[1];
+                        unitclass = (Byte)EventList[i].Arguments[1];
                         mapsprite = Core.ReadByte(address_classes + 6 + unitclass * class_length);
                         address = address_mapsprites + mapsprite * 8;
                         size = Core.ReadByte(address + 2);
                         tileset = new Tileset(Core.ReadData(Core.ReadPointer(address + 4), 0));
-                        palette_index = (byte)(EventList[i].Arguments[3] & 6);
+                        palette_index = (Byte)(EventList[i].Arguments[3] & 6);
                         if (palette_index > 2) palette_index -= 3;
                         switch (size)
                         {
@@ -430,13 +430,13 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
                         }
                         if (image != null)
                         {
-                            offsetX = (int)(EventList[i].Arguments[UNIT_argX] * 16);
-                            offsetY = (int)(EventList[i].Arguments[UNIT_argY] * 16);
+                            offsetX = (Int32)(EventList[i].Arguments[UNIT_argX] * 16);
+                            offsetY = (Int32)(EventList[i].Arguments[UNIT_argY] * 16);
                             offsetX -= (size == 0x02 ? 8 : 0);
                             offsetY -= (size == 0x00 ? 0 : 16);
-                            int pixel;
-                            for (int y = 0; y < image.Height; y++)
-                            for (int x = 0; x < image.Width; x++)
+                            Int32 pixel;
+                            for (Int32 y = 0; y < image.Height; y++)
+                            for (Int32 x = 0; x < image.Width; x++)
                             {
                                 index = (x / 2) + y * (image.Width / 2);
                                 pixel = (x % 2 == 0) ?
@@ -459,12 +459,12 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
             }
         }
 
-        string Core_GetAllArrayDefines()
+        String Core_GetAllArrayDefines()
         {
-            string result = "#define None 0\r\n";
-            string define;
+            String result = "#define None 0\r\n";
+            String define;
             ArrayFile definitions;
-            string[] files = new string[]
+            String[] files = new String[]
             {
                 "Dialog Background List.txt",
                 "Cutscene Screen List.txt",
@@ -476,14 +476,14 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
             };
             //FileInfo[] files = new DirectoryInfo(Core.Path_Arrays).GetFiles("*.txt");
             //foreach (FileInfo file in files)
-            foreach (string file in files)
+            foreach (String file in files)
             {
                 if (file.EndsWith("Commands.txt"))
                     continue;
                 definitions = new ArrayFile(file);
                 result += "\r\n";
                 result += "// " + "file.Name\r\n";
-                for (uint i = 0; i <= definitions.LastEntry; i++)
+                for (UInt32 i = 0; i <= definitions.LastEntry; i++)
                 {
                     define = EventAssemblerIO.ReplaceSpacesAndSpecialChars(definitions[i]);
                     if (define.Equals("None"))
@@ -497,7 +497,7 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
 
         
 
-        private void File_Assemble_Click(object sender, EventArgs e)
+        private void File_Assemble_Click(Object sender, EventArgs e)
         {
             OpenFileDialog openWindow = new OpenFileDialog();
             openWindow.RestoreDirectory = true;
@@ -507,7 +507,7 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
                 "Text file (*.event)|*.event|" +
                 "All files (*.*)|*.*";
 
-            string filepath = "";
+            String filepath = "";
             if (openWindow.ShowDialog() == DialogResult.OK)
             {
                 filepath = openWindow.FileName;
@@ -533,11 +533,11 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
             UI.ResumeUpdate();
             UI.PerformUpdate();
         }
-        private void File_Assemble_CurrentText_Click(object sender, EventArgs e)
+        private void File_Assemble_CurrentText_Click(Object sender, EventArgs e)
         {
             UI.SuspendUpdate();
 
-            string code = Core_GetAllArrayDefines() + Event_CodeBox.Text;
+            String code = Core_GetAllArrayDefines() + Event_CodeBox.Text;
             EA_Log log = new EA_Log();
             ROM_Stream stream = new ROM_Stream(this);
             using (TextReader text = new StringReader(code))
@@ -553,7 +553,7 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
             UI.ResumeUpdate();
             UI.PerformUpdate();
         }
-        private void File_Save_Click(object sender, EventArgs e)
+        private void File_Save_Click(Object sender, EventArgs e)
         {
             SaveFileDialog saveWindow = new SaveFileDialog();
             saveWindow.RestoreDirectory = true;
@@ -576,22 +576,22 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
             }
         }
 
-        private void View_Grid_Click(object sender, EventArgs e)
+        private void View_Grid_Click(Object sender, EventArgs e)
         {
             MapViewBox.ShowGrid = View_Grid.Checked;
         }
-        private void View_Units_Click(object sender, EventArgs e)
+        private void View_Units_Click(Object sender, EventArgs e)
         {
             Core_LoadMap();
         }
-        private void View_ArrayDefinitions_CheckedChanged(object sender, EventArgs e)
+        private void View_ArrayDefinitions_CheckedChanged(Object sender, EventArgs e)
         {
             Core_LoadEventCode();
         }
 
-        private void Tools_MakeEAtxt_Click(object sender, EventArgs e)
+        private void Tools_MakeEAtxt_Click(Object sender, EventArgs e)
         {
-            string[] file;
+            String[] file;
             try
             {
                 OpenFileDialog openWindow = new OpenFileDialog();
@@ -618,17 +618,17 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
                     "All files (*.*)|*.*";
                 if (saveWindow.ShowDialog() == DialogResult.OK)
                 {
-                    string number;
-                    string define;
-                    int start, end;
-                    for (int i = 0; i < file.Length; i++)
+                    String number;
+                    String define;
+                    Int32 start, end;
+                    for (Int32 i = 0; i < file.Length; i++)
                     {
                         start = 0;
-                        end = file[i].IndexOfAny(new char[] { ' ', '\t' });
+                        end = file[i].IndexOfAny(new Char[] { ' ', '\t' });
                         if (end < 0) continue;
                         number = file[i].Substring(start, end - start);
                         start = end + 1;
-                        end = file[i].IndexOfAny(new char[] { '\r', '\n' }, start);
+                        end = file[i].IndexOfAny(new Char[] { '\r', '\n' }, start);
                         if (end < 0) end = file[i].Length;
                         define = EventAssemblerIO.ReplaceSpacesAndSpecialChars(file[i].Substring(start, end - start));
                         file[i] = ("#define " + define + "\t" + number);
@@ -641,9 +641,9 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
                 UI.ShowError("Could not make EA definitions file from EM array text file.", ex);
             }
         }
-        private void Tools_MakeEMtxt_Click(object sender, EventArgs e)
+        private void Tools_MakeEMtxt_Click(Object sender, EventArgs e)
         {
-            string[] file;
+            String[] file;
             try
             {
                 OpenFileDialog openWindow = new OpenFileDialog();
@@ -670,20 +670,20 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
                     "All files (*.*)|*.*";
                 if (saveWindow.ShowDialog() == DialogResult.OK)
                 {
-                    string number;
-                    string define;
-                    int start, end;
-                    for (int i = 0; i < file.Length; i++)
+                    String number;
+                    String define;
+                    Int32 start, end;
+                    for (Int32 i = 0; i < file.Length; i++)
                     {
-                        start = file[i].IndexOfAny(new char[] { ' ', '\t' });
+                        start = file[i].IndexOfAny(new Char[] { ' ', '\t' });
                         if (start < 0) continue;
                         while (start < file[i].Length && (file[i][start] == ' ' || file[i][start] == '\t')) ++start;
-                        end = file[i].IndexOfAny(new char[] { ' ', '\t' }, start);
+                        end = file[i].IndexOfAny(new Char[] { ' ', '\t' }, start);
                         if (end < 0) continue;
                         define = file[i].Substring(start, end - start);
                         start = end;
                         while (start < file[i].Length && (file[i][start] == ' ' || file[i][start] == '\t')) ++start;
-                        end = file[i].IndexOfAny(new char[] { ' ', '\t', '\r', '\n' }, start);
+                        end = file[i].IndexOfAny(new Char[] { ' ', '\t', '\r', '\n' }, start);
                         if (end < 0) end = file[i].Length;
                         number = file[i].Substring(start, end - start);
                         file[i] = (number + " " + define);
@@ -696,28 +696,28 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
                 UI.ShowError("Could not make EM array text file from EA definitions file.", ex);
             }
         }
-        private void Tools_ManageSpace_CheckedChanged(object sender, EventArgs e)
+        private void Tools_ManageSpace_CheckedChanged(Object sender, EventArgs e)
         {
             Core_LoadEventCode();
         }
 
 
 
-        private void EntryArrayBox_ValueChanged(object sender, EventArgs e)
+        private void EntryArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Core_Update();
             Chapter_MagicButton.EntryToSelect = Entry_ArrayBox.Value;
         }
 
-        private void Event_ArrayBox_ValueChanged(object sender, EventArgs e)
+        private void Event_ArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 Current.GetAddress(Current.EntryIndex, "Events"),
                 Event_ArrayBox.Value,
-                "Chapter Struct 0x" + Util.ByteToHex((byte)Entry_ArrayBox.Value) +
+                "Chapter Struct 0x" + Util.ByteToHex((Byte)Entry_ArrayBox.Value) +
                 " [" + Entry_ArrayBox.Text + "] - Events changed");
         }
-        private void Event_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void Event_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Core.GetPointer("Map Data Array") + 4 * Event_ArrayBox.Value,
@@ -727,9 +727,9 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
         }
 
         private Point MouseHoverLocation;
-        private bool MouseHoverFinished;
+        private Boolean MouseHoverFinished;
         protected Timer Help_ToolTip_Timer;
-        private void Event_CodeBox_MouseMove(object sender, MouseEventArgs e)
+        private void Event_CodeBox_MouseMove(Object sender, MouseEventArgs e)
         {
             if (Math.Abs(e.X - MouseHoverLocation.X) > 4 &&
                 Math.Abs(e.Y - MouseHoverLocation.Y) > 4)
@@ -742,18 +742,18 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
             MouseHoverLocation = e.Location;
             Help_ToolTip_Timer.Enabled = true;
         }
-        private void HoverTick(object sender, EventArgs e)
+        private void HoverTick(Object sender, EventArgs e)
         {
             Help_ToolTip_Timer.Enabled = false;
             MouseHoverFinished = true;
             try
             {
-                int code_index = Event_CodeBox.GetIndexFromPosition(MouseHoverLocation);
-                string command = Event.GetWord(Event_CodeBox.Text, code_index);
+                Int32 code_index = Event_CodeBox.GetIndexFromPosition(MouseHoverLocation);
+                String command = Event.GetWord(Event_CodeBox.Text, code_index);
 
                 if (command.Length > 0)
                 {
-                    string caption = "";
+                    String caption = "";
 
                     if (command.EndsWith(":"))
                     {
@@ -778,7 +778,7 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
                             Core.CurrentROM.GetIdentifier().Substring(0, 3));
                         if (caption.StartsWith("command:"))
                         {
-                            int length = caption.IndexOf('\n');
+                            Int32 length = caption.IndexOf('\n');
                             command = command + " - " + caption.Substring(8, length - 8);
                             caption = caption.Substring(length + 1);
                         }
@@ -816,7 +816,7 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
             }
         }
 
-        private void MapViewBox_SelectionChanged(object sender, EventArgs e)
+        private void MapViewBox_SelectionChanged(Object sender, EventArgs e)
         {
             if (MapViewBox.SelectionIsSingle())
             {
@@ -825,20 +825,20 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
             }
             else MapSelection_Label.Text = "X: __, Y: __";
 
-            int width = MapViewBox.Selection.GetLength(0);
-            int height = MapViewBox.Selection.GetLength(1);
-            for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++)
+            Int32 width = MapViewBox.Selection.GetLength(0);
+            Int32 height = MapViewBox.Selection.GetLength(1);
+            for (Int32 y = 0; y < height; y++)
+            for (Int32 x = 0; x < width; x++)
             {
                 if (MapViewBox.Selection[x, y])
                 {
-                    for (int i = 0; i < EventList.Count; i++)
+                    for (Int32 i = 0; i < EventList.Count; i++)
                     {
                         if (EventList[i].Command == "UNIT" &&
                             EventList[i].Arguments[UNIT_argX] == x &&
                             EventList[i].Arguments[UNIT_argY] == y)
                         {
-                            int index = UnitEvents_ListBox.Items.IndexOf(EventList[i].Label);
+                                Int32 index = UnitEvents_ListBox.Items.IndexOf(EventList[i].Label);
                             if (index == -1) continue;
                             else if (UnitEvents_ListBox.GetItemChecked(index))
                             {
@@ -853,16 +853,16 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
                 }
             }
         }
-        private void UnitEvents_ListBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void UnitEvents_ListBox_ItemCheck(Object sender, ItemCheckEventArgs e)
         {
             this.BeginInvoke(new MethodInvoker(Core_LoadMap), null);
         }
-        private void MapChanges_ListBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void MapChanges_ListBox_ItemCheck(Object sender, ItemCheckEventArgs e)
         {
             this.BeginInvoke(new MethodInvoker(Core_LoadMap), null);
         }
 
-        private void EventEditor_SizeChanged(object sender, EventArgs e)
+        private void EventEditor_SizeChanged(Object sender, EventArgs e)
         {
             AnchorStyles all, left, right;
             all = (AnchorStyles.Top | AnchorStyles.Bottom);

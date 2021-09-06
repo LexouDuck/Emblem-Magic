@@ -57,9 +57,9 @@ namespace Magic.Editors
             {
                 List.Clear();
                 Patches.Clear();
-                string[] files = Directory.GetFiles(Core.Path_Patches);
+                String[] files = Directory.GetFiles(Core.Path_Patches);
 
-                foreach (string file in files)
+                foreach (String file in files)
                 {
                     if (file.EndsWith(".feh", StringComparison.OrdinalIgnoreCase))
                     {
@@ -102,7 +102,7 @@ namespace Magic.Editors
                 if (repoint.CurrentAddress == new Pointer())
                 {
                     Write write = null;
-                    for (int i = 0; i < repointables.Count; i++)
+                    for (Int32 i = 0; i < repointables.Count; i++)
                     {
                         if (repoint.AssetName == repointables[i].Phrase)
                         {
@@ -129,11 +129,11 @@ namespace Magic.Editors
         }
 
 
-        private void PatchesDataGrid_Click(object sender, EventArgs e)
+        private void PatchesDataGrid_Click(Object sender, EventArgs e)
         {
             if (Patch_DataGrid.SelectedRows.Count == 1)
             {
-                string patchName = (string)Patch_DataGrid.SelectedRows[0].Cells[1].Value;
+                String patchName = (String)Patch_DataGrid.SelectedRows[0].Cells[1].Value;
                 foreach (HackManager patch in Patches)
                 {
                     if (patchName.Equals(patch.HackName))
@@ -148,11 +148,11 @@ namespace Magic.Editors
             }
         }
 
-        private void RefreshButton_Click(object sender, EventArgs e)
+        private void RefreshButton_Click(Object sender, EventArgs e)
         {
             Core_Update();
         }
-        private void ApplyButton_Click(object sender, EventArgs e)
+        private void ApplyButton_Click(Object sender, EventArgs e)
         {
             if (Patch_DataGrid.SelectedRows.Count == 0)
             {
@@ -160,7 +160,7 @@ namespace Magic.Editors
             }
             else if (Patch_DataGrid.SelectedRows.Count == 1)
             {
-                string patchName = (string)Patch_DataGrid.SelectedRows[0].Cells[1].Value;
+                String patchName = (String)Patch_DataGrid.SelectedRows[0].Cells[1].Value;
 
                 foreach (HackManager patch in Patches)
                 {
@@ -173,15 +173,15 @@ namespace Magic.Editors
             }
             else
             {
-                string[] patchNames = new string[Patch_DataGrid.SelectedRows.Count];
-                for (int i = 0; i < patchNames.Length; i++)
+                String[] patchNames = new String[Patch_DataGrid.SelectedRows.Count];
+                for (Int32 i = 0; i < patchNames.Length; i++)
                 {
-                    patchNames[i] = (string)Patch_DataGrid.SelectedRows[i].Cells[1].Value;
+                    patchNames[i] = (String)Patch_DataGrid.SelectedRows[i].Cells[1].Value;
                 }
 
                 foreach (HackManager patch in Patches)
                 {
-                    for (int i = 0; i < patchNames.Length; i++)
+                    for (Int32 i = 0; i < patchNames.Length; i++)
                     {
                         if (patchNames[i].Equals(patch.HackName))
                         {

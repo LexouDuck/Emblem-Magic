@@ -49,7 +49,7 @@ namespace Magic
 
 
 
-        void Options_ApplyButton_Click(object sender, EventArgs e)
+        void Options_ApplyButton_Click(Object sender, EventArgs e)
         {
             Settings.Default.UseCustomPathArrays = Paths_CustomArrays_CheckBox.Checked;
             Settings.Default.PathCustomArrays = Paths_CustomArrays_TextBox.Text;
@@ -101,21 +101,21 @@ namespace Magic
                     break;
                 default: break;
             }
-            Settings.Default.RecentFilesMax = (int)RecentFiles_MaxNumBox.Value;
-            Settings.Default.UndoListMax = (int)UndoAndRedo_MaxNumBox.Value;
+            Settings.Default.RecentFilesMax = (Int32)RecentFiles_MaxNumBox.Value;
+            Settings.Default.UndoListMax = (Int32)UndoAndRedo_MaxNumBox.Value;
             Settings.Default.PreferIndexedBMP = PreferIndexedBMP_CheckBox.Checked;
 
             Settings.Default.Save();
             this.DialogResult = DialogResult.Yes;
         }
-        void Options_CancelButton_Click(object sender, EventArgs e)
+        void Options_CancelButton_Click(Object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.No;
         }
 
 
 
-        private void Paths_CustomArrays_BrowseButton_Click(object sender, EventArgs e)
+        private void Paths_CustomArrays_BrowseButton_Click(Object sender, EventArgs e)
         {
             FolderBrowserDialog folderWindow = new FolderBrowserDialog();
             if (folderWindow.ShowDialog() == DialogResult.OK)
@@ -123,7 +123,7 @@ namespace Magic
                 Paths_CustomArrays_TextBox.Text = folderWindow.SelectedPath;
             }
         }
-        private void Paths_CustomStructs_BrowseButton_Click(object sender, EventArgs e)
+        private void Paths_CustomStructs_BrowseButton_Click(Object sender, EventArgs e)
         {
             FolderBrowserDialog folderWindow = new FolderBrowserDialog();
             if (folderWindow.ShowDialog() == DialogResult.OK)
@@ -131,7 +131,7 @@ namespace Magic
                 Paths_CustomStructs_TextBox.Text = folderWindow.SelectedPath;
             }
         }
-        private void Paths_Arrays_BrowseButton_Click(object sender, EventArgs e)
+        private void Paths_Arrays_BrowseButton_Click(Object sender, EventArgs e)
         {
             FolderBrowserDialog folderWindow = new FolderBrowserDialog();
             if (folderWindow.ShowDialog() == DialogResult.OK)
@@ -139,7 +139,7 @@ namespace Magic
                 Paths_Arrays_TextBox.Text = folderWindow.SelectedPath;
             }
         }
-        private void Paths_Structs_BrowseButton_Click(object sender, EventArgs e)
+        private void Paths_Structs_BrowseButton_Click(Object sender, EventArgs e)
         {
             FolderBrowserDialog folderWindow = new FolderBrowserDialog();
             if (folderWindow.ShowDialog() == DialogResult.OK)
@@ -147,7 +147,7 @@ namespace Magic
                 Paths_Structs_TextBox.Text = folderWindow.SelectedPath;
             }
         }
-        private void Paths_CleanROMs_BrowseButton_Click(object sender, EventArgs e)
+        private void Paths_CleanROMs_BrowseButton_Click(Object sender, EventArgs e)
         {
             FolderBrowserDialog folderWindow = new FolderBrowserDialog();
             if (folderWindow.ShowDialog() == DialogResult.OK)
@@ -155,7 +155,7 @@ namespace Magic
                 Paths_CleanROMs_TextBox.Text = folderWindow.SelectedPath;
             }
         }
-        private void Paths_Modules_BrowseButton_Click(object sender, EventArgs e)
+        private void Paths_Modules_BrowseButton_Click(Object sender, EventArgs e)
         {
             FolderBrowserDialog folderWindow = new FolderBrowserDialog();
             if (folderWindow.ShowDialog() == DialogResult.OK)
@@ -163,7 +163,7 @@ namespace Magic
                 Paths_Modules_TextBox.Text = folderWindow.SelectedPath;
             }
         }
-        private void Paths_Patches_BrowseButton_Click(object sender, EventArgs e)
+        private void Paths_Patches_BrowseButton_Click(Object sender, EventArgs e)
         {
             FolderBrowserDialog folderWindow = new FolderBrowserDialog();
             if (folderWindow.ShowDialog() == DialogResult.OK)
@@ -172,7 +172,7 @@ namespace Magic
             }
         }
 
-        private void RecentFiles_ClearButton_Click(object sender, EventArgs e)
+        private void RecentFiles_ClearButton_Click(Object sender, EventArgs e)
         {
             App.File_RecentFiles.Clear();
         }

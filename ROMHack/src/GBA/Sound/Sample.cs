@@ -11,12 +11,12 @@ namespace GBA
         public Sample(Pointer address)
         {
             Data = Core.ReadData(address, 16);
-            Data = Core.ReadData(address, 16 + (int)PCM_Size);
+            Data = Core.ReadData(address, 16 + (System.Int32)PCM_Size);
         }
 
-        byte[] Data;
+        System.Byte[] Data;
 
-        public byte[] ToBytes()
+        public System.Byte[] ToBytes()
         {
             return Data;
         }
@@ -25,7 +25,7 @@ namespace GBA
         /// <summary>
         /// Whether or not this sample is played on loop
         /// </summary>
-        public bool Looped
+        public System.Boolean Looped
         {
             get
             {
@@ -35,7 +35,7 @@ namespace GBA
         /// <summary>
         /// The pitch adjustment for this sound sample. Pitch = 1024 * SampleRate
         /// </summary>
-        public uint Pitch
+        public System.UInt32 Pitch
         {
             get
             {
@@ -45,7 +45,7 @@ namespace GBA
         /// <summary>
         /// The relative loop starting point for this sample
         /// </summary>
-        public uint LoopStart
+        public System.UInt32 LoopStart
         {
             get
             {
@@ -55,7 +55,7 @@ namespace GBA
         /// <summary>
         /// The size of this sound sample
         /// </summary>
-        public uint PCM_Size
+        public System.UInt32 PCM_Size
         {
             get
             {
@@ -65,7 +65,7 @@ namespace GBA
         /// <summary>
         /// The actual sample wave, in signed 8-bit standard Pulse Code Modulation data
         /// </summary>
-        public byte[] PCM_Data
+        public System.Byte[] PCM_Data
         {
             get
             {

@@ -90,20 +90,20 @@ namespace WinMM
         /// <summary>
         /// Specifies the manufacturer id of the device.
         /// </summary>
-        public short wMid;
+        public Int16 wMid;
         /// <summary>
         /// Specifies the product id of the device.
         /// </summary>
-        public short wPid;
+        public Int16 wPid;
         /// <summary>
         /// Specifies the version of the device's driver.
         /// </summary>
-        public int vDriverVersion;
+        public Int32 vDriverVersion;
         /// <summary>
         /// Specifies the name of the device.
         /// </summary>
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
-        public string szPname;
+        public String szPname;
         /// <summary>
         /// Specifies the WAVE formats the device supports.
         /// </summary>
@@ -111,11 +111,11 @@ namespace WinMM
         /// <summary>
         /// Specifies the number of channels the device supports.
         /// </summary>
-        public short wChannels;
+        public Int16 wChannels;
         /// <summary>
         /// Unused.  Padding.
         /// </summary>
-        public short wReserved1;
+        public Int16 wReserved1;
         /// <summary>
         /// Specifies the features that the device supports.
         /// </summary>
@@ -131,32 +131,32 @@ namespace WinMM
         /// <summary>
         /// The ManufacturerID.
         /// </summary>
-        public short wMid;
+        public Int16 wMid;
         /// <summary>
         /// The ProductID.
         /// </summary>
-        public short wPid;
+        public Int16 wPid;
         /// <summary>
         /// The device's driver version.
         /// </summary>
-        public int vDriverVersion;
+        public Int32 vDriverVersion;
         /// <summary>
         /// The name of the device.
         /// </summary>
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
-        public string szPname;
+        public String szPname;
         /// <summary>
         /// The formats the device supports.
         /// </summary>
-        public int dwFormats;
+        public Int32 dwFormats;
         /// <summary>
         /// The number of channels the device supports.
         /// </summary>
-        public short wChannels;
+        public Int16 wChannels;
         /// <summary>
         /// Reserved for internal use.
         /// </summary>
-        public short wReserved1;
+        public Int16 wReserved1;
     }
 
     /// <summary>
@@ -172,11 +172,11 @@ namespace WinMM
         /// <summary>
         /// Length, in bytes, of the buffer.
         /// </summary>
-        internal int dwBufferLength;
+        internal Int32 dwBufferLength;
         /// <summary>
         /// When the header is used in input, this member specifies how much data is in the buffer.
         /// </summary>
-        internal int dwBytesRecorded;
+        internal Int32 dwBytesRecorded;
         /// <summary>
         /// User data.
         /// </summary>
@@ -188,7 +188,7 @@ namespace WinMM
         /// <summary>
         /// Number of times to play the loop. This member is used only with output buffers.
         /// </summary>
-        internal int dwLoops;
+        internal Int32 dwLoops;
         /// <summary>
         /// Reserved for internal use.
         /// </summary>
@@ -196,7 +196,7 @@ namespace WinMM
         /// <summary>
         /// Reserved for internal use.
         /// </summary>
-        internal int reserved;
+        internal Int32 reserved;
     }
 
     /// <summary>
@@ -208,31 +208,31 @@ namespace WinMM
         /// <summary>
         /// The wave format of the stream.
         /// </summary>
-        public short wFormatTag;
+        public Int16 wFormatTag;
         /// <summary>
         /// The number of channels.
         /// </summary>
-        public short nChannels;
+        public Int16 nChannels;
         /// <summary>
         /// The number of samples per second.
         /// </summary>
-        public int nSamplesPerSec;
+        public Int32 nSamplesPerSec;
         /// <summary>
         /// The average bytes per second.
         /// </summary>
-        public int nAvgBytesPerSec;
+        public Int32 nAvgBytesPerSec;
         /// <summary>
         /// The smallest atomic data size.
         /// </summary>
-        public short nBlockAlign;
+        public Int16 nBlockAlign;
         /// <summary>
         /// The number of bits per sample.
         /// </summary>
-        public short wBitsPerSample;
+        public Int16 wBitsPerSample;
         /// <summary>
         /// The remaining header size. (Must be zero in this struct format.)
         /// </summary>
-        public short cbSize;
+        public Int16 cbSize;
     }
 
     /// <summary>
@@ -244,39 +244,39 @@ namespace WinMM
         /// <summary>
         /// The wave format of the stream.
         /// </summary>
-        public short wFormatTag;
+        public Int16 wFormatTag;
         /// <summary>
         /// The number of channels.
         /// </summary>
-        public short nChannels;
+        public Int16 nChannels;
         /// <summary>
         /// The number of samples per second.
         /// </summary>
-        public int nSamplesPerSec;
+        public Int32 nSamplesPerSec;
         /// <summary>
         /// The average bytes per second.
         /// </summary>
-        public int nAvgBytesPerSec;
+        public Int32 nAvgBytesPerSec;
         /// <summary>
         /// The smallest atomic data size.
         /// </summary>
-        public short nBlockAlign;
+        public Int16 nBlockAlign;
         /// <summary>
         /// The number of bits per sample.
         /// </summary>
-        public short wBitsPerSample;
+        public Int16 wBitsPerSample;
         /// <summary>
         /// The remaining header size.
         /// </summary>
-        public short cbSize;
+        public Int16 cbSize;
         /// <summary>
         /// The number of valid bits per sample.
         /// </summary>
-        public short wValidBitsPerSample;
+        public Int16 wValidBitsPerSample;
         /// <summary>
         /// The channel mask.
         /// </summary>
-        public int dwChannelMask;
+        public Int32 dwChannelMask;
         /// <summary>
         /// The sub format identifier.
         /// </summary>
@@ -292,15 +292,15 @@ namespace WinMM
         /// <summary>
         /// Time format.
         /// </summary>
-        public int wType;
+        public Int32 wType;
         /// <summary>
         /// The first part of the data.
         /// </summary>
-        public int wData1;
+        public Int32 wData1;
         /// <summary>
         /// The second part of the data.
         /// </summary>
-        public int wData2;
+        public Int32 wData2;
     }
 
     /// <summary>
@@ -810,7 +810,7 @@ namespace WinMM
         /// <param name="fuSound">Flags for playing the sound.</param>
         /// <returns>Returns TRUE if successful or FALSE otherwise.</returns>
         [DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
-        internal static extern int PlaySound(string lpszSound, IntPtr hmod, PLAYSOUNDFLAGS fuSound);
+        internal static extern Int32 PlaySound(String lpszSound, IntPtr hmod, PLAYSOUNDFLAGS fuSound);
         /// <summary>
         /// The sndPlaySound function plays a waveform sound specified either by a filename or by an entry in the registry or the WIN.INI file. This function offers a subset of the functionality of the PlaySound function; sndPlaySound is being maintained for backward compatibility.
         /// </summary>
@@ -822,7 +822,7 @@ namespace WinMM
         /// The specified sound must fit in available physical memory and be playable by an installed waveform-audio device driver. If sndPlaySound does not find the sound in the current directory, the function searches for it using the standard directory-search order.
         /// </remarks>
         [Obsolete, DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
-        internal static extern int sndPlaySound(IntPtr lpszSound, PLAYSOUNDFLAGS fuSound);
+        internal static extern Int32 sndPlaySound(IntPtr lpszSound, PLAYSOUNDFLAGS fuSound);
 
         /// <summary>
         /// Takes an <see cref="MMSYSERROR"/> code and, if it is indeed an error, throws a corresponding exception.
@@ -837,7 +837,7 @@ namespace WinMM
             }
 
             StringBuilder detailsBuilder = new StringBuilder(255);
-            string details = string.Empty;
+            String details = String.Empty;
 
             MMSYSERROR pullInfoError = MMSYSERROR.MMSYSERR_ERROR;
 
@@ -853,7 +853,7 @@ namespace WinMM
 
             if (pullInfoError != MMSYSERROR.MMSYSERR_NOERROR)
             {
-                details = error.ToString() + " (" + ((int)error).ToString(CultureInfo.CurrentCulture) + ")";
+                details = error.ToString() + " (" + ((Int32)error).ToString(CultureInfo.CurrentCulture) + ")";
             }
             else
             {
@@ -904,7 +904,7 @@ namespace WinMM
         /// is copied and the function returns zero.
         /// </remarks>
         [DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
-        internal static extern MMSYSERROR waveOutGetDevCaps(IntPtr uDeviceID, ref WAVEOUTCAPS pwoc, int cbwoc);
+        internal static extern MMSYSERROR waveOutGetDevCaps(IntPtr uDeviceID, ref WAVEOUTCAPS pwoc, Int32 cbwoc);
         /// <summary>
         /// The waveOutGetErrorText function retrieves a textual description of the error identified by the given error number.
         /// </summary>
@@ -925,7 +925,7 @@ namespace WinMM
         /// All error descriptions are less than MAXERRORLENGTH characters long.
         /// </remarks>
         [DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
-        internal static extern MMSYSERROR waveOutGetErrorText(MMSYSERROR mmrError, StringBuilder pszText, int cchText);
+        internal static extern MMSYSERROR waveOutGetErrorText(MMSYSERROR mmrError, StringBuilder pszText, Int32 cchText);
         /// <summary>
         /// The waveOutGetID function retrieves the device identifier for the given waveform-audio output device.
         /// This function is supported for backward compatibility. New applications can cast a handle of the device
@@ -942,7 +942,7 @@ namespace WinMM
         /// </list>
         /// </returns>
         [Obsolete, DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
-        internal static extern MMSYSERROR waveOutGetID(WaveOutSafeHandle hwo, ref int puDeviceID);
+        internal static extern MMSYSERROR waveOutGetID(WaveOutSafeHandle hwo, ref Int32 puDeviceID);
         /// <summary>
         /// The waveOutGetNumDevs function retrieves the number of waveform-audio output devices present in the system.
         /// </summary>
@@ -950,7 +950,7 @@ namespace WinMM
         /// Returns the number of devices. A return value of zero means that no devices are present or that an error occurred.
         /// </returns>
         [DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
-        internal static extern int waveOutGetNumDevs();
+        internal static extern Int32 waveOutGetNumDevs();
         /// <summary>
         /// The waveOutGetPitch function retrieves the current pitch setting for the specified waveform-audio output device.
         /// </summary>
@@ -978,7 +978,7 @@ namespace WinMM
         /// the dwSupport member of the WAVEOUTCAPS structure (filled by the waveOutGetDevCaps function).
         /// </remarks>
         [DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
-        internal static extern MMSYSERROR waveOutGetPitch(WaveOutSafeHandle hwo, ref int pdwPitch);
+        internal static extern MMSYSERROR waveOutGetPitch(WaveOutSafeHandle hwo, ref Int32 pdwPitch);
         /// <summary>
         /// The waveOutGetPlaybackRate function retrieves the current playback rate for the specified waveform-audio output device.
         /// </summary>
@@ -1006,7 +1006,7 @@ namespace WinMM
         /// to test the dwSupport member of the WAVEOUTCAPS structure (filled by the waveOutGetDevCaps function).
         /// </remarks>
         [DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
-        internal static extern MMSYSERROR waveOutGetPlaybackRate(WaveOutSafeHandle hwo, ref int pdwRate);
+        internal static extern MMSYSERROR waveOutGetPlaybackRate(WaveOutSafeHandle hwo, ref Int32 pdwRate);
         /// <summary>
         /// The waveOutGetPosition function retrieves the current playback position of the given waveform-audio output device.
         /// </summary>
@@ -1027,7 +1027,7 @@ namespace WinMM
         /// supported, wType will specify an alternative format.  The position is set to zero when the device is opened or reset.
         /// </remarks>
         [DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
-        internal static extern MMSYSERROR waveOutGetPosition(WaveOutSafeHandle hwo, ref MMTIME pmmt, int cbmmt);
+        internal static extern MMSYSERROR waveOutGetPosition(WaveOutSafeHandle hwo, ref MMTIME pmmt, Int32 cbmmt);
         /// <summary>
         /// The waveOutGetVolume function retrieves the current volume level of the specified waveform-audio output device.
         /// </summary>
@@ -1061,7 +1061,7 @@ namespace WinMM
         /// same when increasing the volume level from 0x5000 to 0x6000 as it is from 0x4000 to 0x5000.
         /// </remarks>
         [DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
-        internal static extern MMSYSERROR waveOutGetVolume(WaveOutSafeHandle hwo, ref int pdwVolume);
+        internal static extern MMSYSERROR waveOutGetVolume(WaveOutSafeHandle hwo, ref Int32 pdwVolume);
         /// <summary>
         /// The waveOutGetVolume function retrieves the current volume level of the specified waveform-audio output device.
         /// </summary>
@@ -1095,7 +1095,7 @@ namespace WinMM
         /// same when increasing the volume level from 0x5000 to 0x6000 as it is from 0x4000 to 0x5000.
         /// </remarks>
         [DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
-        internal static extern MMSYSERROR waveOutGetVolume(IntPtr uDeviceID, ref int pdwVolume);
+        internal static extern MMSYSERROR waveOutGetVolume(IntPtr uDeviceID, ref Int32 pdwVolume);
         /// <summary>
         /// The waveOutMessage function sends messages to the waveform-audio output device drivers.
         /// </summary>
@@ -1108,7 +1108,7 @@ namespace WinMM
         /// <param name="dwParam2">Message parameter two.</param>
         /// <returns>Returns the value returned from the driver.</returns>
         [DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
-        internal static extern int waveOutMessage(IntPtr deviceID, int uMsg, ref int dwParam1, ref int dwParam2);
+        internal static extern Int32 waveOutMessage(IntPtr deviceID, Int32 uMsg, ref Int32 dwParam1, ref Int32 dwParam2);
         /// <summary>
         /// The waveOutOpen function opens the given waveform-audio output device for playback.
         /// </summary>
@@ -1141,7 +1141,7 @@ namespace WinMM
         /// If you choose to have a function receive callback information, the following messages are sent to the function to indicate the progress of waveform-audio output: WOM_OPEN, WOM_CLOSE, and WOM_DONE. 
         /// </remarks>
         [DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
-        internal static extern MMSYSERROR waveOutOpen(ref IntPtr phwo, int uDeviceID, ref WAVEFORMATEX pwfx, WaveOutProc dwCallback, IntPtr dwCallbackInstance, WaveOpenFlags dwFlags);
+        internal static extern MMSYSERROR waveOutOpen(ref IntPtr phwo, Int32 uDeviceID, ref WAVEFORMATEX pwfx, WaveOutProc dwCallback, IntPtr dwCallbackInstance, WaveOpenFlags dwFlags);
         /// <summary>
         /// The waveOutPause function pauses playback on the given waveform-audio output device. The current position is saved.
         /// Use the waveOutRestart function to resume playback from the current position.
@@ -1185,7 +1185,7 @@ namespace WinMM
         /// Preparing a header that has already been prepared has no effect, and the function returns zero.
         /// </remarks>
         [DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
-        internal static extern MMSYSERROR waveOutPrepareHeader(WaveOutSafeHandle hwo, IntPtr pwh, int cbwh);
+        internal static extern MMSYSERROR waveOutPrepareHeader(WaveOutSafeHandle hwo, IntPtr pwh, Int32 cbwh);
         /// <summary>
         /// The waveOutReset function stops playback on the given waveform-audio output device and resets the current
         /// position to zero. All pending playback buffers are marked as done and returned to the application.
@@ -1238,7 +1238,7 @@ namespace WinMM
         /// Changing the pitch does not change the playback rate or the sample rate, nor does it change the playback time. Not all devices support pitch changes. To determine whether the device supports pitch control, use the WAVECAPS_PITCH flag to test the dwSupport member of the WAVEOUTCAPS structure (filled by the waveOutGetDevCaps function).
         /// </remarks>
         [DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
-        internal static extern MMSYSERROR waveOutSetPitch(WaveOutSafeHandle hwo, int pdwPitch);
+        internal static extern MMSYSERROR waveOutSetPitch(WaveOutSafeHandle hwo, Int32 pdwPitch);
         /// <summary>
         /// The waveOutSetPlaybackRate function sets the playback rate for the specified waveform-audio output device.
         /// </summary>
@@ -1255,7 +1255,7 @@ namespace WinMM
         /// </returns>
         /// <remarks>Changing the playback rate does not change the sample rate but does change the playback time. Not all devices support playback rate changes. To determine whether a device supports playback rate changes, use the WAVECAPS_PLAYBACKRATE flag to test the dwSupport member of the WAVEOUTCAPS structure (filled by the waveOutGetDevCaps function).</remarks>
         [DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
-        internal static extern MMSYSERROR waveOutSetPlaybackRate(WaveOutSafeHandle hwo, int dwRate);
+        internal static extern MMSYSERROR waveOutSetPlaybackRate(WaveOutSafeHandle hwo, Int32 dwRate);
         /// <summary>
         /// The waveOutSetVolume function sets the volume level of the specified waveform-audio  output device.
         /// </summary>
@@ -1277,7 +1277,7 @@ namespace WinMM
         /// Volume settings are interpreted logarithmically. This means the perceived increase in volume is the same when increasing the volume level from 0x5000 to 0x6000 as it is from 0x4000 to 0x5000.
         /// </remarks>
         [DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
-        internal static extern MMSYSERROR waveOutSetVolume(WaveOutSafeHandle hwo, int dwVolume);
+        internal static extern MMSYSERROR waveOutSetVolume(WaveOutSafeHandle hwo, Int32 dwVolume);
         /// <summary>
         /// The waveOutSetVolume function sets the volume level of the specified waveform-audio  output device.
         /// </summary>
@@ -1299,7 +1299,7 @@ namespace WinMM
         /// Volume settings are interpreted logarithmically. This means the perceived increase in volume is the same when increasing the volume level from 0x5000 to 0x6000 as it is from 0x4000 to 0x5000.
         /// </remarks>
         [DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
-        internal static extern MMSYSERROR waveOutSetVolume(IntPtr uDeviceID, int dwVolume);
+        internal static extern MMSYSERROR waveOutSetVolume(IntPtr uDeviceID, Int32 dwVolume);
         /// <summary>
         /// The waveOutUnprepareHeader function cleans up the preparation performed by the <see cref="waveOutPrepareHeader"/> function. This function must be called after the device driver is finished with a data block. You must call this function before freeing the buffer.
         /// </summary>
@@ -1320,7 +1320,7 @@ namespace WinMM
         /// Unpreparing a buffer that has not been prepared has no effect, and the function returns zero.
         /// </remarks>
         [DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
-        internal static extern MMSYSERROR waveOutUnprepareHeader(WaveOutSafeHandle hwo, IntPtr pwh, int cbwh);
+        internal static extern MMSYSERROR waveOutUnprepareHeader(WaveOutSafeHandle hwo, IntPtr pwh, Int32 cbwh);
         /// <summary>
         /// The waveOutWrite function sends a data block to the given waveform-audio output device.
         /// </summary>
@@ -1341,6 +1341,6 @@ namespace WinMM
         /// The buffer must be prepared with the waveOutPrepareHeader function before it is passed to waveOutWrite. Unless the device is paused by calling the waveOutPause function, playback begins when the first data block is sent to the device.
         /// </remarks>
         [DllImport("winmm.dll", SetLastError = true, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Winapi)]
-        internal static extern MMSYSERROR waveOutWrite(WaveOutSafeHandle hwo, IntPtr pwh, int cbwh);
+        internal static extern MMSYSERROR waveOutWrite(WaveOutSafeHandle hwo, IntPtr pwh, Int32 cbwh);
     }
 }

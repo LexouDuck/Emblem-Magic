@@ -87,11 +87,11 @@ namespace Magic.Editors
             }
 
 
-            string result = "";
-            string length;
+            String result = "";
+            String length;
             foreach (Space range in ranges)
             {
-                length = "0x" + Util.UInt32ToHex((uint)range.Length);
+                length = "0x" + Util.UInt32ToHex((UInt32)range.Length);
                 result += range.Marked.Name +
                     " | " + range.Address + " - " + range.EndByte +  " | " +
                     "Length: " + length.PadLeft(10) + "\r\n";
@@ -105,26 +105,26 @@ namespace Magic.Editors
 
 
 
-        void Space_EndOffLabel_Click(object sender, EventArgs e)
+        void Space_EndOffLabel_Click(Object sender, EventArgs e)
         {
             Space_EndByteBox.Enabled = true;
             Space_EndByteBox.Focus();
             Space_LengthBox.Enabled = false;
             Space_LengthBox.ResetText();
         }
-        void Space_LengthLabel_Click(object sender, EventArgs e)
+        void Space_LengthLabel_Click(Object sender, EventArgs e)
         {
             Space_LengthBox.Enabled = true;
             Space_LengthBox.Focus();
             Space_EndByteBox.Enabled = false;
             Space_EndByteBox.ResetText();
         }
-        void Space_OKButton_Click(object sender, EventArgs e)
+        void Space_OKButton_Click(Object sender, EventArgs e)
         {
-            string mark = Space_MarkAsComboBox.SelectedItem.ToString();
+            String mark = Space_MarkAsComboBox.SelectedItem.ToString();
             GBA.Pointer address = Space_AddressBox.Value;
             GBA.Pointer endbyte = Space_EndByteBox.Value;
-            int length = (int)Space_LengthBox.Value;
+            Int32 length = (Int32)Space_LengthBox.Value;
 
             if ((Space_EndByteLabel.Checked && (endbyte <= address)) || (Space_LengthLabel.Checked && length <= 0))
             {
@@ -160,11 +160,11 @@ namespace Magic.Editors
 
 
 
-        void Marks_ListBox_Click(object sender, EventArgs e)
+        void Marks_ListBox_Click(Object sender, EventArgs e)
         {
             Update_MarksPanel();
         }
-        void Marks_NameTextChanged(object sender, EventArgs e)
+        void Marks_NameTextChanged(Object sender, EventArgs e)
         {
             Mark current = App.FEH.Marks.MarkingTypes[Marks_ListBox.SelectedIndex];
 
@@ -172,7 +172,7 @@ namespace Magic.Editors
 
             Core_Update();
         }
-        void Marks_ColorButton_Click(object sender, EventArgs e)
+        void Marks_ColorButton_Click(Object sender, EventArgs e)
         {
             ColorDialog colorWindow = new ColorDialog();
             colorWindow.FullOpen = true;
@@ -186,21 +186,21 @@ namespace Magic.Editors
                 Core_Update();
             }
         }
-        void Marks_LayerValueChanged(object sender, EventArgs e)
+        void Marks_LayerValueChanged(Object sender, EventArgs e)
         {
             Mark current = App.FEH.Marks.MarkingTypes[Marks_ListBox.SelectedIndex];
 
-            current.Layer = (int)Marks_LayerNumBox.Value;
+            current.Layer = (Int32)Marks_LayerNumBox.Value;
 
             Core_Update();
         }
-        void Marks_CreateMarkButton_Click(object sender, EventArgs e)
+        void Marks_CreateMarkButton_Click(Object sender, EventArgs e)
         {
             App.FEH.Marks.Add("NEW ", 0, Color.Black);
 
             Core_Update();
         }
-        void Marks_DeleteMarkButton_Click(object sender, EventArgs e)
+        void Marks_DeleteMarkButton_Click(Object sender, EventArgs e)
         {
             Mark current = App.FEH.Marks.MarkingTypes[Marks_ListBox.SelectedIndex];
 
@@ -211,10 +211,10 @@ namespace Magic.Editors
 
 
 
-        void Output_SpaceBar_MouseMove(object sender, MouseEventArgs e)
+        void Output_SpaceBar_MouseMove(Object sender, MouseEventArgs e)
         {
-            double ratio = (float)Output_SpaceBar.Total / (float)Output_SpaceBar.Width;
-            uint current = (uint)(ratio * e.Location.X);
+            Double ratio = (Single)Output_SpaceBar.Total / (Single)Output_SpaceBar.Width;
+            UInt32 current = (UInt32)(ratio * e.Location.X);
 
             Output_CurrentAddressStatusLabel.Text = Util.AddressToString(current, 8);
 
@@ -234,7 +234,7 @@ namespace Magic.Editors
             Output_SpaceLengthStatusLabel.Text = "Length: ";
             Output_SpaceMarkedStatusLabel.Text = "Marked: ";
         }
-        void Output_SpaceBar_MouseLeave(object sender, EventArgs e)
+        void Output_SpaceBar_MouseLeave(Object sender, EventArgs e)
         {
             Output_CurrentAddressStatusLabel.Text = "";
             Output_SpaceAddressStatusLabel.Text = "Start Offset: ";
@@ -243,17 +243,17 @@ namespace Magic.Editors
             Output_SpaceMarkedStatusLabel.Text = "Marked: ";
         }
 
-        void Output_SortOffsetButton_Click(object sender, EventArgs e)
+        void Output_SortOffsetButton_Click(Object sender, EventArgs e)
         {
             Sorting = SpaceSortingMode.Offset;
             Update_OutputTextBox();
         }
-        void Output_SortLengthButton_Click(object sender, EventArgs e)
+        void Output_SortLengthButton_Click(Object sender, EventArgs e)
         {
             Sorting = SpaceSortingMode.Length;
             Update_OutputTextBox();
         }
-        void Output_SortByNameButton_Click(object sender, EventArgs e)
+        void Output_SortByNameButton_Click(Object sender, EventArgs e)
         {
             Sorting = SpaceSortingMode.Marked;
             Update_OutputTextBox();

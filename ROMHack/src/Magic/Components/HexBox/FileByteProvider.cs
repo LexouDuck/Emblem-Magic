@@ -12,26 +12,26 @@ namespace Magic.Components
     /// </remarks>
     public sealed class FileByteProvider : IByteProvider, IDisposable
     {
-        const int COPY_BLOCK_SIZE = 4096;
+        const Int32 COPY_BLOCK_SIZE = 4096;
 
-        string _fileName;
+        String _fileName;
         Stream _stream;
         DataMap _dataMap;
-        long _totalLength;
-        bool _readOnly;
+        Int64 _totalLength;
+        Boolean _readOnly;
 
         /// <summary>
         /// Constructs a new <see cref="FileByteProvider" /> instance.
         /// </summary>
         /// <param name="fileName">The name of the file from which bytes should be provided.</param>
-        public FileByteProvider(string fileName) : this(fileName, false) { }
+        public FileByteProvider(String fileName) : this(fileName, false) { }
 
         /// <summary>
         /// Constructs a new <see cref="FileByteProvider" /> instance.
         /// </summary>
         /// <param name="fileName">The name of the file from which bytes should be provided.</param>
         /// <param name="readOnly">True, opens the file in read-only mode.</param>
-        public FileByteProvider(string fileName, bool readOnly)
+        public FileByteProvider(String fileName, Boolean readOnly)
         {
             _fileName = fileName;
 
@@ -82,9 +82,9 @@ namespace Magic.Components
         /// <summary>
         /// See <see cref="IByteProvider.ReadByte" /> for more information.
         /// </summary>
-        public byte ReadByte(long index)
+        public Byte ReadByte(Int64 index)
         {
-            long blockOffset;
+            Int64 blockOffset;
             DataBlock block = GetDataBlock(index, out blockOffset);
             FileDataBlock fileBlock = block as FileDataBlock;
             if (fileBlock != null)
@@ -101,12 +101,12 @@ namespace Magic.Components
         /// <summary>
         /// See <see cref="IByteProvider.WriteByte" /> for more information.
         /// </summary>
-        public void WriteByte(long index, byte value)
+        public void WriteByte(Int64 index, Byte value)
         {
             try
             {
                 // Find the block affected.
-                long blockOffset;
+                Int64 blockOffset;
                 DataBlock block = GetDataBlock(index, out blockOffset);
 
                 // If the byte is already in a memory block, modify it.
@@ -187,12 +187,12 @@ namespace Magic.Components
         /// <summary>
         /// See <see cref="IByteProvider.InsertBytes" /> for more information.
         /// </summary>
-        public void InsertBytes(long index, byte[] bs)
+        public void InsertBytes(Int64 index, Byte[] bs)
         {
             try
             {
                 // Find the block affected.
-                long blockOffset;
+                Int64 blockOffset;
                 DataBlock block = GetDataBlock(index, out blockOffset);
 
                 // If the insertion point is in a memory block, just insert it.
@@ -254,24 +254,24 @@ namespace Magic.Components
         /// <summary>
         /// See <see cref="IByteProvider.DeleteBytes" /> for more information.
         /// </summary>
-        public void DeleteBytes(long index, long length)
+        public void DeleteBytes(Int64 index, Int64 length)
         {
             try
             {
-                long bytesToDelete = length;
+                Int64 bytesToDelete = length;
 
                 // Find the first block affected.
-                long blockOffset;
+                Int64 blockOffset;
                 DataBlock block = GetDataBlock(index, out blockOffset);
 
                 // Truncate or remove each block as necessary.
                 while ((bytesToDelete > 0) && (block != null))
                 {
-                    long blockLength = block.Length;
+                    Int64 blockLength = block.Length;
                     DataBlock nextBlock = block.NextBlock;
 
                     // Delete the appropriate section from the block (this may result in two blocks or a zero length block).
-                    long count = Math.Min(bytesToDelete, blockLength - (index - blockOffset));
+                    Int64 count = Math.Min(bytesToDelete, blockLength - (index - blockOffset));
                     block.RemoveBytes(index - blockOffset, count);
 
                     if (block.Length == 0)
@@ -279,7 +279,7 @@ namespace Magic.Components
                         _dataMap.Remove(block);
                         if (_dataMap.FirstBlock == null)
                         {
-                            _dataMap.AddFirst(new MemoryDataBlock(new byte[0]));
+                            _dataMap.AddFirst(new MemoryDataBlock(new Byte[0]));
                         }
                     }
                     
@@ -299,7 +299,7 @@ namespace Magic.Components
         /// <summary>
         /// See <see cref="IByteProvider.Length" /> for more information.
         /// </summary>
-        public long Length
+        public Int64 Length
         {
             get
             {
@@ -310,7 +310,7 @@ namespace Magic.Components
         /// <summary>
         /// See <see cref="IByteProvider.HasChanges" /> for more information.
         /// </summary>
-        public bool HasChanges()
+        public Boolean HasChanges()
         {
             if (_readOnly)
                 return false;
@@ -320,7 +320,7 @@ namespace Magic.Components
                 return true;
             }
 
-            long offset = 0;
+            Int64 offset = 0;
             for (DataBlock block = _dataMap.FirstBlock; block != null; block = block.NextBlock)
             {
                 FileDataBlock fileBlock = block as FileDataBlock;
@@ -357,7 +357,7 @@ namespace Magic.Components
             }
 
             // Secondly, shift around any file sections that have moved.
-            long dataOffset = 0;
+            Int64 dataOffset = 0;
             for (DataBlock block = _dataMap.FirstBlock; block != null; block = block.NextBlock)
             {
                 FileDataBlock fileBlock = block as FileDataBlock;
@@ -376,9 +376,9 @@ namespace Magic.Components
                 if (memoryBlock != null)
                 {
                     _stream.Position = dataOffset;
-                    for (int memoryOffset = 0; memoryOffset < memoryBlock.Length; memoryOffset += COPY_BLOCK_SIZE)
+                    for (Int32 memoryOffset = 0; memoryOffset < memoryBlock.Length; memoryOffset += COPY_BLOCK_SIZE)
                     {
-                        _stream.Write(memoryBlock.Data, memoryOffset, (int)Math.Min(COPY_BLOCK_SIZE, memoryBlock.Length - memoryOffset));
+                        _stream.Write(memoryBlock.Data, memoryOffset, (Int32)Math.Min(COPY_BLOCK_SIZE, memoryBlock.Length - memoryOffset));
                     }
                 }
                 dataOffset += block.Length;
@@ -392,7 +392,7 @@ namespace Magic.Components
         /// <summary>
         /// See <see cref="IByteProvider.SupportsWriteByte" /> for more information.
         /// </summary>
-        public bool SupportsWriteByte()
+        public Boolean SupportsWriteByte()
         {
             return !_readOnly;
         }
@@ -400,7 +400,7 @@ namespace Magic.Components
         /// <summary>
         /// See <see cref="IByteProvider.SupportsInsertBytes" /> for more information.
         /// </summary>
-        public bool SupportsInsertBytes()
+        public Boolean SupportsInsertBytes()
         {
             return !_readOnly;
         }
@@ -408,7 +408,7 @@ namespace Magic.Components
         /// <summary>
         /// See <see cref="IByteProvider.SupportsDeleteBytes" /> for more information.
         /// </summary>
-        public bool SupportsDeleteBytes()
+        public Boolean SupportsDeleteBytes()
         {
             return !_readOnly;
         }
@@ -442,7 +442,7 @@ namespace Magic.Components
         /// <summary>
         /// Gets a value, if the file is opened in read-only mode.
         /// </summary>
-        public bool ReadOnly
+        public Boolean ReadOnly
         {
             get { return _readOnly; }
         }
@@ -461,7 +461,7 @@ namespace Magic.Components
             }
         }
 
-        DataBlock GetDataBlock(long findOffset, out long blockOffset)
+        DataBlock GetDataBlock(Int64 findOffset, out Int64 blockOffset)
         {
             if (findOffset < 0 || findOffset > _totalLength)
             {
@@ -481,7 +481,7 @@ namespace Magic.Components
             return null;
         }
 
-        FileDataBlock GetNextFileDataBlock(DataBlock block, long dataOffset, out long nextDataOffset)
+        FileDataBlock GetNextFileDataBlock(DataBlock block, Int64 dataOffset, out Int64 nextDataOffset)
         {
             // Iterate over the remaining blocks until a file block is encountered.
             nextDataOffset = dataOffset + block.Length;
@@ -499,20 +499,20 @@ namespace Magic.Components
             return null;
         }
 
-        byte ReadByteFromFile(long fileOffset)
+        Byte ReadByteFromFile(Int64 fileOffset)
         {
             // Move to the correct position and read the byte.
             if (_stream.Position != fileOffset)
             {
                 _stream.Position = fileOffset;
             }
-            return (byte)_stream.ReadByte();
+            return (Byte)_stream.ReadByte();
         }
 
-        void MoveFileBlock(FileDataBlock fileBlock, long dataOffset)
+        void MoveFileBlock(FileDataBlock fileBlock, Int64 dataOffset)
         {
             // First, determine whether the next file block needs to move before this one.
-            long nextDataOffset;
+            Int64 nextDataOffset;
 			FileDataBlock nextFileBlock = GetNextFileDataBlock(fileBlock, dataOffset, out nextDataOffset);
             if (nextFileBlock != null && dataOffset + fileBlock.Length > nextFileBlock.FileOffset)
             {
@@ -524,15 +524,15 @@ namespace Magic.Components
             if (fileBlock.FileOffset > dataOffset)
             {
                 // Move the section to earlier in the file stream (done in chunks starting at the beginning of the section).
-                byte[] buffer = new byte[COPY_BLOCK_SIZE];
-                for (long relativeOffset = 0; relativeOffset < fileBlock.Length; relativeOffset += buffer.Length)
+                Byte[] buffer = new Byte[COPY_BLOCK_SIZE];
+                for (Int64 relativeOffset = 0; relativeOffset < fileBlock.Length; relativeOffset += buffer.Length)
                 {
-                    long readOffset = fileBlock.FileOffset + relativeOffset;
-                    int bytesToRead = (int)Math.Min(buffer.Length, fileBlock.Length - relativeOffset);
+                    Int64 readOffset = fileBlock.FileOffset + relativeOffset;
+                    Int32 bytesToRead = (Int32)Math.Min(buffer.Length, fileBlock.Length - relativeOffset);
                     _stream.Position = readOffset;
                     _stream.Read(buffer, 0, bytesToRead);
 
-                    long writeOffset = dataOffset + relativeOffset;
+                    Int64 writeOffset = dataOffset + relativeOffset;
                     _stream.Position = writeOffset;
                     _stream.Write(buffer, 0, bytesToRead);
                 }
@@ -540,15 +540,15 @@ namespace Magic.Components
             else
             {
                 // Move the section to later in the file stream (done in chunks starting at the end of the section).
-                byte[] buffer = new byte[COPY_BLOCK_SIZE];
-                for (long relativeOffset = 0; relativeOffset < fileBlock.Length; relativeOffset += buffer.Length)
+                Byte[] buffer = new Byte[COPY_BLOCK_SIZE];
+                for (Int64 relativeOffset = 0; relativeOffset < fileBlock.Length; relativeOffset += buffer.Length)
                 {
-                    int bytesToRead = (int)Math.Min(buffer.Length, fileBlock.Length - relativeOffset);
-                    long readOffset = fileBlock.FileOffset + fileBlock.Length - relativeOffset - bytesToRead;
+                    Int32 bytesToRead = (Int32)Math.Min(buffer.Length, fileBlock.Length - relativeOffset);
+                    Int64 readOffset = fileBlock.FileOffset + fileBlock.Length - relativeOffset - bytesToRead;
                     _stream.Position = readOffset;
                     _stream.Read(buffer, 0, bytesToRead);
 
-                    long writeOffset = dataOffset + fileBlock.Length - relativeOffset - bytesToRead;
+                    Int64 writeOffset = dataOffset + fileBlock.Length - relativeOffset - bytesToRead;
                     _stream.Position = writeOffset;
                     _stream.Write(buffer, 0, bytesToRead);
                 }

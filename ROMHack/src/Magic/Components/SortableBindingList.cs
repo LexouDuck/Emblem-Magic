@@ -12,7 +12,7 @@ namespace Library.Forms
     /// <typeparam name="T">The type of elements in the list.</typeparam>
     public class SortableBindingList<T> : BindingList<T> where T : class
     {
-        private bool _isSorted;
+        private Boolean _isSorted;
         private ListSortDirection _sortDirection = ListSortDirection.Ascending;
         private PropertyDescriptor _sortProperty;
 
@@ -34,14 +34,14 @@ namespace Library.Forms
         /// <summary>
         /// Gets a value indicating whether the list supports sorting.
         /// </summary>
-        protected override bool SupportsSortingCore
+        protected override Boolean SupportsSortingCore
         {
             get { return true; }
         }
         /// <summary>
         /// Gets a value indicating whether the list is sorted.
         /// </summary>
-        protected override bool IsSortedCore
+        protected override Boolean IsSortedCore
         {
             get { return _isSorted; }
         }
@@ -91,7 +91,7 @@ namespace Library.Forms
         }
 
 
-        private int Compare(T lhs, T rhs)
+        private Int32 Compare(T lhs, T rhs)
         {
             var result = OnComparison(lhs, rhs);
             //invert if descending
@@ -100,10 +100,10 @@ namespace Library.Forms
             return result;
         }
 
-        private int OnComparison(T lhs, T rhs)
+        private Int32 OnComparison(T lhs, T rhs)
         {
-            object lhsValue = lhs == null ? null : _sortProperty.GetValue(lhs);
-            object rhsValue = rhs == null ? null : _sortProperty.GetValue(rhs);
+            Object lhsValue = lhs == null ? null : _sortProperty.GetValue(lhs);
+            Object rhsValue = rhs == null ? null : _sortProperty.GetValue(rhs);
             if (lhsValue == null)
             {
                 return (rhsValue == null) ? 0 : -1; //nulls are equal

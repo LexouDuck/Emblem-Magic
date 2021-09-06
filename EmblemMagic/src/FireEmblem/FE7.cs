@@ -6,9 +6,9 @@ namespace EmblemMagic.FireEmblem
 {
     public class FE7 : Game
     {
-        public FE7(GameVersion version, bool clean, bool expanded) : base(version, clean, expanded) { }
+        public FE7(GameVersion version, Boolean clean, Boolean expanded) : base(version, clean, expanded) { }
         
-        public static string GameID(GameVersion version)
+        public static String GameID(GameVersion version)
         {
             switch (version)
             {
@@ -18,7 +18,7 @@ namespace EmblemMagic.FireEmblem
                 default: throw new Exception("Invalid game version.");
             }
         }
-        public static uint Checksum(GameVersion version)
+        public static UInt32 Checksum(GameVersion version)
         {
             switch (version)
             {
@@ -28,7 +28,7 @@ namespace EmblemMagic.FireEmblem
                 default: throw new Exception("Invalid game version.");
             }
         }
-        public static uint DefaultFileSize(GameVersion version)
+        public static UInt32 DefaultFileSize(GameVersion version)
         {
             switch (version)
             {
@@ -39,9 +39,9 @@ namespace EmblemMagic.FireEmblem
             }
         }
 
-        override public string GetIdentifier()
+        override public String GetIdentifier()
         {
-            return "FE7" + (char)Version;
+            return "FE7" + (Char)Version;
         }
         override public Magic.Range[] GetDefaultFreeSpace()
         {

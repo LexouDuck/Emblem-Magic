@@ -19,22 +19,22 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// The index of the tileset to use for this frame
         /// </summary>
-        public uint TilesetIndex;
+        public UInt32 TilesetIndex;
         /// <summary>
         /// The offset of this OAM data in the larger array of combined OAM framedata
         /// </summary>
-        public uint OAM_Offset;
+        public UInt32 OAM_Offset;
         /// <summary>
         /// The duration (in 60ths/second) that this frame is to show up onscreen
         /// </summary>
-        public uint Duration;
+        public UInt32 Duration;
 
         public BattleAnimFrame(
             OAM_Array oamData_L,
             OAM_Array oamData_R,
-            uint tileset,
-            uint offset,
-            uint duration)
+            UInt32 tileset,
+            UInt32 offset,
+            UInt32 duration)
         {
             OAM_Data_L = oamData_L;
             OAM_Data_R = oamData_R;
@@ -51,17 +51,17 @@ namespace EmblemMagic.FireEmblem
     /// </summary>
     public class BattleAnimation : GBA.SpriteSheet
     {
-        public const byte SCREEN_OFFSET_X_L = 0x5C;
-        public const byte SCREEN_OFFSET_X_R = 0x94;
-        public const byte SCREEN_OFFSET_Y = 0x58;
+        public const Byte SCREEN_OFFSET_X_L = 0x5C;
+        public const Byte SCREEN_OFFSET_X_R = 0x94;
+        public const Byte SCREEN_OFFSET_Y = 0x58;
         
-        public const int MAXIMUM_ANIMDATA_LENGTH = 0x2A00;
-        public const int MAXIMUM_OAM_LENGTH = 0x5800;
+        public const Int32 MAXIMUM_ANIMDATA_LENGTH = 0x2A00;
+        public const Int32 MAXIMUM_OAM_LENGTH = 0x5800;
         /// <summary>
         /// The amount of different modes for any battle animation
         /// </summary>
-        public const int MODES = 12;
-        public static string[] Modes = new string[12]
+        public const Int32 MODES = 12;
+        public static String[] Modes = new String[12]
         {
             "Normal Attack (layer1)",
             "Normal Attack (layer2)",
@@ -76,7 +76,7 @@ namespace EmblemMagic.FireEmblem
             "Idle (ranged)",
             "Missed Attack"
         };
-        public static string[] Modes_Layered = new string[9]
+        public static String[] Modes_Layered = new String[9]
         {
             "Normal Attack",
             "Critical Attack",
@@ -94,7 +94,7 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// The animation code for this class animation - in a jagged array for the 12 sections of anim code
         /// </summary>
-        public string[][] AnimCode;
+        public String[][] AnimCode;
         /// <summary>
         /// The different tilesheets used for this battle animation
         /// </summary>
@@ -107,13 +107,13 @@ namespace EmblemMagic.FireEmblem
 
 
         public BattleAnimation(
-            uint[] sections,
-            byte[] animdata,
-            byte[] OAMdataL,
-            byte[] OAMdataR) : base(240, 160)
+            UInt32[] sections,
+            Byte[] animdata,
+            Byte[] OAMdataL,
+            Byte[] OAMdataR) : base(240, 160)
         {
-            byte lastFrame = 0;
-            for (int i = 0; i < animdata.Length; i += 4)
+            Byte lastFrame = 0;
+            for (Int32 i = 0; i < animdata.Length; i += 4)
             {
                 if (animdata[i + 3] == 0x86)
                 {
@@ -121,24 +121,24 @@ namespace EmblemMagic.FireEmblem
                 }
             }
             // this tuple array holds 3 values - Tileset pointer, OAM data offset, and frame duration
-            Tuple<Pointer, uint, byte>[] frames = new Tuple<Pointer, uint, byte>[lastFrame + 1];
-            List<Tuple<Pointer, uint, byte>> anomalies = new List<Tuple<Pointer, uint, byte>>();
-            for (uint i = 0; i < animdata.Length; i += 4)
+            Tuple<Pointer, UInt32, Byte>[] frames = new Tuple<Pointer, UInt32, Byte>[lastFrame + 1];
+            List<Tuple<Pointer, UInt32, Byte>> anomalies = new List<Tuple<Pointer, UInt32, Byte>>();
+            for (UInt32 i = 0; i < animdata.Length; i += 4)
             {
                 if (animdata[i + 3] == 0x86)
                 {
-                    byte duration = animdata[i];
-                    byte frame = animdata[i + 2];
+                    Byte duration = animdata[i];
+                    Byte frame = animdata[i + 2];
                     i += 4;
                     Pointer pointer = new Pointer(animdata.GetUInt32(i, false), true, true);
                     i += 4;
-                    uint offset = animdata.GetUInt32(i, true);
+                    UInt32 offset = animdata.GetUInt32(i, true);
 
                     if (frames[frame] != null && (pointer != frames[frame].Item1 || offset != frames[frame].Item2))
                     //    throw new Exception("Inconsistent frames found in the animation.");
                     // this is thrown with FEditor animations, should make a prompt to re-number the frames in FEditor anims
                     {
-                        bool duplicate = false;
+                        Boolean duplicate = false;
                         foreach (var f in anomalies)
                         {
                             if (f.Item1 == pointer && f.Item2 == offset)
@@ -153,7 +153,7 @@ namespace EmblemMagic.FireEmblem
 
             Frames = new BattleAnimFrame[frames.Length + anomalies.Count];
             List<Pointer> pointers = new List<Pointer>();
-            for (int i = 0; i < frames.Length; i++)
+            for (Int32 i = 0; i < frames.Length; i++)
             {
                 if (frames[i] != null)
                 {
@@ -169,7 +169,7 @@ namespace EmblemMagic.FireEmblem
                         frames[i].Item3);
                 }
             }
-            for (int i = 0; i < anomalies.Count; i++)
+            for (Int32 i = 0; i < anomalies.Count; i++)
             {
                 if (anomalies[i].Item1 != new Pointer() && !pointers.Contains(anomalies[i].Item1))
                 {
@@ -184,24 +184,24 @@ namespace EmblemMagic.FireEmblem
             }
 
             AnimCode = new String[sections.Length][];
-            for (int i = 0; i < sections.Length; i++)
+            for (Int32 i = 0; i < sections.Length; i++)
             {
                 AnimCode[i] = DecompileAnimCode(animdata, sections[i], Frames);
             }
 
             pointers.Sort(delegate (Pointer first, Pointer second)
             {
-                return (int)(first.Address - second.Address);
+                return (Int32)(first.Address - second.Address);
             });
 
             Tilesets = new Tileset[pointers.Count];
-            for (int i = 0; i < Tilesets.Length; i++)
+            for (Int32 i = 0; i < Tilesets.Length; i++)
             {
-                for (int j = 0; j < Frames.Length; j++)
+                for (Int32 j = 0; j < Frames.Length; j++)
                 {
                     if (Frames[j] == null) continue;
                     if (Frames[j].TilesetIndex == pointers[i])
-                        Frames[j].TilesetIndex = (uint)i;
+                        Frames[j].TilesetIndex = (UInt32)i;
                 }
                 Tilesets[i] = new Tileset(Core.ReadData(pointers[i], 0));
             }
@@ -212,7 +212,7 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// Makes the given frame into the current display state of this BattleAnimation
         /// </summary>
-        public void ShowFrame(Palette palette, byte frame, bool leftToRight)
+        public void ShowFrame(Palette palette, Byte frame, Boolean leftToRight)
         {
             this.Clear();
 
@@ -229,18 +229,18 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// Returns the animation code of all 12 modes combined into one string array
         /// </summary>
-        public string[] GetMergedAnimCode()
+        public String[] GetMergedAnimCode()
         {
-            int length = 0;
-            for (int i = 0; i < AnimCode.Length; i++)
+            Int32 length = 0;
+            for (Int32 i = 0; i < AnimCode.Length; i++)
             {
                 length += AnimCode[i].Length;
             }
-            string[] result = new string[length];
+            String[] result = new String[length];
             length = 0;
-            for (int i = 0; i < AnimCode.Length; i++)
+            for (Int32 i = 0; i < AnimCode.Length; i++)
             {
-                for (int j = 0; j < AnimCode[i].Length; j++)
+                for (Int32 j = 0; j < AnimCode[i].Length; j++)
                 {
                     result[length] = AnimCode[i][j];
                     length++;
@@ -254,11 +254,11 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// Returns the section offsets for the 12 modes of animation data
         /// </summary>
-        public static byte[] GetSections(byte[] animdata)
+        public static Byte[] GetSections(Byte[] animdata)
         {
-            int[] sections = new int[12];
-            int current = 0;
-            for (int i = 0; i < animdata.Length; i += 4)
+            Int32[] sections = new Int32[12];
+            Int32 current = 0;
+            for (Int32 i = 0; i < animdata.Length; i += 4)
             {
                 if (animdata[i + 3] == 0x80)
                 {
@@ -268,8 +268,8 @@ namespace EmblemMagic.FireEmblem
                     catch { break; }
                 }
             }
-            byte[] result = new byte[12 * 4];
-            for (int i = 0; i < 12; i++)
+            Byte[] result = new Byte[12 * 4];
+            for (Int32 i = 0; i < 12; i++)
             {
                 Array.Copy(Util.Int32ToBytes(sections[i], true), 0, result, i * 4, 4);
             }
@@ -278,12 +278,12 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// Returns all the differents pointers to tilesets found in the given byte array, sorted by address
         /// </summary>
-        public static List<Pointer> GetTilesetPointers(byte[] animdata)
+        public static List<Pointer> GetTilesetPointers(Byte[] animdata)
         {
             List<Pointer> result = new List<Pointer>();
-            byte[] buffer = new byte[4];
+            Byte[] buffer = new Byte[4];
             Pointer pointer;
-            for (int i = 0; i < animdata.Length; i += 4)
+            for (Int32 i = 0; i < animdata.Length; i += 4)
             {
                 if (animdata[i + 3] == 0x86)
                 {
@@ -304,12 +304,12 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// Flips the given OAM and returns both (left-side-facing-right and right-side-facing-left)
         /// </summary>
-        public static Tuple<byte[], byte[]> GetFlippedOAM(byte[] OAMdata)
+        public static Tuple<Byte[], Byte[]> GetFlippedOAM(Byte[] OAMdata)
         {
-            byte[] flipped = new byte[OAMdata.Length];
+            Byte[] flipped = new Byte[OAMdata.Length];
             OAM block;
-            byte[] buffer = new byte[12];
-            for (int i = 0; i < OAMdata.Length; i += 12)
+            Byte[] buffer = new Byte[12];
+            for (Int32 i = 0; i < OAMdata.Length; i += 12)
             {
                 Array.Copy(OAMdata, i, buffer, 0, 12);
 
@@ -334,15 +334,15 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// Compiles one mode of animation code (that is, a block with a terminator at the end)
         /// </summary>
-        public static byte[] CompileAnimationCode(string[] animcode, Tuple<uint, uint>[] frames)
+        public static Byte[] CompileAnimationCode(String[] animcode, Tuple<UInt32, UInt32>[] frames)
         {
             try
             {
-                List<byte> result = new List<byte>();
-                byte duration = 1;
-                byte frame;
-                bool frameCompile = false;
-                for (int line = 0; line < animcode.Length; line++)
+                List<Byte> result = new List<Byte>();
+                Byte duration = 1;
+                Byte frame;
+                Boolean frameCompile = false;
+                for (Int32 line = 0; line < animcode.Length; line++)
                 {
                     try
                     {
@@ -350,7 +350,7 @@ namespace EmblemMagic.FireEmblem
                             continue;
                         else if (animcode[line] == "")
                             continue;
-                        else for (int i = 0; (i < animcode[line].Length); i++)
+                        else for (Int32 i = 0; (i < animcode[line].Length); i++)
                         {
                             if (animcode[line][i] == '#') break;
 
@@ -371,9 +371,9 @@ namespace EmblemMagic.FireEmblem
                                 case '8':
                                 case '9':
                                     if (frameCompile) throw new Exception("Unexpected number read.");
-                                    int length = 1;
+                                        Int32 length = 1;
                                     while (animcode[line][i + length] != ' ') length++;
-                                    duration = (byte)int.Parse(animcode[line].Substring(i, length));
+                                    duration = (Byte)Int32.Parse(animcode[line].Substring(i, length));
                                     frameCompile = true;
                                     i += length;
                                     break;
@@ -414,7 +414,7 @@ namespace EmblemMagic.FireEmblem
                                     {
                                         if (frameCompile) throw new Exception("Unexpected terminator read.");
 
-                                        result.AddRange(new byte[4] { 0x00, 0x00, 0x00, 0x80 });
+                                        result.AddRange(new Byte[4] { 0x00, 0x00, 0x00, 0x80 });
 
                                         return result.ToArray();
                                     }
@@ -439,20 +439,20 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// Converts the given byte array of animation data into animation code, stopping at the first terminator met
         /// </summary>
-        public static string[] DecompileAnimCode(byte[] animdata, uint offset, BattleAnimFrame[] frames)
+        public static String[] DecompileAnimCode(Byte[] animdata, UInt32 offset, BattleAnimFrame[] frames)
         {
-            List<string> result = new List<string>();
-            int index = 0;
-            for (uint i = offset; i < animdata.Length; i += 4)
+            List<String> result = new List<String>();
+            Int32 index = 0;
+            for (UInt32 i = offset; i < animdata.Length; i += 4)
             {
                 if (animdata[i + 3] == 0x86)
                 {
-                    byte duration = animdata[i];
-                    int frame = -1;
+                    Byte duration = animdata[i];
+                    Int32 frame = -1;
                     Pointer pointer = new Pointer(animdata.GetUInt32(i + 4, false), true, true);
-                    uint OAM_offset = animdata.GetUInt32(i + 8, true);
+                    UInt32 OAM_offset = animdata.GetUInt32(i + 8, true);
 
-                    for (int f = 0; f < frames.Length; f++)
+                    for (Int32 f = 0; f < frames.Length; f++)
                     {
                         if (frames[f] != null &&
                             frames[f].TilesetIndex == pointer &&
@@ -460,7 +460,7 @@ namespace EmblemMagic.FireEmblem
                         { frame = f; break; }
                     }
                     //if (frame == -1) frame = animdata[i + 2];
-                    result.Add(duration + " f" + Util.ByteToHex((byte)frame)); // + " " + pointer + " " + OAM_offset);
+                    result.Add(duration + " f" + Util.ByteToHex((Byte)frame)); // + " " + pointer + " " + OAM_offset);
                     i += 8;
                 }
                 else if (animdata[i + 3] == 0x85)
@@ -490,16 +490,16 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// Returns the two seperate anim codes from a 2-layered mode's string array
         /// </summary>
-        public static Tuple<string[], string[]> SplitLayeredAnimationCode(string[] animcode)
+        public static Tuple<String[], String[]> SplitLayeredAnimationCode(String[] animcode)
         {
             try
             {
-                string[] result1 = new string[animcode.Length];
-                string[] result2 = new string[animcode.Length];
-                string duration = null;
-                string command;
-                int compile = 0; // 0 is normal, 1 = expecting f command, 2 = expecting b command
-                for (int line = 0; line < animcode.Length; line++)
+                String[] result1 = new String[animcode.Length];
+                String[] result2 = new String[animcode.Length];
+                String duration = null;
+                String command;
+                Int32 compile = 0; // 0 is normal, 1 = expecting f command, 2 = expecting b command
+                for (Int32 line = 0; line < animcode.Length; line++)
                 {
                     try
                     {
@@ -507,7 +507,7 @@ namespace EmblemMagic.FireEmblem
                             continue;
                         if (animcode[line] == "")
                             continue;
-                        for (int i = 0; (i < animcode[line].Length); i++)
+                        for (Int32 i = 0; (i < animcode[line].Length); i++)
                         {
                             if (animcode[line][i] == '#') break;
 
@@ -526,7 +526,7 @@ namespace EmblemMagic.FireEmblem
                                 case '8':
                                 case '9':
                                     if (compile > 0) throw new Exception("Unexpected number encountered.");
-                                    int length = 1;
+                                    Int32 length = 1;
                                     while (animcode[line][i + length] != ' ') length++;
                                     duration = animcode[line].Substring(i, length + 1);
                                     result1[line] += duration;
@@ -612,26 +612,26 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// Makes one line-returned string from a string array of anim code
         /// </summary>
-        public static string GetAnimationCode(string[][] animcode,
-            int mode, bool layered, bool every_mode,
-            ref List<Tuple<uint, OAM>> affines, ref int[] duplicates,
-            string file = null, BattleAnimFrame[] frames = null)
+        public static String GetAnimationCode(String[][] animcode,
+            Int32 mode, Boolean layered, Boolean every_mode,
+            ref List<Tuple<UInt32, OAM>> affines, ref Int32[] duplicates,
+            String file = null, BattleAnimFrame[] frames = null)
         {
-            string result = "";
-            int i = (every_mode) ? 0 : mode;
-            int f, f1, f2;
-            int frame_index;
-            string frame;
-            string frame1;
-            string frame2;
+            String result = "";
+            Int32 i = (every_mode) ? 0 : mode;
+            Int32 f, f1, f2;
+            Int32 frame_index;
+            String frame;
+            String frame1;
+            String frame2;
             while (every_mode ? i < BattleAnimation.MODES : i == mode)
             {
                 if (layered && (i == 0 || i == 2 || i == 8)) // two-layer anim modes
                 {
                     result += "# Modes " + (i + 1) + " & " + (i + 2) + ": ";
                     result += BattleAnimation.Modes_Layered[(i == 8) ? 6 : i / 2];
-                    string[] layer1 = animcode[i];     int l1 = 0; // front layer
-                    string[] layer2 = animcode[i + 1]; int l2 = 0; // back layer
+                    String[] layer1 = animcode[i]; Int32 l1 = 0; // front layer
+                    String[] layer2 = animcode[i + 1]; Int32 l2 = 0; // back layer
                     while (l1 < layer1.Length || l2 < layer2.Length)
                     {
                         result += "\r\n";
@@ -647,7 +647,7 @@ namespace EmblemMagic.FireEmblem
                             // go see the lyn blade lord critical anim for an example, or brigand handaxe attack
                             if (l2 < layer2.Length && layer2[l2][0] == 'c')
                             {
-                                for (int j = 0; j < layer2[l2].Length; j++)
+                                for (Int32 j = 0; j < layer2[l2].Length; j++)
                                 {
                                     result += layer2[l2][j];
                                 }
@@ -655,14 +655,14 @@ namespace EmblemMagic.FireEmblem
                             }
                             else if (l1 < layer1.Length && layer1[l1][0] == 'c')
                             {
-                                for (int j = 0; j < layer1[l1].Length; j++)
+                                for (Int32 j = 0; j < layer1[l1].Length; j++)
                                 {
                                     result += layer1[l1][j];
                                 }
                                 l2--;
                             }
                         }
-                        else for (int j = 0; j < layer1[l1].Length; j++)
+                        else for (Int32 j = 0; j < layer1[l1].Length; j++)
                         {
                             if (layer1[l1][j] == 'f')
                             {
@@ -702,7 +702,7 @@ namespace EmblemMagic.FireEmblem
                 {
                     result += "# Mode " + (i + 1) + ": ";
                     result += BattleAnimation.Modes[i];
-                    foreach (string line in animcode[i])
+                    foreach (String line in animcode[i])
                     {
                         result += "\r\n";
                         if (i != BattleAnimation.MODES - 1 && line == "end")
@@ -712,7 +712,7 @@ namespace EmblemMagic.FireEmblem
                                 result += "\r\n\r\n";
                             else return result;
                         }
-                        else for (int j = 0; j < line.Length; j++)
+                        else for (Int32 j = 0; j < line.Length; j++)
                         {
                             if (line[j] == 'f')
                             {
@@ -742,19 +742,19 @@ namespace EmblemMagic.FireEmblem
             }
             return result;
         }
-        private static int GetAnimationCode_CheckDuplicateFrames(
-            int frame, BattleAnimFrame[] frames, ref int[] duplicates)
+        private static Int32 GetAnimationCode_CheckDuplicateFrames(
+            Int32 frame, BattleAnimFrame[] frames, ref Int32[] duplicates)
         {
             List<OAM> oam = frames[frame].OAM_Data_R.Sprites;
             List<OAM> check_oam;
-            bool equal;
-            for (int i = 0; i < frame; i++)
+            Boolean equal;
+            for (Int32 i = 0; i < frame; i++)
             {
                 if (frames[i] == null || i == frame)
                     continue;
                 check_oam = frames[i].OAM_Data_R.Sprites;
                 equal = true;
-                for (int j = 0; j < oam.Count; j++)
+                for (Int32 j = 0; j < oam.Count; j++)
                 {
                     if (j >= check_oam.Count)
                     {
@@ -781,17 +781,17 @@ namespace EmblemMagic.FireEmblem
             }
             return frame;
         }
-        private static string GetAnimationCode_AddAffinesIfAny(string file,
-            uint tileset, OAM_Array oam, ref List<Tuple<uint, OAM>> affines)
+        private static String GetAnimationCode_AddAffinesIfAny(String file,
+            UInt32 tileset, OAM_Array oam, ref List<Tuple<UInt32, OAM>> affines)
         {
-            string result = "";
-            int s = 0;
+            String result = "";
+            Int32 s = 0;
             while (s < oam.Sprites.Count)
             {
                 if (oam.Sprites[s].IsAffineSprite())
                 {
-                    int affine_index = -1;
-                    for (int i = 0; i < affines.Count; i++)
+                    Int32 affine_index = -1;
+                    for (Int32 i = 0; i < affines.Count; i++)
                     {
                         if (tileset == affines[i].Item1 &&
                             oam.Sprites[s].SheetX == affines[i].Item2.SheetX &&
@@ -807,8 +807,8 @@ namespace EmblemMagic.FireEmblem
                     }
                     if (result.Length > 0)
                         result += "\r\n\t";
-                    int index = oam.Sprites[s].AffineIndex;
-                    bool big = oam.Sprites[s].OBJMode == OAM_OBJMode.BigAffine;
+                    Int32 index = oam.Sprites[s].AffineIndex;
+                    Boolean big = oam.Sprites[s].OBJMode == OAM_OBJMode.BigAffine;
                     result += (big ? " d" : " a");
                     result += " [" + file + "_affine_" + affine_index;
                     result += ".png]";
@@ -828,14 +828,14 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// Replaces the tileset indices after 0x86 commands with the pointers in the given list
         /// </summary>
-        public static byte[] PrepareAnimationData(byte[] animdata, List<Pointer> pointers)
+        public static Byte[] PrepareAnimationData(Byte[] animdata, List<Pointer> pointers)
         {
-            for (uint i = 0; i < animdata.Length; i += 4)
+            for (UInt32 i = 0; i < animdata.Length; i += 4)
             {
                 if (animdata[i + 3] == 0x86)
                 {
                     i += 4;
-                    int tileset = animdata.GetInt32(i, true);
+                    Int32 tileset = animdata.GetInt32(i, true);
                     Array.Copy(pointers[tileset].ToBytes(), 0, animdata, i, 4);
                 }
             }
@@ -844,10 +844,10 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// Replaces the tileset pointers after 0x86 commands with simple tileset indices
         /// </summary>
-        public static byte[] ExportAnimationData(byte[] animdata, List<Pointer> pointers)
+        public static Byte[] ExportAnimationData(Byte[] animdata, List<Pointer> pointers)
         {
-            byte[] buffer = new byte[4];
-            for (int i = 0; i < animdata.Length; i += 4)
+            Byte[] buffer = new Byte[4];
+            for (Int32 i = 0; i < animdata.Length; i += 4)
             {
                 if (animdata[i + 3] == 0x86)
                 {
@@ -855,7 +855,7 @@ namespace EmblemMagic.FireEmblem
                     Array.Copy(animdata, i, buffer, 0, 4);
                     Pointer pointer = new Pointer(buffer);
 
-                    int tileset = pointers.FindIndex(delegate (Pointer p) {
+                    Int32 tileset = pointers.FindIndex(delegate (Pointer p) {
                         return (p == pointer);
                     });
                     Array.Copy(Util.Int32ToBytes(tileset, true), 0, animdata, i, 4);

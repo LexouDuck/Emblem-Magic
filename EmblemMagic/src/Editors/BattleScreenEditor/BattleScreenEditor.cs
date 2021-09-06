@@ -16,7 +16,7 @@ namespace EmblemMagic.Editors
         /// <summary>
         /// Gets a string representing the current entry in the array
         /// </summary>
-        string CurrentEntry
+        String CurrentEntry
         {
             get
             {
@@ -25,7 +25,7 @@ namespace EmblemMagic.Editors
         }
 
         BattleScreen CurrentScreen;
-        string BattleScreenEntry = "Battle Screen Frame - ";
+        String BattleScreenEntry = "Battle Screen Frame - ";
 
 
 
@@ -65,8 +65,8 @@ namespace EmblemMagic.Editors
         {
             try
             {
-                byte[] tileset = Core.ReadData(Core.GetPointer("Battle Screen Tileset"), 0);
-                byte[] palettes = Core.ReadData(Core.GetPointer("Battle Screen Palettes"), 4 * Palette.LENGTH);
+                Byte[] tileset = Core.ReadData(Core.GetPointer("Battle Screen Tileset"), 0);
+                Byte[] palettes = Core.ReadData(Core.GetPointer("Battle Screen Palettes"), 4 * Palette.LENGTH);
                 TSA_Array tsa = Core.ReadTSA(Core.GetPointer("Battle Screen TSA"), 16, 32, false, false);
 
                 CurrentScreen = new BattleScreen(
@@ -91,8 +91,8 @@ namespace EmblemMagic.Editors
         {
             try
             {
-                byte[] tileset = Core.ReadData((Pointer)Current["Tileset"], 0);
-                byte[] palette = Core.ReadData((Pointer)Current["Palette"], Palette.LENGTH);
+                Byte[] tileset = Core.ReadData((Pointer)Current["Tileset"], 0);
+                Byte[] palette = Core.ReadData((Pointer)Current["Palette"], Palette.LENGTH);
 
                 CurrentPlatform = new BattlePlatform(tileset, palette);
 
@@ -178,7 +178,7 @@ namespace EmblemMagic.Editors
 
             try
             {
-                Platform_Name_TextBox.Text = (string)Current["Name"];
+                Platform_Name_TextBox.Text = (String)Current["Name"];
                 Platform_Tileset_PointerBox.Value = (Pointer)Current["Tileset"];
                 Platform_Palette_PointerBox.Value = (Pointer)Current["Palette"];
             }
@@ -198,7 +198,7 @@ namespace EmblemMagic.Editors
 
         void Core_WriteBattleScreenTSA(TSA_Array tsa)
         {
-            bool[,] selection = Screen_GridBox.Selection;
+            Boolean[,] selection = Screen_GridBox.Selection;
 
             Core.WriteData(this,
                 Core.GetPointer("Battle Screen TSA"),
@@ -211,25 +211,25 @@ namespace EmblemMagic.Editors
         {
             UI.SuspendUpdate();
                 Tileset tileset = new Tileset(insert.Graphics.Count);
-                for (int i = 0; i < insert.Graphics.Count; i++)
+                for (Int32 i = 0; i < insert.Graphics.Count; i++)
                 {
                     if (i >= BattleScreen.TILE_LIMIT && i < BattleScreen.TILE_LIMIT_END)
                         tileset.Add(Tile.Empty);
                     else tileset.Add(insert.Graphics[i]);
                 }
-                byte[] data_tileset = tileset.ToBytes(true);
-                byte[] data_palette = Palette.Merge(insert.Palettes).ToBytes(false);
-                byte[] data_tsa = BattleScreen.GetInsertableTSA(insert.Tiling).ToBytes(false, false);
-                byte[] data_L_name   = insert.L_Name.ToBytes(true);
-                byte[] data_L_weapon = insert.L_Weapon.ToBytes(true);
-                byte[] data_R_name   = insert.R_Name.ToBytes(true);
-                byte[] data_R_weapon = insert.R_Weapon.ToBytes(true);
+            Byte[] data_tileset = tileset.ToBytes(true);
+            Byte[] data_palette = Palette.Merge(insert.Palettes).ToBytes(false);
+            Byte[] data_tsa = BattleScreen.GetInsertableTSA(insert.Tiling).ToBytes(false, false);
+            Byte[] data_L_name   = insert.L_Name.ToBytes(true);
+            Byte[] data_L_weapon = insert.L_Weapon.ToBytes(true);
+            Byte[] data_R_name   = insert.R_Name.ToBytes(true);
+            Byte[] data_R_weapon = insert.R_Weapon.ToBytes(true);
             try
             {
 
-                bool cancel = Prompt.ShowRepointDialog(this, "Repoint Battle Screen",
+                Boolean cancel = Prompt.ShowRepointDialog(this, "Repoint Battle Screen",
                     "The battle screen to insert might need some of its parts to be repointed.",
-                    BattleScreenEntry, new Tuple<string, Pointer, int>[] {
+                    BattleScreenEntry, new Tuple<String, Pointer, Int32>[] {
                         Tuple.Create("Tileset",  Core.GetPointer("Battle Screen Tileset"),  data_tileset.Length),
                         Tuple.Create("Palette",  Core.GetPointer("Battle Screen Palettes"), data_palette.Length),
                         // Tuple.Create("TSA", Core.GetPointer("Battle Screen TSA"), data_tsa.Length),
@@ -281,12 +281,12 @@ namespace EmblemMagic.Editors
             UI.SuspendUpdate();
             try
             {
-                byte[] data_tileset = insert.Sheet.ToBytes(true);
-                byte[] data_palette = insert.Colors.ToBytes(false);
+                Byte[] data_tileset = insert.Sheet.ToBytes(true);
+                Byte[] data_palette = insert.Colors.ToBytes(false);
 
-                bool cancel = Prompt.ShowRepointDialog(this, "Repoint Battle Platform",
+                Boolean cancel = Prompt.ShowRepointDialog(this, "Repoint Battle Platform",
                     "The battle platform to insert might need some of its parts to be repointed.",
-                    CurrentEntry, new Tuple<string, Pointer, int>[] {
+                    CurrentEntry, new Tuple<String, Pointer, Int32>[] {
                         Tuple.Create("Tileset", (Pointer)Current["Tileset"], data_tileset.Length),
                         Tuple.Create("Palette", (Pointer)Current["Palette"], data_palette.Length),
                     }, new Pointer[] {
@@ -314,7 +314,7 @@ namespace EmblemMagic.Editors
             UI.PerformUpdate();
         }
 
-        void Core_Screen_InsertImage(string filepath)
+        void Core_Screen_InsertImage(String filepath)
         {
             BattleScreen screen;
             try
@@ -332,13 +332,13 @@ namespace EmblemMagic.Editors
             }
             Core_Insert(screen);
         }
-        void Core_Screen_InsertData(string filepath)
+        void Core_Screen_InsertData(String filepath)
         {
             BattleScreen screen;
             try
             {
-                string path = Path.GetDirectoryName(filepath) + '\\';
-                string file = Path.GetFileNameWithoutExtension(filepath);
+                String path = Path.GetDirectoryName(filepath) + '\\';
+                String file = Path.GetFileNameWithoutExtension(filepath);
 
                 if (!File.Exists(path + file + ".chr"))
                     throw new Exception("Could not find Tileset file:\n" + path + file + ".chr");
@@ -347,8 +347,8 @@ namespace EmblemMagic.Editors
                 if (!File.Exists(path + file + ".tsa"))
                     throw new Exception("Could not find TSA file:\n" + path + file + ".tsa");
 
-                byte[] tileset = File.ReadAllBytes(path + file + ".chr");
-                byte[] palette = File.ReadAllBytes(path + file + ".pal");
+                Byte[] tileset = File.ReadAllBytes(path + file + ".chr");
+                Byte[] palette = File.ReadAllBytes(path + file + ".pal");
                 TSA_Array tsa = new TSA_Array(
                     BattleScreen.WIDTH,
                     BattleScreen.HEIGHT,
@@ -368,7 +368,7 @@ namespace EmblemMagic.Editors
             }
             Core_Insert(screen);
         }
-        void Core_Screen_SaveImage(string filepath)
+        void Core_Screen_SaveImage(String filepath)
         {
             try
             {
@@ -376,9 +376,9 @@ namespace EmblemMagic.Editors
                     CurrentScreen.Width,
                     CurrentScreen.Height,
                     CurrentScreen.Palettes,
-                    delegate (int x, int y)
+                    delegate (Int32 x, Int32 y)
                     {
-                        return (byte)CurrentScreen[x, y];
+                        return (Byte)CurrentScreen[x, y];
                     });
             }
             catch (Exception ex)
@@ -386,16 +386,16 @@ namespace EmblemMagic.Editors
                 UI.ShowError("Could not save image", ex);
             }
         }
-        void Core_Screen_SaveData(string filepath)
+        void Core_Screen_SaveData(String filepath)
         {
             try
             {
-                string path = Path.GetDirectoryName(filepath) + "\\";
-                string file = Path.GetFileNameWithoutExtension(filepath);
+                String path = Path.GetDirectoryName(filepath) + "\\";
+                String file = Path.GetFileNameWithoutExtension(filepath);
 
-                byte[] data_tileset = CurrentScreen.Graphics.ToBytes(false);
-                byte[] data_palette = Palette.Merge(CurrentScreen.Palettes).ToBytes(false);
-                byte[] data_tsa = CurrentScreen.Tiling.ToBytes(false, false);
+                Byte[] data_tileset = CurrentScreen.Graphics.ToBytes(false);
+                Byte[] data_palette = Palette.Merge(CurrentScreen.Palettes).ToBytes(false);
+                Byte[] data_tsa = CurrentScreen.Tiling.ToBytes(false, false);
 
                 File.WriteAllBytes(path + file + ".chr", data_tileset);
                 File.WriteAllBytes(path + file + ".pal", data_palette);
@@ -411,7 +411,7 @@ namespace EmblemMagic.Editors
             }
         }
 
-        void Core_Platform_InsertImage(string filepath)
+        void Core_Platform_InsertImage(String filepath)
         {
             BattlePlatform platform;
             try
@@ -425,21 +425,21 @@ namespace EmblemMagic.Editors
             }
             Core_Insert(platform);
         }
-        void Core_Platform_InsertData(string filepath)
+        void Core_Platform_InsertData(String filepath)
         {
             BattlePlatform platform;
             try
             {
-                string path = Path.GetDirectoryName(filepath) + '\\';
-                string file = Path.GetFileNameWithoutExtension(filepath);
+                String path = Path.GetDirectoryName(filepath) + '\\';
+                String file = Path.GetFileNameWithoutExtension(filepath);
 
                 if (!File.Exists(path + file + ".chr"))
                     throw new Exception("Could not find Tileset file:\n" + path + file + ".chr");
                 if (!File.Exists(path + file + ".pal"))
                     throw new Exception("Could not find Palette file:\n" + path + file + ".pal");
 
-                byte[] tileset = File.ReadAllBytes(path + file + ".chr");
-                byte[] palette = File.ReadAllBytes(path + file + ".pal");
+                Byte[] tileset = File.ReadAllBytes(path + file + ".chr");
+                Byte[] palette = File.ReadAllBytes(path + file + ".pal");
 
                 platform = new BattlePlatform(tileset, palette);
             }
@@ -450,7 +450,7 @@ namespace EmblemMagic.Editors
             }
             Core_Insert(platform);
         }
-        void Core_Platform_SaveImage(string filepath)
+        void Core_Platform_SaveImage(String filepath)
         {
             try
             {
@@ -458,9 +458,9 @@ namespace EmblemMagic.Editors
                     CurrentPlatform.Width,
                     CurrentPlatform.Height,
                     new Palette[1] { CurrentPlatform.Colors },
-                    delegate (int x, int y)
+                    delegate (Int32 x, Int32 y)
                     {
-                        return (byte)CurrentPlatform[x, y];
+                        return (Byte)CurrentPlatform[x, y];
                     });
             }
             catch (Exception ex)
@@ -468,15 +468,15 @@ namespace EmblemMagic.Editors
                 UI.ShowError("Could not save image", ex);
             }
         }
-        void Core_Platform_SaveData(string filepath)
+        void Core_Platform_SaveData(String filepath)
         {
             try
             {
-                string path = Path.GetDirectoryName(filepath) + "\\";
-                string file = Path.GetFileNameWithoutExtension(filepath);
+                String path = Path.GetDirectoryName(filepath) + "\\";
+                String file = Path.GetFileNameWithoutExtension(filepath);
 
-                byte[] data_tileset = CurrentPlatform.Sheet.ToBytes(false);
-                byte[] data_palette = CurrentPlatform.Colors.ToBytes(false);
+                Byte[] data_tileset = CurrentPlatform.Sheet.ToBytes(false);
+                Byte[] data_palette = CurrentPlatform.Colors.ToBytes(false);
 
                 File.WriteAllBytes(path + file + ".chr", data_tileset);
                 File.WriteAllBytes(path + file + ".pal", data_palette);
@@ -489,7 +489,7 @@ namespace EmblemMagic.Editors
 
 
 
-        private void File_Insert_Screen_Click(object sender, EventArgs e)
+        private void File_Insert_Screen_Click(Object sender, EventArgs e)
         {
             OpenFileDialog openWindow = new OpenFileDialog();
             openWindow.RestoreDirectory = true;
@@ -519,7 +519,7 @@ namespace EmblemMagic.Editors
                 UI.ShowError("File chosen has invalid extension.\r\n" + openWindow.FileName);
             }
         }
-        private void File_Insert_Platform_Click(object sender, EventArgs e)
+        private void File_Insert_Platform_Click(Object sender, EventArgs e)
         {
             OpenFileDialog openWindow = new OpenFileDialog();
             openWindow.RestoreDirectory = true;
@@ -547,7 +547,7 @@ namespace EmblemMagic.Editors
                 UI.ShowError("File chosen has invalid extension.\r\n" + openWindow.FileName);
             }
         }
-        private void File_Save_Screen_Click(object sender, EventArgs e)
+        private void File_Save_Screen_Click(Object sender, EventArgs e)
         {
             SaveFileDialog saveWindow = new SaveFileDialog();
             saveWindow.RestoreDirectory = true;
@@ -574,7 +574,7 @@ namespace EmblemMagic.Editors
                 UI.ShowError("File chosen has invalid extension.\r\n" + saveWindow.FileName);
             }
         }
-        private void File_Save_Platform_Click(object sender, EventArgs e)
+        private void File_Save_Platform_Click(Object sender, EventArgs e)
         {
             SaveFileDialog saveWindow = new SaveFileDialog();
             saveWindow.RestoreDirectory = true;
@@ -602,20 +602,20 @@ namespace EmblemMagic.Editors
             }
         }
 
-        private void Tool_OpenPalette_Platform_Click(object sender, EventArgs e)
+        private void Tool_OpenPalette_Platform_Click(Object sender, EventArgs e)
         {
             UI.OpenPaletteEditor(this,
                 CurrentEntry,
                 (Pointer)Current["Palette"], 1);
         }
-        private void Tool_OpenPalette_Screen_Click(object sender, EventArgs e)
+        private void Tool_OpenPalette_Screen_Click(Object sender, EventArgs e)
         {
             UI.OpenPaletteEditor(this,
                 "Battle Screen Frame Palettes - ",
                 Core.GetPointer("Battle Screen Palettes"), 4);
         }
 
-        private void View_ShowGrid_Click(object sender, EventArgs e)
+        private void View_ShowGrid_Click(Object sender, EventArgs e)
         {
             Screen_GridBox.ShowGrid = View_ShowGrid.Checked;
         }
@@ -627,19 +627,19 @@ namespace EmblemMagic.Editors
             Core_LoadScreenValues();
         }
 
-        private void Screen_Tile_NumBox_ValueChanged(object sender, EventArgs e)
+        private void Screen_Tile_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            int width = Screen_GridBox.Selection.GetLength(0);
-            int height = Screen_GridBox.Selection.GetLength(1);
+            Int32 width = Screen_GridBox.Selection.GetLength(0);
+            Int32 height = Screen_GridBox.Selection.GetLength(1);
             TSA tsa;
-            for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++)
+            for (Int32 y = 0; y < height; y++)
+            for (Int32 x = 0; x < width; x++)
             {
                 if (Screen_GridBox.Selection[x, y])
                 {
                     tsa = CurrentScreen.Tiling[x, y];
                     CurrentScreen.Tiling[x, y] = new TSA(
-                        (int)Screen_TileIndex_NumBox.Value,
+                        (Int32)Screen_TileIndex_NumBox.Value,
                         tsa.Palette,
                         tsa.FlipH,
                         tsa.FlipV);
@@ -647,33 +647,33 @@ namespace EmblemMagic.Editors
             }
             Core_WriteBattleScreenTSA(CurrentScreen.Tiling);
         }
-        private void Screen_Palette_NumBox_ValueChanged(object sender, EventArgs e)
+        private void Screen_Palette_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            int width = Screen_GridBox.Selection.GetLength(0);
-            int height = Screen_GridBox.Selection.GetLength(1);
+            Int32 width = Screen_GridBox.Selection.GetLength(0);
+            Int32 height = Screen_GridBox.Selection.GetLength(1);
             TSA tsa;
-            for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++)
+            for (Int32 y = 0; y < height; y++)
+            for (Int32 x = 0; x < width; x++)
             {
                 if (Screen_GridBox.Selection[x, y])
                 {
                     tsa = CurrentScreen.Tiling[x, y];
                     CurrentScreen.Tiling[x, y] = new TSA(
                         tsa.TileIndex,
-                        (byte)Screen_Palette_NumBox.Value,
+                        (Byte)Screen_Palette_NumBox.Value,
                         tsa.FlipH,
                         tsa.FlipV);
                 }
             }
             Core_WriteBattleScreenTSA(CurrentScreen.Tiling);
         }
-        private void Screen_FlipH_CheckBox_CheckedChanged(object sender, EventArgs e)
+        private void Screen_FlipH_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
-            int width = Screen_GridBox.Selection.GetLength(0);
-            int height = Screen_GridBox.Selection.GetLength(1);
+            Int32 width = Screen_GridBox.Selection.GetLength(0);
+            Int32 height = Screen_GridBox.Selection.GetLength(1);
             TSA tsa;
-            for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++)
+            for (Int32 y = 0; y < height; y++)
+            for (Int32 x = 0; x < width; x++)
             {
                 if (Screen_GridBox.Selection[x, y])
                 {
@@ -687,13 +687,13 @@ namespace EmblemMagic.Editors
             }
             Core_WriteBattleScreenTSA(CurrentScreen.Tiling);
         }
-        private void Screen_FlipV_CheckBox_CheckedChanged(object sender, EventArgs e)
+        private void Screen_FlipV_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
-            int width = Screen_GridBox.Selection.GetLength(0);
-            int height = Screen_GridBox.Selection.GetLength(1);
+            Int32 width = Screen_GridBox.Selection.GetLength(0);
+            Int32 height = Screen_GridBox.Selection.GetLength(1);
             TSA tsa;
-            for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++)
+            for (Int32 y = 0; y < height; y++)
+            for (Int32 x = 0; x < width; x++)
             {
                 if (Screen_GridBox.Selection[x, y])
                 {
@@ -720,7 +720,7 @@ namespace EmblemMagic.Editors
             Program.Core.Core_OpenEditor(editor);
         }
 
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        protected override Boolean ProcessCmdKey(ref Message msg, Keys keyData)
         {
             Core_LoadScreenValues();
 
@@ -734,21 +734,21 @@ namespace EmblemMagic.Editors
             Core_Update();
         }
 
-        private void Platform_Name_TextBox_TextChanged(object sender, EventArgs e)
+        private void Platform_Name_TextBox_TextChanged(Object sender, EventArgs e)
         {
             Core.WriteData(this,
                 Current.GetAddress(Current.EntryIndex, "Name"),
                 ByteArray.Make_ASCII(Platform_Name_TextBox.Text),
                 CurrentEntry + "Name changed");
         }
-        private void Platform_Tileset_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void Platform_Tileset_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Current.GetAddress(Current.EntryIndex, "Tileset"),
                 Platform_Tileset_PointerBox.Value,
                 CurrentEntry + "Tileset repointed");
         }
-        private void Platform_Palette_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void Platform_Palette_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Current.GetAddress(Current.EntryIndex, "Palette"),

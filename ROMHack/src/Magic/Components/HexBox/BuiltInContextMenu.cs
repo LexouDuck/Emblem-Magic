@@ -51,7 +51,7 @@ namespace Magic.Components
         /// </summary>
         /// <param name="sender">the sender object</param>
         /// <param name="e">the event data</param>
-        void HexBox_ByteProviderChanged(object sender, EventArgs e)
+        void HexBox_ByteProviderChanged(Object sender, EventArgs e)
         {
             CheckBuiltInContextMenu();
         }
@@ -89,7 +89,7 @@ namespace Magic.Components
         /// </summary>
         /// <param name="sender">the sender object</param>
         /// <param name="e">the event data</param>
-        void BuildInContextMenuStrip_Opening(object sender, CancelEventArgs e)
+        void BuildInContextMenuStrip_Opening(Object sender, CancelEventArgs e)
         {
             _cutToolStripMenuItem.Enabled = this._hexBox.CanCut();
             _copyToolStripMenuItem.Enabled = this._hexBox.CanCopy();
@@ -101,81 +101,85 @@ namespace Magic.Components
         /// </summary>
         /// <param name="sender">the sender object</param>
         /// <param name="e">the event data</param>
-        void CutMenuItem_Click(object sender, EventArgs e) { this._hexBox.Cut(); }
+        void CutMenuItem_Click(Object sender, EventArgs e) { this._hexBox.Cut(); }
         /// <summary>
         /// The handler for the "Copy"-Click event
         /// </summary>
         /// <param name="sender">the sender object</param>
         /// <param name="e">the event data</param>
-        void CopyMenuItem_Click(object sender, EventArgs e) { this._hexBox.Copy(); }
+        void CopyMenuItem_Click(Object sender, EventArgs e) { this._hexBox.Copy(); }
         /// <summary>
         /// The handler for the "Paste"-Click event
         /// </summary>
         /// <param name="sender">the sender object</param>
         /// <param name="e">the event data</param>
-        void PasteMenuItem_Click(object sender, EventArgs e) { this._hexBox.Paste(); }
+        void PasteMenuItem_Click(Object sender, EventArgs e) { this._hexBox.Paste(); }
         /// <summary>
         /// The handler for the "Select All"-Click event
         /// </summary>
         /// <param name="sender">the sender object</param>
         /// <param name="e">the event data</param>
-        void SelectAllMenuItem_Click(object sender, EventArgs e) { this._hexBox.SelectAll(); }
+        void SelectAllMenuItem_Click(Object sender, EventArgs e) { this._hexBox.SelectAll(); }
         /// <summary>
         /// Gets or sets the custom text of the "Copy" ContextMenuStrip item.
         /// </summary>
         [Category("BuiltIn-ContextMenu"), DefaultValue(null), Localizable(true)]
-        public string CopyMenuItemText
+        public String CopyMenuItemText
         {
             get { return _copyMenuItemText; }
             set { _copyMenuItemText = value; }
-        } string _copyMenuItemText;
+        }
+        String _copyMenuItemText;
 
         /// <summary>
         /// Gets or sets the custom text of the "Cut" ContextMenuStrip item.
         /// </summary>
         [Category("BuiltIn-ContextMenu"), DefaultValue(null), Localizable(true)]
-        public string CutMenuItemText
+        public String CutMenuItemText
         {
             get { return _cutMenuItemText; }
             set { _cutMenuItemText = value; }
-        } string _cutMenuItemText;
+        }
+        String _cutMenuItemText;
 
         /// <summary>
         /// Gets or sets the custom text of the "Paste" ContextMenuStrip item.
         /// </summary>
         [Category("BuiltIn-ContextMenu"), DefaultValue(null), Localizable(true)]
-        public string PasteMenuItemText
+        public String PasteMenuItemText
         {
             get { return _pasteMenuItemText; }
             set { _pasteMenuItemText = value; }
-        } string _pasteMenuItemText;
+        }
+        String _pasteMenuItemText;
 
         /// <summary>
         /// Gets or sets the custom text of the "Select All" ContextMenuStrip item.
         /// </summary>
         [Category("BuiltIn-ContextMenu"), DefaultValue(null), Localizable(true)]
-        public string SelectAllMenuItemText
+        public String SelectAllMenuItemText
         {
             get { return _selectAllMenuItemText; }
             set { _selectAllMenuItemText = value; }
-        } string _selectAllMenuItemText = null;
+        }
+        String _selectAllMenuItemText = null;
 
         /// <summary>
         /// Gets the text of the "Cut" ContextMenuStrip item.
         /// </summary>
-        internal string CutMenuItemTextInternal { get { return !string.IsNullOrEmpty(CutMenuItemText) ? CutMenuItemText : "Cut"; } }
+        internal String CutMenuItemTextInternal { get { return !String.IsNullOrEmpty(CutMenuItemText) ? CutMenuItemText : "Cut"; } }
         /// <summary>
         /// Gets the text of the "Copy" ContextMenuStrip item.
         /// </summary>
-        internal string CopyMenuItemTextInternal { get { return !string.IsNullOrEmpty(CopyMenuItemText) ? CopyMenuItemText : "Copy"; } }
+        internal String CopyMenuItemTextInternal { get { return !String.IsNullOrEmpty(CopyMenuItemText) ? CopyMenuItemText : "Copy"; } }
         /// <summary>
         /// Gets the text of the "Paste" ContextMenuStrip item.
         /// </summary>
-        internal string PasteMenuItemTextInternal { get { return !string.IsNullOrEmpty(PasteMenuItemText) ? PasteMenuItemText : "Paste"; } }
+        internal String PasteMenuItemTextInternal { get { return !String.IsNullOrEmpty(PasteMenuItemText) ? PasteMenuItemText : "Paste"; } }
         /// <summary>
         /// Gets the text of the "Select All" ContextMenuStrip item.
         /// </summary>
-        internal string SelectAllMenuItemTextInternal { get { return !string.IsNullOrEmpty(SelectAllMenuItemText) ? SelectAllMenuItemText : "SelectAll"; } }
+        internal String SelectAllMenuItemTextInternal { get { return !String.IsNullOrEmpty(SelectAllMenuItemText) ? SelectAllMenuItemText : "SelectAll"; } }
 
         /// <summary>
         /// Gets or sets the image of the "Cut" ContextMenuStrip item.

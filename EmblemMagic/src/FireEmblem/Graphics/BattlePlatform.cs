@@ -5,12 +5,12 @@ namespace EmblemMagic.FireEmblem
 {
     public class BattlePlatform : GBA.Sprite
     {
-        public const int WIDTH = 13;
-        public const int HEIGHT = 10;
+        public const Int32 WIDTH = 13;
+        public const Int32 HEIGHT = 10;
 
 
 
-        public BattlePlatform(byte[] tileset, byte[] palette) : base(
+        public BattlePlatform(Byte[] tileset, Byte[] palette) : base(
             new Palette(palette),
             new Tileset(tileset),
             new TileMap(GetMap())) { }
@@ -25,9 +25,9 @@ namespace EmblemMagic.FireEmblem
 
 
 
-        public static int?[,] GetMap()
+        public static Int32?[,] GetMap()
         {
-            return TileMap.Convert(new int?[10, 13]
+            return TileMap.Convert(new Int32?[10, 13]
             {
                 { null, null, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, null },
                 { null, null, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13, 0x14, null },

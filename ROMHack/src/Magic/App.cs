@@ -109,8 +109,8 @@ namespace Magic
         public void Core_OpenEditor(Editor editor);
         public void Core_ExitEditor(Editor editor);
 
-        public void Core_SaveROMFile(string path);
-        public void Core_SaveFEHFile(string path);
+        public void Core_SaveROMFile(String path);
+        public void Core_SaveFEHFile(String path);
 
         /// <summary>
         /// Performs a user-requested write operation of any sort
@@ -122,15 +122,15 @@ namespace Magic
 
 
         public void Core_Undo();
-        public void Core_UndoAction(int index);
+        public void Core_UndoAction(Int32 index);
         public void Core_Redo();
-        public void Core_RedoAction(int index);
+        public void Core_RedoAction(Int32 index);
 
 
 
         public void Core_MarkSpace();
         public void Core_GetFreeSpace();
         public void Core_GetLastWrite();
-        public void Core_CheckROMIdentifier(string identifier);
+        public void Core_CheckROMIdentifier(String identifier);
     }
 }

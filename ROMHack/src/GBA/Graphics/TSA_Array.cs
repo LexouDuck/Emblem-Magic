@@ -9,14 +9,14 @@ namespace GBA
     /// </summary>
     public class TSA_Array
     {
-        public TSA this[int x, int y]
+        public TSA this[Int32 x, Int32 y]
         {
             get
             {
                 if (x < 0 || x >= Width)  throw new ArgumentException("X given is out of bounds: " + x);
                 if (y < 0 || y >= Height) throw new ArgumentException("Y given is out of bounds: " + y);
 
-                int index = x + y * Width;
+                Int32 index = x + y * Width;
 
                 return Tiles[index];
             }
@@ -25,7 +25,7 @@ namespace GBA
                 if (x < 0 || x >= Width)  throw new ArgumentException("X given is out of bounds: " + x);
                 if (y < 0 || y >= Height) throw new ArgumentException("Y given is out of bounds: " + y);
 
-                int index = x + y * Width;
+                Int32 index = x + y * Width;
 
                 Tiles[index] = value;
             }
@@ -39,30 +39,30 @@ namespace GBA
         /// <summary>
         /// The width of this TSA
         /// </summary>
-        public int Width { get; set; }
+        public Int32 Width { get; set; }
         /// <summary>
         /// The height of this TSA
         /// </summary>
-        public int Height { get; set; }
+        public Int32 Height { get; set; }
 
 
 
-        public TSA_Array(int width, int height)
+        public TSA_Array(Int32 width, Int32 height)
         {
             Load(width, height);
         }
-        public TSA_Array(int width, int height, byte[] data)
+        public TSA_Array(Int32 width, Int32 height, Byte[] data)
         {
             Load(width, height);
 
-            for (int i = 0; i < Tiles.Length; i++)
+            for (Int32 i = 0; i < Tiles.Length; i++)
             {
                 if (i * 2 + 1 > data.Length) return;
 
                 Tiles[i] = new TSA((UInt16)(data[i * 2] | (data[i * 2 + 1] << 8)));
             }
         }
-        public TSA_Array(TSA_Array source, int offset = 0, Rectangle region = new Rectangle())
+        public TSA_Array(TSA_Array source, Int32 offset = 0, Rectangle region = new Rectangle())
         {
             if (region == new Rectangle())
             {
@@ -75,8 +75,8 @@ namespace GBA
 
             if (offset == 0)
             {
-                for (int y = 0; y < Height; y++)
-                for (int x = 0; x < Width; x++)
+                for (Int32 y = 0; y < Height; y++)
+                for (Int32 x = 0; x < Width; x++)
                 {
                     Tiles[x + y * Width] = source[region.X + x, region.Y + y];
                 }
@@ -84,8 +84,8 @@ namespace GBA
             else
             {
                 TSA tsa;
-                for (int y = 0; y < Height; y++)
-                for (int x = 0; x < Width; x++)
+                for (Int32 y = 0; y < Height; y++)
+                for (Int32 x = 0; x < Width; x++)
                 {
                     Tiles[x + y * Width] = source[region.X + x, region.Y + y];
                     tsa = this[x, y];
@@ -97,7 +97,7 @@ namespace GBA
                 }
             }
         }
-        void Load(int width, int height)
+        void Load(Int32 width, Int32 height)
         {
             Width = width;
             Height = height;
@@ -106,7 +106,7 @@ namespace GBA
 
 
 
-        public void SetTile(int x, int y, UInt16 tileIndex)
+        public void SetTile(Int32 x, Int32 y, UInt16 tileIndex)
         {
             TSA tsa = this[x, y];
             this[x, y] = new TSA(
@@ -115,7 +115,7 @@ namespace GBA
                 tsa.FlipH,
                 tsa.FlipV);
         }
-        public void SetPalette(int x, int y, byte palette)
+        public void SetPalette(Int32 x, Int32 y, Byte palette)
         {
             TSA tsa = this[x, y];
             this[x, y] = new TSA(
@@ -124,7 +124,7 @@ namespace GBA
                 tsa.FlipH,
                 tsa.FlipV);
         }
-        public void SetFlipH(int x, int y, bool flipH)
+        public void SetFlipH(Int32 x, Int32 y, Boolean flipH)
         {
             TSA tsa = this[x, y];
             this[x, y] = new TSA(
@@ -133,7 +133,7 @@ namespace GBA
                 flipH,
                 tsa.FlipV);
         }
-        public void SetFlipV(int x, int y, bool flipV)
+        public void SetFlipV(Int32 x, Int32 y, Boolean flipV)
         {
             TSA tsa = this[x, y];
             this[x, y] = new TSA(
@@ -148,13 +148,13 @@ namespace GBA
         /// <summary>
         /// Returns this TSA array as a byte array, LZ77 compressed or not
         /// </summary>
-        public Byte[] ToBytes(bool compressed, bool flipRows)
+        public Byte[] ToBytes(Boolean compressed, Boolean flipRows)
         {
-            byte[] result = new byte[Tiles.Length * 2];
-            for (int i = 0; i < Tiles.Length; i++)
+            Byte[] result = new Byte[Tiles.Length * 2];
+            for (Int32 i = 0; i < Tiles.Length; i++)
             {
-                result[i * 2] = (byte)(Tiles[i].Value & 0x00FF);
-                result[i * 2 + 1] = (byte)((Tiles[i].Value & 0xFF00) >> 8);
+                result[i * 2] = (Byte)(Tiles[i].Value & 0x00FF);
+                result[i * 2 + 1] = (Byte)((Tiles[i].Value & 0xFF00) >> 8);
             }
 
             if (flipRows) result = FlipRows(Width, Height, result);
@@ -164,13 +164,13 @@ namespace GBA
 
 
 
-        public static byte[] FlipRows(int width, int height, byte[] tsa_data)
+        public static Byte[] FlipRows(Int32 width, Int32 height, Byte[] tsa_data)
         {
-            byte[] result = new byte[2 + tsa_data.Length];
-            result[0] = (byte)(width - 1);
-            result[1] = (byte)(height - 1);
-            int row = width * 2;
-            for (int i = 0; i < height; i++)
+            Byte[] result = new Byte[2 + tsa_data.Length];
+            result[0] = (Byte)(width - 1);
+            result[1] = (Byte)(height - 1);
+            Int32 row = width * 2;
+            for (Int32 i = 0; i < height; i++)
             {
                 Array.Copy(tsa_data, (height - 1 - i) * row, result, 2 + i * row, row);
             }
@@ -179,12 +179,12 @@ namespace GBA
         /// <summary>
         /// Generates a simple TSA Array where every tile index increments and has palette #0, not flipped
         /// </summary>
-        public static TSA_Array GetBasicTSA(int width, int height)
+        public static TSA_Array GetBasicTSA(Int32 width, Int32 height)
         {
             TSA_Array result = new TSA_Array(width, height);
-            int index = 0;
-            for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++)
+            Int32 index = 0;
+            for (Int32 y = 0; y < height; y++)
+            for (Int32 x = 0; x < width; x++)
             {
                 result[x, y] = new TSA((UInt16)(index++ % TSA.MAX_TILES));
             }

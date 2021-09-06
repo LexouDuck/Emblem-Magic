@@ -26,7 +26,7 @@ namespace Magic.Components
         /// <summary>
         /// Whether or not this ColorBox should be drawn with a gradient to white
         /// </summary>
-        public bool Gradient
+        public System.Boolean Gradient
         {
             get
             {
@@ -38,11 +38,12 @@ namespace Magic.Components
                 this.Invalidate();
                 return;
             }
-        } bool _gradient;
+        }
+        System.Boolean _gradient;
         /// <summary>
         /// Whether or not to show a contour around the ColorBox
         /// </summary>
-        public bool Selected
+        public System.Boolean Selected
         {
             get
             {
@@ -54,7 +55,8 @@ namespace Magic.Components
                 this.Invalidate();
                 return;
             }
-        } bool _selected;
+        }
+        System.Boolean _selected;
 
 
 

@@ -19,9 +19,9 @@ namespace Magic.Editors
         String Entry { get; }
 
         Pointer PaletteAddress { get; }
-        int PaletteLength { get; }
+        Int32 PaletteLength { get; }
         Pointer TilesetAddress { get; }
-        int TilesetLength { get; }
+        Int32 TilesetLength { get; }
         /// <summary>
         /// The address at which the TSA array is located
         /// </summary>
@@ -29,11 +29,11 @@ namespace Magic.Editors
         /// <summary>
         /// Whether or not the TSA data to edit is stored LZ77 compressed
         /// </summary>
-        bool IsCompressed { get; }
+        Boolean IsCompressed { get; }
         /// <summary>
         /// Whether or not to flip the rows of this TSA before displaying
         /// </summary>
-        bool FlipRows { get; }
+        Boolean FlipRows { get; }
 
         /// <summary>
         /// The TSA array this TSA editor is to edit
@@ -50,12 +50,12 @@ namespace Magic.Editors
         public TSAEditor(IApp app,
             Editor owner,
             String entry,
-            Pointer palette_address, int palette_length,
-            Pointer tileset_address, int tileset_length,
+            Pointer palette_address, Int32 palette_length,
+            Pointer tileset_address, Int32 tileset_length,
             Pointer address,
-            int width, int height,
-            bool compressed,
-            bool flipRows)
+            Int32 width, Int32 height,
+            Boolean compressed,
+            Boolean flipRows)
             : base(app)
         {
             try
@@ -109,16 +109,16 @@ namespace Magic.Editors
         {
             try
             {
-                byte[] palette = Core.ReadData(PaletteAddress, PaletteLength);
-                byte[] tileset;
+                Byte[] palette = Core.ReadData(PaletteAddress, PaletteLength);
+                Byte[] tileset;
                 if (TilesetLength == -1)
                 {
-                    int amount = 10;
-                    int length = 32 * 2 * Tile.LENGTH;
-                    tileset = new byte[amount * length];
+                    Int32 amount = 10;
+                    Int32 length = 32 * 2 * Tile.LENGTH;
+                    tileset = new Byte[amount * length];
                     Pointer address;
-                    byte[] buffer;
-                    for (int i = 0; i < amount; i++)
+                    Byte[] buffer;
+                    for (Int32 i = 0; i < amount; i++)
                     {
                         address = Core.ReadPointer(TilesetAddress + i * 4);
                         buffer = Core.ReadData(address, 0);
@@ -200,7 +200,7 @@ namespace Magic.Editors
         }
         void Core_WriteTSA()
         {
-            bool[,] selection = TSA_GridBox.Selection;
+            Boolean[,] selection = TSA_GridBox.Selection;
 
             Core.WriteData(
                 Owner ?? this,
@@ -213,7 +213,7 @@ namespace Magic.Editors
 
 
 
-        private void LoadButton_Click(object sender, EventArgs e)
+        private void LoadButton_Click(Object sender, EventArgs e)
         {
             OpenFileDialog openWindow = new OpenFileDialog();
             openWindow.Filter = "TSA data (*.tsa)|*.tsa|All files (*.*)|*.*";
@@ -231,7 +231,7 @@ namespace Magic.Editors
                     Entry + "TSA changed");
             }
         }
-        private void SaveButton_Click(object sender, EventArgs e)
+        private void SaveButton_Click(Object sender, EventArgs e)
         {
             SaveFileDialog saveWindow = new SaveFileDialog();
             saveWindow.Filter = "TSA data (*.tsa)|*.tsa|All files (*.*)|*.*";
@@ -246,7 +246,7 @@ namespace Magic.Editors
             }
         }
 
-        private void TSA_GridBox_SelectionChanged(object sender, EventArgs e)
+        private void TSA_GridBox_SelectionChanged(Object sender, EventArgs e)
         {
             Core_LoadValues();
         }
@@ -255,13 +255,13 @@ namespace Magic.Editors
             TSA_GridBox.ShowGrid = ViewGrid_CheckBox.Checked;
         }
 
-        private void TileIndex_NumBox_ValueChanged(object sender, EventArgs e)
+        private void TileIndex_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            int width = TSA_GridBox.Selection.GetLength(0);
-            int height = TSA_GridBox.Selection.GetLength(1);
+            Int32 width = TSA_GridBox.Selection.GetLength(0);
+            Int32 height = TSA_GridBox.Selection.GetLength(1);
             TSA tsa;
-            for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++)
+            for (Int32 y = 0; y < height; y++)
+            for (Int32 x = 0; x < width; x++)
             {
                 if (TSA_GridBox.Selection[x, y])
                 {
@@ -275,33 +275,33 @@ namespace Magic.Editors
             }
             Core_WriteTSA();
         }
-        private void Palette_NumBox_ValueChanged(object sender, EventArgs e)
+        private void Palette_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            int width = TSA_GridBox.Selection.GetLength(0);
-            int height = TSA_GridBox.Selection.GetLength(1);
+            Int32 width = TSA_GridBox.Selection.GetLength(0);
+            Int32 height = TSA_GridBox.Selection.GetLength(1);
             TSA tsa;
-            for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++)
+            for (Int32 y = 0; y < height; y++)
+            for (Int32 x = 0; x < width; x++)
             {
                 if (TSA_GridBox.Selection[x, y])
                 {
                     tsa = Current[x, y];
                     Current[x, y] = new TSA(
                         tsa.TileIndex,
-                        (byte)Palette_NumBox.Value,
+                        (Byte)Palette_NumBox.Value,
                         tsa.FlipH,
                         tsa.FlipV);
                 }
             }
             Core_WriteTSA();
         }
-        private void FlipH_CheckBox_CheckedChanged(object sender, EventArgs e)
+        private void FlipH_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
-            int width = TSA_GridBox.Selection.GetLength(0);
-            int height = TSA_GridBox.Selection.GetLength(1);
+            Int32 width = TSA_GridBox.Selection.GetLength(0);
+            Int32 height = TSA_GridBox.Selection.GetLength(1);
             TSA tsa;
-            for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++)
+            for (Int32 y = 0; y < height; y++)
+            for (Int32 x = 0; x < width; x++)
             {
                 if (TSA_GridBox.Selection[x, y])
                 {
@@ -315,13 +315,13 @@ namespace Magic.Editors
             }
             Core_WriteTSA();
         }
-        private void FlipV_CheckBox_CheckedChanged(object sender, EventArgs e)
+        private void FlipV_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
-            int width = TSA_GridBox.Selection.GetLength(0);
-            int height = TSA_GridBox.Selection.GetLength(1);
+            Int32 width = TSA_GridBox.Selection.GetLength(0);
+            Int32 height = TSA_GridBox.Selection.GetLength(1);
             TSA tsa;
-            for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++)
+            for (Int32 y = 0; y < height; y++)
+            for (Int32 x = 0; x < width; x++)
             {
                 if (TSA_GridBox.Selection[x, y])
                 {

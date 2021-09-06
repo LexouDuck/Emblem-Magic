@@ -13,7 +13,7 @@ namespace Magic.Components
         /// <summary>
         /// Amount of colors to show up on each line for this PaletteBox
         /// </summary>
-        public int ColorsPerLine { get; set; }
+        public Int32 ColorsPerLine { get; set; }
 
 
 
@@ -58,14 +58,14 @@ namespace Magic.Components
                 e.Graphics.FillRectangle(gap, 0, 0, Width, Height);
             }
 
-            int size = Width / ColorsPerLine;
-            int x, y;
-            int length;
+            Int32 size = Width / ColorsPerLine;
+            Int32 x, y;
+            Int32 length;
             if (Colors == null)
             {
                 length = ColorsPerLine * (Height / size);
 
-                for (int i = 0; i < length; i++)
+                for (Int32 i = 0; i < length; i++)
                 {
                     x = (i % ColorsPerLine) * size;
                     y = (i / ColorsPerLine) * size;
@@ -80,7 +80,7 @@ namespace Magic.Components
             {
                 length = Colors.Count;
 
-                for (int i = 0; i < length; i++)
+                for (Int32 i = 0; i < length; i++)
                 {
                     x = (i % ColorsPerLine) * size;
                     y = (i / ColorsPerLine) * size;

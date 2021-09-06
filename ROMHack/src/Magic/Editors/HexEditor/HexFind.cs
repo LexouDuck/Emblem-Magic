@@ -12,7 +12,7 @@ namespace Magic.Editors
     {
         public HexBox HexEditSource { get; set; }
 
-        bool Finding;
+        Boolean Finding;
 
         public HexFind()
         {
@@ -26,10 +26,10 @@ namespace Magic.Editors
         {
             if (HexEditSource.SelectionLength > 0)
             {
-                string text = "";
-                byte[] data = new byte[HexEditSource.SelectionLength];
+                String text = "";
+                Byte[] data = new Byte[HexEditSource.SelectionLength];
 
-                for (int i = 0; i < HexEditSource.SelectionLength; i++)
+                for (Int32 i = 0; i < HexEditSource.SelectionLength; i++)
                 {
                     data[i] = HexEditSource.ByteProvider.ReadByte(HexEditSource.SelectionStart + i);
                     text += HexEditSource.ByteCharConverter.ToChar(data[i]);
@@ -41,13 +41,13 @@ namespace Magic.Editors
             else
             {
                 FindTextBox.Text = "";
-                FindHexBox.Value = new byte[0];
+                FindHexBox.Value = new Byte[0];
             }
         }
         /// <summary>
         /// Is called when this find window is activated
         /// </summary>
-        void Core_OnFocus(object sender, EventArgs e)
+        void Core_OnFocus(Object sender, EventArgs e)
         {
             if (FindTextRadioBox.Checked)
                 FindTextBox.Focus();
@@ -131,28 +131,28 @@ namespace Magic.Editors
 
 
 
-        private void Find_FindText_Checked(object sender, EventArgs e)
+        private void Find_FindText_Checked(Object sender, EventArgs e)
         {
             FindTextBox.Enabled = true;
             FindHexBox.Enabled = false;
 
             FindTextBox.Focus();
         }
-        private void Find_FindHex_Checked(object sender, EventArgs e)
+        private void Find_FindHex_Checked(Object sender, EventArgs e)
         {
             FindHexBox.Enabled = true;
             FindTextBox.Enabled = false;
 
             FindHexBox.Focus();
         }
-        private void Find_CancelButton_Click(object sender, EventArgs e)
+        private void Find_CancelButton_Click(Object sender, EventArgs e)
         {
             if (Finding)
                 this.HexEditSource.AbortFind();
             else
                 this.Close();
         }
-        private void Find_FindOKButton_Click(object sender, EventArgs e)
+        private void Find_FindOKButton_Click(Object sender, EventArgs e)
         {
             if ((FindTextRadioBox.Checked && FindTextBox.Text.Length == 0) ||
                 (FindHexRadioBox.Checked && FindHexBox.Value.Length == 0))
@@ -168,23 +168,23 @@ namespace Magic.Editors
                 UI.ShowError("There has been an error during the find operation.", ex);
             }
         }
-        private void Find_Timer_Tick(object sender, EventArgs e)
+        private void Find_Timer_Tick(Object sender, EventArgs e)
         {
             if (FindingLabel.Text.Length == 13)
                 FindingLabel.Text = "";
 
             FindingLabel.Text += ".";
         }
-        private void Find_TimerPercent_Tick(object sender, EventArgs e)
+        private void Find_TimerPercent_Tick(Object sender, EventArgs e)
         {
-            long pos = this.HexEditSource.CurrentFindingPosition;
-            long length = HexEditSource.Value.Length;
-            double percent = (double)pos / (double)length * (double)100;
+            Int64 pos = this.HexEditSource.CurrentFindingPosition;
+            Int64 length = HexEditSource.Value.Length;
+            Double percent = (Double)pos / (Double)length * (Double)100;
 
             System.Globalization.NumberFormatInfo nfi =
                 new System.Globalization.CultureInfo("en-US").NumberFormat;
 
-            string text = percent.ToString("0.00", nfi) + " %";
+            String text = percent.ToString("0.00", nfi) + " %";
             PercentLabel.Text = text;
         }
     }

@@ -42,12 +42,12 @@ namespace Magic
 
         
 
-        public Write(Editor author, Pointer address, byte[] data, string description = "")
+        public Write(Editor author, Pointer address, Byte[] data, String description = "")
         {
             Author = (author == null) ? "Unknown Editor" : author.Text ?? "Unknown Editor";
             Load(DateTime.Now, address, data, description ?? "");
         }
-        public Write(string author, Pointer address, byte[] data, string description = "")
+        public Write(String author, Pointer address, Byte[] data, String description = "")
         {
             Author = (author == null) ? "Unknown Editor" : author ?? "Unknown Editor";
             Load(DateTime.Now, address, data, description ?? "");
@@ -55,23 +55,23 @@ namespace Magic
         /// <summary>
         /// Constructor used for loading from file.
         /// </summary>
-        public Write(string author, ulong time, string phrase, uint address, byte[] data)
+        public Write(String author, UInt64 time, String phrase, UInt32 address, Byte[] data)
         {
             Author = author ?? "Unknown Editor";
-            string description = phrase ?? "";
-            int length;
+            String description = phrase ?? "";
+            Int32 length;
             for (length = description.Length; length > 0; length--)
             {
                 if (description[length - 1] != ' ') break;
             }
             description = description.Substring(0, length);
-            Load(DateTime.FromBinary((long)time), new Pointer(address), data, description);
+            Load(DateTime.FromBinary((Int64)time), new Pointer(address), data, description);
         }
 
         /// <summary>
         /// private, sets some basic fields. 
         /// </summary>
-        void Load(DateTime time, Pointer address, byte[] data, string phrase)
+        void Load(DateTime time, Pointer address, Byte[] data, String phrase)
         {
             /*
             if (address < 0 || address + data.Length > App.ROM.FileSize)
@@ -89,10 +89,10 @@ namespace Magic
         /// Returns a fixed-length string of the Editor of this write
         /// </summary>
         /// <returns></returns>
-        public string GetEditorString()
+        public String GetEditorString()
         {
-            string result = Author;
-            for (int i = 0; i < HackManager.LENGTH_Write_Author - Author.Length; i++)
+            String result = Author;
+            for (Int32 i = 0; i < HackManager.LENGTH_Write_Author - Author.Length; i++)
             {
                 result += " ";
             }
@@ -102,10 +102,10 @@ namespace Magic
         /// Returns a fixed-length string of this write's description
         /// </summary>
         /// <returns></returns>
-        public string GetPhraseString()
+        public String GetPhraseString()
         {
-            string result = Phrase;
-            for (int i = 0; i < HackManager.LENGTH_Write_Phrase - Phrase.Length; i++)
+            String result = Phrase;
+            for (Int32 i = 0; i < HackManager.LENGTH_Write_Phrase - Phrase.Length; i++)
             {
                 result += " ";
             }

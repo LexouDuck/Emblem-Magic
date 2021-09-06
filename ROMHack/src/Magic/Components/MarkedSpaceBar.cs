@@ -36,7 +36,7 @@ namespace Magic.Components
         /// </summary>
         /// <param name="total">The total this bar respresents</param>
         /// <param name="list">The list of spaces to show up</param>
-        public void Load(uint total, List<Space> list)
+        public void Load(UInt32 total, List<Space> list)
         {
             Total = total;
             Ranges.Clear();
@@ -49,33 +49,33 @@ namespace Magic.Components
 
         void UpdateRanges()
         {
-            int offset;
-            int endoff;
-            float ratio;
+            Int32 offset;
+            Int32 endoff;
+            Single ratio;
             Space space;
-            for (int i = 0; i < Ranges.Count; i++)
+            for (Int32 i = 0; i < Ranges.Count; i++)
             {
                 space = Ranges[i].Item1;
 
-                ratio = (float)(int)space.Address / (float)Total;
-                offset = (int)(ratio * Width);
+                ratio = (Single)(Int32)space.Address / (Single)Total;
+                offset = (Int32)(ratio * Width);
 
-                ratio = (float)(int)space.EndByte / (float)Total;
-                endoff = Math.Max(offset + 1, (int)(ratio * Width));
+                ratio = (Single)(Int32)space.EndByte / (Single)Total;
+                endoff = Math.Max(offset + 1, (Int32)(ratio * Width));
 
                 Ranges[i] = Tuple.Create(space, new Range(offset, endoff));
             }
         }
         void AddMarkedSpace(Space space)
         {
-            int offset;
-            int endoff;
-            float ratio;
-            ratio = (float)(int)space.Address / (float)Total;
-            offset = (int)(ratio * Width);
+            Int32 offset;
+            Int32 endoff;
+            Single ratio;
+            ratio = (Single)(Int32)space.Address / (Single)Total;
+            offset = (Int32)(ratio * Width);
 
-            ratio = (float)(int)space.EndByte / (float)Total;
-            endoff = Math.Max(offset + 1, (int)(ratio * Width));
+            ratio = (Single)(Int32)space.EndByte / (Single)Total;
+            endoff = Math.Max(offset + 1, (Int32)(ratio * Width));
 
             Ranges.Add(Tuple.Create(space, new Range(offset, endoff)));
         }
@@ -108,7 +108,7 @@ namespace Magic.Components
         /// <summary>
         /// An event handler that calls the 'OnPaint' method
         /// </summary>
-        void Redraw(object sender, EventArgs e)
+        void Redraw(Object sender, EventArgs e)
         {
             this.Invalidate();
         }
@@ -122,7 +122,7 @@ namespace Magic.Components
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
+        protected override void Dispose(Boolean disposing)
         {
             if (disposing && (components != null))
             {

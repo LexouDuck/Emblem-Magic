@@ -12,7 +12,7 @@ namespace Magic
             String,
             Boolean,
             Pointer,
-            int>> List { get; set; }
+            Int32>> List { get; set; }
 
         public PointEditor(IApp app) : base(app)
         {
@@ -20,7 +20,7 @@ namespace Magic
                 String,
                 Boolean,
                 Pointer,
-                int>>();
+                Int32>>();
 
             InitializeComponent();
 
@@ -105,7 +105,7 @@ namespace Magic
 
 
 
-        private void SelectPointer_Click(object sender, EventArgs e)
+        private void SelectPointer_Click(Object sender, EventArgs e)
         {
             if (PointerDataGrid.SelectedRows.Count == 0)
             {
@@ -113,7 +113,7 @@ namespace Magic
             }
             else if (PointerDataGrid.SelectedRows.Count == 1)
             {
-                String asset = (string)PointerDataGrid.CurrentRow.Cells[0].Value;
+                String asset = (String)PointerDataGrid.CurrentRow.Cells[0].Value;
 
                 Update_EditPanel(App.FEH.Point.Get(asset));
             }
@@ -123,7 +123,7 @@ namespace Magic
             }
         }
 
-        private void RepointButton_Click(object sender, EventArgs e)
+        private void RepointButton_Click(Object sender, EventArgs e)
         {
             if (PointerDataGrid.SelectedRows.Count == 0)
             {
@@ -131,7 +131,7 @@ namespace Magic
             }
             else if (PointerDataGrid.SelectedRows.Count == 1)
             {
-                Repoint asset = App.FEH.Point.Get((string)PointerDataGrid.CurrentRow.Cells[0].Value);
+                Repoint asset = App.FEH.Point.Get((String)PointerDataGrid.CurrentRow.Cells[0].Value);
                 asset.AssetName = Repoint_NameTextBox.Text;
                 Core.Repoint(this, asset.CurrentAddress, Repoint_CurrentPointerBox.Value, asset.AssetName + " repointed");
             }
@@ -141,7 +141,7 @@ namespace Magic
             }
             Core_Update();
         }
-        private void CreateButton_Click(object sender, EventArgs e)
+        private void CreateButton_Click(Object sender, EventArgs e)
         {
             Repoint repoint = Prompt.ShowRepointCreateDialog();
 
@@ -153,7 +153,7 @@ namespace Magic
             }
             Core_Update();
         }
-        private void DeleteButton_Click(object sender, EventArgs e)
+        private void DeleteButton_Click(Object sender, EventArgs e)
         {
             if (PointerDataGrid.SelectedRows.Count == 0)
             {
@@ -161,11 +161,11 @@ namespace Magic
             }
             else if (PointerDataGrid.SelectedRows.Count == 1)
             {
-                App.FEH.Point.Remove((string)PointerDataGrid.CurrentRow.Cells[0].Value);
+                App.FEH.Point.Remove((String)PointerDataGrid.CurrentRow.Cells[0].Value);
             }
             else foreach (DataGridViewRow row in PointerDataGrid.SelectedRows)
             {
-                App.FEH.Point.Remove((string)row.Cells[0].Value);
+                App.FEH.Point.Remove((String)row.Cells[0].Value);
             }
             Core_Update();
         }

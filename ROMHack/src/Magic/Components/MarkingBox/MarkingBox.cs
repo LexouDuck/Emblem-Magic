@@ -25,7 +25,7 @@ namespace Magic.Components
             UpdateMarkList(this, null);
         }
 
-        void UpdateMarkList(object sender, EventArgs e)
+        void UpdateMarkList(Object sender, EventArgs e)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace Magic.Components
             }
             catch
             {
-                BindingList <string> emptylist = new BindingList<string>();
+                BindingList <String> emptylist = new BindingList<String>();
                 emptylist.Add("(unmark)");
                 DataSource = emptylist;
             }

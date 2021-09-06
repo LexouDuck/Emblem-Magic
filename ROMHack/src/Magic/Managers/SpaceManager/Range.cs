@@ -11,17 +11,17 @@ namespace Magic
         /// <summary>
         /// The starting point of this range.
         /// </summary>
-        public uint Start;
+        public UInt32 Start;
 
         /// <summary>
         /// The ending point of this range.
         /// </summary>
-        public uint End;
+        public UInt32 End;
 
         /// <summary>
         /// The length of this range.
         /// </summary>
-        public uint Length
+        public UInt32 Length
         {
             get
             {
@@ -29,36 +29,36 @@ namespace Magic
             }
         }
 
-        public Range(int start, int end)
+        public Range(Int32 start, Int32 end)
         {
             // if (start == end) throw new Exception("Range cannot be of length 0");
             if (end < start) throw new Exception("Range cannot be negative, 'End' must be greater than 'Start'.");
 
-            Start = (uint)start;
-            End = (uint)end;
+            Start = (UInt32)start;
+            End = (UInt32)end;
         }
 
 
-        override public bool Equals(object other)
+        override public Boolean Equals(Object other)
         {
             if (!(other is Range)) return false;
             Range range = (Range)other;
             return (Start == range.Start && End == range.End);
         }
-        override public int GetHashCode()
+        override public Int32 GetHashCode()
         {
             return Start.GetHashCode() ^ End.GetHashCode();
         }
-        override public string ToString()
+        override public String ToString()
         {
             return "Range, from " + Util.AddressToString(Start, 8) + " to " + Util.AddressToString(End, 8);
         }
 
-        public static bool operator ==(Range left, Range right)
+        public static Boolean operator ==(Range left, Range right)
         {
             return (left.Start == right.Start && left.End == right.End);
         }
-        public static bool operator !=(Range left, Range right)
+        public static Boolean operator !=(Range left, Range right)
         {
             return (left.Start != right.Start || left.End != right.End);
         }

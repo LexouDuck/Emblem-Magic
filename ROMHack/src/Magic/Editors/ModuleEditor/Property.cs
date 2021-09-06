@@ -27,23 +27,23 @@ namespace Magic.Editors
         /// <summary>
         /// The name of this module property
         /// </summary>
-        public string Name { get; }
+        public String Name { get; }
         /// <summary>
         /// The name of the file used for a drop-down box
         /// </summary>
-        public string FileName { get; }
+        public String FileName { get; }
         /// <summary>
         /// What category this property is to be placed in.
         /// </summary>
-        public string Section { get; }
+        public String Section { get; }
         /// <summary>
         /// At what index in the data this property is located, in bits
         /// </summary>
-        public int Position { get; }
+        public Int32 Position { get; }
         /// <summary>
         /// How many bits long this property is. (do ">> 3" for bytes)
         /// </summary>
-        public int Length { get; }
+        public Int32 Length { get; }
         /// <summary>
         /// What kind of Control should be loaded for this property
         /// </summary>
@@ -51,12 +51,12 @@ namespace Magic.Editors
         /// <summary>
         /// The editor to which this property has a shortcut button attached (is null if there is none)
         /// </summary>
-        public string EditorShortcut { get; }
+        public String EditorShortcut { get; }
 
         /// <summary>
         /// Gets the byte offset of this property within the struct
         /// </summary>
-        public int Offset
+        public Int32 Offset
         {
             get
             {
@@ -66,7 +66,7 @@ namespace Magic.Editors
         /// <summary>
         /// Gets the right-to-left bit index of this property
         /// </summary>
-        public int BitIndex
+        public Int32 BitIndex
         {
             get
             {
@@ -77,13 +77,13 @@ namespace Magic.Editors
 
 
         public Property(
-            int line,
-            string name,
-            string category,
-            string propertyIndex,
-            string propertyLength,
-            string controlType,
-            string fileName)
+            Int32 line,
+            String name,
+            String category,
+            String propertyIndex,
+            String propertyLength,
+            String controlType,
+            String fileName)
         {
             try
             {
@@ -106,13 +106,13 @@ namespace Magic.Editors
         /// <summary>
         /// Gets the value for this property within the given entry byte array
         /// </summary>
-        public object GetValue(byte[] entry)
+        public Object GetValue(Byte[] entry)
         {
 
             if (Length % 8 == 0)
             {   // if this is a byte entry
-                int length = Length >> 3;
-                byte[] data = new byte[length];
+                Int32 length = Length >> 3;
+                Byte[] data = new Byte[length];
                 Array.Copy(entry, Position / 8, data, 0, length);
 
                 switch (ControlType)
@@ -141,7 +141,7 @@ namespace Magic.Editors
         public Control GetControl()
         {
             Control control;
-            long max = (long)Math.Pow(2, Length);
+            Int64 max = (Int64)Math.Pow(2, Length);
             switch (ControlType)
             {
                 case PropertyType.BOOL: control = new CheckBox() {

@@ -42,7 +42,7 @@ namespace Magic.Editors
 
         }
 
-        public void Core_OnLoad(object sender, EventArgs e)
+        public void Core_OnLoad(Object sender, EventArgs e)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace Magic.Editors
         /// <summary>
         /// Is called by EM shortcut buttons to set the correct index
         /// </summary>
-        public virtual void Core_SetEntry(uint entry) { }
+        public virtual void Core_SetEntry(UInt32 entry) { }
         /// <summary>
         /// Is called when the editor opens (after the constructor)
         /// </summary>
@@ -69,12 +69,12 @@ namespace Magic.Editors
         /// <summary>
         /// Is called when (just before) the editor closes
         /// </summary>
-        public virtual void Core_OnExit(object sender, FormClosingEventArgs e) { }
+        public virtual void Core_OnExit(Object sender, FormClosingEventArgs e) { }
 
         /// <summary>
         /// Is called when the editor closes.
         /// </summary>
-        public void Core_CloseEditor(object sender, FormClosedEventArgs e)
+        public void Core_CloseEditor(Object sender, FormClosedEventArgs e)
         {
             App.Core_ExitEditor(this);
             this.Dispose();
@@ -99,7 +99,7 @@ namespace Magic.Editors
         /// <summary>
         /// Allows for using Ctrl+Z or Ctrl+Y for undos and redos from any editor window
         /// </summary>
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        protected override Boolean ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (App.Edit_Undo.Enabled && keyData == (Keys.Control | Keys.Z))
             {

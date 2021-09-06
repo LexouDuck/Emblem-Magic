@@ -10,20 +10,20 @@ namespace EmblemMagic.Editors
 {
     public partial class WorldMapEditor_FE8 : Editor
     {
-        const int MINI_MAP_TILESET = 0;
-        const int MINI_MAP_PALETTE = 1;
-        const int SMALLMAP_TILESET = 2;
-        const int SMALLMAP_PALETTE = 3;
-        const int SMALLMAP_TSA     = 4;
-        const int LARGEMAP_TILESET = 5;
-        const int LARGEMAP_PALETTE = 6;
-        const int LARGEMAP_TSA     = 7;
+        const Int32 MINI_MAP_TILESET = 0;
+        const Int32 MINI_MAP_PALETTE = 1;
+        const Int32 SMALLMAP_TILESET = 2;
+        const Int32 SMALLMAP_PALETTE = 3;
+        const Int32 SMALLMAP_TSA     = 4;
+        const Int32 LARGEMAP_TILESET = 5;
+        const Int32 LARGEMAP_PALETTE = 6;
+        const Int32 LARGEMAP_TSA     = 7;
 
         WorldMap_FE8_Mini CurrentMiniMap { get; set; }
         public WorldMap_FE8_Small CurrentSmallMap { get; set; }
         public WorldMap_FE8_Large CurrentLargeMap { get; set; }
 
-        string CurrentEntry(string prefix)
+        String CurrentEntry(String prefix)
         {
             if (prefix.Equals("Mini") && Core.CurrentROM.Version == GameVersion.EUR)
                 return prefix + " World Map " + Mini_Map_NumberBox.Value + " - ";
@@ -81,7 +81,7 @@ namespace EmblemMagic.Editors
                 CurrentMiniMap = new WorldMap_FE8_Mini(
                     pointers[MINI_MAP_PALETTE],
                     (Core.CurrentROM.Version == GameVersion.EUR) ?
-                    Core.ReadPointer(pointers[MINI_MAP_TILESET] + (int)Mini_Map_NumberBox.Value * 4) :
+                    Core.ReadPointer(pointers[MINI_MAP_TILESET] + (Int32)Mini_Map_NumberBox.Value * 4) :
                     pointers[MINI_MAP_TILESET]);
                 Mini_Map_ImageBox.Load(CurrentMiniMap);
                 Mini_Map_PaletteBox.Load(CurrentMiniMap.Colors);
@@ -160,7 +160,7 @@ namespace EmblemMagic.Editors
             LargeMap_TSAPointerBox.ValueChanged     += LargeMap_TSAPointerBox_ValueChanged;
         }
 
-        void Core_InsertMiniMap(string filepath)
+        void Core_InsertMiniMap(String filepath)
         {
             try
             {
@@ -173,14 +173,14 @@ namespace EmblemMagic.Editors
                 UI.ShowError("Could not insert the mini world map image.", ex); return;
             }
 
-            byte[] data_palette = CurrentMiniMap.Colors.ToBytes(false);
-            byte[] data_tileset = CurrentMiniMap.Sheet.ToBytes(true);
+            Byte[] data_palette = CurrentMiniMap.Colors.ToBytes(false);
+            Byte[] data_tileset = CurrentMiniMap.Sheet.ToBytes(true);
 
             UI.SuspendUpdate();
 
-            bool cancel = Prompt.ShowRepointDialog(this, "Repoint Mini World Map",
+            Boolean cancel = Prompt.ShowRepointDialog(this, "Repoint Mini World Map",
                 "The different parts of this image may need to be repointed upon insertion.",
-                CurrentEntry("Mini"), new Tuple<string, Pointer, int>[] {
+                CurrentEntry("Mini"), new Tuple<String, Pointer, Int32>[] {
                     Tuple.Create("Palette", Core.GetPointer("Mini World Map Palette"), data_palette.Length),
                     Tuple.Create("Tileset", Core.GetPointer("Mini World Map Tileset"), data_tileset.Length)});
             if (cancel) return;
@@ -198,7 +198,7 @@ namespace EmblemMagic.Editors
             UI.ResumeUpdate();
             UI.PerformUpdate();
         }
-        void Core_InsertSmallMap(string filepath)
+        void Core_InsertSmallMap(String filepath)
         {
             try
             {
@@ -211,15 +211,15 @@ namespace EmblemMagic.Editors
                 UI.ShowError("Could not insert the small world map image.", ex); return;
             }
 
-            byte[] data_palette = Palette.Merge(CurrentSmallMap.Palettes).ToBytes(false);
-            byte[] data_tileset = CurrentSmallMap.Graphics.ToBytes(true);
-            byte[] data_tsa = CurrentSmallMap.Tiling.ToBytes(true, true);
+            Byte[] data_palette = Palette.Merge(CurrentSmallMap.Palettes).ToBytes(false);
+            Byte[] data_tileset = CurrentSmallMap.Graphics.ToBytes(true);
+            Byte[] data_tsa = CurrentSmallMap.Tiling.ToBytes(true, true);
 
             UI.SuspendUpdate();
 
-            bool cancel = Prompt.ShowRepointDialog(this, "Repoint Small World Map",
+            Boolean cancel = Prompt.ShowRepointDialog(this, "Repoint Small World Map",
                 "The different parts of this image may need to be repointed upon insertion.",
-                CurrentEntry("Small"), new Tuple<string, Pointer, int>[] {
+                CurrentEntry("Small"), new Tuple<String, Pointer, Int32>[] {
                     Tuple.Create("Palette", Core.GetPointer("Small World Map Palette"), data_palette.Length),
                     Tuple.Create("Tileset", Core.GetPointer("Small World Map Tileset"), data_tileset.Length),
                     Tuple.Create("TSA", Core.GetPointer("Small World Map TSA"), data_tsa.Length)});
@@ -243,7 +243,7 @@ namespace EmblemMagic.Editors
             UI.ResumeUpdate();
             UI.PerformUpdate();
         }
-        void Core_InsertLargeMap(string filepath)
+        void Core_InsertLargeMap(String filepath)
         {
             try
             {
@@ -256,15 +256,15 @@ namespace EmblemMagic.Editors
                 UI.ShowError("Could not insert the large world map image.", ex); return;
             }
 
-            byte[] data_palette = Palette.Merge(CurrentLargeMap.Palettes).ToBytes(false);
-            byte[] data_tileset = CurrentLargeMap.Graphics.ToBytes(false);
-            byte[] data_tsa = LZ77.Compress(CurrentLargeMap.GetPaletteMap());
+            Byte[] data_palette = Palette.Merge(CurrentLargeMap.Palettes).ToBytes(false);
+            Byte[] data_tileset = CurrentLargeMap.Graphics.ToBytes(false);
+            Byte[] data_tsa = LZ77.Compress(CurrentLargeMap.GetPaletteMap());
 
             UI.SuspendUpdate();
 
-            bool cancel = Prompt.ShowRepointDialog(this, "Repoint Large World Map",
+            Boolean cancel = Prompt.ShowRepointDialog(this, "Repoint Large World Map",
                 "The different parts of this image may need to be repointed upon insertion.",
-                CurrentEntry("Large"), new Tuple<string, Pointer, int>[] {
+                CurrentEntry("Large"), new Tuple<String, Pointer, Int32>[] {
                     Tuple.Create("Palette", Core.GetPointer("Large World Map Palette"), data_palette.Length),
                     Tuple.Create("Tileset", Core.GetPointer("Large World Map Tileset"), data_tileset.Length),
                     Tuple.Create("TSA",     Core.GetPointer("Large World Map TSA"), data_tsa.Length)});
@@ -300,7 +300,7 @@ namespace EmblemMagic.Editors
                 CurrentMiniMap = new WorldMap_FE8_Mini(
                     pointers[MINI_MAP_PALETTE],
                     (Core.CurrentROM.Version == GameVersion.EUR) ?
-                    Core.ReadPointer(pointers[MINI_MAP_TILESET] + (int)Mini_Map_NumberBox.Value * 4) :
+                    Core.ReadPointer(pointers[MINI_MAP_TILESET] + (Int32)Mini_Map_NumberBox.Value * 4) :
                     pointers[MINI_MAP_TILESET]);
                 Mini_Map_ImageBox.Load(CurrentMiniMap);
                 Mini_Map_PaletteBox.Load(CurrentMiniMap.Colors);

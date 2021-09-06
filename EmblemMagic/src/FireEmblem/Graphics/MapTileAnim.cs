@@ -7,11 +7,11 @@ namespace EmblemMagic.FireEmblem
 {
     public struct MapTileFrame
     {
-        public const int LENGTH = 8;
+        public const Int32 LENGTH = 8;
 
-        byte[] Data;
+        Byte[] Data;
 
-        public MapTileFrame(byte[] data)
+        public MapTileFrame(Byte[] data)
         {
             if (data.Length != LENGTH) throw new Exception("Map tile frame length is invalid: " + data.Length);
 
@@ -41,7 +41,7 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// The duration of this frame of the map tile animation
         /// </summary>
-        public byte Duration
+        public Byte Duration
         {
             get
             {
@@ -59,7 +59,7 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// The offset of the color to apply this animation to (only used if this is a palette anim)
         /// </summary>
-        public byte Offset
+        public Byte Offset
         {
             get
             {
@@ -76,7 +76,7 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// The length of data pointed to by this map tile animation
         /// </summary>
-        public byte Length
+        public Byte Length
         {
             get
             {
@@ -97,9 +97,9 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// Returns true if this MapTileFrame struct is a terminator - 8 bytes of 0x00
         /// </summary>
-        public bool IsTerminator()
+        public Boolean IsTerminator()
         {
-            for (int i = 0; i < LENGTH; i++)
+            for (Int32 i = 0; i < LENGTH; i++)
             {
                 if (Data[i] != 0x00) return false;
             }
@@ -109,14 +109,14 @@ namespace EmblemMagic.FireEmblem
         /// Returns true if this struct indicates a palette change frame (the pointer is at +0x04 and not +0x00)
         /// </summary>
         /// <returns></returns>
-        public bool IsPaletteAnimation()
+        public Boolean IsPaletteAnimation()
         {
             return (Data[7] == 0x00);
         }
         /// <summary>
         /// Returns the 8-length byte array for this MapTileFrame struct
         /// </summary>
-        public byte[] ToBytes()
+        public Byte[] ToBytes()
         {
             return Data;
         }
@@ -126,7 +126,7 @@ namespace EmblemMagic.FireEmblem
 
     public class MapTileAnim
     {
-        public const int LENGTH = 8;
+        public const Int32 LENGTH = 8;
 
         public Pointer Address;
         public List<MapTileFrame> Frames;
@@ -139,8 +139,8 @@ namespace EmblemMagic.FireEmblem
             {
                 return;
             }
-            byte[] frame;
-            int index = 0;
+            Byte[] frame;
+            Int32 index = 0;
             do
             {
                 frame = Core.ReadData(address + index * MapTileFrame.LENGTH, MapTileFrame.LENGTH);
@@ -151,10 +151,10 @@ namespace EmblemMagic.FireEmblem
         
 
 
-        public byte[] ToBytes()
+        public Byte[] ToBytes()
         {
-            byte[] result = new byte[Frames.Count * MapTileFrame.LENGTH];
-            for (int i = 0; i < Frames.Count; i++)
+            Byte[] result = new Byte[Frames.Count * MapTileFrame.LENGTH];
+            for (Int32 i = 0; i < Frames.Count; i++)
             {
                 Array.Copy(Frames[i].ToBytes(), 0, result, i * MapTileFrame.LENGTH, MapTileFrame.LENGTH);
             }

@@ -15,12 +15,12 @@ namespace Magic.Editors
         TabPage MainTabPage;
         List<HexBox>  FileHexBoxes;
         List<TabPage> FileTabPages;
-        List<string>  FilePaths;
+        List<String>  FilePaths;
 
         /// <summary>
         /// Get or sets the currently focused tab.
         /// </summary>
-        int CurrentTab
+        Int32 CurrentTab
         {
             get
             {
@@ -37,7 +37,8 @@ namespace Magic.Editors
                 Update_StatusLabel();
                 return;
             }
-        } int _current;
+        }
+        Int32 _current;
         /// <summary>
         /// Returns true if the currently focused tab is that of the open ROM
         /// </summary>
@@ -53,12 +54,12 @@ namespace Magic.Editors
             get
             {
                 HexBox hexbox = CurrentTabIsROM() ? MainHexBox : FileHexBoxes[CurrentTab];
-                return new Pointer((uint)((hexbox.CurrentLine - 1) * hexbox.BytesPerLine + hexbox.CurrentPositionInLine));
+                return new Pointer((UInt32)((hexbox.CurrentLine - 1) * hexbox.BytesPerLine + hexbox.CurrentPositionInLine));
             }
             set
             {
                 HexBox hexbox = CurrentTabIsROM() ? MainHexBox : FileHexBoxes[CurrentTab];
-                hexbox.Select((uint)value, 1);
+                hexbox.Select((UInt32)value, 1);
                 hexbox.Focus();
             }
         }
@@ -66,7 +67,7 @@ namespace Magic.Editors
         HexFind Tool_Find;
         HexGoTo Tool_GoTo;
 
-        List<Tuple<Pointer, byte>> Differences;
+        List<Tuple<Pointer, Byte>> Differences;
 
         public HexEditor(IApp app) : base(app)
         {
@@ -78,9 +79,9 @@ namespace Magic.Editors
 
                 FileHexBoxes = new List<HexBox>();
                 FileTabPages = new List<TabPage>();
-                FilePaths = new List<string>();
+                FilePaths = new List<String>();
 
-                Differences = new List<Tuple<Pointer, byte>>();
+                Differences = new List<Tuple<Pointer, Byte>>();
             }
             catch (Exception ex)
             {
@@ -115,10 +116,10 @@ namespace Magic.Editors
         /// <summary>
         /// Potentially prompts the user about closing files without saving changes
         /// </summary>
-        public override void Core_OnExit(object sender, FormClosingEventArgs e)
+        public override void Core_OnExit(Object sender, FormClosingEventArgs e)
         {
             DialogResult answer;
-            for (int i = 0; i < FilePaths.Count; i++)
+            for (Int32 i = 0; i < FilePaths.Count; i++)
             {
                 answer = Prompt.SaveHexChanges();
                 CurrentTab = i;
@@ -143,7 +144,7 @@ namespace Magic.Editors
                 rom.LengthChanged += new EventHandler(Core_ROMSizeChanged);
 
                 MainHexBox.ByteProvider = rom;
-                Differences = new List<Tuple<Pointer, byte>>();
+                Differences = new List<Tuple<Pointer, Byte>>();
             }
             catch (Exception ex)
             {
@@ -157,7 +158,7 @@ namespace Magic.Editors
         /// Opens a file.
         /// </summary>
         /// <param name="path">the file name of the file to open</param>
-        void Core_OpenFile(string path)
+        void Core_OpenFile(String path)
         {
             if (!File.Exists(path))
             {
@@ -222,7 +223,7 @@ namespace Magic.Editors
         /// <summary>
         /// Saves the file at the given index - optimized for using an already open stream
         /// </summary>
-        void Core_SaveFile(int index)
+        void Core_SaveFile(Int32 index)
         {
             try
             {
@@ -258,12 +259,12 @@ namespace Magic.Editors
         /// <summary>
         /// Saves the file from the tab at the given index as a new file.
         /// </summary>
-        void Core_MakeFile(int index)
+        void Core_MakeFile(Int32 index)
         {
             using (FileStream file = File.OpenWrite(FilePaths[index]))
             {
-                byte[] data = FileHexBoxes[index].Value;
-                file.Write(data, 0, (int)data.Length);
+                Byte[] data = FileHexBoxes[index].Value;
+                file.Write(data, 0, (Int32)data.Length);
 
                 Console.Out.WriteLine("Saved " + data.Length + " to file.");
                 //file.Close();
@@ -272,7 +273,7 @@ namespace Magic.Editors
         /// <summary>
         /// Closes the tabpage corresponding to the given index
         /// </summary>
-        void Core_ExitFile(int index)
+        void Core_ExitFile(Int32 index)
         {
             if (CurrentTabIsROM())
             {
@@ -297,21 +298,21 @@ namespace Magic.Editors
         /// <summary>
         /// Adds the byte that has just been typed into Differences
         /// </summary>
-        void Core_ROMChanged(object sender, EventArgs e)
+        void Core_ROMChanged(Object sender, EventArgs e)
         {
-            for (int i = 0; i < Differences.Count; i++)
+            for (Int32 i = 0; i < Differences.Count; i++)
             {
                 if (Differences[i].Item1 == CurrentAddress)
                 {
                     Differences.RemoveAt(i);
                 }
             }
-            Differences.Add(Tuple.Create(CurrentAddress, MainHexBox.ByteProvider.ReadByte((int)CurrentAddress)));
+            Differences.Add(Tuple.Create(CurrentAddress, MainHexBox.ByteProvider.ReadByte((Int32)CurrentAddress)));
         }
         /// <summary>
         /// Prompts the user about chenging the filesize of the ROM
         /// </summary>
-        void Core_ROMSizeChanged(object sender, EventArgs e)
+        void Core_ROMSizeChanged(Object sender, EventArgs e)
         {
             if (Prompt.ChangeROMSize() == DialogResult.No)
             {
@@ -321,7 +322,7 @@ namespace Magic.Editors
         /// <summary>
         /// An event handler that updates the menustrip
         /// </summary>
-        void Core_UpdateMenu(object sender, EventArgs e)
+        void Core_UpdateMenu(Object sender, EventArgs e)
         {
             Update_FileMenu();
             Update_EditMenu();
@@ -329,17 +330,17 @@ namespace Magic.Editors
         /// <summary>
         /// Enables drag & drop
         /// </summary>
-        void Core_DragEnter(object sender, DragEventArgs e)
+        void Core_DragEnter(Object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.All;
         }
         /// <summary>
         /// Processes a file drop
         /// </summary>
-        void Core_DragDrop(object sender, DragEventArgs e)
+        void Core_DragDrop(Object sender, DragEventArgs e)
         {
-            object fileNameData = e.Data.GetData(DataFormats.FileDrop);
-            string[] fileNames = (string[])fileNameData;
+            Object fileNameData = e.Data.GetData(DataFormats.FileDrop);
+            String[] fileNames = (String[])fileNameData;
             if (fileNames.Length == 1)
             {
                 Core_OpenFile(fileNames[0]);
@@ -349,7 +350,7 @@ namespace Magic.Editors
         /// <summary>
         /// Creates a new TabPage for the given file
         /// </summary>
-        void Core_CreateTabPage(FileByteProvider file, string fileName)
+        void Core_CreateTabPage(FileByteProvider file, String fileName)
         {
             TabPage tabpage = new TabPage();
             tabpage.Name = "FileTabPage" + FileTabPages.Count;
@@ -391,7 +392,7 @@ namespace Magic.Editors
         /// Closes the tab page at the given index
         /// </summary>
         /// <param name="index"></param>
-        void Core_CloseTabPage(int index)
+        void Core_CloseTabPage(Int32 index)
         {
             Tabs_Control.TabPages.Remove(FileTabPages[index]);
             Tabs_Control.Controls.Remove(FileTabPages[index]);
@@ -446,15 +447,15 @@ namespace Magic.Editors
         /// Shows the bits for the current byte
         /// </summary>
         /// <returns>A string that is like "Bits of byte n° XXX : XXXXXXXX"</returns>
-        string Core_ShowBits()
+        String Core_ShowBits()
         {
-            string result = "";
+            String result = "";
 
-            byte? currentByte = null;
+            Byte? currentByte = null;
             IByteProvider currentFile = CurrentTabIsROM() ?
                 MainHexBox.ByteProvider :
                 FileHexBoxes[CurrentTab].ByteProvider;
-            uint selection = CurrentAddress;
+            UInt32 selection = CurrentAddress;
 
             if (selection < currentFile.Length)
             {
@@ -462,11 +463,11 @@ namespace Magic.Editors
             }
 
             BitInfo bitInfo = (currentByte == null) ? null :
-                new BitInfo((byte)currentByte, selection);
+                new BitInfo((Byte)currentByte, selection);
 
             if (bitInfo != null)
             {
-                byte currentByteNotNull = (byte)currentByte;
+                Byte currentByteNotNull = (Byte)currentByte;
                 result = "Bits: " + bitInfo.ToString();
             }
 
@@ -475,18 +476,18 @@ namespace Magic.Editors
         /// <summary>
         /// Puts together the bytes in Differences with chaining addresses
         /// </summary>
-        List<Tuple<Pointer, byte[]>> Core_MergeDifferences()
+        List<Tuple<Pointer, Byte[]>> Core_MergeDifferences()
         {
-            Differences.Sort(delegate (Tuple<Pointer, byte> first, Tuple<Pointer, byte> second)
+            Differences.Sort(delegate (Tuple<Pointer, Byte> first, Tuple<Pointer, Byte> second)
             {
                 return (first.Item1 - second.Item1);
             }); // first we sort the differences (they were in chronological order, now they're sorted by offset)
 
-            int chain;
+            Int32 chain;
             Pointer address;
-            List<Tuple<Pointer, byte[]>> data = new List<Tuple<Pointer, byte[]>>();
-            byte[] buffer;
-            for (int i = 0; i < Differences.Count; i++)
+            List<Tuple<Pointer, Byte[]>> data = new List<Tuple<Pointer, Byte[]>>();
+            Byte[] buffer;
+            for (Int32 i = 0; i < Differences.Count; i++)
             {   // then we put adjacent bytes together so as to make byte arrays
                 chain = 1;
                 while (((i + 1) < Differences.Count) &&
@@ -496,9 +497,9 @@ namespace Magic.Editors
                     chain++;
                 }
                 address = Differences[(i - chain) + 1].Item1;
-                buffer = new byte[chain];
+                buffer = new Byte[chain];
                 UI.ShowMessage("address: " + address + ", buffer: " + chain);
-                for (int index = 0; index < chain; index++)
+                for (Int32 index = 0; index < chain; index++)
                 {
                     buffer[index] = Differences[(i - chain) + index + 1].Item2;
                 }
@@ -523,7 +524,7 @@ namespace Magic.Editors
             
             Menu_File_Close.Enabled = !CurrentTabIsROM();
 
-            string romfile = CurrentTabIsROM() ? "ROM" : "File";
+            String romfile = CurrentTabIsROM() ? "ROM" : "File";
             Menu_File_Save.Text = "Save " + romfile + "...";
             Menu_File_SaveAs.Text = "Save " + romfile + " As...";
         }
@@ -548,11 +549,11 @@ namespace Magic.Editors
         /// <param name="fileName">the file name to display</param>
         void Update_TabControl()
         {
-            string fileName;
-            string readOnly;
-            string changed;
+            String fileName;
+            String readOnly;
+            String changed;
 
-            for (int i = 0; i < FilePaths.Count; i++)
+            for (Int32 i = 0; i < FilePaths.Count; i++)
             {
                 fileName = Path.GetFileName(FilePaths[i]);
                 readOnly = ((FileByteProvider)FileHexBoxes[i].ByteProvider).ReadOnly ? " [Read-only]" : "";
@@ -572,8 +573,8 @@ namespace Magic.Editors
             HexBox hexbox =  CurrentTabIsROM() ?
                 MainHexBox :
                 FileHexBoxes[CurrentTab];
-            Pointer address = new Pointer((uint)hexbox.SelectionStart);
-            uint length = (uint)hexbox.SelectionLength;
+            Pointer address = new Pointer((UInt32)hexbox.SelectionStart);
+            UInt32 length = (UInt32)hexbox.SelectionLength;
             Status_File.Text = App.ROM.FileName + " - " + Util.GetDisplayBytes(hexbox.ByteProvider.Length) +
                 " | Path: " + App.ROM.FilePath;
             Status_Position.Text = "Address: " + address + " | " + (length == 0 ? "No selection" : ("Selected: 0x" + Util.IntToHex(length)));
@@ -592,45 +593,45 @@ namespace Magic.Editors
 
 
 
-        void HexBox_Copy(object sender, EventArgs e)
+        void HexBox_Copy(Object sender, EventArgs e)
         {
             Update_EditMenu();
         }
-        void HexBox_CopyHex(object sender, EventArgs e)
+        void HexBox_CopyHex(Object sender, EventArgs e)
         {
             Update_EditMenu();
         }
 
-        void HexBox_Position_Changed(object sender, EventArgs e)
+        void HexBox_Position_Changed(Object sender, EventArgs e)
         {
             Update_StatusLabel();
         }
-        void HexBox_SelectionStartChanged(object sender, EventArgs e)
+        void HexBox_SelectionStartChanged(Object sender, EventArgs e)
         {
             Update_EditMenu();
             Update_StatusLabel();
         }
-        void HexBox_SelectionLengthChanged(object sender, EventArgs e)
+        void HexBox_SelectionLengthChanged(Object sender, EventArgs e)
         {
             Update_EditMenu();
             Update_StatusLabel();
         }
 
-        void HexBox_ByteProvider_Changed(object sender, EventArgs e)
+        void HexBox_ByteProvider_Changed(Object sender, EventArgs e)
         {
             Update_FileMenu();
             Update_EditMenu();
             Update_TabControl();
             Update_StatusLabel();
         }
-        void HexBox_ByteProvider_LengthChanged(object sender, EventArgs e)
+        void HexBox_ByteProvider_LengthChanged(Object sender, EventArgs e)
         {
             Update_StatusLabel();
         }
 
 
         
-        void File_Open_Click(object sender, EventArgs e)
+        void File_Open_Click(Object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "All files (*.*)|*.*|ROMs (*.gba)|*.gba|Hacks (*.feh)|*.feh";
@@ -647,12 +648,12 @@ namespace Magic.Editors
             Update_TabControl();
             Update_StatusLabel();
         }
-        void File_Recent_Click(object sender, ToolStripItemClickedEventArgs e)
+        void File_Recent_Click(Object sender, ToolStripItemClickedEventArgs e)
         {
             RecentFileMenuItem menu_item = (RecentFileMenuItem)e.ClickedItem;
             this.Core_OpenFile(menu_item.FileName);
         }
-        void File_Save_Click(object sender, EventArgs e)
+        void File_Save_Click(Object sender, EventArgs e)
         {
             if (CurrentTabIsROM()) Core_SaveFile();
             else Core_SaveFile(CurrentTab);
@@ -662,21 +663,21 @@ namespace Magic.Editors
             Update_TabControl();
             Update_StatusLabel();
         }
-        void File_SaveAs_Click(object sender, EventArgs e)
+        void File_SaveAs_Click(Object sender, EventArgs e)
         {
             if (CurrentTabIsROM()) Core_MakeFile();
             else Core_MakeFile(CurrentTab);
         }
-        void File_Apply_Click(object sender, EventArgs e)
+        void File_Apply_Click(Object sender, EventArgs e)
         {
-            List<Tuple<Pointer, byte[]>> data = Core_MergeDifferences();
-            for (int i = 0; i < data.Count; i++)
+            List<Tuple<Pointer, Byte[]>> data = Core_MergeDifferences();
+            for (Int32 i = 0; i < data.Count; i++)
             {
                 Core.WriteData(this, data[i].Item1, data[i].Item2, "Apply n°" + i);
             }
-            Differences = new List<Tuple<Pointer, byte>>();
+            Differences = new List<Tuple<Pointer, Byte>>();
         }
-        void File_Close_Click(object sender, EventArgs e)
+        void File_Close_Click(Object sender, EventArgs e)
         {
             try
             {
@@ -704,54 +705,54 @@ namespace Magic.Editors
             }
         }
 
-        void Edit_Cut_Click(object sender, EventArgs e)
+        void Edit_Cut_Click(Object sender, EventArgs e)
         {
             HexBox hexbox = CurrentTabIsROM() ?  MainHexBox : FileHexBoxes[CurrentTab];
 
             hexbox.Cut();
         }
-        void Edit_Copy_Click(object sender, EventArgs e)
+        void Edit_Copy_Click(Object sender, EventArgs e)
         {
             HexBox hexbox = CurrentTabIsROM() ? MainHexBox : FileHexBoxes[CurrentTab];
 
             hexbox.Copy();
         }
-        void Edit_Paste_Click(object sender, EventArgs e)
+        void Edit_Paste_Click(Object sender, EventArgs e)
         {
             HexBox hexbox = CurrentTabIsROM() ? MainHexBox : FileHexBoxes[CurrentTab];
 
             hexbox.Paste();
         }
-        void Edit_CopyHex_Click(object sender, EventArgs e)
+        void Edit_CopyHex_Click(Object sender, EventArgs e)
         {
             HexBox hexbox = CurrentTabIsROM() ? MainHexBox : FileHexBoxes[CurrentTab];
 
             hexbox.CopyHex();
         }
-        void Edit_PasteHex_Click(object sender, EventArgs e)
+        void Edit_PasteHex_Click(Object sender, EventArgs e)
         {
             HexBox hexbox = CurrentTabIsROM() ? MainHexBox : FileHexBoxes[CurrentTab];
 
             hexbox.PasteHex();
         }
-        void Edit_SelectAll_Click(object sender, EventArgs e)
+        void Edit_SelectAll_Click(Object sender, EventArgs e)
         {
             HexBox hexbox = CurrentTabIsROM() ? MainHexBox : FileHexBoxes[CurrentTab];
 
             hexbox.SelectAll();
         }
 
-        void Tool_Find_Click(object sender, EventArgs e)
+        void Tool_Find_Click(Object sender, EventArgs e)
         {
             Core_ShowFind();
         }
-        void Tool_FindNext_Click(object sender, EventArgs e)
+        void Tool_FindNext_Click(Object sender, EventArgs e)
         {
             Core_ShowFind();
 
             Tool_Find.Core_FindNext();
         }
-        void Tool_GoTo_Click(object sender, EventArgs e)
+        void Tool_GoTo_Click(Object sender, EventArgs e)
         {
             Core_ShowGoTo();
         }
@@ -764,8 +765,8 @@ namespace Magic.Editors
             BasicEditor editor = new BasicEditor(App);
             App.Core_OpenEditor(editor);
 
-            Pointer address = new Pointer((uint)hexbox.SelectionStart);
-            int length = (int)hexbox.SelectionLength;
+            Pointer address = new Pointer((UInt32)hexbox.SelectionStart);
+            Int32 length = (Int32)hexbox.SelectionLength;
             editor.Core_SetEntry(address, length, (length > 0 ? Core.ReadData(address, length) : null));
         }
     }

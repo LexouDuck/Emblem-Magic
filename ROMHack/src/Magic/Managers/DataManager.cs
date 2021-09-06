@@ -38,7 +38,7 @@ namespace Magic
         /// </summary>
         public UInt32 FileSize
         {
-            get { return (uint)FileData.Length; }
+            get { return (UInt32)FileData.Length; }
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Magic
         /// Opens the file at the given path for the DataManager.
         /// </summary>
         /// <returns>true if the file was successfully opened</returns>
-        public void OpenFile(string path)
+        public void OpenFile(String path)
         {
             if (path == null || path.Length == 0)
                 throw new Exception("The ROM file path given is invalid.");
@@ -106,9 +106,9 @@ namespace Magic
         /// <summary>
         /// Returns 'length' of data from the loaded ROM at the given address.
         /// </summary>
-        public Byte[] Read(Pointer address, int length)
+        public Byte[] Read(Pointer address, Int32 length)
         {
-            byte[] result = new byte[length];
+            Byte[] result = new Byte[length];
             lock (Locked)
             {
                 try
@@ -125,21 +125,21 @@ namespace Magic
         /// <summary>
         /// Returns the address of the first occurence of the given sequence of bytes in the ROM
         /// </summary>
-        public Pointer Find(byte[] data, uint align)
+        public Pointer Find(Byte[] data, UInt32 align)
         {
             lock (Locked)
             {
-                byte[] buffer = new byte[data.Length];
+                Byte[] buffer = new Byte[data.Length];
                 try
                 {
-                    for (uint parse = 0; parse < FileData.Length; parse += align)
+                    for (UInt32 parse = 0; parse < FileData.Length; parse += align)
                     {
                         if (data[0] == FileData[parse])
                         {
-                            bool match = true;
+                            Boolean match = true;
                             Array.Copy(FileData, parse, buffer, 0, data.Length);
 
-                            for (int i = 0; i < data.Length; i++)
+                            for (Int32 i = 0; i < data.Length; i++)
                             {
                                 if (data[i] != buffer[i])
                                 {
@@ -162,22 +162,22 @@ namespace Magic
         /// <summary>
         /// Returns an array of addresses at which the given sequence of bytes was found in the ROM
         /// </summary>
-        public Pointer[] Search(byte[] data, uint align)
+        public Pointer[] Search(Byte[] data, UInt32 align)
         {
             List<Pointer> result = new List<Pointer>();
             lock (Locked)
             {
-                byte[] buffer = new byte[data.Length];
+                Byte[] buffer = new Byte[data.Length];
                 try
                 {
-                    for (uint parse = 0; parse < FileData.Length; parse += align)
+                    for (UInt32 parse = 0; parse < FileData.Length; parse += align)
                     {
                         if (data[0] == FileData[parse])
                         {
-                            bool match = true;
+                            Boolean match = true;
                             Array.Copy(FileData, parse, buffer, 0, data.Length);
 
-                            for (int i = 0; i < data.Length; i++)
+                            for (Int32 i = 0; i < data.Length; i++)
                             {
                                 if (data[i] != buffer[i])
                                 {
@@ -209,7 +209,7 @@ namespace Magic
                     Byte[] old_data = new Byte[write.Data.Length];
                     Array.Copy(this.FileData, write.Address, old_data, 0, write.Data.Length);
 
-                    for (int i = 0; i < write.Data.Length; i++)
+                    for (Int32 i = 0; i < write.Data.Length; i++)
                     {
                         this.FileData[write.Address + i] = write.Data[i];
                     }
@@ -230,7 +230,7 @@ namespace Magic
         /// <summary>
         /// Restores the data from a clean ROM file for the loaded ROM
         /// </summary>
-        public void Restore(Pointer address, int length, List<WriteConflict> conflict)
+        public void Restore(Pointer address, Int32 length, List<WriteConflict> conflict)
         {
             lock (Locked)
             {
@@ -250,7 +250,7 @@ namespace Magic
                         new Write("", new Pointer(address), restore),
                         old_data, conflict));
 
-                    for (int i = 0; i < length; i++)
+                    for (Int32 i = 0; i < length; i++)
                     {
                         FileData[address + i] = restore[i];
                     }
@@ -264,7 +264,7 @@ namespace Magic
         /// <summary>
         /// Changes the length of the loaded ROM, marking expanded space as 'FREE'
         /// </summary>
-        public void Resize(int newFileSize, SpaceManager space)
+        public void Resize(Int32 newFileSize, SpaceManager space)
         {
             if (newFileSize == 0 ||
                 newFileSize == FileSize)
@@ -276,14 +276,14 @@ namespace Magic
                 UI.ShowMessage("The ROM cannot be expanded beyond 32MB.");
                 return;
             }
-            byte[] data = FileData;
-            FileData = new byte[newFileSize];
+            Byte[] data = FileData;
+            FileData = new Byte[newFileSize];
             if (newFileSize > data.Length)
             {
                 Array.Copy(data, FileData, data.Length);
                 space.MarkSpace("FREE",
-                    new Pointer((uint)data.Length),
-                    new Pointer((uint)FileData.Length));
+                    new Pointer((UInt32)data.Length),
+                    new Pointer((UInt32)FileData.Length));
             }
             else Array.Copy(data, FileData, FileData.Length);
         }
@@ -293,7 +293,7 @@ namespace Magic
         /// <summary>
         /// Undoes the action at the given index of UndoList, moving that undo to the RedoList afterwards.
         /// </summary>
-        public void UndoAction(int index)
+        public void UndoAction(Int32 index)
         {
             lock (Locked)
             {
@@ -304,7 +304,7 @@ namespace Magic
 
                     RedoList.Add(new UndoRedo(UndoList[index].Action, UndoList[index].Associated, old_data, UndoList[index].Conflicts));
 
-                    for (int i = 0; i < UndoList[index].Data.Length; i++)
+                    for (Int32 i = 0; i < UndoList[index].Data.Length; i++)
                     {
                         FileData[UndoList[index].Associated.Address + i] = UndoList[index].Data[i];
                     }
@@ -319,7 +319,7 @@ namespace Magic
         /// <summary>
         /// Redoes the action at the given index of RedoList - moves the redo list item into UndoList
         /// </summary>
-        public void RedoAction(int index)
+        public void RedoAction(Int32 index)
         {
             lock (Locked)
             {
@@ -332,7 +332,7 @@ namespace Magic
 
                     UndoList.Add(new UndoRedo(action, RedoList[index].Associated, old_data, RedoList[index].Conflicts));
 
-                    for (int i = 0; i < RedoList[index].Data.Length; i++)
+                    for (Int32 i = 0; i < RedoList[index].Data.Length; i++)
                     {
                         FileData[RedoList[index].Associated.Address + i] = RedoList[index].Data[i];
                     }

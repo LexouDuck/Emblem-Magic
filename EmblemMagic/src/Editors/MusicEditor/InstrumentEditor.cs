@@ -18,7 +18,7 @@ namespace EmblemMagic.Editors
                 return Instruments.GetAddress(Entry_ByteBox.Value);
             }
         }
-        string CurrentEntry
+        String CurrentEntry
         {
             get
             {
@@ -26,7 +26,7 @@ namespace EmblemMagic.Editors
             }
         }
 
-        string[] InstrumentTypes = new string[]
+        String[] InstrumentTypes = new String[]
         {
             "DirectSound",
             "PSG Square 1",
@@ -40,7 +40,7 @@ namespace EmblemMagic.Editors
 
         public InstrumentEditor(IApp app,
             InstrumentArray instruments,
-            byte index)
+            Byte index)
             : base(app)
         {
             try
@@ -107,7 +107,7 @@ namespace EmblemMagic.Editors
 
             try
             {
-                int index = 0;
+                Int32 index = 0;
                 switch (Current.Type)
                 {
                     case InstrumentType.Direct:  index = 0; break;
@@ -178,7 +178,7 @@ namespace EmblemMagic.Editors
                 {
                     DutyPeriod_Label.Enabled = true;
                     DutyPeriod_ComboBox.Enabled = true;
-                    DutyPeriod_ComboBox.DataSource = new string[]
+                    DutyPeriod_ComboBox.DataSource = new String[]
                     {
                         "0x00 - 12.5%",
                         "0x01 - 25%",
@@ -191,7 +191,7 @@ namespace EmblemMagic.Editors
                 {
                     DutyPeriod_Label.Enabled = true;
                     DutyPeriod_ComboBox.Enabled = true;
-                    DutyPeriod_ComboBox.DataSource = new string[]
+                    DutyPeriod_ComboBox.DataSource = new String[]
                     {
                         "0x00 - Normal",
                         "0x01 - Metallic",
@@ -234,9 +234,9 @@ namespace EmblemMagic.Editors
             Core_Update();
         }
 
-        private void Instrument_PianoBox_SelectionChanged(object sender, EventArgs e)
+        private void Instrument_PianoBox_SelectionChanged(Object sender, EventArgs e)
         {
-            for (byte i = 0; i < Music.NOTES; i++)
+            for (Byte i = 0; i < Music.NOTES; i++)
             {
                 if (Instrument_PianoBox.Selection[i])
                 {
@@ -249,19 +249,19 @@ namespace EmblemMagic.Editors
             }
         }
 
-        private void Type_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void Type_ComboBox_SelectedIndexChanged(Object sender, EventArgs e)
         {
-            byte data;
+            Byte data;
             switch (Type_ComboBox.Text)
             {
-                case "DirectSound":  data = (byte)InstrumentType.Direct;  break;
-                case "PSG Square 1": data = (byte)InstrumentType.Square1; break;
-                case "PSG Square 2": data = (byte)InstrumentType.Square2; break;
-                case "PSG Waveform": data = (byte)InstrumentType.Wave;    break;
-                case "PSG Noise":    data = (byte)InstrumentType.Noise;   break;
-                case "Fixed Pitch":  data = (byte)InstrumentType.Fixed;   break;
-                case "MultiSample":  data = (byte)InstrumentType.Multi;   break;
-                case "Percussion":   data = (byte)InstrumentType.Drums;   break;
+                case "DirectSound":  data = (Byte)InstrumentType.Direct;  break;
+                case "PSG Square 1": data = (Byte)InstrumentType.Square1; break;
+                case "PSG Square 2": data = (Byte)InstrumentType.Square2; break;
+                case "PSG Waveform": data = (Byte)InstrumentType.Wave;    break;
+                case "PSG Noise":    data = (Byte)InstrumentType.Noise;   break;
+                case "Fixed Pitch":  data = (Byte)InstrumentType.Fixed;   break;
+                case "MultiSample":  data = (Byte)InstrumentType.Multi;   break;
+                case "Percussion":   data = (Byte)InstrumentType.Drums;   break;
                 default: data = 0x01; break;
             }
             Core.WriteByte(this,
@@ -269,21 +269,21 @@ namespace EmblemMagic.Editors
                 data,
                 CurrentEntry + "Type changed");
         }
-        private void BaseKey_ByteArrayBox_ValueChanged(object sender, EventArgs e)
+        private void BaseKey_ByteArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 CurrentAddress + 1,
                 BaseKey_ByteArrayBox.Value,
                 CurrentEntry + "Base Key changed");
         }
-        private void Panning_ByteBox_ValueChanged(object sender, EventArgs e)
+        private void Panning_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 CurrentAddress + 3,
                 Panning_ByteBox.Value,
                 CurrentEntry + "Panning changed");
         }
-        private void Unused_ByteBox_ValueChanged(object sender, EventArgs e)
+        private void Unused_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 CurrentAddress + 2,
@@ -291,28 +291,28 @@ namespace EmblemMagic.Editors
                 CurrentEntry + "Unused byte changed");
         }
 
-        private void Envelope_Attack_ByteBox_ValueChanged(object sender, EventArgs e)
+        private void Envelope_Attack_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 CurrentAddress + 8,
                 Envelope_Attack_ByteBox.Value,
                 CurrentEntry + "Env. Attack changed");
         }
-        private void Envelope_Decay_ByteBox_ValueChanged(object sender, EventArgs e)
+        private void Envelope_Decay_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 CurrentAddress + 8,
                 Envelope_Decay_ByteBox.Value,
                 CurrentEntry + "Env. Decay changed");
         }
-        private void Envelope_Sustain_ByteBox_ValueChanged(object sender, EventArgs e)
+        private void Envelope_Sustain_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 CurrentAddress + 8,
                 Envelope_Sustain_ByteBox.Value,
                 CurrentEntry + "Env. Sustain changed");
         }
-        private void Envelope_Release_ByteBox_ValueChanged(object sender, EventArgs e)
+        private void Envelope_Release_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 CurrentAddress + 8,
@@ -320,21 +320,21 @@ namespace EmblemMagic.Editors
                 CurrentEntry + "Env. Release changed");
         }
 
-        private void DutyPeriod_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void DutyPeriod_ComboBox_SelectedIndexChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 CurrentAddress + 8,
-                (byte)DutyPeriod_ComboBox.SelectedIndex,
+                (Byte)DutyPeriod_ComboBox.SelectedIndex,
                 CurrentEntry + "Duty Period changed");
         }
-        private void Sample_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void Sample_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 CurrentAddress + 4,
                 Sample_PointerBox.Value,
                 CurrentEntry + "Sample repointed");
         }
-        private void KeyMap_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void KeyMap_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 CurrentAddress + 8,

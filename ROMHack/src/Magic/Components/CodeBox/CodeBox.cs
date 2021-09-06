@@ -10,14 +10,14 @@ namespace Magic.Components
     public class CodeBox : FastColoredTextBox
     {
         public List<Tuple<Regex, TextStyle>> SyntaxColors { get; }
-        public List<Tuple<string, string>> Collapses { get; }
+        public List<Tuple<String, String>> Collapses { get; }
 
         Brush bg;
 
         public CodeBox() : base()
         {
             SyntaxColors = new List<Tuple<Regex, TextStyle>>();
-            Collapses = new List<Tuple<string, string>>();
+            Collapses = new List<Tuple<String, String>>();
 
             bg = new SolidBrush(this.BackColor);
             this.SelectionColor = SystemColors.Highlight;
@@ -31,7 +31,7 @@ namespace Magic.Components
         /// <summary>
         /// Adds a new syntax coloring item to this CodeBox
         /// </summary>
-        public void AddSyntax(string regex, Color color, FontStyle style = FontStyle.Regular)
+        public void AddSyntax(String regex, Color color, FontStyle style = FontStyle.Regular)
         {
             SyntaxColors.Add(Tuple.Create(new Regex(regex),
                 new TextStyle(new SolidBrush(color), bg, style)));
@@ -39,12 +39,12 @@ namespace Magic.Components
         /// <summary>
         /// Adds a new collapsing region rule for this CodeBox
         /// </summary>
-        public void AddCollapse(string start, string end)
+        public void AddCollapse(String start, String end)
         {
             Collapses.Add(Tuple.Create(start, end));
         }
 
-        void RedrawChangedText(object sender, TextChangedEventArgs e)
+        void RedrawChangedText(Object sender, TextChangedEventArgs e)
         {
             foreach (Tuple<Regex, TextStyle> syntax in SyntaxColors)
             {
@@ -52,13 +52,13 @@ namespace Magic.Components
                 e.ChangedRange.SetStyle(syntax.Item2, syntax.Item1);
             }
             e.ChangedRange.ClearFoldingMarkers();
-            foreach (Tuple<string, string> collapse in Collapses)
+            foreach (Tuple<String, String> collapse in Collapses)
             {
                 e.ChangedRange.SetFoldingMarkers(collapse.Item1, collapse.Item2);
             }
         }
 
-        public int GetIndexFromPosition(Point position)
+        public Int32 GetIndexFromPosition(Point position)
         {
             return PointToPosition(position);
         }

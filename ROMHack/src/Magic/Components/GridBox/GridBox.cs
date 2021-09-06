@@ -9,7 +9,7 @@ namespace Magic.Components
         /// <summary>
         /// The dimensions of tiles on this Gridbox (pixels)
         /// </summary>
-        public int TileSize { get; set; }
+        public Int32 TileSize { get; set; }
         /// <summary>
         /// The image to show up behind the grid
         /// </summary>
@@ -17,7 +17,7 @@ namespace Magic.Components
         /// <summary>
         /// Determines whether or not the grid is to show up on this GridBox
         /// </summary>
-        public bool ShowGrid
+        public Boolean ShowGrid
         {
             get
             {
@@ -28,11 +28,12 @@ namespace Magic.Components
                 _ShowGrid = value;
                 this.Invalidate();
             }
-        } bool _ShowGrid;
+        }
+        Boolean _ShowGrid;
         /// <summary>
         /// A rectangle describing the currently selected tiles
         /// </summary>
-        public bool[,] Selection
+        public Boolean[,] Selection
         {
             get
             {
@@ -44,7 +45,8 @@ namespace Magic.Components
                 this.SelectionChanged(this, null);
                 this.Invalidate();
             }
-        } bool[,] _Selection;
+        }
+        Boolean[,] _Selection;
         Point LastClick;
 
         public event EventHandler SelectionChanged = delegate { };
@@ -82,13 +84,13 @@ namespace Magic.Components
             Width = image.Width;
             Height = image.Height;
             Display = new Bitmap(Width, Height);
-            for (int y = 0; y < Height; y++)
-            for (int x = 0; x < Width; x++)
+            for (Int32 y = 0; y < Height; y++)
+            for (Int32 x = 0; x < Width; x++)
             {
                 Display.SetPixel(x, y, (System.Drawing.Color)image.GetColor(x, y));
             }
 
-            Selection = new bool[image.Width / TileSize, image.Height / TileSize];
+            Selection = new Boolean[image.Width / TileSize, image.Height / TileSize];
         }
         /// <summary>
         /// Resets the control, losing current selection, and drawing an empty gray image.
@@ -96,7 +98,7 @@ namespace Magic.Components
         public void Reset()
         {
             Display = null;
-            Selection = new bool[Width / TileSize, Height / TileSize];
+            Selection = new Boolean[Width / TileSize, Height / TileSize];
         }
 
 
@@ -104,13 +106,13 @@ namespace Magic.Components
         /// <summary>
         /// Returns true if no tiles are selected in the grid
         /// </summary>
-        public bool SelectionIsEmpty()
+        public Boolean SelectionIsEmpty()
         {
             if (Selection == null) return true;
-            int width = Selection.GetLength(0);
-            int height = Selection.GetLength(1);
-            for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++)
+            Int32 width = Selection.GetLength(0);
+            Int32 height = Selection.GetLength(1);
+            for (Int32 y = 0; y < height; y++)
+            for (Int32 x = 0; x < width; x++)
             {
                 if (Selection[x, y]) return false;
             }
@@ -119,14 +121,14 @@ namespace Magic.Components
         /// <summary>
         /// Returns true if a single tile of the grid is selected
         /// </summary>
-        public bool SelectionIsSingle()
+        public Boolean SelectionIsSingle()
         {
             if (Selection == null) return false;
-            int width = Selection.GetLength(0);
-            int height = Selection.GetLength(1);
-            bool match = false;
-            for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++)
+            Int32 width = Selection.GetLength(0);
+            Int32 height = Selection.GetLength(1);
+            Boolean match = false;
+            for (Int32 y = 0; y < height; y++)
+            for (Int32 x = 0; x < width; x++)
             {
                 if (match)
                 {
@@ -139,14 +141,14 @@ namespace Magic.Components
         /// <summary>
         /// Returns the amount of tiles currently selected
         /// </summary>
-        public int GetSelectionAmount()
+        public Int32 GetSelectionAmount()
         {
             if (Selection == null) return 0;
-            int result = 0;
-            int width = Selection.GetLength(0);
-            int height = Selection.GetLength(1);
-            for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++)
+            Int32 result = 0;
+            Int32 width = Selection.GetLength(0);
+            Int32 height = Selection.GetLength(1);
+            for (Int32 y = 0; y < height; y++)
+            for (Int32 x = 0; x < width; x++)
             {
                 if (Selection[x, y]) result++;
             }
@@ -158,10 +160,10 @@ namespace Magic.Components
         public Point GetSelectionCoords()
         {
             if (Selection == null) return new Point(-1, -1);
-            int width = Selection.GetLength(0);
-            int height = Selection.GetLength(1);
-            for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++)
+            Int32 width = Selection.GetLength(0);
+            Int32 height = Selection.GetLength(1);
+            for (Int32 y = 0; y < height; y++)
+            for (Int32 x = 0; x < width; x++)
             {
                 if (Selection[x, y]) return new Point(x, y);
             }
@@ -172,14 +174,14 @@ namespace Magic.Components
         /// </summary>
         public Rectangle GetSelectionRectangle()
         {
-            int width  = Selection.GetLength(0);
-            int height = Selection.GetLength(1);
-            int x_min = width;
-            int y_min = height;
-            int x_max = 0;
-            int y_max = 0;
-            for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++)
+            Int32 width  = Selection.GetLength(0);
+            Int32 height = Selection.GetLength(1);
+            Int32 x_min = width;
+            Int32 y_min = height;
+            Int32 x_max = 0;
+            Int32 y_max = 0;
+            for (Int32 y = 0; y < height; y++)
+            for (Int32 x = 0; x < width; x++)
             {
                 if (Selection[x, y])
                 {
@@ -206,13 +208,13 @@ namespace Magic.Components
 
             if (ModifierKeys == Keys.Shift)
             {
-                Selection = new bool[Display.Width / TileSize, Display.Height / TileSize];
-                int x1 = LastClick.X;
-                int y1 = LastClick.Y;
-                int x2 = (e.X / TileSize);
-                int y2 = (e.Y / TileSize);
-                for (int y = y1; (y1 < y2) ? (y <= y2) : (y >= y2); y += (y1 < y2) ? 1 : -1)
-                for (int x = x1; (x1 < x2) ? (x <= x2) : (x >= x2); x += (x1 < x2) ? 1 : -1)
+                Selection = new Boolean[Display.Width / TileSize, Display.Height / TileSize];
+                Int32 x1 = LastClick.X;
+                Int32 y1 = LastClick.Y;
+                Int32 x2 = (e.X / TileSize);
+                Int32 y2 = (e.Y / TileSize);
+                for (Int32 y = y1; (y1 < y2) ? (y <= y2) : (y >= y2); y += (y1 < y2) ? 1 : -1)
+                for (Int32 x = x1; (x1 < x2) ? (x <= x2) : (x >= x2); x += (x1 < x2) ? 1 : -1)
                 {
                     Selection[x, y] = true;
                 }
@@ -224,7 +226,7 @@ namespace Magic.Components
             }
             else
             {
-                Selection = new bool[Display.Width / TileSize, Display.Height / TileSize];
+                Selection = new Boolean[Display.Width / TileSize, Display.Height / TileSize];
                 LastClick = new Point(e.X / TileSize, e.Y / TileSize);
                 Selection[LastClick.X, LastClick.Y] = true;
             }
@@ -238,8 +240,8 @@ namespace Magic.Components
         protected override void OnKeyDown(KeyEventArgs e)
         {
             base.OnKeyDown(e);
-            int offsetX = 0;
-            int offsetY = 0;
+            Int32 offsetX = 0;
+            Int32 offsetY = 0;
             switch (e.KeyCode)
             {
                 case Keys.Left:  offsetX = -1; break;
@@ -250,13 +252,13 @@ namespace Magic.Components
             if (offsetX == 0 && offsetY == 0) return;
             else
             {
-                int width = Selection.GetLength(0);
-                int height = Selection.GetLength(1);
-                bool[,] selection = new bool[width, height];
+                Int32 width = Selection.GetLength(0);
+                Int32 height = Selection.GetLength(1);
+                Boolean[,] selection = new Boolean[width, height];
                 if (e.Shift) // SHIFT key is pressed
                 {
-                    for (int y = 0; y < height; y++)
-                    for (int x = 0; x < width; x++)
+                    for (Int32 y = 0; y < height; y++)
+                    for (Int32 x = 0; x < width; x++)
                     {
                         if (x - offsetX >= 0 && x - offsetX < width &&
                             y - offsetY >= 0 && y - offsetY < height &&
@@ -268,8 +270,8 @@ namespace Magic.Components
                 }
                 else if (e.Control) // CTRL key is pressed
                 {
-                    for (int y = 0; y < height; y++)
-                    for (int x = 0; x < width; x++)
+                    for (Int32 y = 0; y < height; y++)
+                    for (Int32 x = 0; x < width; x++)
                     {
                         if (x + offsetX >= 0 && x + offsetX < width &&
                             y + offsetY >= 0 && y + offsetY < height)
@@ -289,7 +291,7 @@ namespace Magic.Components
                 }
             }
         }
-        protected override bool IsInputKey(Keys keyData)
+        protected override Boolean IsInputKey(Keys keyData)
         {
             switch (keyData)
             {
@@ -329,14 +331,14 @@ namespace Magic.Components
                 e.Graphics.DrawImage(Display, 0, 0);
             }
 
-            int width = Width / TileSize;
-            int height = Height / TileSize;
+            Int32 width = Width / TileSize;
+            Int32 height = Height / TileSize;
             
             using (Pen select = new Pen(SystemColors.Highlight))
             using (Pen normal = new Pen(SystemColors.ControlDarkDark))
             {
-                for (int tileY = 0; tileY < height; tileY++)
-                for (int tileX = 0; tileX < width; tileX++)
+                for (Int32 tileY = 0; tileY < height; tileY++)
+                for (Int32 tileX = 0; tileX < width; tileX++)
                 {
                     if (Selection != null && Selection[tileX, tileY])
                     {

@@ -10,16 +10,16 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// The length of one block of OAM data
         /// </summary>
-        public const int LENGTH = 72;
+        public const Int32 LENGTH = 72;
 
         /// <summary>
         /// The entire struct is just a wrapper for this field.
         /// </summary>
-        byte[] Data;
+        Byte[] Data;
 
 
 
-        byte FlagByte
+        Byte FlagByte
         {
             get
             {
@@ -38,11 +38,11 @@ namespace EmblemMagic.FireEmblem
             }
             set
             {
-                byte[] data = Util.Int16ToBytes(value, true);
+                Byte[] data = Util.Int16ToBytes(value, true);
                 Array.Copy(data, 0, Data, 2, 2);
             }
         }
-        byte Duration
+        Byte Duration
         {
             get
             {
@@ -61,11 +61,11 @@ namespace EmblemMagic.FireEmblem
             }
             set
             {
-                byte[] data = Util.UInt16ToBytes(value, true);
+                Byte[] data = Util.UInt16ToBytes(value, true);
                 Array.Copy(data, 0, Data, 8, 2);
             }
         }
-        byte Frame
+        Byte Frame
         {
             get
             {
@@ -76,7 +76,7 @@ namespace EmblemMagic.FireEmblem
                 Data[19] = value;
             }
         }
-        byte Command
+        Byte Command
         {
             get
             {
@@ -154,25 +154,25 @@ namespace EmblemMagic.FireEmblem
             }
         }
 
-        public SpellAnimFrame(byte[] data)
+        public SpellAnimFrame(Byte[] data)
         {
             if (data.Length != LENGTH) throw new Exception("Invalid frame AIS length.");
 
-            Data = new byte[LENGTH];
+            Data = new Byte[LENGTH];
             Array.Copy(data, Data, LENGTH);
         }
     }
 
     public class SpellAnimation
     {
-        public bool Looped { get; set; }
+        public Boolean Looped { get; set; }
         public Pointer Name { get; set; }
         public Pointer Address_Constructor { get; }
         public Pointer Address_LoopRoutine { get; }
         public Pointer Address_AnimLoading { get; }
-        public byte[] Constructor { get; }
-        public byte[] LoopRoutine { get; }
-        public byte[] AnimLoading { get; }
+        public Byte[] Constructor { get; }
+        public Byte[] LoopRoutine { get; }
+        public Byte[] AnimLoading { get; }
 
         public SpellAnimation(Pointer address)
         {
@@ -193,10 +193,10 @@ namespace EmblemMagic.FireEmblem
             AnimLoading = ReadASM(Address_AnimLoading);
         }
 
-        byte[] ReadASM(Pointer address)
+        Byte[] ReadASM(Pointer address)
         {
-            const int iterate = 2000;
-            int length = 0;
+            const Int32 iterate = 2000;
+            Int32 length = 0;
             while (length < iterate)
             {
                 if (Core.ReadByte(address + length) == 0x00 && Core.ReadByte(address + length + 1) == 0x47 || // bx r0;
@@ -214,7 +214,7 @@ namespace EmblemMagic.FireEmblem
         }
         Pointer ReadCallback(Pointer address)
         {
-            byte[] callback = Core.ReadData(address, 16);
+            Byte[] callback = Core.ReadData(address, 16);
 
             switch (callback.GetInt32(0, true))
             {
@@ -242,9 +242,9 @@ namespace EmblemMagic.FireEmblem
             return ASM.Disassemble_Thumb(AnimLoading, Address_AnimLoading);
         }
 
-        public string[] GetAnimCode(SpellCommands commands)
+        public String[] GetAnimCode(SpellCommands commands)
         {
-            List<string> result = new List<string>();
+            List<String> result = new List<String>();
 
             result.Add("Constructor");
             result.AddRange(GetAnimCode(GetASM_Constructor(), commands));
@@ -257,16 +257,16 @@ namespace EmblemMagic.FireEmblem
 
             return result.ToArray();
         }
-        List<string> GetAnimCode(ASM.Instruction[] routine, SpellCommands commands)
+        List<String> GetAnimCode(ASM.Instruction[] routine, SpellCommands commands)
         {
             routine = GetCleanASM(routine);
 
-            int count = 1;
-            int indent = 0;
-            string command;
-            List<string> result = new List<string>();
-            List<Tuple<Pointer, string>> labels = new List<Tuple<Pointer, string>>();
-            for (int i = 0; i < routine.Length; i++)
+            Int32 count = 1;
+            Int32 indent = 0;
+            String command;
+            List<String> result = new List<String>();
+            List<Tuple<Pointer, String>> labels = new List<Tuple<Pointer, String>>();
+            for (Int32 i = 0; i < routine.Length; i++)
             {
                 command = commands.Get(routine, ref i);
                 while (labels.Count > 0 && routine[i].Address >= labels[0].Item1)
@@ -280,8 +280,8 @@ namespace EmblemMagic.FireEmblem
                     if (command.StartsWith("goto_"))
                     {
                         Pointer address = Util.StringToAddress(command.Substring(command.IndexOf('(') + 1, 8));
-                        string label = (address == routine[routine.Length - 3].Address) ? "return" : "label_" + count;
-                        int index = 0;
+                        String label = (address == routine[routine.Length - 3].Address) ? "return" : "label_" + count;
+                        Int32 index = 0;
                         while (index < labels.Count && labels[index].Item1 <= address)
                             index++;
                         if (labels.Count == 0)
@@ -307,9 +307,9 @@ namespace EmblemMagic.FireEmblem
                             command = command.Substring(5, command.IndexOf('(') - 5) + ' ' + label;
                         }
                     }
-                    result.Add(new string(' ', indent * 4) + command);
+                    result.Add(new String(' ', indent * 4) + command);
                 }
-                else result.Add(new string(' ', indent * 4) + routine[i].Code);
+                else result.Add(new String(' ', indent * 4) + routine[i].Code);
                 if (command == "{") indent++;
             }
             return result;
@@ -319,22 +319,22 @@ namespace EmblemMagic.FireEmblem
         /// </summary>
         ASM.Instruction[] GetCleanASM(ASM.Instruction[] routine)
         {
-            for (int i = 0; i < routine.Length; i++)
+            for (Int32 i = 0; i < routine.Length; i++)
             {
-                for (int j = 0; j < routine[i].Code.Length; j++)
+                for (Int32 j = 0; j < routine[i].Code.Length; j++)
                 {
                     if (routine[i].Code[j] == '[' &&
                         routine[i].Code[j + 1] == 'p' &&
                         routine[i].Code[j + 2] == 'c')
                     {
                         j += 8;
-                        ushort offset = (routine[i].Code[j + 2] == ']') ?
+                        UInt16 offset = (routine[i].Code[j + 2] == ']') ?
                             Util.HexToByte(routine[i].Code.Substring(j, 2)) :
                             (UInt16)Util.HexToInt(routine[i].Code.Substring(j, 4));
                         j += (routine[i].Code[j + 7] == '=') ?  9 : 7;
-                        uint address = Util.HexToInt(routine[i].Code.Substring(j, 8));
-                        uint pc = (routine[i].Address & 0xFFFFFFFC) + 4;
-                        byte n = 1;
+                        UInt32 address = Util.HexToInt(routine[i].Code.Substring(j, 8));
+                        UInt32 pc = (routine[i].Address & 0xFFFFFFFC) + 4;
+                        Byte n = 1;
                         while (routine[i + n].Address < pc + offset)
                         {
                             n++;
@@ -343,10 +343,10 @@ namespace EmblemMagic.FireEmblem
                         }
                         if (i + n + 1 >= routine.Length)
                             goto Continue;
-                        if (routine[i + n + 1].Data[0] == (byte)((address & 0xFF000000) >> 24) &&
-                            routine[i + n + 1].Data[1] == (byte)((address & 0x00FF0000) >> 16) &&
-                            routine[i + n + 0].Data[0] == (byte)((address & 0x0000FF00) >> 8) &&
-                            routine[i + n + 0].Data[1] == (byte) (address & 0x000000FF))
+                        if (routine[i + n + 1].Data[0] == (Byte)((address & 0xFF000000) >> 24) &&
+                            routine[i + n + 1].Data[1] == (Byte)((address & 0x00FF0000) >> 16) &&
+                            routine[i + n + 0].Data[0] == (Byte)((address & 0x0000FF00) >> 8) &&
+                            routine[i + n + 0].Data[1] == (Byte) (address & 0x000000FF))
                         {
                             /*
                             string code = routine[i].Code;
@@ -362,7 +362,7 @@ namespace EmblemMagic.FireEmblem
                 Continue: continue;
             }
             List<ASM.Instruction> result = new List<ASM.Instruction>();
-            for (int i = 0; i < routine.Length; i++)
+            for (Int32 i = 0; i < routine.Length; i++)
             {
                 if (routine[i].Code == "nop")
                     continue;

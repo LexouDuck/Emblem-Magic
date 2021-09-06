@@ -13,14 +13,14 @@ namespace Compression
         /// <summary>
         /// Decompresses huffman-encoded text parsing through the huffman tree
         /// </summary>
-        public static byte[] Decompress(Pointer pointer, Pointer huffman_tree, Pointer root_node)
+        public static Byte[] Decompress(Pointer pointer, Pointer huffman_tree, Pointer root_node)
         {
-            byte[] result = new byte[0x1000];
-            int parse = 0;
-            byte current = Core.ReadByte(pointer + parse); parse++;
+            Byte[] result = new Byte[0x1000];
+            Int32 parse = 0;
+            Byte current = Core.ReadByte(pointer + parse); parse++;
             Pointer node = root_node;
-            int bit = 0;
-            int i = 0;
+            Int32 bit = 0;
+            Int32 i = 0;
             while (i < 0x1000)
             {
                 Int16 Lshort = Util.BytesToInt16(Core.ReadData(node, 2), true); node = node + 2;
@@ -28,12 +28,12 @@ namespace Compression
                 if (Rshort < 0)
                 {   // reached leaf
                     node = root_node;
-                    result[i++] = (byte)Lshort;
+                    result[i++] = (Byte)Lshort;
                     if ((Lshort & 0xFF00) != 0)
                     { // two characters
                         if (i != 0x1000)
                         {
-                            result[i++] = (byte)(Lshort >> 8);
+                            result[i++] = (Byte)(Lshort >> 8);
                         }
                     }
                     else if (Lshort == 0)
@@ -54,16 +54,16 @@ namespace Compression
                     bit++;
                 }
             }
-            byte[] output = new byte[i];
+            Byte[] output = new Byte[i];
             Array.Copy(result, output, i);
             return output;
         }
         /// <summary>
         /// Compresses the given byte array of ASCII text according to the current ROM's Huffman tree
         /// </summary>
-        public static byte[] Compress(byte[] text, Pointer huffman_tree, Pointer root_node)
+        public static Byte[] Compress(Byte[] text, Pointer huffman_tree, Pointer root_node)
         {
-            byte[] result = new byte[text.Length];
+            Byte[] result = new Byte[text.Length];
             return result;
         }
     }

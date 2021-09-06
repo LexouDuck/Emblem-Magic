@@ -40,7 +40,7 @@ namespace WinMM
         /// <summary>
         /// Gets the system specific identifier of the device.
         /// </summary>
-        public int DeviceId
+        public System.Int32 DeviceId
         {
             get;
             internal set;
@@ -49,7 +49,7 @@ namespace WinMM
         /// <summary>
         /// Gets the device's manufacturer name.
         /// </summary>
-        public string Manufacturer
+        public System.String Manufacturer
         {
             get;
             internal set;
@@ -58,7 +58,7 @@ namespace WinMM
         /// <summary>
         /// Gets the device's product id.
         /// </summary>
-        public int ProductId
+        public System.Int32 ProductId
         {
             get;
             internal set;
@@ -67,7 +67,7 @@ namespace WinMM
         /// <summary>
         /// Gets the device's driver version.
         /// </summary>
-        public int DriverVersion
+        public System.Int32 DriverVersion
         {
             get;
             internal set;
@@ -76,7 +76,7 @@ namespace WinMM
         /// <summary>
         /// Gets the name of the device.
         /// </summary>
-        public string Name
+        public System.String Name
         {
             get;
             internal set;
@@ -85,7 +85,7 @@ namespace WinMM
         /// <summary>
         /// Gets the number of channels the device is capable of playing.
         /// </summary>
-        public int Channels
+        public System.Int32 Channels
         {
             get;
             internal set;
@@ -94,7 +94,7 @@ namespace WinMM
         /// <summary>
         /// Gets a value indicating whether a device supports pitch modulation.
         /// </summary>
-        public bool SupportsPitch
+        public System.Boolean SupportsPitch
         {
             get
             {
@@ -105,7 +105,7 @@ namespace WinMM
         /// <summary>
         /// Gets a value indicating whether a device supports playback rate modification.
         /// </summary>
-        public bool SupportsPlaybackRate
+        public System.Boolean SupportsPlaybackRate
         {
             get
             {
@@ -116,7 +116,7 @@ namespace WinMM
         /// <summary>
         /// Gets a value indicating whether a device supports volume changing.
         /// </summary>
-        public bool SupportsVolume
+        public System.Boolean SupportsVolume
         {
             get
             {
@@ -127,7 +127,7 @@ namespace WinMM
         /// <summary>
         /// Gets a value indicating whether a device supports stereo volume changing.
         /// </summary>
-        public bool SupportsStereoVolume
+        public System.Boolean SupportsStereoVolume
         {
             get
             {

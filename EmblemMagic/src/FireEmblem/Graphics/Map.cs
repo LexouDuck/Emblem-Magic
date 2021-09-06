@@ -7,16 +7,16 @@ namespace EmblemMagic.FireEmblem
 {
     public class Map : IDisplayable
     {
-        public Color GetColor(int x, int y)
+        public Color GetColor(Int32 x, Int32 y)
         {
             if (x < 0 || x >= Width) throw new ArgumentException("X given is out of bounds: " + x);
             if (y < 0 || y >= Height) throw new ArgumentException("Y given is out of bounds: " + y);
 
-            int tileX = x / 16;
-            int tileY = y / 16;
+            Int32 tileX = x / 16;
+            Int32 tileY = y / 16;
             MapTile combo;
-            int index = -1;
-            for (int i = 0; i < ShowChanges.Length; i++)
+            Int32 index = -1;
+            for (Int32 i = 0; i < ShowChanges.Length; i++)
             {
                 if (ShowChanges[i] && Changes.Contains(i, tileX, tileY))
                     index = i;
@@ -27,7 +27,7 @@ namespace EmblemMagic.FireEmblem
             }
             else
             {
-                int tile_index = Changes.GetTile(index, tileX, tileY);
+                Int32 tile_index = Changes.GetTile(index, tileX, tileY);
                 if (tile_index == 0)
                 {
                     combo = Tileset.Tiles[Layout[tileX, tileY]];
@@ -43,8 +43,8 @@ namespace EmblemMagic.FireEmblem
             }
             tileX = x % 16;
             tileY = y % 16;
-            int tileIndex;
-            int palette;
+            Int32 tileIndex;
+            Int32 palette;
             if (tileX < 8 && tileY < 8)
             {
                 palette = combo.Palette_00;
@@ -86,12 +86,12 @@ namespace EmblemMagic.FireEmblem
             return Tileset.Palettes[palette][tile[tileX, tileY]];
         }
 
-        public const int PALETTES = 10;
+        public const Int32 PALETTES = 10;
 
         /// <summary>
         /// The Width of this map, in pixels
         /// </summary>
-        public int Width
+        public Int32 Width
         {
             get
             {
@@ -101,7 +101,7 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// The Height of this map, in pixels
         /// </summary>
-        public int Height
+        public Int32 Height
         {
             get
             {
@@ -111,20 +111,20 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// The Width of this map, in 16x16 tiles
         /// </summary>
-        public byte WidthTiles
+        public Byte WidthTiles
         {
             get
             {
-                return (byte)Layout.GetLength(0);
+                return (Byte)Layout.GetLength(0);
             }
             set
             {
-                int[,] tiles = Layout;
-                Layout = new int[value, tiles.GetLength(1)];
-                int width  = Layout.GetLength(0);
-                int height = Layout.GetLength(1);
-                for (int y = 0; y < height; y++)
-                for (int x = 0; x < width; x++)
+                Int32[,] tiles = Layout;
+                Layout = new Int32[value, tiles.GetLength(1)];
+                Int32 width  = Layout.GetLength(0);
+                Int32 height = Layout.GetLength(1);
+                for (Int32 y = 0; y < height; y++)
+                for (Int32 x = 0; x < width; x++)
                 {
                     if (x >= tiles.GetLength(0))
                          Layout[x, y] = 0;
@@ -135,20 +135,20 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// The Height of this map, in 16x16 tiles
         /// </summary>
-        public byte HeightTiles
+        public Byte HeightTiles
         {
             get
             {
-                return (byte)Layout.GetLength(1);
+                return (Byte)Layout.GetLength(1);
             }
             set
             {
-                int[,] tiles = Layout;
-                Layout = new int[tiles.GetLength(0), value];
-                int width  = Layout.GetLength(0);
-                int height = Layout.GetLength(1);
-                for (int y = 0; y < height; y++)
-                for (int x = 0; x < width; x++)
+                Int32[,] tiles = Layout;
+                Layout = new Int32[tiles.GetLength(0), value];
+                Int32 width  = Layout.GetLength(0);
+                Int32 height = Layout.GetLength(1);
+                for (Int32 y = 0; y < height; y++)
+                for (Int32 x = 0; x < width; x++)
                 {
                     if (y >= tiles.GetLength(1))
                          Layout[x, y] = 0;
@@ -160,7 +160,7 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// The layout of tiles for this map
         /// </summary>
-        public int[,] Layout { get; set; }
+        public Int32[,] Layout { get; set; }
         /// <summary>
         /// The triggerable tile changes associated with this map
         /// </summary>
@@ -173,24 +173,24 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// Whether or not to display this map with its secondary palette
         /// </summary>
-        public bool ShowFog { get; set; }
+        public Boolean ShowFog { get; set; }
         /// <summary>
         /// the number of the tile change to display - 0 is no tile change shown
         /// </summary>
-        public bool[] ShowChanges { get; set; }
+        public Boolean[] ShowChanges { get; set; }
         /// <summary>
         /// If true, shows white borders around tiles that are a result of triggerable map changes
         /// </summary>
-        public bool ShowChanges_TileBorders { get; set; }
+        public Boolean ShowChanges_TileBorders { get; set; }
 
 
 
-        public Map(MapTileset tileset, byte[] map_data, Pointer map_changes, bool show_changeborders = true)
+        public Map(MapTileset tileset, Byte[] map_data, Pointer map_changes, Boolean show_changeborders = true)
         {
-            Layout = new int[map_data[0], map_data[1]];
-            int x = 0;
-            int y = 0;
-            for (int i = 2; i < map_data.Length; i += 2)
+            Layout = new Int32[map_data[0], map_data[1]];
+            Int32 x = 0;
+            Int32 y = 0;
+            for (Int32 i = 2; i < map_data.Length; i += 2)
             {
                 Layout[x, y] = ((map_data[i] | (map_data[i + 1] << 8)) >> 2 & 0x03FF);
                 x++;
@@ -200,7 +200,7 @@ namespace EmblemMagic.FireEmblem
             Tileset = tileset;
 
             Changes = (map_changes == new Pointer()) ? null : new MapChanges(map_changes);
-            ShowChanges = new bool[(Changes == null) ? 0 : Changes.Count];
+            ShowChanges = new Boolean[(Changes == null) ? 0 : Changes.Count];
             ShowChanges_TileBorders = show_changeborders;
         }
 
@@ -208,15 +208,15 @@ namespace EmblemMagic.FireEmblem
 
         public Byte[] ToBytes()
         {
-            byte[] result = new byte[2 + WidthTiles * HeightTiles * 2];
+            Byte[] result = new Byte[2 + WidthTiles * HeightTiles * 2];
             result[0] = WidthTiles;
             result[1] = HeightTiles;
-            int x = 0;
-            int y = 0;
-            for (int i = 2; i < result.Length; i += 2)
+            Int32 x = 0;
+            Int32 y = 0;
+            for (Int32 i = 2; i < result.Length; i += 2)
             {
-                result[i] = (byte)((Layout[x, y] << 2) & 0xFF);
-                result[i + 1] = (byte)(Layout[x, y] >> 6);
+                result[i] = (Byte)((Layout[x, y] << 2) & 0xFF);
+                result[i + 1] = (Byte)(Layout[x, y] >> 6);
                 x++;
                 if (x % WidthTiles == 0)
                 { x = 0; y++; }

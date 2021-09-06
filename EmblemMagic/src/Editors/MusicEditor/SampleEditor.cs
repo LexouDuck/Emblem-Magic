@@ -20,7 +20,7 @@ namespace EmblemMagic.Editors
         /// </summary>
         Music Preview;
 
-        string CurrentEntry
+        String CurrentEntry
         {
             get
             {
@@ -78,21 +78,21 @@ namespace EmblemMagic.Editors
         {
             Core.WriteByte(this,
                 Address + 3,
-                Loop_CheckBox.Checked ? (byte)0x40 : (byte)0x00,
+                Loop_CheckBox.Checked ? (Byte)0x40 : (Byte)0x00,
                 CurrentEntry + "Loop changed");
         }
         private void Loop_NumberBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteData(this,
                 Address + 8,
-                Util.UInt32ToBytes((uint)Loop_NumberBox.Value, true),
+                Util.UInt32ToBytes((UInt32)Loop_NumberBox.Value, true),
                 CurrentEntry + "Loop Start changed");
         }
         private void Rate_NumberBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteData(this,
                 Address + 4,
-                Util.UInt32ToBytes((uint)(Rate_NumberBox.Value * 1024), true),
+                Util.UInt32ToBytes((UInt32)(Rate_NumberBox.Value * 1024), true),
                 CurrentEntry + "Sampling Rate changed");
         }
 

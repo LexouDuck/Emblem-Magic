@@ -10,15 +10,15 @@ namespace EmblemMagic.Editors
 {
     public partial class WorldMapEditor_FE6 : Editor
     {
-        const int SMALLMAP_TILESET = 0;
-        const int SMALLMAP_PALETTE = 1;
-        const int LARGEMAP_TILESET = 2;
-        const int LARGEMAP_PALETTE = 3;
+        const Int32 SMALLMAP_TILESET = 0;
+        const Int32 SMALLMAP_PALETTE = 1;
+        const Int32 LARGEMAP_TILESET = 2;
+        const Int32 LARGEMAP_PALETTE = 3;
 
         WorldMap_FE6_Small CurrentSmallMap { get; set; }
         WorldMap_FE6_Large CurrentLargeMap { get; set; }
 
-        string CurrentEntry(bool small)
+        String CurrentEntry(Boolean small)
         {
             return (small ? "Small" : "Large") + " World Map - ";
         }
@@ -126,7 +126,7 @@ namespace EmblemMagic.Editors
             LargeMap_BL_GraphicsPointerBox.ValueChanged += LargeMap_BL_GraphicsPointerBox_ValueChanged;
             LargeMap_BR_GraphicsPointerBox.ValueChanged += LargeMap_BR_GraphicsPointerBox_ValueChanged;
         }
-        void Core_WriteSmallMap(string path)
+        void Core_WriteSmallMap(String path)
         {
             try
             {
@@ -137,14 +137,14 @@ namespace EmblemMagic.Editors
                 UI.ShowError("Could not insert the image.", ex); return;
             }
 
-            byte[] data_palette = CurrentSmallMap.Colors.ToBytes(true);
-            byte[] data_tileset = LZ77.Compress(CurrentSmallMap.ToBytes());
+            Byte[] data_palette = CurrentSmallMap.Colors.ToBytes(true);
+            Byte[] data_tileset = LZ77.Compress(CurrentSmallMap.ToBytes());
 
             UI.SuspendUpdate();
 
-            bool cancel = Prompt.ShowRepointDialog(this, "Repoint Small World Map",
+            Boolean cancel = Prompt.ShowRepointDialog(this, "Repoint Small World Map",
                 "The different parts of this image may need to be repointed upon insertion.",
-                CurrentEntry(true), new Tuple<string, Pointer, int>[] {
+                CurrentEntry(true), new Tuple<String, Pointer, Int32>[] {
                     Tuple.Create("Palette", Core.GetPointer("Small World Map Palette"), data_palette.Length),
                     Tuple.Create("Tileset", Core.GetPointer("Small World Map Tileset"), data_tileset.Length)});
             if (cancel) return;
@@ -162,7 +162,7 @@ namespace EmblemMagic.Editors
             UI.ResumeUpdate();
             UI.PerformUpdate();
         }
-        void Core_WriteLargeMap(string path)
+        void Core_WriteLargeMap(String path)
         {
             try
             {
@@ -217,14 +217,14 @@ namespace EmblemMagic.Editors
             }
         }
 
-        private void SmallMap_GraphicsPointerBox_ValueChanged(object sender, EventArgs e)
+        private void SmallMap_GraphicsPointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.Repoint(this,
                 Core.GetPointer("Small World Map Tileset"),
                 SmallMap_GraphicsPointerBox.Value,
                 CurrentEntry(true) + "Graphics repoint");
         }
-        private void SmallMap_PalettePointerBox_ValueChanged(object sender, EventArgs e)
+        private void SmallMap_PalettePointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.Repoint(this,
                 Core.GetPointer("Small World Map Palette"),
@@ -255,28 +255,28 @@ namespace EmblemMagic.Editors
             }
         }
 
-        private void LargeMap_TL_GraphicsPointerBox_ValueChanged(object sender, EventArgs e)
+        private void LargeMap_TL_GraphicsPointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Core.GetPointer("Large World Map Tileset"),
                 LargeMap_TL_GraphicsPointerBox.Value,
                 CurrentEntry(false) + "Graphics (TL) repoint");
         }
-        private void LargeMap_TR_GraphicsPointerBox_ValueChanged(object sender, EventArgs e)
+        private void LargeMap_TR_GraphicsPointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Core.GetPointer("Large World Map Tileset") + 8,
                 LargeMap_TR_GraphicsPointerBox.Value,
                 CurrentEntry(false) + "Graphics (TR) repoint");
         }
-        private void LargeMap_BL_GraphicsPointerBox_ValueChanged(object sender, EventArgs e)
+        private void LargeMap_BL_GraphicsPointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Core.GetPointer("Large World Map Tileset") + 16,
                 LargeMap_BL_GraphicsPointerBox.Value,
                 CurrentEntry(false) + "Graphics (BL) repoint");
         }
-        private void LargeMap_BR_GraphicsPointerBox_ValueChanged(object sender, EventArgs e)
+        private void LargeMap_BR_GraphicsPointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Core.GetPointer("Large World Map Tileset") + 24,
@@ -284,7 +284,7 @@ namespace EmblemMagic.Editors
                 CurrentEntry(false) + "Graphics (BR) repoint");
         }
 
-        private void LargeMap_TL_PalettePointerBox_ValueChanged(object sender, EventArgs e)
+        private void LargeMap_TL_PalettePointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 ((Game)Core.CurrentROM).Address_WorldMap()[LARGEMAP_PALETTE],

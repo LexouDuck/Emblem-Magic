@@ -14,7 +14,7 @@ namespace Magic.Components
         {
             get
             {
-                return new Pointer((uint)base.Value);
+                return new Pointer((UInt32)base.Value);
             }
             set
             {
@@ -36,7 +36,7 @@ namespace Magic.Components
             ResumeLayout(false);
         }
 
-        void UpdateMaximum(object sender, EventArgs e)
+        void UpdateMaximum(Object sender, EventArgs e)
         {
             try
             {

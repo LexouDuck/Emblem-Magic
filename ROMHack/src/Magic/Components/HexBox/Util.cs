@@ -8,23 +8,23 @@ namespace Magic.Components
     /// </summary>
     struct BytePositionInfo
     {
-        public BytePositionInfo(long index, int characterPosition)
+        public BytePositionInfo(Int64 index, Int32 characterPosition)
         {
             _index = index;
             _characterPosition = characterPosition;
         }
 
-        public int CharacterPosition
+        public Int32 CharacterPosition
         {
             get { return _characterPosition; }
         }
-        int _characterPosition;
+        Int32 _characterPosition;
 
-        public long Index
+        public Int64 Index
         {
             get { return _index; }
         }
-        long _index;
+        Int64 _index;
     }
 
 
@@ -39,14 +39,14 @@ namespace Magic.Components
         /// </summary>
         /// <param name="b"></param>
         /// <returns></returns>
-        char ToChar(byte b);
+        Char ToChar(Byte b);
 
         /// <summary>
         /// Returns the byte to use when the character passed across is entered during editing.
         /// </summary>
         /// <param name="c"></param>
         /// <returns></returns>
-        byte ToByte(char c);
+        Byte ToByte(Char c);
     }
 
     /// <summary>
@@ -59,9 +59,9 @@ namespace Magic.Components
         /// </summary>
         /// <param name="b"></param>
         /// <returns></returns>
-        public virtual char ToChar(byte b)
+        public virtual Char ToChar(Byte b)
         {
-            return b > 0x1F && !(b > 0x7E && b < 0xA0) ? (char)b : '.';
+            return b > 0x1F && !(b > 0x7E && b < 0xA0) ? (Char)b : '.';
         }
 
         /// <summary>
@@ -69,16 +69,16 @@ namespace Magic.Components
         /// </summary>
         /// <param name="c"></param>
         /// <returns></returns>
-        public virtual byte ToByte(char c)
+        public virtual Byte ToByte(Char c)
         {
-            return (byte)c;
+            return (Byte)c;
         }
 
         /// <summary>
         /// Returns a description of the byte char provider.
         /// </summary>
         /// <returns></returns>
-        public override string ToString()
+        public override String ToString()
         {
             return "ANSI (Default)";
         }
@@ -107,33 +107,33 @@ namespace Magic.Components
     {
 
         [DllImport("user32.dll")]
-        public static extern int GetScrollPos(IntPtr hWnd, int nBar);
+        public static extern Int32 GetScrollPos(IntPtr hWnd, Int32 nBar);
 
         [DllImport("user32.dll")]
-        public static extern int SetScrollPos(IntPtr hWnd, int nBar, int nPos, bool bRedraw);
+        public static extern Int32 SetScrollPos(IntPtr hWnd, Int32 nBar, Int32 nPos, Boolean bRedraw);
 
         [DllImport("user32.dll", EntryPoint = "PostMessageA")]
-        public static extern bool PostMessage(IntPtr hWnd, uint msg, int wParam, int lParam);
+        public static extern Boolean PostMessage(IntPtr hWnd, UInt32 msg, Int32 wParam, Int32 lParam);
 
         [DllImport("user32.dll")]
         public static extern IntPtr SendMessage(IntPtr hWnd, Int32 wMsg, IntPtr wParam, IntPtr lParam);
         
 
         [DllImport("user32.dll", SetLastError=true)]
-		public static extern bool CreateCaret(IntPtr hWnd, IntPtr hBitmap, int nWidth, int nHeight);
+		public static extern Boolean CreateCaret(IntPtr hWnd, IntPtr hBitmap, Int32 nWidth, Int32 nHeight);
 
 		[DllImport("user32.dll", SetLastError=true)]
-		public static extern bool ShowCaret(IntPtr hWnd);
+		public static extern Boolean ShowCaret(IntPtr hWnd);
 
 		[DllImport("user32.dll", SetLastError=true)]
-		public static extern bool DestroyCaret();
+		public static extern Boolean DestroyCaret();
 
 		[DllImport("user32.dll", SetLastError=true)]
-		public static extern bool SetCaretPos(int X, int Y);
+		public static extern Boolean SetCaretPos(Int32 X, Int32 Y);
 
 		// Key definitions
-		public const int WM_KEYDOWN = 0x100;
-		public const int WM_KEYUP = 0x101;
-		public const int WM_CHAR = 0x102;
+		public const Int32 WM_KEYDOWN = 0x100;
+		public const Int32 WM_KEYUP = 0x101;
+		public const Int32 WM_CHAR = 0x102;
 	}
 }

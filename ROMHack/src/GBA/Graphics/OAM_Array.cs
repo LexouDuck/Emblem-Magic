@@ -5,7 +5,7 @@ namespace GBA
 {
     public class OAM_Array
     {
-        public OAM this[int index]
+        public OAM this[Int32 index]
         {
             get
             {
@@ -47,14 +47,14 @@ namespace GBA
         /// <summary>
         /// Reads OAM data starting at 'offset', stopping at the first terminator encountered
         /// </summary>
-        public OAM_Array(byte[] data, uint offset)
+        public OAM_Array(Byte[] data, UInt32 offset)
         {
             Sprites = new List<OAM>();
             Affines = new List<OAM_Affine>();
 
-            byte[] buffer = new byte[12];
-            bool loadAffineData = true;
-            for (uint i = offset; i < data.Length; i += 12)
+            Byte[] buffer = new Byte[12];
+            Boolean loadAffineData = true;
+            for (UInt32 i = offset; i < data.Length; i += 12)
             {
                 if (data[i] == 0x00)
                 {
@@ -64,7 +64,7 @@ namespace GBA
                 }
                 else
                 {
-                    for (int j = 1; j < 12; j++)
+                    for (Int32 j = 1; j < 12; j++)
                     {
                         if (data[i + j] != 0x00)
                         {
@@ -88,16 +88,16 @@ namespace GBA
         /// <summary>
         /// Returns a byte array of this OAM array
         /// </summary>
-        public byte[] ToBytes()
+        public Byte[] ToBytes()
         {
-            byte[] result = new byte[Affines.Count * OAM.LENGTH + Sprites.Count * OAM.LENGTH + OAM.LENGTH];
-            int index = 0;
-            for (int i = 0; i < Affines.Count; i++)
+            Byte[] result = new Byte[Affines.Count * OAM.LENGTH + Sprites.Count * OAM.LENGTH + OAM.LENGTH];
+            Int32 index = 0;
+            for (Int32 i = 0; i < Affines.Count; i++)
             {
                 Array.Copy(Affines[i].ToBytes(), 0, result, index, OAM.LENGTH);
                 index += OAM.LENGTH;
             }
-            for (int i = 0; i < Sprites.Count; i++)
+            for (Int32 i = 0; i < Sprites.Count; i++)
             {
                 Array.Copy(Sprites[i].ToBytes(), 0, result, index, OAM.LENGTH);
                 index += OAM.LENGTH;
@@ -108,9 +108,9 @@ namespace GBA
         /// <summary>
         /// Merges the different OAM arrays given into one big byte array, each array separated by a terminator
         /// </summary>
-        public static byte[] Merge(List<OAM_Array> frameOAMs)
+        public static Byte[] Merge(List<OAM_Array> frameOAMs)
         {
-            List<byte> result = new List<byte>();
+            List<Byte> result = new List<Byte>();
             foreach (OAM_Array oam in frameOAMs)
             {
                 result.AddRange(oam.ToBytes());

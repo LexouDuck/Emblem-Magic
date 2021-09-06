@@ -13,11 +13,11 @@ namespace GBA
         /// <summary>
         /// This indexer allows for fast access to pixel data in indexed color format - for IDisplayable
         /// </summary>
-        public int this[int x, int y]
+        public Int32 this[Int32 x, Int32 y]
         {
             get
             {
-                int index = GetSpriteIndex(x, y);
+                Int32 index = GetSpriteIndex(x, y);
                 if (index == -1)
                 {
                     return 0;
@@ -30,9 +30,9 @@ namespace GBA
                 }
             }
         }
-        public Color GetColor(int x, int y)
+        public Color GetColor(Int32 x, Int32 y)
         {
-            int index = GetSpriteIndex(x, y);
+            Int32 index = GetSpriteIndex(x, y);
             if (index == -1)
             {
                 if (Sprites.Count == 0)
@@ -50,12 +50,12 @@ namespace GBA
         /// <summary>
         /// Returns the index of the sprite in this GBA.SpriteSheet that corresponds to the tile coordinates given
         /// </summary>
-        public int GetSpriteIndex(int x, int y)
+        public Int32 GetSpriteIndex(Int32 x, Int32 y)
         {
             if (x < 0 || x >= Width) throw new ArgumentException("X given is out of bounds: " + x);
             if (y < 0 || y >= Height) throw new ArgumentException("Y given is out of bounds: " + y);
 
-            for (int i = 0; i < Count; i++)
+            for (Int32 i = 0; i < Count; i++)
             {
                 if ((x >= Offsets[i].X) && (x < Offsets[i].X + Sprites[i].Width) &&
                     (y >= Offsets[i].Y) && (y < Offsets[i].Y + Sprites[i].Height))
@@ -71,11 +71,11 @@ namespace GBA
         /// <summary>
         /// The width of this GBA.SpriteSheet, in pixels
         /// </summary>
-        public int Width { get; }
+        public Int32 Width { get; }
         /// <summary>
         /// The height of this GBA.SpriteSheet, in pixels
         /// </summary>
-        public int Height { get; }
+        public Int32 Height { get; }
 
 
 
@@ -91,7 +91,7 @@ namespace GBA
         /// <summary>
         /// How many different sprites this SpriteSheet holds
         /// </summary>
-        public int Count
+        public Int32 Count
         {
             get
             {
@@ -104,7 +104,7 @@ namespace GBA
         /// <summary>
         /// Creates an empty spritesheet with the given dimensions
         /// </summary>
-        public SpriteSheet(int width, int height)
+        public SpriteSheet(Int32 width, Int32 height)
         {
             Width = width;
             Height = height;
@@ -117,7 +117,7 @@ namespace GBA
         /// <summary>
         /// Adds a sprite to the spritesheet, at the given coordinates
         /// </summary>
-        public void AddSprite(Sprite sprite, int offsetX, int offsetY)
+        public void AddSprite(Sprite sprite, Int32 offsetX, Int32 offsetY)
         {
             Offsets.Add(new Point(offsetX, offsetY));
             Sprites.Add(sprite);
@@ -125,10 +125,10 @@ namespace GBA
         /// <summary>
         /// Adds a compound sprite made from an OAM array onto the spritesheet
         /// </summary>
-        public void AddSprite(Palette palette, Tileset tileset, OAM_Array oam, int offsetX, int offsetY, bool showAffines = true)
+        public void AddSprite(Palette palette, Tileset tileset, OAM_Array oam, Int32 offsetX, Int32 offsetY, Boolean showAffines = true)
         {
             Sprite sprite;
-            for (int i = 0; i < oam.Sprites.Count; i++)
+            for (Int32 i = 0; i < oam.Sprites.Count; i++)
             {
                 if (oam[i].IsAffineSprite())
                 {
@@ -151,10 +151,10 @@ namespace GBA
             Sprites = new List<Sprite>();
         }
 
-        public bool IsRegionEmpty(Rectangle region)
+        public Boolean IsRegionEmpty(Rectangle region)
         {
-            for (int y = 0; y < region.Height; y++)
-            for (int x = 0; x < region.Width; x++)
+            for (Int32 y = 0; y < region.Height; y++)
+            for (Int32 x = 0; x < region.Width; x++)
             {
                 if (this[x + region.X, y + region.Y] > 0)
                     return false;

@@ -38,7 +38,7 @@ namespace Magic.Editors
         /// <summary>
         /// Returns the full name of the current entry: "[EntryType] 0x???? ([EntryText]) - "
         /// </summary>
-        string CurrentEntry
+        String CurrentEntry
         {
             get
             {
@@ -47,7 +47,7 @@ namespace Magic.Editors
                 if (EntrySelector is PointerArrayBox)
                     return Status_Module + " " + ((PointerArrayBox)EntrySelector).Value + " (" + EntrySelector.Text + ") - ";
                 if (EntrySelector is NumericUpDown)
-                    return Status_Module + " 0x" + Util.ByteToHex((byte)((NumericUpDown)EntrySelector).Value) + " - ";
+                    return Status_Module + " 0x" + Util.ByteToHex((Byte)((NumericUpDown)EntrySelector).Value) + " - ";
                 return Status_Module + " 0x??";
             }
         }
@@ -63,7 +63,7 @@ namespace Magic.Editors
                 if (EntrySelector is PointerArrayBox)
                     return ((PointerArrayBox)EntrySelector).Value;
                 if (EntrySelector is NumericUpDown)
-                    return CurrentModule.Address + (int)((NumericUpDown)EntrySelector).Value * CurrentModule.EntryLength;
+                    return CurrentModule.Address + (Int32)((NumericUpDown)EntrySelector).Value * CurrentModule.EntryLength;
                 return new Pointer();
             }
         }
@@ -99,10 +99,10 @@ namespace Magic.Editors
         {
             Core_LoadValues(CurrentValue);
         }
-        public override void Core_SetEntry(uint entry)
+        public override void Core_SetEntry(UInt32 entry)
         {
             if (EntrySelector is ByteArrayBox)
-                ((ByteArrayBox)EntrySelector).Value = (byte)entry;
+                ((ByteArrayBox)EntrySelector).Value = (Byte)entry;
             if (EntrySelector is PointerArrayBox)
                 ((PointerArrayBox)EntrySelector).Value = new Pointer(entry);
             if (EntrySelector is NumericUpDown)
@@ -113,7 +113,7 @@ namespace Magic.Editors
         /// Opens a module file and sets CurrentModule, as well as the status labels
         /// </summary>
         /// <param name="path"></param>
-        public void Core_OpenFile(string path)
+        public void Core_OpenFile(String path)
         {
             if (CurrentModule == null)
             {
@@ -149,23 +149,23 @@ namespace Magic.Editors
         /// <summary>
         /// Loads the EMM module at the given filepath into this window
         /// </summary>
-        void Core_LoadModule(string path)
+        void Core_LoadModule(String path)
         {
             if (path == null || path.Length == 0)
                 throw new Exception("The module file path given is invalid.");
             if (!File.Exists(path))
                 throw new Exception("The module file was not found: " + path);
 
-            string[] filedata = File.ReadAllLines(path);
-            List<string> file = new List<string>();
-            foreach (string line in filedata)
+            String[] filedata = File.ReadAllLines(path);
+            List<String> file = new List<String>();
+            foreach (String line in filedata)
             {
                 if (line == null) continue;
                 else if (line == "" || line[0] == '#')
                 {
                     continue;
                 }
-                else for (int i = 1; i < line.Length; i++)
+                else for (Int32 i = 1; i < line.Length; i++)
                 {
                     if (line[i] == '#') file.Add(line.Substring(0, i)); continue;
                 }   // take out commented lines or parts of lines
@@ -199,8 +199,8 @@ namespace Magic.Editors
         {
             LayoutPanel.SuspendLayout();
 
-            bool unused = false;
-            List<string> sectionNames = new List<string>();
+            Boolean unused = false;
+            List<String> sectionNames = new List<String>();
             foreach (Property item in CurrentModule.Properties)
             {
                 if (item.Section == "Unused") { unused = true; continue; }
@@ -212,7 +212,7 @@ namespace Magic.Editors
             
             GroupBox[] sections = new GroupBox[sectionNames.Count];
             TableLayoutPanel[] layouts = new TableLayoutPanel[sections.Length];
-            for (int i = 0; i < sections.Length; i++)
+            for (Int32 i = 0; i < sections.Length; i++)
             {
                 sections[i] = new GroupBox()
                 {
@@ -233,9 +233,9 @@ namespace Magic.Editors
 
             ModuleControls = new Control[CurrentModule.Properties.Length];
 
-            int[] rows = new int[sections.Length];
-            int total = 0;
-            int index = 0;
+            Int32[] rows = new Int32[sections.Length];
+            Int32 total = 0;
+            Int32 index = 0;
             Label label;
             foreach (Property property in CurrentModule.Properties)
             {
@@ -265,13 +265,13 @@ namespace Magic.Editors
         /// </summary>
         void Core_LoadEvents()
         {
-            int i = 0;
+            Int32 i = 0;
             foreach (Property property in CurrentModule.Properties)
             {
                 switch (property.ControlType)
                 {
                     case PropertyType.BOOL: {
-                            ((CheckBox)ModuleControls[i]).CheckedChanged += delegate (object sender, EventArgs e)
+                            ((CheckBox)ModuleControls[i]).CheckedChanged += delegate (Object sender, EventArgs e)
                             {
                                 if (!WriteDisabled) Core.WriteByte(this,
                                     CurrentAddress + (property.Offset),
@@ -283,7 +283,7 @@ namespace Magic.Editors
                             }; } break;
 
                     case PropertyType.TEXT: {
-                            ((TextBox)ModuleControls[i]).TextChanged += delegate (object sender, EventArgs e)
+                            ((TextBox)ModuleControls[i]).TextChanged += delegate (Object sender, EventArgs e)
                             {
                                 if (!WriteDisabled) Core.WriteData(this,
                                     CurrentAddress + (property.Offset),
@@ -292,7 +292,7 @@ namespace Magic.Editors
                             }; } break;
 
                     case PropertyType.HEXT: {
-                            ((HexBox)ModuleControls[i]).TextChanged += delegate (object sender, EventArgs e)
+                            ((HexBox)ModuleControls[i]).TextChanged += delegate (Object sender, EventArgs e)
                             {
                                 if (!WriteDisabled) Core.WriteData(this,
                                     CurrentAddress + (property.Offset),
@@ -302,48 +302,48 @@ namespace Magic.Editors
 
                     case PropertyType.HEXU:
                     case PropertyType.NUMU: {
-                            ((NumericUpDown)ModuleControls[i]).ValueChanged += delegate (object sender, EventArgs e)
+                            ((NumericUpDown)ModuleControls[i]).ValueChanged += delegate (Object sender, EventArgs e)
                             {
                                 if (!WriteDisabled) Core.WriteData(this,
                                     CurrentAddress + (property.Offset),
-                                    Util.NumberToBytes((long)((NumericUpDown)sender).Value, property.Length >> 3, false),
+                                    Util.NumberToBytes((Int64)((NumericUpDown)sender).Value, property.Length >> 3, false),
                                     CurrentEntry + property.Name + " changed");
                             }; } break;
 
                     case PropertyType.NUMS: {
-                            ((NumericUpDown)ModuleControls[i]).ValueChanged += delegate (object sender, EventArgs e)
+                            ((NumericUpDown)ModuleControls[i]).ValueChanged += delegate (Object sender, EventArgs e)
                             {
                                 if (!WriteDisabled) Core.WriteData(this,
                                     CurrentAddress + (property.Offset),
-                                    Util.NumberToBytes((long)((NumericUpDown)sender).Value, property.Length >> 3, true),
+                                    Util.NumberToBytes((Int64)((NumericUpDown)sender).Value, property.Length >> 3, true),
                                     CurrentEntry + property.Name + " changed");
                             }; } break;
 
                     case PropertyType.LIST: { if (property.FileName == null)
-                            ((ByteBox)ModuleControls[i]).ValueChanged += delegate (object sender, EventArgs e)
+                            ((ByteBox)ModuleControls[i]).ValueChanged += delegate (Object sender, EventArgs e)
                             {
                                 if (!WriteDisabled) Core.WriteByte(this,
                                     CurrentAddress + (property.Offset),
                                     ((ByteBox)sender).Value,
                                     CurrentEntry + property.Name + " changed");
                             };
-                            else ((ByteArrayBox)ModuleControls[i]).ValueChanged += delegate (object sender, EventArgs e)
+                            else ((ByteArrayBox)ModuleControls[i]).ValueChanged += delegate (Object sender, EventArgs e)
                             {
                                 if (!WriteDisabled) Core.WriteData(this,
                                     CurrentAddress + (property.Offset),
-                                    Util.NumberToBytes((long)((NumericUpDown)sender).Value, property.Length >> 3, true),
+                                    Util.NumberToBytes((Int64)((NumericUpDown)sender).Value, property.Length >> 3, true),
                                     CurrentEntry + property.Name + " changed");
                             }; } break;
 
                     case PropertyType.POIN: { if (property.FileName == null)
-                            ((PointerBox)ModuleControls[i]).ValueChanged += delegate (object sender, EventArgs e)
+                            ((PointerBox)ModuleControls[i]).ValueChanged += delegate (Object sender, EventArgs e)
                             {
                                 if (!WriteDisabled) Core.WriteData(this,
                                     CurrentAddress + (property.Offset),
                                     ((PointerBox)sender).Value.ToBytes(),
                                     CurrentEntry + property.Name + " changed");
                             };
-                            else ((PointerArrayBox)ModuleControls[i]).ValueChanged += delegate (object sender, EventArgs e)
+                            else ((PointerArrayBox)ModuleControls[i]).ValueChanged += delegate (Object sender, EventArgs e)
                             {
                                 if (!WriteDisabled) Core.WriteData(this,
                                     CurrentAddress + (property.Offset),
@@ -359,10 +359,10 @@ namespace Magic.Editors
         /// <summary>
         /// Loads the correct values into the controls for the array entry at the given index
         /// </summary>
-        void Core_LoadValues(uint entry)
+        void Core_LoadValues(UInt32 entry)
         {
             WriteDisabled = true;
-            object[] values;
+            Object[] values;
             try
             {
                 if (EntrySelector is PointerArrayBox)
@@ -370,24 +370,24 @@ namespace Magic.Editors
                         CurrentModule[new Pointer(entry)] :
                         CurrentModule[new Pointer(entry)];
                 else
-                    values = CurrentModule[(int)entry];
+                    values = CurrentModule[(Int32)entry];
             }
             catch (Exception ex)
             {
                 UI.ShowError("The current entry could not be properly loaded.", ex);
                 return;
             }
-            int i = 0;
+            Int32 i = 0;
             foreach (Property property in CurrentModule.Properties)
             {
                 try
                 {
                     switch (property.ControlType)
                     {
-                        case PropertyType.BOOL: ((CheckBox)ModuleControls[i]).Checked = (bool)values[i]; break;
+                        case PropertyType.BOOL: ((CheckBox)ModuleControls[i]).Checked = (Boolean)values[i]; break;
 
-                        case PropertyType.TEXT: ((TextBox)ModuleControls[i]).Text = (string)values[i]; break;
-                        case PropertyType.HEXT: ((HexBox)ModuleControls[i]).Value = (byte[])values[i]; break;
+                        case PropertyType.TEXT: ((TextBox)ModuleControls[i]).Text = (String)values[i]; break;
+                        case PropertyType.HEXT: ((HexBox)ModuleControls[i]).Value = (Byte[])values[i]; break;
 
                         case PropertyType.HEXU: ((NumericUpDown)ModuleControls[i]).Value = Convert.ToUInt32(values[i]); break;
                         case PropertyType.NUMU: ((NumericUpDown)ModuleControls[i]).Value = Convert.ToUInt32(values[i]); break;
@@ -415,7 +415,7 @@ namespace Magic.Editors
 
 
 
-        MagicButton GetEditorShortcut(int index, Property property)
+        MagicButton GetEditorShortcut(Int32 index, Property property)
         {
             MagicButton result = new MagicButton(App)
             {
@@ -426,21 +426,21 @@ namespace Magic.Editors
             switch (property.ControlType)
             {
                 case PropertyType.BOOL:
-                    ((CheckBox)ModuleControls[index]).CheckedChanged += delegate (object sender, EventArgs e)
+                    ((CheckBox)ModuleControls[index]).CheckedChanged += delegate (Object sender, EventArgs e)
                     {
                         result.EntryToSelect = 0;
                     };
                     break;
 
                 case PropertyType.TEXT:
-                    ((TextBox)ModuleControls[index]).TextChanged += delegate (object sender, EventArgs e)
+                    ((TextBox)ModuleControls[index]).TextChanged += delegate (Object sender, EventArgs e)
                     {
                         result.EntryToSelect = 0;
                     };
                     break;
 
                 case PropertyType.HEXT:
-                    ((HexBox)ModuleControls[index]).TextChanged += delegate (object sender, EventArgs e)
+                    ((HexBox)ModuleControls[index]).TextChanged += delegate (Object sender, EventArgs e)
                     {
                         result.EntryToSelect = Util.BytesToUInt(((HexBox)ModuleControls[index]).Value, true);
                     };
@@ -448,30 +448,30 @@ namespace Magic.Editors
 
                 case PropertyType.HEXU:
                 case PropertyType.NUMU:
-                    ((NumericUpDown)ModuleControls[index]).ValueChanged += delegate (object sender, EventArgs e)
+                    ((NumericUpDown)ModuleControls[index]).ValueChanged += delegate (Object sender, EventArgs e)
                     {
-                        result.EntryToSelect = (uint)((NumericUpDown)ModuleControls[index]).Value;
+                        result.EntryToSelect = (UInt32)((NumericUpDown)ModuleControls[index]).Value;
                     };
                     break;
 
                 case PropertyType.NUMS:
-                    ((NumericUpDown)ModuleControls[index]).ValueChanged += delegate (object sender, EventArgs e)
+                    ((NumericUpDown)ModuleControls[index]).ValueChanged += delegate (Object sender, EventArgs e)
                     {
-                        result.EntryToSelect = (uint)((NumericUpDown)ModuleControls[index]).Value;
+                        result.EntryToSelect = (UInt32)((NumericUpDown)ModuleControls[index]).Value;
                     };
                     break;
 
                 case PropertyType.LIST:
                     if (property.FileName == null)
                     {
-                        ((ByteBox)ModuleControls[index]).ValueChanged += delegate (object sender, EventArgs e)
+                        ((ByteBox)ModuleControls[index]).ValueChanged += delegate (Object sender, EventArgs e)
                         {
                             result.EntryToSelect = ((ByteBox)ModuleControls[index]).Value;
                         };
                     }
                     else
                     {
-                        ((ByteArrayBox)ModuleControls[index]).ValueChanged += delegate (object sender, EventArgs e)
+                        ((ByteArrayBox)ModuleControls[index]).ValueChanged += delegate (Object sender, EventArgs e)
                         {
                             result.EntryToSelect = ((ByteArrayBox)ModuleControls[index]).Value;
                         };
@@ -481,14 +481,14 @@ namespace Magic.Editors
                 case PropertyType.POIN:
                     if (property.FileName == null)
                     {
-                        ((PointerBox)ModuleControls[index]).ValueChanged += delegate (object sender, EventArgs e)
+                        ((PointerBox)ModuleControls[index]).ValueChanged += delegate (Object sender, EventArgs e)
                         {
                             result.EntryToSelect = ((PointerBox)ModuleControls[index]).Value;
                         };
                     }
                     else
                     {
-                        ((PointerArrayBox)ModuleControls[index]).ValueChanged += delegate (object sender, EventArgs e)
+                        ((PointerArrayBox)ModuleControls[index]).ValueChanged += delegate (Object sender, EventArgs e)
                         {
                             result.EntryToSelect = ((PointerArrayBox)ModuleControls[index]).Value;
                         };
@@ -502,18 +502,18 @@ namespace Magic.Editors
 
 
 
-        void EntryIndexChanged(object sender, EventArgs e)
+        void EntryIndexChanged(Object sender, EventArgs e)
         {
             Core_Update();
         }
 
-        void File_OpenModule_Click(object sender, ToolStripItemClickedEventArgs e)
+        void File_OpenModule_Click(Object sender, ToolStripItemClickedEventArgs e)
         {
             FolderViewMenuItem menu_item = (FolderViewMenuItem)e.ClickedItem;
 
             Core_OpenFile(menu_item.FilePath);
         }
-        void File_OpenEMMFile_Click(object sender, EventArgs e)
+        void File_OpenEMMFile_Click(Object sender, EventArgs e)
         {
             OpenFileDialog openWindow = new OpenFileDialog();
             openWindow.Filter = "All files (*.*)|*.*|Emblem Magic Modules (*.emm)|*.emm";
@@ -534,14 +534,14 @@ namespace Magic.Editors
         {
             if (EntrySelector is PointerArrayBox)
             {
-                ((PointerArrayBox)EntrySelector).Value = new GBA.Pointer(((PointerArrayBox)EntrySelector).Value.Address + (uint)CurrentModule.EntryLength);
+                ((PointerArrayBox)EntrySelector).Value = new GBA.Pointer(((PointerArrayBox)EntrySelector).Value.Address + (UInt32)CurrentModule.EntryLength);
             }
         }
         private void Offset_Minus_Button_Click(Object sender, EventArgs e)
         {
             if (EntrySelector is PointerArrayBox)
             {
-                ((PointerArrayBox)EntrySelector).Value = new GBA.Pointer(((PointerArrayBox)EntrySelector).Value.Address - (uint)CurrentModule.EntryLength);
+                ((PointerArrayBox)EntrySelector).Value = new GBA.Pointer(((PointerArrayBox)EntrySelector).Value.Address - (UInt32)CurrentModule.EntryLength);
             }
         }
 
@@ -551,7 +551,7 @@ namespace Magic.Editors
             App.Core_OpenEditor(editor);
 
             Pointer address = CurrentAddress;
-            int length = CurrentModule.EntryLength;
+            Int32 length = CurrentModule.EntryLength;
             editor.Core_SetEntry(address, length, (length > 0 ? Core.ReadData(address, length) : null));
         }
     }

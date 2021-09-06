@@ -11,17 +11,17 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// The name of this command
         /// </summary>
-        public string Name { get; }
+        public String Name { get; }
         /// <summary>
         /// The ASM code this command is a macro for
         /// </summary>
-        public string[] ASM_Code { get; }
+        public String[] ASM_Code { get; }
         /// <summary>
         /// Whether or not to apply syntax coloring onto this command
         /// </summary>
-        public bool Colored { get; }
+        public Boolean Colored { get; }
 
-        public SpellCommand(string command, string[] asm_code, bool color)
+        public SpellCommand(String command, String[] asm_code, Boolean color)
         {
             Name = command;
             ASM_Code = asm_code;
@@ -35,12 +35,12 @@ namespace EmblemMagic.FireEmblem
     {
         List<SpellCommand> Commands;
 
-        public SpellCommands(string filepath)
+        public SpellCommands(String filepath)
         {
-            string[] file = File.ReadAllLines(filepath);
+            String[] file = File.ReadAllLines(filepath);
 
             Commands = new List<SpellCommand>();
-            for (int i = 0; i < file.Length; i++)
+            for (Int32 i = 0; i < file.Length; i++)
             {
                 if (file[i].Length == 0 || file[i][0] == '@')
                 {
@@ -48,8 +48,8 @@ namespace EmblemMagic.FireEmblem
                 }
                 else
                 {
-                    string command;
-                    int length = file[i].IndexOf('@');
+                    String command;
+                    Int32 length = file[i].IndexOf('@');
                     if (length == -1)
                     {
                         command = file[i].TrimEnd(' ');
@@ -60,7 +60,7 @@ namespace EmblemMagic.FireEmblem
                                file[i][length - 1] == '\t') length--;
                         command = file[i].Substring(0, length);
                     }
-                    List<string> asmcode = new List<string>();
+                    List<String> asmcode = new List<String>();
                     i++;
                     while (i < file.Length)
                     {
@@ -87,18 +87,18 @@ namespace EmblemMagic.FireEmblem
             }
         }
 
-        public string Get(ASM.Instruction[] asm, ref int index)
+        public String Get(ASM.Instruction[] asm, ref Int32 index)
         {
-            string result = "";
-            List<string> arguments;
-            bool match;
+            String result = "";
+            List<String> arguments;
+            Boolean match;
             foreach (var command in Commands)
             {
                 match = false;
-                arguments = new List<string>();
-                for (int i = 0; i < command.ASM_Code.Length; i++)
+                arguments = new List<String>();
+                for (Int32 i = 0; i < command.ASM_Code.Length; i++)
                 {
-                    for (int j = 0; j < asm[index + i].Code.Length; j++)
+                    for (Int32 j = 0; j < asm[index + i].Code.Length; j++)
                     {
                         if (asm[index + i].Code[j] == command.ASM_Code[i][j])
                         {
@@ -110,8 +110,8 @@ namespace EmblemMagic.FireEmblem
                         }
                         else if (match && command.ASM_Code[i][j] == '_')
                         {
-                            string argument = "";
-                            int c = 0;
+                            String argument = "";
+                            Int32 c = 0;
                             while (j + c < command.ASM_Code[i].Length && command.ASM_Code[i][j + c] == '_')
                             {
                                 argument += asm[index + i].Code[j + c];
@@ -132,7 +132,7 @@ namespace EmblemMagic.FireEmblem
                     if (arguments.Count == 0)
                         return result;
                     result += "(";
-                    for (int i = 0; i < arguments.Count; i++)
+                    for (Int32 i = 0; i < arguments.Count; i++)
                     {
                         result += arguments[i];
                         if (i < arguments.Count - 1)
@@ -148,9 +148,9 @@ namespace EmblemMagic.FireEmblem
 
 
 
-        public string GetRegex()
+        public String GetRegex()
         {
-            string result = "";
+            String result = "";
 
             foreach (var command in Commands)
             {

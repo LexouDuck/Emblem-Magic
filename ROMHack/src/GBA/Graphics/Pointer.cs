@@ -11,7 +11,7 @@ namespace GBA
         /// <summary>
         /// At runtime on a GBA, address are offset because of the hardware - pointers in the ROM all start with 0X08
         /// </summary>
-        public const int HardwareOffset = 0x08000000;
+        public const Int32 HardwareOffset = 0x08000000;
 
 
 
@@ -25,7 +25,7 @@ namespace GBA
         /// <summary>
         /// Makes a Pointer from the given byte array. The 2 bools will decide how the byte array is read.
         /// </summary>
-        public Pointer(byte[] data, bool littleEndian = true, bool hardwareOffset = true)
+        public Pointer(Byte[] data, Boolean littleEndian = true, Boolean hardwareOffset = true)
         {
             if (data.Length != 4)
                 throw new Exception("given byte array is of invalid length: " + data.Length);
@@ -37,7 +37,7 @@ namespace GBA
                 Address = 0;
                 return;
             }
-            uint address = Util.BytesToUInt32(data, littleEndian);
+            UInt32 address = Util.BytesToUInt32(data, littleEndian);
 
             if (hardwareOffset)
             {
@@ -48,12 +48,12 @@ namespace GBA
             //if (address >= Core.CurrentROMSize)
             //    throw new Exception("Pointer is beyond the range of the ROM: " + Util.AddressToString(address, 8));
 
-            Address = (uint)address;
+            Address = (UInt32)address;
         }
         /// <summary>
         /// Makes a Pointer from the given address. The 2 bools will decide how the int address is read.
         /// </summary>
-        public Pointer(uint address, bool littleEndian = false, bool hardwareOffset = false)
+        public Pointer(UInt32 address, Boolean littleEndian = false, Boolean hardwareOffset = false)
         {
             if (address == 0)
             {
@@ -62,7 +62,7 @@ namespace GBA
             }
             if (littleEndian)
             {
-                byte[] pointer = Util.UInt32ToBytes(address, true);
+                Byte[] pointer = Util.UInt32ToBytes(address, true);
                 address = Util.BytesToUInt32(pointer, false);
             }
             if (hardwareOffset)
@@ -82,71 +82,71 @@ namespace GBA
         /// <summary>
         /// Returns a 4-byte array of this pointer, that differs depending on littleEndian and hardwareOffset
         /// </summary>
-        public byte[] ToBytes(bool littleEndian = true, bool hardwareOffset = true)
+        public Byte[] ToBytes(Boolean littleEndian = true, Boolean hardwareOffset = true)
         {
-            if (Address == 0) return new byte[4] { 0x00, 0x00, 0x00, 0x00 };
+            if (Address == 0) return new Byte[4] { 0x00, 0x00, 0x00, 0x00 };
 
             return Util.UInt32ToBytes((hardwareOffset) ? Address + HardwareOffset : Address, littleEndian);
         }
         
 
 
-        override public string ToString()
+        override public String ToString()
         {
             return Util.AddressToString(Address);
         }
-        override public bool Equals(object other)
+        override public Boolean Equals(Object other)
         {
             if (!(other is Pointer)) return false;
             Pointer pointer = (Pointer)other;
             return (Address == pointer.Address);
         }
-        override public int GetHashCode()
+        override public Int32 GetHashCode()
         {
             return Address.GetHashCode();
         }
 
-        public static bool operator ==(Pointer left, Pointer right)
+        public static Boolean operator ==(Pointer left, Pointer right)
         {
             return (left.Address == right.Address);
         }
-        public static bool operator !=(Pointer left, Pointer right)
+        public static Boolean operator !=(Pointer left, Pointer right)
         {
             return (left.Address != right.Address);
         }
 
         public static Pointer operator +(Pointer left, Pointer right)
         {
-            return new Pointer((uint)(left.Address + right.Address));
+            return new Pointer((UInt32)(left.Address + right.Address));
         }
-        public static Pointer operator +(Pointer left, uint right)
+        public static Pointer operator +(Pointer left, UInt32 right)
         {
             return new Pointer(left.Address + right);
         }
-        public static Pointer operator +(Pointer left, int right)
+        public static Pointer operator +(Pointer left, Int32 right)
         {
-            return new Pointer((uint)(left.Address + right));
+            return new Pointer((UInt32)(left.Address + right));
         }
-        public static int operator -(Pointer left, Pointer right)
+        public static Int32 operator -(Pointer left, Pointer right)
         {
-            return (int)(left.Address - right.Address);
+            return (Int32)(left.Address - right.Address);
         }
-        public static Pointer operator -(Pointer left, uint right)
+        public static Pointer operator -(Pointer left, UInt32 right)
         {
             return new Pointer(left.Address - right);
         }
-        public static Pointer operator -(Pointer left, int right)
+        public static Pointer operator -(Pointer left, Int32 right)
         {
-            return new Pointer((uint)(left.Address - right));
+            return new Pointer((UInt32)(left.Address - right));
         }
 
-        static public implicit operator uint (Pointer pointer)
+        static public implicit operator UInt32(Pointer pointer)
         {
             return pointer.Address;
         }
-        static public implicit operator int (Pointer pointer)
+        static public implicit operator Int32(Pointer pointer)
         {
-            return (int)pointer.Address;
+            return (Int32)pointer.Address;
         }
 
         internal void CompareTo(Pointer item1)

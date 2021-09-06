@@ -5,7 +5,7 @@ namespace Magic.Editors
 {
     public class BitInfo
     {
-        public bool this[int index]
+        public Boolean this[Int32 index]
         {
             get
             {
@@ -14,25 +14,26 @@ namespace Magic.Editors
             set
             {
                 if (value)
-                    _value |= (byte)(1 << index); //set bit index 1
+                    _value |= (Byte)(1 << index); //set bit index 1
                 else
-                    _value &= (byte)(~(1 << index)); //set bit index 0
+                    _value &= (Byte)(~(1 << index)); //set bit index 0
             }
         }
 
 
         
-		public byte Value
+		public Byte Value
 		{
 			get { return _value; }
 			set { _value = value; }
-        } byte _value;
+        }
+        Byte _value;
 
-        public long Position { get; set; }
+        public Int64 Position { get; set; }
 
 
 
-		public BitInfo(byte value, long position)
+		public BitInfo(Byte value, Int64 position)
 		{
 			_value = value;
 			Position = position;
@@ -40,9 +41,9 @@ namespace Magic.Editors
 
 
 
-		public override string ToString()
+		public override String ToString()
 		{
-			var result = string.Format("{0}{1}{2}{3}{4}{5}{6}{7}"
+			var result = String.Format("{0}{1}{2}{3}{4}{5}{6}{7}"
 				, GetBitAsString(7)
 				, GetBitAsString(6)
 				, GetBitAsString(5)
@@ -54,7 +55,7 @@ namespace Magic.Editors
 			return result;
 		}
 
-		public string GetBitAsString(int index)
+		public String GetBitAsString(Int32 index)
 		{
 			if (this[index])
                 return "1";

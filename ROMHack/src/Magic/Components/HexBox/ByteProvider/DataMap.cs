@@ -5,10 +5,10 @@ namespace Magic.Components
 {
     internal class DataMap : ICollection, IEnumerable
     {
-        readonly object _syncRoot = new object();
-        internal int _count;
+        readonly Object _syncRoot = new Object();
+        internal Int32 _count;
         internal DataBlock _firstBlock;
-        internal int _version;
+        internal Int32 _version;
 
         public DataMap()
         {
@@ -204,7 +204,7 @@ namespace Magic.Components
         }
 
         #region ICollection Members
-        public void CopyTo(Array array, int index)
+        public void CopyTo(Array array, Int32 index)
         {
             DataBlock[] blockArray = array as DataBlock[];
             for (DataBlock block = FirstBlock; block != null; block = block.NextBlock)
@@ -213,7 +213,7 @@ namespace Magic.Components
             }
         }
 
-        public int Count
+        public Int32 Count
         {
             get
             {
@@ -221,7 +221,7 @@ namespace Magic.Components
             }
         }
 
-        public bool IsSynchronized
+        public Boolean IsSynchronized
         {
             get
             {
@@ -229,7 +229,7 @@ namespace Magic.Components
             }
         }
 
-        public object SyncRoot
+        public Object SyncRoot
         {
             get
             {
@@ -250,8 +250,8 @@ namespace Magic.Components
         {
             DataMap _map;
             DataBlock _current;
-            int _index;
-            int _version;
+            Int32 _index;
+            Int32 _version;
 
             internal Enumerator(DataMap map)
             {
@@ -261,7 +261,7 @@ namespace Magic.Components
                 _index = -1;
             }
 
-            object IEnumerator.Current
+            Object IEnumerator.Current
             {
                 get
                 {
@@ -273,7 +273,7 @@ namespace Magic.Components
                 }
             }
 
-            public bool MoveNext()
+            public Boolean MoveNext()
             {
                 if (this._version != _map._version)
                 {

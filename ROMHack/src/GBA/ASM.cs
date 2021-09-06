@@ -14,7 +14,7 @@ namespace GBA
         /// </summary>
         public class RegisterSet
         {
-            public UInt32 this[int index]
+            public UInt32 this[Int32 index]
             {
                 get
                 {
@@ -64,36 +64,36 @@ namespace GBA
                 }
             }
 
-            public uint R0;  // GPR (Lo) - General Purpose Registers
-            public uint R1;  // GPR (Lo)
-            public uint R2;  // GPR (Lo)
-            public uint R3;  // GPR (Lo)
-            public uint R4;  // GPR (Lo)
-            public uint R5;  // GPR (Lo)
-            public uint R6;  // GPR (Lo)
-            public uint R7;  // GPR (Lo)
-            public uint R8;  // GPR (Hi) - Hi registers can only be freely accessed in ARM state
-            public uint R9;  // GPR (Hi)
-            public uint R10; // GPR (Hi)
-            public uint R11; // GPR (Hi)
-            public uint R12; // GPR (Hi)
-            public uint SP;  // Stack Pointer: each exception handler must use its own stack (is a GPR in ARM state)
-            public uint LR;  // Link Register: stores the address to return to after executing a BL subroutine
-            public uint PC;  // Program Counter: the address of the code currently being read (+n, depending on instruction)
+            public UInt32 R0;  // GPR (Lo) - General Purpose Registers
+            public UInt32 R1;  // GPR (Lo)
+            public UInt32 R2;  // GPR (Lo)
+            public UInt32 R3;  // GPR (Lo)
+            public UInt32 R4;  // GPR (Lo)
+            public UInt32 R5;  // GPR (Lo)
+            public UInt32 R6;  // GPR (Lo)
+            public UInt32 R7;  // GPR (Lo)
+            public UInt32 R8;  // GPR (Hi) - Hi registers can only be freely accessed in ARM state
+            public UInt32 R9;  // GPR (Hi)
+            public UInt32 R10; // GPR (Hi)
+            public UInt32 R11; // GPR (Hi)
+            public UInt32 R12; // GPR (Hi)
+            public UInt32 SP;  // Stack Pointer: each exception handler must use its own stack (is a GPR in ARM state)
+            public UInt32 LR;  // Link Register: stores the address to return to after executing a BL subroutine
+            public UInt32 PC;  // Program Counter: the address of the code currently being read (+n, depending on instruction)
             
-            public bool N; // N - Sign Flag(0=Not Signed, 1=Signed)
-            public bool Z; // Z - Zero Flag(0=Not Zero, 1=Zero)
-            public bool C; // C - Carry Flag(0=Borrow/No Carry, 1=Carry/No Borrow)
-            public bool V; // V - Overflow Flag(0=No Overflow, 1=Overflow)
+            public Boolean N; // N - Sign Flag(0=Not Signed, 1=Signed)
+            public Boolean Z; // Z - Zero Flag(0=Not Zero, 1=Zero)
+            public Boolean C; // C - Carry Flag(0=Borrow/No Carry, 1=Carry/No Borrow)
+            public Boolean V; // V - Overflow Flag(0=No Overflow, 1=Overflow)
             
-            public bool I; // I - IRQ disable(0=Enable, 1=Disable)
-            public bool F; // F - FIQ disable(0=Enable, 1=Disable)
-            public bool T; // T - State Bit(0=ARM, 1=THUMB)
-            public byte M; // M4-M0 - Mode Bits(See below)
+            public Boolean I; // I - IRQ disable(0=Enable, 1=Disable)
+            public Boolean F; // F - FIQ disable(0=Enable, 1=Disable)
+            public Boolean T; // T - State Bit(0=ARM, 1=THUMB)
+            public Byte M; // M4-M0 - Mode Bits(See below)
 
-            public List<uint> Stack;
+            public List<UInt32> Stack;
 
-            public RegisterSet(Pointer pc, bool thumb)
+            public RegisterSet(Pointer pc, Boolean thumb)
             {
                 R0 = 0; R8  = 0;
                 R1 = 0; R9  = 0;
@@ -109,7 +109,7 @@ namespace GBA
                 C = false; T = thumb;
                 V = false; M = 0x00;
                 
-                Stack = new List<uint>();
+                Stack = new List<UInt32>();
             }
         }
 
@@ -119,22 +119,22 @@ namespace GBA
             public Byte[] Data;
             public String Code;
 
-            public Instruction(Pointer address, byte[] data, string asmCode)
+            public Instruction(Pointer address, Byte[] data, String asmCode)
             {
                 this.Address = address;
                 this.Data = data;
                 this.Code = asmCode;
             }
 
-            override public string ToString()
+            override public String ToString()
             {
                 return Address + " | " + Util.BytesToHex(Data) + (Data.Length == 2 ? "     | " : " | ") + Code;
             }
 
             public RegisterSet Read(RegisterSet cpu)
             {
-                int index = 0;
-                string opcode = "";
+                Int32 index = 0;
+                String opcode = "";
                 while (Code[index] != ' ')
                 {
                     opcode += Code[index++];
@@ -144,21 +144,21 @@ namespace GBA
 
                 if (opcode.Equals("B", StringComparison.OrdinalIgnoreCase))
                 {
-                    int i = 0;
+                    Int32 i = 0;
                     while (Code[i] != '$') i++;
                     i++;
                     return B(cpu, new Pointer(Util.HexToInt(Code.Substring(i, 8))), "");
                 }
                 if (opcode.Equals("BL", StringComparison.OrdinalIgnoreCase))
                 {
-                    int i = 0;
+                    Int32 i = 0;
                     while (Code[i] != '$') i++;
                     i++;
                     return BL(cpu, new Pointer(Util.HexToInt(Code.Substring(i, 8))));
                 }
                 if (opcode.Equals("BLH", StringComparison.OrdinalIgnoreCase))
                 {
-                    int i = 0;
+                    Int32 i = 0;
                     while (Code[i] != '$') i++;
                     i++;
                     return BLH(cpu, new Pointer(Util.HexToInt(Code.Substring(i, 8))));
@@ -167,20 +167,20 @@ namespace GBA
                 {
                     try
                     {
-                        int i = 0;
+                        Int32 i = 0;
                         while (Code[i] != '$') i++;
                         i++;
                         return BL(cpu, new Pointer(Util.HexToInt(Code.Substring(i, 8))));
                     }
                     catch
                     {
-                        int Rs = Read_Register(ref index);
+                        Int32 Rs = Read_Register(ref index);
                         return BX(cpu, Rs);
                     }
                 }
                 if (opcode.StartsWith("B", StringComparison.OrdinalIgnoreCase) && opcode.Length == 3)
                 {
-                    int i = 0;
+                    Int32 i = 0;
                     while (Code[i] != '$') i++;
                     i++;
                     return B(cpu, new Pointer(Util.HexToInt(Code.Substring(i, 8))), opcode.Substring(1, 2));
@@ -188,122 +188,122 @@ namespace GBA
 
                 if (opcode.Equals("PUSH", StringComparison.OrdinalIgnoreCase))
                 {
-                    int[] Rlist = Read_RegisterList(ref index);
+                    Int32[] Rlist = Read_RegisterList(ref index);
                     return PUSH(cpu, Rlist);
                 }
                 if (opcode.Equals("POP", StringComparison.OrdinalIgnoreCase))
                 {
-                    int[] Rlist = Read_RegisterList(ref index);
+                    Int32[] Rlist = Read_RegisterList(ref index);
                     return POP(cpu, Rlist);
                 }
 
                 if (opcode.Equals("MOV", StringComparison.OrdinalIgnoreCase))
                 {
-                    int Rd = Read_Register(ref index);
-                    bool immediate = false;
-                    for (int i = 0; i < Code.Length; i++)
+                    Int32 Rd = Read_Register(ref index);
+                    Boolean immediate = false;
+                    for (Int32 i = 0; i < Code.Length; i++)
                     {
                         if (Code[i] == '#') immediate = true;
                     }
                     if (immediate)
                     {
-                        byte Imm = (byte)Read_Immediate(ref index);
+                        Byte Imm = (Byte)Read_Immediate(ref index);
                         return MOV(cpu, Rd, Imm);
                     }
                     else
                     {
-                        int Rs = Read_Register(ref index);
+                        Int32 Rs = Read_Register(ref index);
                         return MOV(cpu, Rd, Rs);
                     }
                 }
                 if (opcode.Equals("MVN", StringComparison.OrdinalIgnoreCase))
                 {
-                    int Rd = Read_Register(ref index);
-                    int Rs = Read_Register(ref index);
+                    Int32 Rd = Read_Register(ref index);
+                    Int32 Rs = Read_Register(ref index);
                     return MVN(cpu, Rd, Rs);
                 }
                 if (opcode.Equals("AND", StringComparison.OrdinalIgnoreCase))
                 {
-                    int Rd = Read_Register(ref index);
-                    int Rs = Read_Register(ref index);
+                    Int32 Rd = Read_Register(ref index);
+                    Int32 Rs = Read_Register(ref index);
                     return AND(cpu, Rd, Rs);
                 }
                 if (opcode.Equals("TST", StringComparison.OrdinalIgnoreCase))
                 {
-                    int Rd = Read_Register(ref index);
-                    int Rs = Read_Register(ref index);
+                    Int32 Rd = Read_Register(ref index);
+                    Int32 Rs = Read_Register(ref index);
                     return TST(cpu, Rd, Rs);
                 }
                 if (opcode.Equals("BIC", StringComparison.OrdinalIgnoreCase))
                 {
-                    int Rd = Read_Register(ref index);
-                    int Rs = Read_Register(ref index);
+                    Int32 Rd = Read_Register(ref index);
+                    Int32 Rs = Read_Register(ref index);
                     return BIC(cpu, Rd, Rs);
                 }
                 if (opcode.Equals("ORR", StringComparison.OrdinalIgnoreCase))
                 {
-                    int Rd = Read_Register(ref index);
-                    int Rs = Read_Register(ref index);
+                    Int32 Rd = Read_Register(ref index);
+                    Int32 Rs = Read_Register(ref index);
                     return ORR(cpu, Rd, Rs);
                 }
                 if (opcode.Equals("EOR", StringComparison.OrdinalIgnoreCase))
                 {
-                    int Rd = Read_Register(ref index);
-                    int Rs = Read_Register(ref index);
+                    Int32 Rd = Read_Register(ref index);
+                    Int32 Rs = Read_Register(ref index);
                     return EOR(cpu, Rd, Rs);
                 }
                 if (opcode.Equals("LSL", StringComparison.OrdinalIgnoreCase))
                 {
-                    int Rd = Read_Register(ref index);
-                    int Rs = Read_Register(ref index);
-                    bool immediate = false;
-                    for (int i = 0; i < Code.Length; i++)
+                    Int32 Rd = Read_Register(ref index);
+                    Int32 Rs = Read_Register(ref index);
+                    Boolean immediate = false;
+                    for (Int32 i = 0; i < Code.Length; i++)
                     {
                         if (Code[i] == '#') immediate = true;
                     }
                     if (immediate)
                     {
-                        byte Imm = (byte)Read_Immediate(ref index);
+                        Byte Imm = (Byte)Read_Immediate(ref index);
                         return LSL(cpu, Rd, Rs, Imm);
                     }
                     else return LSL(cpu, Rd, Rs);
                 }
                 if (opcode.Equals("LSR", StringComparison.OrdinalIgnoreCase))
                 {
-                    int Rd = Read_Register(ref index);
-                    int Rs = Read_Register(ref index);
-                    bool immediate = false;
-                    for (int i = 0; i < Code.Length; i++)
+                    Int32 Rd = Read_Register(ref index);
+                    Int32 Rs = Read_Register(ref index);
+                    Boolean immediate = false;
+                    for (Int32 i = 0; i < Code.Length; i++)
                     {
                         if (Code[i] == '#') immediate = true;
                     }
                     if (immediate)
                     {
-                        byte Imm = (byte)Read_Immediate(ref index);
+                        Byte Imm = (Byte)Read_Immediate(ref index);
                         return LSR(cpu, Rd, Rs, Imm);
                     }
                     else return LSR(cpu, Rd, Rs);
                 }
                 if (opcode.Equals("ASR", StringComparison.OrdinalIgnoreCase))
                 {
-                    int Rd = Read_Register(ref index);
-                    int Rs = Read_Register(ref index);
-                    bool immediate = false;
-                    for (int i = 0; i < Code.Length; i++)
+                    Int32 Rd = Read_Register(ref index);
+                    Int32 Rs = Read_Register(ref index);
+                    Boolean immediate = false;
+                    for (Int32 i = 0; i < Code.Length; i++)
                     {
                         if (Code[i] == '#') immediate = true;
                     }
                     if (immediate)
                     {
-                        byte Imm = (byte)Read_Immediate(ref index);
+                        Byte Imm = (Byte)Read_Immediate(ref index);
                         return ASR(cpu, Rd, Rs, Imm);
                     }
                     else return ASR(cpu, Rd, Rs);
                 }
                 if (opcode.Equals("ROR", StringComparison.OrdinalIgnoreCase))
                 {
-                    int Rd = Read_Register(ref index);
-                    int Rs = Read_Register(ref index);
+                    Int32 Rd = Read_Register(ref index);
+                    Int32 Rs = Read_Register(ref index);
                     return ROR(cpu, Rd, Rs);
                 }
                 if (opcode.Equals("NOP", StringComparison.OrdinalIgnoreCase))
@@ -314,34 +314,34 @@ namespace GBA
 
                 if (opcode.Equals("ADC", StringComparison.OrdinalIgnoreCase))
                 {
-                    int Rd = Read_Register(ref index);
-                    int Rs = Read_Register(ref index);
+                    Int32 Rd = Read_Register(ref index);
+                    Int32 Rs = Read_Register(ref index);
                     return ADC(cpu, Rd, Rs);
                 }
                 if (opcode.Equals("SBC", StringComparison.OrdinalIgnoreCase))
                 {
-                    int Rd = Read_Register(ref index);
-                    int Rs = Read_Register(ref index);
+                    Int32 Rd = Read_Register(ref index);
+                    Int32 Rs = Read_Register(ref index);
                     return SBC(cpu, Rd, Rs);
                 }
 
                 if (opcode.StartsWith("LDR", StringComparison.OrdinalIgnoreCase))
                 {
-                    int Rd = Read_Register(ref index);
-                    int Rs = Read_Register(ref index);
-                    bool immediate = false;
-                    for (int i = 0; i < Code.Length; i++)
+                    Int32 Rd = Read_Register(ref index);
+                    Int32 Rs = Read_Register(ref index);
+                    Boolean immediate = false;
+                    for (Int32 i = 0; i < Code.Length; i++)
                     {
                         if (Code[i] == '#') immediate = true;
                     }
                     if (immediate)
                     {
-                        byte Imm = (byte)Read_Immediate(ref index);
+                        Byte Imm = (Byte)Read_Immediate(ref index);
                         return LDR(cpu, Rd, Rs, Imm);
                     }
                     else
                     {
-                        int Ro = Read_Register(ref index);
+                        Int32 Ro = Read_Register(ref index);
                         return LDR(cpu, Rd, Rs, Ro);
                     }
                 }
@@ -349,7 +349,7 @@ namespace GBA
                 return cpu;
             }
 
-            private int Read_Register(ref int index)
+            private Int32 Read_Register(ref Int32 index)
             {
                 while (index < Code.Length)
                 {
@@ -363,7 +363,7 @@ namespace GBA
                     else if (Code.Substring(index, 2).Equals("PC", StringComparison.OrdinalIgnoreCase)) { index += 2; return 15; }
                     else index++;
                 }
-                int length = 1;
+                Int32 length = 1;
                 while (index + length < Code.Length)
                 {
                     if (Code[index + length] == ' '
@@ -373,11 +373,11 @@ namespace GBA
                      || Code[index + length] == ']') break;
                     else length++;
                 }
-                string result = Code.Substring(index, length);
+                String result = Code.Substring(index, length);
                 index += length;
-                return int.Parse(result);
+                return Int32.Parse(result);
             }
-            private int Read_Immediate(ref int index)
+            private Int32 Read_Immediate(ref Int32 index)
             {
                 while (index < Code.Length)
                 {
@@ -386,7 +386,7 @@ namespace GBA
                     else index++;
                 }
                 index++;
-                int length = 0;
+                Int32 length = 0;
                 while (index + length < Code.Length)
                 {
                     if (Code[index + length] == ' '
@@ -396,17 +396,17 @@ namespace GBA
                      || Code[index + length] == ']') break;
                     else length++;
                 }
-                string immediate = Code.Substring(index, length);
+                String immediate = Code.Substring(index, length);
                 index += length;
                 if (immediate.StartsWith("0x"))
                 {
-                    return (int)Util.HexToInt(immediate.Substring(2));
+                    return (Int32)Util.HexToInt(immediate.Substring(2));
                 }
-                return int.Parse(immediate);
+                return Int32.Parse(immediate);
             }
-            private int[] Read_RegisterList(ref int index)
+            private Int32[] Read_RegisterList(ref Int32 index)
             {
-                List<int> result = new List<int>();
+                List<Int32> result = new List<Int32>();
                 while (Code[index] != '{') index++;
                 result.Add(Read_Register(ref index));
                 while (Code[index] == ' ') index++;
@@ -416,8 +416,8 @@ namespace GBA
                 {
                     if (Code[index] == '-')
                     {
-                        int list_end = Read_Register(ref index);
-                        for (int i = result[0]; i <= list_end; i++)
+                        Int32 list_end = Read_Register(ref index);
+                        for (Int32 i = result[0]; i <= list_end; i++)
                         {
                             result.Add(i);
                         }
@@ -438,7 +438,7 @@ namespace GBA
                 End: return result.ToArray();
             }
 
-            RegisterSet MOV(RegisterSet cpu, int Rd, byte Imm)
+            RegisterSet MOV(RegisterSet cpu, Int32 Rd, Byte Imm)
             {
                 cpu[Rd] = Imm;
 
@@ -447,7 +447,7 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet MOV(RegisterSet cpu, int Rd, int Rs)
+            RegisterSet MOV(RegisterSet cpu, Int32 Rd, Int32 Rs)
             {
                 cpu[Rd] = cpu[Rs];
 
@@ -458,7 +458,7 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet MVN(RegisterSet cpu, int Rd, int Rs)
+            RegisterSet MVN(RegisterSet cpu, Int32 Rd, Int32 Rs)
             {
                 cpu[Rd] = ~cpu[Rs];
 
@@ -467,7 +467,7 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet AND(RegisterSet cpu, int Rd, int Rs)
+            RegisterSet AND(RegisterSet cpu, Int32 Rd, Int32 Rs)
             {
                 cpu[Rd] &= cpu[Rs];
 
@@ -476,16 +476,16 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet TST(RegisterSet cpu, int Rd, int Rs)
+            RegisterSet TST(RegisterSet cpu, Int32 Rd, Int32 Rs)
             {
-                uint test = (cpu[Rd] & cpu[Rs]);
+                UInt32 test = (cpu[Rd] & cpu[Rs]);
 
                 cpu.N = (test < 0);
                 cpu.Z = (test == 0);
 
                 return cpu;
             }
-            RegisterSet BIC(RegisterSet cpu, int Rd, int Rs)
+            RegisterSet BIC(RegisterSet cpu, Int32 Rd, Int32 Rs)
             {
                 cpu[Rd] &= ~cpu[Rs];
 
@@ -494,7 +494,7 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet ORR(RegisterSet cpu, int Rd, int Rs)
+            RegisterSet ORR(RegisterSet cpu, Int32 Rd, Int32 Rs)
             {
                 cpu[Rd] |= cpu[Rs];
 
@@ -503,7 +503,7 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet EOR(RegisterSet cpu, int Rd, int Rs)
+            RegisterSet EOR(RegisterSet cpu, Int32 Rd, Int32 Rs)
             {
                 cpu[Rd] ^= cpu[Rs];
 
@@ -512,7 +512,7 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet LSL(RegisterSet cpu, int Rd, int Rs, byte Imm)
+            RegisterSet LSL(RegisterSet cpu, Int32 Rd, Int32 Rs, Byte Imm)
             {
                 cpu[Rd] = cpu[Rs] << Imm;
 
@@ -523,10 +523,10 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet LSL(RegisterSet cpu, int Rd, int Rs)
+            RegisterSet LSL(RegisterSet cpu, Int32 Rd, Int32 Rs)
             {
-                int shift = (int)(cpu[Rs] & 0xFF);
-                cpu[Rd] = (uint)((int)cpu[Rd] << shift);
+                Int32 shift = (Int32)(cpu[Rs] & 0xFF);
+                cpu[Rd] = (UInt32)((Int32)cpu[Rd] << shift);
 
                 cpu.N = (cpu[Rd] < 0);
                 cpu.Z = (cpu[Rd] == 0);
@@ -535,7 +535,7 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet LSR(RegisterSet cpu, int Rd, int Rs, byte Imm)
+            RegisterSet LSR(RegisterSet cpu, Int32 Rd, Int32 Rs, Byte Imm)
             {
                 cpu[Rd] = cpu[Rs] >> Imm;
 
@@ -546,9 +546,9 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet LSR(RegisterSet cpu, int Rd, int Rs)
+            RegisterSet LSR(RegisterSet cpu, Int32 Rd, Int32 Rs)
             {
-                int shift = (int)(cpu[Rs] & 0xFF);
+                Int32 shift = (Int32)(cpu[Rs] & 0xFF);
                 cpu[Rd] = cpu[Rd] >> shift;
 
                 cpu.N = (cpu[Rd] < 0);
@@ -558,9 +558,9 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet ASR(RegisterSet cpu, int Rd, int Rs, byte Imm)
+            RegisterSet ASR(RegisterSet cpu, Int32 Rd, Int32 Rs, Byte Imm)
             {
-                cpu[Rd] = (uint)((int)cpu[Rs] >> Imm);
+                cpu[Rd] = (UInt32)((Int32)cpu[Rs] >> Imm);
 
                 cpu.N = (cpu[Rd] < 0);
                 cpu.Z = (cpu[Rd] == 0);
@@ -569,10 +569,10 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet ASR(RegisterSet cpu, int Rd, int Rs)
+            RegisterSet ASR(RegisterSet cpu, Int32 Rd, Int32 Rs)
             {
-                int shift = (int)(cpu[Rs] & 0xFF);
-                cpu[Rd] = (uint)((int)cpu[Rd] >> shift);
+                Int32 shift = (Int32)(cpu[Rs] & 0xFF);
+                cpu[Rd] = (UInt32)((Int32)cpu[Rd] >> shift);
 
                 cpu.N = (cpu[Rd] < 0);
                 cpu.Z = (cpu[Rd] == 0);
@@ -581,9 +581,9 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet ROR(RegisterSet cpu, int Rd, int Rs)
+            RegisterSet ROR(RegisterSet cpu, Int32 Rd, Int32 Rs)
             {
-                int rotate = (int)(cpu[Rs] & 0xFF);
+                Int32 rotate = (Int32)(cpu[Rs] & 0xFF);
                 cpu[Rd] = (cpu[Rd] >> rotate) | (cpu[Rd] << (32 - rotate));
 
                 cpu.N = (cpu[Rd] < 0);
@@ -594,7 +594,7 @@ namespace GBA
                 return cpu;
             }
 
-            RegisterSet ADD(RegisterSet cpu, int Rd, int Rs, byte Imm)
+            RegisterSet ADD(RegisterSet cpu, Int32 Rd, Int32 Rs, Byte Imm)
             {
                 try
                 {
@@ -613,7 +613,7 @@ namespace GBA
                 
                 return cpu;
             }
-            RegisterSet ADD(RegisterSet cpu, int Rd, byte Imm)
+            RegisterSet ADD(RegisterSet cpu, Int32 Rd, Byte Imm)
             {
                 try
                 {
@@ -634,7 +634,7 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet ADD(RegisterSet cpu, int Rd, int Rs, int Rn)
+            RegisterSet ADD(RegisterSet cpu, Int32 Rd, Int32 Rs, Int32 Rn)
             {
                 try
                 {
@@ -653,7 +653,7 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet ADD(RegisterSet cpu, int Rd, int Rs)
+            RegisterSet ADD(RegisterSet cpu, Int32 Rd, Int32 Rs)
             {
                 try
                 {
@@ -674,7 +674,7 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet ADC(RegisterSet cpu, int Rd, int Rs)
+            RegisterSet ADC(RegisterSet cpu, Int32 Rd, Int32 Rs)
             {
                 try
                 {
@@ -696,7 +696,7 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet SUB(RegisterSet cpu, int Rd, int Rs, byte Imm)
+            RegisterSet SUB(RegisterSet cpu, Int32 Rd, Int32 Rs, Byte Imm)
             {
                 try
                 {
@@ -717,7 +717,7 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet SUB(RegisterSet cpu, int Rd, byte Imm)
+            RegisterSet SUB(RegisterSet cpu, Int32 Rd, Byte Imm)
             {
                 try
                 {
@@ -738,7 +738,7 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet SUB(RegisterSet cpu, int Rd, int Rs, int Rn)
+            RegisterSet SUB(RegisterSet cpu, Int32 Rd, Int32 Rs, Int32 Rn)
             {
                 try
                 {
@@ -759,7 +759,7 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet SBC(RegisterSet cpu, int Rd, int Rs)
+            RegisterSet SBC(RegisterSet cpu, Int32 Rd, Int32 Rs)
             {
                 try
                 {
@@ -781,7 +781,7 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet NEG(RegisterSet cpu, int Rd, int Rs)
+            RegisterSet NEG(RegisterSet cpu, Int32 Rd, Int32 Rs)
             {
                 try
                 {
@@ -802,18 +802,18 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet CMP(RegisterSet cpu, int Rd, byte Imm)
+            RegisterSet CMP(RegisterSet cpu, Int32 Rd, Byte Imm)
             {
-                int result;
+                Int32 result;
                 try
                 {
-                    result = checked((int)(cpu[Rd] - Imm));
+                    result = checked((Int32)(cpu[Rd] - Imm));
                     cpu.C = false;
                     cpu.V = false;
                 }
                 catch
                 {
-                    result = (int)((long)cpu[Rd] - (long)Imm);
+                    result = (Int32)((Int64)cpu[Rd] - (Int64)Imm);
                     cpu.C = true;
                     cpu.V = true;
                 }
@@ -822,18 +822,18 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet CMP(RegisterSet cpu, int Rd, int Rs)
+            RegisterSet CMP(RegisterSet cpu, Int32 Rd, Int32 Rs)
             {
-                int result;
+                Int32 result;
                 try
                 {
-                    result = checked ((int)(cpu[Rd] - cpu[Rs]));
+                    result = checked ((Int32)(cpu[Rd] - cpu[Rs]));
                     cpu.C = false;
                     cpu.V = false;
                 }
                 catch
                 {
-                    result = (int)((long)cpu[Rd] - (long)cpu[Rs]);
+                    result = (Int32)((Int64)cpu[Rd] - (Int64)cpu[Rs]);
                     cpu.C = true;
                     cpu.V = true;
                 }
@@ -842,18 +842,18 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet CMN(RegisterSet cpu, int Rd, int Rs)
+            RegisterSet CMN(RegisterSet cpu, Int32 Rd, Int32 Rs)
             {
-                int result;
+                Int32 result;
                 try
                 {
-                    result = checked((int)(cpu[Rd] + cpu[Rs]));
+                    result = checked((Int32)(cpu[Rd] + cpu[Rs]));
                     cpu.C = false;
                     cpu.V = false;
                 }
                 catch
                 {
-                    result = (int)((long)cpu[Rd] + (long)cpu[Rs]);
+                    result = (Int32)((Int64)cpu[Rd] + (Int64)cpu[Rs]);
                     cpu.C = true;
                     cpu.V = true;
                 }
@@ -862,7 +862,7 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet MUL(RegisterSet cpu, int Rd, int Rs)
+            RegisterSet MUL(RegisterSet cpu, Int32 Rd, Int32 Rs)
             {
                 try
                 {
@@ -882,9 +882,9 @@ namespace GBA
                 return cpu;
             }
 
-            RegisterSet B(RegisterSet cpu, Pointer address, string condition)
+            RegisterSet B(RegisterSet cpu, Pointer address, String condition)
             {
-                bool result;
+                Boolean result;
                 switch (condition)
                 {
                     case "eq": result = (cpu.Z == true); break;
@@ -928,7 +928,7 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet BX(RegisterSet cpu, int Rs)
+            RegisterSet BX(RegisterSet cpu, Int32 Rs)
             {
                 cpu.PC = cpu[Rs] & 0xFFFFFFFE;
                 cpu.T = (cpu[Rs] & 0x1) != 0;
@@ -936,17 +936,17 @@ namespace GBA
                 return cpu;
             }
 
-            RegisterSet PUSH(RegisterSet cpu, int[] Rlist)
+            RegisterSet PUSH(RegisterSet cpu, Int32[] Rlist)
             {
-                for (int i = 0; i < Rlist.Length; i++)
+                for (Int32 i = 0; i < Rlist.Length; i++)
                 {
                     cpu.Stack.Insert(0, cpu[Rlist[i]]);
                 }
                 return cpu;
             }
-            RegisterSet POP(RegisterSet cpu, int[] Rlist)
+            RegisterSet POP(RegisterSet cpu, Int32[] Rlist)
             {
-                for (int i = 0; i < Rlist.Length; i++)
+                for (Int32 i = 0; i < Rlist.Length; i++)
                 {
                     cpu[Rlist[i]] = cpu.Stack[0];
                     cpu.Stack.RemoveAt(0);
@@ -954,7 +954,7 @@ namespace GBA
                 return cpu;
             }
 
-            RegisterSet LDR(RegisterSet cpu, int Rd, int Rb, byte Imm)
+            RegisterSet LDR(RegisterSet cpu, Int32 Rd, Int32 Rb, Byte Imm)
             {
                 Pointer address = new Pointer((Rb == 15) ?
                    (cpu[Rb] & 0xFFFFFFFC) + 4 + Imm : // PC-relative ldr has PC+4 rather than PC+2
@@ -964,43 +964,43 @@ namespace GBA
 
                 return cpu;
             }
-            RegisterSet LDR(RegisterSet cpu, int Rd, int Rb, int Ro)
+            RegisterSet LDR(RegisterSet cpu, Int32 Rd, Int32 Rb, Int32 Ro)
             {
                 cpu[Rd] = Util.BytesToUInt32(Core.ReadData(new Pointer(cpu[Rb] + cpu[Ro], false, true), 4), true);
 
                 return cpu;
             }
-            RegisterSet LDRB(RegisterSet cpu, int Rd, int Rb, byte Imm)
+            RegisterSet LDRB(RegisterSet cpu, Int32 Rd, Int32 Rb, Byte Imm)
             {
                 cpu[Rd] = Core.ReadByte(new Pointer(cpu[Rb] + Imm, false, true));
 
                 return cpu;
             }
-            RegisterSet LDRB(RegisterSet cpu, int Rd, int Rb, int Ro)
+            RegisterSet LDRB(RegisterSet cpu, Int32 Rd, Int32 Rb, Int32 Ro)
             {
                 cpu[Rd] = Core.ReadByte(new Pointer(cpu[Rb] + cpu[Ro], false, true));
 
                 return cpu;
             }
-            RegisterSet LDRH(RegisterSet cpu, int Rd, int Rb, byte Imm)
+            RegisterSet LDRH(RegisterSet cpu, Int32 Rd, Int32 Rb, Byte Imm)
             {
-                cpu[Rd] = Util.BytesToUInt16(Core.ReadData(new Pointer(cpu[Rb] + (uint)(Imm << 1), false, true), 2), true);
+                cpu[Rd] = Util.BytesToUInt16(Core.ReadData(new Pointer(cpu[Rb] + (UInt32)(Imm << 1), false, true), 2), true);
 
                 return cpu;
             }
-            RegisterSet LDRH(RegisterSet cpu, int Rd, int Rb, int Ro)
+            RegisterSet LDRH(RegisterSet cpu, Int32 Rd, Int32 Rb, Int32 Ro)
             {
                 cpu[Rd] = Util.BytesToUInt16(Core.ReadData(new Pointer(cpu[Rb] + cpu[Ro], false, true), 2), true);
 
                 return cpu;
             }
-            RegisterSet LDSB(RegisterSet cpu, int Rd, int Rb, int Ro)
+            RegisterSet LDSB(RegisterSet cpu, Int32 Rd, Int32 Rb, Int32 Ro)
             {
                 cpu[Rd] = Core.ReadByte(new Pointer(cpu[Rb] + cpu[Ro], false, true));
 
                 return cpu;
             }
-            RegisterSet LDSH(RegisterSet cpu, int Rd, int Rb, int Ro)
+            RegisterSet LDSH(RegisterSet cpu, Int32 Rd, Int32 Rb, Int32 Ro)
             {
                 cpu[Rd] = Util.BytesToUInt16(Core.ReadData(new Pointer(cpu[Rb] + cpu[Ro], false, true), 2), true);
 
@@ -1011,7 +1011,7 @@ namespace GBA
         /// <summary>
         /// The 16 registers of the GBA processor
         /// </summary>
-        static string[] Registers = new string[16]
+        static String[] Registers = new String[16]
         {
             "r0",  // GPR (Lo) - General Purpose Registers
             "r1",  // GPR (Lo)
@@ -1034,7 +1034,7 @@ namespace GBA
         /// <summary>
         /// These conditions can be added as suffixes to certain instructions
         /// </summary>
-        static string[] Conditions = new string[16]
+        static String[] Conditions = new String[16]
         {
             "eq", // 0:   EQ    Z = 1           EQual (zero) (same)
             "ne", // 1:   NE    Z = 0           Not Equal (nonzero) (not same)
@@ -1054,7 +1054,7 @@ namespace GBA
             "nv"  // F:   NV      -             NeVer(ARMv1, v2 only) (Reserved ARMv3 and up)
         };
 
-        static string[] ALU_Shifts = new string[5]
+        static String[] ALU_Shifts = new String[5]
         {
             "lsl", // Logical Shift Left
             "lsr", // Logical Shift Right
@@ -1063,7 +1063,7 @@ namespace GBA
             "rrx"  // 
         };
 
-        static string[] ARM_AddressingModes = new string[8]
+        static String[] ARM_AddressingModes = new String[8]
         {
             // non-stack
             "da", // decrement after
@@ -1079,11 +1079,11 @@ namespace GBA
 
         struct Opcode
         {
-            public uint BitMask;
-            public uint CodeValue;
-            public string Format;
+            public UInt32 BitMask;
+            public UInt32 CodeValue;
+            public String Format;
 
-            public Opcode(uint bitmask, uint instruction, string formatstring)
+            public Opcode(UInt32 bitmask, UInt32 instruction, String formatstring)
             {
                 this.BitMask = bitmask;
                 this.CodeValue = instruction;
@@ -1167,22 +1167,22 @@ namespace GBA
             new Opcode(0x00000000, 0x00000000, "[ ??? ]")
         };
         
-        public static Instruction[] Disassemble_ARM(byte[] data, Pointer pc)
+        public static Instruction[] Disassemble_ARM(Byte[] data, Pointer pc)
         {
             List<Instruction> result = new List<Instruction>();
 
-            string line;
-            for (uint i = 0; i < data.Length; i += 4)
+            String line;
+            for (UInt32 i = 0; i < data.Length; i += 4)
             {
                 line = "";
                 UInt32 opcode = data.GetUInt32(i, true);
 
-                int index = 0;
+                Int32 index = 0;
                 while ((Opcodes_ARM[index].BitMask & opcode) != Opcodes_ARM[index].CodeValue)
                     index++;
 
-                int j = 0;
-                int[] args;
+                Int32 j = 0;
+                Int32[] args;
                 while (j < Opcodes_ARM[index].Format.Length)
                 {
                     if (Opcodes_ARM[index].Format[j] != '%')
@@ -1217,10 +1217,10 @@ namespace GBA
                             case 'i': // immediate value
                                 j++; args = ReadFormatCodeArgs(Opcodes_ARM[index].Format, ref j);
                                 {
-                                    uint val = (uint)(((opcode >> args[0]) & GetBitMask(args[1])) << args[2]);
+                                    UInt32 val = (UInt32)(((opcode >> args[0]) & GetBitMask(args[1])) << args[2]);
                                     line += "#";
-                                    if (val < 256) line += "0x" + Util.ByteToHex((byte)val);
-                                    else line += "0x" + Util.UInt16ToHex((ushort)val);
+                                    if (val < 256) line += "0x" + Util.ByteToHex((Byte)val);
+                                    else line += "0x" + Util.UInt16ToHex((UInt16)val);
                                 }
                                 break;
 
@@ -1229,8 +1229,8 @@ namespace GBA
                                 {
                                     Pointer address;
                                     address = new Pointer((((pc + i) & 0xFFFFFFFC) + 4));
-                                    address += (int)(((opcode >> args[0]) & GetBitMask(args[1])) << args[2]);
-                                    byte[] pointer = new Byte[4];
+                                    address += (Int32)(((opcode >> args[0]) & GetBitMask(args[1])) << args[2]);
+                                    Byte[] pointer = new Byte[4];
                                     pointer = Core.ReadData(address, 4);
                                     Array.Reverse(pointer);
                                     line += "(=$" + Util.BytesToHex(pointer) + ")";
@@ -1306,7 +1306,7 @@ namespace GBA
                             case 'x': // Psr argument
                                 j++;
                                 {
-                                    bool mode = ((opcode & (0x1 << 22)) != 0);
+                                    Boolean mode = ((opcode & (0x1 << 22)) != 0);
                                     line += (mode) ? "spsr" : "cpsr";
                                 }
                                 break;
@@ -1314,7 +1314,7 @@ namespace GBA
                             case 'X': // Psr argument with field
                                 j++;
                                 {
-                                    bool mode = ((opcode & (0x1 << 22)) != 0);
+                                    Boolean mode = ((opcode & (0x1 << 22)) != 0);
                                     line += (mode) ? "spsr" : "cpsr";
                                     if (((opcode >> 19) & 0x1) == 1) line += "_flg";
                                     if (((opcode >> 16) & 0x1) == 1) line += "_ctl";
@@ -1331,7 +1331,7 @@ namespace GBA
                             case 'q': // comment field for SWI or BKPT
                                 j++;
                                 {
-                                    uint comment = opcode & 0xFFFFFF;
+                                    UInt32 comment = opcode & 0xFFFFFF;
                                     line +=  "#0x" + Util.UInt32ToHex(comment);
                                 }
                                 break;
@@ -1339,20 +1339,20 @@ namespace GBA
                             case 'n': // second operand for ALU operations
                                 j++;
                                 {
-                                    int operand;
-                                    int shift;
+                                    Int32 operand;
+                                    Int32 shift;
                                     if (((opcode >> 25) & 0x1) == 1) // immediate value
                                     {
-                                        operand = (byte)(opcode & 0xFF);
-                                        shift = (int)((opcode & 0xF00) >> 7);
-                                        line += "#0x" + Util.UInt32ToHex((uint)(operand << shift));
+                                        operand = (Byte)(opcode & 0xFF);
+                                        shift = (Int32)((opcode & 0xF00) >> 7);
+                                        line += "#0x" + Util.UInt32ToHex((UInt32)(operand << shift));
                                     }
                                     else // register as 2nd operand
                                     {
-                                        uint reg = (opcode & 0xF);
+                                        UInt32 reg = (opcode & 0xF);
                                         line += Registers[reg];
 
-                                        shift = (((int)opcode >> 5) & 0x3);
+                                        shift = (((Int32)opcode >> 5) & 0x3);
                                         line += ',' + ALU_Shifts[shift] + ' ';
 
                                         if (((opcode >> 4) & 0x1) == 1) // shift by register
@@ -1362,9 +1362,9 @@ namespace GBA
                                         }
                                         else
                                         {
-                                            operand = (byte)(opcode & 0xFF);
-                                            shift = (int)((opcode & 0xF80) >> 7);
-                                            line += "#0x" + Util.UInt32ToHex((uint)(operand << shift));
+                                            operand = (Byte)(opcode & 0xFF);
+                                            shift = (Int32)((opcode & 0xF80) >> 7);
+                                            line += "#0x" + Util.UInt32ToHex((UInt32)(operand << shift));
                                         }
                                     }
                                 }
@@ -1373,13 +1373,13 @@ namespace GBA
                             case 'a': // Pre/Post-indexed address for LDR and STR
                                 j++;
                                 {
-                                    bool add = (opcode & (0x1 << 23)) != 0;
-                                    bool pre_indexed = (opcode & (0x1 << 24)) != 0;
-                                    bool immediate = (opcode & (0x1 << 25)) != 0;
-                                    uint reg = ((opcode >> 16) & 0xF);
+                                    Boolean add = (opcode & (0x1 << 23)) != 0;
+                                    Boolean pre_indexed = (opcode & (0x1 << 24)) != 0;
+                                    Boolean immediate = (opcode & (0x1 << 25)) != 0;
+                                    UInt32 reg = ((opcode >> 16) & 0xF);
                                     if (immediate)
                                     {
-                                        ushort immed = (ushort)(opcode & 0xFFF);
+                                        UInt16 immed = (UInt16)(opcode & 0xFFF);
                                         if (immed == 0)
                                         {
                                             line += '[' + Registers[reg] + ']';
@@ -1399,9 +1399,9 @@ namespace GBA
                                     }
                                     else
                                     {
-                                        byte shift = (byte)((opcode >> 7) & 0x1F);
-                                        uint shift_type = ((opcode >> 5) & 0x3);
-                                        uint offset_reg = (opcode & 0xF);
+                                        Byte shift = (Byte)((opcode >> 7) & 0x1F);
+                                        UInt32 shift_type = ((opcode >> 5) & 0x3);
+                                        UInt32 offset_reg = (opcode & 0xF);
                                         if (pre_indexed)
                                         {
                                             line += '[' + Registers[reg] + ", " + (add ? "+" : "-") + Registers[offset_reg];
@@ -1427,13 +1427,13 @@ namespace GBA
                             case 'A': // Pre/Post-indexed address for LDRH/SH/D and STRH/SH/D
                                 j++;
                                 {
-                                    bool add = (opcode & (0x1 << 23)) != 0;
-                                    bool pre_indexed = (opcode & (0x1 << 24)) != 0;
-                                    bool immediate = (opcode & (0x1 << 25)) != 0;
-                                    uint reg = ((opcode >> 16) & 0xF);
+                                    Boolean add = (opcode & (0x1 << 23)) != 0;
+                                    Boolean pre_indexed = (opcode & (0x1 << 24)) != 0;
+                                    Boolean immediate = (opcode & (0x1 << 25)) != 0;
+                                    UInt32 reg = ((opcode >> 16) & 0xF);
                                     if (immediate)
                                     {
-                                        ushort immed = (ushort)((opcode & 0xF) | ((opcode >> 4) & 0xF0));
+                                        UInt16 immed = (UInt16)((opcode & 0xF) | ((opcode >> 4) & 0xF0));
                                         if (immed == 0)
                                         {
                                             line += '[' + Registers[reg] + ']';
@@ -1453,9 +1453,9 @@ namespace GBA
                                     }
                                     else
                                     {
-                                        byte shift = (byte)((opcode >> 7) & 0x1F);
-                                        uint shift_type = ((opcode >> 5) & 0x3);
-                                        uint offset_reg = (opcode & 0xF);
+                                        Byte shift = (Byte)((opcode >> 7) & 0x1F);
+                                        UInt32 shift_type = ((opcode >> 5) & 0x3);
+                                        UInt32 offset_reg = (opcode & 0xF);
                                         if (pre_indexed)
                                         {
                                             line += '[' + Registers[reg] + ", " + (add ? "+" : "-") + Registers[offset_reg];
@@ -1484,10 +1484,10 @@ namespace GBA
                             case 'l': // register list
                                 j++;
                                 {
-                                    int amount = 0;
-                                    int lastFirstReg = 0;
-                                    bool hasRegs = false;
-                                    for (int u = 0; u < 8; u++)
+                                    Int32 amount = 0;
+                                    Int32 lastFirstReg = 0;
+                                    Boolean hasRegs = false;
+                                    for (Int32 u = 0; u < 8; u++)
                                     {
                                         if ((opcode & (1 << u)) != 0)
                                         {
@@ -1649,22 +1649,22 @@ namespace GBA
             new Opcode(0x0000, 0x0000, "???")
         };
 
-        public static Instruction[] Disassemble_Thumb(byte[] data, Pointer pc)
+        public static Instruction[] Disassemble_Thumb(Byte[] data, Pointer pc)
         {
             List<Instruction> result = new List<Instruction>();
-            
-            string line;
-            for (uint i = 0; i < data.Length; i += 2)
+
+            String line;
+            for (UInt32 i = 0; i < data.Length; i += 2)
             {
                 line = "";
                 UInt16 opcode = data.GetUInt16(i, true);
 
-                int index = 0;
+                Int32 index = 0;
                 while ((Opcodes_Thumb[index].BitMask & opcode) != Opcodes_Thumb[index].CodeValue)
                     index++;
 
-                int j = 0;
-                int[] args;
+                Int32 j = 0;
+                Int32[] args;
                 while (j < Opcodes_Thumb[index].Format.Length)
                 {
                     if (Opcodes_Thumb[index].Format[j] != '%')
@@ -1687,7 +1687,7 @@ namespace GBA
                             case 'h': // hi register
                                 j++; args = ReadFormatCodeArgs(Opcodes_Thumb[index].Format, ref j);
                                 {
-                                    int reg = (opcode >> args[0]) & 7;
+                                    Int32 reg = (opcode >> args[0]) & 7;
                                     if ((opcode & (0x1 << args[1])) != 0)
                                         reg += 8;
                                     line += Registers[reg];
@@ -1719,7 +1719,7 @@ namespace GBA
                                     Pointer address;
                                     address = new Pointer((((pc + i) & 0xFFFFFFFC) + 4));
                                     address += ((opcode & 0xFF) << 2);
-                                    byte[] pointer = new Byte[4];
+                                    Byte[] pointer = new Byte[4];
                                     pointer = Core.ReadData(address, 4);
                                     Array.Reverse(pointer);
                                     line += "(=$" + Util.BytesToHex(pointer) + ")";
@@ -1731,10 +1731,10 @@ namespace GBA
                             case 'i': // immediate value
                                 j++; args = ReadFormatCodeArgs(Opcodes_Thumb[index].Format, ref j);
                                 {
-                                    int val = ((opcode >> args[0]) & GetBitMask(args[1])) << args[2];
+                                    Int32 val = ((opcode >> args[0]) & GetBitMask(args[1])) << args[2];
                                     line += "#";
-                                    if (val < 256) line += "0x" + Util.ByteToHex((byte)val);
-                                    else line += "0x" + Util.UInt16ToHex((ushort)val);
+                                    if (val < 256) line += "0x" + Util.ByteToHex((Byte)val);
+                                    else line += "0x" + Util.UInt16ToHex((UInt16)val);
                                 }
                                 break;
 
@@ -1743,11 +1743,11 @@ namespace GBA
                             case 'o': // signed offset
                                 j++; args = ReadFormatCodeArgs(Opcodes_Thumb[index].Format, ref j);
                                 {
-                                    int offset = (opcode >> args[0]) & GetBitMask(args[1]);
+                                    Int32 offset = (opcode >> args[0]) & GetBitMask(args[1]);
                                     if ((offset & (0x1 << (args[1] - 1))) != 0)
-                                        offset = (int)((long)offset - 0x80000000);
+                                        offset = (Int32)((Int64)offset - 0x80000000);
                                     offset <<= args[2];
-                                    Pointer address = new Pointer((uint)(pc + i - (i & 1) + (offset + 4)));
+                                    Pointer address = new Pointer((UInt32)(pc + i - (i & 1) + (offset + 4)));
                                     line += '$' + Util.BytesToHex(address.ToBytes(false));
                                 }
                                 break;
@@ -1761,11 +1761,11 @@ namespace GBA
                                     catch { opcode2 = Util.BytesToUInt16(Core.ReadData(pc + i, 2), true); }
                                     if ((opcode2 & 0xF800) == 0xE800) line += 'x'; // switch to ARM
                                     line += ' ';
-                                    int branch = opcode & 0x7FF;
+                                    Int32 branch = opcode & 0x7FF;
                                     if ((branch & 0x400) != 0) // is negative
                                         branch |= 0xFFF800;
                                     branch = (branch << 12) | ((opcode2 & 0x7FF) << 1);
-                                    Pointer address = new Pointer((uint)((pc + i) + 2 + branch));
+                                    Pointer address = new Pointer((UInt32)((pc + i) + 2 + branch));
                                     line += '$' + Util.BytesToHex(address.ToBytes(false));
                                 }
                                 break;
@@ -1775,7 +1775,7 @@ namespace GBA
                                 {
                                     i += 2;
                                     UInt16 opcode2 = data.GetUInt16(i, true);
-                                    Pointer address = new Pointer((uint)((pc + i) + 2 + ((opcode2 & 0x7FF) << 1)));
+                                    Pointer address = new Pointer((UInt32)((pc + i) + 2 + ((opcode2 & 0x7FF) << 1)));
                                     line += '$' + Util.BytesToHex(address.ToBytes(false));
                                 }
                                 break;
@@ -1784,10 +1784,10 @@ namespace GBA
                             case 'l': // register list
                                 j++;
                                 {
-                                    int amount = 0;
-                                    int lastFirstReg = 0;
-                                    bool hasRegs = false;
-                                    for (int u = 0; u < 8; u++)
+                                    Int32 amount = 0;
+                                    Int32 lastFirstReg = 0;
+                                    Boolean hasRegs = false;
+                                    for (Int32 u = 0; u < 8; u++)
                                     {
                                         if ((opcode & (1 << u)) != 0)
                                         {
@@ -1842,10 +1842,10 @@ namespace GBA
                     }
                 }
                 Pointer pc_address = new Pointer(pc + i);
-                byte[] asm_data;
+                Byte[] asm_data;
                 if (line.StartsWith("bl"))
                 {
-                    UInt32 long_opcode = (uint)((opcode << 16) | data.GetUInt16(i, true));
+                    UInt32 long_opcode = (UInt32)((opcode << 16) | data.GetUInt16(i, true));
                     asm_data = Util.UInt32ToBytes(long_opcode, false);
                     pc_address -= 2;
                 }
@@ -1860,14 +1860,14 @@ namespace GBA
 
 
 
-        static int[] ReadFormatCodeArgs(string formatCode, ref int index)
+        static Int32[] ReadFormatCodeArgs(String formatCode, ref Int32 index)
         {
-            List<int> result = new List<int>();
+            List<Int32> result = new List<Int32>();
             while (formatCode[index] != '(')
                 index++;
 
             index++;
-            int length = 0; 
+            Int32 length = 0; 
             while (index + length < formatCode.Length)
             {
                 if (formatCode[index + length] == ')')
@@ -1889,10 +1889,10 @@ namespace GBA
             return result.ToArray();
         }
 
-        static int GetBitMask(int bitAmount)
+        static Int32 GetBitMask(Int32 bitAmount)
         {
-            int result = 0;
-            for (int i = 0; i < bitAmount; i++)
+            Int32 result = 0;
+            for (Int32 i = 0; i < bitAmount; i++)
             {
                 result <<= 1;
                 result += 1;
@@ -1900,12 +1900,12 @@ namespace GBA
             return result;
         }
 
-        public static string GetInstructionsRegex_Thumb()
+        public static String GetInstructionsRegex_Thumb()
         {
-            string result = null;
-            string instruction;
-            int length;
-            int index;
+            String result = null;
+            String instruction;
+            Int32 length;
+            Int32 index;
             foreach (Opcode opcode in Opcodes_Thumb)
             {
                 if (result == null)
@@ -1919,12 +1919,12 @@ namespace GBA
                 index = instruction.IndexOf('%');
                 if (index >= 0)
                 {
-                    char format_char = instruction[index + 1];
+                    Char format_char = instruction[index + 1];
                     instruction = instruction.Remove(index, 2);
                     switch (format_char)
                     {
                         case 'c':
-                            foreach (string flag in Conditions)
+                            foreach (String flag in Conditions)
                             {
                                 result += instruction.Insert(index, flag) + "|";
                             }

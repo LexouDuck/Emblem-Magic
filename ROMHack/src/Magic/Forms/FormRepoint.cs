@@ -10,9 +10,9 @@ namespace Magic
     {
         public PointerBox[] Boxes { get; }
 
-        public uint[] Lengths { get; }
+        public UInt32[] Lengths { get; }
 
-        public FormRepoint(string caption, string message, Tuple<string, Pointer, int>[] pointers, int forceWidth = 0)
+        public FormRepoint(String caption, String message, Tuple<String, Pointer, Int32>[] pointers, Int32 forceWidth = 0)
         {
             InitializeComponent();
 
@@ -23,12 +23,12 @@ namespace Magic
             BoxLayout.Height = Math.Min(this.Height - 170, pointers.Length * 28);
             BoxLayout.RowCount = pointers.Length;
 
-            Lengths = new uint[pointers.Length];
+            Lengths = new UInt32[pointers.Length];
             Boxes = new PointerBox[pointers.Length];
             Label label;
-            for (int i = 0; i < pointers.Length; i++)
+            for (Int32 i = 0; i < pointers.Length; i++)
             {
-                Lengths[i] = (uint)pointers[i].Item3;
+                Lengths[i] = (UInt32)pointers[i].Item3;
 
                 label = new Label();
                 label.Anchor = AnchorStyles.Left | AnchorStyles.Right;
@@ -72,11 +72,11 @@ namespace Magic
             Cancel.DialogResult = DialogResult.Cancel;
         }
 
-        private void AutoSequence_Click(object sender, EventArgs e)
+        private void AutoSequence_Click(Object sender, EventArgs e)
         {
-            for (int i = 1; i < Boxes.Length; i++)
+            for (Int32 i = 1; i < Boxes.Length; i++)
             {
-                Boxes[i].Value = Boxes[i - 1].Value + (int)Lengths[i - 1];
+                Boxes[i].Value = Boxes[i - 1].Value + (Int32)Lengths[i - 1];
 
                 Boxes[i].Value += (4 - Boxes[i].Value % 4) % 4;
             }

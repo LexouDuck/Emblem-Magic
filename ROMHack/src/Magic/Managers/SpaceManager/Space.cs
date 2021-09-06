@@ -28,7 +28,7 @@ namespace Magic
         /// <summary>
         /// Gets the length of the area of marked space.
         /// </summary>
-        public int Length
+        public Int32 Length
         {
             get
             {
@@ -38,18 +38,18 @@ namespace Magic
 
 
 
-        public Space(Mark mark, int start, int end)
+        public Space(Mark mark, Int32 start, Int32 end)
         {
             if (end < start) throw new Exception("space cannot be negative.");
             
             Marked = mark;
-            Address = new Pointer((uint)start);
-            EndByte = new Pointer((uint)end);
+            Address = new Pointer((UInt32)start);
+            EndByte = new Pointer((UInt32)end);
         }
         /// <summary>
         /// Constructor used for loading from file.
         /// </summary>
-        public Space(Mark mark, uint start, uint end)
+        public Space(Mark mark, UInt32 start, UInt32 end)
         {
             if (end < start) throw new Exception("space cannot be negative.");
 

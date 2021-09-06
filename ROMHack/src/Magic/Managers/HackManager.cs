@@ -14,11 +14,11 @@ namespace Magic
         public const Int32 TableTotal = 5;
         public const Int32 TableLength = 12 + TableTotal * 4;
 
-        public const int LENGTH_Write_Author = 16;
-        public const int LENGTH_Write_TimeOf = 8;
-        public const int LENGTH_Write_Phrase = 64;
-        public const int LENGTH_Write_Offset = 4;
-        public static int LENGTH_Write
+        public const Int32 LENGTH_Write_Author = 16;
+        public const Int32 LENGTH_Write_TimeOf = 8;
+        public const Int32 LENGTH_Write_Phrase = 64;
+        public const Int32 LENGTH_Write_Offset = 4;
+        public static Int32 LENGTH_Write
         {
             get
             {
@@ -29,7 +29,7 @@ namespace Magic
             }
         }
 
-        public const int LENGTH_Point_Name = 32;
+        public const Int32 LENGTH_Point_Name = 32;
 
         private Object Locked = new Object();
 
@@ -44,7 +44,7 @@ namespace Magic
         {
             foreach (Write write in Write.History)
             {
-                for (int i = 0; i < write.Data.Length; i++)
+                for (Int32 i = 0; i < write.Data.Length; i++)
                 {
                     if (Core.ReadByte(write.Address + i) != write.Data[i])
                     {
@@ -100,7 +100,7 @@ namespace Magic
         /// <summary>
         /// Opens a file from the system and writes its contents onto 'FileData', then calls LoadData()
         /// </summary>
-        public void OpenFile(string path)
+        public void OpenFile(String path)
         {
             if (path == null || path.Length == 0)
                 throw new Exception("The module file path given is invalid.");
@@ -121,7 +121,7 @@ namespace Magic
         /// <summary>
         /// Makes the byte array of HackData, then overwrites or creates an FEH file at the given path.
         /// </summary>
-        public void SaveFile(string path)
+        public void SaveFile(String path)
         {
             lock (Locked)
             {
@@ -142,7 +142,7 @@ namespace Magic
         /// </summary>
         public void LoadData()
         {
-            uint parse = 0;
+            UInt32 parse = 0;
             HackData table = new HackData(FileData);
             parse += TableLength;
             // the first 2 bytes are always "FE" in ascii byte encoding - they serve as an indicator that the file is valid
@@ -150,17 +150,17 @@ namespace Magic
             // byte 4 is the version of the associated ROM - "E" for PAL, "U" for NTSC, "J" for japanese
             App.Core_CheckROMIdentifier(table.TableString);
 
-            uint length = 0;
-            byte[] buffer;
+            UInt32 length = 0;
+            Byte[] buffer;
             HackData subtable;
             List<Write>   write = new List<Write>();
             List<Repoint> point = new List<Repoint>();
             List<Mark>    marks = new List<Mark>();
             List<Space>   space = new List<Space>();
-            for (int i = 0; i < TableTotal; i++)
+            for (Int32 i = 0; i < TableTotal; i++)
             {
                 length = table.EntryLength[i];
-                buffer = new byte[length];
+                buffer = new Byte[length];
                 Array.Copy(FileData, parse, buffer, 0, length);
 
                 subtable = new HackData(buffer);
@@ -177,36 +177,36 @@ namespace Magic
         }
         void LoadData_Properties(HackData table)
         {
-            HackName        = table.Entries[0].GetASCII(0, (int)table.EntryLength[0]);
-            HackAuthor      = table.Entries[1].GetASCII(0, (int)table.EntryLength[1]);
-            HackDescription = table.Entries[2].GetASCII(0, (int)table.EntryLength[2]);
+            HackName        = table.Entries[0].GetASCII(0, (Int32)table.EntryLength[0]);
+            HackAuthor      = table.Entries[1].GetASCII(0, (Int32)table.EntryLength[1]);
+            HackDescription = table.Entries[2].GetASCII(0, (Int32)table.EntryLength[2]);
         }
         void LoadData_Write(HackData table)
         {
             List<Write> result = new List<Write>();
-            const uint index_Author = 0;
-            const uint index_TimeOf = LENGTH_Write_Author;
-            const uint index_Phrase = index_TimeOf + LENGTH_Write_TimeOf;
-            const uint index_Offset = index_Phrase + LENGTH_Write_Phrase;
-            const uint index_Data = index_Offset + LENGTH_Write_Offset;
-            for (int i = 0; i < table.EntryAmount; i++)
+            const UInt32 index_Author = 0;
+            const UInt32 index_TimeOf = LENGTH_Write_Author;
+            const UInt32 index_Phrase = index_TimeOf + LENGTH_Write_TimeOf;
+            const UInt32 index_Offset = index_Phrase + LENGTH_Write_Phrase;
+            const UInt32 index_Data = index_Offset + LENGTH_Write_Offset;
+            for (Int32 i = 0; i < table.EntryAmount; i++)
             {
                 result.Add(new Write(
                     table.Entries[i].GetASCII(index_Author, LENGTH_Write_Author).TrimEnd(' '),   // author of write
                     table.Entries[i].GetUInt64(index_TimeOf, false),                             // time of write
                     table.Entries[i].GetASCII(index_Phrase, LENGTH_Write_Phrase).TrimEnd(' '), // description
                     table.Entries[i].GetUInt32(index_Offset, false),                           // offset of write
-                    table.Entries[i].GetBytes(index_Data, (int)table.EntryLength[i] - LENGTH_Write))); // data to write
+                    table.Entries[i].GetBytes(index_Data, (Int32)table.EntryLength[i] - LENGTH_Write))); // data to write
             }
             Write.History = result;
         }
         void LoadData_Point(HackData table)
         {
             List<Repoint> result = new List<Repoint>();
-            const uint index_Name = 0;
-            const uint index_Default = LENGTH_Point_Name;
-            const uint index_Current = index_Default + 4;
-            for (int i = 0; i < table.EntryAmount; i++)
+            const UInt32 index_Name = 0;
+            const UInt32 index_Default = LENGTH_Point_Name;
+            const UInt32 index_Current = index_Default + 4;
+            for (Int32 i = 0; i < table.EntryAmount; i++)
             {
                 result.Add(new Repoint(
                     table.Entries[i].GetASCII(index_Name, LENGTH_Point_Name).TrimEnd(' '), // asset name
@@ -218,7 +218,7 @@ namespace Magic
         void LoadData_Marks(HackData table)
         {
             List<Mark> result = new List<Mark>();
-            for (int i = 0; i < table.EntryAmount; i++)
+            for (Int32 i = 0; i < table.EntryAmount; i++)
             {
                 result.Add(new Mark(
                     table.Entries[i].GetASCII(0, 4),        // marking type identifier
@@ -230,7 +230,7 @@ namespace Magic
         void LoadData_Space(HackData table)
         {
             List<Space> result = new List<Space>();
-            for (int i = 0; i < table.EntryAmount; i++)
+            for (Int32 i = 0; i < table.EntryAmount; i++)
             {
                 result.Add(new Space(Marks.Get(
                    table.Entries[i].GetASCII(0, 4)),       // marking type identifier
@@ -244,9 +244,9 @@ namespace Magic
         /// <summary>
         /// Returns a byte array in FEH format of the current hack
         /// </summary>
-        public byte[] MakeData()
+        public Byte[] MakeData()
         {
-            HackData tableProperties = new HackData("_FEH", new byte[3][]
+            HackData tableProperties = new HackData("_FEH", new Byte[3][]
             {
                 ByteArray.Make_ASCII(HackName),
                 ByteArray.Make_ASCII(HackAuthor),
@@ -258,34 +258,34 @@ namespace Magic
             HackData tableSpace = MakeData_Space();
 
             HackData table;
-            byte[][] table_data = new byte[TableTotal][];
+            Byte[][] table_data = new Byte[TableTotal][];
             table_data[0] = tableProperties.ToBytes();
             table_data[1] = tableWrite.ToBytes();
             table_data[2] = tablePoint.ToBytes();
             table_data[3] = tableMarks.ToBytes();
             table_data[4] = tableSpace.ToBytes();
-            string game_identifier = Core.CurrentROM.GetIdentifier();
+            String game_identifier = Core.CurrentROM.GetIdentifier();
             table = new HackData(game_identifier, table_data);
 
             return table.ToBytes();
         }
         HackData MakeData_Write()
         {
-            byte[][] writes = new byte[Write.History.Count][];
+            Byte[][] writes = new Byte[Write.History.Count][];
 
-            byte[] entry;
-            int entry_length;
+            Byte[] entry;
+            Int32 entry_length;
 
-            byte[] write_author;    // 16 for editor used,
-            byte[] write_timeof;   // 8 for time (year 2038..?)
-            byte[] write_phrase;  // 64 for description phrase
-            byte[] write_offset; // 4 for offset of write
-            byte[] write_data;  // and then a variable length of data written
-            int index = 0;
-            for (int i = 0; i < writes.Length; i++)
+            Byte[] write_author;    // 16 for editor used,
+            Byte[] write_timeof;   // 8 for time (year 2038..?)
+            Byte[] write_phrase;  // 64 for description phrase
+            Byte[] write_offset; // 4 for offset of write
+            Byte[] write_data;  // and then a variable length of data written
+            Int32 index = 0;
+            for (Int32 i = 0; i < writes.Length; i++)
             {
-                entry_length = (int)LENGTH_Write + Write.History[i].Data.Length;
-                entry = new byte[entry_length];
+                entry_length = (Int32)LENGTH_Write + Write.History[i].Data.Length;
+                entry = new Byte[entry_length];
 
                 write_author = ByteArray.Make_ASCII(Write.History[i].GetEditorString());
                 write_timeof = ByteArray.Make_Int64((UInt64)Write.History[i].Time.ToBinary());
@@ -306,17 +306,17 @@ namespace Magic
         }
         HackData MakeData_Point()
         {
-            byte[][] repoints = new byte[Point.Repoints.Count][];
-            byte[] entry;
+            Byte[][] repoints = new Byte[Point.Repoints.Count][];
+            Byte[] entry;
 
-            int entry_length = 40;
-            byte[] asset_name;    // 32 bytes for asset name
-            byte[] asset_default; // 4 bytes for default pointer for this asset
-            byte[] asset_current; // 4 bytes for the repointed address for this asset
+            Int32 entry_length = 40;
+            Byte[] asset_name;    // 32 bytes for asset name
+            Byte[] asset_default; // 4 bytes for default pointer for this asset
+            Byte[] asset_current; // 4 bytes for the repointed address for this asset
 
-            for (int i = 0; i < repoints.Length; i++)
+            for (Int32 i = 0; i < repoints.Length; i++)
             {
-                entry = new byte[entry_length];
+                entry = new Byte[entry_length];
 
                 asset_name = ByteArray.Make_ASCII(Point.Repoints[i].AssetName.PadRight(LENGTH_Point_Name));
                 asset_default = ByteArray.Make_Int32(Point.Repoints[i].DefaultAddress);
@@ -333,17 +333,17 @@ namespace Magic
         }
         HackData MakeData_Marks()
         {
-            byte[][] marks = new byte[Marks.MarkingTypes.Count][];
-            byte[] entry;
+            Byte[][] marks = new Byte[Marks.MarkingTypes.Count][];
+            Byte[] entry;
 
-            int entry_length = 12;
-            byte[] mark_name;  // 4 bytes for marking name (FREE/USED/etc)
-            byte[] mark_layer; // 4 bytes for marking type layer number
-            byte[] mark_color; // 4 bytes for marking color
+            Int32 entry_length = 12;
+            Byte[] mark_name;  // 4 bytes for marking name (FREE/USED/etc)
+            Byte[] mark_layer; // 4 bytes for marking type layer number
+            Byte[] mark_color; // 4 bytes for marking color
 
-            for (int i = 0; i < marks.Length; i++)
+            for (Int32 i = 0; i < marks.Length; i++)
             {
-                entry = new byte[entry_length];
+                entry = new Byte[entry_length];
 
                 mark_name  = ByteArray.Make_ASCII(Marks.MarkingTypes[i].Name);
                 mark_layer = ByteArray.Make_Int32((UInt32)Marks.MarkingTypes[i].Layer);
@@ -360,18 +360,18 @@ namespace Magic
         }
         HackData MakeData_Space()
         {
-            byte[][] spaces = new byte[Space.MarkedRanges.Count][];
+            Byte[][] spaces = new Byte[Space.MarkedRanges.Count][];
 
-            byte[] entry;
-            int entry_length = 16;
+            Byte[] entry;
+            Int32 entry_length = 16;
 
-            byte[] space_marked;  // 4 bytes for marking name (FREE/USED/etc)
-            byte[] space_address; // 4 bytes for start offset
-            byte[] space_endbyte; // 4 bytes for end offset
+            Byte[] space_marked;  // 4 bytes for marking name (FREE/USED/etc)
+            Byte[] space_address; // 4 bytes for start offset
+            Byte[] space_endbyte; // 4 bytes for end offset
 
-            for (int i = 0; i < spaces.Length; i++)
+            for (Int32 i = 0; i < spaces.Length; i++)
             {
-                entry = new byte[entry_length];
+                entry = new Byte[entry_length];
 
                 space_marked  = ByteArray.Make_ASCII(Space.MarkedRanges[i].Marked.Name);
                 space_address = ByteArray.Make_Int32(Space.MarkedRanges[i].Address);

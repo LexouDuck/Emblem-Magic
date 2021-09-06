@@ -22,13 +22,13 @@ namespace GBA
     /// </summary>
     public struct Instrument
     {
-        public const int LENGTH = 12;
+        public const Int32 LENGTH = 12;
 
-        byte[] Data;
+        Byte[] Data;
 
 
 
-        public Instrument(byte[] data)
+        public Instrument(Byte[] data)
         {
             if (data.Length != LENGTH)
                 throw new Exception("Data given has invalid length.");
@@ -38,7 +38,7 @@ namespace GBA
 
 
 
-        public byte[] ToBytes()
+        public Byte[] ToBytes()
         {
             return Data;
         }
@@ -46,7 +46,7 @@ namespace GBA
         /// <summary>
         /// Returns true if the instrument has bytes which indicate it is not used
         /// </summary>
-        public bool IsUnused()
+        public Boolean IsUnused()
         {
             return (
                 Data[0x0] == 0x01 &&
@@ -78,7 +78,7 @@ namespace GBA
         /// <summary>
         /// Which note this instrument plays for (only used as percussion sub-instrument)
         /// </summary>
-        public byte BaseKey
+        public Byte BaseKey
         {
             get
             {
@@ -88,7 +88,7 @@ namespace GBA
         /// <summary>
         /// This byte is apparently always unused
         /// </summary>
-        public byte Unused
+        public Byte Unused
         {
             get
             {
@@ -98,7 +98,7 @@ namespace GBA
         /// <summary>
         /// The left/right sound panning (only used as percussion sub-instrument and if bit 7 of the value is set)
         /// </summary>
-        public byte Panning
+        public Byte Panning
         {
             get
             {
@@ -132,7 +132,7 @@ namespace GBA
         /// if Type=PSGchannel, is the wave's duty cycle (0=12,5%, 1=25%, 2=50%, 3=75%).
         /// if Type=Noise, is noise's period (0 = normal (32767 samples), 1 = metallic (127 samples)).
         /// </summary>
-        public byte DutyPeriod
+        public Byte DutyPeriod
         {
             get
             {
@@ -145,7 +145,7 @@ namespace GBA
         /// if Type=PSGchannel (0x00 = no attack, 0x07 = longest attack)
         /// else (0x01 = longest attack, 0xFF = no attack)
         /// </summary>
-        public byte Attack
+        public Byte Attack
         {
             get
             {
@@ -157,7 +157,7 @@ namespace GBA
         /// if Type=PSGchannel (0x00 = no decay, 0x01 = fastest decay, 0x07 = slowest decay)
         /// else (0x00 = no decay, 0xFF = longest decay)
         /// </summary>
-        public byte Decay
+        public Byte Decay
         {
             get
             {
@@ -169,7 +169,7 @@ namespace GBA
         /// if Type=PSGchannel (0x00 = sustain to silence, 0x0F = sustain to full volume)
         /// else (0x00 = sustain to silence, 0xFF = sustain to full volume)
         /// </summary>
-        public byte Sustain
+        public Byte Sustain
         {
             get
             {
@@ -181,7 +181,7 @@ namespace GBA
         /// if Type=PSGchannel (0x00 = no release, 0x07 = slowest release)
         /// else (0x00 = instantaneous release, 0xFF = longest release)
         /// </summary>
-        public byte Release
+        public Byte Release
         {
             get
             {

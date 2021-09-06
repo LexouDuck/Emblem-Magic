@@ -13,7 +13,7 @@ namespace Magic
             Cancel_Button.DialogResult = DialogResult.Cancel;
         }
 
-        public string AssetName
+        public System.String AssetName
         {
             get
             {

@@ -7,7 +7,7 @@ namespace Magic.Components
     class ControlPainting
     {
 
-        private const int WM_SETREDRAW = 11;
+        private const Int32 WM_SETREDRAW = 11;
 
         public static void SuspendPainting(Control control)
         {

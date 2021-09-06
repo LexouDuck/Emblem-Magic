@@ -15,7 +15,7 @@ namespace Magic.Components
         {
             get
             {
-                return new Pointer((uint)EntryValueBox.Value);
+                return new Pointer((System.UInt32)EntryValueBox.Value);
             }
             set
             {

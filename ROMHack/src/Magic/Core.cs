@@ -33,7 +33,7 @@ namespace Magic
         /// <summary>
         /// Gets the identifier for the current type of ROM open: "FE6J", "FE7U", etc
         /// </summary>
-        public static string ROMIdentifier
+        public static String ROMIdentifier
         {
             get { return App.CurrentROM.GetIdentifier(); }
         }
@@ -65,11 +65,11 @@ namespace Magic
         /// <summary>
         /// Gets the full path (and filename) of the corresponding clean ROM
         /// </summary>
-        public static string Path_CleanROM
+        public static String Path_CleanROM
         {
             get
             {
-                string path = Settings.Default.PathCleanROMs + "\\" + ROMIdentifier + ".gba";
+                String path = Settings.Default.PathCleanROMs + "\\" + ROMIdentifier + ".gba";
                 Try:
                 if (File.Exists(path))
                     return path;
@@ -86,7 +86,7 @@ namespace Magic
         /// <summary>
         /// Gets the full path to the Arrays folder for the ROM, or a custom folder is the option is set
         /// </summary>
-        public static string Path_Arrays
+        public static String Path_Arrays
         {
             get
             {
@@ -97,7 +97,7 @@ namespace Magic
         /// <summary>
         /// Gets the full path to the Arrays folder for the ROM, or a custom folder is the option is set
         /// </summary>
-        public static string Path_Structs
+        public static String Path_Structs
         {
             get
             {
@@ -108,7 +108,7 @@ namespace Magic
         /// <summary>
         /// Gets the full path to the Modules folder appropriate for the current ROM
         /// </summary>
-        public static string Path_Modules
+        public static String Path_Modules
         {
             get
             {
@@ -118,7 +118,7 @@ namespace Magic
         /// <summary>
         /// Gets the full path to the Patches folder for the program
         /// </summary>
-        public static string Path_Patches
+        public static String Path_Patches
         {
             get
             {
@@ -128,7 +128,7 @@ namespace Magic
 
         public static void SetDefaultPaths()
         {
-            string path = Directory.GetCurrentDirectory();
+            String path = Directory.GetCurrentDirectory();
 
             if (Settings.Default.PathCleanROMs == "")
                 Settings.Default.PathCleanROMs = path + "\\ROMs";
@@ -142,9 +142,9 @@ namespace Magic
                 Settings.Default.PathPatches = path + "\\Patches";
         }
 
-        public static Palette FindPaletteFile(string filepath)
+        public static Palette FindPaletteFile(String filepath)
         {
-            string path = filepath.Substring(0, filepath.Length - 4) + ".pal";
+            String path = filepath.Substring(0, filepath.Length - 4) + ".pal";
             Palette result = null;
             if (File.Exists(path)) result = new Palette(path);
             path = filepath.Substring(0, filepath.Length - 4) + " palette.png";
@@ -181,9 +181,9 @@ namespace Magic
         /// <summary>
         /// Reads 'length' of bytes from the currently loaded ROM (does LZ77 decompress if length == 0)
         /// </summary>
-        public static Byte[] ReadData(Pointer address, int length)
+        public static Byte[] ReadData(Pointer address, Int32 length)
         {
-            if (address == 0) return new byte[0];
+            if (address == 0) return new Byte[0];
 
             //App.FEH.Space.MarkSpace("DATA", address, address + length);
 
@@ -209,8 +209,8 @@ namespace Magic
             if (address == 0) return new Pointer();
 
             //App.FEH.Space.MarkSpace("POIN", address, address + 4);
-            
-            byte[] data = App.ROM.Read(address, 4);
+
+            Byte[] data = App.ROM.Read(address, 4);
 
             if (data[3] < 0x08 && !(data[0] == 0 && data[1] == 0 && data[2] == 0 && data[3] == 0))
                 throw new Exception("Pointer is invalid: " + Util.BytesToSpacedHex(data));
@@ -220,13 +220,13 @@ namespace Magic
         /// <summary>
         /// Reads a palette from the currently loaded ROM (does LZ77 decompress if length == 0)
         /// </summary>
-        public static Palette ReadPalette(Pointer address, int length)
+        public static Palette ReadPalette(Pointer address, Int32 length)
         {
             if (address == 0) return null;
 
             //App.FEH.Space.MarkSpace("PAL ", address, address + length);
 
-            byte[] palette = Core.ReadData(address, length);
+            Byte[] palette = Core.ReadData(address, length);
 
             return new Palette(palette, palette.Length / 2);
         }
@@ -239,13 +239,13 @@ namespace Magic
         /// <param name="compressed">Whether or not the TSA data is LZ77 compressed</param>
         /// <param name="flipRows">Whether or not to flip the rows of the TSA (usually for uncompressed TSA)</param>
         /// <returns></returns>
-        public static TSA_Array ReadTSA(Pointer address, int width, int height, bool compressed, bool flipRows)
+        public static TSA_Array ReadTSA(Pointer address, Int32 width, Int32 height, Boolean compressed, Boolean flipRows)
         {
             if (address == 0) return null;
 
             //App.FEH.Space.MarkSpace("TSA ", address, address + length);
 
-            byte[] data;
+            Byte[] data;
             if (compressed)
             {
                 try
@@ -278,9 +278,9 @@ namespace Magic
 
             if (flipRows)
             {
-                byte[] result = new byte[width * height * 2];
-                int row = width * 2;
-                for (int i = 0; i < height; i++)
+                Byte[] result = new Byte[width * height * 2];
+                Int32 row = width * 2;
+                for (Int32 i = 0; i < height; i++)
                 {
                     Array.Copy(data, (height - 1 - i) * row, result, i * row, row);
                 }
@@ -292,14 +292,14 @@ namespace Magic
         /// <summary>
         /// Returns the first occurence of the given sequence of bytes in the ROM, 'align' determines search interval
         /// </summary>
-        public static Pointer FindData(Byte[] data, uint align = 1)
+        public static Pointer FindData(Byte[] data, UInt32 align = 1)
         {
             return App.ROM.Find(data, align);
         }
         /// <summary>
         /// Returns all the addresses at which the given sequence of bytes was found, 'align' determines search interval
         /// </summary>
-        public static Pointer[] SearchData(Byte[] data, uint align = 1)
+        public static Pointer[] SearchData(Byte[] data, UInt32 align = 1)
         {
             return App.ROM.Search(data, align);
         }
@@ -307,7 +307,7 @@ namespace Magic
         /// <summary>
         /// Returns the current pointer to the asset whose name matches the one given
         /// </summary>
-        public static Repoint GetRepoint(string asset)
+        public static Repoint GetRepoint(String asset)
         {
             Repoint result = App.FEH.Point.Get(asset);
             if (result == null)
@@ -317,7 +317,7 @@ namespace Magic
         /// <summary>
         /// Returns the current pointer to the asset whose name matches the one given
         /// </summary>
-        public static Pointer GetPointer(string asset)
+        public static Pointer GetPointer(String asset)
         {
             return GetRepoint(asset).CurrentAddress;
         }
@@ -325,7 +325,7 @@ namespace Magic
         /// <summary>
         /// Returns the first encountered address to an area of free space of appropriate size
         /// </summary>
-        public static Pointer GetFreeSpace(int length)
+        public static Pointer GetFreeSpace(Int32 length)
         {
             Pointer result = App.FEH.Space.GetPointer("FREE", length);
 
@@ -339,16 +339,16 @@ namespace Magic
         /// <summary>
         /// Writes a single byte to the currently loaded ROM
         /// </summary>
-        public static void WriteByte(Editor sender, Pointer address, byte data, string description = "")
+        public static void WriteByte(Editor sender, Pointer address, Byte data, String description = "")
         {
             if (address == 0) return;
 
-            App.Core_UserAction(UserAction.Write, new Write(sender, address, new byte[1] { data }, description));
+            App.Core_UserAction(UserAction.Write, new Write(sender, address, new Byte[1] { data }, description));
         }
         /// <summary>
         /// Writes Data to the currently loaded ROM
         /// </summary>
-        public static void WriteData(Editor sender, Pointer address, byte[] data, string description = "")
+        public static void WriteData(Editor sender, Pointer address, Byte[] data, String description = "")
         {
             if (address == 0 || data == null) return;
 
@@ -357,7 +357,7 @@ namespace Magic
         /// <summary>
         /// Writes a 4-byte Pointer to the ROM, converting it as necessary (hardware offsetting and little endian)
         /// </summary>
-        public static void WritePointer(Editor sender, Pointer address, Pointer pointer, string description = "")
+        public static void WritePointer(Editor sender, Pointer address, Pointer pointer, String description = "")
         {
             if (address == 0) return;
 
@@ -367,14 +367,14 @@ namespace Magic
         /// <summary>
         /// Replaces any occurence of the 'original' pointer found in the ROM
         /// </summary>
-        public static void Repoint(Editor sender, Pointer original, Pointer repoint, string description = "")
+        public static void Repoint(Editor sender, Pointer original, Pointer repoint, String description = "")
         {
             if (original == repoint) return;
             Repoint pointer = App.FEH.Point.Get(original);
             if (pointer == null)
                 throw new Exception("Couldn't find any FEH Repoint of address: " + original);
             pointer.UpdateReferences();
-            for (int i = 0; i < pointer.References.Length; i++)
+            for (Int32 i = 0; i < pointer.References.Length; i++)
             {
                 Core.WritePointer(sender, pointer.References[i], repoint, description);
             }
@@ -385,31 +385,31 @@ namespace Magic
         /// <summary>
         /// Restores data from the ROM as it was when last saved
         /// </summary>
-        public static void RestoreData(Pointer address, int length)
+        public static void RestoreData(Pointer address, Int32 length)
         {
             if (address == 0) return;
             if (length == 0) throw new Exception("Data to restore cannot be of length 0.");
 
-            App.Core_UserAction(UserAction.Restore, new Write("", address, new byte[length]));
+            App.Core_UserAction(UserAction.Restore, new Write("", address, new Byte[length]));
         }
 
         //============================ Input/Output ===============================
         
-        public static void SaveImage(string filepath, int width, int height, Palette[] palettes, Func<int, int, byte> displayfunc)
+        public static void SaveImage(String filepath, Int32 width, Int32 height, Palette[] palettes, Func<Int32, Int32, Byte> displayfunc)
         {
             using (var image = new System.Drawing.Bitmap(width, height, PixelFormat.Format8bppIndexed))
             {
                 ColorPalette result_palette = image.Palette;
-                for (int p = 0; p < 16; p++)
+                for (Int32 p = 0; p < 16; p++)
                 {
                     if (p >= palettes.Length)
                     {
-                        for (int i = 0; i < Palette.MAX; i++)
+                        for (Int32 i = 0; i < Palette.MAX; i++)
                         {
                             result_palette.Entries[p * Palette.MAX + i] = System.Drawing.Color.Black;
                         }
                     }
-                    else for (int i = 0; i < Palette.MAX; i++)
+                    else for (Int32 i = 0; i < Palette.MAX; i++)
                     {
                         result_palette.Entries[p * Palette.MAX + i] = (System.Drawing.Color)palettes[p][i];
                     }
@@ -418,10 +418,10 @@ namespace Magic
                 var data = image.LockBits(new Rectangle(0, 0, width, height), ImageLockMode.WriteOnly, PixelFormat.Format8bppIndexed);
                 unsafe
                 {
-                    byte* pixeldata = (byte*)data.Scan0.ToPointer();
-                    byte* pixel;
-                    for (int y = 0; y < image.Height; y++)
-                    for (int x = 0; x < image.Width; x++)
+                    Byte* pixeldata = (Byte*)data.Scan0.ToPointer();
+                    Byte* pixel;
+                    for (Int32 y = 0; y < image.Height; y++)
+                    for (Int32 x = 0; x < image.Width; x++)
                     {
                         pixel = pixeldata + y * data.Width + x;
                         pixel[0] = displayfunc(x, y);

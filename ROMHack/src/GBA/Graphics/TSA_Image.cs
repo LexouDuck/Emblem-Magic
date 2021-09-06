@@ -7,45 +7,45 @@ namespace GBA
 {
     public class TSA_Image : IDisplayable
     {
-        public int this[int x, int y]
+        public Int32 this[Int32 x, Int32 y]
         {
             get
             {
                 if (x < 0 || x >= Width)  throw new ArgumentException("X given is out of bounds: " + x);
                 if (y < 0 || y >= Height) throw new ArgumentException("Y given is out of bounds: " + y);
 
-                int tileX = x / Tile.SIZE;
-                int tileY = y / Tile.SIZE;
+                Int32 tileX = x / Tile.SIZE;
+                Int32 tileY = y / Tile.SIZE;
                 Tile tile = Graphics[Tiling[tileX, tileY].TileIndex];
-                int palette = Tiling[tileX, tileY].Palette;
-                bool flipH = Tiling[tileX, tileY].FlipH;
-                bool flipV = Tiling[tileX, tileY].FlipV;
+                Int32 palette = Tiling[tileX, tileY].Palette;
+                Boolean flipH = Tiling[tileX, tileY].FlipH;
+                Boolean flipV = Tiling[tileX, tileY].FlipV;
                 tileX = flipH ? 7 - x % Tile.SIZE : x % Tile.SIZE;
                 tileY = flipV ? 7 - y % Tile.SIZE : y % Tile.SIZE;
                 return palette * Palette.MAX + tile[tileX, tileY];
             }
         }
-        public byte GetPaletteIndex(int x, int y)
+        public Byte GetPaletteIndex(Int32 x, Int32 y)
         {
             if (x < 0 || x >= Width) throw new ArgumentException("X given is out of bounds: " + x);
             if (y < 0 || y >= Height) throw new ArgumentException("Y given is out of bounds: " + y);
 
-            int tileX = x / Tile.SIZE;
-            int tileY = y / Tile.SIZE;
+            Int32 tileX = x / Tile.SIZE;
+            Int32 tileY = y / Tile.SIZE;
             Tile tile = Graphics[Tiling[tileX, tileY].TileIndex];
             return Tiling[tileX, tileY].Palette;
         }
-        public Color GetColor(int x, int y)
+        public Color GetColor(Int32 x, Int32 y)
         {
             if (x < 0 || x >= Width) throw new ArgumentException("X given is out of bounds: " + x);
             if (y < 0 || y >= Height) throw new ArgumentException("Y given is out of bounds: " + y);
 
-            int tileX = x / Tile.SIZE;
-            int tileY = y / Tile.SIZE;
+            Int32 tileX = x / Tile.SIZE;
+            Int32 tileY = y / Tile.SIZE;
             Tile tile = Graphics[Tiling[tileX, tileY].TileIndex];
-            int palette = Tiling[tileX, tileY].Palette;
-            bool flipH = Tiling[tileX, tileY].FlipH;
-            bool flipV = Tiling[tileX, tileY].FlipV;
+            Int32 palette = Tiling[tileX, tileY].Palette;
+            Boolean flipH = Tiling[tileX, tileY].FlipH;
+            Boolean flipV = Tiling[tileX, tileY].FlipV;
             tileX = flipH ? 7 - x % Tile.SIZE : x % Tile.SIZE;
             tileY = flipV ? 7 - y % Tile.SIZE : y % Tile.SIZE;
             return Palettes[palette][tile[tileX, tileY]];
@@ -53,11 +53,11 @@ namespace GBA
         /// <summary>
         /// The width of this TSA_Image, in pixels
         /// </summary>
-        public int Width { get; }
+        public Int32 Width { get; }
         /// <summary>
         /// The height of this TSA_Image, in pixels
         /// </summary>
-        public int Height { get; }
+        public Int32 Height { get; }
 
         /// <summary>
         /// The array of 16-color Palettes that this TSA_Image uses
@@ -74,14 +74,14 @@ namespace GBA
 
 
 
-        public TSA_Image(int width, int height)
+        public TSA_Image(Int32 width, Int32 height)
         {
             Width = width * 8;
             Height = height * 8;
         }
         public TSA_Image(
-            byte[] palettes,
-            byte[] graphics,
+            Byte[] palettes,
+            Byte[] graphics,
             TSA_Array tsa)
         {
             if (palettes == null)
@@ -101,8 +101,8 @@ namespace GBA
             Graphics = new Tileset(graphics);
 
             Palettes = new Palette[palettes.Length / GBA.Palette.LENGTH];
-            byte[] buffer = new byte[GBA.Palette.LENGTH];
-            for (int p = 0; p < Palettes.Length; p++)
+            Byte[] buffer = new Byte[GBA.Palette.LENGTH];
+            for (Int32 p = 0; p < Palettes.Length; p++)
             {
                 Array.Copy(palettes, p * GBA.Palette.LENGTH, buffer, 0, GBA.Palette.LENGTH);
                 Palettes[p] = new Palette(buffer);
@@ -136,11 +136,11 @@ namespace GBA
         /// <param name="paletteAmount">the maximum amount of 16-color palettes</param>
         /// <param name="checkRedundantTiles">whether or not to add all tiles found to the tileset</param>
         public TSA_Image(
-            int width, int height,
+            Int32 width, Int32 height,
             GBA.Bitmap image,
             GBA.Palette palette,
-            int paletteAmount,
-            bool checkRedundantTiles)
+            Int32 paletteAmount,
+            Boolean checkRedundantTiles)
         {
             Width = width * 8;
             Height = height * 8;
@@ -166,22 +166,22 @@ namespace GBA
             {   // run the image TSA-ifier and show a loading bar window
                 loading.Show();
 
-                int tileAmount = width * height;
-                byte[] bytes = image.ToBytes();
-                int[] colorTotals = new int[image.Colors.Count];
-                int[,] colorAmounts = new int[image.Colors.Count, tileAmount];
+                    Int32 tileAmount = width * height;
+                    Byte[] bytes = image.ToBytes();
+                    Int32[] colorTotals = new Int32[image.Colors.Count];
+                    Int32[,] colorAmounts = new Int32[image.Colors.Count, tileAmount];
 
                 loading.SetLoading("Checking colors...", 2);
 
-                int index;
-                int tile_index = 0;
-                for (int tileY = 0; tileY < height; tileY++)
-                for (int tileX = 0; tileX < width; tileX++)
+                    Int32 index;
+                    Int32 tile_index = 0;
+                for (Int32 tileY = 0; tileY < height; tileY++)
+                for (Int32 tileX = 0; tileX < width; tileX++)
                 {
                     index = tileX * 8 + tileY * 8 * Width;
-                    for (int y = 0; y < 8; y++)
+                    for (Int32 y = 0; y < 8; y++)
                     {
-                        for (int x = 0; x < 8; x++)
+                        for (Int32 x = 0; x < 8; x++)
                         {
                             colorTotals[bytes[index]]++;
                             colorAmounts[bytes[index], tile_index]++;
@@ -193,8 +193,8 @@ namespace GBA
 
                 loading.SetPercent(7);
 
-                List<int> colors = new List<int>();
-                for (int i = 0; i < colorTotals.Length; i++)
+                List<Int32> colors = new List<Int32>();
+                for (Int32 i = 0; i < colorTotals.Length; i++)
                 {
                     index = 0;
                     while (index < colors.Count && colorTotals[i] > colors[index])
@@ -214,11 +214,11 @@ namespace GBA
 
                 loading.SetLoading("Asserting tile palettes...", 10);
 
-                byte[] tilePalettes = new byte[tileAmount];
-                int[] certainty = new int[tileAmount];
+                    Byte[] tilePalettes = new Byte[tileAmount];
+                    Int32[] certainty = new Int32[tileAmount];
                 GBA.Color color;
-                int amount;
-                for (int i = colors.Count - 1; i >= 0; i--)
+                    Int32 amount;
+                for (Int32 i = colors.Count - 1; i >= 0; i--)
                 {
                     color = image.Colors[colors[i]];
                     tile_index = 0;
@@ -236,7 +236,7 @@ namespace GBA
                             if (certainty[tile_index] < amount)
                             {
                                 tilePalettes[tile_index]++;
-                                tilePalettes[tile_index] %= (byte)paletteAmount;
+                                tilePalettes[tile_index] %= (Byte)paletteAmount;
                                 certainty[tile_index] = amount;
                                 i++; break;
                             }
@@ -244,37 +244,37 @@ namespace GBA
                         }
                         tile_index++;
                     }
-                    loading.SetPercent(10 + (50 - 50 * ((float)i / (float)(colors.Count))));
+                    loading.SetPercent(10 + (50 - 50 * ((Single)i / (Single)(colors.Count))));
                 }   // and we do a loop going from  most used color to least used, setting tilePalettes
 
                 loading.SetMessage("Creating TSA information...");
 
                 Graphics = new Tileset(width * height);
                 Tiling = new TSA_Array(width, height);
-                int pixel;
+                    Int32 pixel;
                 tile_index = 0;
-                byte HI_nibble;
-                byte LO_nibble;
+                    Byte HI_nibble;
+                    Byte LO_nibble;
                 Tile tile;
-                Tuple<int, bool, bool> current;
-                for (int tileY = 0; tileY < height; tileY++)
-                for (int tileX = 0; tileX < width; tileX++)
+                Tuple<Int32, Boolean, Boolean> current;
+                for (Int32 tileY = 0; tileY < height; tileY++)
+                for (Int32 tileX = 0; tileX < width; tileX++)
                 {
                     index = (Palettes[tilePalettes[tile_index]].IsFull) ? tilePalettes[tile_index] : 0;
-                    bytes = new byte[GBA.Tile.LENGTH];
+                    bytes = new Byte[GBA.Tile.LENGTH];
 
-                    for (int y = 0; y < 8; y++)
-                    for (int x = 0; x < 4; x++)
+                    for (Int32 y = 0; y < 8; y++)
+                    for (Int32 x = 0; x < 4; x++)
                     {
                         color = image.GetColor(tileX * 8 + x * 2, tileY * 8 + y);
                         pixel = GBA.Color.GetNearest(Palettes[index], color);
-                        LO_nibble = (pixel == -1) ? (byte)0x00 : (byte)(pixel);
+                        LO_nibble = (pixel == -1) ? (Byte)0x00 : (Byte)(pixel);
 
                         color = image.GetColor(tileX * 8 + x * 2 + 1, tileY * 8 + y);
                         pixel = GBA.Color.GetNearest(Palettes[index], color);
-                        HI_nibble = (pixel == -1) ? (byte)0x00 : (byte)(pixel);
+                        HI_nibble = (pixel == -1) ? (Byte)0x00 : (Byte)(pixel);
 
-                        bytes[x + y * 4] = (byte)((HI_nibble << 4) | LO_nibble);
+                        bytes[x + y * 4] = (Byte)((HI_nibble << 4) | LO_nibble);
                     }
 
                     tile = new Tile(bytes);
@@ -309,7 +309,7 @@ namespace GBA
                         current.Item3);
                     // } catch { }
 
-                    loading.SetPercent(60 + 40 * ((float)tile_index / (float)tileAmount));
+                    loading.SetPercent(60 + 40 * ((Single)tile_index / (Single)tileAmount));
                     tile_index++;
                 }
             }
@@ -323,10 +323,10 @@ namespace GBA
         /// <param name="paletteAmount">the maximum amount of 16-color palettes</param>
         /// <param name="checkRedundantTiles">whether or not to add all tiles found to the tileset</param>
         public TSA_Image(
-            int width, int height,
+            Int32 width, Int32 height,
             GBA.Bitmap image,
-            int paletteAmount,
-            bool checkRedundantTiles)
+            Int32 paletteAmount,
+            Boolean checkRedundantTiles)
         {
             Width = width * 8;
             Height = height * 8;
@@ -347,22 +347,22 @@ namespace GBA
             {   // Run the image TSA-ifier
                 loading.Show();
 
-                int tileAmount = width * height;
-                byte[] bytes = image.ToBytes();
-                int[] colorTotals = new int[image.Colors.Count];
-                int[,] colorAmounts = new int[image.Colors.Count, tileAmount];
+                    Int32 tileAmount = width * height;
+                    Byte[] bytes = image.ToBytes();
+                    Int32[] colorTotals = new Int32[image.Colors.Count];
+                    Int32[,] colorAmounts = new Int32[image.Colors.Count, tileAmount];
 
                 loading.SetLoading("Checking colors...", 2);
 
-                int index;
-                int tile = 0;
-                for (int tileY = 0; tileY < height; tileY++)
-                for (int tileX = 0; tileX < width; tileX++)
+                    Int32 index;
+                    Int32 tile = 0;
+                for (Int32 tileY = 0; tileY < height; tileY++)
+                for (Int32 tileX = 0; tileX < width; tileX++)
                 {
                     index = tileX * 8 + tileY * 8 * Width;
-                    for (int y = 0; y < 8; y++)
+                    for (Int32 y = 0; y < 8; y++)
                     {
-                        for (int x = 0; x < 8; x++)
+                        for (Int32 x = 0; x < 8; x++)
                         {
                             colorTotals[bytes[index]]++;
                             colorAmounts[bytes[index], tile]++;
@@ -374,8 +374,8 @@ namespace GBA
 
                 loading.SetPercent(7);
 
-                List<int> colors = new List<int>();
-                for (int i = 0; i < colorTotals.Length; i++)
+                List<Int32> colors = new List<Int32>();
+                for (Int32 i = 0; i < colorTotals.Length; i++)
                 {
                     index = 0;
                     while (index < colors.Count && colorTotals[i] > colors[index])
@@ -392,7 +392,7 @@ namespace GBA
                 loading.SetPercent(9);
 
                 Palettes = new Palette[paletteAmount];
-                for (int i = 0; i < paletteAmount; i++)
+                for (Int32 i = 0; i < paletteAmount; i++)
                 {
                     Palettes[i] = new GBA.Palette(16);
                     Palettes[i].Add(new GBA.Color(0x0000));
@@ -400,11 +400,11 @@ namespace GBA
 
                 loading.SetLoading("Asserting tile palettes...", 10);
 
-                byte[] tilePalettes = new byte[tileAmount];
-                int[] certainty = new int[tileAmount];
+                    Byte[] tilePalettes = new Byte[tileAmount];
+                    Int32[] certainty = new Int32[tileAmount];
                 GBA.Color color;
-                int amount;
-                for (int i = colors.Count - 1; i >= 0; i--)
+                    Int32 amount;
+                for (Int32 i = colors.Count - 1; i >= 0; i--)
                 {
                     color = image.Colors[colors[i]];
                     tile = 0;
@@ -424,7 +424,7 @@ namespace GBA
                                 if (certainty[tile] < amount)
                                 {
                                     tilePalettes[tile]++;
-                                    tilePalettes[tile] %= (byte)Palettes.Length;
+                                    tilePalettes[tile] %= (Byte)Palettes.Length;
                                     certainty[tile] = 0;
                                     i++; break;
                                 }
@@ -438,18 +438,18 @@ namespace GBA
                         }
                         tile++;
                     }
-                    loading.SetPercent(10 + (50 - 50 * ((float)i / (float)(colors.Count))));
+                    loading.SetPercent(10 + (50 - 50 * ((Single)i / (Single)(colors.Count))));
                 }   // and we do a loop going from  most used color to least used, setting tilePalettes and filling said palettes
 
                 amount = 0;
-                for (int p = 0; p < Palettes.Length; p++)
+                for (Int32 p = 0; p < Palettes.Length; p++)
                 {
                     Palettes[p].Sort(delegate (GBA.Color first, GBA.Color second)
                     {
                         return (first.GetValueR() + first.GetValueG() + first.GetValueB())
                                 - (second.GetValueR() + second.GetValueG() + second.GetValueB());
                     });
-                    for (int i = Palettes[p].Count; i < 16; i++)
+                    for (Int32 i = Palettes[p].Count; i < 16; i++)
                     {
                         Palettes[p].Add(new Color(0x0000));
                     }
@@ -459,30 +459,30 @@ namespace GBA
 
                 Graphics = new Tileset(width * height);
                 Tiling = new TSA_Array(width, height);
-                int pixel;
+                    Int32 pixel;
                 tile = 0;
-                byte HI_nibble;
-                byte LO_nibble;
+                    Byte HI_nibble;
+                    Byte LO_nibble;
                 Tile currentTile;
-                Tuple<int, bool, bool> current;
-                for (int tileY = 0; tileY < height; tileY++)
-                for (int tileX = 0; tileX < width; tileX++)
+                Tuple<Int32, Boolean, Boolean> current;
+                for (Int32 tileY = 0; tileY < height; tileY++)
+                for (Int32 tileX = 0; tileX < width; tileX++)
                 {
                     index = (Palettes[tilePalettes[tile]].IsFull) ? tilePalettes[tile] : 0;
-                    bytes = new byte[GBA.Tile.LENGTH];
+                    bytes = new Byte[GBA.Tile.LENGTH];
 
-                    for (int y = 0; y < 8; y++)
-                    for (int x = 0; x < 4; x++)
+                    for (Int32 y = 0; y < 8; y++)
+                    for (Int32 x = 0; x < 4; x++)
                     {
                         color = image.GetColor(tileX * 8 + x * 2, tileY * 8 + y);
                         pixel = GBA.Color.GetNearest(Palettes[index], color);
-                        LO_nibble = (pixel == -1) ? (byte)0x00 : (byte)(pixel);
+                        LO_nibble = (pixel == -1) ? (Byte)0x00 : (Byte)(pixel);
 
                         color = image.GetColor(tileX * 8 + x * 2 + 1, tileY * 8 + y);
                         pixel = GBA.Color.GetNearest(Palettes[index], color);
-                        HI_nibble = (pixel == -1) ? (byte)0x00 : (byte)(pixel);
+                        HI_nibble = (pixel == -1) ? (Byte)0x00 : (Byte)(pixel);
 
-                        bytes[x + y * 4] = (byte)((HI_nibble << 4) | LO_nibble);
+                        bytes[x + y * 4] = (Byte)((HI_nibble << 4) | LO_nibble);
                     }
 
                     currentTile = new Tile(bytes);
@@ -517,7 +517,7 @@ namespace GBA
                         current.Item3);
                     // } catch { }
 
-                    loading.SetPercent(60 + 40 * ((float)tile / (float)tileAmount));
+                    loading.SetPercent(60 + 40 * ((Single)tile / (Single)tileAmount));
                     tile++;
                 }
             }

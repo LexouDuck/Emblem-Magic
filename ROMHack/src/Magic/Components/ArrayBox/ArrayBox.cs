@@ -36,12 +36,12 @@ namespace Magic.Components
         /// </summary>
         [DesignerSerializationVisibility
         (DesignerSerializationVisibility.Hidden)]
-        override public string Text
+        override public String Text
         {
             get
             {
                 if (EntryComboBox.SelectedItem == null) return "";
-                KeyValuePair<uint, string> current = (KeyValuePair<uint, string>)EntryComboBox.SelectedItem;
+                KeyValuePair<UInt32, String> current = (KeyValuePair<UInt32, String>)EntryComboBox.SelectedItem;
                 return current.Value;
             }
             set
@@ -55,7 +55,7 @@ namespace Magic.Components
         /// </summary>
         [DesignerSerializationVisibility
         (DesignerSerializationVisibility.Hidden)]
-        new public string Name
+        new public String Name
         {
             get
             {
@@ -71,11 +71,11 @@ namespace Magic.Components
         /// </summary>
         [DesignerSerializationVisibility
         (DesignerSerializationVisibility.Hidden)]
-        public int Maximum
+        public Int32 Maximum
         {
             get
             {
-                return (int)EntryValueBox.Maximum;
+                return (Int32)EntryValueBox.Maximum;
             }
             set
             {
@@ -88,7 +88,7 @@ namespace Magic.Components
         /// <summary>
         /// Loads the file at 'path' to display list entry names
         /// </summary>
-        public void Load(string path)
+        public void Load(String path)
         {
             Load(new ArrayFile(path));
         }
@@ -96,8 +96,8 @@ namespace Magic.Components
         {
             File = file;
 
-            int longestString = 0;
-            for (uint i = 0; i <= File.LastEntry; i++)
+            Int32 longestString = 0;
+            for (UInt32 i = 0; i <= File.LastEntry; i++)
             {
                 if (File[i].Length > longestString)
                     longestString = File[i].Length;
@@ -112,7 +112,7 @@ namespace Magic.Components
 
             //if (File.LastEntry != 0) EntryValueBox.Maximum = File.LastEntry;
 
-            EntryValueBox.MouseWheel += delegate (object sender, MouseEventArgs e)
+            EntryValueBox.MouseWheel += delegate (Object sender, MouseEventArgs e)
             {
                 ((HandledMouseEventArgs)e).Handled = true;
             };
@@ -121,7 +121,7 @@ namespace Magic.Components
             EntryComboBox.DisplayMember = "Value";
             EntryComboBox.SelectedValueChanged += UpdateEntryValueBox;
             EntryComboBox.TextUpdate += UpdateArrayFileText;
-            EntryComboBox.MouseWheel += delegate (object sender, MouseEventArgs e)
+            EntryComboBox.MouseWheel += delegate (Object sender, MouseEventArgs e)
             {
                 ((HandledMouseEventArgs)e).Handled = true;
             };
@@ -154,13 +154,13 @@ namespace Magic.Components
 
 
 
-        protected void UpdateEntryValueBox(object sender, EventArgs e)
+        protected void UpdateEntryValueBox(Object sender, EventArgs e)
         {
             EntryValueBox.ValueChanged -= UpdateEntryComboBox;
 
             try
             {
-                uint value = ((KeyValuePair<uint, string>)EntryComboBox.SelectedItem).Key;
+                UInt32 value = ((KeyValuePair<UInt32, String>)EntryComboBox.SelectedItem).Key;
                 EntryValueBox.Value = value;
             }
             catch
@@ -170,13 +170,13 @@ namespace Magic.Components
 
             EntryValueBox.ValueChanged += UpdateEntryComboBox;
         }
-        protected void UpdateEntryComboBox(object sender, EventArgs e)
+        protected void UpdateEntryComboBox(Object sender, EventArgs e)
         {
             EntryComboBox.SelectedValueChanged -= UpdateEntryValueBox;
 
             try
             {
-                EntryComboBox.SelectedValue = (uint)EntryValueBox.Value;
+                EntryComboBox.SelectedValue = (UInt32)EntryValueBox.Value;
             }
             catch
             {
@@ -186,11 +186,11 @@ namespace Magic.Components
             EntryComboBox.SelectedValueChanged += UpdateEntryValueBox;
         }
 
-        protected void UpdateArrayFileText(object sender, EventArgs e)
+        protected void UpdateArrayFileText(Object sender, EventArgs e)
         {
             if (Prompt.UpdateArrayFile() == DialogResult.Yes)
             {
-                File.RenameEntry((uint)EntryValueBox.Value, EntryComboBox.Text);
+                File.RenameEntry((UInt32)EntryValueBox.Value, EntryComboBox.Text);
 
                 EntryComboBox.DataSource = File.ToList();
             }

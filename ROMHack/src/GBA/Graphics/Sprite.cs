@@ -13,7 +13,7 @@ namespace GBA
         /// <summary>
         /// This indexer allows for fast access to pixel data in GBA.Color format - for IDisplayable
         /// </summary>
-        public int this[int x, int y]
+        public Int32 this[Int32 x, Int32 y]
         {
             get
             {
@@ -25,10 +25,10 @@ namespace GBA
                     if (FlipH) x = (Width - x - 1);
                     if (FlipV) y = (Height - y - 1);
 
-                    int tileX = x / Tile.SIZE;
-                    int tileY = y / Tile.SIZE;
+                    Int32 tileX = x / Tile.SIZE;
+                    Int32 tileY = y / Tile.SIZE;
 
-                    int index = Tiles[tileX, tileY];
+                    Int32 index = Tiles[tileX, tileY];
                     if (index < 0 || index >= Sheet.Count)
                         return 0;
 
@@ -40,7 +40,7 @@ namespace GBA
                 else return Transform[x, y];
             }
         }
-        public Color GetColor(int x, int y)
+        public Color GetColor(Int32 x, Int32 y)
         {
             return (Colors[this[x, y]]);
         }
@@ -48,7 +48,7 @@ namespace GBA
         /// <summary>
         /// Gets the width of this sprite, in pixels.
         /// </summary>
-        public int Width
+        public Int32 Width
         {
             get
             {
@@ -58,7 +58,7 @@ namespace GBA
         /// <summary>
         /// Gets the height of this sprite, in pixels.
         /// </summary>
-        public int Height
+        public Int32 Height
         {
             get
             {
@@ -76,11 +76,11 @@ namespace GBA
         /// <summary>
         /// Whether or not this Sprite is to show up flipped horizontally
         /// </summary>
-        public bool FlipH { get; private set; }
+        public Boolean FlipH { get; private set; }
         /// <summary>
         /// Whether or not this Sprite is to show up flipped vertically
         /// </summary>
-        public bool FlipV { get; private set; }
+        public Boolean FlipV { get; private set; }
 
         /// <summary>
         /// The Palette associated with this GBA Sprite
@@ -119,51 +119,51 @@ namespace GBA
             Size size = oam.GetDimensions();
             Load(palette, tileset, new TileMap(oam.GetTileMap(size)), false, false);
 
-            int width = (oam.OBJMode == OAM_OBJMode.BigAffine) ? size.Width * 16 : size.Width * 8;
-            int height = (oam.OBJMode == OAM_OBJMode.BigAffine) ? size.Height * 16: size.Height * 8;
-            byte[] data = new byte[width * height];
-            int tileX, tileY;
-            int affX, affY;
-            int halfW = width / 2;
-            int halfH = height / 2;
-            for (int y = halfH * -1; y < halfH; y++)
-            for (int x = halfW * -1; x < halfW; x++)
+            Int32 width = (oam.OBJMode == OAM_OBJMode.BigAffine) ? size.Width * 16 : size.Width * 8;
+            Int32 height = (oam.OBJMode == OAM_OBJMode.BigAffine) ? size.Height * 16: size.Height * 8;
+            Byte[] data = new Byte[width * height];
+            Int32 tileX, tileY;
+            Int32 affX, affY;
+            Int32 halfW = width / 2;
+            Int32 halfH = height / 2;
+            for (Int32 y = halfH * -1; y < halfH; y++)
+            for (Int32 x = halfW * -1; x < halfW; x++)
             {
-                affX = (int)(transform.Ux * x + transform.Vx * y) + size.Width * 4;
-                affY = (int)(transform.Uy * x + transform.Vy * y) + size.Height * 4;
+                affX = (Int32)(transform.Ux * x + transform.Vx * y) + size.Width * 4;
+                affY = (Int32)(transform.Uy * x + transform.Vy * y) + size.Height * 4;
                 if (affX < 0 || affX >= size.Width * 8) continue;
                 if (affY < 0 || affY >= size.Height * 8) continue;
 
                 tileX = affX / Tile.SIZE;
                 tileY = affY / Tile.SIZE;
-                int index = Tiles[tileX, tileY];
+                    Int32 index = Tiles[tileX, tileY];
                 if (index < 0 || index >= Sheet.Count) continue;
                 tileX = affX % Tile.SIZE;
                 tileY = affY % Tile.SIZE;
 
-                data[(halfW + x) + (halfH + y) * width] = (byte)Sheet[index][tileX, tileY];
+                data[(halfW + x) + (halfH + y) * width] = (Byte)Sheet[index][tileX, tileY];
             }
             Transform = new Bitmap(width, height, palette.ToBytes(false), data);
         }
         /// <summary>
         /// Creates a GBA.Sprite from a GBA.Image, making a GBA.Tilemap by checking with the given GBA.Tileset
         /// </summary>
-        public Sprite(Image image, bool addAllTiles)
+        public Sprite(Image image, Boolean addAllTiles)
         {
-            int width = image.Width / Tile.SIZE;
-            int height = image.Height / Tile.SIZE;
+            Int32 width = image.Width / Tile.SIZE;
+            Int32 height = image.Height / Tile.SIZE;
 
             Tile tile;
             Tileset tileset = new Tileset();
-            byte[] buffer = new byte[Tile.LENGTH];
-            int?[,] map = new int?[width, height];
-            int index = 0;
-            for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++)
+            Byte[] buffer = new Byte[Tile.LENGTH];
+            Int32?[,] map = new Int32?[width, height];
+            Int32 index = 0;
+            for (Int32 y = 0; y < height; y++)
+            for (Int32 x = 0; x < width; x++)
             {
                 index = (x * 4) + y * (width * 4 * 8);
 
-                for (int i = 0; i < 8; i++)
+                for (Int32 i = 0; i < 8; i++)
                 {
                     Array.Copy(image.Bytes, index + i * (width * 4), buffer, i * 4, 4);
                 }
@@ -184,7 +184,7 @@ namespace GBA
         /// <summary>
         /// Initializes the fields of this class
         /// </summary>
-        void Load(Palette palette, Tileset tileset, TileMap tilemap, bool flipH, bool flipV)
+        void Load(Palette palette, Tileset tileset, TileMap tilemap, Boolean flipH, Boolean flipV)
         {
             Colors = palette;
             Sheet = tileset;
@@ -203,15 +203,15 @@ namespace GBA
             Color[,] result = new Color[Width, Height];
             Color[,] tile = new Color[Tile.SIZE, Tile.SIZE];
 
-            for (int iy = 0; iy < Height; iy += Tile.SIZE)
-            for (int ix = 0; ix < Width ; ix += Tile.SIZE)
+            for (Int32 iy = 0; iy < Height; iy += Tile.SIZE)
+            for (Int32 ix = 0; ix < Width ; ix += Tile.SIZE)
             {
                 tile = (Tiles[ix, iy] < 0) ?
                     Tile.Empty.GetPixels(Colors) :
                     Sheet[Tiles[ix, iy]].GetPixels(Colors);
 
-                for (int y = 0; y < Tile.SIZE; y++)
-                for (int x = 0; x < Tile.SIZE; x++)
+                for (Int32 y = 0; y < Tile.SIZE; y++)
+                for (Int32 x = 0; x < Tile.SIZE; x++)
                 {
                     result[ix + x, iy + y] = tile[x, y];
                 }

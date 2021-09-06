@@ -44,10 +44,10 @@ namespace Magic
         /// <summary>
         /// Changes a write (sending the old one to deadlist) and returns it.
         /// </summary>
-        public Write Change(Write write, Pointer address, byte[] data)
+        public Write Change(Write write, Pointer address, Byte[] data)
         {
-            string editor = write.Author;
-            string phrase = write.Phrase;
+            String editor = write.Author;
+            String phrase = write.Phrase;
             History.Remove(write);
             DeadList.Add(write);
             Write result = new Write(editor, address, data, phrase);
@@ -58,7 +58,7 @@ namespace Magic
         /// <summary>
         /// Deletes the given write permanently from the list it is in - returns false if not found
         /// </summary>
-        public bool Delete(Write write)
+        public Boolean Delete(Write write)
         {
             App.FEH.Changed = true;
 
@@ -74,7 +74,7 @@ namespace Magic
             Write write_old;
             Tuple<Write, Write> write_new;
 
-            for (int i = 0; i < writes.Count; i++)
+            for (Int32 i = 0; i < writes.Count; i++)
             {
                 write_old = writes[i].Write;
                 write_new = writes[i].GetNewWrite();
@@ -90,7 +90,7 @@ namespace Magic
         /// <summary>
         /// Returns whichever Write is at the given address, or null if no Write is found.
         /// </summary>
-        public Write Find(Pointer address, bool findDead = false)
+        public Write Find(Pointer address, Boolean findDead = false)
         {
             if (findDead)
             {
@@ -117,7 +117,7 @@ namespace Magic
         /// <summary>
         /// Returns the most recent Write sharing the same address with the given Write
         /// </summary>
-        public Write FindMostRecent(Pointer address, bool findDead = false)
+        public Write FindMostRecent(Pointer address, Boolean findDead = false)
         {
             Write result = null;
             foreach (Write write in DeadList)
@@ -177,7 +177,7 @@ namespace Magic
         /// </summary>
         public void Update_FEHSaved()
         {
-            for (int i = 0; i < History.Count; i++)
+            for (Int32 i = 0; i < History.Count; i++)
             {
                 History[i].IsSaved = true;
             }
@@ -187,7 +187,7 @@ namespace Magic
         /// </summary>
         public void Update_ROMSaved()
         {
-            for (int i = 0; i < History.Count; i++)
+            for (Int32 i = 0; i < History.Count; i++)
             {
                 History[i].Patched = true;
             }

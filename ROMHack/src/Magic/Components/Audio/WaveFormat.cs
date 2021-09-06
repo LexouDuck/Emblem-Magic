@@ -40,17 +40,17 @@ namespace WinMM
         /// <summary>
         /// Holds the number of channels.
         /// </summary>
-        private short channels;
+        private System.Int16 channels;
 
         /// <summary>
         /// Holds the sampling frequency.
         /// </summary>
-        private int samplesPerSecond;
+        private System.Int32 samplesPerSecond;
 
         /// <summary>
         /// Holds the number of bits per sample.
         /// </summary>
-        private short bitsPerSample;
+        private System.Int16 bitsPerSample;
 
         /// <summary>
         /// Gets the preset WaveFormat: PCM, 44.100 kHz, 16 bit, stereo
@@ -583,7 +583,7 @@ namespace WinMM
         /// <summary>
         /// Gets or sets the number of channels.
         /// </summary>
-        public short Channels
+        public System.Int16 Channels
         {
             get
             {
@@ -599,7 +599,7 @@ namespace WinMM
         /// <summary>
         /// Gets or sets the sampling frequency.
         /// </summary>
-        public int SamplesPerSecond
+        public System.Int32 SamplesPerSecond
         {
             get
             {
@@ -615,7 +615,7 @@ namespace WinMM
         /// <summary>
         /// Gets or sets the number of bits per sample.
         /// </summary>
-        public short BitsPerSample
+        public System.Int16 BitsPerSample
         {
             get
             {
@@ -631,18 +631,18 @@ namespace WinMM
         /// <summary>
         /// Gets the smallest atomic unit of data, in bytes.
         /// </summary>
-        public short BlockAlign
+        public System.Int16 BlockAlign
         {
             get
             {
-                return (short)(this.Channels * this.BitsPerSample / 8);
+                return (System.Int16)(this.Channels * this.BitsPerSample / 8);
             }
         }
 
         /// <summary>
         /// Gets the average number of bytes per second.
         /// </summary>
-        public int AverageBytesPerSecond
+        public System.Int32 AverageBytesPerSecond
         {
             get
             {

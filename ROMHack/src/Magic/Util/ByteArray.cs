@@ -14,58 +14,58 @@ namespace Magic
         /// <summary>
         /// Returns a subsection of 'this' byte array.
         /// </summary>
-        public static byte[] GetBytes(this byte[] data, uint offset, int length = -1)
+        public static Byte[] GetBytes(this Byte[] data, UInt32 offset, Int32 length = -1)
         {
-            if (length < 0) length = data.Length - (int)offset;
-            byte[] result = new byte[length];
+            if (length < 0) length = data.Length - (Int32)offset;
+            Byte[] result = new Byte[length];
             Array.Copy(data, offset, result, 0, length);
             return result;
         }
         /// <summary>
         /// Returns an ASCII string from 'this' byte array
         /// </summary>
-        public static String GetASCII(this byte[] data, uint offset, int length = -1)
+        public static String GetASCII(this Byte[] data, UInt32 offset, Int32 length = -1)
         {
-            if (length < 0) length = data.Length - (int)offset;
-            byte[] result = new byte[length];
+            if (length < 0) length = data.Length - (Int32)offset;
+            Byte[] result = new Byte[length];
             Array.Copy(data, offset, result, 0, length);
             return Encoding.ASCII.GetString(result);
         }
 
-        public static Int16 GetInt16(this byte[] data, uint offset, bool littleEndian)
+        public static Int16 GetInt16(this Byte[] data, UInt32 offset, Boolean littleEndian)
         {
-            byte[] result = new byte[2];
+            Byte[] result = new Byte[2];
             Array.Copy(data, offset, result, 0, 2);
             return Util.BytesToInt16(result, littleEndian);
         }
-        public static Int32 GetInt32(this byte[] data, uint offset, bool littleEndian)
+        public static Int32 GetInt32(this Byte[] data, UInt32 offset, Boolean littleEndian)
         {
-            byte[] result = new byte[4];
+            Byte[] result = new Byte[4];
             Array.Copy(data, offset, result, 0, 4);
             return Util.BytesToInt32(result, littleEndian);
         }
-        public static Int64 GetInt64(this byte[] data, uint offset, bool littleEndian)
+        public static Int64 GetInt64(this Byte[] data, UInt32 offset, Boolean littleEndian)
         {
-            byte[] result = new byte[8];
+            Byte[] result = new Byte[8];
             Array.Copy(data, offset, result, 0, 8);
             if (littleEndian != BitConverter.IsLittleEndian) Array.Reverse(result);
             return BitConverter.ToInt64(result, 0);
         }
-        public static UInt16 GetUInt16(this byte[] data, uint offset, bool littleEndian)
+        public static UInt16 GetUInt16(this Byte[] data, UInt32 offset, Boolean littleEndian)
         {
-            byte[] result = new byte[2];
+            Byte[] result = new Byte[2];
             Array.Copy(data, offset, result, 0, 2);
             return Util.BytesToUInt16(result, littleEndian);
         }
-        public static UInt32 GetUInt32(this byte[] data, uint offset, bool littleEndian)
+        public static UInt32 GetUInt32(this Byte[] data, UInt32 offset, Boolean littleEndian)
         {
-            byte[] result = new byte[4];
+            Byte[] result = new Byte[4];
             Array.Copy(data, offset, result, 0, 4);
             return Util.BytesToUInt32(result, littleEndian);
         }
-        public static UInt64 GetUInt64(this byte[] data, uint offset, bool littleEndian)
+        public static UInt64 GetUInt64(this Byte[] data, UInt32 offset, Boolean littleEndian)
         {
-            byte[] result = new byte[8];
+            Byte[] result = new Byte[8];
             Array.Copy(data, offset, result, 0, 8);
             if (littleEndian != BitConverter.IsLittleEndian) Array.Reverse(result);
             return BitConverter.ToUInt64(result, 0);
@@ -73,19 +73,19 @@ namespace Magic
 
         public static Byte[] Make_Int32(UInt32 input)
         {
-            byte[] result = BitConverter.GetBytes(input);
+            Byte[] result = BitConverter.GetBytes(input);
             if (BitConverter.IsLittleEndian) Array.Reverse(result);
             return result;
         }
         public static Byte[] Make_Int64(UInt64 input)
         {
-            byte[] result = BitConverter.GetBytes(input);
+            Byte[] result = BitConverter.GetBytes(input);
             if (BitConverter.IsLittleEndian) Array.Reverse(result);
             return result;
         }
         public static Byte[] Make_ASCII(String input)
         {
-            byte[] result = System.Text.Encoding.ASCII.GetBytes(input);
+            Byte[] result = System.Text.Encoding.ASCII.GetBytes(input);
             return result;
         }
     }

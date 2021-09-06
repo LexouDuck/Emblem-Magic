@@ -21,19 +21,19 @@ namespace EmblemMagic.Editors
             InitializeComponent();
         }
 
-        void Core_Find(string text, bool forward)
+        void Core_Find(String text, Boolean forward)
         {
             if (text == null || text == "")
             {
                 UI.ShowMessage("There is no input text to find."); return;
             }
-            string current = Owner.Core_GetText(Owner.CurrentIndex);
+            String current = Owner.Core_GetText(Owner.CurrentIndex);
 
             Find_ProgressBar.Maximum = MAXIMUM;
 
-            for (int i = forward ?
-                    (int)(Owner.CurrentSelection.Start + Owner.CurrentSelection.Length) :
-                    (int)(Owner.CurrentSelection.Start - 1);
+            for (Int32 i = forward ?
+                    (Int32)(Owner.CurrentSelection.Start + Owner.CurrentSelection.Length) :
+                    (Int32)(Owner.CurrentSelection.Start - 1);
                 forward ?
                     (i < current.Length) :
                     (i >= 0);
@@ -44,8 +44,8 @@ namespace EmblemMagic.Editors
 
                 if (current[i] == text[0])
                 {
-                    bool match = true;
-                    for (int j = 1; j < text.Length; j++)
+                    Boolean match = true;
+                    for (Int32 j = 1; j < text.Length; j++)
                     {
                         if (current[i + j] == text[j]) continue;
                         else { match = false; break; }
@@ -77,7 +77,7 @@ namespace EmblemMagic.Editors
                     {
                         current = Owner.Core_GetText(entry);
 
-                        for (int i = forward ? 0 : current.Length - 1;
+                        for (Int32 i = forward ? 0 : current.Length - 1;
                             forward ?
                                 (i < current.Length) :
                                 (i >= 0);
@@ -85,8 +85,8 @@ namespace EmblemMagic.Editors
                         {
                             if (current[i] == text[0])
                             {
-                                bool match = true;
-                                for (int j = 1; j < text.Length; j++)
+                                Boolean match = true;
+                                for (Int32 j = 1; j < text.Length; j++)
                                 {
                                     if (current[i + j] == text[j]) continue;
                                     else { match = false; break; }

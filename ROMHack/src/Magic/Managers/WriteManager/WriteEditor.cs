@@ -86,7 +86,7 @@ namespace Magic.Editors
         {
             if (selection == null)
             {
-                WriteDataHexBox.Value = new byte[0];
+                WriteDataHexBox.Value = new Byte[0];
                 WritePointerBox.Value = new Pointer();
                 WriteLength.Text = "-";
                 WriteEditorLabel.Text = "";
@@ -96,7 +96,7 @@ namespace Magic.Editors
             {
                 WriteDataHexBox.Value = selection.Data;
                 WritePointerBox.Value = selection.Address;
-                WriteLength.Text = "0x" + Util.UInt32ToHex((uint)selection.Data.Length).TrimStart('0');
+                WriteLength.Text = "0x" + Util.UInt32ToHex((UInt32)selection.Data.Length).TrimStart('0');
                 WriteEditorLabel.Text = selection.Author;
                 WritePhraseTextBox.Text = selection.Phrase;
             }
@@ -107,7 +107,7 @@ namespace Magic.Editors
         /// <summary>
         /// Is read when the user clicks a cell or row on the DataGrid
         /// </summary>
-        private void SelectWrite_Click(object sender, EventArgs e)
+        private void SelectWrite_Click(Object sender, EventArgs e)
         {
             if (WriteHistoryList.SelectedRows.Count == 1)
             {
@@ -123,7 +123,7 @@ namespace Magic.Editors
         /// <summary>
         /// Checks current selection, and applies the write (or prompts the user) accordingly.
         /// </summary>
-        private void ApplyWrite_Click(object sender, EventArgs e)
+        private void ApplyWrite_Click(Object sender, EventArgs e)
         {
             if (WriteHistoryList.SelectedRows.Count == 0)
             {
@@ -147,9 +147,9 @@ namespace Magic.Editors
                     foreach (DataGridViewRow row in WriteHistoryList.SelectedRows)
                     {
                         Core.WriteData(this,
-                            Util.StringToAddress((string)row.Cells[1].Value),
+                            Util.StringToAddress((String)row.Cells[1].Value),
                             WriteDataHexBox.Value,
-                            (string)row.Cells[4].Value);
+                            (String)row.Cells[4].Value);
                     }
                 }
             }
@@ -157,7 +157,7 @@ namespace Magic.Editors
         /// <summary>
         /// Checks current selection, and deletes the write (or prompts the user) accordingly.
         /// </summary>
-        private void DeleteWrite_Click(object sender, EventArgs e)
+        private void DeleteWrite_Click(Object sender, EventArgs e)
         {
             if (WriteHistoryList.SelectedRows.Count == 0)
             {
@@ -178,7 +178,7 @@ namespace Magic.Editors
         /// <summary>
         /// Merges all currently selected writes from the list, adding bytes in the interval to the write data
         /// </summary>
-        private void MergeWrites_Click(object sender, EventArgs e)
+        private void MergeWrites_Click(Object sender, EventArgs e)
         {
             if (WriteHistoryList.SelectedRows.Count == 0)
             {
@@ -190,21 +190,21 @@ namespace Magic.Editors
             }
             else
             {
-                Pointer address = new Pointer((uint)Core.CurrentROMSize);
+                Pointer address = new Pointer((UInt32)Core.CurrentROMSize);
                 Pointer endbyte = new Pointer();
                 foreach (DataGridViewRow row in WriteHistoryList.SelectedRows)
                 {
                     if ((Pointer)row.Cells[1].Value < address)
                         address = (Pointer)row.Cells[1].Value;
-                    if ((Pointer)row.Cells[1].Value + (int)row.Cells[2].Value > endbyte)
-                        endbyte = (Pointer)row.Cells[1].Value + (int)row.Cells[2].Value;
+                    if ((Pointer)row.Cells[1].Value + (Int32)row.Cells[2].Value > endbyte)
+                        endbyte = (Pointer)row.Cells[1].Value + (Int32)row.Cells[2].Value;
                 }
                 Core.WriteData(this, address, Core.ReadData(address, endbyte - address), "Merged write");
                 UI.PerformUpdate();
             }
         }
 
-        private void MarkSpaceButton_Click(object sender, EventArgs e)
+        private void MarkSpaceButton_Click(Object sender, EventArgs e)
         {
             if (WriteHistoryList.SelectedRows.Count == 0)
             {
@@ -213,8 +213,8 @@ namespace Magic.Editors
             else if (WriteHistoryList.SelectedRows.Count == 1)
             {
                 Pointer address = (Pointer)WriteHistoryList.SelectedRows[0].Cells[1].Value;
-                App.FEH.Space.MarkSpace((string)MarkSpaceBox.SelectedValue,
-                    address, address + (int)WriteHistoryList.SelectedRows[0].Cells[2].Value);
+                App.FEH.Space.MarkSpace((String)MarkSpaceBox.SelectedValue,
+                    address, address + (Int32)WriteHistoryList.SelectedRows[0].Cells[2].Value);
                 UI.PerformUpdate();
             }
             else
@@ -222,8 +222,8 @@ namespace Magic.Editors
                 foreach (DataGridViewRow row in WriteHistoryList.SelectedRows)
                 {
                     Pointer address = (Pointer)row.Cells[1].Value;
-                    App.FEH.Space.MarkSpace((string)MarkSpaceBox.SelectedValue,
-                        address, address + (int)row.Cells[2].Value);
+                    App.FEH.Space.MarkSpace((String)MarkSpaceBox.SelectedValue,
+                        address, address + (Int32)row.Cells[2].Value);
                 }
                 UI.PerformUpdate();
             }

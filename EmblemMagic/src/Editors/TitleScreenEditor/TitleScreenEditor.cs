@@ -54,7 +54,7 @@ namespace EmblemMagic.Editors
             Core_LoadTitleScreen();
         }
 
-        void Core_SaveImage(string filepath)
+        void Core_SaveImage(String filepath)
         {
             try
             {
@@ -62,9 +62,9 @@ namespace EmblemMagic.Editors
                     Current.Width,
                     Current.Height,
                     GBA.Palette.Split(CurrentPalette, 16),
-                    delegate (int x, int y)
+                    delegate (Int32 x, Int32 y)
                     {
-                        return (byte)Current[x, y];
+                        return (Byte)Current[x, y];
                     });
             }
             catch (Exception ex)
@@ -72,21 +72,21 @@ namespace EmblemMagic.Editors
                 UI.ShowError("Could not save title screen image.", ex);
             }
         }
-        void Core_SaveData(string filepath)
+        void Core_SaveData(String filepath)
         {
             try
             {
-                string path = Path.GetDirectoryName(filepath) + '\\';
-                string file = Path.GetFileNameWithoutExtension(filepath);
+                String path = Path.GetDirectoryName(filepath) + '\\';
+                String file = Path.GetFileNameWithoutExtension(filepath);
 
                 if (Core.CurrentROM is FE6)
                 {
-                    string name_mg_palette = "Title Screen MG/FG Palette";
-                    string name_mg_tileset = "Title Screen MG/FG Tileset";
-                    string name_fg_tileset = "Title Screen FG Tileset";
-                    string name_mg_tsa     = "Title Screen MG TSA";
-                    string name_bg_tileset = "Title Screen BG Tileset";
-                    string name_bg_palette = "Title Screen BG Palette";
+                    String name_mg_palette = "Title Screen MG/FG Palette";
+                    String name_mg_tileset = "Title Screen MG/FG Tileset";
+                    String name_fg_tileset = "Title Screen FG Tileset";
+                    String name_mg_tsa     = "Title Screen MG TSA";
+                    String name_bg_tileset = "Title Screen BG Tileset";
+                    String name_bg_palette = "Title Screen BG Palette";
 
                     Pointer address_mg_palette = Core.GetPointer(name_mg_palette);
                     Pointer address_mg_tileset = Core.GetPointer(name_mg_tileset);
@@ -104,13 +104,13 @@ namespace EmblemMagic.Editors
                 }
                 if (Core.CurrentROM is FE7)
                 {
-                    string name_bg_palette = "Title Screen BG Palette";
-                    string name_bg_tileset = "Title Screen BG Tileset";
-                    string name_mg_palette = "Title Screen MG Palette";
-                    string name_mg_tileset = "Title Screen MG Tileset";
-                    string name_mg_tsa     = "Title Screen MG TSA";
-                    string name_fg_palette = "Title Screen FG Palette";
-                    string name_fg_tileset = "Title Screen FG Tileset";
+                    String name_bg_palette = "Title Screen BG Palette";
+                    String name_bg_tileset = "Title Screen BG Tileset";
+                    String name_mg_palette = "Title Screen MG Palette";
+                    String name_mg_tileset = "Title Screen MG Tileset";
+                    String name_mg_tsa     = "Title Screen MG TSA";
+                    String name_fg_palette = "Title Screen FG Palette";
+                    String name_fg_tileset = "Title Screen FG Tileset";
 
                     Pointer address_bg_palette = Core.GetPointer(name_bg_palette);
                     Pointer address_bg_tileset = Core.GetPointer(name_bg_tileset);
@@ -120,7 +120,7 @@ namespace EmblemMagic.Editors
                     Pointer address_fg_palette = Core.GetPointer(name_fg_palette);
                     Pointer address_fg_tileset = Core.GetPointer(name_fg_tileset);
 
-                    bool tsa = (Core.CurrentROM.Version != GameVersion.JAP);
+                    Boolean tsa = (Core.CurrentROM.Version != GameVersion.JAP);
 
                     File.WriteAllBytes(path + name_bg_palette + ".pal", Core.ReadPalette(address_bg_palette, Palette.LENGTH).ToBytes(false));
                     File.WriteAllBytes(path + name_bg_tileset + ".chr", new Tileset(Core.ReadData(address_bg_tileset, 0)).ToBytes(false));
@@ -132,16 +132,16 @@ namespace EmblemMagic.Editors
                 }
                 if (Core.CurrentROM is FE8)
                 {
-                    string name_bg_palette  = "Title Screen BG Palette";
-                    string name_bg_tileset1 = "Title Screen BG Tileset 1";
-                    string name_bg_tileset2 = "Title Screen BG Tileset 2";
-                    string name_bg_tsa      = "Title Screen BG TSA";
-                    string name_mg_palette  = "Title Screen MG Palette";
-                    string name_mg_tileset  = "Title Screen MG Tileset";
-                    string name_mg_tsa      = "Title Screen MG TSA";
-                    string name_fg_palette  = "Title Screen FG Palette";
-                    string name_fg_tileset1 = "Title Screen FG Tileset 1";
-                    string name_fg_tileset2 = "Title Screen FG Tileset 2";
+                    String name_bg_palette  = "Title Screen BG Palette";
+                    String name_bg_tileset1 = "Title Screen BG Tileset 1";
+                    String name_bg_tileset2 = "Title Screen BG Tileset 2";
+                    String name_bg_tsa      = "Title Screen BG TSA";
+                    String name_mg_palette  = "Title Screen MG Palette";
+                    String name_mg_tileset  = "Title Screen MG Tileset";
+                    String name_mg_tsa      = "Title Screen MG TSA";
+                    String name_fg_palette  = "Title Screen FG Palette";
+                    String name_fg_tileset1 = "Title Screen FG Tileset 1";
+                    String name_fg_tileset2 = "Title Screen FG Tileset 2";
 
                     Pointer address_bg_palette  = Core.GetPointer(name_bg_palette);
                     Pointer address_bg_tileset1 = Core.GetPointer(name_bg_tileset1);
@@ -203,7 +203,7 @@ namespace EmblemMagic.Editors
                     Pointer address_fg_palette = Core.GetPointer("Title Screen FG Palette");
                     Pointer address_fg_tileset = Core.GetPointer("Title Screen FG Tileset");
 
-                    bool tsa = (Core.CurrentROM.Version != GameVersion.JAP);
+                    Boolean tsa = (Core.CurrentROM.Version != GameVersion.JAP);
                     Core_LoadTitleScreen_FE7(
                         Core.ReadPalette(address_bg_palette, Palette.LENGTH),
                         new Tileset(Core.ReadData(address_bg_tileset, 0)),
@@ -254,11 +254,11 @@ namespace EmblemMagic.Editors
         {
             GBA.Bitmap result;
             Palette palette = Palette.Empty(256);
-            for (int i = 0; i < mg_palette.Count; i++)
+            for (Int32 i = 0; i < mg_palette.Count; i++)
             {
                 palette.Set(i, mg_palette[i]);
             }
-            for (int i = 0; i < bg_palette.Count; i++)
+            for (Int32 i = 0; i < bg_palette.Count; i++)
             {
                 bg_palette[i] = bg_palette[i].SetAlpha(false);
                 palette.Set(GBA.Palette.MAX * 15 + i, bg_palette[i]);
@@ -269,8 +269,8 @@ namespace EmblemMagic.Editors
             if (BG_CheckBox.Checked)
             {
                 GBA.Image bg = bg_tileset.ToImage(GBA.Screen.W_TILES + 2, GBA.Screen.H_TILES, bg_palette.ToBytes(false));
-                for (int y = 0; y < GBA.Screen.HEIGHT; y++)
-                for (int x = 0; x < GBA.Screen.WIDTH; x++)
+                for (Int32 y = 0; y < GBA.Screen.HEIGHT; y++)
+                for (Int32 x = 0; x < GBA.Screen.WIDTH; x++)
                 {
                     result[x, y] = GBA.Palette.MAX * 15 + bg[x, y];
                 }
@@ -278,8 +278,8 @@ namespace EmblemMagic.Editors
             if (MG_CheckBox.Checked)
             {
                 TSA_Image mg = new TSA_Image(mg_palette, mg_tileset, mg_tsa);
-                for (int y = 0; y < GBA.Screen.HEIGHT; y++)
-                for (int x = 0; x < GBA.Screen.WIDTH; x++)
+                for (Int32 y = 0; y < GBA.Screen.HEIGHT; y++)
+                for (Int32 x = 0; x < GBA.Screen.WIDTH; x++)
                 {
                     if (mg.GetColor(x, y).Value != 0)
                         result[x, y] = mg[x, y];
@@ -315,15 +315,15 @@ namespace EmblemMagic.Editors
         {
             GBA.Bitmap result;
             Palette palette = Palette.Empty(256);
-            for (int i = 0; i < bg_palette.Count; i++)
+            for (Int32 i = 0; i < bg_palette.Count; i++)
             {
                 palette.Set(GBA.Palette.MAX * 15 + i, bg_palette[i]);
             }
-            for (int i = 0; i < mg_palette.Count; i++)
+            for (Int32 i = 0; i < mg_palette.Count; i++)
             {
                 palette.Set(GBA.Palette.MAX * 14 + i, mg_palette[i]);
             }
-            for (int i = 0; i < fg_palette.Count; i++)
+            for (Int32 i = 0; i < fg_palette.Count; i++)
             {
                 palette.Set(i, fg_palette[i]);
             }
@@ -333,8 +333,8 @@ namespace EmblemMagic.Editors
             if (BG_CheckBox.Checked)
             {
                 GBA.Image bg = bg_tileset.ToImage(GBA.Screen.W_TILES, GBA.Screen.H_TILES + 1, bg_palette.ToBytes(false));
-                for (int y = 0; y < GBA.Screen.HEIGHT; y++)
-                for (int x = 0; x < GBA.Screen.WIDTH; x++)
+                for (Int32 y = 0; y < GBA.Screen.HEIGHT; y++)
+                for (Int32 x = 0; x < GBA.Screen.WIDTH; x++)
                 {
                     if (x < 8 && y < 8)
                          result[x, y] = GBA.Palette.MAX * 15 + bg[x, GBA.Screen.HEIGHT + y];
@@ -344,8 +344,8 @@ namespace EmblemMagic.Editors
             if (MG_CheckBox.Checked)
             {
                 TSA_Image mg = new TSA_Image(mg_palette, mg_tileset, mg_tsa);
-                for (int y = 0; y < mg.Height; y++)
-                for (int x = 0; x < mg.Width; x++)
+                for (Int32 y = 0; y < mg.Height; y++)
+                for (Int32 x = 0; x < mg.Width; x++)
                 {
                     if (mg[x, y] != 0)
                         result[x, 8 + y] = GBA.Palette.MAX * 14 + mg[x, y];
@@ -353,8 +353,8 @@ namespace EmblemMagic.Editors
             }
             if (FG_CheckBox.Checked)
             {
-                bool jap = (Core.CurrentROM.Version == GameVersion.JAP);
-                bool eur = (Core.CurrentROM.Version == GameVersion.EUR);
+                Boolean jap = (Core.CurrentROM.Version == GameVersion.JAP);
+                Boolean eur = (Core.CurrentROM.Version == GameVersion.EUR);
                 Palette[] palettes = Palette.Split(fg_palette, 8);
                 GBA.Image fg;
                 // durandal sword
@@ -390,16 +390,16 @@ namespace EmblemMagic.Editors
         {
             GBA.Bitmap result;
             Palette palette = Palette.Empty(256);
-            for (int i = 0; i < bg_palette.Count; i++)
+            for (Int32 i = 0; i < bg_palette.Count; i++)
             {
                 bg_palette[i] = bg_palette[i].SetAlpha(false);
                 palette.Set(GBA.Palette.MAX * 15 + i, bg_palette[i]);
             }
-            for (int i = 0; i < mg_palette.Count; i++)
+            for (Int32 i = 0; i < mg_palette.Count; i++)
             {
                 palette.Set(GBA.Palette.MAX * 14 + i, mg_palette[i]);
             }
-            for (int i = 0; i < fg_palette.Count; i++)
+            for (Int32 i = 0; i < fg_palette.Count; i++)
             {
                 palette.Set(i, fg_palette[i]);
             }
@@ -409,8 +409,8 @@ namespace EmblemMagic.Editors
             if (BG_CheckBox.Checked)
             {
                 TSA_Image bg = new TSA_Image(bg_palette, bg_tileset, bg_tsa);
-                for (int y = 0; y < bg.Height; y++)
-                for (int x = 0; x < bg.Width; x++)
+                for (Int32 y = 0; y < bg.Height; y++)
+                for (Int32 x = 0; x < bg.Width; x++)
                 {
                     if (bg[x, y] != 0)
                         result[x, y] = GBA.Palette.MAX * 15 + bg[x, y];
@@ -419,8 +419,8 @@ namespace EmblemMagic.Editors
             if (MG_CheckBox.Checked)
             {
                 TSA_Image mg = new TSA_Image(mg_palette, mg_tileset, mg_tsa);
-                for (int y = 0; y < mg.Height; y++)
-                for (int x = 0; x < mg.Width; x++)
+                for (Int32 y = 0; y < mg.Height; y++)
+                for (Int32 x = 0; x < mg.Width; x++)
                 {
                     if (mg[x, y] != 0)
                         result[x, y] = GBA.Palette.MAX * 14 + mg[x, y];
@@ -473,12 +473,12 @@ namespace EmblemMagic.Editors
             CurrentPalette = palette;
         }
 
-        void Core_DrawLayer(GBA.Bitmap result, GBA.Image image, Rectangle region, int offsetX, int offsetY)
+        void Core_DrawLayer(GBA.Bitmap result, GBA.Image image, Rectangle region, Int32 offsetX, Int32 offsetY)
         {
-            int index;
-            int pixel;
-            for (int y = 0; y < region.Height; y++)
-            for (int x = 0; x < region.Width; x++)
+            Int32 index;
+            Int32 pixel;
+            for (Int32 y = 0; y < region.Height; y++)
+            for (Int32 x = 0; x < region.Width; x++)
             {
                 index = ((region.X + x) / 2) + ((region.Y + y) * (image.Width / 2));
                 pixel = (x % 2 == 0) ?
@@ -530,7 +530,7 @@ namespace EmblemMagic.Editors
             Core_Update();
         }
 
-        private void BG_MagicButton_Click(object sender, EventArgs e)
+        private void BG_MagicButton_Click(Object sender, EventArgs e)
         {
             GraphicsEditor editor = new GraphicsEditor(App);
 
@@ -556,7 +556,7 @@ namespace EmblemMagic.Editors
 
             Program.Core.Core_OpenEditor(editor);
         }
-        private void MG_MagicButton_Click(object sender, EventArgs e)
+        private void MG_MagicButton_Click(Object sender, EventArgs e)
         {
             GraphicsEditor editor = new GraphicsEditor(App);
 
@@ -569,7 +569,7 @@ namespace EmblemMagic.Editors
             }
             if (Core.CurrentROM is FE7)
             {
-                bool tsa = (Core.CurrentROM.Version != GameVersion.JAP);
+                Boolean tsa = (Core.CurrentROM.Version != GameVersion.JAP);
                 editor.Core_SetEntry(GBA.Screen.W_TILES + 2, GBA.Screen.H_TILES,
                     Core.GetPointer("Title Screen MG Palette"), false,
                     Core.GetPointer("Title Screen MG Tileset"), true,
@@ -585,7 +585,7 @@ namespace EmblemMagic.Editors
 
             Program.Core.Core_OpenEditor(editor);
         }
-        private void FG_MagicButton_Click(object sender, EventArgs e)
+        private void FG_MagicButton_Click(Object sender, EventArgs e)
         {
             GraphicsEditor editor = new GraphicsEditor(App);
 

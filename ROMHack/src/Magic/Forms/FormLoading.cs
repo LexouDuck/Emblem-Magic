@@ -22,9 +22,9 @@ namespace Magic
             Application.Idle += OnLoaded;
         }
 
-        public void SetLoading(string message, float percent)
+        public void SetLoading(String message, Single percent)
         {
-            int value = (int)Math.Min(percent, 100);
+            Int32 value = (Int32)Math.Min(percent, 100);
             LoadingLabel.Text = message;
             LoadingBar.Value = value;
             this.Refresh();
@@ -34,14 +34,14 @@ namespace Magic
             LoadingLabel.Text = message;
             this.Refresh();
         }
-        public void SetPercent(float percent)
+        public void SetPercent(Single percent)
         {
-            int value = (int)Math.Min(percent, 100);
+            Int32 value = (Int32)Math.Min(percent, 100);
             LoadingBar.Value = value;
             this.Refresh();
         }
 
-        private void OnLoaded(object sender, EventArgs e)
+        private void OnLoaded(Object sender, EventArgs e)
         {
             Application.Idle -= OnLoaded;
             this.Close();

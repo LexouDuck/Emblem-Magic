@@ -15,14 +15,14 @@ namespace EmblemMagic.Editors
         UInt16[] CurrentTerrainNames;
         MapTileAnim CurrentTileAnim;
 
-        string CurrentEntry_Terrain
+        String CurrentEntry_Terrain
         {
             get
             {
                 return "Map Terrain 0x" + Util.ByteToHex(Terrain_ArrayBox.Value) + "[" + Terrain_ArrayBox.Text + "] - ";
             }
         }
-        string CurrentEntry_TileAnim
+        String CurrentEntry_TileAnim
         {
             get
             {
@@ -42,7 +42,7 @@ namespace EmblemMagic.Editors
                 Terrain_Stat_PointerArrayBox.Load("Terrain Stat Pointers.txt");
                 Terrain_Class_PointerArrayBox.Load("Terrain Move Cost Pointers.txt");
 
-                string[] file;
+                String[] file;
                 try
                 {
                     file = File.ReadAllLines(Core.Path_Arrays + "Map List.txt");
@@ -51,11 +51,11 @@ namespace EmblemMagic.Editors
                 {
                     throw new Exception("Could not open the array file:\n" + Core.Path_Arrays + "Map List.txt", ex);
                 }
-                List<string> list_palettes = new List<string>();
-                List<string> list_tilesets = new List<string>();
-                List<string> list_tsa_array = new List<string>();
-                List<string> list_tile_anim = new List<string>();
-                foreach (string entry in file)
+                List<String> list_palettes = new List<String>();
+                List<String> list_tilesets = new List<String>();
+                List<String> list_tsa_array = new List<String>();
+                List<String> list_tile_anim = new List<String>();
+                foreach (String entry in file)
                 {
                     if (entry == null || entry == "" || entry.Length < 10) continue;
                     else switch (entry.Substring(5, 5))
@@ -127,12 +127,12 @@ namespace EmblemMagic.Editors
         }
 
         public void Core_SetEntry(
-            byte palette,
-            byte tileset_1,
-            byte tileset_2,
-            byte tsa_terrain,
-            byte map_anim_1,
-            byte map_anim_2 = 0)
+            Byte palette,
+            Byte tileset_1,
+            Byte tileset_2,
+            Byte tsa_terrain,
+            Byte map_anim_1,
+            Byte map_anim_2 = 0)
         {
             Palette_ArrayBox.Value = palette;
             Tileset1_ArrayBox.Value = tileset_1;
@@ -201,7 +201,7 @@ namespace EmblemMagic.Editors
         {
             try
             {
-                byte[] terrain = Core.ReadData(TilesetTSA_PointerBox.Value, 0);
+                Byte[] terrain = Core.ReadData(TilesetTSA_PointerBox.Value, 0);
 
                 List<UInt16> names = new List<UInt16>();
                 Pointer address = Core.GetPointer("Map Terrain Names");
@@ -227,15 +227,15 @@ namespace EmblemMagic.Editors
 
             try
             {
-                int entry = Terrain_ArrayBox.Value;
+                Int32 entry = Terrain_ArrayBox.Value;
 
                 Terrain_Name_ShortBox.Value = CurrentTerrainNames[entry];
                 Terrain_Stat_ByteBox.Value = Core.ReadByte(Terrain_Stat_PointerArrayBox.Value + entry);
                 Terrain_Class_ByteBox.Value = Core.ReadByte(Terrain_Class_PointerArrayBox.Value + entry);
 
-                int x = 0;
-                int y = 0;
-                for (int i = 0; i < CurrentTileset.Terrain.Length; i++)
+                Int32 x = 0;
+                Int32 y = 0;
+                for (Int32 i = 0; i < CurrentTileset.Terrain.Length; i++)
                 {
                     if (CurrentTileset.Terrain[i] == entry)
                     {
@@ -306,7 +306,7 @@ namespace EmblemMagic.Editors
                     TileAnim_Offset_ByteBox.Enabled = true;
                     TileAnim_Offset_ByteBox.Value = frame.Offset;
 
-                    byte[] change = Core.ReadData(frame.FrameData, frame.Length * 2);
+                    Byte[] change = Core.ReadData(frame.FrameData, frame.Length * 2);
                     TileAnim_PaletteBox.Load(new Palette(change));
                     TileAnim_ImageBox.Reset();
                 }
@@ -318,8 +318,8 @@ namespace EmblemMagic.Editors
                     TileAnim_Offset_ByteBox.Enabled = false;
                     TileAnim_Offset_ByteBox.Value = 0;
 
-                    byte[] tileset = Core.ReadData(frame.FrameData, frame.Length * 8 * Tile.LENGTH);
-                    byte[] palette = Core.ReadData(Palette_PointerBox.Value + ViewPalette_ByteBox.Value * Palette.LENGTH, Palette.LENGTH);
+                    Byte[] tileset = Core.ReadData(frame.FrameData, frame.Length * 8 * Tile.LENGTH);
+                    Byte[] palette = Core.ReadData(Palette_PointerBox.Value + ViewPalette_ByteBox.Value * Palette.LENGTH, Palette.LENGTH);
                     TileAnim_ImageBox.Load(new Tileset(tileset).ToImage(32, 4, palette));
                     TileAnim_PaletteBox.Reset();
                 }
@@ -339,11 +339,11 @@ namespace EmblemMagic.Editors
             try
             {
                 MapTileFrame frame = CurrentTileAnim.Frames[TileAnim_Frame_ByteBox.Value];
-                byte[] tileset = Core.ReadData(Tileset1_PointerBox.Value, 0);
-                byte[] palette = Core.ReadData(Palette_PointerBox.Value, Map.PALETTES * Palette.LENGTH);
+                Byte[] tileset = Core.ReadData(Tileset1_PointerBox.Value, 0);
+                Byte[] palette = Core.ReadData(Palette_PointerBox.Value, Map.PALETTES * Palette.LENGTH);
                 if (ViewAnimation_CheckBox.Checked)
                 {
-                    byte[] change;
+                    Byte[] change;
                     if (frame.IsPaletteAnimation())
                     {
                         change = TileAnim_PaletteBox.Colors.ToBytes(false);
@@ -357,7 +357,7 @@ namespace EmblemMagic.Editors
                 }
                 Tileset_PaletteBox.Load(new GBA.Palette(palette, Map.PALETTES * Palette.MAX));
                 Tileset_ImageBox.Load(new Tileset(tileset).ToImage(32, 32,
-                    palette.GetBytes((uint)(ViewPalette_ByteBox.Value * Palette.LENGTH), Palette.LENGTH)));
+                    palette.GetBytes((UInt32)(ViewPalette_ByteBox.Value * Palette.LENGTH), Palette.LENGTH)));
             }
             catch (Exception ex)
             {
@@ -371,12 +371,12 @@ namespace EmblemMagic.Editors
             UI.SuspendUpdate();
             try
             {
-                byte[] data_palette = Palette.Merge(map_tileset.Palettes).ToBytes(false);
-                byte[] data_tileset1 = map_tileset.Tileset1.ToBytes(true);
-                byte[] data_tileset2 = map_tileset.Tileset2.ToBytes(true);
-                byte[] data_tsa = map_tileset.GetTSAandTerrain(true);
+                Byte[] data_palette = Palette.Merge(map_tileset.Palettes).ToBytes(false);
+                Byte[] data_tileset1 = map_tileset.Tileset1.ToBytes(true);
+                Byte[] data_tileset2 = map_tileset.Tileset2.ToBytes(true);
+                Byte[] data_tsa = map_tileset.GetTSAandTerrain(true);
 
-                var repoints = new List<Tuple<string, Pointer, int>>()
+                var repoints = new List<Tuple<String, Pointer, Int32>>()
                 {
                     Tuple.Create("Palette", Palette_PointerBox.Value, data_palette.Length),
                     Tuple.Create("Tileset 1", Tileset1_PointerBox.Value, data_tileset1.Length),
@@ -392,7 +392,7 @@ namespace EmblemMagic.Editors
                     address + 4 * TilesetTSA_ArrayBox.Value,
                 };
 
-                bool cancel = Prompt.ShowRepointDialog(this, "Repoint Map Tileset",
+                Boolean cancel = Prompt.ShowRepointDialog(this, "Repoint Map Tileset",
                     "The map tileset to insert may need some of its parts to be repointed.",
                     CurrentEntry_Terrain, repoints.ToArray(), writepos.ToArray());
                 if (cancel) return;
@@ -427,20 +427,20 @@ namespace EmblemMagic.Editors
             UI.PerformUpdate();
         }
 
-        void Core_InsertImage(string filepath)
+        void Core_InsertImage(String filepath)
         {
             MapTileset tileset = null;
             try
             {
-                string path = Path.GetDirectoryName(filepath) + '\\';
-                string file = Path.GetFileNameWithoutExtension(filepath);
+                String path = Path.GetDirectoryName(filepath) + '\\';
+                String file = Path.GetFileNameWithoutExtension(filepath);
 
                 Palette palette = null;
                 Bitmap maptileset = new Bitmap(filepath);
                 Bitmap tileset1 = null;
                 Bitmap tileset2 = null;
-                string[] extensions = new string[] { "png", "PNG", "bmp", "BMP", "gif", "GIF" };
-                for (int i = 0; i < extensions.Length; i++)
+                String[] extensions = new String[] { "png", "PNG", "bmp", "BMP", "gif", "GIF" };
+                for (Int32 i = 0; i < extensions.Length; i++)
                 {
                     if (File.Exists(path + file + " palette." + extensions[i])) palette = new Palette(path + file + " palette." + extensions[i]);
                     if (File.Exists(path + file + " 1." + extensions[i])) tileset1 = new Bitmap(path + file + " 1." + extensions[i]);
@@ -457,13 +457,13 @@ namespace EmblemMagic.Editors
             }
             Core_Insert(tileset);
         }
-        void Core_InsertData(string filepath)
+        void Core_InsertData(String filepath)
         {
             MapTileset tileset;
             try
             {
-                string path = Path.GetDirectoryName(filepath) + '\\';
-                string file = Path.GetFileNameWithoutExtension(filepath);
+                String path = Path.GetDirectoryName(filepath) + '\\';
+                String file = Path.GetFileNameWithoutExtension(filepath);
 
                 if (!File.Exists(path + file + ".chr"))
                     throw new Exception("Could not find Tileset file:\n" + path + file + ".chr");
@@ -472,17 +472,17 @@ namespace EmblemMagic.Editors
                 if (!File.Exists(path + file + ".tsa"))
                     throw new Exception("Could not find TSA and Terrain file:\n" + path + file + ".tsa");
 
-                byte[] data_tileset = File.ReadAllBytes(path + file + ".chr");
-                byte[] data_palette = File.ReadAllBytes(path + file + ".pal");
-                byte[] data_tsa = File.ReadAllBytes(path + file + ".tsa");
-                uint length = 32 * 32 * Tile.LENGTH;
+                Byte[] data_tileset = File.ReadAllBytes(path + file + ".chr");
+                Byte[] data_palette = File.ReadAllBytes(path + file + ".pal");
+                Byte[] data_tsa = File.ReadAllBytes(path + file + ".tsa");
+                UInt32 length = 32 * 32 * Tile.LENGTH;
                 if (data_tileset.Length != length && data_tileset.Length != length * 2)
                     throw new Exception("Tileset .chr file has invalid length." +
                         "\nIt should be " + length + " or " + length * 2 + " bytes long.");
 
                 tileset = new MapTileset(
                     data_palette,
-                    data_tileset.GetBytes(0, (int)length),
+                    data_tileset.GetBytes(0, (Int32)length),
                     data_tileset.GetBytes(length),
                     data_tsa);
             }
@@ -493,7 +493,7 @@ namespace EmblemMagic.Editors
             }
             Core_Insert(tileset);
         }
-        void Core_SaveImage(string filepath)
+        void Core_SaveImage(String filepath)
         {
             try
             {
@@ -501,9 +501,9 @@ namespace EmblemMagic.Editors
                     CurrentTileset.Width,
                     CurrentTileset.Height,
                     CurrentTileset.Palettes,
-                    delegate (int x, int y)
+                    delegate (Int32 x, Int32 y)
                     {
-                        return (byte)CurrentTileset[x, y];
+                        return (Byte)CurrentTileset[x, y];
                     });
             }
             catch (Exception ex)
@@ -511,20 +511,20 @@ namespace EmblemMagic.Editors
                 UI.ShowError("Could not save image", ex);
             }
         }
-        void Core_SaveData(string filepath)
+        void Core_SaveData(String filepath)
         {
             try
             {
-                string path = Path.GetDirectoryName(filepath) + '\\';
-                string file = Path.GetFileNameWithoutExtension(filepath);
+                String path = Path.GetDirectoryName(filepath) + '\\';
+                String file = Path.GetFileNameWithoutExtension(filepath);
 
-                byte[] tileset1 = Core.ReadData(Tileset1_PointerBox.Value, 0);
-                byte[] tileset2 = Core.ReadData(Tileset2_PointerBox.Value, 0);
-                byte[] data_tileset = new byte[tileset1.Length + tileset2.Length];
+                Byte[] tileset1 = Core.ReadData(Tileset1_PointerBox.Value, 0);
+                Byte[] tileset2 = Core.ReadData(Tileset2_PointerBox.Value, 0);
+                Byte[] data_tileset = new Byte[tileset1.Length + tileset2.Length];
                 Array.Copy(tileset1, 0, data_tileset, 0, tileset1.Length);
                 Array.Copy(tileset2, 0, data_tileset, tileset1.Length, tileset2.Length);
-                byte[] data_palette = Core.ReadData(Palette_PointerBox.Value, Map.PALETTES * Palette.LENGTH);
-                byte[] data_tsa = Core.ReadData(TilesetTSA_PointerBox.Value, 0);
+                Byte[] data_palette = Core.ReadData(Palette_PointerBox.Value, Map.PALETTES * Palette.LENGTH);
+                Byte[] data_tsa = Core.ReadData(TilesetTSA_PointerBox.Value, 0);
 
                 File.WriteAllBytes(path + file + ".chr", data_tileset);
                 File.WriteAllBytes(path + file + ".pal", data_palette);
@@ -610,13 +610,13 @@ namespace EmblemMagic.Editors
         {
             try
             {
-                const int offset = 2 * MapTileset.WIDTH * MapTileset.HEIGHT;
-                byte[] terrain = Core.ReadData(TilesetTSA_PointerBox.Value, 0);
-                int width  = Tileset_GridBox.Selection.GetLength(0);
-                int height = Tileset_GridBox.Selection.GetLength(1);
-                int index = 0;
-                for (int y = 0; y < height; y++)
-                for (int x = 0; x < width; x++)
+                const Int32 offset = 2 * MapTileset.WIDTH * MapTileset.HEIGHT;
+                Byte[] terrain = Core.ReadData(TilesetTSA_PointerBox.Value, 0);
+                Int32 width  = Tileset_GridBox.Selection.GetLength(0);
+                Int32 height = Tileset_GridBox.Selection.GetLength(1);
+                Int32 index = 0;
+                for (Int32 y = 0; y < height; y++)
+                for (Int32 x = 0; x < width; x++)
                 {
                     if (Tileset_GridBox.Selection[x, y])
                     {
@@ -652,28 +652,28 @@ namespace EmblemMagic.Editors
             Core_LoadPaletteAndSmallTileset();
         }
 
-        private void Palette_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void Palette_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Core.GetPointer("Map Data Array") + 4 * Palette_ArrayBox.Value,
                 Palette_PointerBox.Value,
                 Palette_ArrayBox.Text + "Palette repoint");
         }
-        private void Tileset1_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void Tileset1_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Core.GetPointer("Map Data Array") + 4 * Tileset1_ArrayBox.Value,
                 Tileset1_PointerBox.Value,
                 Tileset1_ArrayBox.Text + "Tileset 1 repoint");
         }
-        private void Tileset2_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void Tileset2_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Core.GetPointer("Map Data Array") + 4 * Tileset2_ArrayBox.Value,
                 Tileset2_PointerBox.Value,
                 Tileset2_ArrayBox.Text + "Tileset 2 repoint");
         }
-        private void TilesetTSA_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void TilesetTSA_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Core.GetPointer("Map Data Array") + 4 * TilesetTSA_ArrayBox.Value,
@@ -683,11 +683,11 @@ namespace EmblemMagic.Editors
 
 
 
-        private void Terrain_ArrayBox_ValueChanged(object sender, EventArgs e)
+        private void Terrain_ArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Core_LoadTerrainValues();
         }
-        private void Terrain_Name_ShortBox_ValueChanged(object sender, EventArgs e)
+        private void Terrain_Name_ShortBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteData(this,
                 Core.GetPointer("Map Terrain Names") + Terrain_ArrayBox.Value * 2,
@@ -697,13 +697,13 @@ namespace EmblemMagic.Editors
             Terrain_Name_MagicButton.EntryToSelect = Terrain_Name_ShortBox.Value;
         }
 
-        private void Terrain_Stat_PointerArrayBox_ValueChanged(object sender, EventArgs e)
+        private void Terrain_Stat_PointerArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Terrain_Stat_ByteBox.ValueChanged -= Terrain_Stat_ByteBox_ValueChanged;
             Terrain_Stat_ByteBox.Value = Core.ReadByte(Terrain_Stat_PointerArrayBox.Value + Terrain_ArrayBox.Value);
             Terrain_Stat_ByteBox.ValueChanged += Terrain_Stat_ByteBox_ValueChanged;
         }
-        private void Terrain_Stat_ByteBox_ValueChanged(object sender, EventArgs e)
+        private void Terrain_Stat_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 Terrain_Stat_PointerArrayBox.Value + Terrain_ArrayBox.Value,
@@ -711,13 +711,13 @@ namespace EmblemMagic.Editors
                 CurrentEntry_Terrain + Terrain_Stat_PointerArrayBox.Text + " changed");
         }
 
-        private void Terrain_Class_PointerArrayBox_ValueChanged(object sender, EventArgs e)
+        private void Terrain_Class_PointerArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Terrain_Class_ByteBox.ValueChanged -= Terrain_Class_ByteBox_ValueChanged;
             Terrain_Class_ByteBox.Value = Core.ReadByte(Terrain_Class_PointerArrayBox.Value + Terrain_ArrayBox.Value);
             Terrain_Class_ByteBox.ValueChanged += Terrain_Class_ByteBox_ValueChanged;
         }
-        private void Terrain_Class_ByteBox_ValueChanged(object sender, EventArgs e)
+        private void Terrain_Class_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 Terrain_Class_PointerArrayBox.Value + Terrain_ArrayBox.Value,
@@ -727,13 +727,13 @@ namespace EmblemMagic.Editors
 
 
 
-        private void TileAnim_ArrayBox_ValueChanged(object sender, EventArgs e)
+        private void TileAnim_ArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Core_LoadTileAnim();
             Core_LoadTileAnimFrame();
             Core_LoadPaletteAndSmallTileset();
         }
-        private void TileAnim_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void TileAnim_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Core.GetPointer("Map Data Array") + 4 * TileAnim_ArrayBox.Value,
@@ -741,19 +741,19 @@ namespace EmblemMagic.Editors
                 TileAnim_ArrayBox.Text + "Tile Anim 1 repoint");
         }
 
-        private void TileAnim_Frame_ByteBox_ValueChanged(object sender, EventArgs e)
+        private void TileAnim_Frame_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
             Core_LoadTileAnimFrame();
             Core_LoadPaletteAndSmallTileset();
         }
-        private void TileAnim_RadioButton_Click(object sender, EventArgs e)
+        private void TileAnim_RadioButton_Click(Object sender, EventArgs e)
         {
 
         }
 
-        private void TileAnim_Data_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void TileAnim_Data_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
-            int frame = TileAnim_Frame_ByteBox.Value;
+            Int32 frame = TileAnim_Frame_ByteBox.Value;
             Pointer address = CurrentTileAnim.Address + frame * MapTileFrame.LENGTH;
             if (CurrentTileAnim.Frames[frame].IsPaletteAnimation())
                 address += 0;
@@ -764,9 +764,9 @@ namespace EmblemMagic.Editors
                TileAnim_Data_PointerBox.Value,
                CurrentEntry_TileAnim + "Frame " + frame + " Data repointed");
         }
-        private void TileAnim_Duration_ByteBox_ValueChanged(object sender, EventArgs e)
+        private void TileAnim_Duration_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
-            int frame = TileAnim_Frame_ByteBox.Value;
+            Int32 frame = TileAnim_Frame_ByteBox.Value;
             Pointer address = CurrentTileAnim.Address + frame * MapTileFrame.LENGTH;
             if (CurrentTileAnim.Frames[frame].IsPaletteAnimation())
                 address += 4;
@@ -777,9 +777,9 @@ namespace EmblemMagic.Editors
                TileAnim_Duration_ByteBox.Value,
                CurrentEntry_TileAnim + "Frame " + frame + " Duration changed");
         }
-        private void TileAnim_Length_ByteBox_ValueChanged(object sender, EventArgs e)
+        private void TileAnim_Length_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
-            int frame = TileAnim_Frame_ByteBox.Value;
+            Int32 frame = TileAnim_Frame_ByteBox.Value;
             Pointer address = CurrentTileAnim.Address + frame * MapTileFrame.LENGTH;
             if (CurrentTileAnim.Frames[frame].IsPaletteAnimation())
                 address += 5;
@@ -790,9 +790,9 @@ namespace EmblemMagic.Editors
                TileAnim_Length_ByteBox.Value,
                CurrentEntry_TileAnim + "Frame " + frame + " Data Length changed");
         }
-        private void TileAnim_Offset_ByteBox_ValueChanged(object sender, EventArgs e)
+        private void TileAnim_Offset_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
-            int frame = TileAnim_Frame_ByteBox.Value;
+            Int32 frame = TileAnim_Frame_ByteBox.Value;
             Pointer address = CurrentTileAnim.Address + frame * MapTileFrame.LENGTH;
             if (CurrentTileAnim.Frames[frame].IsPaletteAnimation())
             {

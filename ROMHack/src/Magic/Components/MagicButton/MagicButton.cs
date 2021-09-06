@@ -11,7 +11,7 @@ namespace Magic.Components
     {
         protected IApp App;
 
-        public string EditorToOpen = null;
+        public String EditorToOpen = null;
         public UInt32 EntryToSelect = 0;
 
         public MagicButton(IApp app) : base()

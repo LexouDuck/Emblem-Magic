@@ -9,11 +9,11 @@ namespace Magic.Components
         /// <summary>
         /// Determines whether or not the grid is to show up on this MapBox
         /// </summary>
-        public bool ShowGrid { get; set; }
+        public Boolean ShowGrid { get; set; }
         /// <summary>
         /// The dimensions of tiles on this MapBox (pixels)
         /// </summary>
-        public int TileSize { get; set; }
+        public Int32 TileSize { get; set; }
         /// <summary>
         /// The image to show up behind the grid
         /// </summary>
@@ -25,7 +25,7 @@ namespace Magic.Components
         /// <summary>
         /// A boolean map of the hover-highlighted tiles
         /// </summary>
-        public bool[,] Hover { get; set; }
+        public Boolean[,] Hover { get; set; }
 
 
 
@@ -62,8 +62,8 @@ namespace Magic.Components
             Width = image.Width;
             Height = image.Height;
             Display = new Bitmap(Width, Height);
-            for (int y = 0; y < Height; y++)
-            for (int x = 0; x < Width; x++)
+            for (Int32 y = 0; y < Height; y++)
+            for (Int32 x = 0; x < Width; x++)
             {
                 Display.SetPixel(x, y, (System.Drawing.Color)image.GetColor(x, y));
             }
@@ -121,11 +121,11 @@ namespace Magic.Components
                 using (Pen select = new Pen(SystemColors.Highlight))
                 using (Pen normal = new Pen(SystemColors.ControlDarkDark))
                 {
-                    int width = Width / TileSize;
-                    int height = Height / TileSize;
+                    Int32 width = Width / TileSize;
+                    Int32 height = Height / TileSize;
 
-                    for (int y = 0; y < height; y++)
-                    for (int x = 0; x < width; x++)
+                    for (Int32 y = 0; y < height; y++)
+                    for (Int32 x = 0; x < width; x++)
                     {
                         if (Hover != null &&
                             x >= Hovered.X && x < Hovered.X + Hover.GetLength(0) &&
@@ -151,8 +151,8 @@ namespace Magic.Components
             {
                 using (Pen select = new Pen(SystemColors.Highlight))
                 {
-                    for (int y = 0; y < Hover.GetLength(1); y++)
-                    for (int x = 0; x < Hover.GetLength(0); x++)
+                    for (Int32 y = 0; y < Hover.GetLength(1); y++)
+                    for (Int32 x = 0; x < Hover.GetLength(0); x++)
                     {
                         if (Hover[x, y])
                         {

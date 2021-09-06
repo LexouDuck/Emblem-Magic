@@ -32,7 +32,7 @@ namespace EmblemMagic.Editors
             Current = new KeyMap(Core.ReadData(Address, KeyMap.LENGTH));
 
             KeyMap_PianoBox.SelectionChanged -= KeyMap_PianoBox_SelectionChanged;
-            for (int i = 0; i < KeyMap_PianoBox.Selection.Length; i++)
+            for (Int32 i = 0; i < KeyMap_PianoBox.Selection.Length; i++)
             {
                 if (Current[i] == Sample_ByteBox.Value)
                 {
@@ -51,7 +51,7 @@ namespace EmblemMagic.Editors
 
         private void KeyMap_PianoBox_SelectionChanged(Object sender, EventArgs e)
         {
-            for (int i = 0; i < KeyMap_PianoBox.Selection.Length; i++)
+            for (Int32 i = 0; i < KeyMap_PianoBox.Selection.Length; i++)
             {
                 if (KeyMap_PianoBox.Selection[i] && Current[i] != Sample_ByteBox.Value)
                 {

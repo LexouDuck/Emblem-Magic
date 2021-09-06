@@ -22,7 +22,7 @@ namespace Magic
         {
             Repoints.Clear();
 
-            for (int i = 0; i < pointers.Length; i++)
+            for (Int32 i = 0; i < pointers.Length; i++)
             {
                 Repoints.Add(pointers[i]);
             }
@@ -43,7 +43,7 @@ namespace Magic
         /// </summary>
         public void Remove(String assetName)
         {
-            for (int i = 0; i < Repoints.Count; i++)
+            for (Int32 i = 0; i < Repoints.Count; i++)
             {
                 if (assetName.Equals(Repoints[i].AssetName))
                     Repoints.RemoveAt(i);
@@ -55,7 +55,7 @@ namespace Magic
         /// </summary>
         public Repoint Get(String assetName)
         {
-            for (int i = 0; i < Repoints.Count; i++)
+            for (Int32 i = 0; i < Repoints.Count; i++)
             {
                 if (assetName.Equals(Repoints[i].AssetName))
                     return Repoints[i];
@@ -67,7 +67,7 @@ namespace Magic
         /// </summary>
         public Repoint Get(Pointer address)
         {
-            for (int i = 0; i < Repoints.Count; i++)
+            for (Int32 i = 0; i < Repoints.Count; i++)
             {
                 if (address == Repoints[i].CurrentAddress)
                     return Repoints[i];

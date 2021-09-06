@@ -20,7 +20,7 @@ namespace Magic
 
         //============================= Popup messages ============================
 
-        public static void ShowMessage(string text)
+        public static void ShowMessage(String text)
         {
             MessageBox.Show(text,
                 App.SoftwareName,
@@ -28,7 +28,7 @@ namespace Magic
                 MessageBoxIcon.Information);
         }
 
-        public static void ShowWarning(string text)
+        public static void ShowWarning(String text)
         {
             MessageBox.Show(text,
                 App.SoftwareName,
@@ -36,7 +36,7 @@ namespace Magic
                 MessageBoxIcon.Warning);
         }
 
-        public static DialogResult ShowError(string text)
+        public static DialogResult ShowError(String text)
         {
             DialogResult result = MessageBox.Show(
                 "Error: " + text,
@@ -49,12 +49,12 @@ namespace Magic
         {
             return ShowError(GetMethodName(ex) + " : " + ex.Message);
         }
-        public static DialogResult ShowError(string text, Exception ex)
+        public static DialogResult ShowError(String text, Exception ex)
         {
             return ShowError(text + "\n\n" + GetMethodName(ex) + " :\n" + ex.Message);
         }
 
-        public static void ShowDebug(string text)
+        public static void ShowDebug(String text)
         {
             Form debug = new Form()
             {
@@ -74,7 +74,7 @@ namespace Magic
             debug.ShowDialog();
         }
 
-        public static DialogResult ShowQuestion(string text)
+        public static DialogResult ShowQuestion(String text)
         {
             DialogResult result = MessageBox.Show(text,
                 App.SoftwareName,
@@ -119,13 +119,13 @@ namespace Magic
             Editor sender,
             String prefix,
             Pointer address,
-            int paletteAmount)
+            Int32 paletteAmount)
         {
             App.Core_OpenEditor(new PaletteEditor(App,
                 sender,
                 prefix,
                 address,
-                (byte)paletteAmount));
+                (Byte)paletteAmount));
         }
 
         /// <summary>
@@ -134,12 +134,12 @@ namespace Magic
         public static void OpenTSAEditor(
             Editor sender,
             String prefix,
-            Pointer palette_address, int palette_length,
-            Pointer tileset_address, int tileset_length,
+            Pointer palette_address, Int32 palette_length,
+            Pointer tileset_address, Int32 tileset_length,
             Pointer tsa_address,
-            int tsa_width, int tsa_height,
-            bool compressed,
-            bool flipRows)
+            Int32 tsa_width, Int32 tsa_height,
+            Boolean compressed,
+            Boolean flipRows)
         {
             App.Core_OpenEditor(new TSAEditor(App,
                 sender,
@@ -159,8 +159,8 @@ namespace Magic
             Editor sender,
             String prefix,
             Pointer address,
-            int compressed,
-            int offsetX, int offsetY,
+            Int32 compressed,
+            Int32 offsetX, Int32 offsetY,
             Palette palette,
             Tileset tileset)
         {

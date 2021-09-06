@@ -44,7 +44,7 @@ namespace Magic
                 }
                 else
                 {
-                    byte[] data = new byte[Write.Data.Length - Portion.End];
+                    Byte[] data = new Byte[Write.Data.Length - Portion.End];
                     Array.Copy(Write.Data, Portion.End, data, 0, data.Length);
                     return Tuple.Create(
                         (Write)null,
@@ -55,7 +55,7 @@ namespace Magic
             {
                 if (Portion.End == Write.Data.Length)
                 {
-                    byte[] data = new byte[Portion.Start];
+                    Byte[] data = new Byte[Portion.Start];
                     Array.Copy(Write.Data, 0, data, 0, data.Length);
                     return Tuple.Create(
                         new Write(editor, address, data, phrase),
@@ -63,9 +63,9 @@ namespace Magic
                 }
                 else
                 {
-                    byte[] data1 = new byte[Portion.Start];
+                    Byte[] data1 = new Byte[Portion.Start];
                     Array.Copy(Write.Data, 0, data1, 0, data1.Length);
-                    byte[] data2 = new byte[Write.Data.Length - Portion.End];
+                    Byte[] data2 = new Byte[Write.Data.Length - Portion.End];
                     Array.Copy(Write.Data, Portion.End, data2, 0, data2.Length);
                     return Tuple.Create(
                         new Write(editor, address, data1, phrase),

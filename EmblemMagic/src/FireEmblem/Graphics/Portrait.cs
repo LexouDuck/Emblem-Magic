@@ -17,25 +17,25 @@ namespace EmblemMagic.FireEmblem
     /// </summary>
     public class Portrait : GBA.SpriteSheet
     {
-        public const int MAIN = 0;
-        public const int CHIBI = 1;
-        public const int MOUTH = 2;
+        public const Int32 MAIN = 0;
+        public const Int32 CHIBI = 1;
+        public const Int32 MOUTH = 2;
 
-        public const int WIDTH = 16;
-        public const int HEIGHT = 14;
+        public const Int32 WIDTH = 16;
+        public const Int32 HEIGHT = 14;
 
-        public static int Face_Width  = (Core.CurrentROM is FE6) ? 8 : 32;
-        public static int Face_Height = (Core.CurrentROM is FE6) ? 17 : 4;
-        public static int Face_Length = Face_Width * Face_Height * Tile.LENGTH;
-        public static int Card_Width  = 10;
-        public static int Card_Height = 9;
-        public static int Card_Length = Card_Width * Card_Height * Tile.LENGTH;
-        public static int Chibi_Width  = 4;
-        public static int Chibi_Height = 4;
-        public static int Chibi_Length = Chibi_Width * Chibi_Height * Tile.LENGTH;
-        public static int Mouth_Width  = 12;
-        public static int Mouth_Height = 4;
-        public static int Mouth_Length = Mouth_Width * Mouth_Height * Tile.LENGTH;
+        public static Int32 Face_Width  = (Core.CurrentROM is FE6) ? 8 : 32;
+        public static Int32 Face_Height = (Core.CurrentROM is FE6) ? 17 : 4;
+        public static Int32 Face_Length = Face_Width * Face_Height * Tile.LENGTH;
+        public static Int32 Card_Width  = 10;
+        public static Int32 Card_Height = 9;
+        public static Int32 Card_Length = Card_Width * Card_Height * Tile.LENGTH;
+        public static Int32 Chibi_Width  = 4;
+        public static Int32 Chibi_Height = 4;
+        public static Int32 Chibi_Length = Chibi_Width * Chibi_Height * Tile.LENGTH;
+        public static Int32 Mouth_Width  = 12;
+        public static Int32 Mouth_Height = 4;
+        public static Int32 Mouth_Length = Mouth_Width * Mouth_Height * Tile.LENGTH;
 
 
 
@@ -59,7 +59,7 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// Creates a regular fire emblem portrait from the given data
         /// </summary>
-        public Portrait(Palette palette, byte[] face, byte[] chibi, byte[] mouth)
+        public Portrait(Palette palette, Byte[] face, Byte[] chibi, Byte[] mouth)
             : base(WIDTH * Tile.SIZE, HEIGHT * Tile.SIZE)
         {
             if (palette == null) throw new Exception("Palette given is null.");
@@ -100,7 +100,7 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// Creates a generic class card Portrait from the given palette and tile data
         /// </summary>
-        public Portrait(Palette palette, byte[] card)
+        public Portrait(Palette palette, Byte[] card)
             : base(Card_Width * GBA.Tile.SIZE, Card_Height * GBA.Tile.SIZE)
         {
             if (card == null) throw new Exception("Portrait main image is null");
@@ -111,7 +111,7 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// Creates a FireEmblem.Portrait from the given image.
         /// </summary>
-        public Portrait(Image image, bool generic)
+        public Portrait(Image image, Boolean generic)
             : base((generic) ? Card_Width * Tile.SIZE : WIDTH * Tile.SIZE,
                   (generic) ? Card_Height * Tile.SIZE : HEIGHT * Tile.SIZE)
         {
@@ -149,11 +149,11 @@ namespace EmblemMagic.FireEmblem
 
 
 
-        public static int?[,] Map_Test(bool generic)
+        public static Int32?[,] Map_Test(Boolean generic)
         {
             if (generic)
             {
-                return TileMap.Convert(new int?[9, 10]
+                return TileMap.Convert(new Int32?[9, 10]
                 {
                     { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09 },
                     { 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13 },
@@ -166,7 +166,7 @@ namespace EmblemMagic.FireEmblem
                     { 0x50, 0x51, 0x52, 0x53, 0x54, 0x55, 0x56, 0x57, 0x58, 0x59 }
                 }, 0);
             }
-            else return TileMap.Convert(new int?[10, 12]
+            else return TileMap.Convert(new Int32?[10, 12]
             {
                 { null, null, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, null, null },
                 { null, null, 0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, null, null },
@@ -180,11 +180,11 @@ namespace EmblemMagic.FireEmblem
                 { 0x74, 0x75, 0x30, 0x31, 0x32, 0x33, 0x70, 0x71, 0x72, 0x73, 0x76, 0x77 },
             }, 0);
         }
-        static int?[,] Map_Face()
+        static Int32?[,] Map_Face()
         {
             if (Program.Core.CurrentROM is FE6)
             {
-                return TileMap.Convert(new int?[14, 16]
+                return TileMap.Convert(new Int32?[14, 16]
                 {
                     { null, null, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, null, null, null, null, null, null },
                     { null, null, 0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, null, null, null, null, null, null },
@@ -204,7 +204,7 @@ namespace EmblemMagic.FireEmblem
             }
             else
             {
-                return TileMap.Convert(new int?[14, 16]
+                return TileMap.Convert(new Int32?[14, 16]
                 {
                     { null, null, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, null, null, null, null, null, null },
                     { null, null, 0x20, 0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, null, null, null, null, null, null },
@@ -223,9 +223,9 @@ namespace EmblemMagic.FireEmblem
                 }, 0);
             }
         }
-        static int?[,] Map_Chibi()
+        static Int32?[,] Map_Chibi()
         {
-            return TileMap.Convert(new int?[4, 4]
+            return TileMap.Convert(new Int32?[4, 4]
             {
                 { 0x00, 0x01, 0x02, 0x03 },
                 { 0x04, 0x05, 0x06, 0x07 },
@@ -233,18 +233,18 @@ namespace EmblemMagic.FireEmblem
                 { 0x0C, 0x0D, 0x0E, 0x0F },
             }, 0);
         }
-        static int?[,] Map_Mouth()
+        static Int32?[,] Map_Mouth()
         {
-            return TileMap.Convert(new int?[4, 12] {
+            return TileMap.Convert(new Int32?[4, 12] {
                 { 0x00, 0x01, 0x02, 0x03, 0x08, 0x09, 0x0A, 0x0B, 0x10, 0x11, 0x12, 0x13 },
                 { 0x04, 0x05, 0x06, 0x07, 0x0C, 0x0D, 0x0E, 0x0F, 0x14, 0x15, 0x16, 0x17 },
                 { 0x18, 0x19, 0x1A, 0x1B, 0x20, 0x21, 0x22, 0x23, 0x28, 0x29, 0x2A, 0x2B },
                 { 0x1C, 0x1D, 0x1E, 0x1F, 0x24, 0x25, 0x26, 0x27, 0x2C, 0x2D, 0x2E, 0x2F },
             }, 0);
         }
-        static int?[,] Map_Card()
+        static Int32?[,] Map_Card()
         {
-            return TileMap.Convert(new int?[9, 10]
+            return TileMap.Convert(new Int32?[9, 10]
             {
                 { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09 },
                 { 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F, 0x10, 0x11, 0x12, 0x13 },

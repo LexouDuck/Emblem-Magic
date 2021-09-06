@@ -2,7 +2,7 @@
 {
     public static class CRC32
     {
-        static uint[] CRC32Table = new uint[256]
+        static System.UInt32[] CRC32Table = new System.UInt32[256]
         {
             0x00000000, 0x77073096, 0xee0e612c, 0x990951ba, 0x076dc419, 0x706af48f,
             0xe963a535, 0x9e6495a3, 0x0edb8832, 0x79dcb8a4, 0xe0d5e91e, 0x97d2d988,
@@ -48,12 +48,12 @@
             0x54de5729, 0x23d967bf, 0xb3667a2e, 0xc4614ab8, 0x5d681b02, 0x2a6f2b94,
             0xb40bbe37, 0xc30c8ea1, 0x5a05df1b, 0x2d02ef8d };
 
-        static void crc32_adjust(ref uint crc32, byte input)
+        static void crc32_adjust(ref System.UInt32 crc32, System.Byte input)
         {
             crc32 = ((crc32 >> 8) & 0x00ffffff) ^ CRC32Table[(crc32 ^ input) & 0xff];
         }
 
-        static void crc32_adjust(ref uint crc32, byte[] input)
+        static void crc32_adjust(ref System.UInt32 crc32, System.Byte[] input)
         {
             foreach (var item in input)
             {
@@ -61,17 +61,17 @@
             }
         }
         
-        public static uint CalculateCRC32(byte[] data, int index, int length)
+        public static System.UInt32 CalculateCRC32(System.Byte[] data, System.Int32 index, System.Int32 length)
         {
-            uint crc32 = 0xFFFFFFFF;
-            for (int i = index; i < index + length; i++)
+            System.UInt32 crc32 = 0xFFFFFFFF;
+            for (System.Int32 i = index; i < index + length; i++)
             {
                 crc32_adjust(ref crc32, data[i]);
             }
             return ~crc32;
         }
 
-        public static uint GetChecksum(byte[] data)
+        public static System.UInt32 GetChecksum(System.Byte[] data)
         {
             return CalculateCRC32(data, 0, data.Length);
         }

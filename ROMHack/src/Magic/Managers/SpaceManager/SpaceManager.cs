@@ -26,7 +26,7 @@ namespace Magic
         }
         public void Load(Range[] free_space)
         {
-            for (int i = 0; i < free_space.Length; i++)
+            for (Int32 i = 0; i < free_space.Length; i++)
             {
                 MarkSpace("FREE",
                     new Pointer(free_space[i].Start),
@@ -39,7 +39,7 @@ namespace Magic
         /// <summary>
         /// Marks the given range of space in the ROM, fuses with other ranges or overwrites them appropriately
         /// </summary>
-        public void MarkSpace(string markname, Pointer address, Pointer endbyte)
+        public void MarkSpace(String markname, Pointer address, Pointer endbyte)
         {
             Mark mark = App.FEH.Marks.Get(markname);
             if (mark == null)
@@ -51,7 +51,7 @@ namespace Magic
                 else return;
             }
 
-            int i = 0;
+            Int32 i = 0;
             while (i < MarkedRanges.Count && address > MarkedRanges[i].Address)
             { i++; }
 
@@ -66,7 +66,7 @@ namespace Magic
         /// </summary>
         public void UnmarkSpace(Pointer address, Pointer endbyte)
         {
-            int i = 0;
+            Int32 i = 0;
             while (i < MarkedRanges.Count && address > MarkedRanges[i].Address)
             { i++; }
 
@@ -76,15 +76,15 @@ namespace Magic
             }
             else
             {
-                bool check = true;
+                Boolean check = true;
                 Mark mark = MarkedRanges[i].Marked;
 
                 if (address < MarkedRanges[i].EndByte)
                 {   // if there's an overlap with preceding range
                     if (endbyte < MarkedRanges[i].EndByte)
                     {   // if the range to remove is within a bigger one
-                        int first = MarkedRanges[i].Address;
-                        int last = MarkedRanges[i].EndByte;
+                        Int32 first = MarkedRanges[i].Address;
+                        Int32 last = MarkedRanges[i].EndByte;
                         MarkedRanges.RemoveAt(i);
                         MarkedRanges.Insert(i, new Space(mark, endbyte, last));
                         MarkedRanges.Insert(i, new Space(mark, first, address));
@@ -92,7 +92,7 @@ namespace Magic
                     }   // split the preceding range in 2
                     else
                     {   // so it's an overlap
-                        int first = MarkedRanges[i].Address;
+                        Int32 first = MarkedRanges[i].Address;
                         MarkedRanges.RemoveAt(i);
                         MarkedRanges.Insert(i, new Space(mark, first, address));
 
@@ -118,7 +118,7 @@ namespace Magic
                     {   // so there are ranges to modify
                         if (endbyte < MarkedRanges[i].EndByte)
                         {   // if the following range has a remaining portion after the removal
-                            int last = MarkedRanges[i].EndByte;
+                            Int32 last = MarkedRanges[i].EndByte;
                             MarkedRanges.RemoveAt(i);
                             MarkedRanges.Insert(i, new Space(mark, endbyte, last));
                             check = false;
@@ -140,7 +140,7 @@ namespace Magic
         /// <summary>
         /// Returns true if the given range is within a space marked 'markname'
         /// </summary>
-        public bool IsMarked(string markname, Pointer address, int length = 1)
+        public Boolean IsMarked(String markname, Pointer address, Int32 length = 1)
         {
             Mark mark = App.FEH.Marks.Get(markname);
 
@@ -158,7 +158,7 @@ namespace Magic
         /// <summary>
         /// returns all the ranges of marked space with the given mark to them
         /// </summary>
-        public List<Range> GetAllMarkedAs(string markname)
+        public List<Range> GetAllMarkedAs(String markname)
         {
             Mark mark = App.FEH.Marks.Get(markname);
             List<Range> list = new List<Range>();
@@ -189,7 +189,7 @@ namespace Magic
         /// <summary>
         /// Returns a pointer of an area of marked space in the loaded rom that is at least 'length'
         /// </summary>
-        public Pointer GetPointer(string markname, int length)
+        public Pointer GetPointer(String markname, Int32 length)
         {
             foreach (Space space in MarkedRanges)
             {
@@ -204,13 +204,13 @@ namespace Magic
         /// <summary>
         /// Merges intersecting ranges and whatnot, checking space at the previous and following indices.
         /// </summary>
-        private void ListCleanup(int index)
+        private void ListCleanup(Int32 index)
         {
-            bool prev_check = false;
-            int prev_index = index - 1;
+            Boolean prev_check = false;
+            Int32 prev_index = index - 1;
             Mark prev_marked = null;
-            int prev_offset = 0;
-            int prev_endoff = 0;
+            Int32 prev_offset = 0;
+            Int32 prev_endoff = 0;
             if (prev_index >= 0 && prev_index < MarkedRanges.Count)
             {
                 prev_check = true;
@@ -218,11 +218,11 @@ namespace Magic
                 prev_offset = MarkedRanges[prev_index].Address;
                 prev_endoff = MarkedRanges[prev_index].EndByte;
             }
-            bool this_check = false;
-            int this_index = index;
+            Boolean this_check = false;
+            Int32 this_index = index;
             Mark this_marked = null;
-            int this_offset = 0;
-            int this_endoff = 0;
+            Int32 this_offset = 0;
+            Int32 this_endoff = 0;
             if (this_index >= 0 && this_index < MarkedRanges.Count)
             {
                 this_check = true;
@@ -230,11 +230,11 @@ namespace Magic
                 this_offset = MarkedRanges[this_index].Address;
                 this_endoff = MarkedRanges[this_index].EndByte;
             }
-            bool next_check = false;
-            int next_index = index + 1;
+            Boolean next_check = false;
+            Int32 next_index = index + 1;
             Mark next_marked = null;
-            int next_offset = 0;
-            int next_endoff = 0;
+            Int32 next_offset = 0;
+            Int32 next_endoff = 0;
             if (next_index >= 0 && next_index < MarkedRanges.Count)
             {
                 next_check = true;
@@ -325,7 +325,7 @@ namespace Magic
                 }
             }
 
-            for (int i = 0; i < MarkedRanges.Count; i++)
+            for (Int32 i = 0; i < MarkedRanges.Count; i++)
             {
                 if (MarkedRanges[i].Length <= 0) MarkedRanges.RemoveAt(i);
             }

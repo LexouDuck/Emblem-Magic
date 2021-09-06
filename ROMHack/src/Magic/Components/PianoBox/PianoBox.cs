@@ -13,22 +13,22 @@ namespace Magic.Components
         /// <summary>
         /// The amount of octaves to display in this PianoBox
         /// </summary>
-        public int Octaves { get; set; }
+        public Int32 Octaves { get; set; }
         /// <summary>
         /// The currently highlighted notes on the piano
         /// </summary>
-        public bool[] Selection { get; set; }
+        public Boolean[] Selection { get; set; }
         /// <summary>
         /// Whether or not the selection of notes on this PianoBox is sustained
         /// </summary>
-        public bool ToggleSelection { get; set; }
+        public Boolean ToggleSelection { get; set; }
 
 
 
         public PianoBox()
         {
             Octaves = 10;
-            Selection = new bool[Octaves * 12];
+            Selection = new Boolean[Octaves * 12];
             ToggleSelection = false;
 
             InitializeComponent();
@@ -46,10 +46,10 @@ namespace Magic.Components
 
 
 
-        void CheckKeyboard(bool select)
+        void CheckKeyboard(Boolean select)
         {
-            Selection = new bool[Octaves * 12];
-            for (int i = 0; i < keys.Count; i++)
+            Selection = new Boolean[Octaves * 12];
+            for (Int32 i = 0; i < keys.Count; i++)
             {
                 switch (keys[i])
                 {
@@ -75,13 +75,13 @@ namespace Magic.Components
         }
         void CheckMouseCollisions(MouseEventArgs e)
         {
-            float increment = Width / Octaves / 7; // the width of a white note
-            float width = (increment / 3) * 2;
-            float height = this.Height * 0.6f;
-            float x = width;
+            Single increment = Width / Octaves / 7; // the width of a white note
+            Single width = (increment / 3) * 2;
+            Single height = this.Height * 0.6f;
+            Single x = width;
             if (e.Y <= height)
             {
-                for (int i = 0; i < Octaves * 12; i++)
+                for (Int32 i = 0; i < Octaves * 12; i++)
                 {
                     switch (i % 12)
                     {
@@ -104,7 +104,7 @@ namespace Magic.Components
                 }
             }
             x = 0;
-            for (int i = 0; i < Octaves * 12; i++)
+            for (Int32 i = 0; i < Octaves * 12; i++)
             {
                 switch (i % 12)
                 {
@@ -128,14 +128,14 @@ namespace Magic.Components
 
 
 
-        bool mouse = false;
+        Boolean mouse = false;
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
 
             if (!ToggleSelection && mouse)
             {
-                Selection = new bool[Octaves * 12];
+                Selection = new Boolean[Octaves * 12];
                 CheckMouseCollisions(e);
             }
         }
@@ -146,7 +146,7 @@ namespace Magic.Components
 
             if (!ToggleSelection)
             {
-                Selection = new bool[Octaves * 12];
+                Selection = new Boolean[Octaves * 12];
                 this.SelectionChanged(this, null);
                 this.Invalidate();
             }
@@ -176,7 +176,7 @@ namespace Magic.Components
             CheckKeyboard(false);
             e.Handled = true;
         }
-        protected override bool IsInputKey(Keys keyData)
+        protected override Boolean IsInputKey(Keys keyData)
         {
             switch (keyData)
             {
@@ -203,7 +203,7 @@ namespace Magic.Components
         {
             base.OnPaint(e);
 
-            float increment = Width / Octaves / 7; // the width of a white note
+            Single increment = Width / Octaves / 7; // the width of a white note
 
             using (Brush white = new SolidBrush(this.ForeColor))
             {
@@ -212,14 +212,14 @@ namespace Magic.Components
 
             using (Brush selected = new SolidBrush(SystemColors.Highlight))
             {
-                float width = (increment / 3) * 2;
-                float height = (this.Height * 0.6f);
-                float x = 0;
+                Single width = (increment / 3) * 2;
+                Single height = (this.Height * 0.6f);
+                Single x = 0;
                 using (Pen lines = new Pen(SystemColors.AppWorkspace))
                 {
                     e.Graphics.DrawRectangle(lines, 0, 0, Width - 1, Height - 1);
                     
-                    for (int i = 0; i < Octaves * 12; i++)
+                    for (Int32 i = 0; i < Octaves * 12; i++)
                     {
                         switch (i % 12)
                         {
@@ -238,7 +238,7 @@ namespace Magic.Components
                 x = width;
                 using (Brush black = new SolidBrush(this.BackColor))
                 {
-                    for (int i = 0; i < Octaves * 12; i++)
+                    for (Int32 i = 0; i < Octaves * 12; i++)
                     {
                         switch (i % 12)
                         {
@@ -264,7 +264,7 @@ namespace Magic.Components
         /// <summary>
         /// An event handler that calls the 'OnPaint' method
         /// </summary>
-        void Redraw(object sender, EventArgs e)
+        void Redraw(Object sender, EventArgs e)
         {
             this.Invalidate();
         }
@@ -278,7 +278,7 @@ namespace Magic.Components
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
+        protected override void Dispose(Boolean disposing)
         {
             if (disposing && (components != null))
             {

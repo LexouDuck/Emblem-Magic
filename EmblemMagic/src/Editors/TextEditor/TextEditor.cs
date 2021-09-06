@@ -30,7 +30,7 @@ namespace EmblemMagic.Editors
                 return EntryNumBox.Value;
             }
         }
-        public string CurrentEntry
+        public String CurrentEntry
         {
             get
             {
@@ -45,8 +45,8 @@ namespace EmblemMagic.Editors
             }
             set
             {
-                Text_CodeBox.SelectionStart = (int)value.Start;
-                Text_CodeBox.SelectionLength = (int)value.Length;
+                Text_CodeBox.SelectionStart = (Int32)value.Start;
+                Text_CodeBox.SelectionLength = (Int32)value.Length;
                 this.Select();
                 //Text_CodeBox.ScrollToCaret();
             }
@@ -66,7 +66,7 @@ namespace EmblemMagic.Editors
                 Text_CodeBox.KeyDown += new KeyEventHandler(TextBox_SelectAll);
                 Text_CodeBox.AddSyntax(@"\[(.*?)\]", System.Drawing.SystemColors.Highlight);
 
-                Font_ComboBox.DataSource = new string[]
+                Font_ComboBox.DataSource = new String[]
                 {
                     "Menu Font",
                     "Text Bubble Font"
@@ -80,7 +80,7 @@ namespace EmblemMagic.Editors
             }
         }
 
-        public override void Core_SetEntry(uint entry)
+        public override void Core_SetEntry(UInt32 entry)
         {
             EntryNumBox.Value = (UInt16)entry;
         }
@@ -99,7 +99,7 @@ namespace EmblemMagic.Editors
         {
             try
             {
-                CurrentFont = new Font(Core.GetPointer((string)Font_ComboBox.SelectedValue));
+                CurrentFont = new Font(Core.GetPointer((String)Font_ComboBox.SelectedValue));
 
                 Font_GridBox.Load(CurrentFont);
             }
@@ -130,7 +130,7 @@ namespace EmblemMagic.Editors
             else if (Font_GridBox.SelectionIsSingle())
             {
                 System.Drawing.Point selection = Font_GridBox.GetSelectionCoords();
-                int index = selection.X + selection.Y * 16;
+                Int32 index = selection.X + selection.Y * 16;
                 if (CurrentFont.Glyphs[index] == null)
                 {
                     Glyph_Address_PointerBox.Value = new Pointer();
@@ -169,7 +169,7 @@ namespace EmblemMagic.Editors
             {
                 Pointer address = Core.ReadPointer(Core.GetPointer("Text Array") + EntryNumBox.Value * 4);
 
-                Text_PointerBox.Value = new Pointer((uint)(address & 0x7FFFFFFF));
+                Text_PointerBox.Value = new Pointer((UInt32)(address & 0x7FFFFFFF));
                 Text_ASCII_CheckBox.CheckedChanged -= Text_ASCII_CheckBox_CheckedChanged;
                 Text_ASCII_CheckBox.Checked = ((address & 0x80000000) != 0);
                 Text_ASCII_CheckBox.CheckedChanged += Text_ASCII_CheckBox_CheckedChanged;
@@ -185,8 +185,8 @@ namespace EmblemMagic.Editors
         {
             try
             {
-                string[] text = FireEmblem.Text.RemoveBracketCodes(Text_CodeBox.Text.Split('\r', '\n'));
-                bool bubble = ((string)Font_ComboBox.SelectedValue).Equals("Text Bubble Font");
+                String[] text = FireEmblem.Text.RemoveBracketCodes(Text_CodeBox.Text.Split('\r', '\n'));
+                Boolean bubble = ((String)Font_ComboBox.SelectedValue).Equals("Text Bubble Font");
 
                 CurrentTextPreview = new TextPreview(CurrentFont, bubble, text, Text_Line_NumBox.Value);
 
@@ -199,7 +199,7 @@ namespace EmblemMagic.Editors
             }
         }
 
-        public string Core_GetText(UInt16 entry)
+        public String Core_GetText(UInt16 entry)
         {
             Pointer address = Core.ReadPointer(Core.GetPointer("Text Array") + entry * 4);
 
@@ -219,13 +219,13 @@ namespace EmblemMagic.Editors
             }
             else
             {
-                address = new Pointer((uint)(address & 0x7FFFFFFF));
+                address = new Pointer((UInt32)(address & 0x7FFFFFFF));
                 if (address > Core.CurrentROMSize)
                     throw new Exception("Invalid pointer read in the Text Array: " + address);
 
-                List<byte> data = new List<byte>();
-                byte buffer = 0xFF;
-                int index = 0;
+                List<Byte> data = new List<Byte>();
+                Byte buffer = 0xFF;
+                Int32 index = 0;
                 while (buffer != 0x00)
                 {
                     buffer = Core.ReadByte(address + index);
@@ -240,13 +240,13 @@ namespace EmblemMagic.Editors
                     PortraitList);
             }
         }
-        public void Core_WriteText(string text, UInt16 entry)
+        public void Core_WriteText(String text, UInt16 entry)
         {
             UI.SuspendUpdate();
             try
             {
                 Pointer address;
-                byte[] data = FireEmblem.Text.TextToBytes(
+                Byte[] data = FireEmblem.Text.TextToBytes(
                     text,
                     TextCommands1,
                     TextCommands2,
@@ -283,7 +283,7 @@ namespace EmblemMagic.Editors
             UI.ResumeUpdate();
             UI.PerformUpdate();
         }
-        public void Core_WriteFont(string path)
+        public void Core_WriteFont(String path)
         {
             UI.SuspendUpdate();
 
@@ -298,20 +298,20 @@ namespace EmblemMagic.Editors
                 
                 FireEmblem.Font font = new FireEmblem.Font(bitmap);
 
-                List<Tuple<string, Pointer, int>> repoints = new List<Tuple<string, Pointer, int>>();
+                List<Tuple<String, Pointer, Int32>> repoints = new List<Tuple<String, Pointer, Int32>>();
                 List<Pointer> addresses = new List<Pointer>();
-                for (int i = 0; i < 256; i++)
+                for (Int32 i = 0; i < 256; i++)
                 {
                     if (font.Glyphs[i] != null && CurrentFont.Glyphs[i] == null)
                     {
-                        repoints.Add(Tuple.Create("Glyph 0x" + Util.ByteToHex((byte)i), new Pointer(), 0x48));
+                        repoints.Add(Tuple.Create("Glyph 0x" + Util.ByteToHex((Byte)i), new Pointer(), 0x48));
                         addresses.Add(CurrentFont.Address + i * 4);
                     }
                 }
 
                 if (addresses.Count != 0)
                 {
-                    bool cancel = Prompt.ShowRepointDialog(this,
+                    Boolean cancel = Prompt.ShowRepointDialog(this,
                         "Repoint Null Glyphs",
                         "Some glyphs in the font are currently set as null in the ROM.\n" +
                         "As such, a non-null pointer must be given to these glyphs.",
@@ -322,16 +322,16 @@ namespace EmblemMagic.Editors
                     if (cancel) { UI.ResumeUpdate(); return; }
                 }
 
-                CurrentFont = new FireEmblem.Font(Core.GetPointer((string)Font_ComboBox.SelectedValue));
+                CurrentFont = new FireEmblem.Font(Core.GetPointer((String)Font_ComboBox.SelectedValue));
 
-                for (int i = 0; i < 256; i++)
+                for (Int32 i = 0; i < 256; i++)
                 {
                     if (font.Glyphs[i] != null && CurrentFont.Glyphs[i].Address != new Pointer())
                     {
                         Core.WriteData(this,
                             CurrentFont.Glyphs[i].Address,
                             font.Glyphs[i].ToBytes(),
-                            Font_ComboBox.SelectedValue + " - Glyph 0x" + Util.ByteToHex((byte)i) + " changed");
+                            Font_ComboBox.SelectedValue + " - Glyph 0x" + Util.ByteToHex((Byte)i) + " changed");
                     }
                 }
             }
@@ -346,7 +346,7 @@ namespace EmblemMagic.Editors
 
 
 
-        private void File_SaveEntry_Click(object sender, EventArgs e)
+        private void File_SaveEntry_Click(Object sender, EventArgs e)
         {
             using (SaveFileDialog saveWindow = new SaveFileDialog())
             {
@@ -362,7 +362,7 @@ namespace EmblemMagic.Editors
                 }
             }
         }
-        private void File_SaveScript_Click(object sender, EventArgs e)
+        private void File_SaveScript_Click(Object sender, EventArgs e)
         {
             using (SaveFileDialog saveWindow = new SaveFileDialog())
             {
@@ -379,10 +379,10 @@ namespace EmblemMagic.Editors
                         loading.Show();
                         loading.SetLoading("Dumping script...", 0);
                         UInt16 entry = 0;
-                        string file = "";
+                        String file = "";
                         while (++entry < Int16.MaxValue)
                         {
-                            loading.SetPercent(100 * ((float)entry / (float)0x5000));
+                            loading.SetPercent(100 * ((Single)entry / (Single)0x5000));
                             try
                             {
                                 file += Core_GetText(entry) + "\r\n";
@@ -394,25 +394,25 @@ namespace EmblemMagic.Editors
                 }
             }
         }
-        private void File_SaveFolder_Click(object sender, EventArgs e)
+        private void File_SaveFolder_Click(Object sender, EventArgs e)
         {
             using (var folderWindow = new FolderBrowserDialog())
             {
                 folderWindow.ShowNewFolderButton = true;
 
                 if (folderWindow.ShowDialog() == DialogResult.OK &&
-                    !string.IsNullOrWhiteSpace(folderWindow.SelectedPath))
+                    !String.IsNullOrWhiteSpace(folderWindow.SelectedPath))
                 {
                     using (FormLoading loading = new FormLoading())
                     {
                         loading.Show();
                         loading.SetLoading("Dumping script...", 0);
-                        int amount = 0;
+                        Int32 amount = 0;
                         UInt16 entry = 0;
-                        string name;
+                        String name;
                         while (++entry < Int16.MaxValue)
                         {
-                            loading.SetPercent(30 + 70 * ((float)entry / (float)Int16.MaxValue));
+                            loading.SetPercent(30 + 70 * ((Single)entry / (Single)Int16.MaxValue));
                             try
                             {
                                 name = folderWindow.SelectedPath + "\\0x" + Util.UInt16ToHex((UInt16)entry) + ".txt";
@@ -427,7 +427,7 @@ namespace EmblemMagic.Editors
                 }
             }
         }
-        private void File_InsertEntry_Click(object sender, EventArgs e)
+        private void File_InsertEntry_Click(Object sender, EventArgs e)
         {
             using (OpenFileDialog openWindow = new OpenFileDialog())
             {
@@ -442,7 +442,7 @@ namespace EmblemMagic.Editors
                 }
             }
         }
-        private void File_InsertScript_Click(object sender, EventArgs e)
+        private void File_InsertScript_Click(Object sender, EventArgs e)
         {
             using (OpenFileDialog openWindow = new OpenFileDialog())
             {
@@ -453,11 +453,11 @@ namespace EmblemMagic.Editors
 
                 if (openWindow.ShowDialog() == DialogResult.OK)
                 {
-                    string end_command = TextCommands1[0x00];
-                    string file = File.ReadAllText(openWindow.FileName);
+                    String end_command = TextCommands1[0x00];
+                    String file = File.ReadAllText(openWindow.FileName);
                     UInt16 entry = 0x0000;
-                    int parse = 0;
-                    int length = 0;
+                    Int32 parse = 0;
+                    Int32 length = 0;
                     while (parse < file.Length)
                     {
                         if (file[parse] == '[')
@@ -485,18 +485,18 @@ namespace EmblemMagic.Editors
                 }
             }
         }
-        private void File_InsertFolder_Click(object sender, EventArgs e)
+        private void File_InsertFolder_Click(Object sender, EventArgs e)
         {
             using (var folderWindow = new FolderBrowserDialog())
             {
                 if (folderWindow.ShowDialog() == DialogResult.OK &&
-                    !string.IsNullOrWhiteSpace(folderWindow.SelectedPath))
+                    !String.IsNullOrWhiteSpace(folderWindow.SelectedPath))
                 {
-                    string[] files = Directory.GetFiles(folderWindow.SelectedPath);
-                    string file;
-                    int amount = 0;
+                    String[] files = Directory.GetFiles(folderWindow.SelectedPath);
+                    String file;
+                    Int32 amount = 0;
                     UInt16 index = 0x0000;
-                    foreach (string filepath in files)
+                    foreach (String filepath in files)
                     {
                         file = Path.GetFileName(filepath);
                         if (file.StartsWith("0x"))
@@ -512,7 +512,7 @@ namespace EmblemMagic.Editors
             }
         }
 
-        private void Tool_Find_Click(object sender, EventArgs e)
+        private void Tool_Find_Click(Object sender, EventArgs e)
         {
             if (FindWindow == null || FindWindow.IsDisposed)
             {
@@ -521,7 +521,7 @@ namespace EmblemMagic.Editors
             }
             FindWindow.Select();
         }
-        private void Tool_Replace_Click(object sender, EventArgs e)
+        private void Tool_Replace_Click(Object sender, EventArgs e)
         {
             if (ReplaceWindow == null || ReplaceWindow.IsDisposed)
             {
@@ -531,14 +531,14 @@ namespace EmblemMagic.Editors
             ReplaceWindow.Select();
         }
 
-        private void View_Bytecodes_Click(object sender, EventArgs e)
+        private void View_Bytecodes_Click(Object sender, EventArgs e)
         {
             Core_Update();
         }
 
 
 
-        private void EntryNumBox_ValueChanged(object sender, EventArgs e)
+        private void EntryNumBox_ValueChanged(Object sender, EventArgs e)
         {
             Text_Line_NumBox.ValueChanged -= Text_Line_NumBox_ValueChanged;
             Text_Line_NumBox.Value = 0;
@@ -563,33 +563,33 @@ namespace EmblemMagic.Editors
                 UI.ShowMessage("Sorry, text cannot be changed back into huffman encoded text data.");
             }
         }
-        private void Text_Apply_Button_Click(object sender, EventArgs e)
+        private void Text_Apply_Button_Click(Object sender, EventArgs e)
         {
             Core_WriteText(Text_CodeBox.Text, CurrentIndex);
         }
-        private void Text_Cancel_Button_Click(object sender, EventArgs e)
+        private void Text_Cancel_Button_Click(Object sender, EventArgs e)
         {
             Core_LoadText();
             Core_LoadPreview();
         }
-        private void Text_Line_NumBox_ValueChanged(object sender, EventArgs e)
+        private void Text_Line_NumBox_ValueChanged(Object sender, EventArgs e)
         {
             Core_LoadPreview();
         }
 
 
 
-        private void Font_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void Font_ComboBox_SelectedIndexChanged(Object sender, EventArgs e)
         {
             Core_LoadFont();
             Core_LoadPreview();
         }
-        private void Font_GridBox_SelectionChanged(object sender, EventArgs e)
+        private void Font_GridBox_SelectionChanged(Object sender, EventArgs e)
         {
             Core_LoadFontValues();
         }
 
-        private void Font_InsertButton_Click(object sender, EventArgs e)
+        private void Font_InsertButton_Click(Object sender, EventArgs e)
         {
             OpenFileDialog openWindow = new OpenFileDialog();
             openWindow.Filter = "Image files (*.png, *.bmp, *.gif)|*.png;*.bmp;*.gif|All files (*.*)|*.*";
@@ -603,82 +603,82 @@ namespace EmblemMagic.Editors
             }
         }
         
-        private void Glyph_Address_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void Glyph_Address_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
-            bool[,] selection = Font_GridBox.Selection;
-            int width  = selection.GetLength(0);
-            int height = selection.GetLength(1);
-            byte index;
-            for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++)
+            Boolean[,] selection = Font_GridBox.Selection;
+            Int32 width  = selection.GetLength(0);
+            Int32 height = selection.GetLength(1);
+            Byte index;
+            for (Int32 y = 0; y < height; y++)
+            for (Int32 x = 0; x < width; x++)
             {
                 if (selection[x, y])
                 {
-                    index = (byte)(x + y * 16);
+                    index = (Byte)(x + y * 16);
                     Core.WritePointer(this,
                         CurrentFont.Address + index * 4,
                         Glyph_Address_PointerBox.Value,
-                        (string)Font_ComboBox.SelectedValue + " - Glyph 0x" + Util.ByteToHex(index) + " repointed");
+                        (String)Font_ComboBox.SelectedValue + " - Glyph 0x" + Util.ByteToHex(index) + " repointed");
                 }
             }
             Font_GridBox.Selection = selection;
         }
-        private void Glyph_Pointer_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void Glyph_Pointer_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
-            bool[,] selection = Font_GridBox.Selection;
-            int width  = selection.GetLength(0);
-            int height = selection.GetLength(1);
-            byte index;
-            for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++)
+            Boolean[,] selection = Font_GridBox.Selection;
+            Int32 width  = selection.GetLength(0);
+            Int32 height = selection.GetLength(1);
+            Byte index;
+            for (Int32 y = 0; y < height; y++)
+            for (Int32 x = 0; x < width; x++)
             {
                 if (selection[x, y])
                 {
-                    index = (byte)(x + y * 16);
+                    index = (Byte)(x + y * 16);
                     Core.WritePointer(this,
                         CurrentFont.Glyphs[index].Address,
                         Glyph_Address_PointerBox.Value,
-                        (string)Font_ComboBox.SelectedValue + " - Glyph 0x" + Util.ByteToHex(index) + " Local Pointer changed");
+                        (String)Font_ComboBox.SelectedValue + " - Glyph 0x" + Util.ByteToHex(index) + " Local Pointer changed");
                 }
             }
             Font_GridBox.Selection = selection;
         }
-        private void Glyph_Shift_ByteBox_ValueChanged(object sender, EventArgs e)
+        private void Glyph_Shift_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
-            bool[,] selection = Font_GridBox.Selection;
-            int width  = selection.GetLength(0);
-            int height = selection.GetLength(1);
-            byte index;
-            for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++)
+            Boolean[,] selection = Font_GridBox.Selection;
+            Int32 width  = selection.GetLength(0);
+            Int32 height = selection.GetLength(1);
+            Byte index;
+            for (Int32 y = 0; y < height; y++)
+            for (Int32 x = 0; x < width; x++)
             {
                 if (selection[x, y])
                 {
-                    index = (byte)(x + y * 16);
+                    index = (Byte)(x + y * 16);
                     Core.WriteByte(this,
                         CurrentFont.Glyphs[index].Address + 4,
                         Glyph_Shift_ByteBox.Value,
-                        (string)Font_ComboBox.SelectedValue + " - Glyph 0x" + Util.ByteToHex(index) + " Unknown byte changed");
+                        (String)Font_ComboBox.SelectedValue + " - Glyph 0x" + Util.ByteToHex(index) + " Unknown byte changed");
                 }
             }
             Font_GridBox.Selection = selection;
         }
-        private void Glyph_Width_ByteBox_ValueChanged(object sender, EventArgs e)
+        private void Glyph_Width_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
-            bool[,] selection = Font_GridBox.Selection;
-            int width  = selection.GetLength(0);
-            int height = selection.GetLength(1);
-            byte index;
-            for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++)
+            Boolean[,] selection = Font_GridBox.Selection;
+            Int32 width  = selection.GetLength(0);
+            Int32 height = selection.GetLength(1);
+            Byte index;
+            for (Int32 y = 0; y < height; y++)
+            for (Int32 x = 0; x < width; x++)
             {
                 if (selection[x, y])
                 {
-                    index = (byte)(x + y * 16);
+                    index = (Byte)(x + y * 16);
                     Core.WriteByte(this,
                         CurrentFont.Glyphs[index].Address + 5,
                         Glyph_Width_ByteBox.Value,
-                        (string)Font_ComboBox.SelectedValue + " - Glyph 0x" + Util.ByteToHex(index) + " Width changed");
+                        (String)Font_ComboBox.SelectedValue + " - Glyph 0x" + Util.ByteToHex(index) + " Width changed");
                 }
             }
             Font_GridBox.Selection = selection;

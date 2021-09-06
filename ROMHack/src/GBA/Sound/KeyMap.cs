@@ -5,9 +5,9 @@ namespace GBA
 {
     public struct KeyMap
     {
-        public const int LENGTH = 128;
+        public const Int32 LENGTH = 128;
 
-        public byte this[int index]
+        public Byte this[Int32 index]
         {
             get
             {
@@ -15,7 +15,7 @@ namespace GBA
             }
         }
 
-        public KeyMap(byte[] data)
+        public KeyMap(Byte[] data)
         {
             if (data.Length != LENGTH)
                 throw new Exception("Data given has invalid length.");
@@ -23,9 +23,9 @@ namespace GBA
             Data = data;
         }
 
-        byte[] Data;
+        Byte[] Data;
 
-        public byte[] ToBytes()
+        public Byte[] ToBytes()
         {
             return Data;
         }

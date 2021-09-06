@@ -23,11 +23,11 @@ namespace Magic.Editors
         /// <summary>
         /// The amount of sequential palettes to be loaded/edited
         /// </summary>
-        int PaletteAmount { get; }
+        Int32 PaletteAmount { get; }
         /// <summary>
         /// Whether or not the palette to edit is compressed.
         /// </summary>
-        bool IsCompressed { get; }
+        Boolean IsCompressed { get; }
 
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Magic.Editors
         /// <summary>
         /// The index of the currently selected color in the palette
         /// </summary>
-        int CurrentIndex
+        Int32 CurrentIndex
         {
             get
             {
@@ -67,7 +67,8 @@ namespace Magic.Editors
 
                 Core_LoadValues();
             }
-        } int _index;
+        }
+        Int32 _index;
         /// <summary>
         /// The address at which the currently selected color is located
         /// </summary>
@@ -81,7 +82,7 @@ namespace Magic.Editors
         /// <summary>
         /// Is true if "swap colors" has been pressed
         /// </summary>
-        bool SwapMode
+        Boolean SwapMode
         {
             get
             {
@@ -123,7 +124,8 @@ namespace Magic.Editors
                 }
                 _swap = value;
             }
-        } bool _swap;
+        }
+        Boolean _swap;
 
 
 
@@ -131,7 +133,7 @@ namespace Magic.Editors
             Editor owner,
             String entry,
             Pointer address,
-            byte amount)
+            Byte amount)
             : base(app)
         {
             InitializeComponent();
@@ -145,7 +147,7 @@ namespace Magic.Editors
             Current = Core.ReadPalette(address, amount * Palette.LENGTH);
             if (IsCompressed)
             {
-                amount = (byte)(Current.Count / Palette.MAX);
+                amount = (Byte)(Current.Count / Palette.MAX);
             }
             PaletteAmount = amount;
 
@@ -157,7 +159,7 @@ namespace Magic.Editors
             SaveButton.Location = new System.Drawing.Point(248, 170 + 22 * amount);
             
             ColorBoxes = new ColorBox[GBA.Palette.MAX * amount];
-            for (int i = 0; i < ColorBoxes.Length; i++)
+            for (Int32 i = 0; i < ColorBoxes.Length; i++)
             {
                 ColorBoxes[i] = new ColorBox();
                 ColorBoxes[i].Gradient = false;
@@ -170,8 +172,8 @@ namespace Magic.Editors
                 ColorBoxes[i].TabIndex = 8;
                 ColorBoxes[i].TabStop = false;
 
-                int index = i;
-                ColorBoxes[i].Click += delegate (object sender, EventArgs e)
+                Int32 index = i;
+                ColorBoxes[i].Click += delegate (Object sender, EventArgs e)
                 {
                     if (CurrentIndex == index)
                     {
@@ -200,7 +202,7 @@ namespace Magic.Editors
         {
             Current = Core.ReadPalette(Address, IsCompressed ? 0 : PaletteAmount * GBA.Palette.LENGTH);
 
-            for (int i = 0; i < ColorBoxes.Length; i++)
+            for (Int32 i = 0; i < ColorBoxes.Length; i++)
             {
                 ColorBoxes[i].Color = (System.Drawing.Color)Current[i];
             }
@@ -258,7 +260,7 @@ namespace Magic.Editors
             TrackBar_B.Scroll += TrackBar_B_Scroll;
         }
 
-        public void Core_Insert(string filepath)
+        public void Core_Insert(String filepath)
         {
             try
             {
@@ -295,7 +297,7 @@ namespace Magic.Editors
                     Entry + "Palette color " + CurrentIndex + " changed");
             }
         }
-        public void Core_SwapColors(int index1, int index2)
+        public void Core_SwapColors(Int32 index1, Int32 index2)
         {
             if (index1 < 0 || index1 >= PaletteAmount * 16
              || index2 < 0 || index2 >= PaletteAmount * 16)
@@ -334,13 +336,13 @@ namespace Magic.Editors
 
 
 
-        private void SwapButton_Click(object sender, EventArgs e)
+        private void SwapButton_Click(Object sender, EventArgs e)
         {
             SwapMode = true;
             SwapButton.Text = "Cancel";
             SwapButton.Enabled = true;
         }
-        private void LoadButton_Click(object sender, EventArgs e)
+        private void LoadButton_Click(Object sender, EventArgs e)
         {
             OpenFileDialog openWindow = new OpenFileDialog();
             openWindow.RestoreDirectory = true;
@@ -356,7 +358,7 @@ namespace Magic.Editors
                 Core_Insert(openWindow.FileName);
             }
         }
-        private void SaveButton_Click(object sender, EventArgs e)
+        private void SaveButton_Click(Object sender, EventArgs e)
         {
             SaveFileDialog saveWindow = new SaveFileDialog();
             saveWindow.RestoreDirectory = true;
@@ -373,42 +375,42 @@ namespace Magic.Editors
             }
         }
 
-        private void AlphaCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void AlphaCheckBox_CheckedChanged(Object sender, EventArgs e)
         {
             Core_WriteColor(Current[CurrentIndex].SetAlpha(AlphaCheckBox.Checked));
         }
 
-        private void NumBox_16bit_ValueChanged(object sender, EventArgs e)
+        private void NumBox_16bit_ValueChanged(Object sender, EventArgs e)
         {
             Core_WriteColor(new GBA.Color((UInt16)NumBox_16bit.Value));
         }
-        private void NumBox_32bit_ValueChanged(object sender, EventArgs e)
+        private void NumBox_32bit_ValueChanged(Object sender, EventArgs e)
         {
             Core_WriteColor(new GBA.Color((UInt32)NumBox_32bit.Value));
         }
 
-        private void NumBox_R_ValueChanged(object sender, EventArgs e)
+        private void NumBox_R_ValueChanged(Object sender, EventArgs e)
         {
-            Core_WriteColor(Current[CurrentIndex].SetValueR((byte)NumBox_R.Value));
+            Core_WriteColor(Current[CurrentIndex].SetValueR((Byte)NumBox_R.Value));
         }
-        private void NumBox_G_ValueChanged(object sender, EventArgs e)
+        private void NumBox_G_ValueChanged(Object sender, EventArgs e)
         {
-            Core_WriteColor(Current[CurrentIndex].SetValueG((byte)NumBox_G.Value));
+            Core_WriteColor(Current[CurrentIndex].SetValueG((Byte)NumBox_G.Value));
         }
-        private void NumBox_B_ValueChanged(object sender, EventArgs e)
+        private void NumBox_B_ValueChanged(Object sender, EventArgs e)
         {
-            Core_WriteColor(Current[CurrentIndex].SetValueB((byte)NumBox_B.Value));
+            Core_WriteColor(Current[CurrentIndex].SetValueB((Byte)NumBox_B.Value));
         }
 
-        private void TrackBar_R_Scroll(object sender, EventArgs e)
+        private void TrackBar_R_Scroll(Object sender, EventArgs e)
         {
             NumBox_R.Value = TrackBar_R.Value;
         }
-        private void TrackBar_G_Scroll(object sender, EventArgs e)
+        private void TrackBar_G_Scroll(Object sender, EventArgs e)
         {
             NumBox_G.Value = TrackBar_G.Value;
         }
-        private void TrackBar_B_Scroll(object sender, EventArgs e)
+        private void TrackBar_B_Scroll(Object sender, EventArgs e)
         {
             NumBox_B.Value = TrackBar_B.Value;
         }

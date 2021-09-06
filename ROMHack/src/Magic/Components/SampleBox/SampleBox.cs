@@ -12,8 +12,8 @@ namespace Magic.Components
     /// </summary>
     public class SampleBox : Control
     {
-        int Loop;
-        byte[] Data;
+        Int32 Loop;
+        Byte[] Data;
 
         public SampleBox()
         {
@@ -23,7 +23,7 @@ namespace Magic.Components
         }
         public void Load(Sample sample)
         {
-            Loop = sample.Looped ? (int)sample.LoopStart : -1;
+            Loop = sample.Looped ? (Int32)sample.LoopStart : -1;
             Data = sample.PCM_Data;
 
             this.Invalidate();
@@ -44,12 +44,12 @@ namespace Magic.Components
             {
                 using (Pen wave = new Pen(this.ForeColor))
                 {
-                    float amplitude;
-                    int width = this.Width;
-                    int height = this.Height / 2;
-                    for (int i = 0; i < width; i++)
+                    Single amplitude;
+                    Int32 width = this.Width;
+                    Int32 height = this.Height / 2;
+                    for (Int32 i = 0; i < width; i++)
                     {
-                        amplitude = ((Data[i * Data.Length / Width] - 128) / (float)128) * height;
+                        amplitude = ((Data[i * Data.Length / Width] - 128) / (Single)128) * height;
                         e.Graphics.DrawLine(wave,
                             i, height + amplitude,
                             i, height + amplitude * -1);
@@ -72,7 +72,7 @@ namespace Magic.Components
         /// <summary>
         /// An event handler that calls the 'OnPaint' method
         /// </summary>
-        void Redraw(object sender, EventArgs e)
+        void Redraw(Object sender, EventArgs e)
         {
             this.Invalidate();
         }
@@ -86,7 +86,7 @@ namespace Magic.Components
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
+        protected override void Dispose(Boolean disposing)
         {
             if (disposing && (components != null))
             {

@@ -57,7 +57,7 @@ namespace WinMM
         /// Releases the resuorces used by this handle.
         /// </summary>
         /// <returns>true, if disposing of the handle succeeded; false, otherwise.</returns>
-        protected override bool ReleaseHandle()
+        protected override Boolean ReleaseHandle()
         {
             MMSYSERROR ret = NativeMethods.waveOutClose(this);
             return ret == MMSYSERROR.MMSYSERR_NOERROR;

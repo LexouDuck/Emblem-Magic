@@ -11,30 +11,30 @@ namespace Compression
         /// <summary>
         /// Returns a byte array of the encoded VLQ for the given number
         /// </summary>
-        public static byte[] Encode(UInt64 number)
+        public static Byte[] Encode(UInt64 number)
         {
-            List<byte> result = new List<byte>(8);
+            List<Byte> result = new List<Byte>(8);
             UInt64 temp = 0x7F & number;
             number >>= 7;
             while (number != 0x00)
             {
-                result.Add((byte)temp);
+                result.Add((Byte)temp);
                 number--;
                 temp = 0x7F & number;
                 number >>= 7;
             }
-            result.Add((byte)(0x80 | temp));
+            result.Add((Byte)(0x80 | temp));
             return result.ToArray();
         }
         /// <summary>
         /// Returns the UInt64 number described in the given VLQ byte array
         /// </summary>
-        public static UInt64 Decode(byte[] vlq)
+        public static UInt64 Decode(Byte[] vlq)
         {
             UInt64 result = 0;
-            int shift = 1;
-            int index = 0;
-            byte temp = vlq[index++];
+            Int32 shift = 1;
+            Int32 index = 0;
+            Byte temp = vlq[index++];
             result += (UInt64)((temp & 0x7F) * shift);
             while ((temp & 0x80) == 0)
             {

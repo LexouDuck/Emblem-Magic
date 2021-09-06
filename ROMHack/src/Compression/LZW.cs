@@ -8,37 +8,37 @@ namespace Magic.Compression
     /// </summary>
     public class LZW
     {
-        static readonly int EOF = -1;
-        static readonly int BITS = 12;
-        static readonly int HASH_SIZE = 5003; // 80% occupancy
+        static readonly Int32 EOF = -1;
+        static readonly Int32 BITS = 12;
+        static readonly Int32 HASH_SIZE = 5003; // 80% occupancy
 
-        int ImageWidth, ImageHeight;
-        byte[] Pixels;
-        int MinCodeSize;
-        int Remaining;
-        int Current;
+        Int32 ImageWidth, ImageHeight;
+        Byte[] Pixels;
+        Int32 MinCodeSize;
+        Int32 Remaining;
+        Int32 Current;
 
-        int BitsPerCode; // number of bits/code
-        int MaxBits = BITS; // user settable max # bits/code
-        int MaxCode; // maximum code, given n_bits
-        int InvalidCode = 1 << BITS; // should NEVER generate this code
+        Int32 BitsPerCode; // number of bits/code
+        Int32 MaxBits = BITS; // user settable max # bits/code
+        Int32 MaxCode; // maximum code, given n_bits
+        Int32 InvalidCode = 1 << BITS; // should NEVER generate this code
 
-        int[] HashTable = new int[HASH_SIZE];
-        int[] CodeTable = new int[HASH_SIZE];
-        int HashSize = HASH_SIZE; // for dynamic table sizing
-        int NextCode = 0; // first unused entry
+        Int32[] HashTable = new Int32[HASH_SIZE];
+        Int32[] CodeTable = new Int32[HASH_SIZE];
+        Int32 HashSize = HASH_SIZE; // for dynamic table sizing
+        Int32 NextCode = 0; // first unused entry
         // block compression parameters - after all codes are used up, and compression rate changes, start over.
-        bool ClearFlag = false;
+        Boolean ClearFlag = false;
 
-        int InitialBits; // Initial number of bits
+        Int32 InitialBits; // Initial number of bits
 
-        int ClearCode;
-        int EOICode;
-        
-        int CurrentAccumulated = 0;
-        int CurrentBitAmount = 0;
+        Int32 ClearCode;
+        Int32 EOICode;
 
-        int[] BitMasks = new int[]
+        Int32 CurrentAccumulated = 0;
+        Int32 CurrentBitAmount = 0;
+
+        Int32[] BitMasks = new Int32[]
         {
             0x0000,
             0x0001,
@@ -58,10 +58,10 @@ namespace Magic.Compression
             0x7FFF,
             0xFFFF
         };
-        int AccumulatedAmount; // Number of characters so far in this 'packet'
-        byte[] Accumulator = new byte[256]; // Define the storage for the packet accumulator
+        Int32 AccumulatedAmount; // Number of characters so far in this 'packet'
+        Byte[] Accumulator = new Byte[256]; // Define the storage for the packet accumulator
 
-        public LZW(int width, int height, byte[] pixels, int color_depth)
+        public LZW(Int32 width, Int32 height, Byte[] pixels, Int32 color_depth)
         {
             ImageWidth = width;
             ImageHeight = height;
@@ -69,7 +69,7 @@ namespace Magic.Compression
             MinCodeSize = Math.Max(2, color_depth);
         }
 
-        public byte[] Compress()
+        public Byte[] Compress()
         {
             Remaining = ImageWidth * ImageHeight; // reset navigation variables
             Current = 0;
@@ -85,15 +85,15 @@ namespace Magic.Compression
 
         
 
-        void Encode(int init_bits, Stream stream)
+        void Encode(Int32 init_bits, Stream stream)
         {
-            int fcode;
-            int i /* = 0 */;
-            int c;
-            int pixel;
-            int disp;
-            int hsize_reg;
-            int hshift;
+            Int32 fcode;
+            Int32 i /* = 0 */;
+            Int32 c;
+            Int32 pixel;
+            Int32 disp;
+            Int32 hsize_reg;
+            Int32 hshift;
             
             InitialBits = init_bits;
 
@@ -168,7 +168,7 @@ namespace Magic.Compression
         /// Use the VAX insv instruction to insert each code in turn. When the buffer fills up empty it and start over.
         /// </summary>
         /// <param name="code">A n_bits-bit integer.  If == -1, then EOF.  This assumes that (n_bits) lteq (wordsize - 1).</param>
-        void Output(int code, Stream stream)
+        void Output(Int32 code, Stream stream)
         {
             CurrentAccumulated &= BitMasks[CurrentBitAmount];
 
@@ -181,7 +181,7 @@ namespace Magic.Compression
 
             while (CurrentBitAmount >= 8)
             {
-                this.Add((byte)(CurrentAccumulated & 0xff), stream);
+                this.Add((Byte)(CurrentAccumulated & 0xff), stream);
                 CurrentAccumulated >>= 8;
                 CurrentBitAmount -= 8;
             }
@@ -210,7 +210,7 @@ namespace Magic.Compression
                 // At EOF, write the rest of the buffer.
                 while (CurrentBitAmount > 0)
                 {
-                    this.Add((byte)(CurrentAccumulated & 0xff), stream);
+                    this.Add((Byte)(CurrentAccumulated & 0xff), stream);
                     CurrentAccumulated >>= 8;
                     CurrentBitAmount -= 8;
                 }
@@ -222,22 +222,22 @@ namespace Magic.Compression
         /// <summary>
         /// Returns the maximal value for a LZW code given the amount of bits for it
         /// </summary>
-        int GetMaxCode(int n_bits)
+        Int32 GetMaxCode(Int32 n_bits)
         {
             return (1 << n_bits) - 1;
         }
         /// <summary>
         /// Returns the next pixel from the image
         /// </summary>
-        int GetNextPixel()
+        Int32 GetNextPixel()
         {
             --Remaining;
             if (Remaining < 0)
                 return EOF;
-            int temp = Current;
+            Int32 temp = Current;
             if (temp <= Pixels.GetUpperBound(0))
             {
-                byte pixel = Pixels[Current++];
+                Byte pixel = Pixels[Current++];
 
                 return (pixel & 0xFF);
             }
@@ -247,7 +247,7 @@ namespace Magic.Compression
         /// <summary>
         /// Add a character to the end of the current packet, and if it is 254 characters, flush the packet onto the stream.
         /// </summary>
-        void Add(byte c, Stream stream)
+        void Add(Byte c, Stream stream)
         {
             Accumulator[AccumulatedAmount++] = c;
             if (AccumulatedAmount >= 254)
@@ -276,9 +276,9 @@ namespace Magic.Compression
 
             Output(ClearCode, stream);
         }
-        void ResetCodeTable(int hsize)
+        void ResetCodeTable(Int32 hsize)
         {
-            for (int i = 0; i < hsize; ++i)
+            for (Int32 i = 0; i < hsize; ++i)
             {
                 HashTable[i] = -1;
             }

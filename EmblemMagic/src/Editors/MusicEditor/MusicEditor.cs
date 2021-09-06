@@ -17,7 +17,7 @@ namespace EmblemMagic.Editors
         /// <summary>
         /// Gets a string representing the current entry in the music array
         /// </summary>
-        string CurrentEntry
+        String CurrentEntry
         {
             get
             {
@@ -47,9 +47,9 @@ namespace EmblemMagic.Editors
             }
         }
 
-        public override void Core_SetEntry(uint entry)
+        public override void Core_SetEntry(UInt32 entry)
         {
-            EntryArrayBox.Value =(byte)entry;
+            EntryArrayBox.Value =(Byte)entry;
         }
         public override void Core_OnOpen()
         {
@@ -84,9 +84,9 @@ namespace EmblemMagic.Editors
                     Instrument_PointerBox.ValueChanged += Instrument_PointerBox_ValueChanged;
 
                     Instruments = new InstrumentArray(CurrentMusic.Instruments);
-                    List<string> instruments = new List<string>();
-                    string instrument;
-                    for (byte i = 0; i < 128; i++)
+                    List<String> instruments = new List<String>();
+                    String instrument;
+                    for (Byte i = 0; i < 128; i++)
                     {
                         if (Instruments[i].IsUnused())
                         {
@@ -122,7 +122,7 @@ namespace EmblemMagic.Editors
             try
             {
                 Pointer[] pointers = CurrentMusic.Tracks;
-                for (int i = 0; i < CurrentMusic.TrackAmount; i++)
+                for (Int32 i = 0; i < CurrentMusic.TrackAmount; i++)
                 {
                     tracks.Add(new Track(pointers[i]));
                 }
@@ -147,8 +147,8 @@ namespace EmblemMagic.Editors
             try
             {
                 Entry_PointerBox.Value = (Pointer)Current["Address"];
-                Entry_ByteBox1.Value = (byte)Current["TrackGroup1"];
-                Entry_ByteBox2.Value = (byte)Current["TrackGroup2"];
+                Entry_ByteBox1.Value = (Byte)Current["TrackGroup1"];
+                Entry_ByteBox2.Value = (Byte)Current["TrackGroup2"];
 
                 TrackAmount_ByteBox.Value = CurrentMusic.TrackAmount;
                 Music_Unknown_ByteBox.Value = CurrentMusic.Unknown;
@@ -182,7 +182,7 @@ namespace EmblemMagic.Editors
         {
             Preview.Reset();
 
-            for (byte i = 0; i < 128; i++)
+            for (Byte i = 0; i < 128; i++)
             {
                 if (Instruments[i].IsUnused())
                     Preview.Load(null);
@@ -192,15 +192,15 @@ namespace EmblemMagic.Editors
 
 
 
-        private void File_Insert_Click(object sender, EventArgs e)
+        private void File_Insert_Click(Object sender, EventArgs e)
         {
 
         }
-        private void File_Save_Click(object sender, EventArgs e)
+        private void File_Save_Click(Object sender, EventArgs e)
         {
 
         }
-        private void View_HideInstruments_Click(object sender, EventArgs e)
+        private void View_HideInstruments_Click(Object sender, EventArgs e)
         {
             Core_LoadInstruments();
         }
@@ -212,21 +212,21 @@ namespace EmblemMagic.Editors
             Core_Update();
         }
 
-        private void Entry_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void Entry_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Current.GetAddress(Current.EntryIndex, "Address"),
                 Instrument_PointerBox.Value,
                 CurrentEntry + "Music Header repointed");
         }
-        private void Entry_ByteBox1_ValueChanged(object sender, EventArgs e)
+        private void Entry_ByteBox1_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 Current.GetAddress(Current.EntryIndex, "TrackGroup1"),
                 Entry_ByteBox1.Value,
                 CurrentEntry + "Track Group 1 changed");
         }
-        private void Entry_ByteBox2_ValueChanged(object sender, EventArgs e)
+        private void Entry_ByteBox2_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 Current.GetAddress(Current.EntryIndex, "TrackGroup2"),
@@ -234,41 +234,41 @@ namespace EmblemMagic.Editors
                 CurrentEntry + "Track Group 2 changed");
         }
 
-        private void Instrument_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void Instrument_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Current.Address + 4,
                 Instrument_PointerBox.Value,
                 CurrentEntry + "Instruments repointed");
         }
-        private void Instrument_ListBox_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void Instrument_ListBox_MouseDoubleClick(Object sender, MouseEventArgs e)
         {
             App.Core_OpenEditor(new InstrumentEditor(App, Instruments,
-                Util.HexToByte(((string)Instrument_ListBox.SelectedItem).Substring(0, 2))));
+                Util.HexToByte(((String)Instrument_ListBox.SelectedItem).Substring(0, 2))));
         }
 
-        private void TrackAmount_ByteBox_ValueChanged(object sender, EventArgs e)
+        private void TrackAmount_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 Current.Address,
                 TrackAmount_ByteBox.Value,
                 CurrentEntry + "Track Amount changed");
         }
-        private void Music_Unknown_ByteBox_ValueChanged(object sender, EventArgs e)
+        private void Music_Unknown_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 Current.Address + 1,
                 Music_Unknown_ByteBox.Value,
                 CurrentEntry + "Unknown changed");
         }
-        private void Music_Priority_ByteBox_ValueChanged(object sender, EventArgs e)
+        private void Music_Priority_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 Current.Address + 2,
                 Music_Priority_ByteBox.Value,
                 CurrentEntry + "Priority changed");
         }
-        private void Music_Reverb_ByteBox_ValueChanged(object sender, EventArgs e)
+        private void Music_Reverb_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 Current.Address + 3,

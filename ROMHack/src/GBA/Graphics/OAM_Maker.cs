@@ -12,12 +12,12 @@ namespace GBA
         /// <summary>
         /// The maximum amount of OAM object allowed for any given frame on the GBA
         /// </summary>
-        public const int MAXIMUM = 128;
+        public const Int32 MAXIMUM = 128;
 
         /// <summary>
         /// The index of the tileset to use for this sprite set
         /// </summary>
-        public int TilesetIndex;
+        public Int32 TilesetIndex;
         /// <summary>
         /// The array of OAM sprites this class creates from an image
         /// </summary>
@@ -25,7 +25,7 @@ namespace GBA
 
 
         
-        public OAM_Maker(ref List<TileSheet> Graphics, GBA.Image image, int offsetX, int offsetY)
+        public OAM_Maker(ref List<TileSheet> Graphics, GBA.Image image, Int32 offsetX, Int32 offsetY)
         {
             Rectangle sprite = GetSpriteArea(image);
 
@@ -40,7 +40,7 @@ namespace GBA
 
             TilesetIndex = -1;
             Point[] sheet = new Point[OAMs.Count];
-            for (int i = 0; i < Graphics.Count; i++)
+            for (Int32 i = 0; i < Graphics.Count; i++)
             {
                 sheet = Graphics[i].CheckIfFits(OAMs);
 
@@ -61,13 +61,13 @@ namespace GBA
             List<OAM> result = new List<OAM>();
             Point pos;
             Size size;
-            for (int i = 0; i < OAMs.Count; i++)
+            for (Int32 i = 0; i < OAMs.Count; i++)
             {
                 pos = OAMs[i].Item1;
                 size = OAMs[i].Item2;
 
-                for (int y = 0; y < size.Height; y++)
-                for (int x = 0; x < size.Width; x++)
+                for (Int32 y = 0; y < size.Height; y++)
+                for (Int32 x = 0; x < size.Width; x++)
                 {
                     Graphics[TilesetIndex][sheet[i].X + x, sheet[i].Y + y] = image.GetTile(
                         pos.X + x * Tile.SIZE, 
@@ -90,7 +90,7 @@ namespace GBA
                     OAM_OBJMode.Normal,
                     false,
                     false,
-                    (byte)sheet[i].X, (byte)sheet[i].Y,
+                    (Byte)sheet[i].X, (Byte)sheet[i].Y,
                     false, false));
                 /*
                 Magic.UI.ShowMessage(
@@ -110,12 +110,12 @@ namespace GBA
         /// </summary>
         static List<Tuple<Point, Size>> GetSpriteOAMs(Image image, Rectangle sprite)
         {
-            int width = sprite.Width / Tile.SIZE;
-            int height = sprite.Height / Tile.SIZE;
-            bool[,] tilesToMap = new bool[width, height];
+            Int32 width = sprite.Width / Tile.SIZE;
+            Int32 height = sprite.Height / Tile.SIZE;
+            Boolean[,] tilesToMap = new Boolean[width, height];
             Tile tile = null;
-            for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++)
+            for (Int32 y = 0; y < height; y++)
+            for (Int32 x = 0; x < width; x++)
             {
                 tile = image.GetTile(
                     sprite.X + x * Tile.SIZE,
@@ -131,10 +131,10 @@ namespace GBA
 
             Point pos;
             Size size;
-            int tileAmount = 1;
-            int index = 0;
-            int offsetX;
-            int offsetY;
+            Int32 tileAmount = 1;
+            Int32 index = 0;
+            Int32 offsetX;
+            Int32 offsetY;
             while (tileAmount > 0)
             {
                 offsetX = index % width;
@@ -148,13 +148,13 @@ namespace GBA
 
                 result.Add(Tuple.Create(pos, size));
 
-                for (int y = 0; y < size.Height; y++)
-                for (int x = 0; x < size.Width; x++)
+                for (Int32 y = 0; y < size.Height; y++)
+                for (Int32 x = 0; x < size.Width; x++)
                 {
                     tilesToMap[x + offsetX, y + offsetY] = false;
                 }
                 tileAmount = 0;
-                foreach (bool value in tilesToMap)
+                foreach (Boolean value in tilesToMap)
                 {
                     if (value) tileAmount++;
                 }
@@ -167,13 +167,13 @@ namespace GBA
         /// </summary>
         static Rectangle GetSpriteArea(Image image)
         {
-            int minX = image.Width;
-            int minY = image.Height;
-            int maxX = 0;
-            int maxY = 0;
-            bool empty = true;
-            for (int y = 0; y < image.Height; y++)
-            for (int x = 0; x < image.Width; x++)
+            Int32 minX = image.Width;
+            Int32 minY = image.Height;
+            Int32 maxX = 0;
+            Int32 maxY = 0;
+            Boolean empty = true;
+            for (Int32 y = 0; y < image.Height; y++)
+            for (Int32 x = 0; x < image.Width; x++)
             {
                 if (image[x, y] != 0)
                 {
@@ -192,14 +192,14 @@ namespace GBA
         /// <summary>
         /// Returns the optimal shape/size for OAM in the bool tilemap at the given coordinates, without any overlap
         /// </summary>
-        static Size GetSpriteSize(bool[,] map, int x = 0, int y = 0)
+        static Size GetSpriteSize(Boolean[,] map, Int32 x = 0, Int32 y = 0)
         {
             if (!map[x, y]) return new Size();
 
             foreach (Size oam in possibleOAMs)
             {
-                for (int tileY = 0; tileY < oam.Height; tileY++)
-                for (int tileX = 0; tileX < oam.Width; tileX++)
+                for (Int32 tileY = 0; tileY < oam.Height; tileY++)
+                for (Int32 tileX = 0; tileX < oam.Width; tileX++)
                 {
                     try
                     {
@@ -336,17 +336,17 @@ namespace GBA
         /// <summary>
         /// Supposed to check other OAMs in the sheet to avoid redundancy - currently unused
         /// </summary>
-        OAM GetMatch(GBA.Image image, int imageX, int imageY, int tileset, Tuple<Point, bool, bool> match, ref List<TileSheet> Graphics)
+        OAM GetMatch(GBA.Image image, Int32 imageX, Int32 imageY, Int32 tileset, Tuple<Point, Boolean, Boolean> match, ref List<TileSheet> Graphics)
         {
             if (match == null) return OAM.Terminator;
 
-            bool[,] matched = new bool[8, 8];
+            Boolean[,] matched = new Boolean[8, 8];
             Point sheet = match.Item1;
-            bool flipH = match.Item2;
-            bool flipV = match.Item3;
+            Boolean flipH = match.Item2;
+            Boolean flipV = match.Item3;
             Tile tile;
-            for (int tileY = 0; flipV ? (tileY > -8) : (tileY < 8); tileY += flipV ? -1 : 1)
-            for (int tileX = 0; flipH ? (tileX > -8) : (tileX < 8); tileX += flipH ? -1 : 1)
+            for (Int32 tileY = 0; flipV ? (tileY > -8) : (tileY < 8); tileY += flipV ? -1 : 1)
+            for (Int32 tileX = 0; flipH ? (tileX > -8) : (tileX < 8); tileX += flipH ? -1 : 1)
             {
                 if (tileX == 0 && tileY == 0) continue;
                 // top-left corner tile of OAM obj has already been matched
@@ -380,7 +380,7 @@ namespace GBA
                 OAM_OBJMode.Normal,
                 false,
                 false,
-                (byte)sheet.X, (byte)sheet.Y,
+                (Byte)sheet.X, (Byte)sheet.Y,
                 flipH, flipV);
         }
     }

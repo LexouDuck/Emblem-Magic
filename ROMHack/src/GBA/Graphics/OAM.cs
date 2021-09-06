@@ -15,7 +15,7 @@ namespace GBA
         Int16 c;
         Int16 d;
 
-        public OAM_Affine(float ux, float vx, float uy, float vy)
+        public OAM_Affine(Single ux, Single vx, Single uy, Single vy)
         {
             a = 0;
             b = 0;
@@ -27,29 +27,29 @@ namespace GBA
             Uy = uy;
             Vy = vy;
         }
-        public OAM_Affine(byte[] data)
+        public OAM_Affine(Byte[] data)
         {
             if (data[0] == 0x00) throw new Exception("Invalid OAM Affine data read. It should not start with 0x00.");
             // data format is 01 00 Cx Cy |U-x||V-x| |U-y||V-y|
-            uint index = 4;
+            UInt32 index = 4;
             a = data.GetInt16(index, true); index += 2;
             b = data.GetInt16(index, true); index += 2;
             c = data.GetInt16(index, true); index += 2;
             d = data.GetInt16(index, true); index += 2;
         }
 
-        public float Ux { get { return GetFloat16(a); } set { a = (Int16)(value * 256); } }
-        public float Vx { get { return GetFloat16(b); } set { b = (Int16)(value * 256); } }
-        public float Uy { get { return GetFloat16(c); } set { c = (Int16)(value * 256); } }
-        public float Vy { get { return GetFloat16(d); } set { d = (Int16)(value * 256); } }
+        public Single Ux { get { return GetFloat16(a); } set { a = (Int16)(value * 256); } }
+        public Single Vx { get { return GetFloat16(b); } set { b = (Int16)(value * 256); } }
+        public Single Uy { get { return GetFloat16(c); } set { c = (Int16)(value * 256); } }
+        public Single Vy { get { return GetFloat16(d); } set { d = (Int16)(value * 256); } }
 
         /// <summary>
         /// Returns a 12-length byte array of this OAM affine transformation data
         /// </summary>
-        public byte[] ToBytes()
+        public Byte[] ToBytes()
         {
-            byte[] result = new byte[OAM.LENGTH];
-            int index = 0;
+            Byte[] result = new Byte[OAM.LENGTH];
+            Int32 index = 0;
             result[index++] = 0x01;
             result[index++] = 0x00;
             result[index++] = 0xFF;
@@ -60,9 +60,9 @@ namespace GBA
             Array.Copy(Util.Int16ToBytes(d, true), 0, result, index, 2); index += 2;
             return result;
         }
-        static float GetFloat16(int value)
+        static Single GetFloat16(Int32 value)
         {
-            return ((float)value / (float)256);
+            return ((Single)value / (Single)256);
         }
     }
 
@@ -76,16 +76,16 @@ namespace GBA
         /// <summary>
         /// The length of one block of OAM data
         /// </summary>
-        public const int LENGTH = 12;
-        
+        public const Int32 LENGTH = 12;
+
         /// <summary>
         /// The entire struct is just a wrapper for this field.
         /// </summary>
-        byte[] Data;
+        Byte[] Data;
 
 
 
-        public OAM(byte[] data)
+        public OAM(Byte[] data)
         {
             if (data.Length != LENGTH)
                 throw new Exception("OAM data block length given is invalid: " + data.Length);
@@ -122,23 +122,23 @@ namespace GBA
             if (data[10] != 0x00) throw new Exception("OAM data block byte 10 should be 0x00");
             if (data[11] != 0x00) throw new Exception("OAM data block byte 11 should be 0x00");
 
-            Data = new byte[LENGTH];
+            Data = new Byte[LENGTH];
             Array.Copy(data, Data, LENGTH);
         }
         public OAM(
             OAM_Shape shape,
             OAM_Size size,
             Int16 screenX, Int16 screenY,
-            byte priority,
-            byte palette,
+            Byte priority,
+            Byte palette,
             OAM_GFXMode gfxMode,
             OAM_OBJMode objMode,
-            bool fullColor,
-            bool mosaic,
-            byte sheetX, byte sheetY,
-            bool flipH, bool flipV)
+            Boolean fullColor,
+            Boolean mosaic,
+            Byte sheetX, Byte sheetY,
+            Boolean flipH, Boolean flipV)
         {
-            Data = new byte[LENGTH];
+            Data = new Byte[LENGTH];
 
             SpriteShape = shape;
             SpriteSize = size;
@@ -165,16 +165,16 @@ namespace GBA
             OAM_Shape shape,
             OAM_Size size,
             Int16 screenX, Int16 screenY,
-            byte priority,
-            byte palette,
+            Byte priority,
+            Byte palette,
             OAM_GFXMode gfxMode,
             OAM_OBJMode objMode,
-            bool fullColor,
-            bool mosaic,
-            byte sheetX, byte sheetY,
-            byte affineIndex)
+            Boolean fullColor,
+            Boolean mosaic,
+            Byte sheetX, Byte sheetY,
+            Byte affineIndex)
         {
-            Data = new byte[LENGTH];
+            Data = new Byte[LENGTH];
 
             SpriteShape = shape;
             SpriteSize = size;
@@ -208,16 +208,16 @@ namespace GBA
             {
                 switch ((Data[1] >> 6) & 0x3)
                 {
-                    case (byte)OAM_Shape.Square: return OAM_Shape.Square;
-                    case (byte)OAM_Shape.Rect_H: return OAM_Shape.Rect_H;
-                    case (byte)OAM_Shape.Rect_V: return OAM_Shape.Rect_V;
+                    case (Byte)OAM_Shape.Square: return OAM_Shape.Square;
+                    case (Byte)OAM_Shape.Rect_H: return OAM_Shape.Rect_H;
+                    case (Byte)OAM_Shape.Rect_V: return OAM_Shape.Rect_V;
                     default: return OAM_Shape.Invalid;
                 }
             }
             set
             {
-                Data[1] &= (byte)(0x3F);
-                Data[1] |= (byte)(((byte)value & 0x3) << 6);
+                Data[1] &= (Byte)(0x3F);
+                Data[1] |= (Byte)(((Byte)value & 0x3) << 6);
             }
         }
         /// <summary>
@@ -229,17 +229,17 @@ namespace GBA
             {
                 switch ((Data[3] >> 6) & 0x3)
                 {
-                    case (byte)OAM_Size.Times1: return OAM_Size.Times1;
-                    case (byte)OAM_Size.Times2: return OAM_Size.Times2;
-                    case (byte)OAM_Size.Times4: return OAM_Size.Times4;
-                    case (byte)OAM_Size.Times8: return OAM_Size.Times8;
+                    case (Byte)OAM_Size.Times1: return OAM_Size.Times1;
+                    case (Byte)OAM_Size.Times2: return OAM_Size.Times2;
+                    case (Byte)OAM_Size.Times4: return OAM_Size.Times4;
+                    case (Byte)OAM_Size.Times8: return OAM_Size.Times8;
                     default: return 0;
                 }
             }
             set
             {
-                Data[3] &= (byte)(0x3F);
-                Data[3] |= (byte)(((byte)value & 0x3) << 6);
+                Data[3] &= (Byte)(0x3F);
+                Data[3] |= (Byte)(((Byte)value & 0x3) << 6);
             }
         }
 
@@ -252,16 +252,16 @@ namespace GBA
             {
                 switch ((Data[1] >> 2) & 0x3)
                 {
-                    case (byte)OAM_GFXMode.Normal: return OAM_GFXMode.Normal;
-                    case (byte)OAM_GFXMode.AlphaBlend: return OAM_GFXMode.AlphaBlend;
-                    case (byte)OAM_GFXMode.OBJ_Window: return OAM_GFXMode.OBJ_Window;
+                    case (Byte)OAM_GFXMode.Normal: return OAM_GFXMode.Normal;
+                    case (Byte)OAM_GFXMode.AlphaBlend: return OAM_GFXMode.AlphaBlend;
+                    case (Byte)OAM_GFXMode.OBJ_Window: return OAM_GFXMode.OBJ_Window;
                     default: return OAM_GFXMode.Invalid;
                 }
             }
             set
             {
-                Data[1] &= (byte)(0xF3);
-                Data[1] |= (byte)(((byte)value & 0x3) << 2);
+                Data[1] &= (Byte)(0xF3);
+                Data[1] |= (Byte)(((Byte)value & 0x3) << 2);
             }
         }
         /// <summary>
@@ -273,17 +273,17 @@ namespace GBA
             {
                 switch (Data[1] & 0x03)
                 {
-                    case (byte)OAM_OBJMode.Normal: return OAM_OBJMode.Normal;
-                    case (byte)OAM_OBJMode.Affine: return OAM_OBJMode.Affine;
-                    case (byte)OAM_OBJMode.Hidden: return OAM_OBJMode.Hidden;
-                    case (byte)OAM_OBJMode.BigAffine: return OAM_OBJMode.BigAffine;
+                    case (Byte)OAM_OBJMode.Normal: return OAM_OBJMode.Normal;
+                    case (Byte)OAM_OBJMode.Affine: return OAM_OBJMode.Affine;
+                    case (Byte)OAM_OBJMode.Hidden: return OAM_OBJMode.Hidden;
+                    case (Byte)OAM_OBJMode.BigAffine: return OAM_OBJMode.BigAffine;
                     default: return 0;
                 }
             }
             set
             {
-                Data[1] &= (byte)(0xFC);
-                Data[1] |= (byte)((byte)value & 0x3);
+                Data[1] &= (Byte)(0xFC);
+                Data[1] |= (Byte)((Byte)value & 0x3);
             }
         }
 
@@ -294,11 +294,11 @@ namespace GBA
         {
             get
             {
-                return Util.BytesToInt16(new byte[2] { Data[6], Data[7] }, true);
+                return Util.BytesToInt16(new Byte[2] { Data[6], Data[7] }, true);
             }
             set
             {
-                byte[] result = Util.Int16ToBytes(value, false);
+                Byte[] result = Util.Int16ToBytes(value, false);
                 Data[6] = result[1]; Data[7] = result[0];
             }
         }
@@ -309,11 +309,11 @@ namespace GBA
         {
             get
             {
-                return Util.BytesToInt16(new byte[2] { Data[8], Data[9] }, true);
+                return Util.BytesToInt16(new Byte[2] { Data[8], Data[9] }, true);
             }
             set
             {
-                byte[] result = Util.Int16ToBytes(value, false);
+                Byte[] result = Util.Int16ToBytes(value, false);
                 Data[8] = result[1]; Data[9] = result[0];
             }
         }
@@ -321,67 +321,67 @@ namespace GBA
         /// <summary>
         /// The 0-3 priority at which this sprite should be drawn (if priority is the same, higher Y sprites are drawn first)
         /// </summary>
-        public byte Priority
+        public Byte Priority
         {
             get
             {
-                return (byte)((Data[5] >> 2) & 0x3);
+                return (Byte)((Data[5] >> 2) & 0x3);
             }
             set
             {
-                Data[5] &= (byte)(0xF3);
-                Data[5] |= (byte)((value & 0x3) << 2);
+                Data[5] &= (Byte)(0xF3);
+                Data[5] |= (Byte)((value & 0x3) << 2);
             }
         }
         /// <summary>
         /// The 0-15 index of the palette-bank this OAM should use (useless if FullColors==true)
         /// </summary>
-        public byte Palette
+        public Byte Palette
         {
             get
             {
-                return (byte)((Data[5] >> 4) & 0xF);
+                return (Byte)((Data[5] >> 4) & 0xF);
             }
             set
             {
-                Data[5] &= (byte)(0x0F);
-                Data[5] |= (byte)((value & 0xF) << 4);
+                Data[5] &= (Byte)(0x0F);
+                Data[5] |= (Byte)((value & 0xF) << 4);
             }
         }
 
         /// <summary>
         /// The X coordinate of the upper left tile of this sprite on the sheet
         /// </summary>
-        public byte SheetX
+        public Byte SheetX
         {
             get
             {
-                return (byte)(Data[4] & 0x1F);
+                return (Byte)(Data[4] & 0x1F);
             }
             set
             {
-                Data[4] = (byte)((value & 0x1F) | ((SheetY << 5) & 0xE0));
+                Data[4] = (Byte)((value & 0x1F) | ((SheetY << 5) & 0xE0));
             }
         }
         /// <summary>
         /// The Y coordinate of the upper left tile of this sprite on the sheet
         /// </summary>
-        public byte SheetY
+        public Byte SheetY
         {
             get
             {
-                return (byte)((Data[4] & 0xE0) >> 5);
+                return (Byte)((Data[4] & 0xE0) >> 5);
             }
             set
             {
-                Data[4] = (byte)((SheetX & 0x1F) | ((value << 5) & 0xE0));
+                Data[4] = (Byte)((SheetX & 0x1F) | ((value << 5) & 0xE0));
             }
         }
 
         /// <summary>
         /// Whether or not this OAM sprite is to show up flipped horizontally - unused if affine OAM
         /// </summary>
-        public bool FlipH
+        public Boolean FlipH
         {
             get
             {
@@ -390,13 +390,13 @@ namespace GBA
             set
             {
                 if (value) Data[3] |= (0x1 << 4);
-                else Data[3] &= (byte)(0xEF);
+                else Data[3] &= (Byte)(0xEF);
             }
         }
         /// <summary>
         /// Whether or not this OAM sprite is to show up flipped vertically - unused if affine OAM
         /// </summary>
-        public bool FlipV
+        public Boolean FlipV
         {
             get
             {
@@ -405,14 +405,14 @@ namespace GBA
             set
             {
                 if (value) Data[3] |= (0x1 << 5);
-                else Data[3] &= (byte)(0xDF);
+                else Data[3] &= (Byte)(0xDF);
             }
         }
 
         /// <summary>
         /// if true, OAM sprite is in 256-color mode, otherwise it is in 16-color palettes mode
         /// </summary>
-        public bool FullColors
+        public Boolean FullColors
         {
             get
             {
@@ -421,13 +421,13 @@ namespace GBA
             set
             {
                 if (value) Data[1] |= (0x1 << 5);
-                else Data[1] &= (byte)(0xDF);
+                else Data[1] &= (Byte)(0xDF);
             }
         }
         /// <summary>
         /// If true, the sprite renders as streched, only the first pixels of each row being drawn and repeated
         /// </summary>
-        public bool DrawMosaic
+        public Boolean DrawMosaic
         {
             get
             {
@@ -436,23 +436,23 @@ namespace GBA
             set
             {
                 if (value) Data[1] |= (0x1 << 4);
-                else Data[1] &= (byte)(0xEF);
+                else Data[1] &= (Byte)(0xEF);
             }
         }
         
         /// <summary>
         /// The index of the affine transform parameter block for this sprite, unused if GFX mode is not affine
         /// </summary>
-        public byte AffineIndex
+        public Byte AffineIndex
         {
             get
             {
-                return (byte)((Data[3] & 0x3E) >> 1);
+                return (Byte)((Data[3] & 0x3E) >> 1);
             }
             set
             {
-                Data[3] &= (byte)(0xC1);
-                Data[3] |= (byte)((value & 0x1F) << 1);
+                Data[3] &= (Byte)(0xC1);
+                Data[3] |= (Byte)((value & 0x1F) << 1);
             }
         }
 
@@ -476,9 +476,9 @@ namespace GBA
         /// <summary>
         /// Returns a boolean indicating whether or not 'this' and 'oam' have the same value.
         /// </summary>
-        public bool Equals(OAM oam)
+        public Boolean Equals(OAM oam)
         {
-            for (int i = 0; i < LENGTH; i++)
+            for (Int32 i = 0; i < LENGTH; i++)
             {
                 if (Data[i] != oam.Data[i])
                     return false;
@@ -529,12 +529,12 @@ namespace GBA
         /// <summary>
         /// Returns a byte map of the tile indices for this OAM based on its SheetIndex
         /// </summary>
-        public int?[,] GetTileMap(Size size)
+        public Int32?[,] GetTileMap(Size size)
         {
-            int?[,] result = new int?[size.Width, size.Height];
-            int index;
-            for (int y = 0; y < size.Height; y++)
-            for (int x = 0; x < size.Width; x++)
+            Int32?[,] result = new Int32?[size.Width, size.Height];
+            Int32 index;
+            for (Int32 y = 0; y < size.Height; y++)
+            for (Int32 x = 0; x < size.Width; x++)
             {
                 index = (SheetX + x) + (SheetY + y) * 32;
                 // the tilesets are 32x8 tilesheets
@@ -550,7 +550,7 @@ namespace GBA
         {
             get
             {
-                return new OAM(new byte[12]
+                return new OAM(new Byte[12]
                 {
                     0x01,
                     0x00,

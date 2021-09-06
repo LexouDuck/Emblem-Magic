@@ -42,7 +42,7 @@ namespace WinMM
         /// <summary>
         /// Indicates the DeviceID of the Microsoft Wave Mapper device.
         /// </summary>
-        public const int WaveOutMapperDeviceId = -1;
+        public const Int32 WaveOutMapperDeviceId = -1;
 
         /// <summary>
         /// Holds a list of manufactureres, read lazily from the assembly's resources.
@@ -51,7 +51,7 @@ namespace WinMM
         /// <summary>
         /// Holds this device's DeviceID.
         /// </summary>
-        private int deviceId;
+        private Int32 deviceId;
         /// <summary>
         /// Holds the device's capabilities.
         /// </summary>
@@ -60,20 +60,20 @@ namespace WinMM
         /// <summary>
         /// Hold a locking object for start/stop synchronization.
         /// </summary>
-        private object startStopLock = new object();
+        private Object startStopLock = new Object();
         /// <summary>
         /// Hold a locking object for buffer synchronization.
         /// </summary>
-        private object bufferingLock = new object();
+        private Object bufferingLock = new Object();
 
         /// <summary>
         /// Holds a flag indicating whether or not we are currently buffering.
         /// </summary>
-        private bool buffering;
+        private Boolean buffering;
         /// <summary>
         /// Holds the number of buffers currently in the queue.
         /// </summary>
-        private int bufferQueueCount;
+        private Int32 bufferQueueCount;
         /// <summary>
         /// Holds a list of buffers to be released to the operating system.
         /// </summary>
@@ -104,7 +104,7 @@ namespace WinMM
         /// </summary>
         /// <param name="deviceId">The device identifier to obtain.</param>
         /// <exception cref="ArgumentOutOfRangeException">If <paramref name="deviceId"/> is not in the valid range.</exception>
-        public WaveOut(int deviceId)
+        public WaveOut(Int32 deviceId)
         {
             if ((deviceId >= DeviceCount || deviceId < 0) && deviceId != WaveOutMapperDeviceId)
             {
@@ -134,7 +134,7 @@ namespace WinMM
         /// Disposes of the managed and native resources used by this instance.
         /// </summary>
         /// <param name="disposing">true to dispose all resources, false to relase native resources only.</param>
-        private void Dispose(bool disposing)
+        private void Dispose(Boolean disposing)
         {
             if (disposing)
             {
@@ -190,7 +190,7 @@ namespace WinMM
         {
             get
             {
-                int volume = 0;
+                Int32 volume = 0;
                 if (this.handle != null && !this.handle.IsInvalid && !this.handle.IsClosed)
                 {
                     NativeMethods.Throw(
@@ -204,32 +204,32 @@ namespace WinMM
                         NativeMethods.ErrorSource.WaveOut);
                 }
 
-                uint left = unchecked((uint)volume) & (uint)0xFFFF;
-                uint right = unchecked((uint)volume) >> 16;
+                UInt32 left = unchecked((UInt32)volume) & (UInt32)0xFFFF;
+                UInt32 right = unchecked((UInt32)volume) >> 16;
                 Volume ret = new Volume();
-                ret.Left = (float)left / UInt16.MaxValue;
-                ret.Right = (float)right / UInt16.MaxValue;
+                ret.Left = (Single)left / UInt16.MaxValue;
+                ret.Right = (Single)right / UInt16.MaxValue;
                 return ret;
             }
 
             set
             {
-                float leftVolume = Math.Min(Math.Max(value.Left, 0.0f), 1.0f);
-                float rightVolume = Math.Min(Math.Max(value.Right, 0.0f), 1.0f);
-                uint left = (uint)(UInt16.MaxValue * leftVolume);
-                uint right = (uint)(UInt16.MaxValue * rightVolume);
-                uint volume = left | (right << 16);
+                Single leftVolume = Math.Min(Math.Max(value.Left, 0.0f), 1.0f);
+                Single rightVolume = Math.Min(Math.Max(value.Right, 0.0f), 1.0f);
+                UInt32 left = (UInt32)(UInt16.MaxValue * leftVolume);
+                UInt32 right = (UInt32)(UInt16.MaxValue * rightVolume);
+                UInt32 volume = left | (right << 16);
 
                 if (this.handle != null && !this.handle.IsInvalid && !this.handle.IsClosed)
                 {
                     NativeMethods.Throw(
-                        NativeMethods.waveOutSetVolume(this.handle, unchecked((int)volume)),
+                        NativeMethods.waveOutSetVolume(this.handle, unchecked((Int32)volume)),
                         NativeMethods.ErrorSource.WaveOut);
                 }
                 else
                 {
                     NativeMethods.Throw(
-                        NativeMethods.waveOutSetVolume((IntPtr)this.deviceId, unchecked((int)volume)),
+                        NativeMethods.waveOutSetVolume((IntPtr)this.deviceId, unchecked((Int32)volume)),
                         NativeMethods.ErrorSource.WaveOut);
                 }
             }
@@ -238,11 +238,11 @@ namespace WinMM
         /// <summary>
         /// Gets or sets the pitch modifier ratio.  This is not supported on all devices.
         /// </summary>
-        public float Pitch
+        public Single Pitch
         {
             get
             {
-                int pitch = 0;
+                Int32 pitch = 0;
                 NativeMethods.Throw(
                     NativeMethods.waveOutGetPitch(this.handle, ref pitch),
                     NativeMethods.ErrorSource.WaveOut);
@@ -260,11 +260,11 @@ namespace WinMM
         /// <summary>
         /// Gets or sets the playback rate modifier ratio.  This is not supported on all devices.
         /// </summary>
-        public float PlaybackRate
+        public Single PlaybackRate
         {
             get
             {
-                int rate = 0;
+                Int32 rate = 0;
                 NativeMethods.Throw(
                     NativeMethods.waveOutGetPlaybackRate(this.handle, ref rate),
                     NativeMethods.ErrorSource.WaveOut);
@@ -283,11 +283,11 @@ namespace WinMM
         /// <summary>
         /// Gets the number of devices available on the system.
         /// </summary>
-        private static int DeviceCount
+        private static Int32 DeviceCount
         {
             get
             {
-                return (int)NativeMethods.waveOutGetNumDevs();
+                return (Int32)NativeMethods.waveOutGetNumDevs();
             }
         }
         /// <summary>
@@ -326,7 +326,7 @@ namespace WinMM
                 wfx.wBitsPerSample = waveFormat.BitsPerSample;
                 wfx.nBlockAlign = waveFormat.BlockAlign;
                 wfx.nChannels = waveFormat.Channels;
-                wfx.wFormatTag = (short)(int)waveFormat.FormatTag;
+                wfx.wFormatTag = (Int16)(Int32)waveFormat.FormatTag;
                 wfx.nSamplesPerSec = waveFormat.SamplesPerSecond;
                 wfx.cbSize = 0;
 
@@ -385,7 +385,7 @@ namespace WinMM
         /// Writes a block of data (in the current format, set during Open) to the device.
         /// </summary>
         /// <param name="bufferData">The data to send to the device.</param>
-        public void Write(byte[] bufferData)
+        public void Write(Byte[] bufferData)
         {
             lock (this.startStopLock)
             {
@@ -458,14 +458,14 @@ namespace WinMM
         /// </summary>
         /// <param name="waveFormat">The format to check.</param>
         /// <returns>true, if the format is supported; false, otherwise.</returns>
-        public bool SupportsFormat(WaveFormat waveFormat)
+        public Boolean SupportsFormat(WaveFormat waveFormat)
         {
             WAVEFORMATEX wfx = new WAVEFORMATEX();
             wfx.nAvgBytesPerSec = waveFormat.AverageBytesPerSecond;
             wfx.wBitsPerSample = waveFormat.BitsPerSample;
             wfx.nBlockAlign = waveFormat.BlockAlign;
             wfx.nChannels = waveFormat.Channels;
-            wfx.wFormatTag = (short)(int)waveFormat.FormatTag;
+            wfx.wFormatTag = (Int16)(Int32)waveFormat.FormatTag;
             wfx.nSamplesPerSec = waveFormat.SamplesPerSecond;
             wfx.cbSize = 0;
 
@@ -497,14 +497,14 @@ namespace WinMM
         /// </summary>
         /// <param name="deviceId">The DeviceID for which to retrieve the capabilities.</param>
         /// <returns>The capabilities of the device.</returns>
-        private static WaveOutDevice GetDeviceCaps(int deviceId)
+        private static WaveOutDevice GetDeviceCaps(Int32 deviceId)
         {
             WAVEOUTCAPS wocaps = new WAVEOUTCAPS();
             NativeMethods.waveOutGetDevCaps(new IntPtr(deviceId), ref wocaps, Marshal.SizeOf(wocaps.GetType()));
             WaveOutDevice caps = new WaveOutDevice();
-            caps.DeviceId = (int)deviceId;
+            caps.DeviceId = (Int32)deviceId;
             caps.Channels = wocaps.wChannels;
-            caps.DriverVersion = (int)wocaps.vDriverVersion;
+            caps.DriverVersion = (Int32)wocaps.vDriverVersion;
             caps.Manufacturer = GetManufacturer(wocaps.wMid);
             caps.Name = wocaps.szPname;
             caps.ProductId = wocaps.wPid;
@@ -517,7 +517,7 @@ namespace WinMM
         /// </summary>
         /// <param name="manufacturerId">The ManufacturerID for which to search.</param>
         /// <returns>The specified manufacturer's name.</returns>
-        private static string GetManufacturer(int manufacturerId)
+        private static String GetManufacturer(Int32 manufacturerId)
         {
             XmlDocument manufacturers = Manufacturers;
             XmlElement man = null;
@@ -541,9 +541,9 @@ namespace WinMM
         private static List<WaveOutDevice> GetAllDeviceCaps()
         {
             List<WaveOutDevice> devices = new List<WaveOutDevice>();
-            int count = DeviceCount;
+            Int32 count = DeviceCount;
 
-            for (int i = 0; i < count; i++)
+            for (Int32 i = 0; i < count; i++)
             {
                 devices.Add(GetDeviceCaps(i));
             }
@@ -637,24 +637,24 @@ namespace WinMM
         /// </summary>
         /// <param name="value">The floating point number to convert.</param>
         /// <returns>A 32-bit fixed point number.</returns>
-        private static int FloatToFixed(float value)
+        private static Int32 FloatToFixed(Single value)
         {
-            short whole = (short)value;
-            ushort fraction = (ushort)((value - whole) * ushort.MaxValue);
+            Int16 whole = (Int16)value;
+            UInt16 fraction = (UInt16)((value - whole) * UInt16.MaxValue);
 
-            return unchecked((int)((((uint)whole) << 8) | (((uint)fraction) >> 8)));
+            return unchecked((Int32)((((UInt32)whole) << 8) | (((UInt32)fraction) >> 8)));
         }
         /// <summary>
         /// Converts a 32-bit fixed point number number to a floating point.
         /// </summary>
         /// <param name="value">The 32-bit fixed point number to convert.</param>
         /// <returns>A floating point number.</returns>
-        private static float FixedToFloat(int value)
+        private static Single FixedToFloat(Int32 value)
         {
-            short whole = (short)(unchecked((uint)value) >> 8);
-            ushort fraction = (ushort)value;
+            Int16 whole = (Int16)(unchecked((UInt32)value) >> 8);
+            UInt16 fraction = (UInt16)value;
 
-            return (float)whole + (((float)fraction) / ushort.MaxValue);
+            return (Single)whole + (((Single)fraction) / UInt16.MaxValue);
         }
     }
 }

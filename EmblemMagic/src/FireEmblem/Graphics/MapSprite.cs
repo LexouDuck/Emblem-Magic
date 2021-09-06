@@ -7,28 +7,28 @@ namespace EmblemMagic.FireEmblem
 {
     public class MapSprite : GBA.SpriteSheet
     {
-        public const int W_TILES = 20;
-        public const int H_TILES = 16;
+        public const Int32 W_TILES = 20;
+        public const Int32 H_TILES = 16;
 
-        public const int WIDTH  = W_TILES * Tile.SIZE;
-        public const int HEIGHT = H_TILES * Tile.SIZE;
+        public const Int32 WIDTH  = W_TILES * Tile.SIZE;
+        public const Int32 HEIGHT = H_TILES * Tile.SIZE;
 
-        public const int IDLE = 0;
-        public const int WALK = 1;
+        public const Int32 IDLE = 0;
+        public const Int32 WALK = 1;
 
-        public const int IDLE_SIZE_16x16 = 0x00;
-        public const int IDLE_SIZE_16x32 = 0x01;
-        public const int IDLE_SIZE_32x32 = 0x02;
+        public const Int32 IDLE_SIZE_16x16 = 0x00;
+        public const Int32 IDLE_SIZE_16x32 = 0x01;
+        public const Int32 IDLE_SIZE_32x32 = 0x02;
 
         // can either 0x00 for 16x16, 0x01 for 16x32, or 0x02 for 32x32
-        public byte IdleSize;
+        public Byte IdleSize;
 
 
 
         /// <summary>
         /// Creates a map sprite from the given data
         /// </summary>
-        public MapSprite(Palette palette, byte[] idle, byte[] move, byte size)
+        public MapSprite(Palette palette, Byte[] idle, Byte[] move, Byte size)
             : base(W_TILES * Tile.SIZE, H_TILES * Tile.SIZE)
         {
             if (palette == null) throw new Exception("Map Sprite palette is null.");
@@ -51,7 +51,7 @@ namespace EmblemMagic.FireEmblem
 
             Tileset idleTiles = new GBA.Tileset();
             Tileset moveTiles = new GBA.Tileset();
-            byte size = 0x02;
+            Byte size = 0x02;
             if (image.IsRegionEmpty(new Rectangle( 0, 32, Tile.SIZE, HEIGHT - 32)) &&
                 image.IsRegionEmpty(new Rectangle(24, 32, Tile.SIZE, HEIGHT - 32)))
             {
@@ -73,11 +73,11 @@ namespace EmblemMagic.FireEmblem
             IdleSize = size;
         }
 
-        public static int?[,] Map_Idle(byte size)
+        public static Int32?[,] Map_Idle(Byte size)
         {
             switch (size)
             {
-                case 0x00: return TileMap.Convert(new int?[12, 4]
+                case 0x00: return TileMap.Convert(new Int32?[12, 4]
                 {
                     { null, null, null, null },
                     { null, null, null, null },
@@ -93,7 +93,7 @@ namespace EmblemMagic.FireEmblem
                     { null, 0x0A, 0x0B, null },
                 }, 0);
 
-                case 0x01: return TileMap.Convert(new int?[12, 4]
+                case 0x01: return TileMap.Convert(new Int32?[12, 4]
                 {
                     { null, 0x00, 0x01, null },
                     { null, 0x02, 0x03, null },
@@ -109,7 +109,7 @@ namespace EmblemMagic.FireEmblem
                     { null, 0x16, 0x17, null },
                 }, 0);
 
-                case 0x02: return TileMap.Convert(new int?[12, 4]
+                case 0x02: return TileMap.Convert(new Int32?[12, 4]
                 {
                     { 0x00, 0x01, 0x02, 0x03 },
                     { 0x04, 0x05, 0x06, 0x07 },
@@ -125,12 +125,12 @@ namespace EmblemMagic.FireEmblem
                     { 0x2C, 0x2D, 0x2E, 0x2F },
                 }, 0);
 
-                default: return new int?[0, 0];
+                default: return new Int32?[0, 0];
             }
         }
-        public static int?[,] Map_Move()
+        public static Int32?[,] Map_Move()
         {
-            return TileMap.Convert(new int?[16, 16]
+            return TileMap.Convert(new Int32?[16, 16]
             {
                 { 0x00, 0x01, 0x02, 0x03, 0x40, 0x41, 0x42, 0x43, 0x80, 0x81, 0x82, 0x83, null, null, null, null },
                 { 0x04, 0x05, 0x06, 0x07, 0x44, 0x45, 0x46, 0x47, 0x84, 0x85, 0x86, 0x87, null, null, null, null },
@@ -150,11 +150,11 @@ namespace EmblemMagic.FireEmblem
                 { 0x3C, 0x3D, 0x3E, 0x3F, 0x7C, 0x7D, 0x7E, 0x7F, 0xBC, 0xBD, 0xBE, 0xBF, 0xEC, 0xED, 0xEE, 0xEF },
             }, 0);
         }
-        public static int?[,] Map_Test(int offset, byte? size = null)
+        public static Int32?[,] Map_Test(Int32 offset, Byte? size = null)
         {
             if (size == null)
             {
-                return TileMap.Convert(new int?[4, 4]
+                return TileMap.Convert(new Int32?[4, 4]
                 {
                     { 0x00, 0x01, 0x02, 0x03 },
                     { 0x04, 0x05, 0x06, 0x07 },
@@ -167,7 +167,7 @@ namespace EmblemMagic.FireEmblem
                 switch (size)
                 {
                     case 0x00: offset /= 4;
-                    return TileMap.Convert(new int?[4, 4]
+                    return TileMap.Convert(new Int32?[4, 4]
                     {
                         { null, null, null, null },
                         { null, null, null, null },
@@ -176,7 +176,7 @@ namespace EmblemMagic.FireEmblem
                     }, offset);
 
                     case 0x01: offset /= 2;
-                    return TileMap.Convert(new int?[4, 4]
+                    return TileMap.Convert(new Int32?[4, 4]
                     {
                         { null, 0x00, 0x01, null },
                         { null, 0x02, 0x03, null },
@@ -185,7 +185,7 @@ namespace EmblemMagic.FireEmblem
                     }, offset);
 
                     case 0x02:
-                    return TileMap.Convert(new int?[4, 4]
+                    return TileMap.Convert(new Int32?[4, 4]
                     {
                         { 0x00, 0x01, 0x02, 0x03 },
                         { 0x04, 0x05, 0x06, 0x07 },
@@ -193,7 +193,7 @@ namespace EmblemMagic.FireEmblem
                         { 0x0C, 0x0D, 0x0E, 0x0F },
                     }, offset);
 
-                    default: return new int?[0, 0];
+                    default: return new Int32?[0, 0];
                 }
             }
         }

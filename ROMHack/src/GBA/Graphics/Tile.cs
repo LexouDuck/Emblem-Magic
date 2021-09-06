@@ -19,31 +19,31 @@ namespace GBA
         /// <summary>
         /// The usual width and height of a tile
         /// </summary>
-        public const int SIZE = 8;
+        public const Int32 SIZE = 8;
         /// <summary>
         /// The amount of bytes for one 8x8 tile of pixel data in 4bpp
         /// </summary>
-        public const int LENGTH = 32;
+        public const Int32 LENGTH = 32;
 
 
         /// <summary>
         /// An empty tile (all pixels are 0)
         /// </summary>
-        public static Tile Empty = new Tile(new byte[LENGTH]);
+        public static Tile Empty = new Tile(new Byte[LENGTH]);
 
 
 
         /// <summary>
         /// The 0-15 int of the color index in the palette for the pixel at the given coordinates.
         /// </summary>
-        public int this[int x, int y]
+        public Int32 this[Int32 x, Int32 y]
         {
             get
             {
                 if (x < 0 || x >= SIZE) throw new ArgumentException("X given is out of bounds: " + x);
                 if (y < 0 || y >= SIZE) throw new ArgumentException("Y given is out of bounds: " + y);
 
-                int index = (x / 2) + (y * (SIZE / 2));
+                Int32 index = (x / 2) + (y * (SIZE / 2));
                 if (index < 0 || index >= Bytes.Length)
                     throw new ArgumentException("index is outside of the byte array." + Bytes.Length);
                 else return (x % 2 == 0) ?
@@ -55,12 +55,12 @@ namespace GBA
                 if (x < 0 || x >= SIZE) throw new ArgumentException("X given is out of bounds: " + x);
                 if (y < 0 || y >= SIZE) throw new ArgumentException("Y given is out of bounds: " + y);
 
-                int index = (x / 2) + (y * (SIZE / 2));
+                Int32 index = (x / 2) + (y * (SIZE / 2));
                 if (index < 0 || index >= Bytes.Length)
                     throw new ArgumentException("index is outside of the byte array.");
                 else Bytes[index] = (x % 2 == 0) ?
-                    (byte)((Bytes[index] & 0xF0) | (value & 0x0F)) :
-                    (byte)((Bytes[index] & 0x0F) |((value & 0x0F) << 4));
+                    (Byte)((Bytes[index] & 0xF0) | (value & 0x0F)) :
+                    (Byte)((Bytes[index] & 0x0F) |((value & 0x0F) << 4));
                 return;
             }
         }
@@ -75,12 +75,12 @@ namespace GBA
         /// <summary>
         /// Creates a size x size Tile from the given byte array (size must be a multiple of 8)
         /// </summary>
-        public Tile(byte[] data)
+        public Tile(Byte[] data)
         {
             if (data.Length != LENGTH)
                 throw new Exception("data given has invalid length, it should be 32 bytes long");
             
-            Bytes = new byte[LENGTH];
+            Bytes = new Byte[LENGTH];
             Array.Copy(data, Bytes, LENGTH);
         }
         /// <summary>
@@ -91,7 +91,7 @@ namespace GBA
             if (image.Width != SIZE || image.Height != SIZE)
                 throw new Exception("given GBA.Image is not 8x8 pixels");
 
-            Bytes = new byte[LENGTH];
+            Bytes = new Byte[LENGTH];
             Array.Copy(image.Bytes, Bytes, LENGTH);
         }
 
@@ -100,9 +100,9 @@ namespace GBA
         /// <summary>
         /// Tells whether or not this Tile is blank.
         /// </summary>
-        public bool IsEmpty()
+        public Boolean IsEmpty()
         {
-            for (int i = 0; i < Bytes.Length; i++)
+            for (Int32 i = 0; i < Bytes.Length; i++)
             {
                 if (Bytes[i] != 0) return false;
             }
@@ -114,10 +114,10 @@ namespace GBA
         /// </summary>
         public Tile FlipVertical()
         {
-            byte[] result = new byte[Bytes.Length];
-            int width = SIZE / 2;
-            int height = SIZE;
-            for (int row = 0; row < height; row++)
+            Byte[] result = new Byte[Bytes.Length];
+            Int32 width = SIZE / 2;
+            Int32 height = SIZE;
+            for (Int32 row = 0; row < height; row++)
             {
                 Array.Copy(Bytes, row * width, result, (height - 1 - row) * width, width);
             }
@@ -128,17 +128,17 @@ namespace GBA
         /// </summary>
         public Tile FlipHorizontal()
         {
-            byte[] result = new byte[Bytes.Length];
-            int width = SIZE / 2;
-            int height = SIZE;
-            byte[] buffer = new byte[width];
-            for (int row = 0; row < height; row++)
+            Byte[] result = new Byte[Bytes.Length];
+            Int32 width = SIZE / 2;
+            Int32 height = SIZE;
+            Byte[] buffer = new Byte[width];
+            for (Int32 row = 0; row < height; row++)
             {
                 Array.Copy(Bytes, row * width, buffer, 0, width);
                 Array.Reverse(buffer);
-                for (int i = 0; i < width; i++)
+                for (Int32 i = 0; i < width; i++)
                 {
-                    result[row * width + i] = (byte)(((buffer[i] & 0x0F) << 4) | ((buffer[i] & 0xF0) >> 4));
+                    result[row * width + i] = (Byte)(((buffer[i] & 0x0F) << 4) | ((buffer[i] & 0xF0) >> 4));
                 }
             }
             return new Tile(result);
@@ -149,10 +149,10 @@ namespace GBA
         public Color[,] GetPixels(Palette colors)
         {
             Color[,] result = new Color[SIZE, SIZE];
-            int index = 0;
-            for (int y = 0; y < SIZE; y++)
+            Int32 index = 0;
+            for (Int32 y = 0; y < SIZE; y++)
             {
-                for (int x = 0; x < SIZE; x += 2)
+                for (Int32 x = 0; x < SIZE; x += 2)
                 {
                     result[x, y] = colors[(Bytes[index] & 0x0F)];
                     result[x + 1, y] = colors[(Bytes[index] & 0xF0) >> 4];
@@ -164,32 +164,32 @@ namespace GBA
 
 
 
-        override public string ToString()
+        override public String ToString()
         {
-            string result = "";
-            for (int y = 0; y < SIZE; y++)
+            String result = "";
+            for (Int32 y = 0; y < SIZE; y++)
             {
-                for (int x = 0; x < SIZE; x++)
+                for (Int32 x = 0; x < SIZE; x++)
                 {
-                    result += Util.ByteToDigit((byte)this[x, y]);
+                    result += Util.ByteToDigit((Byte)this[x, y]);
                     result += " ";
                 }
                 result += "\n";
             }
             return "GBA.Tile:\n" + result;
         }
-        override public bool Equals(object other)
+        override public Boolean Equals(Object other)
         {
             if (!(other is Tile)) return false;
             Tile tile = (Tile)other;
             if (this == tile) return true;
-            for (int i = 0; i < Bytes.Length; i++)
+            for (Int32 i = 0; i < Bytes.Length; i++)
             {
                 if (Bytes[i] != tile.Bytes[i]) return false;
             }
             return true;
         }
-        override public int GetHashCode()
+        override public Int32 GetHashCode()
         {
             return Bytes.GetHashCode();
         }

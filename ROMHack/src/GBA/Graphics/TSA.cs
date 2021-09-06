@@ -11,7 +11,7 @@ namespace GBA
         /// <summary>
         /// The maximum amount of tiles for a TSA array (the number goes from 0x0000 to 0x03FF)
         /// </summary>
-        public const int MAX_TILES = 1024;
+        public const Int32 MAX_TILES = 1024;
 
         // TSA info format is 'PPPP VHTT TTTT TTTT', so:
         // - 4bits for palette index
@@ -34,7 +34,7 @@ namespace GBA
         {
             Value = value;
         }
-        public TSA(int tile, byte palette, bool flipH, bool flipV)
+        public TSA(Int32 tile, Byte palette, Boolean flipH, Boolean flipV)
         {
             Value = (UInt16)((palette << 12) |
                 (flipV ? BITS_FLIPV : 0) |

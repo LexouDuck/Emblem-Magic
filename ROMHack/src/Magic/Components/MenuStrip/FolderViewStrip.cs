@@ -12,11 +12,11 @@ namespace Magic.Components
         /// <summary>
         /// The path + filename and extension the file in question.
         /// </summary>
-        public string FilePath { get; set; }
+        public String FilePath { get; set; }
         /// <summary>
         /// Gets the text to display on the MenuItem
         /// </summary>
-        public override string Text
+        public override String Text
         {
             get
             {
@@ -24,7 +24,7 @@ namespace Magic.Components
             }
         }
 
-        public FolderViewMenuItem(string filepath)
+        public FolderViewMenuItem(String filepath)
         {
             FilePath = filepath;
         }
@@ -42,20 +42,20 @@ namespace Magic.Components
         /// <summary>
         /// Loads the files located at the given path into this FolderViewMenu
         /// </summary>
-        public void LoadFiles(string path, string extension = null)
+        public void LoadFiles(String path, String extension = null)
         {
-            string[] files = Directory.GetFiles(path);
+            String[] files = Directory.GetFiles(path);
 
             if (extension == null)
             {
-                foreach (string file in files)
+                foreach (String file in files)
                 {
                     DropDownItems.Add(new FolderViewMenuItem(file));
                 }
             }
             else
             {
-                foreach (string file in files)
+                foreach (String file in files)
                 {
                     if (file.EndsWith(extension, StringComparison.OrdinalIgnoreCase))
                        DropDownItems.Add(new FolderViewMenuItem(file));
@@ -78,7 +78,7 @@ namespace Magic.Components
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
+        protected override void Dispose(Boolean disposing)
         {
             if (disposing && (components != null))
             {

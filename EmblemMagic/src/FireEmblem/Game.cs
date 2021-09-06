@@ -29,14 +29,14 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// The address in the ROM at which the game ID is located
         /// </summary>
-        const uint ID_ADDRESS = 0x0000A0;
+        const UInt32 ID_ADDRESS = 0x0000A0;
 
 
 
         /// <summary>
         /// Creates a FE6/FE7/FE8 instance from the given parameters
         /// </summary>
-        public Game(GameVersion version, bool clean, bool expanded)
+        public Game(GameVersion version, Boolean clean, Boolean expanded)
         {
             Version = version;
             IsClean = clean;
@@ -48,11 +48,11 @@ namespace EmblemMagic.FireEmblem
         /// </summary>
         public static Game FromROM(DataManager ROM)
         {
-            byte[] id_data = Core.ReadData(new Pointer(ID_ADDRESS), 0x12);
+            Byte[] id_data = Core.ReadData(new Pointer(ID_ADDRESS), 0x12);
             String id = new String(Encoding.ASCII.GetChars(id_data));
 
             GameVersion version = 0;
-            char game = ' ';
+            Char game = ' ';
             foreach (GameVersion region in Enum.GetValues(typeof(GameVersion)))
             {
                 if (region == GameVersion.JAP)
@@ -61,8 +61,8 @@ namespace EmblemMagic.FireEmblem
                 if (id.Equals(FE8.GameID(region))) { game = '8'; version = region; break; }
             }
 
-            bool clean;
-            bool expanded;
+            Boolean clean;
+            Boolean expanded;
             switch (game)
             {
                 case '6':
@@ -91,21 +91,21 @@ namespace EmblemMagic.FireEmblem
 
 
 
-        override public string ToString()
+        override public String ToString()
         {
             if (this is FE6) return "Fire Emblem 6" + " (" + Version + ") " + " - " + (IsClean ? "Clean" : "Hacked") + " ROM";
             if (this is FE7) return "Fire Emblem 7" + " (" + Version + ") " + " - " + (IsClean ? "Clean" : "Hacked") + " ROM";
             if (this is FE8) return "Fire Emblem 8" + " (" + Version + ") " + " - " + (IsClean ? "Clean" : "Hacked") + " ROM";
             return "Unknown Game";
         }
-        override public bool Equals(object other)
+        override public Boolean Equals(Object other)
         {
             if (!(other is Game)) return false;
             Game game = (Game)other;
             return (Version == game.Version)
                 && (this.GetType() == game.GetType());
         }
-        override public int GetHashCode()
+        override public Int32 GetHashCode()
         {
             return this.GetType().GetHashCode() ^ Version.GetHashCode() ^ IsClean.GetHashCode() ^ Expanded.GetHashCode();
         }
@@ -115,7 +115,7 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// Returns a string identifier of this Fire Emblem game : "FE6J", "FE7U", or "FE8E", etc
         /// </summary>
-        public abstract string GetIdentifier();
+        public abstract String GetIdentifier();
 
         /// <summary>
         /// Gets the default file size of the current ROM (according to game and version)

@@ -7,33 +7,33 @@ namespace Compression
 {
     public static class LZ77
     {
-        public const int BLOCK_SIZE = 0x8;
-        public const int BUFFER_SIZE = 0x12;
-        public const int WINDOW_SIZE = 0x1000;
+        public const Int32 BLOCK_SIZE = 0x8;
+        public const Int32 BUFFER_SIZE = 0x12;
+        public const Int32 WINDOW_SIZE = 0x1000;
 
 
 
         /// <summary>
         /// Returns the length of the compressed data once decomrpessed, or -1 if can't be decompressed
         /// </summary>
-        public static int GetLength(Pointer data)
+        public static Int32 GetLength(Pointer data)
         {
             if (Core.ReadByte(data) != 0x10) return -1;
 
-            uint decomp_length = Core.ReadData(data, 4).GetUInt32(0, true) & 0x00FFFFFF;
-            int decomp_parse = 0;
+            UInt32 decomp_length = Core.ReadData(data, 4).GetUInt32(0, true) & 0x00FFFFFF;
+            Int32 decomp_parse = 0;
             Pointer parse = data + 4;
 
             while (decomp_parse < decomp_length)
             {
-                byte isCompressed = Core.ReadByte(parse);
+                Byte isCompressed = Core.ReadByte(parse);
                 parse += 1;
-                for (int i = 0; i < BLOCK_SIZE && decomp_parse < decomp_length; i++)
+                for (Int32 i = 0; i < BLOCK_SIZE && decomp_parse < decomp_length; i++)
                 {
                     if ((isCompressed & 0x80) != 0)
                     {
-                        byte AmountToCopy = (byte)(((Core.ReadByte(parse) >> 4) & 0xF) + 3);
-                        ushort CopyPosition = (ushort)((((Core.ReadByte(parse) & 0xF) << 8) + Core.ReadByte(parse)) + 1);
+                        Byte AmountToCopy = (Byte)(((Core.ReadByte(parse) >> 4) & 0xF) + 3);
+                        UInt16 CopyPosition = (UInt16)((((Core.ReadByte(parse) & 0xF) << 8) + Core.ReadByte(parse)) + 1);
 
                         if (CopyPosition > decomp_parse)
                             return -1;
@@ -59,7 +59,7 @@ namespace Compression
         /// <summary>
         /// Decompress the given byte array holding GBA formatted LZ77 data
         /// </summary>
-        public static byte[] Decompress(Pointer address)
+        public static Byte[] Decompress(Pointer address)
         {
             Pointer pos = address;
             if (address == new Pointer()) return null;
@@ -68,13 +68,13 @@ namespace Compression
                 throw new Exception("LZ77 compressed data is not valid, it should start with 0x10");
             pos += 1;
 
-            int offset = 0;
-            int length = Core.ReadByte(pos) + (Core.ReadByte(pos + 1) << 8) + (Core.ReadByte(pos + 2) << 16);
+            Int32 offset = 0;
+            Int32 length = Core.ReadByte(pos) + (Core.ReadByte(pos + 1) << 8) + (Core.ReadByte(pos + 2) << 16);
             pos += 3;
 
-            byte[] result = new byte[length];
+            Byte[] result = new Byte[length];
 
-            byte isCompressed;
+            Byte isCompressed;
             try
             {
                 while (offset < length)
@@ -82,7 +82,7 @@ namespace Compression
                     isCompressed = Core.ReadByte(pos);
                     pos += 1;
                     // byte of 8 flags for 8 blocks
-                    for (int i = 0; i < BLOCK_SIZE; i++)
+                    for (Int32 i = 0; i < BLOCK_SIZE; i++)
                     {
                         if ((isCompressed & (0x80 >> i)) == 0)
                         {   // so this block isn't compressed, copy a single byte
@@ -94,15 +94,15 @@ namespace Compression
                             UInt16 block = (UInt16)(Core.ReadByte(pos) | (Core.ReadByte(pos + 1) << 8));
                             pos += 2;
                             // load LZ copy block
-                            int amountToCopy = ((block >> 4) & 0xF) + 3;
-                            int displacement = ((block & 0xF) << 8) | ((block >> 8) & 0xFF);
+                            Int32 amountToCopy = ((block >> 4) & 0xF) + 3;
+                            Int32 displacement = ((block & 0xF) << 8) | ((block >> 8) & 0xFF);
 
-                            int copyPosition = offset - displacement - 1;
+                            Int32 copyPosition = offset - displacement - 1;
                             if (copyPosition > length) throw new Exception();
 
-                            for (int j = 0; j < amountToCopy; j++)
+                            for (Int32 j = 0; j < amountToCopy; j++)
                             {
-                                byte b = result[copyPosition + j];
+                                Byte b = result[copyPosition + j];
                                 result[offset++] = b;
                             }
                         }
@@ -124,16 +124,16 @@ namespace Compression
         /// Returns info about the result of an LZ77 compression search given the array to search through,
         /// the position to search from, and the length of array that is being compressed.
         /// </summary>
-        public static int[] Search(byte[] input, int position, int length)
+        public static Int32[] Search(Byte[] input, Int32 position, Int32 length)
         {
-            List<int> results = new List<int>();
+            List<Int32> results = new List<Int32>();
 
             if (!(position < length))
-                return new int[] { -1, 0 };
+                return new Int32[] { -1, 0 };
             if (position < 3 || (length - position) < 3)
-                return new int[] { 0, 0 };
+                return new Int32[] { 0, 0 };
 
-            for (int i = 1; ((i < WINDOW_SIZE) && (i < position)); i++)
+            for (Int32 i = 1; ((i < WINDOW_SIZE) && (i < position)); i++)
             {
                 if (input[position - i - 1] == input[position])
                 {
@@ -141,15 +141,15 @@ namespace Compression
                 }
             }
             if (results.Count == 0)
-                return new int[] { 0, 0 };
+                return new Int32[] { 0, 0 };
 
-            int amountOfBytes = 0;
+            Int32 amountOfBytes = 0;
 
             while (amountOfBytes < BUFFER_SIZE)
             {
                 amountOfBytes++;
-                bool searchComplete = false;
-                for (int i = results.Count - 1; i >= 0; i--)
+                Boolean searchComplete = false;
+                for (Int32 i = results.Count - 1; i >= 0; i--)
                 {
                     try
                     {
@@ -164,7 +164,7 @@ namespace Compression
                     }
                     catch
                     {
-                        return new int[] { 0, 0 };
+                        return new Int32[] { 0, 0 };
                     }
                 }
                 if (searchComplete)
@@ -172,27 +172,27 @@ namespace Compression
             }
 
             //Length of data is first, then position
-            return new int[] { amountOfBytes, results[0] };
+            return new Int32[] { amountOfBytes, results[0] };
         }
 
         /// <summary>
         /// Returns the given byte array, compressed using the LZ77 compression algorithm
         /// </summary>
-        public static byte[] Compress(byte[] input)
+        public static Byte[] Compress(Byte[] input)
         {
-            int length = input.Length;
-            int position = 0;
+            Int32 length = input.Length;
+            Int32 position = 0;
 
             List<Byte> result = new List<Byte>();
-            result.Add((byte)0x10);
+            result.Add((Byte)0x10);
 
-            result.Add((byte)(0xFF & (length)));
-            result.Add((byte)(0xFF & (length >> 8)));
-            result.Add((byte)(0xFF & (length >> 16)));
+            result.Add((Byte)(0xFF & (length)));
+            result.Add((Byte)(0xFF & (length >> 8)));
+            result.Add((Byte)(0xFF & (length >> 16)));
 
-            byte isCompressed = 0;
-            int[] searchResult = null;
-            Byte add = (byte)0;
+            Byte isCompressed = 0;
+            Int32[] searchResult = null;
+            Byte add = (Byte)0;
             List<Byte> tempList = null;
 
             while (position < length)
@@ -200,18 +200,18 @@ namespace Compression
                 isCompressed = 0;
                 tempList = new List<Byte>();
 
-                for (int i = 0; i < BLOCK_SIZE; i++)
+                for (Int32 i = 0; i < BLOCK_SIZE; i++)
                 {
                     searchResult = Search(input, position, length);
 
                     if (searchResult[0] > 2)
                     {
-                        add = (byte)((((searchResult[0] - 3) & 0xF) << 4) + (((searchResult[1] - 1) >> 8) & 0xF));
+                        add = (Byte)((((searchResult[0] - 3) & 0xF) << 4) + (((searchResult[1] - 1) >> 8) & 0xF));
                         tempList.Add(add);
-                        add = (byte)((searchResult[1] - 1) & 0xFF);
+                        add = (Byte)((searchResult[1] - 1) & 0xFF);
                         tempList.Add(add);
                         position += searchResult[0];
-                        isCompressed |= (byte)(1 << (BLOCK_SIZE - (i + 1)));
+                        isCompressed |= (Byte)(1 << (BLOCK_SIZE - (i + 1)));
                     }
                     else if (searchResult[0] >= 0)
                     {

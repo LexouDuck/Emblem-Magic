@@ -8,7 +8,7 @@ namespace Magic.Components
         internal DataBlock _nextBlock;
         internal DataBlock _previousBlock;
 
-        public abstract long Length
+        public abstract Int64 Length
         {
             get;
         }
@@ -37,6 +37,6 @@ namespace Magic.Components
             }
         }
 
-        public abstract void RemoveBytes(long position, long count);
+        public abstract void RemoveBytes(Int64 position, Int64 count);
     }
 }

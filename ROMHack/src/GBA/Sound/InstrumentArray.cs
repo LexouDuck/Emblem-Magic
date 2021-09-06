@@ -5,7 +5,7 @@ namespace GBA
 {
     public class InstrumentArray
     {
-        public Instrument this[int index]
+        public Instrument this[Int32 index]
         {
             get
             {
@@ -22,7 +22,7 @@ namespace GBA
 
 
 
-        public Pointer GetAddress(int index)
+        public Pointer GetAddress(Int32 index)
         {
             return Address + Instrument.LENGTH * index;
         }
@@ -30,14 +30,14 @@ namespace GBA
         /// <summary>
         /// returns the 16-byte data for a programmable waveform
         /// </summary>
-        public byte[] GetProgrammableWaveData(Pointer address)
+        public Byte[] GetProgrammableWaveData(Pointer address)
         {
             return Core.ReadData(address, 16);
         }
 
 
 
-        public Audio[] GetAudio(int index)
+        public Audio[] GetAudio(Int32 index)
         {
             Audio[] result = new Audio[Music.NOTES];
             Instrument entry = this[index];
@@ -45,12 +45,12 @@ namespace GBA
 
             Instrument instrument;
             KeyMap keymap;
-            for (int i = 0; i < result.Length; i++)
+            for (Int32 i = 0; i < result.Length; i++)
             {
                 switch (entry.Type)
                 {
                     case InstrumentType.Direct:
-                        uint frequency = (uint)(sample.Pitch * Math.Pow(2, ((i - entry.BaseKey) / (double)12)));
+                        UInt32 frequency = (UInt32)(sample.Pitch * Math.Pow(2, ((i - entry.BaseKey) / (Double)12)));
                         result[i] = new Audio_DirectSound(entry, sample, frequency);
                         break;
 

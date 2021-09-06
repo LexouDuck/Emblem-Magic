@@ -6,14 +6,14 @@ namespace EmblemMagic.FireEmblem
 {
     public static class Text
     {
-        public static String[] RemoveBracketCodes(string[] text)
+        public static String[] RemoveBracketCodes(String[] text)
         {
-            List<string> result = new List<string>();
-            string line;
-            for (int i = 0; i < text.Length; i++)
+            List<String> result = new List<String>();
+            String line;
+            for (Int32 i = 0; i < text.Length; i++)
             {
                 line = "";
-                for (int j = 0; j < text[i].Length; j++)
+                for (Int32 j = 0; j < text[i].Length; j++)
                 {
                     if (text[i][j] == '[')
                     {
@@ -30,14 +30,14 @@ namespace EmblemMagic.FireEmblem
         /// Loads command codes on ASCII-encoded FE game text, and returns the final string
         /// </summary>
         public static String BytesToText(
-            byte[] data, bool bytecodes,
+            Byte[] data, Boolean bytecodes,
             ArrayFile commands_list,
             ArrayFile commands_0x80,
             ArrayFile portrait_list)
         {
-            string result = "";
-            string command;
-            for (int i = 0; i < data.Length; i++)
+            String result = "";
+            String command;
+            for (Int32 i = 0; i < data.Length; i++)
             {
                 if (data[i] < 0x20)
                 {
@@ -47,7 +47,7 @@ namespace EmblemMagic.FireEmblem
                         result += "\r\n";
                     if (data[i] == 0x10)
                     {
-                        UInt16 index = Util.BytesToUInt16(new byte[2] { data[i + 1], data[i + 2] }, true);
+                        UInt16 index = Util.BytesToUInt16(new Byte[2] { data[i + 1], data[i + 2] }, true);
 
                         if (index < 0x100) throw new Exception(
                             "Invalid portrait index read in the text data" +
@@ -82,15 +82,15 @@ namespace EmblemMagic.FireEmblem
                 {
                     if (Core.CurrentROM.Version == GameVersion.JAP)
                     {
-                        byte[] buffer = System.Text.Encoding.Convert(
+                        Byte[] buffer = System.Text.Encoding.Convert(
                             System.Text.Encoding.GetEncoding(932), // Shift-JIS
                             System.Text.Encoding.Unicode,
                             data, i++, 2);
                         //UInt16 symbol = data.GetUInt16((uint)i++, false);
                         //UI.ShowMessage(Util.UInt16ToHex(symbol));
-                        result += (char)(Util.BytesToNumber(buffer, true));
+                        result += (Char)(Util.BytesToNumber(buffer, true));
                     }
-                    else result += (char)data[i];
+                    else result += (Char)data[i];
                 }
             }
             return result;
@@ -98,45 +98,45 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// Takes text with command codes and returns the corresponding ASCII-encoded byte array
         /// </summary>
-        public static byte[] TextToBytes(string text,
+        public static Byte[] TextToBytes(String text,
             ArrayFile commands_list,
             ArrayFile commands_0x80,
             ArrayFile portrait_list)
         {
-            List<byte> result = new List<byte>();
-            for (int i = 0; i < text.Length; i++)
+            List<Byte> result = new List<Byte>();
+            for (Int32 i = 0; i < text.Length; i++)
             {
                 if (text[i] == '[')
                 {
                     i++;
-                    int length = 0;
+                    Int32 length = 0;
                     while (text[i + length] != ']') length++;
-                    string command = text.Substring(i, length);
+                    String command = text.Substring(i, length);
                     i += length;
                     
                     if (command.StartsWith(commands_list[0x10]))
                     {   // Load portrait command is pretty special
-                        string portrait = command.Substring(commands_list[0x10].Length + 1);
+                        String portrait = command.Substring(commands_list[0x10].Length + 1);
                         result.Add(0x10);
                         if (portrait.Equals("Current"))
                         {
-                            result.AddRange(new byte[2] { 0xFF, 0xFF });
+                            result.AddRange(new Byte[2] { 0xFF, 0xFF });
                         }
                         else
                         {
-                            uint index = portrait_list.FindEntry(portrait);
+                            UInt32 index = portrait_list.FindEntry(portrait);
                             if (index == 0xFFFFFFFF) throw new Exception("Invalid portrait name: " + portrait);
                             result.AddRange(Util.UInt16ToBytes((UInt16)(index + 0x100), true));
                         }
                     }
                     else
                     {
-                        uint index = commands_list.FindEntry(command);
-                        if (index == uint.MaxValue)
+                        UInt32 index = commands_list.FindEntry(command);
+                        if (index == UInt32.MaxValue)
                         {   // so it's not a regular byte command
 
                             index = commands_0x80.FindEntry(command);
-                            if (index == uint.MaxValue)
+                            if (index == UInt32.MaxValue)
                             {   // it wasn't found in the command lists
 
                                 if (command.StartsWith("0x"))
@@ -148,17 +148,17 @@ namespace EmblemMagic.FireEmblem
                             else
                             {
                                 result.Add(0x80);
-                                result.Add((byte)index);
+                                result.Add((Byte)index);
                             }
                         }
-                        else result.Add((byte)index);
+                        else result.Add((Byte)index);
                     }
                 }
                 else if (text[i] == '\n' || (text[i] == '\r' && text[++i] == '\n'))
                 {
                     result.Add(0x01);
                 }
-                else result.Add((byte)text[i]);
+                else result.Add((Byte)text[i]);
             }
             return result.ToArray();
         }

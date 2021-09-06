@@ -23,10 +23,10 @@ namespace Magic.Editors
             Tileset_2bpp_RadioButton.Enabled = false;
 
             GrayScale = new Palette();
-            byte value;
-            for (int i = 0; i < Palette.MAX; i++)
+            Byte value;
+            for (Int32 i = 0; i < Palette.MAX; i++)
             {
-                value = (byte)(i * 16);
+                value = (Byte)(i * 16);
                 GrayScale.Add(new GBA.Color(0, value, value, value));
             }
         }
@@ -39,18 +39,18 @@ namespace Magic.Editors
         {
             try
             {
-                byte[] palette = Core.ReadData(
-                    Palette_PointerBox.Value + (int)Palette_Index_NumBox.Value * Palette.LENGTH,
+                Byte[] palette = Core.ReadData(
+                    Palette_PointerBox.Value + (Int32)Palette_Index_NumBox.Value * Palette.LENGTH,
                     Palette_CheckBox.Checked ? 0 : 16 * Palette.LENGTH);
-                byte[] tileset = Core.ReadData(
+                Byte[] tileset = Core.ReadData(
                     Tileset_PointerBox.Value,
                     Tileset_CheckBox.Checked ? 0 : (Tileset_8bpp_RadioButton.Checked ?
-                        ((int)Width_NumBox.Value * (int)Height_NumBox.Value * Tile.SIZE * Tile.SIZE) :
-                        ((int)Width_NumBox.Value * (int)Height_NumBox.Value * Tile.LENGTH)));
+                        ((Int32)Width_NumBox.Value * (Int32)Height_NumBox.Value * Tile.SIZE * Tile.SIZE) :
+                        ((Int32)Width_NumBox.Value * (Int32)Height_NumBox.Value * Tile.LENGTH)));
 
                 if (Palette_Opaque_CheckBox.Checked)
                 {
-                    for (int i = 0; i < palette.Length; i += 2)
+                    for (Int32 i = 0; i < palette.Length; i += 2)
                     {
                         palette[i + 1] &= 0x7F;
                     }
@@ -74,8 +74,8 @@ namespace Magic.Editors
                 {
                     image = new TSA_Image(palette, tileset,
                         Core.ReadTSA(TSA_PointerBox.Value,
-                            (int)Width_NumBox.Value,
-                            (int)Height_NumBox.Value,
+                            (Int32)Width_NumBox.Value,
+                            (Int32)Height_NumBox.Value,
                             TSA_CheckBox.Checked,
                             TSA_FlipRows_CheckBox.Checked));
 
@@ -84,8 +84,8 @@ namespace Magic.Editors
                 else if (Tileset_8bpp_RadioButton.Checked)
                 {
                     image = new Bitmap(
-                        (int)Width_NumBox.Value * Tile.SIZE,
-                        (int)Height_NumBox.Value * Tile.SIZE,
+                        (Int32)Width_NumBox.Value * Tile.SIZE,
+                        (Int32)Height_NumBox.Value * Tile.SIZE,
                         View_GrayscalePalette.Checked ?
                             GrayScale.ToBytes(false) :
                             palette,
@@ -96,8 +96,8 @@ namespace Magic.Editors
                 else
                 {
                     image = new Tileset(tileset).ToImage(
-                        (int)Width_NumBox.Value,
-                        (int)Height_NumBox.Value,
+                        (Int32)Width_NumBox.Value,
+                        (Int32)Height_NumBox.Value,
                         View_GrayscalePalette.Checked ?
                             GrayScale.ToBytes(false) :
                             palette.GetBytes(0, Palette.LENGTH));
@@ -118,9 +118,9 @@ namespace Magic.Editors
         }
 
         public void Core_SetEntry(
-            Pointer palette, bool palette_compressed,
-            Pointer tileset, bool tileset_compressed,
-            Pointer tsa = new Pointer(), bool tsa_compressed = false, bool tsa_flipped = false)
+            Pointer palette, Boolean palette_compressed,
+            Pointer tileset, Boolean tileset_compressed,
+            Pointer tsa = new Pointer(), Boolean tsa_compressed = false, Boolean tsa_flipped = false)
         {
             Palette_PointerBox.ValueChanged      -= Palette_PointerBox_ValueChanged;
             Palette_CheckBox.CheckedChanged      -= Palette_CheckBox_CheckedChanged;
@@ -150,10 +150,10 @@ namespace Magic.Editors
 
             TSA_Label_CheckedChanged(this, null);
         }
-        public void Core_SetEntry(int width, int height,
-            Pointer palette, bool palette_compressed,
-            Pointer tileset, bool tileset_compressed,
-            Pointer tsa = new Pointer(), bool tsa_compressed = false, bool tsa_flipped = false)
+        public void Core_SetEntry(Int32 width, Int32 height,
+            Pointer palette, Boolean palette_compressed,
+            Pointer tileset, Boolean tileset_compressed,
+            Pointer tsa = new Pointer(), Boolean tsa_compressed = false, Boolean tsa_flipped = false)
         {
             Width_NumBox.ValueChanged  -= Width_NumBox_ValueChanged;
             Height_NumBox.ValueChanged -= Height_NumBox_ValueChanged;
@@ -172,17 +172,17 @@ namespace Magic.Editors
 
         void Core_Insert(
             Palette palette,
-            byte[] graphics,
+            Byte[] graphics,
             TSA_Array tsa = null)
         {
             UI.SuspendUpdate();
             try
             {
-                byte[] data_palette = palette.ToBytes(Palette_CheckBox.Checked);
-                byte[] data_tileset = Tileset_CheckBox.Checked ? LZ77.Compress(graphics) : graphics;
-                byte[] data_tsa = null;
+                Byte[] data_palette = palette.ToBytes(Palette_CheckBox.Checked);
+                Byte[] data_tileset = Tileset_CheckBox.Checked ? LZ77.Compress(graphics) : graphics;
+                Byte[] data_tsa = null;
 
-                List<Tuple<string, Pointer, int>> repoints = new List<Tuple<string, Pointer, int>>();
+                List<Tuple<String, Pointer, Int32>> repoints = new List<Tuple<String, Pointer, Int32>>();
                 repoints.Add(Tuple.Create("Palette", Palette_PointerBox.Value, data_palette.Length));
                 repoints.Add(Tuple.Create("Tileset", Tileset_PointerBox.Value, data_tileset.Length));
                 if (tsa != null)
@@ -191,7 +191,7 @@ namespace Magic.Editors
                     repoints.Add(Tuple.Create("TSA", TSA_PointerBox.Value, data_tsa.Length));
                 }
 
-                bool cancel = Prompt.ShowRepointDialog(this, "Repoint Graphics",
+                Boolean cancel = Prompt.ShowRepointDialog(this, "Repoint Graphics",
                     "The image and palette to insert might need to be repointed.",
                     "Image at " + Tileset_PointerBox.Value + " - ", repoints.ToArray());
                 if (cancel) return;
@@ -221,7 +221,7 @@ namespace Magic.Editors
             UI.ResumeUpdate();
             UI.PerformUpdate();
         }
-        void Core_InsertImage(string filepath)
+        void Core_InsertImage(String filepath)
         {
             IDisplayable image;
             try
@@ -230,12 +230,12 @@ namespace Magic.Editors
 
                 if (TSA_Label.Checked && TSA_PointerBox.Value != new Pointer())
                 {
-                    int width = TSA_FlipRows_CheckBox.Checked ?
+                    Int32 width = TSA_FlipRows_CheckBox.Checked ?
                         ((TSA_Image)Image_ImageBox.Display).Tiling.Width :
-                        (int)Width_NumBox.Value;
-                    int height = TSA_FlipRows_CheckBox.Checked ?
+                        (Int32)Width_NumBox.Value;
+                    Int32 height = TSA_FlipRows_CheckBox.Checked ?
                         ((TSA_Image)Image_ImageBox.Display).Tiling.Height :
-                        (int)Height_NumBox.Value;
+                        (Int32)Height_NumBox.Value;
 
                     if (palette == null)
                     {
@@ -295,13 +295,13 @@ namespace Magic.Editors
             }
             UI.ShowError("Image couldn't be inserted because of an internal error.");
         }
-        void Core_InsertData(string filepath)
+        void Core_InsertData(String filepath)
         {
-            string path = Path.GetDirectoryName(filepath) + '\\';
-            string file = Path.GetFileNameWithoutExtension(filepath);
+            String path = Path.GetDirectoryName(filepath) + '\\';
+            String file = Path.GetFileNameWithoutExtension(filepath);
 
             Palette palette;
-            byte[] graphics;
+            Byte[] graphics;
             TSA_Array tsa = null;
             try
             {
@@ -317,8 +317,8 @@ namespace Magic.Editors
                 if (!File.Exists(path + file + ".tsa"))
                 {
                     tsa = new TSA_Array(
-                        (int)Width_NumBox.Value,
-                        (int)Height_NumBox.Value,
+                        (Int32)Width_NumBox.Value,
+                        (Int32)Height_NumBox.Value,
                         File.ReadAllBytes(path + file + ".tsa"));
                 }
             }
@@ -329,13 +329,13 @@ namespace Magic.Editors
             }
             Core_Insert(palette, graphics, tsa);
         }
-        void Core_SaveImage(string filepath)
+        void Core_SaveImage(String filepath)
         {
-            byte[] data = Core.ReadData(
-                Palette_PointerBox.Value + (int)Palette_Index_NumBox.Value * Palette.LENGTH,
+            Byte[] data = Core.ReadData(
+                Palette_PointerBox.Value + (Int32)Palette_Index_NumBox.Value * Palette.LENGTH,
                 Palette_CheckBox.Checked ? 0 : 16 * Palette.LENGTH);
             Palette[] palettes = new Palette[16];
-            for (uint i = 0; i < 16; i++)
+            for (UInt32 i = 0; i < 16; i++)
             {
                 palettes[i] = new Palette(data.GetBytes(i * Palette.LENGTH, Palette.LENGTH));
             }
@@ -343,25 +343,25 @@ namespace Magic.Editors
                 Image_ImageBox.Display.Width,
                 Image_ImageBox.Display.Height,
                 palettes,
-                delegate (int x, int y)
+                delegate (Int32 x, Int32 y)
                 {
-                    int palette = 0;
+                    Int32 palette = 0;
                     if (TSA_Label.Checked)
                         palette = ((TSA_Image)Image_ImageBox.Display).GetPaletteIndex(x, y);
-                    return (byte)palettes[palette].Find(Image_ImageBox.Display.GetColor(x, y));
+                    return (Byte)palettes[palette].Find(Image_ImageBox.Display.GetColor(x, y));
                 });
         }
-        void Core_SaveData(string filepath)
+        void Core_SaveData(String filepath)
         {
-            string path = Path.GetDirectoryName(filepath) + '\\';
-            string file = Path.GetFileNameWithoutExtension(filepath);
+            String path = Path.GetDirectoryName(filepath) + '\\';
+            String file = Path.GetFileNameWithoutExtension(filepath);
             try
             {
                 IDisplayable image = Image_ImageBox.Display;
 
-                byte[] data_palette = null;
-                byte[] data_tileset = null;
-                byte[] data_tsa     = null;
+                Byte[] data_palette = null;
+                Byte[] data_tileset = null;
+                Byte[] data_tsa     = null;
 
                 if (image is GBA.TSA_Image)
                 {
@@ -390,7 +390,7 @@ namespace Magic.Editors
             }
         }
 
-        void Core_FindPrevLZ77Address(PointerBox pointerBox, bool strict)
+        void Core_FindPrevLZ77Address(PointerBox pointerBox, Boolean strict)
         {
             for (Pointer address = (pointerBox.Value - 4) - (pointerBox.Value % 4);
                  address >= 0;
@@ -400,7 +400,7 @@ namespace Magic.Editors
                 {
                     if (strict)
                     {
-                        uint header = Util.BytesToUInt32(Core.ReadData(address, 4), true);
+                        UInt32 header = Util.BytesToUInt32(Core.ReadData(address, 4), true);
                         header >>= 8;
                         if ((header % 0x20 == 0) &&
                             (header <= 0x8000) &&
@@ -418,7 +418,7 @@ namespace Magic.Editors
                 }
             }
         }
-        void Core_FindNextLZ77Address(PointerBox pointerBox, bool strict)
+        void Core_FindNextLZ77Address(PointerBox pointerBox, Boolean strict)
         {
             for (Pointer address = (pointerBox.Value + 4) + (pointerBox.Value % 4);
                 address < Core.CurrentROMSize;
@@ -428,7 +428,7 @@ namespace Magic.Editors
                 {
                     if (strict)
                     {
-                        uint header = Util.BytesToUInt32(Core.ReadData(address, 4), true);
+                        UInt32 header = Util.BytesToUInt32(Core.ReadData(address, 4), true);
                         header >>= 8;
                         if ((header % 0x20 == 0) &&
                             (header <= 0x8000) &&
@@ -517,7 +517,7 @@ namespace Magic.Editors
         {
             UI.OpenPaletteEditor(this,
                 "Unknown Palette - ",
-                Palette_PointerBox.Value + (int)Palette_Index_NumBox.Value * Palette.LENGTH,
+                Palette_PointerBox.Value + (Int32)Palette_Index_NumBox.Value * Palette.LENGTH,
                 Palette_CheckBox.Checked ? 0 : 1);
         }
         private void Tool_OpenTSAEditor_Click(Object sender, EventArgs e)
@@ -528,7 +528,7 @@ namespace Magic.Editors
                 "Unknown TSA Array - ",
                 Palette_PointerBox.Value, Palette_CheckBox.Checked ? 0 : 16 * Palette.LENGTH,
                 Tileset_PointerBox.Value, Tileset_CheckBox.Checked ? 0 :
-                    (int)(Width_NumBox.Value * Height_NumBox.Value) * Tile.LENGTH,
+                    (Int32)(Width_NumBox.Value * Height_NumBox.Value) * Tile.LENGTH,
                 TSA_PointerBox.Value,
                 tsa.Width, tsa.Height,
                 TSA_CheckBox.Checked, TSA_FlipRows_CheckBox.Checked);
@@ -541,26 +541,26 @@ namespace Magic.Editors
 
 
 
-        private void Palette_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void Palette_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core_Update();
         }
-        private void Palette_CheckBox_CheckedChanged(object sender, EventArgs e)
+        private void Palette_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
             Palette_Offset_Label.Enabled = !Palette_CheckBox.Checked;
             Palette_Index_NumBox.Enabled = !Palette_CheckBox.Checked;
 
             Core_Update();
         }
-        private void Tileset_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void Tileset_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core_Update();
         }
-        private void Tileset_CheckBox_CheckedChanged(object sender, EventArgs e)
+        private void Tileset_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
             Core_Update();
         }
-        private void TSA_Label_CheckedChanged(object sender, EventArgs e)
+        private void TSA_Label_CheckedChanged(Object sender, EventArgs e)
         {
             if (TSA_Label.Checked)
             {
@@ -591,33 +591,33 @@ namespace Magic.Editors
             }
             Core_Update();
         }
-        private void TSA_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void TSA_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core_Update();
         }
-        private void TSA_CheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            Core_Update();
-        }
-
-        private void Width_NumBox_ValueChanged(object sender, EventArgs e)
-        {
-            Core_Update();
-        }
-        private void Height_NumBox_ValueChanged(object sender, EventArgs e)
+        private void TSA_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
             Core_Update();
         }
 
-        private void Tileset_2bpp_RadioButton_CheckedChanged(object sender, EventArgs e)
+        private void Width_NumBox_ValueChanged(Object sender, EventArgs e)
         {
             Core_Update();
         }
-        private void Tileset_4bpp_RadioButton_CheckedChanged(object sender, EventArgs e)
+        private void Height_NumBox_ValueChanged(Object sender, EventArgs e)
         {
             Core_Update();
         }
-        private void Tileset_8bpp_RadioButton_CheckedChanged(object sender, EventArgs e)
+
+        private void Tileset_2bpp_RadioButton_CheckedChanged(Object sender, EventArgs e)
+        {
+            Core_Update();
+        }
+        private void Tileset_4bpp_RadioButton_CheckedChanged(Object sender, EventArgs e)
+        {
+            Core_Update();
+        }
+        private void Tileset_8bpp_RadioButton_CheckedChanged(Object sender, EventArgs e)
         {
             if (Tileset_8bpp_RadioButton.Checked)
             {
@@ -633,20 +633,20 @@ namespace Magic.Editors
             Core_Update();
         }
 
-        private void Palette_Index_NumBox_ValueChanged(object sender, EventArgs e)
+        private void Palette_Index_NumBox_ValueChanged(Object sender, EventArgs e)
         {
             Core_Update();
         }
-        private void Palette_Opaque_CheckBox_CheckedChanged(object sender, EventArgs e)
+        private void Palette_Opaque_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
             Core_Update();
         }
 
-        private void TSA_Dimensions_CheckBox_CheckedChanged(object sender, EventArgs e)
+        private void TSA_Dimensions_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
             Core_Update();
         }
-        private void TSA_FlipRows_CheckBox_CheckedChanged(object sender, EventArgs e)
+        private void TSA_FlipRows_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
             if (TSA_FlipRows_CheckBox.Checked)
             {
@@ -659,27 +659,27 @@ namespace Magic.Editors
             Core_Update();
         }
 
-        private void Prev_Palette_Button_Click(object sender, EventArgs e)
+        private void Prev_Palette_Button_Click(Object sender, EventArgs e)
         {
             Core_FindPrevLZ77Address(Palette_PointerBox, false);
         }
-        private void Next_Palette_Button_Click(object sender, EventArgs e)
+        private void Next_Palette_Button_Click(Object sender, EventArgs e)
         {
             Core_FindNextLZ77Address(Palette_PointerBox, false);
         }
-        private void Prev_Tileset_Button_Click(object sender, EventArgs e)
+        private void Prev_Tileset_Button_Click(Object sender, EventArgs e)
         {
             Core_FindPrevLZ77Address(Tileset_PointerBox, true);
         }
-        private void Next_Tileset_Button_Click(object sender, EventArgs e)
+        private void Next_Tileset_Button_Click(Object sender, EventArgs e)
         {
             Core_FindNextLZ77Address(Tileset_PointerBox, true);
         }
-        private void Prev_TSA_Button_Click(object sender, EventArgs e)
+        private void Prev_TSA_Button_Click(Object sender, EventArgs e)
         {
             Core_FindPrevLZ77Address(TSA_PointerBox, false);
         }
-        private void Next_TSA_Button_Click(object sender, EventArgs e)
+        private void Next_TSA_Button_Click(Object sender, EventArgs e)
         {
             Core_FindNextLZ77Address(TSA_PointerBox, false);
         }

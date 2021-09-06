@@ -27,7 +27,7 @@ namespace EmblemMagic.Editors
         /// <summary>
         /// Gets a string of the current byte index in the chapter array
         /// </summary>
-        string CurrentEntry
+        String CurrentEntry
         {
             get
             {
@@ -85,7 +85,7 @@ namespace EmblemMagic.Editors
         {
             try
             {
-                byte[] palette_data = Core.ReadData(Palette_PointerBox.Value, Map.PALETTES * GBA.Palette.LENGTH);
+                Byte[] palette_data = Core.ReadData(Palette_PointerBox.Value, Map.PALETTES * GBA.Palette.LENGTH);
 
                 CurrentTileset = new MapTileset(palette_data,
                     Core.ReadData(Tileset1_PointerBox.Value, 0),
@@ -141,14 +141,14 @@ namespace EmblemMagic.Editors
             
             try
             {
-                MapData_ArrayBox.Value    = (byte)Current["Map"];
-                Changes_ArrayBox.Value    = (byte)Current["MapChanges"];
-                TileAnim1_ArrayBox.Value  = (byte)Current["TileAnim1"];
-                TileAnim2_ArrayBox.Value  = (byte)Current["TileAnim2"];
-                Palette_ArrayBox.Value    = (byte)Current["Palette"];
-                TilesetTSA_ArrayBox.Value = (byte)Current["TSA"];
-                Tileset1_ArrayBox.Value   = (byte)Current["Tileset1"];
-                Tileset2_ArrayBox.Value   = (byte)Current["Tileset2"];
+                MapData_ArrayBox.Value    = (Byte)Current["Map"];
+                Changes_ArrayBox.Value    = (Byte)Current["MapChanges"];
+                TileAnim1_ArrayBox.Value  = (Byte)Current["TileAnim1"];
+                TileAnim2_ArrayBox.Value  = (Byte)Current["TileAnim2"];
+                Palette_ArrayBox.Value    = (Byte)Current["Palette"];
+                TilesetTSA_ArrayBox.Value = (Byte)Current["TSA"];
+                Tileset1_ArrayBox.Value   = (Byte)Current["Tileset1"];
+                Tileset2_ArrayBox.Value   = (Byte)Current["Tileset2"];
 
                 GBA.Pointer address = Core.GetPointer("Map Data Array");
                 MapData_PointerBox.Value   = Core.ReadPointer(address + 4 * MapData_ArrayBox.Value);
@@ -200,7 +200,7 @@ namespace EmblemMagic.Editors
             Changes_CheckBox.CheckedChanged += Changes_CheckBox_CheckedChanged;
 
             Changes_Total_NumBox.Value = (CurrentMap == null || CurrentMap.Changes == null) ?
-                (byte)(0x00) : (byte)(CurrentMap.Changes.Count - 1);
+                (Byte)(0x00) : (Byte)(CurrentMap.Changes.Count - 1);
             Changes_Total_NumBox.Enabled = false;
             Changes_Total_Label.Enabled = false;
             Changes_NumBox.Enabled = false;
@@ -226,10 +226,10 @@ namespace EmblemMagic.Editors
         /// </summary>
         void Core_WriteMap()
         {
-            bool[,] selected = Tileset_GridBox.Selection;
-            bool viewpalette = View_AltPalette.Checked;
-            bool changes = Changes_CheckBox.Checked;
-            byte number = Changes_NumBox.Value;
+            Boolean[,] selected = Tileset_GridBox.Selection;
+            Boolean viewpalette = View_AltPalette.Checked;
+            Boolean changes = Changes_CheckBox.Checked;
+            Byte number = Changes_NumBox.Value;
 
             Core.WriteData(this,
                 MapData_PointerBox.Value,
@@ -246,10 +246,10 @@ namespace EmblemMagic.Editors
         /// </summary>
         void Core_WriteMapChanges()
         {
-            bool[,] selected = Tileset_GridBox.Selection;
-            bool viewpalette = View_AltPalette.Checked;
-            bool changes = Changes_CheckBox.Checked;
-            byte number = Changes_NumBox.Value;
+            Boolean[,] selected = Tileset_GridBox.Selection;
+            Boolean viewpalette = View_AltPalette.Checked;
+            Boolean changes = Changes_CheckBox.Checked;
+            Byte number = Changes_NumBox.Value;
 
             Core.WriteData(this,
                 Changes_PointerBox.Value,
@@ -262,9 +262,9 @@ namespace EmblemMagic.Editors
             Changes_NumBox.Value = number;
         }
 
-        void Core_InsertMAR(string filepath, int width, int height)
+        void Core_InsertMAR(String filepath, Int32 width, Int32 height)
         {
-            byte[] mar;
+            Byte[] mar;
             try
             {
                 mar = File.ReadAllBytes(filepath);
@@ -281,12 +281,12 @@ namespace EmblemMagic.Editors
                 return;
             }
 
-            int[,] layout = new int[width, height];
-            int x = 0;
-            int y = 0;
-            for (int i = 0; i < mar.Length; i += 2)
+            Int32[,] layout = new Int32[width, height];
+            Int32 x = 0;
+            Int32 y = 0;
+            for (Int32 i = 0; i < mar.Length; i += 2)
             {
-                int tile = mar[i] + (mar[i + 1] << 8);
+                Int32 tile = mar[i] + (mar[i + 1] << 8);
                 tile >>= 3;
                 layout[x, y] = tile;
                 x++;
@@ -301,16 +301,16 @@ namespace EmblemMagic.Editors
 
             Core_WriteMap();
         }
-        void Core_InsertTMX(string filepath, int width, int height)
+        void Core_InsertTMX(String filepath, Int32 width, Int32 height)
         {
             XmlDocument file = new XmlDocument();
             file.Load(filepath);
 
-            width = int.Parse(file["map"].Attributes["width"].Value);
-            height = int.Parse(file["map"].Attributes["height"].Value);
-            CurrentMap.Layout = new int[width, height];
+            width = Int32.Parse(file["map"].Attributes["width"].Value);
+            height = Int32.Parse(file["map"].Attributes["height"].Value);
+            CurrentMap.Layout = new Int32[width, height];
 
-            List <Tuple<byte, Rectangle, int[,]>> changes = new List<Tuple<byte, Rectangle, int[,]>>();
+            List <Tuple<Byte, Rectangle, Int32[,]>> changes = new List<Tuple<Byte, Rectangle, Int32[,]>>();
             XmlNodeList layers = file.SelectNodes("/map/layer");
             XmlNodeList data;
             foreach (XmlNode layer in layers)
@@ -318,11 +318,11 @@ namespace EmblemMagic.Editors
                 if (layer["properties"]["property"].Attributes["name"].Value == "Main")
                 {
                     data = layer.SelectNodes("data/tile");
-                    int x = 0;
-                    int y = 0;
+                    Int32 x = 0;
+                    Int32 y = 0;
                     foreach (XmlNode tile in data)
                     {
-                        CurrentMap.Layout[x, y] = int.Parse(tile.Attributes["gid"].Value) - 1;
+                        CurrentMap.Layout[x, y] = Int32.Parse(tile.Attributes["gid"].Value) - 1;
                         x++;
                         if (x == width)
                         {
@@ -333,24 +333,24 @@ namespace EmblemMagic.Editors
                 }
                 else
                 {
-                    string xpath = "//properties/property[@name=" + '"' + "{0}" + '"' + "]";
-                    byte index = byte.Parse(layer.SelectSingleNode(string.Format(xpath, "ID")).Attributes["value"].Value);
+                    String xpath = "//properties/property[@name=" + '"' + "{0}" + '"' + "]";
+                    Byte index = Byte.Parse(layer.SelectSingleNode(String.Format(xpath, "ID")).Attributes["value"].Value);
                     Rectangle region = new Rectangle(
-                        int.Parse(layer.SelectSingleNode(string.Format(xpath, "X")).Attributes["value"].Value),
-                        int.Parse(layer.SelectSingleNode(string.Format(xpath, "Y")).Attributes["value"].Value),
-                        int.Parse(layer.SelectSingleNode(string.Format(xpath, "Width")).Attributes["value"].Value),
-                        int.Parse(layer.SelectSingleNode(string.Format(xpath, "Height")).Attributes["value"].Value));
-                    int[,] layout = new int[region.Width, region.Height];
+                        Int32.Parse(layer.SelectSingleNode(String.Format(xpath, "X")).Attributes["value"].Value),
+                        Int32.Parse(layer.SelectSingleNode(String.Format(xpath, "Y")).Attributes["value"].Value),
+                        Int32.Parse(layer.SelectSingleNode(String.Format(xpath, "Width")).Attributes["value"].Value),
+                        Int32.Parse(layer.SelectSingleNode(String.Format(xpath, "Height")).Attributes["value"].Value));
+                    Int32[,] layout = new Int32[region.Width, region.Height];
 
                     data = layer.SelectNodes("data/tile");
-                    int x = 0;
-                    int y = 0;
+                    Int32 x = 0;
+                    Int32 y = 0;
                     foreach (XmlNode tile in data)
                     {
                         if (x >= region.X && x < region.X + region.Width &&
                             y >= region.Y && y < region.Y + region.Height)
                         {
-                            layout[x - region.X, y - region.Y] = int.Parse(tile.Attributes["gid"].Value) - 1;
+                            layout[x - region.X, y - region.Y] = Int32.Parse(tile.Attributes["gid"].Value) - 1;
                         }
                         x++;
                         if (x == width)
@@ -380,17 +380,17 @@ namespace EmblemMagic.Editors
             UI.ResumeUpdate();
             UI.PerformUpdate();
         }
-        void Core_SaveMAR(string filepath, int width, int height)
+        void Core_SaveMAR(String filepath, Int32 width, Int32 height)
         {
-            byte[] mar = new byte[width * height * 2];
-            
-            int x = 0;
-            int y = 0;
-            for (int i = 0; i < mar.Length; i += 2)
+            Byte[] mar = new Byte[width * height * 2];
+
+            Int32 x = 0;
+            Int32 y = 0;
+            for (Int32 i = 0; i < mar.Length; i += 2)
             {
-                int tile = CurrentMap.Layout[x, y] << 3;
-                mar[i] = (byte)(tile & 0xFF);
-                mar[i + 1] = (byte)(tile >> 8);
+                Int32 tile = CurrentMap.Layout[x, y] << 3;
+                mar[i] = (Byte)(tile & 0xFF);
+                mar[i + 1] = (Byte)(tile >> 8);
                 x++;
                 if (x == width)
                 {
@@ -401,7 +401,7 @@ namespace EmblemMagic.Editors
 
             File.WriteAllBytes(filepath, mar);
         }
-        void Core_SaveTMX(string filepath, int width, int height)
+        void Core_SaveTMX(String filepath, Int32 width, Int32 height)
         {
 
         }
@@ -412,8 +412,8 @@ namespace EmblemMagic.Editors
 
             if (Changes_CheckBox.Checked)
             {
-                for (int y = 0; y < selection.Height; y++)
-                for (int x = 0; x < selection.Width; x++)
+                for (Int32 y = 0; y < selection.Height; y++)
+                for (Int32 x = 0; x < selection.Width; x++)
                 {
                     if (Map_GridBox.Hovered.X + x < 0 || Map_GridBox.Hovered.X + x >= CurrentMap.WidthTiles ||
                         Map_GridBox.Hovered.Y + y < 0 || Map_GridBox.Hovered.Y + y >= CurrentMap.HeightTiles)
@@ -435,8 +435,8 @@ namespace EmblemMagic.Editors
             }
             else if (Map_GridBox.Hover != null)
             {
-                for (int y = 0; y < selection.Height; y++)
-                for (int x = 0; x < selection.Width; x++)
+                for (Int32 y = 0; y < selection.Height; y++)
+                for (Int32 x = 0; x < selection.Width; x++)
                 {
                     if (Map_GridBox.Hovered.X + x < 0 || Map_GridBox.Hovered.X + x >= CurrentMap.WidthTiles ||
                         Map_GridBox.Hovered.Y + y < 0 || Map_GridBox.Hovered.Y + y >= CurrentMap.HeightTiles)
@@ -456,7 +456,7 @@ namespace EmblemMagic.Editors
             if (Changes_CheckBox.Checked)
             {
                 CurrentMap.Changes.SetTile(
-                    (int)Changes_NumBox.Value,
+                    (Int32)Changes_NumBox.Value,
                     Map_GridBox.Hovered.X,
                     Map_GridBox.Hovered.Y,
                     0);
@@ -472,28 +472,28 @@ namespace EmblemMagic.Editors
         }
         void Core_PickTool()
         {
-            int width = Tileset_GridBox.Selection.GetLength(0);
-            int height = Tileset_GridBox.Selection.GetLength(1);
-            int tile;
+            Int32 width = Tileset_GridBox.Selection.GetLength(0);
+            Int32 height = Tileset_GridBox.Selection.GetLength(1);
+            Int32 tile;
             if (Changes_CheckBox.Checked)
             {
-                tile = CurrentMap.Changes.GetTile((int)Changes_NumBox.Value, Map_GridBox.Hovered.X, Map_GridBox.Hovered.Y);
+                tile = CurrentMap.Changes.GetTile((Int32)Changes_NumBox.Value, Map_GridBox.Hovered.X, Map_GridBox.Hovered.Y);
                 if (tile == 0) tile = CurrentMap.Layout[Map_GridBox.Hovered.X, Map_GridBox.Hovered.Y];
             }
             else
             {
                 tile = CurrentMap.Layout[Map_GridBox.Hovered.X, Map_GridBox.Hovered.Y];
             }
-            Tileset_GridBox.Selection = new bool[width, height];
+            Tileset_GridBox.Selection = new Boolean[width, height];
             Tileset_GridBox.Selection[tile % width, tile / width] = true;
         }
         void Core_FillTool()
         {
             Rectangle selection = Tileset_GridBox.GetSelectionRectangle();
-            int[] tiles = new int[Tileset_GridBox.GetSelectionAmount()];
-            int index = 0;
-            for (int y = 0; y < selection.Height; y++)
-            for (int x = 0; x < selection.Width; x++)
+            Int32[] tiles = new Int32[Tileset_GridBox.GetSelectionAmount()];
+            Int32 index = 0;
+            for (Int32 y = 0; y < selection.Height; y++)
+            for (Int32 x = 0; x < selection.Width; x++)
             {
                 if (Tileset_GridBox.Selection[selection.X + x, selection.Y + y])
                 {
@@ -507,13 +507,13 @@ namespace EmblemMagic.Editors
             else
             {
                 Point start = Map_GridBox.Hovered;
-                bool[,] map = new bool[CurrentMap.WidthTiles, CurrentMap.HeightTiles];
-                int tile = CurrentMap.Layout[start.X, start.Y];
+                Boolean[,] map = new Boolean[CurrentMap.WidthTiles, CurrentMap.HeightTiles];
+                Int32 tile = CurrentMap.Layout[start.X, start.Y];
                 Core_FillHelper(ref map, ref tile, start.X, start.Y);
 
                 Random random = new Random();
-                for (int y = 0; y < CurrentMap.HeightTiles; y++)
-                for (int x = 0; x < CurrentMap.WidthTiles; x++)
+                for (Int32 y = 0; y < CurrentMap.HeightTiles; y++)
+                for (Int32 x = 0; x < CurrentMap.WidthTiles; x++)
                 {
                     if (map[x, y])
                     {
@@ -522,7 +522,7 @@ namespace EmblemMagic.Editors
                 }
             }
         }
-        void Core_FillHelper(ref bool[,] map, ref int tile, int x, int y)
+        void Core_FillHelper(ref Boolean[,] map, ref Int32 tile, Int32 x, Int32 y)
         {
             if (x < 0 || x >= CurrentMap.WidthTiles
              || y < 0 || y >= CurrentMap.HeightTiles
@@ -542,7 +542,7 @@ namespace EmblemMagic.Editors
 
 
 
-        private void File_Insert_Click(object sender, EventArgs e)
+        private void File_Insert_Click(Object sender, EventArgs e)
         {
             OpenFileDialog openWindow = new OpenFileDialog();
             openWindow.RestoreDirectory = true;
@@ -557,18 +557,18 @@ namespace EmblemMagic.Editors
             {
                 if (openWindow.FileName.EndsWith(".tmx"))
                 {
-                    Core_InsertTMX(openWindow.FileName, (int)Map_Width_NumBox.Value, (int)Map_Height_NumBox.Value);
+                    Core_InsertTMX(openWindow.FileName, (Int32)Map_Width_NumBox.Value, (Int32)Map_Height_NumBox.Value);
                     return;
                 }
                 if (openWindow.FileName.EndsWith(".mar"))
                 {
-                    Core_InsertMAR(openWindow.FileName, (int)Map_Width_NumBox.Value, (int)Map_Height_NumBox.Value);
+                    Core_InsertMAR(openWindow.FileName, (Int32)Map_Width_NumBox.Value, (Int32)Map_Height_NumBox.Value);
                     return;
                 }
                 UI.ShowError("File chosen has invalid extension.\r\n" + openWindow.FileName);
             }
         }
-        private void File_Save_Click(object sender, EventArgs e)
+        private void File_Save_Click(Object sender, EventArgs e)
         {
             SaveFileDialog saveWindow = new SaveFileDialog();
             saveWindow.RestoreDirectory = true;
@@ -584,24 +584,24 @@ namespace EmblemMagic.Editors
             {
                 if (saveWindow.FileName.EndsWith(".tmx", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_SaveTMX(saveWindow.FileName, (int)Map_Width_NumBox.Value, (int)Map_Height_NumBox.Value);
+                    Core_SaveTMX(saveWindow.FileName, (Int32)Map_Width_NumBox.Value, (Int32)Map_Height_NumBox.Value);
                     return;
                 }
                 if (saveWindow.FileName.EndsWith(".mar", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_SaveMAR(saveWindow.FileName, (int)Map_Width_NumBox.Value, (int)Map_Height_NumBox.Value);
+                    Core_SaveMAR(saveWindow.FileName, (Int32)Map_Width_NumBox.Value, (Int32)Map_Height_NumBox.Value);
                     return;
                 }
                 UI.ShowError("File chosen has invalid extension.\r\n" + saveWindow.FileName);
             }
         }
-        private void Tool_OpenPaletteEditor_Click(object sender, EventArgs e)
+        private void Tool_OpenPaletteEditor_Click(Object sender, EventArgs e)
         {
             UI.OpenPaletteEditor(this,
                 "Map Palette 0x" + Util.ByteToHex(Palette_ArrayBox.Value) + " [" + Palette_ArrayBox.Text + "] - ",
                 Palette_PointerBox.Value, 10);
         }
-        private void View_AltPalette_Click(object sender, EventArgs e)
+        private void View_AltPalette_Click(Object sender, EventArgs e)
         {
             CurrentMap.ShowFog = View_AltPalette.Checked;
 
@@ -610,33 +610,33 @@ namespace EmblemMagic.Editors
 
 
 
-        private void EntryArrayBox_ValueChanged(object sender, EventArgs e)
+        private void EntryArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Core_Update();
         }
 
-        private void Map_GridBox_MouseMove(object sender, MouseEventArgs e)
+        private void Map_GridBox_MouseMove(Object sender, MouseEventArgs e)
         {
             if (Tileset_GridBox.SelectionIsEmpty())
             {
-                Map_GridBox.Hover = new bool[1, 1] { { false } };
+                Map_GridBox.Hover = new Boolean[1, 1] { { false } };
             }
             else if (Tool_Tile_Button.Checked)
             {
                 Rectangle selection = Tileset_GridBox.GetSelectionRectangle();
-                Map_GridBox.Hover = new bool[selection.Width, selection.Height];
-                for (int y = 0; y < selection.Height; y++)
-                    for (int x = 0; x < selection.Width; x++)
+                Map_GridBox.Hover = new Boolean[selection.Width, selection.Height];
+                for (Int32 y = 0; y < selection.Height; y++)
+                    for (Int32 x = 0; x < selection.Width; x++)
                     {
                         Map_GridBox.Hover[x, y] = Tileset_GridBox.Selection[selection.X + x, selection.Y + y];
                     }
             }
             else
             {
-                Map_GridBox.Hover = new bool[1, 1] { { true } };
+                Map_GridBox.Hover = new Boolean[1, 1] { { true } };
             }
         }
-        private void Map_GridBox_MouseDown(object sender, EventArgs e)
+        private void Map_GridBox_MouseDown(Object sender, EventArgs e)
         {
             if (Tool_Tile_Button.Checked)
             {
@@ -666,33 +666,33 @@ namespace EmblemMagic.Editors
                 UI.ShowMessage("No tool is selected.");
             }
         }
-        private void Map_GridBox_MouseUp(object sender, EventArgs e)
+        private void Map_GridBox_MouseUp(Object sender, EventArgs e)
         {
             if (Tool_Pick_Button.Checked) return;
             Map_MouseTimer.Enabled = false;
             Core_WriteMap();
         }
-        private void Map_MouseTimer_Tick(object sender, EventArgs e)
+        private void Map_MouseTimer_Tick(Object sender, EventArgs e)
         {
             Map_GridBox_MouseDown(this, null);
         }
 
-        private void Map_WidthNumBox_ValueChanged(object sender, EventArgs e)
+        private void Map_WidthNumBox_ValueChanged(Object sender, EventArgs e)
         {
-            CurrentMap.WidthTiles = (byte)Map_Width_NumBox.Value;
+            CurrentMap.WidthTiles = (Byte)Map_Width_NumBox.Value;
 
             Core_WriteMap();
         }
-        private void Map_HeightNumBox_ValueChanged(object sender, EventArgs e)
+        private void Map_HeightNumBox_ValueChanged(Object sender, EventArgs e)
         {
-            CurrentMap.HeightTiles = (byte)Map_Height_NumBox.Value;
+            CurrentMap.HeightTiles = (Byte)Map_Height_NumBox.Value;
 
             Core_WriteMap();
         }
 
-        private void Changes_CheckBox_CheckedChanged(object sender, EventArgs e)
+        private void Changes_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
-            CurrentMap.ShowChanges = new bool[Changes_Total_NumBox.Value];
+            CurrentMap.ShowChanges = new Boolean[Changes_Total_NumBox.Value];
             CurrentMap.ShowChanges[0] = Changes_CheckBox.Checked;
 
             Tool_Fill_Button.Enabled = !Changes_CheckBox.Checked;
@@ -704,63 +704,63 @@ namespace EmblemMagic.Editors
 
             Map_GridBox.Load(CurrentMap);
         }
-        private void Changes_NumBox_ValueChanged(object sender, EventArgs e)
+        private void Changes_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            CurrentMap.ShowChanges = new bool[Changes_Total_NumBox.Value + 1];
+            CurrentMap.ShowChanges = new Boolean[Changes_Total_NumBox.Value + 1];
             CurrentMap.ShowChanges[Changes_NumBox.Value] = true;
             Map_GridBox.Load(CurrentMap);
         }
 
-        private void Palette_ArrayBox_ValueChanged(object sender, EventArgs e)
+        private void Palette_ArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 Current.GetAddress(Current.EntryIndex, "Palette"),
                 Palette_ArrayBox.Value,
                 CurrentEntry + "Palette changed");
         }
-        private void Tileset1_ArrayBox_ValueChanged(object sender, EventArgs e)
+        private void Tileset1_ArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 Current.GetAddress(Current.EntryIndex, "Tileset1"),
                 Tileset1_ArrayBox.Value,
                 CurrentEntry + "Tileset 1 changed");
         }
-        private void Tileset2_ArrayBox_ValueChanged(object sender, EventArgs e)
+        private void Tileset2_ArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 Current.GetAddress(Current.EntryIndex, "Tileset2"),
                 Tileset2_ArrayBox.Value,
                 CurrentEntry + "Tileset 2 changed");
         }
-        private void TilesetTSA_ArrayBox_ValueChanged(object sender, EventArgs e)
+        private void TilesetTSA_ArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 Current.GetAddress(Current.EntryIndex, "TSA"),
                 TilesetTSA_ArrayBox.Value,
                 CurrentEntry + "Tileset TSA changed");
         }
-        private void MapData_ArrayBox_ValueChanged(object sender, EventArgs e)
+        private void MapData_ArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 Current.GetAddress(Current.EntryIndex, "Map"),
                 MapData_ArrayBox.Value,
                 CurrentEntry + "Map changed");
         }
-        private void Changes_ArrayBox_ValueChanged(object sender, EventArgs e)
+        private void Changes_ArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 Current.GetAddress(Current.EntryIndex, "Changes"),
                 Changes_ArrayBox.Value,
                 CurrentEntry + "Map Changes changed");
         }
-        private void TileAnim1_ArrayBox_ValueChanged(object sender, EventArgs e)
+        private void TileAnim1_ArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 Current.GetAddress(Current.EntryIndex, "TileAnim1"),
                 TileAnim1_ArrayBox.Value,
                 CurrentEntry + "Map Anim 1 changed");
         }
-        private void TileAnim2_ArrayBox_ValueChanged(object sender, EventArgs e)
+        private void TileAnim2_ArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 Current.GetAddress(Current.EntryIndex, "TileAnim2"),
@@ -768,56 +768,56 @@ namespace EmblemMagic.Editors
                 CurrentEntry + "Map Anim 2 changed");
         }
 
-        private void Palette_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void Palette_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Core.GetPointer("Map Data Array") + 4 * Palette_ArrayBox.Value,
                 Palette_PointerBox.Value,
                 CurrentEntry + "Palette repoint");
         }
-        private void Tileset1_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void Tileset1_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Core.GetPointer("Map Data Array") + 4 * Tileset1_ArrayBox.Value,
                 Tileset1_PointerBox.Value,
                 CurrentEntry + "Tileset 1 repoint");
         }
-        private void Tileset2_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void Tileset2_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Core.GetPointer("Map Data Array") + 4 * Tileset2_ArrayBox.Value,
                 Tileset2_PointerBox.Value,
                 CurrentEntry + "Tileset 2 repoint");
         }
-        private void TilesetTSA_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void TilesetTSA_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Core.GetPointer("Map Data Array") + 4 * TilesetTSA_ArrayBox.Value,
                 TilesetTSA_PointerBox.Value,
                 CurrentEntry + "Tileset TSA repoint");
         }
-        private void MapData_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void MapData_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Core.GetPointer("Map Data Array") + 4 * MapData_ArrayBox.Value,
                 MapData_PointerBox.Value,
                 CurrentEntry + "Map repoint");
         }
-        private void Changes_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void Changes_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Core.GetPointer("Map Data Array") + 4 * Changes_ArrayBox.Value,
                 Changes_PointerBox.Value,
                 CurrentEntry + "Map Changes repoint");
         }
-        private void TileAnim1_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void TileAnim1_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Core.GetPointer("Map Data Array") + 4 * TileAnim1_ArrayBox.Value,
                 TileAnim1_PointerBox.Value,
                 CurrentEntry + "Tile Anim 1 repoint");
         }
-        private void TileAnim2_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void TileAnim2_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Core.GetPointer("Map Data Array") + 4 * TileAnim2_ArrayBox.Value,
@@ -827,7 +827,7 @@ namespace EmblemMagic.Editors
 
         private void Clear_Button_Click(Object sender, EventArgs e)
         {
-            CurrentMap.Layout = new int[CurrentMap.WidthTiles, CurrentMap.HeightTiles];
+            CurrentMap.Layout = new Int32[CurrentMap.WidthTiles, CurrentMap.HeightTiles];
 
             Core_WriteMap();
         }

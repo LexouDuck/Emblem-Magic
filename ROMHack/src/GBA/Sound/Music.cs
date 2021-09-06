@@ -14,7 +14,7 @@ namespace GBA
         /// <summary>
         /// The total amount of notes in the GBA sappy engine
         /// </summary>
-        public const int NOTES = 120;
+        public const Int32 NOTES = 120;
 
         /// <summary>
         /// The object used to write sound output data to the speakers
@@ -55,7 +55,7 @@ namespace GBA
         {
             this.Dispose(true);
         }
-        protected virtual void Dispose(bool full)
+        protected virtual void Dispose(Boolean full)
         {
             if (Output != null)
             {
@@ -72,7 +72,7 @@ namespace GBA
         {
             while (Playing.Count > 0)
             {
-                byte[] buffer = MixAudioBuffers(4096); // 3145.728
+                Byte[] buffer = MixAudioBuffers(4096); // 3145.728
 
                 if (buffer != null) Output.Write(buffer);
 
@@ -81,30 +81,30 @@ namespace GBA
             Output.Stop();
             Player = null;
         }
-        byte[] MixAudioBuffers(int length)
+        Byte[] MixAudioBuffers(Int32 length)
         {
-            byte[] result = new byte[length];
+            Byte[] result = new Byte[length];
 
-            List<byte[]> buffers = new List<byte[]>();
-            for (int i = 0; i < Playing.Count; i++)
+            List<Byte[]> buffers = new List<Byte[]>();
+            for (Int32 i = 0; i < Playing.Count; i++)
             {
                 if (Playing[i].Cancel) Playing.RemoveAt(i);
                 else buffers.Add(Playing[i].GetBuffer(result.Length));
             }
             if (buffers.Count == 0) return null;
-            float sum_total;
-            for (int i = 0; i < 4096; i++)
+            Single sum_total;
+            for (Int32 i = 0; i < 4096; i++)
             {
                 sum_total = 0;
-                foreach (byte[] buffer in buffers)
+                foreach (Byte[] buffer in buffers)
                 {
-                    sum_total += buffer[i] / (float)256;
+                    sum_total += buffer[i] / (Single)256;
                 }
                 sum_total /= buffers.Count;
                 sum_total *= 0.8f; // reduce the volume a bit
                 if (sum_total > 1) sum_total = 1;
                 if (sum_total < -1) sum_total = -1;
-                result[i] = (byte)(sum_total * 256);
+                result[i] = (Byte)(sum_total * 256);
             }
             return result;
         }
@@ -123,7 +123,7 @@ namespace GBA
                 sample.Pitch / 1024,
                 Audio.SAMPLE_RATE));
         }
-        public void PlayAudio(byte instrument, byte note)
+        public void PlayAudio(Byte instrument, Byte note)
         {
             if (Samples[instrument] == null) return;
             Audio audio = Samples[instrument][note];
@@ -142,7 +142,7 @@ namespace GBA
                 Player.Start();
             }
         }
-        public void PlayTrack(Track track, ref int i)
+        public void PlayTrack(Track track, ref Int32 i)
         {
             if (track.Data[i] < 0x80) // repeat command
             {

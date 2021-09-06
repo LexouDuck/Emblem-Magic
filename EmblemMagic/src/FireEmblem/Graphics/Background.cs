@@ -16,29 +16,29 @@ namespace EmblemMagic.FireEmblem
     public class Background : TSA_Image
     {
         public Background(
-            byte[] palettes,
-            byte[] tileset,
+            Byte[] palettes,
+            Byte[] tileset,
             TSA_Array tsa)
             : base(palettes, tileset, tsa) { }
 
         public Background(
-            int width, int height,
+            Int32 width, Int32 height,
             GBA.Bitmap image,
-            int paletteAmount,
-            bool checkRedundantTiles)
+            Int32 paletteAmount,
+            Boolean checkRedundantTiles)
             : base(width, height, image, paletteAmount, checkRedundantTiles) { }
 
         public Background(
-            int width, int height,
+            Int32 width, Int32 height,
             GBA.Bitmap image,
             GBA.Palette palette,
-            int paletteAmount,
-            bool checkRedundantTiles)
+            Int32 paletteAmount,
+            Boolean checkRedundantTiles)
             : base(width, height, image, palette, paletteAmount, checkRedundantTiles) { }
 
 
 
-        public static int GetPaletteAmount(BackgroundType bgtype)
+        public static Int32 GetPaletteAmount(BackgroundType bgtype)
         {
             switch (bgtype)
             {

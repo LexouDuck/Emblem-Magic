@@ -4,24 +4,24 @@ namespace Magic.Components
 {
     internal sealed class MemoryDataBlock : DataBlock
     {
-        byte[] _data;
+        Byte[] _data;
 
-        public MemoryDataBlock(byte data)
+        public MemoryDataBlock(Byte data)
         {
-            _data = new byte[] { data };
+            _data = new Byte[] { data };
         }
 
-        public MemoryDataBlock(byte[] data)
+        public MemoryDataBlock(Byte[] data)
         {
             if (data == null)
             {
                 throw new ArgumentNullException("data");
             }
 
-            _data = (byte[])data.Clone();
+            _data = (Byte[])data.Clone();
         }
 
-        public override long Length
+        public override Int64 Length
         {
             get
             {
@@ -29,7 +29,7 @@ namespace Magic.Components
             }
         }
 
-        public byte[] Data
+        public Byte[] Data
         {
             get
             {
@@ -37,25 +37,25 @@ namespace Magic.Components
             }
         }
 
-        public void AddByteToEnd(byte value)
+        public void AddByteToEnd(Byte value)
         {
-            byte[] newData = new byte[_data.LongLength + 1];
+            Byte[] newData = new Byte[_data.LongLength + 1];
             _data.CopyTo(newData, 0);
             newData[newData.LongLength - 1] = value;
             _data = newData;
         }
 
-        public void AddByteToStart(byte value)
+        public void AddByteToStart(Byte value)
         {
-            byte[] newData = new byte[_data.LongLength + 1];
+            Byte[] newData = new Byte[_data.LongLength + 1];
             newData[0] = value;
             _data.CopyTo(newData, 1);
             _data = newData;
         }
 
-        public void InsertBytes(long position, byte[] data)
+        public void InsertBytes(Int64 position, Byte[] data)
         {
-            byte[] newData = new byte[_data.LongLength + data.LongLength];
+            Byte[] newData = new Byte[_data.LongLength + data.LongLength];
             if (position > 0)
             {
                 Array.Copy(_data, 0, newData, 0, position);
@@ -68,9 +68,9 @@ namespace Magic.Components
             _data = newData;
         }
 
-        public override void RemoveBytes(long position, long count)
+        public override void RemoveBytes(Int64 position, Int64 count)
         {
-            byte[] newData = new byte[_data.LongLength - count];
+            Byte[] newData = new Byte[_data.LongLength - count];
 
             if (position > 0)
             {

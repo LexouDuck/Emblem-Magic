@@ -12,11 +12,11 @@ namespace Magic
     /// </summary>
     public class ArrayFile : IEnumerable, IEnumerator
     {
-        public string this[uint index]
+        public String this[UInt32 index]
         {
             get
             {
-                string entry = "";
+                String entry = "";
                 if (Entries.TryGetValue(index, out entry))
                 {
                     return entry;
@@ -28,22 +28,22 @@ namespace Magic
         /// <summary>
         /// The index of the last entry in the list 
         /// </summary>
-        public uint LastEntry { get; private set; }
+        public UInt32 LastEntry { get; private set; }
         /// <summary>
         /// The full path and name of the array file loaded
         /// </summary>
-        string FilePath { get; }
+        String FilePath { get; }
         /// <summary>
         /// The actual string entry names and their indices
         /// </summary>
-        Dictionary<uint, string> Entries { get; }
+        Dictionary<UInt32, String> Entries { get; }
         
-        public ArrayFile(string fileName)
+        public ArrayFile(String fileName)
         {
             FilePath = Core.Path_Arrays + fileName;
-            Entries = new Dictionary<uint, string>();
+            Entries = new Dictionary<UInt32, String>();
 
-            string[] file;
+            String[] file;
             try
             {
                 file = File.ReadAllLines(FilePath);
@@ -54,19 +54,19 @@ namespace Magic
             }
             Load(file);
         }
-        public ArrayFile(string[] file)
+        public ArrayFile(String[] file)
         {
             FilePath = null;
-            Entries = new Dictionary<uint, string>();
+            Entries = new Dictionary<UInt32, String>();
             
             Load(file);
         }
-        void Load(string[] file)
+        void Load(String[] file)
         {
-            uint max = 0;
-            uint index;
-            int i;
-            for (int line = 0; line < file.Length; line++)
+            UInt32 max = 0;
+            UInt32 index;
+            Int32 i;
+            for (Int32 line = 0; line < file.Length; line++)
             {
                 try
                 {
@@ -75,7 +75,7 @@ namespace Magic
 
                     if (file[line].StartsWith("0x"))
                          index = Util.HexToInt(file[line].Substring(0, i));
-                    else index = uint.Parse(file[line].Substring(0, i));
+                    else index = UInt32.Parse(file[line].Substring(0, i));
 
                     if (index > max) max = index;
 
@@ -94,7 +94,7 @@ namespace Magic
         /// <summary>
         /// Returns the entry number corresponding to the given string- returns 0xFFFFFFFF if nothing is found.
         /// </summary>
-        public uint FindEntry(string name)
+        public UInt32 FindEntry(String name)
         {
             foreach (var entry in Entries)
             {
@@ -103,11 +103,11 @@ namespace Magic
             }
             return 0xFFFFFFFF;
         }
-        public void RenameEntry(uint value, string text)
+        public void RenameEntry(UInt32 value, String text)
         {
             Entries[value] = text;
-            string[] file = new string[LastEntry + 1];
-            int index = 0;
+            String[] file = new String[LastEntry + 1];
+            Int32 index = 0;
             foreach (var entry in Entries)
             {
                 file[index++] = "0x" + Util.UInt32ToHex(entry.Key) + " " + entry.Value;
@@ -124,7 +124,7 @@ namespace Magic
         /// </summary>
         public Regex GetRegex()
         {
-            string result = "";
+            String result = "";
             foreach (var entry in Entries)
             {
                 result += entry.Value;
@@ -139,7 +139,8 @@ namespace Magic
             {
                 return Entries[position];
             }
-        } uint position = 0;
+        }
+        UInt32 position = 0;
         public void Reset()
         {
             position = 0;
@@ -154,7 +155,7 @@ namespace Magic
         {
             return (IEnumerator)this;
         }
-        public List<KeyValuePair<uint, string>> ToList()
+        public List<KeyValuePair<UInt32, String>> ToList()
         {
             return Entries.ToList();
         }

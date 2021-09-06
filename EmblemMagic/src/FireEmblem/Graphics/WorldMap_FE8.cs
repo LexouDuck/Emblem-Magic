@@ -7,8 +7,8 @@ namespace EmblemMagic.FireEmblem
 {
     public class WorldMap_FE8_Mini : GBA.Sprite
     {
-        const int WIDTH = 8;
-        const int HEIGHT = 8;
+        const Int32 WIDTH = 8;
+        const Int32 HEIGHT = 8;
 
         public WorldMap_FE8_Mini(
             Pointer palette,
@@ -18,17 +18,17 @@ namespace EmblemMagic.FireEmblem
                 new Tileset(Core.ReadData(tileset, 0)),
                 GetMap()) { }
 
-        public WorldMap_FE8_Mini(string path, Palette palette = null)
+        public WorldMap_FE8_Mini(String path, Palette palette = null)
             : base(new Image(path, palette), true) { }
 
 
 
         public static TileMap GetMap()
         {
-            int?[,] map = new int?[8, 8];
-            int index = 0;
-            for (int y = 0; y < HEIGHT; y++)
-            for (int x = 0; x < WIDTH; x++)
+            Int32?[,] map = new Int32?[8, 8];
+            Int32 index = 0;
+            for (Int32 y = 0; y < HEIGHT; y++)
+            for (Int32 x = 0; x < WIDTH; x++)
             {
                 map[x, y] = index++;
             }
@@ -40,10 +40,10 @@ namespace EmblemMagic.FireEmblem
 
     public class WorldMap_FE8_Small : TSA_Image
     {
-        public const int WIDTH = 30;
-        public const int HEIGHT = 20;
+        public const Int32 WIDTH = 30;
+        public const Int32 HEIGHT = 20;
 
-        public const int PALETTES = 4;
+        public const Int32 PALETTES = 4;
 
 
 
@@ -55,7 +55,7 @@ namespace EmblemMagic.FireEmblem
                 Core.ReadData(tileset, 0),
                 Core.ReadTSA(tsa, WIDTH, HEIGHT, true, true)) { }
 
-        public WorldMap_FE8_Small(string path, Palette palette = null) : base(WIDTH, HEIGHT)
+        public WorldMap_FE8_Small(String path, Palette palette = null) : base(WIDTH, HEIGHT)
         {
             TSA_Image image;
             if (palette == null)
@@ -76,25 +76,25 @@ namespace EmblemMagic.FireEmblem
 
     public class WorldMap_FE8_Large : IDisplayable
     {
-        public int this[int x, int y]
+        public Int32 this[Int32 x, Int32 y]
         {
             get
             {
-                int tileX = x / 8;
-                int tileY = y / 8;
-                int index = tileX + tileY * WIDTH;
-                int palette = PaletteMap[tileX, tileY];
+                Int32 tileX = x / 8;
+                Int32 tileY = y / 8;
+                Int32 index = tileX + tileY * WIDTH;
+                Int32 palette = PaletteMap[tileX, tileY];
                 tileX = x % Tile.SIZE;
                 tileY = y % Tile.SIZE;
                 return palette * Palette.MAX + Graphics[index][tileX, tileY];
             }
         }
-        public Color GetColor(int x, int y)
+        public Color GetColor(Int32 x, Int32 y)
         {
-            int tileX = x / 8;
-            int tileY = y / 8;
-            int index = tileX + tileY * WIDTH;
-            int palette = PaletteMap[tileX, tileY];
+            Int32 tileX = x / 8;
+            Int32 tileY = y / 8;
+            Int32 index = tileX + tileY * WIDTH;
+            Int32 palette = PaletteMap[tileX, tileY];
             tileX = x % Tile.SIZE;
             tileY = y % Tile.SIZE;
             return Palettes[palette][Graphics[index][tileX, tileY]];
@@ -115,14 +115,14 @@ namespace EmblemMagic.FireEmblem
             }
         }
 
-        public const int WIDTH = 60;
-        public const int HEIGHT = 40;
+        public const Int32 WIDTH = 60;
+        public const Int32 HEIGHT = 40;
 
-        public const int PALETTES = 4;
+        public const Int32 PALETTES = 4;
 
         public Palette[] Palettes { get; set; }
         public Tileset Graphics { get; set; }
-        public int[,] PaletteMap { get; set; }
+        public Int32[,] PaletteMap { get; set; }
 
 
 
@@ -132,18 +132,18 @@ namespace EmblemMagic.FireEmblem
             Pointer tsa)
         {
             Palettes = new Palette[PALETTES];
-            for (int i = 0; i < Palettes.Length; i++)
+            for (Int32 i = 0; i < Palettes.Length; i++)
             {
                 Palettes[i] = Core.ReadPalette(palette + i * 32, Palette.LENGTH);
             }
             
             Graphics = new Tileset(Core.ReadData(tileset, WIDTH * HEIGHT * Tile.LENGTH));
 
-            byte[] map = Core.ReadData(tsa, 0);
-            PaletteMap = new int[WIDTH, HEIGHT];
-            int x = 0;
-            int y = 0;
-            for (int i = 0; i < map.Length; i++)
+            Byte[] map = Core.ReadData(tsa, 0);
+            PaletteMap = new Int32[WIDTH, HEIGHT];
+            Int32 x = 0;
+            Int32 y = 0;
+            for (Int32 i = 0; i < map.Length; i++)
             {
                 PaletteMap[x++, y] = (map[i] & 0x0F);
                 PaletteMap[x++, y] = (map[i] & 0xF0) >> 4;
@@ -156,7 +156,7 @@ namespace EmblemMagic.FireEmblem
             }
         }
 
-        public WorldMap_FE8_Large(string path, Palette palette = null)
+        public WorldMap_FE8_Large(String path, Palette palette = null)
         {
             TSA_Image image;
             if (palette == null)
@@ -169,9 +169,9 @@ namespace EmblemMagic.FireEmblem
             }
             Graphics = image.Graphics;
             Palettes = image.Palettes;
-            PaletteMap = new int[WIDTH, HEIGHT];
-            for (int y = 0; y < HEIGHT; y++)
-            for (int x = 0; x < WIDTH; x++)
+            PaletteMap = new Int32[WIDTH, HEIGHT];
+            for (Int32 y = 0; y < HEIGHT; y++)
+            for (Int32 x = 0; x < WIDTH; x++)
             {
                 PaletteMap[x, y] = image.Tiling[x, y].Palette;
             }
@@ -181,12 +181,12 @@ namespace EmblemMagic.FireEmblem
 
         public Byte[] GetPaletteMap()
         {
-            byte[] map = new byte[(WIDTH * HEIGHT) / 2];
-            int x = 0;
-            int y = 0;
-            for (int i = 0; i < map.Length; i++)
+            Byte[] map = new Byte[(WIDTH * HEIGHT) / 2];
+            Int32 x = 0;
+            Int32 y = 0;
+            for (Int32 i = 0; i < map.Length; i++)
             {
-                map[i] = (byte)
+                map[i] = (Byte)
                     ((PaletteMap[x++, y] & 0x0F) &
                     ((PaletteMap[x++, y] << 4) & 0xF0));
 

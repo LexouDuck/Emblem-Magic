@@ -13,7 +13,7 @@ namespace GBA
         /// <summary>
         /// This indexer is what makes the 'Tiles' array accessible.
         /// </summary>
-        public Tile this[int index]
+        public Tile this[Int32 index]
         {
             get
             {
@@ -34,7 +34,7 @@ namespace GBA
         /// <summary>
         /// Gets the amount of tiles in this GBA.Tileset
         /// </summary>
-        public int Count
+        public Int32 Count
         {
             get
             {
@@ -44,7 +44,7 @@ namespace GBA
         /// <summary>
         /// Gets the maximum amount of tiles this Tileset can contain
         /// </summary>
-        public int Maximum
+        public Int32 Maximum
         {
             get
             {
@@ -64,22 +64,22 @@ namespace GBA
         /// <summary>
         /// Creates an empty GBA.Tileset with the given Tile.SIZE
         /// </summary>
-        public Tileset(int maximum = 0)
+        public Tileset(Int32 maximum = 0)
         {
             Load(maximum);
         }
         /// <summary>
         /// Creates a GBA.Tileset of 8x8 tiles from the given tile data (must be a multiple of 32bytes long)
         /// </summary>
-        public Tileset(Byte[] data, int maximum = 0)
+        public Tileset(Byte[] data, Int32 maximum = 0)
         {
             if (data.Length % Tile.LENGTH != 0)
                 throw new Exception("the data given has an invalid length.");
             
             Load(maximum);
 
-            byte[] buffer = new byte[Tile.LENGTH];
-            for (int i = 0; i < (data.Length / Tile.LENGTH); i++)
+            Byte[] buffer = new Byte[Tile.LENGTH];
+            for (Int32 i = 0; i < (data.Length / Tile.LENGTH); i++)
             {
                 Array.Copy(data, i * Tile.LENGTH, buffer, 0, Tile.LENGTH);
                 Sheet.Add(new Tile(buffer));
@@ -88,12 +88,12 @@ namespace GBA
         /// <summary>
         /// Creates a Tileset of size x size tiles, by parsing through a GBA.Image (adding every tile)
         /// </summary>
-        public Tileset(Image image, int maximum = 0)
+        public Tileset(Image image, Int32 maximum = 0)
         {
             Load(maximum);
             
-            for (int y = 0; y < image.Height; y += Tile.SIZE)
-            for (int x = 0; x < image.Width; x += Tile.SIZE)
+            for (Int32 y = 0; y < image.Height; y += Tile.SIZE)
+            for (Int32 x = 0; x < image.Width; x += Tile.SIZE)
             {
                 this.Add(image.GetTile(x, y));
             }
@@ -102,7 +102,7 @@ namespace GBA
         /// <summary>
         /// Initializes the Tileset
         /// </summary>
-        void Load(int maximum)
+        void Load(Int32 maximum)
         {
             Sheet = (maximum == 0) ?
                 new List<Tile>() :
@@ -121,11 +121,11 @@ namespace GBA
         /// <summary>
         /// Adds a set of tiles from another tileset to this one, starting at 'index' and adding 'amount' tiles (all if amount==0)
         /// </summary>
-        public void AddTileset(Tileset tileset, int index = 0, int amount = 0)
+        public void AddTileset(Tileset tileset, Int32 index = 0, Int32 amount = 0)
         {
             if (amount == 0)
                 amount = tileset.Count - index;
-            for (int i = index; i < amount; i++)
+            for (Int32 i = index; i < amount; i++)
             {
                 this.Add(tileset[i]);
             }
@@ -133,11 +133,11 @@ namespace GBA
         /// <summary>
         /// Parses the given byte array, adding all and any tiles to this GBA.Tileset.
         /// </summary>
-        public void Parse(byte[] data)
+        public void Parse(Byte[] data)
         {
             if (data == null) throw new Exception("data given is null");
-            byte[] buffer = new byte[Tile.LENGTH];
-            for (int parse = 0; parse < data.Length; parse += buffer.Length)
+            Byte[] buffer = new Byte[Tile.LENGTH];
+            for (Int32 parse = 0; parse < data.Length; parse += buffer.Length)
             {
                 Array.Copy(data, parse, buffer, 0, buffer.Length);
                 Sheet.Add(new Tile(buffer));
@@ -146,32 +146,32 @@ namespace GBA
         /// <summary>
         /// Parses the given image, adding the tiles to their corresponding indices in the byte map
         /// </summary>
-        public void Parse(Image image, int?[,] map)
+        public void Parse(Image image, Int32?[,] map)
         {
-            int width = map.GetLength(0);
-            int height = map.GetLength(1);
+            Int32 width = map.GetLength(0);
+            Int32 height = map.GetLength(1);
 
             if (image.Width != width * Tile.SIZE || image.Height != height * Tile.SIZE)
                 throw new Exception("given image and map have dimensions that do not match.");
 
-            int length = 0;
-            for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++)
+            Int32 length = 0;
+            for (Int32 y = 0; y < height; y++)
+            for (Int32 x = 0; x < width; x++)
             {
                 if (map[x, y] == null) continue;
-                if (map[x, y] > length) length = (int)map[x, y];
+                if (map[x, y] > length) length = (Int32)map[x, y];
             }
             Tile[] tileset = new Tile[++length];
-            for (int y = 0; y < height; y++)
-            for (int x = 0; x < width; x++)
+            for (Int32 y = 0; y < height; y++)
+            for (Int32 x = 0; x < width; x++)
             {
                 if (map[x, y] == null) continue;
                 else
                 {
-                    tileset[(int)map[x, y]] = image.GetTile(x * Tile.SIZE, y * Tile.SIZE);
+                    tileset[(Int32)map[x, y]] = image.GetTile(x * Tile.SIZE, y * Tile.SIZE);
                 }
             }
-            for (int i = 0; i < tileset.Length; i++)
+            for (Int32 i = 0; i < tileset.Length; i++)
             {
                 Sheet.Add(tileset[i] ?? Tile.Empty);
             }
@@ -180,9 +180,9 @@ namespace GBA
         /// <summary>
         /// Returns true if a matching tile was found in the tileset (doesn't check for H&V flips)
         /// </summary>
-        public bool Contains(Tile tile)
+        public Boolean Contains(Tile tile)
         {
-            for (int i = 0; i < Count; i++)
+            for (Int32 i = 0; i < Count; i++)
             {
                 if (Sheet[i] != null && Sheet[i].Equals(tile)) return true;
             }
@@ -191,9 +191,9 @@ namespace GBA
         /// <summary>
         /// Returns the index of the given tile in this Tileset, return -1 the tile was not found.
         /// </summary>
-        public int Find(Tile tile)
+        public Int32 Find(Tile tile)
         {
-            for (int i = 0; i < Count; i++)
+            for (Int32 i = 0; i < Count; i++)
             {
                 if (Sheet[i] != null && Sheet[i].Equals(tile)) return i;
             }
@@ -202,9 +202,9 @@ namespace GBA
         /// <summary>
         /// Checks if the tileset contains any flipped version of the given tile, returns null if nothing is found
         /// </summary>
-        public Tuple<int, bool, bool> FindMatch(Tile tile)
+        public Tuple<Int32, Boolean, Boolean> FindMatch(Tile tile)
         {
-            int index = Find(tile);
+            Int32 index = Find(tile);
 
             if (index == -1)
             {
@@ -233,10 +233,10 @@ namespace GBA
         /// <summary>
         /// Returns a subset of the tiles of this Tileset
         /// </summary>
-        public Tileset GetTiles(int offset, int length)
+        public Tileset GetTiles(Int32 offset, Int32 length)
         {
             Tileset result = new Tileset(length);
-            for (int i = 0; i < length; i++)
+            for (Int32 i = 0; i < length; i++)
             {
                 if (offset + i >= Sheet.Count)
                     break;
@@ -248,26 +248,26 @@ namespace GBA
         /// <summary>
         /// Returns a GBA.Image of this GBA.Tileset, with the given palette and dimensions
         /// </summary>
-        public Image ToImage(int widthTiles, int heightTiles, byte[] palette)
+        public Image ToImage(Int32 widthTiles, Int32 heightTiles, Byte[] palette)
         {
-            int width = widthTiles * Tile.SIZE;
-            int height = heightTiles * Tile.SIZE;
-            int length = widthTiles * heightTiles;
-            byte[] result = new byte[(width / 2) * height];
-            byte[] tile;
-            int ix, iy;
-            int index;
-            int t = 0;
-            for (int i = 0; (i < length) && (i < Sheet.Count); i++)
+            Int32 width = widthTiles * Tile.SIZE;
+            Int32 height = heightTiles * Tile.SIZE;
+            Int32 length = widthTiles * heightTiles;
+            Byte[] result = new Byte[(width / 2) * height];
+            Byte[] tile;
+            Int32 ix, iy;
+            Int32 index;
+            Int32 t = 0;
+            for (Int32 i = 0; (i < length) && (i < Sheet.Count); i++)
             {
                 ix = (i % widthTiles) * Tile.SIZE;
                 iy = (i / widthTiles) * Tile.SIZE;
                 index = (ix / 2) + (iy * (width / 2));
-                tile = (Sheet[i] == null) ? new byte[Tile.LENGTH] : Sheet[i].Bytes;
+                tile = (Sheet[i] == null) ? new Byte[Tile.LENGTH] : Sheet[i].Bytes;
                 t = 0;
-                for (int y = 0; y < Tile.SIZE; y++)
+                for (Int32 y = 0; y < Tile.SIZE; y++)
                 {
-                    for (int x = 0; x < Tile.SIZE; x += 2)
+                    for (Int32 x = 0; x < Tile.SIZE; x += 2)
                     {
                         result[index++] = tile[t++];
                     }
@@ -279,11 +279,11 @@ namespace GBA
         /// <summary>
         /// Returns the tiles of this Tileset (empty 0th tile excluded) written sequentially in a byte array
         /// </summary>
-        public byte[] ToBytes(bool compressed)
+        public Byte[] ToBytes(Boolean compressed)
         {
-            byte[] result = new byte[Count * GBA.Tile.LENGTH];
-            int index = 0;
-            for (int i = 0; i < Count; i++)
+            Byte[] result = new Byte[Count * GBA.Tile.LENGTH];
+            Int32 index = 0;
+            for (Int32 i = 0; i < Count; i++)
             {
                 Array.Copy(Sheet[i].Bytes, 0, result, index, Sheet[i].Bytes.Length);
                 index += Sheet[i].Bytes.Length;
@@ -294,29 +294,29 @@ namespace GBA
 
 
 
-        override public string ToString()
+        override public String ToString()
         {
-            string result = "GBA.Tileset: " + Count + " tiles.";
+            String result = "GBA.Tileset: " + Count + " tiles.";
             foreach (Tile tile in Sheet)
             {
                 result += "\n\n" + tile;
             }
             return result;
         }
-        override public bool Equals(object other)
+        override public Boolean Equals(Object other)
         {
             if (!(other is Tileset)) return false;
             Tileset tileset = (Tileset)other;
             foreach (Tile tile in Sheet)
             {
-                for (int i = 0; i < Count; i++)
+                for (Int32 i = 0; i < Count; i++)
                 {
                     if (!tileset[i].Equals(tile)) return false;
                 }
             }
             return true;
         }
-        override public int GetHashCode()
+        override public Int32 GetHashCode()
         {
             return Sheet.GetHashCode();
         }

@@ -8,31 +8,31 @@ namespace EmblemMagic.FireEmblem
 {
     public class Font : IDisplayable
     {
-        public int this[int x, int y]
+        public System.Int32 this[System.Int32 x, System.Int32 y]
         {
             get
             {
-                int font_i = (x / 16) + (y / 16) * 16;
+                System.Int32 font_i = (x / 16) + (y / 16) * 16;
                 if (Glyphs[font_i] == null)
                     return 0;
                 else return Glyphs[font_i][x % 16, y % 16];
             }
         }
-        public GBA.Color GetColor(int x, int y)
+        public GBA.Color GetColor(System.Int32 x, System.Int32 y)
         {
-            int font_i = (x / 16) + (y / 16) * 16;
+            System.Int32 font_i = (x / 16) + (y / 16) * 16;
             if (Glyphs[font_i] == null) return Glyph.Colors[0];
             else return Glyphs[font_i].GetColor(x % 16, y % 16);
         }
 
-        public int Width
+        public System.Int32 Width
         {
             get
             {
                 return 256;
             }
         }
-        public int Height
+        public System.Int32 Height
         {
             get
             {
@@ -56,7 +56,7 @@ namespace EmblemMagic.FireEmblem
             Address = address;
             Glyphs = new Glyph[(Core.CurrentROM.Version == GameVersion.JAP ? 512 : 256)];
             Pointer pointer;
-            for (int i = 0; i < Glyphs.Length; i++)
+            for (System.Int32 i = 0; i < Glyphs.Length; i++)
             {
                 if (Core.CurrentROM.Version == GameVersion.JAP)
                 {
@@ -82,9 +82,9 @@ namespace EmblemMagic.FireEmblem
                 image.Colors[3]
             };
             Glyphs = new Glyph[256];
-            int x = 1;
-            int y = 0;
-            for (int i = 1; i < Glyphs.Length; i++)
+            System.Int32 x = 1;
+            System.Int32 y = 0;
+            for (System.Int32 i = 1; i < Glyphs.Length; i++)
             {
                 Glyphs[i] = new Glyph(new GBA.Bitmap(image,
                     new Rectangle(x * 16, y * 16, 16, 16)), colors);
@@ -109,17 +109,17 @@ namespace EmblemMagic.FireEmblem
 
 
 
-        public Glyph GetGlyph(char letter, Dictionary<char, byte> fontmap)
+        public Glyph GetGlyph(System.Char letter, Dictionary<System.Char, System.Byte> fontmap)
         {
-            byte index = 0x00;
+            System.Byte index = 0x00;
             if (fontmap.TryGetValue(letter, out index))
                 return Glyphs[index];
             else return null;
         }
 
-        public static Dictionary<char, byte> GetFontMap()
+        public static Dictionary<System.Char, System.Byte> GetFontMap()
         {
-            Dictionary<char, byte> result = new Dictionary<char, byte>();
+            Dictionary<System.Char, System.Byte> result = new Dictionary<System.Char, System.Byte>();
 
             result.Add(' ', 0x20);
             result.Add('!', 0x21);
@@ -309,9 +309,9 @@ namespace EmblemMagic.FireEmblem
 
             return result;
         }
-        public static Dictionary<char, byte> GetFontMap(bool textBubbleFont)
+        public static Dictionary<System.Char, System.Byte> GetFontMap(System.Boolean textBubbleFont)
         {
-            Dictionary<char, byte> result = new Dictionary<char, byte>();
+            Dictionary<System.Char, System.Byte> result = new Dictionary<System.Char, System.Byte>();
 
             if (textBubbleFont)
             {

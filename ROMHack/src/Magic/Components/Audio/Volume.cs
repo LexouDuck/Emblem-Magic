@@ -35,19 +35,19 @@ namespace WinMM
         /// <summary>
         /// Holds the left volume value.
         /// </summary>
-        private float left;
+        private System.Single left;
 
         /// <summary>
         /// Holds the right volume value.
         /// </summary>
-        private float right;
+        private System.Single right;
 
         /// <summary>
         /// Initializes a new instance of the Volume struct with the given left and right volume values.
         /// </summary>
         /// <param name="leftVolume">The left volume value.</param>
         /// <param name="rightVolume">The right volume value.</param>
-        public Volume(float leftVolume, float rightVolume)
+        public Volume(System.Single leftVolume, System.Single rightVolume)
         {
             this.left = leftVolume;
             this.right = rightVolume;
@@ -57,7 +57,7 @@ namespace WinMM
         /// Initializes a new instance of the Volume struct with the given volume value.
         /// </summary>
         /// <param name="volume">The left and right volume value.</param>
-        public Volume(float volume)
+        public Volume(System.Single volume)
         {
             this.left = volume;
             this.right = volume;
@@ -66,7 +66,7 @@ namespace WinMM
         /// <summary>
         /// Gets or sets the left volume value.
         /// </summary>
-        public float Left
+        public System.Single Left
         {
             get
             {
@@ -82,7 +82,7 @@ namespace WinMM
         /// <summary>
         /// Gets or sets the right volume value.
         /// </summary>
-        public float Right
+        public System.Single Right
         {
             get
             {
@@ -101,7 +101,7 @@ namespace WinMM
         /// <param name="volume1">The first Volume to compare.</param>
         /// <param name="volume2">The second Volume to compare.</param>
         /// <returns>true, if the Volumes are identical; false, otherwise.</returns>
-        public static bool operator ==(Volume volume1, Volume volume2)
+        public static System.Boolean operator ==(Volume volume1, Volume volume2)
         {
             return volume1.Equals(volume2);
         }
@@ -112,7 +112,7 @@ namespace WinMM
         /// <param name="volume1">The first Volume to compare.</param>
         /// <param name="volume2">The second Volume to compare.</param>
         /// <returns>false, if the Volumes are identical; true, otherwise.</returns>
-        public static bool operator !=(Volume volume1, Volume volume2)
+        public static System.Boolean operator !=(Volume volume1, Volume volume2)
         {
             return !volume1.Equals(volume2);
         }
@@ -122,7 +122,7 @@ namespace WinMM
         /// </summary>
         /// <param name="obj">An object to compare to this instance.</param>
         /// <returns>true if <paramref name="obj"/> has the same value as this instance; false, otherwise.</returns>
-        public override bool Equals(object obj)
+        public override System.Boolean Equals(System.Object obj)
         {
             if (obj == null || GetType() != obj.GetType())
             {
@@ -137,7 +137,7 @@ namespace WinMM
         /// Returns the hash code for this instance.
         /// </summary>
         /// <returns>A hash code for this Volume instance.</returns>
-        public override int GetHashCode()
+        public override System.Int32 GetHashCode()
         {
             return 0;
         }

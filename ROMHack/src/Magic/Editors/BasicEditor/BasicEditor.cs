@@ -8,7 +8,7 @@ namespace Magic.Editors
 {
     public partial class BasicEditor : Editor
     {
-        private List<Tuple<bool, Pointer, byte[]>> Accessed;
+        private List<Tuple<Boolean, Pointer, Byte[]>> Accessed;
 
 
 
@@ -18,9 +18,9 @@ namespace Magic.Editors
             {
                 InitializeComponent();
 
-                Accessed = new List<Tuple<bool, Pointer, byte[]>>();
+                Accessed = new List<Tuple<Boolean, Pointer, Byte[]>>();
 
-                Write_HexBox.Value = new byte[0];
+                Write_HexBox.Value = new Byte[0];
                 Write_HexBox.KeyDown += new KeyEventHandler(this.TextBox_SelectAll);
                 Output_TextBox.KeyDown += new KeyEventHandler(this.TextBox_SelectAll);
 
@@ -57,7 +57,7 @@ namespace Magic.Editors
             Output_TextBox.ScrollToCaret();
         }
 
-        public void Core_SetEntry(Pointer address, int length = 0, byte[] data = null)
+        public void Core_SetEntry(Pointer address, Int32 length = 0, Byte[] data = null)
         {
             Read_AddressBox.Value = address;
             Write_AddressBox.Value = address;
@@ -73,19 +73,19 @@ namespace Magic.Editors
 
 
 
-        private void ReadData_Click(object sender, EventArgs e)
+        private void ReadData_Click(Object sender, EventArgs e)
         {
             Pointer address = Read_AddressBox.Value;
-            int length = (int)Read_LengthBox.Value;
-            byte[] data = Core.ReadData(address, (Read_LZ77CheckBox.Checked) ? 0 : length);
+            Int32 length = (Int32)Read_LengthBox.Value;
+            Byte[] data = Core.ReadData(address, (Read_LZ77CheckBox.Checked) ? 0 : length);
 
             Accessed.Add(Tuple.Create(false, address, data));
             Core_Update();
         }
-        private void WriteData_Click(object sender, EventArgs e)
+        private void WriteData_Click(Object sender, EventArgs e)
         {
             Pointer address = Write_AddressBox.Value;
-            byte[] data = (Write_LZ77CheckBox.Checked) ?
+            Byte[] data = (Write_LZ77CheckBox.Checked) ?
                 LZ77.Compress(Write_HexBox.Value) : Write_HexBox.Value;
 
             if (address == 0) return;
@@ -93,7 +93,7 @@ namespace Magic.Editors
             Core.WriteData(this, address, data);
         }
 
-        private void Read_LZ77CheckBox_CheckedChanged(object sender, EventArgs e)
+        private void Read_LZ77CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
             Read_LengthBox.Enabled = !Read_LZ77CheckBox.Checked;
         }

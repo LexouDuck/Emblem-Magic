@@ -18,7 +18,7 @@ namespace EmblemMagic.Editors
         /// <summary>
         /// Gets a string of the current byte index of portrait in the array
         /// </summary>
-        string CurrentEntry
+        String CurrentEntry
         {
             get
             {
@@ -28,7 +28,7 @@ namespace EmblemMagic.Editors
         /// <summary>
         /// Whether or not the current portrait is a generic class card portrait
         /// </summary>
-        bool IsGenericClassCard
+        Boolean IsGenericClassCard
         {
             get
             {
@@ -56,7 +56,7 @@ namespace EmblemMagic.Editors
             }
         }
         
-        public override void Core_SetEntry(uint entry)
+        public override void Core_SetEntry(UInt32 entry)
         {
             EntryArrayBox.Value = (UInt16)entry;
         }
@@ -116,7 +116,7 @@ namespace EmblemMagic.Editors
             {
                 GBA.Palette palette = new GBA.Palette(CurrentPortrait.Colors);
                 palette[0] = palette[0].SetAlpha(true);
-                for (int i = 1; i < palette.Count; i++)
+                for (Int32 i = 1; i < palette.Count; i++)
                 {
                     palette[i] = palette[i].SetAlpha(false);
                 }   // force correct alpha on the palette (1st color transparent, all others opaque)
@@ -135,8 +135,8 @@ namespace EmblemMagic.Editors
                         CurrentPortrait.Sprites[Portrait.MAIN].Sheet :
                         CurrentPortrait.Sprites[Portrait.MOUTH].Sheet,
                         tilemap),
-                        (byte)Current["MouthX"] * 8,
-                        (byte)Current["MouthY"] * 8);
+                        (Byte)Current["MouthX"] * 8,
+                        (Byte)Current["MouthY"] * 8);
 
                     tilemap = new GBA.TileMap(GetTileMap_Eyes(
                         EyesClosed_CheckBox.Checked,
@@ -145,8 +145,8 @@ namespace EmblemMagic.Editors
                         new Sprite(palette,
                         CurrentPortrait.Sprites[Portrait.MAIN].Sheet,
                         tilemap),
-                        (byte)Current["BlinkX"] * 8,
-                        (byte)Current["BlinkY"] * 8);
+                        (Byte)Current["BlinkX"] * 8,
+                        (Byte)Current["BlinkY"] * 8);
                 }
                 tilemap = new TileMap(Portrait.Map_Test(IsGenericClassCard));
                 TestPortrait.AddSprite(
@@ -180,10 +180,10 @@ namespace EmblemMagic.Editors
                 Palette_PointerBox.Value = (Pointer)Current["Palette"];
                 Chibi_PointerBox.Value = (Pointer)Current["Chibi"];
 
-                MouthX_ByteBox.Value = (byte)Current["MouthX"];
-                MouthY_ByteBox.Value = (byte)Current["MouthY"];
-                BlinkX_ByteBox.Value = (byte)Current["BlinkX"];
-                BlinkY_ByteBox.Value = (byte)Current["BlinkY"];
+                MouthX_ByteBox.Value = (Byte)Current["MouthX"];
+                MouthY_ByteBox.Value = (Byte)Current["MouthY"];
+                BlinkX_ByteBox.Value = (Byte)Current["BlinkX"];
+                BlinkY_ByteBox.Value = (Byte)Current["BlinkY"];
 
                 if (Core.CurrentROM is FE6)
                 {
@@ -263,15 +263,15 @@ namespace EmblemMagic.Editors
             UI.SuspendUpdate();
             try
             {
-                int header = ((Core.CurrentROM is FE8 ||
+                Int32 header = ((Core.CurrentROM is FE8 ||
                     (Core.CurrentROM is FE7 && Core.CurrentROM.Version == GameVersion.JAP)) ? 4 : 0);
-                byte[] data_main = insert.Sprites[Portrait.MAIN].Sheet.ToBytes(false);
-                byte[] data_chibi = null;
-                byte[] data_mouth = null;
-                byte[] data_palette = new byte[Palette.LENGTH];
+                Byte[] data_main = insert.Sprites[Portrait.MAIN].Sheet.ToBytes(false);
+                Byte[] data_chibi = null;
+                Byte[] data_mouth = null;
+                Byte[] data_palette = new Byte[Palette.LENGTH];
                 Array.Copy(insert.Colors.ToBytes(false), data_palette, insert.Colors.Count * 2);
 
-                var repoints = new List<Tuple<string, Pointer, int>>();
+                var repoints = new List<Tuple<String, Pointer, Int32>>();
                 var writepos = new List<Pointer>();
 
                 repoints.Add(Tuple.Create("Palette", (Pointer)Current["Palette"], data_palette.Length));
@@ -307,7 +307,7 @@ namespace EmblemMagic.Editors
                     writepos.Add(Current.GetAddress(Current.EntryIndex, "Chibi"));
                 }
 
-                bool cancel = Prompt.ShowRepointDialog(this, "Repoint Portrait",
+                Boolean cancel = Prompt.ShowRepointDialog(this, "Repoint Portrait",
                     "The portrait to insert might need some of its parts to be repointed.",
                     CurrentEntry, repoints.ToArray(), writepos.ToArray());
                 if (cancel) return;
@@ -351,17 +351,17 @@ namespace EmblemMagic.Editors
             UI.PerformUpdate();
         }
 
-        void Core_InsertImage(string filepath)
+        void Core_InsertImage(String filepath)
         {
             Portrait portrait;
             try
             {
                 GBA.Image image = new GBA.Image(filepath);
 
-                int regular_width = Portrait.WIDTH * Tile.SIZE;
-                int regular_height = Portrait.HEIGHT * Tile.SIZE;
-                int generic_width = Portrait.Card_Width * Tile.SIZE;
-                int generic_height = Portrait.Card_Height * Tile.SIZE;
+                Int32 regular_width = Portrait.WIDTH * Tile.SIZE;
+                Int32 regular_height = Portrait.HEIGHT * Tile.SIZE;
+                Int32 generic_width = Portrait.Card_Width * Tile.SIZE;
+                Int32 generic_height = Portrait.Card_Height * Tile.SIZE;
                 if (image.Width == regular_width && image.Height == regular_height)
                 {
                     portrait = new Portrait(image, false);
@@ -381,11 +381,11 @@ namespace EmblemMagic.Editors
             }
             Core_Insert(portrait);
         }
-        void Core_InsertData(string filepath)
+        void Core_InsertData(String filepath)
         {
 
         }
-        void Core_SaveImage(string filepath)
+        void Core_SaveImage(String filepath)
         {
             try
             {
@@ -402,11 +402,11 @@ namespace EmblemMagic.Editors
                     CurrentPortrait.Width,
                     CurrentPortrait.Height,
                     new Palette[1] { CurrentPortrait.Colors },
-                    delegate(int x, int y)
+                    delegate(Int32 x, Int32 y)
                     {
                         if (y == 0 && x < Palette.MAX)
-                            return (byte)x;
-                        return (byte)CurrentPortrait[x, y];
+                            return (Byte)x;
+                        return (Byte)CurrentPortrait[x, y];
                     });
             }
             catch (Exception ex)
@@ -414,7 +414,7 @@ namespace EmblemMagic.Editors
                 UI.ShowError("Could not save image", ex);
             }
         }
-        void Core_SaveData(string filepath)
+        void Core_SaveData(String filepath)
         {
 
         }
@@ -424,17 +424,17 @@ namespace EmblemMagic.Editors
         /// <summary>
         /// Returns the tile mapping array of eyes according to the given parameters
         /// </summary>
-        int?[,] GetTileMap_Eyes(bool closed, int blink)
+        Int32?[,] GetTileMap_Eyes(Boolean closed, Int32 blink)
         {
             if (Program.Core.CurrentROM is FE6)
             {
-                return new int?[0, 0];
+                return new Int32?[0, 0];
             }
             else
             {
                 if (closed || blink == 2)
                 {
-                    return new int?[4, 2] {
+                    return new Int32?[4, 2] {
                         { 0x58, 0x78 },
                         { 0x59, 0x79 },
                         { 0x5A, 0x7A },
@@ -442,31 +442,31 @@ namespace EmblemMagic.Editors
                 }
                 else if (blink == 1)
                 {
-                    return new int?[4, 2] {
+                    return new Int32?[4, 2] {
                         { 0x18, 0x38 },
                         { 0x19, 0x39 },
                         { 0x1A, 0x3A },
                         { 0x1B, 0x3B }};
                 }
-                else return new int?[0, 0];
+                else return new Int32?[0, 0];
             }
         }
         /// <summary>
         /// Returns the tile mapping array of mouth tiles according to the given parameters 
         /// </summary>
-        int?[,] GetTileMap_Mouth(bool smiling, int openness)
+        Int32?[,] GetTileMap_Mouth(Boolean smiling, Int32 openness)
         {
             if (Program.Core.CurrentROM is FE6)
             {
                 if (smiling) switch (openness)
                 {
-                    case 0: return new int?[0, 0];
-                    case 1: return new int?[4, 2] {
+                    case 0: return new Int32?[0, 0];
+                    case 1: return new Int32?[4, 2] {
                         { 0x5C, 0x7C },
                         { 0x5D, 0x7D },
                         { 0x5E, 0x7E },
                         { 0x5F, 0x7F }};
-                    case 2: return new int?[4, 2] {
+                    case 2: return new Int32?[4, 2] {
                         { 0x1C, 0x3C },
                         { 0x1D, 0x3D },
                         { 0x1E, 0x3E },
@@ -475,17 +475,17 @@ namespace EmblemMagic.Editors
                 }
                 else switch (openness)
                 {
-                    case 0: return new int?[4, 2] {
+                    case 0: return new Int32?[4, 2] {
                         { 0x80, 0x84 },
                         { 0x81, 0x85 },
                         { 0x82, 0x86 },
                         { 0x83, 0x87 }};
-                    case 1: return new int?[4, 2] {
+                    case 1: return new Int32?[4, 2] {
                         { 0x58, 0x78 },
                         { 0x59, 0x79 },
                         { 0x5A, 0x7A },
                         { 0x5B, 0x7B }};
-                    case 2: return new int?[4, 2] {
+                    case 2: return new Int32?[4, 2] {
                         { 0x18, 0x38 },
                         { 0x19, 0x39 },
                         { 0x1A, 0x3A },
@@ -497,22 +497,22 @@ namespace EmblemMagic.Editors
             {
                 if (smiling) switch (openness)
                 {
-                    case 0: return new int?[4, 2] {
+                    case 0: return new Int32?[4, 2] {
                         { 0x1C, 0x3C },
                         { 0x1D, 0x3D },
                         { 0x1E, 0x3E },
                         { 0x1F, 0x3F }};
-                    case 1: return new int?[4, 2] {
+                    case 1: return new Int32?[4, 2] {
                         { 0x10, 0x14 },
                         { 0x11, 0x15 },
                         { 0x12, 0x16 },
                         { 0x13, 0x17 }};
-                    case 2: return new int?[4, 2] {
+                    case 2: return new Int32?[4, 2] {
                         { 0x08, 0x0C },
                         { 0x09, 0x0D },
                         { 0x0A, 0x0E },
                         { 0x0B, 0x0F }};
-                    case 3: return new int?[4, 2] {
+                    case 3: return new Int32?[4, 2] {
                         { 0x00, 0x04 },
                         { 0x01, 0x05 },
                         { 0x02, 0x06 },
@@ -521,18 +521,18 @@ namespace EmblemMagic.Editors
                 }
                 else switch (openness)
                 {
-                    case 0: return new int?[0, 0];
-                    case 1: return new int?[4, 2] {
+                    case 0: return new Int32?[0, 0];
+                    case 1: return new Int32?[4, 2] {
                         { 0x28, 0x2C },
                         { 0x29, 0x2D },
                         { 0x2A, 0x2E },
                         { 0x2B, 0x2F }};
-                    case 2: return new int?[4, 2] {
+                    case 2: return new Int32?[4, 2] {
                         { 0x20, 0x24 },
                         { 0x21, 0x25 },
                         { 0x22, 0x26 },
                         { 0x23, 0x27 }};
-                    case 3: return new int?[4, 2] {
+                    case 3: return new Int32?[4, 2] {
                         { 0x18, 0x1C },
                         { 0x19, 0x1D },
                         { 0x1A, 0x1E },
@@ -544,7 +544,7 @@ namespace EmblemMagic.Editors
 
 
 
-        private void File_Insert_Click(object sender, EventArgs e)
+        private void File_Insert_Click(Object sender, EventArgs e)
         {
             OpenFileDialog openWindow = new OpenFileDialog();
             openWindow.RestoreDirectory = true;
@@ -572,7 +572,7 @@ namespace EmblemMagic.Editors
                 UI.ShowError("File chosen has invalid extension.\r\n" + openWindow.FileName);
             }
         }
-        private void File_Save_Click(object sender, EventArgs e)
+        private void File_Save_Click(Object sender, EventArgs e)
         {
             SaveFileDialog saveWindow = new SaveFileDialog();
             saveWindow.RestoreDirectory = true;
@@ -602,27 +602,27 @@ namespace EmblemMagic.Editors
             }
         }
 
-        private void EntryArrayBox_ValueChanged(object sender, EventArgs e)
+        private void EntryArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Core_Update();
         }
-        private void Test_ViewBox_Changed(object sender, EventArgs e)
+        private void Test_ViewBox_Changed(Object sender, EventArgs e)
         {
             Core_UpdateTestView();
         }
 
-        private void Palette_PaletteBox_Click(object sender, EventArgs e)
+        private void Palette_PaletteBox_Click(Object sender, EventArgs e)
         {
             UI.OpenPaletteEditor(this, CurrentEntry, (Pointer)Current["Palette"], 1);
         }
-        private void Palette_PointerBox_Changed(object sender, EventArgs e)
+        private void Palette_PointerBox_Changed(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Current.GetAddress(Current.EntryIndex, "Palette"),
                 Palette_PointerBox.Value,
                 CurrentEntry + "Palette repointed");
         }
-        private void Image_PointerBox_Changed(object sender, EventArgs e)
+        private void Image_PointerBox_Changed(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 (Core.CurrentROM is FE6) ?
@@ -633,30 +633,30 @@ namespace EmblemMagic.Editors
                 Image_PointerBox.Value,
                 CurrentEntry + "Main image repointed");
         }
-        private void Chibi_PointerBox_Changed(object sender, EventArgs e)
+        private void Chibi_PointerBox_Changed(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Current.GetAddress(Current.EntryIndex, "Chibi"),
                 Chibi_PointerBox.Value,
                 CurrentEntry + "Chibi image repointed");
         }
-        private void Mouth_PointerBox_Changed(object sender, EventArgs e)
+        private void Mouth_PointerBox_Changed(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Current.GetAddress(Current.EntryIndex, "Mouth"),
                 Mouth_PointerBox.Value,
                 CurrentEntry + "Mouth image repointed");
         }
-        private void EyesClosed_CheckBox_Changed(object sender, EventArgs e)
+        private void EyesClosed_CheckBox_Changed(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 Current.GetAddress(Current.EntryIndex, "EyesClosed"),
-                (EyesClosed_CheckBox.Checked) ? (byte)0x06 : (byte)0x01,
+                (EyesClosed_CheckBox.Checked) ? (Byte)0x06 : (Byte)0x01,
                 CurrentEntry + (EyesClosed_CheckBox.Checked ? "Eyes closed" : "Eyes opened"));
             Test_ViewBox_Changed(this, null);
         }
 
-        private void MouthX_NumBox_Changed(object sender, EventArgs e)
+        private void MouthX_NumBox_Changed(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 Current.GetAddress(Current.EntryIndex, "MouthX"),
@@ -664,7 +664,7 @@ namespace EmblemMagic.Editors
                 CurrentEntry + "Mouth X changed");
             Test_ViewBox_Changed(this, null);
         }
-        private void MouthY_NumBox_Changed(object sender, EventArgs e)
+        private void MouthY_NumBox_Changed(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 Current.GetAddress(Current.EntryIndex, "MouthY"),
@@ -672,7 +672,7 @@ namespace EmblemMagic.Editors
                 CurrentEntry + "Mouth Y changed");
             Test_ViewBox_Changed(this, null);
         }
-        private void BlinkX_NumBox_Changed(object sender, EventArgs e)
+        private void BlinkX_NumBox_Changed(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 Current.GetAddress(Current.EntryIndex, "BlinkX"),
@@ -680,7 +680,7 @@ namespace EmblemMagic.Editors
                 CurrentEntry + "Blink X changed");
             Test_ViewBox_Changed(this, null);
         }
-        private void BlinkY_NumBox_Changed(object sender, EventArgs e)
+        private void BlinkY_NumBox_Changed(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
                 Current.GetAddress(Current.EntryIndex, "BlinkY"),

@@ -198,7 +198,7 @@ namespace WinMM
         /// <summary>
         /// Joystick Button 32
         /// </summary>
-        JoystickButton32 = unchecked((int)0x80000000),
+        JoystickButton32 = unchecked((Int32)0x80000000),
     }
 
     /// <summary>

@@ -4,16 +4,16 @@ namespace Magic.Components
 {
     internal sealed class FileDataBlock : DataBlock
     {
-        long _length;
-        long _fileOffset;
+        Int64 _length;
+        Int64 _fileOffset;
 
-        public FileDataBlock(long fileOffset, long length)
+        public FileDataBlock(Int64 fileOffset, Int64 length)
         {
             _fileOffset = fileOffset;
             _length = length;
         }
 
-        public long FileOffset
+        public Int64 FileOffset
         {
             get
             {
@@ -21,7 +21,7 @@ namespace Magic.Components
             }
         }
 
-        public override long Length
+        public override Int64 Length
         {
             get
             {
@@ -29,12 +29,12 @@ namespace Magic.Components
             }
         }
 
-        public void SetFileOffset(long value)
+        public void SetFileOffset(Int64 value)
         {
             _fileOffset = value;
         }
 
-        public void RemoveBytesFromEnd(long count)
+        public void RemoveBytesFromEnd(Int64 count)
         {
             if (count > _length)
             {
@@ -44,7 +44,7 @@ namespace Magic.Components
             _length -= count;
         }
 
-        public void RemoveBytesFromStart(long count)
+        public void RemoveBytesFromStart(Int64 count)
         {
             if (count > _length)
             {
@@ -55,7 +55,7 @@ namespace Magic.Components
             _length -= count;
         }
 
-        public override void RemoveBytes(long position, long count)
+        public override void RemoveBytes(Int64 position, Int64 count)
         {
             if (position > _length)
             {
@@ -67,11 +67,11 @@ namespace Magic.Components
                 throw new ArgumentOutOfRangeException("count");
             }
 
-            long prefixLength = position;
-            long prefixFileOffset = _fileOffset;
+            Int64 prefixLength = position;
+            Int64 prefixFileOffset = _fileOffset;
 
-            long suffixLength = _length - count - prefixLength;
-            long suffixFileOffset = _fileOffset + position + count;
+            Int64 suffixLength = _length - count - prefixLength;
+            Int64 suffixFileOffset = _fileOffset + position + count;
 
             if (prefixLength > 0 && suffixLength > 0)
             {

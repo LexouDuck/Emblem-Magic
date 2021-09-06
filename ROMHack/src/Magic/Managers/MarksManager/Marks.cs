@@ -16,7 +16,7 @@ namespace Magic
         /// <summary>
         /// The 4-character string for this marking type.
         /// </summary>
-        public string Name { get; set; }
+        public String Name { get; set; }
 
         /// <summary>
         /// The color associated with this marking type.
@@ -26,28 +26,28 @@ namespace Magic
         /// <summary>
         /// The layer on which this marking type is - types on the same layer conflict with each other.
         /// </summary>
-        public int Layer { get; set; }
+        public Int32 Layer { get; set; }
 
 
 
         /// <summary>
         /// Creates a marking type
         /// </summary>
-        public Mark(string name, int layer, Color color)
+        public Mark(String name, Int32 layer, Color color)
         {
             Load(name, layer, color);
         }
         /// <summary>
         /// Constructor used for loading from file
         /// </summary>
-        public Mark(string name, uint layer, uint color)
+        public Mark(String name, UInt32 layer, UInt32 color)
         {
-            Load(name, (int)layer, Color.FromArgb((int)color));
+            Load(name, (Int32)layer, Color.FromArgb((Int32)color));
         }
         /// <summary>
         /// Initialization function
         /// </summary>
-        void Load(string name, int layer, Color color)
+        void Load(String name, Int32 layer, Color color)
         {
             if (name.Length != 4) throw new Exception("Mark: given name has more than 4 characters.");
             if (layer < 0) throw new Exception("Mark: layer cannot be negative.");

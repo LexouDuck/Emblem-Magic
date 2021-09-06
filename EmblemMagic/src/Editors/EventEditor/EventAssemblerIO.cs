@@ -10,12 +10,12 @@ namespace EmblemMagic.Editors
 {
     public static class EventAssemblerIO
     {
-        public static string ReplaceSpacesAndSpecialChars(string EMidentifier)
+        public static String ReplaceSpacesAndSpecialChars(String EMidentifier)
         {
-            bool capitalize = true;
-            char[] str = EMidentifier.ToCharArray();
-            List<char> result = new List<char>();
-            for (int i = 0; i < str.Length; i++)
+            Boolean capitalize = true;
+            Char[] str = EMidentifier.ToCharArray();
+            List<Char> result = new List<Char>();
+            for (Int32 i = 0; i < str.Length; i++)
             {
                 if (str[i] == '(' ||
                     str[i] == ':' ||
@@ -34,16 +34,16 @@ namespace EmblemMagic.Editors
 
                 capitalize = (str[i] == ' ');
             }
-            return new string(result.ToArray());
+            return new String(result.ToArray());
         }
 
-        static int IndexOfCharset(string str, string charset, int start = 0, int count = 0)
+        static Int32 IndexOfCharset(String str, String charset, Int32 start = 0, Int32 count = 0)
         {
-            int i = 0;
+            Int32 i = 0;
             while (start + i < str.Length)
             {
                 if (i == count) break;
-                for (int c = 0; c < charset.Length; c++)
+                for (Int32 c = 0; c < charset.Length; c++)
                 {
                     if (str[start + i] == charset[c])
                         return (start + i);
@@ -53,21 +53,21 @@ namespace EmblemMagic.Editors
             return (-1);
         }
 
-        static void LoadEventCode_ArrayDefinitionsForCommand(ref string code, string command, int arg_index, ArrayFile definitions, string prefix = "")
+        static void LoadEventCode_ArrayDefinitionsForCommand(ref String code, String command, Int32 arg_index, ArrayFile definitions, String prefix = "")
         {
-            const string separators = " \t\r\n,[]";
-            string define;
-            byte value;
-            int index = 0;
-            int line_length;
-            int occurence;
-            int length;
+            const String separators = " \t\r\n,[]";
+            String define;
+            Byte value;
+            Int32 index = 0;
+            Int32 line_length;
+            Int32 occurence;
+            Int32 length;
             while ((occurence = code.IndexOf(command + " ", index)) > 0)
             {
                 index = occurence + command.Length + 1;
                 line_length = code.IndexOf("\r\n", index) - occurence;
                 if (line_length < 0) line_length = code.Length - occurence;
-                for (int i = 1; i < arg_index; i++)
+                for (Int32 i = 1; i < arg_index; i++)
                 {   // iteratively parse through the event code string, along the command's arguments, to  reach 'arg_index'
                     index = IndexOfCharset(code, separators, index, line_length);
                     if (index >= occurence + line_length) break;
@@ -81,7 +81,7 @@ namespace EmblemMagic.Editors
                 length = 0;
                 while (index + length < code.Length && Util.IsHexDigit(code[index + length]))
                     length++;
-                value = (byte)Util.HexToInt(code.Substring(index, length));
+                value = (Byte)Util.HexToInt(code.Substring(index, length));
                 index -= 2;
                 length += 2;
                 define = ReplaceSpacesAndSpecialChars(definitions[value]);
@@ -92,7 +92,7 @@ namespace EmblemMagic.Editors
                 }
             }
         }
-        public static void LoadEventCode_ArrayDefinitions(ref string code)
+        public static void LoadEventCode_ArrayDefinitions(ref String code)
         {
             ArrayFile backgrounds = new ArrayFile("Dialog Background List.txt");
             ArrayFile cutscenes = new ArrayFile("Cutscene Screen List.txt");
@@ -165,7 +165,7 @@ namespace EmblemMagic.Editors
             LoadEventCode_ArrayDefinitionsForCommand(ref code, "PLAY", 1, songs); // "Music_");
         }
 
-        public static void LoadEventCode_HelperMacros(ref string code)
+        public static void LoadEventCode_HelperMacros(ref String code)
         {
 
         }
@@ -187,50 +187,50 @@ namespace EmblemMagic.Editors
     public class ROM_Stream : Nintenlord.IO.ChangeStream
     {
         Editor owner;
-        int position;
-        Nintenlord.Collections.DataChange.IDataChange<byte> changes;
+        Int32 position;
+        Nintenlord.Collections.DataChange.IDataChange<Byte> changes;
 
         public ROM_Stream(Editor parent) : base()
         {
             owner = parent;
-            changes = new Nintenlord.Collections.DataChange.DataChange<byte>();
+            changes = new Nintenlord.Collections.DataChange.DataChange<Byte>();
         }
 
-        public string Description;
+        public String Description;
 
-        public override bool CanRead { get { return false; } }
-        public override bool CanSeek { get { return true; } }
-        public override bool CanWrite { get { return true; } }
-        public override long Length { get { return Core.CurrentROMSize; } }
-        public override long Position
+        public override Boolean CanRead { get { return false; } }
+        public override Boolean CanSeek { get { return true; } }
+        public override Boolean CanWrite { get { return true; } }
+        public override Int64 Length { get { return Core.CurrentROMSize; } }
+        public override Int64 Position
         {
             get { return position; }
-            set { position = (int)value; }
+            set { position = (Int32)value; }
         }
 
         public override void Flush() { }
-        public override void SetLength(long value) { }
-        public override int Read(byte[] buffer, int offset, int count)
+        public override void SetLength(Int64 value) { }
+        public override Int32 Read(Byte[] buffer, Int32 offset, Int32 count)
         {
             throw new Exception("EA ROM_Stream: Reading not supported.");
         }
-        public override long Seek(long offset, SeekOrigin origin)
+        public override Int64 Seek(Int64 offset, SeekOrigin origin)
         {
             switch (origin)
             {
                 case SeekOrigin.Begin:
-                    position = (int)offset;
+                    position = (Int32)offset;
                     break;
                 case SeekOrigin.Current:
-                    position += (int)offset;
+                    position += (Int32)offset;
                     break;
                 case SeekOrigin.End:
-                    position = (int)Core.CurrentROMSize + (int)offset;
+                    position = (Int32)Core.CurrentROMSize + (Int32)offset;
                     break;
             }
             return position;
         }
-        public override void Write(byte[] buffer, int offset, int count)
+        public override void Write(Byte[] buffer, Int32 offset, Int32 count)
         {
             try
             {
@@ -240,16 +240,16 @@ namespace EmblemMagic.Editors
             position += count;
         }
 
-        public void WriteToROM(bool autoFreeSpace)
+        public void WriteToROM(Boolean autoFreeSpace)
         {
             Pointer address = new Pointer();
-            List<byte[]> writes = new List<byte[]>();
-            int length = 0;
-            foreach (var item in (IEnumerable<KeyValuePair<int, byte[]>>)changes)
+            List<Byte[]> writes = new List<Byte[]>();
+            Int32 length = 0;
+            foreach (var item in (IEnumerable<KeyValuePair<Int32, Byte[]>>)changes)
             {
                 if (length == 0)
                 {
-                    address = new Pointer((uint)item.Key);
+                    address = new Pointer((UInt32)item.Key);
                     writes.Add(item.Value);
                     length = item.Value.Length;
                 }
@@ -268,27 +268,27 @@ namespace EmblemMagic.Editors
                 {
                     WriteToROM_Concatenate(autoFreeSpace, address, writes, length);
                     writes.Clear();
-                    address = new Pointer((uint)item.Key);
+                    address = new Pointer((UInt32)item.Key);
                     writes.Add(item.Value);
                     length = item.Value.Length;
                 }
             }
             WriteToROM_Concatenate(autoFreeSpace, address, writes, length);
         }
-        void WriteToROM_Concatenate(bool autoFreeSpace, Pointer address, List<byte[]> writes, int length)
+        void WriteToROM_Concatenate(Boolean autoFreeSpace, Pointer address, List<Byte[]> writes, Int32 length)
         {
-            byte[] data = new byte[length];
+            Byte[] data = new Byte[length];
             length = 0;
-            for (int index = 0; index < writes.Count; index++)
+            for (Int32 index = 0; index < writes.Count; index++)
             {
-                for (int i = 0; i < writes[index].Length; i++)
+                for (Int32 i = 0; i < writes[index].Length; i++)
                 {
                     data[length + i] = writes[index][i];
                 }
                 length += writes[index].Length;
             }
 
-            string write_description = "???";
+            String write_description = "???";
             if (length == 4 && data[0] == 0x08) write_description = "Repoint";
             else if (writes.Count > 1) write_description = "Compiled Events";
 

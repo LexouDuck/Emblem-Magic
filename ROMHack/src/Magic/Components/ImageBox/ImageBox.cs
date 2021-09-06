@@ -50,7 +50,7 @@ namespace Magic.Components
         /// <summary>
         /// An event handler that calls the 'OnPaint' method
         /// </summary>
-        void Redraw(object sender, System.EventArgs e)
+        void Redraw(Object sender, System.EventArgs e)
         {
             this.Invalidate();
         }
@@ -74,12 +74,12 @@ namespace Magic.Components
                 }
                 else
                 {
-                    int offsetX = (Width / 2) - (Display.Width / 2);
-                    int offsetY = (Height / 2) - (Display.Height / 2);
+                    Int32 offsetX = (Width / 2) - (Display.Width / 2);
+                    Int32 offsetY = (Height / 2) - (Display.Height / 2);
                     Color pixel;
                     Brush color;
-                    for (int y = 0; y < Display.Height; y++)
-                    for (int x = 0; x < Display.Width; x++)
+                    for (Int32 y = 0; y < Display.Height; y++)
+                    for (Int32 x = 0; x < Display.Width; x++)
                     {
                         pixel = (Color)Display.GetColor(x, y);
                         color = new SolidBrush(pixel);
@@ -121,7 +121,7 @@ namespace Magic.Components
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
+        protected override void Dispose(Boolean disposing)
         {
             if (disposing && (components != null))
             {

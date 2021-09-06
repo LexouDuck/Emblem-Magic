@@ -42,8 +42,8 @@ namespace Magic.Components
             try
             {
                 ArrayFile notes = new ArrayFile("Music Notes.txt");
-                int width = RowHeadersWidth;
-                for (int i = 0; i < tracks.Count; i++)
+                Int32 width = RowHeadersWidth;
+                for (Int32 i = 0; i < tracks.Count; i++)
                 {
                     Columns.Add(new DataGridViewTextBoxColumn()
                     {
@@ -56,12 +56,12 @@ namespace Magic.Components
                     Volumes.Add(volume);
                     Controls.Add(volume);
 
-                    string[][] track = tracks[i].GetTrackerString(notes);
-                    const int height = 14;
-                    for (int j = 0; j < track.Length; j++)
+                    String[][] track = tracks[i].GetTrackerString(notes);
+                    const Int32 height = 14;
+                    for (Int32 j = 0; j < track.Length; j++)
                     {
                         if (RowCount <= j) Rows.Add(new DataGridViewRow() { Height = height });
-                        Rows[j].HeaderCell.Value = Util.IntToHex((uint)j);
+                        Rows[j].HeaderCell.Value = Util.IntToHex((UInt32)j);
                         Rows[j].Cells[i].Value = track[j];
                         Rows[j].Height = Math.Max(
                             (track[j][0] == null) ? height : track[j][0].Split('\n').Length * height,
@@ -76,7 +76,7 @@ namespace Magic.Components
             }
         }
         
-        void PaintCells(object sender, DataGridViewCellPaintingEventArgs e)
+        void PaintCells(Object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
@@ -108,10 +108,10 @@ namespace Magic.Components
                     {
                         using (Brush brush = new SolidBrush(e.CellStyle.ForeColor))
                         {
-                            if (e.Value is string)
+                            if (e.Value is String)
                             {
                                 e.Graphics.DrawString(
-                                    (string)e.Value,
+                                    (String)e.Value,
                                     e.CellStyle.Font,
                                     Brushes.Black,
                                     e.CellBounds.X + 2,
@@ -119,9 +119,9 @@ namespace Magic.Components
                             }
                             else
                             {
-                                string[] columns = (string[])e.Value;
-                                int width = 0;
-                                for (int i = 0; i < 5; i++)
+                                String[] columns = (String[])e.Value;
+                                Int32 width = 0;
+                                for (Int32 i = 0; i < 5; i++)
                                 {
                                     if (columns[i] != null)
                                     {
@@ -152,7 +152,7 @@ namespace Magic.Components
             }
         }
 
-        void ColumnHeaderMouseClicked(object sender, DataGridViewCellMouseEventArgs e)
+        void ColumnHeaderMouseClicked(Object sender, DataGridViewCellMouseEventArgs e)
         {
             if (Volumes[e.ColumnIndex].Visible)
             {
@@ -171,11 +171,11 @@ namespace Magic.Components
                 Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             }
         }
-        void PlaceVolumeBars(object sender, EventArgs e)
+        void PlaceVolumeBars(Object sender, EventArgs e)
         {
-            int width = RowHeadersWidth;
-            int scroll = HorizontalScrollingOffset;
-            for (int i = 0; i < Volumes.Count; i++)
+            Int32 width = RowHeadersWidth;
+            Int32 scroll = HorizontalScrollingOffset;
+            for (Int32 i = 0; i < Volumes.Count; i++)
             {
                 Volumes[i].Location = new Point(width + 4 - scroll, 20);
                 Volumes[i].Size = new Size(192, 10);

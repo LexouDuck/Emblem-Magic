@@ -34,7 +34,7 @@ namespace EmblemMagic
                         EditorToOpen.Length > 7 &&
                         EditorToOpen.Substring(0, 7) == "Module:")
                     {
-                        string module = EditorToOpen.Substring(7, EditorToOpen.Length - 7);
+                        String module = EditorToOpen.Substring(7, EditorToOpen.Length - 7);
                         editor = new ModuleEditor(App);
                         ((ModuleEditor)editor).Core_OpenFile(Core.Path_Modules + module +".emm");
                     }
@@ -47,9 +47,9 @@ namespace EmblemMagic
                 switch (EditorToOpen)
                 {
                     case             "Text Editor":       ((TextEditor)editor).Core_SetEntry((UInt16)EntryToSelect); break;
-                    case            "Music Editor":      ((MusicEditor)editor).Core_SetEntry((byte)  EntryToSelect); break;
+                    case            "Music Editor":      ((MusicEditor)editor).Core_SetEntry((Byte)  EntryToSelect); break;
                     case         "Portrait Editor":   ((PortraitEditor)editor).Core_SetEntry((UInt16)EntryToSelect); break;
-                    case       "Map Sprite Editor":  ((MapSpriteEditor)editor).Core_SetEntry((byte)  EntryToSelect); break;
+                    case       "Map Sprite Editor":  ((MapSpriteEditor)editor).Core_SetEntry((Byte)  EntryToSelect); break;
                     case "Battle Animation Editor": ((BattleAnimEditor)editor).Core_SetEntry(        EntryToSelect); break;
                     default:                            ((ModuleEditor)editor).Core_SetEntry(        EntryToSelect); break;
                 }

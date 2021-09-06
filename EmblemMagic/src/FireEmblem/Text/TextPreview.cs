@@ -8,7 +8,7 @@ namespace EmblemMagic.FireEmblem
 {
     public class TextPreview : IDisplayable
     {
-        public int this[int x, int y]
+        public Int32 this[Int32 x, Int32 y]
         {
             get
             {
@@ -27,7 +27,7 @@ namespace EmblemMagic.FireEmblem
                 throw new NotImplementedException();
             }
         }
-        public Color GetColor(int x, int y)
+        public Color GetColor(Int32 x, Int32 y)
         {
             if (Text.GetColor(x, y) == Glyph.Colors[0])
             {
@@ -40,14 +40,14 @@ namespace EmblemMagic.FireEmblem
             else return Text.GetColor(x, y);
         }
 
-        public int Width
+        public Int32 Width
         {
             get
             {
                 return 240;
             }
         }
-        public int Height
+        public Int32 Height
         {
             get
             {
@@ -61,24 +61,24 @@ namespace EmblemMagic.FireEmblem
 
 
 
-        public TextPreview(Font font, bool bubble, string[] text, int line)
+        public TextPreview(Font font, Boolean bubble, String[] text, Int32 line)
         {
             Text = new Bitmap(Width, Height);
-            for (int i = 0; i < Glyph.Colors.Length; i++)
+            for (Int32 i = 0; i < Glyph.Colors.Length; i++)
             {
                 Text.Colors.Add(Glyph.Colors[i]);
             }
-            Dictionary<char, byte> fontmap = (Core.CurrentROM.Version == GameVersion.JAP) ?
+            Dictionary<Char, Byte> fontmap = (Core.CurrentROM.Version == GameVersion.JAP) ?
                 Font.GetFontMap(bubble) : Font.GetFontMap();
             List<Glyph>[] glyphs = new List<Glyph>[text.Length];
-            int[] lengths = new int[text.Length];
-            int length;
-            int offset_x;
-            int offset_y;
-            for (int i = 0; i < text.Length; i++)
+            Int32[] lengths = new Int32[text.Length];
+            Int32 length;
+            Int32 offset_x;
+            Int32 offset_y;
+            for (Int32 i = 0; i < text.Length; i++)
             {
                 glyphs[i] = new List<Glyph>();
-                for (int j = 0; j < text[i].Length; j++)
+                for (Int32 j = 0; j < text[i].Length; j++)
                 {
                     glyphs[i].Add(font.GetGlyph(text[i][j], fontmap));
 
@@ -86,19 +86,19 @@ namespace EmblemMagic.FireEmblem
                         lengths[i] += glyphs[i][glyphs[i].Count - 1].TextWidth;
                 }
             }
-            int lines = Math.Min(bubble ? 2 : 4, text.Length);
-            for (int i = line; i < line + lines; i++)
+            Int32 lines = Math.Min(bubble ? 2 : 4, text.Length);
+            for (Int32 i = line; i < line + lines; i++)
             {
                 offset_x =  bubble ? 8 : Width / 2 - lengths[i] / 2;
                 offset_y = (bubble ? 8 : 0) + (i - line) * 16;
 
                 length = 0;
-                for (int j = 0; j < glyphs[i].Count; j++)
+                for (Int32 j = 0; j < glyphs[i].Count; j++)
                 {
                     if (glyphs[i][j] != null)
                     {
-                        for (int y = 0; y < 16; y++)
-                        for (int x = 0; x < 16; x++)
+                        for (Int32 y = 0; y < 16; y++)
+                        for (Int32 x = 0; x < 16; x++)
                         {
                             if (offset_x + length + x < Width && offset_y + y < Height && glyphs[i][j].GetColor(x, y) != Glyph.Colors[0])
                             {
@@ -114,7 +114,7 @@ namespace EmblemMagic.FireEmblem
             }
 
             length = 0;
-            for (int i = 0; i < text.Length; i++)
+            for (Int32 i = 0; i < text.Length; i++)
             {
                 if (lengths[i] > length) length = lengths[i];
             }   // Store the pixel length of the biggest line
@@ -129,20 +129,20 @@ namespace EmblemMagic.FireEmblem
 
 
 
-        static TSA_Image MakeTextBubble(int longestLine, Pointer tilesetAddress, Pointer paletteAddress)
+        static TSA_Image MakeTextBubble(Int32 longestLine, Pointer tilesetAddress, Pointer paletteAddress)
         {
             Palette palette = Core.ReadPalette(paletteAddress, Palette.LENGTH);
 
             Tileset tileset = new Tileset(Core.ReadData(tilesetAddress, 0));
 
             TSA_Array tsa = new TSA_Array(30, 8);
-            for (int y = 0; y < 8; y++)
-            for (int x = 0; x < 30; x++)
+            for (Int32 y = 0; y < 8; y++)
+            for (Int32 x = 0; x < 30; x++)
             {
                 tsa.SetTile(x, y, 0xF);
             }
 
-            int length = 2;
+            Int32 length = 2;
             if (longestLine / 8 > length)
             {
                 length = longestLine / 8;
@@ -151,7 +151,7 @@ namespace EmblemMagic.FireEmblem
             }
 
             tsa.SetTile(0, 0, 0x0);
-            for (int i = 1; i <= length; i++)
+            for (Int32 i = 1; i <= length; i++)
             {
                 tsa.SetTile(i, 0, 0x1);
             }
@@ -160,7 +160,7 @@ namespace EmblemMagic.FireEmblem
             tsa.SetTile(0, 3, 0x2);
             tsa.SetTile(0, 4, 0x2);
             tsa.SetTile(0, 5, 0x0); tsa.SetFlipV(0, 5, true);
-            for (int i = 2; i <= length; i++)
+            for (Int32 i = 2; i <= length; i++)
             {
                 tsa.SetTile(i, 5, 0x1);
                 tsa.SetFlipV(i, 5, true);
@@ -175,8 +175,8 @@ namespace EmblemMagic.FireEmblem
             tsa.SetTile(1 + length, 3, 0x2); tsa.SetFlipH(1 + length, 3, true);
             tsa.SetTile(1 + length, 4, 0x2); tsa.SetFlipH(1 + length, 4, true);
             tsa.SetTile(1 + length, 5, 0x0); tsa.SetFlipH(1 + length, 5, true); tsa.SetFlipV(1 + length, 5, true);
-            for (int y = 1; y <= 4; y++)
-            for (int x = 1; x <= length; x++)
+            for (Int32 y = 1; y <= 4; y++)
+            for (Int32 x = 1; x <= length; x++)
             {
                 tsa.SetTile(x, y, 0x3);
             }

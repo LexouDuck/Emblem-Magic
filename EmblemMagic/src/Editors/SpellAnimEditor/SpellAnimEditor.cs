@@ -15,9 +15,9 @@ namespace EmblemMagic.Editors
         SpellAnimation CurrentAnim;
         SpellCommands Commands;
 
-        List<Pointer> CurrentArray_Palette = new List<Pointer>(); int CurrentIndex_Palette = 0;
-        List<Pointer> CurrentArray_Tileset = new List<Pointer>(); int CurrentIndex_Tileset = 0;
-        List<Pointer> CurrentArray_TSA     = new List<Pointer>(); int CurrentIndex_TSA = 0;
+        List<Pointer> CurrentArray_Palette = new List<Pointer>(); Int32 CurrentIndex_Palette = 0;
+        List<Pointer> CurrentArray_Tileset = new List<Pointer>(); Int32 CurrentIndex_Tileset = 0;
+        List<Pointer> CurrentArray_TSA     = new List<Pointer>(); Int32 CurrentIndex_TSA = 0;
         List<Size> CurrentArray_Dimensions = new List<Size>();
 
 
@@ -71,18 +71,18 @@ namespace EmblemMagic.Editors
 
         void Core_UpdateDisplay()
         {
-            const int palettes = 8;
-            int width = (int)Width_NumberBox.Value;
-            int height = (int)Height_NumberBox.Value;
-            
-            byte[] palette = Core.ReadData(
+            const Int32 palettes = 8;
+            Int32 width = (Int32)Width_NumberBox.Value;
+            Int32 height = (Int32)Height_NumberBox.Value;
+
+            Byte[] palette = Core.ReadData(
                 Palette_PointerBox.Value,
                 Palette_CheckBox.Checked ? 0 : palettes * Palette.LENGTH);
-            byte[] tileset = Core.ReadData(
+            Byte[] tileset = Core.ReadData(
                 Tileset_PointerBox.Value,
                 Tileset_CheckBox.Checked ? 0 : width * height * Tile.LENGTH);
             
-            for (int i = 0; i < palette.Length; i += 2)
+            for (Int32 i = 0; i < palette.Length; i += 2)
             {
                 palette[i + 1] &= 0x7F;
             }   // force opaque colors on display
@@ -123,17 +123,17 @@ namespace EmblemMagic.Editors
                 UI.ShowError("There has been an error while trying to load the image.", ex);
             }
         }
-        List<Pointer> Core_FindAllInAnimCode(string match)
+        List<Pointer> Core_FindAllInAnimCode(String match)
         {
             List<Pointer> result = new List<Pointer>();
             try
             {
-                List<int> results = new List<int>();
+                List<Int32> results = new List<Int32>();
                 Pointer address = new Pointer();
-                bool is_array = false;
-                bool is_sprite = false;
-                int index = 0;
-                for (int i = 0; i < Anim_CodeBox.Text.Length; i = index + 3)
+                Boolean is_array = false;
+                Boolean is_sprite = false;
+                Int32 index = 0;
+                for (Int32 i = 0; i < Anim_CodeBox.Text.Length; i = index + 3)
                 {
                     index = Anim_CodeBox.Text.IndexOf(match, i);
                     if (index < 0)
@@ -145,7 +145,7 @@ namespace EmblemMagic.Editors
                     index = Anim_CodeBox.Text.IndexOf(")\r\n", index);
                     if (index < 0)
                         break;
-                    int index_of_pointer_arg;
+                    Int32 index_of_pointer_arg;
                     index_of_pointer_arg = Anim_CodeBox.Text.LastIndexOf("$08", index) + 3;
                     if (index_of_pointer_arg < 0)
                         continue; // TODO throw exception here ?
@@ -153,11 +153,11 @@ namespace EmblemMagic.Editors
                     if (is_array)
                     {
                         // TODO change this loop's exit condition for something more reliable
-                        for (int offset = 0; offset < 0x100; offset += 4)
+                        for (Int32 offset = 0; offset < 0x100; offset += 4)
                         {
                             try
                             {
-                                byte pointer_msbyte = Core.ReadByte(address + offset + 3);
+                                Byte pointer_msbyte = Core.ReadByte(address + offset + 3);
                                 if (pointer_msbyte < 0x08 ||
                                     (pointer_msbyte & 0x70) != 0)
                                     break;
@@ -235,12 +235,12 @@ namespace EmblemMagic.Editors
             catch (Exception ex)
             {
                 UI.ShowError("Could not dissassemble spell anim routines.", ex);
-                ASM_ListBox.DataSource = new string[0];
+                ASM_ListBox.DataSource = new String[0];
             }
 
             try
             {
-                Anim_CodeBox.Text = string.Join("\r\n", CurrentAnim.GetAnimCode(Commands));
+                Anim_CodeBox.Text = String.Join("\r\n", CurrentAnim.GetAnimCode(Commands));
             }
             catch (Exception ex)
             {
@@ -377,7 +377,7 @@ namespace EmblemMagic.Editors
 
 
 
-        private void EntryArrayBox_ValueChanged(object sender, EventArgs e)
+        private void EntryArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             CurrentIndex_Palette = 0;
             CurrentIndex_Tileset = 0;
@@ -398,8 +398,8 @@ namespace EmblemMagic.Editors
 
         private void CopyASM_Click(Object sender, EventArgs e)
         {
-            string text = "";
-            foreach (object item in ASM_ListBox.Items)
+            String text = "";
+            foreach (Object item in ASM_ListBox.Items)
             {
                 text += item.ToString().Substring(24) + "\r\n";
             }

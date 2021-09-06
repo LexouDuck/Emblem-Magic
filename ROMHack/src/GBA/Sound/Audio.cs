@@ -11,17 +11,17 @@ namespace GBA
         /// <summary>
         /// Stops the playback thread when set to true
         /// </summary>
-        public bool Cancel { get; set; }
+        public Boolean Cancel { get; set; }
 
         /// <summary>
         /// The current position in the sample
         /// </summary>
-        public uint Position { get; set; }
+        public UInt32 Position { get; set; }
 
-        protected float Attack;
-        protected float Decay;
-        protected float Sustain;
-        protected float Release;
+        protected Single Attack;
+        protected Single Decay;
+        protected Single Sustain;
+        protected Single Release;
 
         public enum ADSR
         {
@@ -32,17 +32,17 @@ namespace GBA
             Release
         }
         public ADSR State;
-        protected double Envelope;
+        protected Double Envelope;
 
         public Audio(Instrument instrument)
         {
             Cancel = false;
             Position = 0;
 
-            Attack = (0xFF - instrument.Attack) / (float)0xFF;
-            Decay =   instrument.Decay   / (float)0xFF;
-            Sustain = instrument.Sustain / (float)0xFF;
-            Release = instrument.Release / (float)0xFF;
+            Attack = (0xFF - instrument.Attack) / (Single)0xFF;
+            Decay =   instrument.Decay   / (Single)0xFF;
+            Sustain = instrument.Sustain / (Single)0xFF;
+            Release = instrument.Release / (Single)0xFF;
 
             Envelope = 0;
             State = ADSR.Attack;
@@ -90,33 +90,33 @@ namespace GBA
         /// <summary>
         /// Returns the next buffer of sound bytes to output
         /// </summary>
-        public abstract byte[] GetBuffer(int length);
+        public abstract Byte[] GetBuffer(Int32 length);
         
 
 
         /// <summary>
         /// The default sampling rate of the GBA
         /// </summary>
-        public const int SAMPLE_RATE = 32768;
+        public const Int32 SAMPLE_RATE = 32768;
 
         /// <summary>
         /// Uses linear interpolation to return a byte array resampled to the new frequency
         /// </summary>
-        public static byte[] ChangeSampleRate(byte[] data, uint old_frequency, uint new_frequency)
+        public static Byte[] ChangeSampleRate(Byte[] data, UInt32 old_frequency, UInt32 new_frequency)
         {
             if (old_frequency == new_frequency) return data;
 
-            double factor = (double)old_frequency / (double)new_frequency;
-            int length = (int)Math.Floor((data.Length - 1) / factor);
-            byte[] result = new byte[length];
+            Double factor = (Double)old_frequency / (Double)new_frequency;
+            Int32 length = (Int32)Math.Floor((data.Length - 1) / factor);
+            Byte[] result = new Byte[length];
             result[0] = data[0];
-            int index1;
-            int index2;
-            for (int i = 1; i < length; i++)
+            Int32 index1;
+            Int32 index2;
+            for (Int32 i = 1; i < length; i++)
             {
-                index1 = (int)Math.Floor(i * factor);
-                index2 = (int)Math.Ceiling(i * factor);
-                result[i] = (byte)((data[index1] + data[index2]) / 2);
+                index1 = (Int32)Math.Floor(i * factor);
+                index2 = (Int32)Math.Ceiling(i * factor);
+                result[i] = (Byte)((data[index1] + data[index2]) / 2);
             }
             return result;
         }
@@ -126,12 +126,12 @@ namespace GBA
 
     public class Audio_DirectSound : Audio
     {
-        uint Frequency;
-        bool Looped;
-        uint LoopStart;
-        byte[] Sample;
+        UInt32 Frequency;
+        Boolean Looped;
+        UInt32 LoopStart;
+        Byte[] Sample;
 
-        public Audio_DirectSound(Instrument instrument, Sample sample, uint frequency = 0) : base(instrument)
+        public Audio_DirectSound(Instrument instrument, Sample sample, UInt32 frequency = 0) : base(instrument)
         {
             Frequency = (frequency == 0 ? sample.Pitch : frequency) / 1024;
 
@@ -140,7 +140,7 @@ namespace GBA
             if (sample.Looped)
             {
                 Looped = true;
-                LoopStart = (uint)(sample.LoopStart / ((double)Frequency / (double)SAMPLE_RATE));
+                LoopStart = (UInt32)(sample.LoopStart / ((Double)Frequency / (Double)SAMPLE_RATE));
                 if (LoopStart >= Sample.Length)
                     throw new Exception("Invalid loop starting point, is beyond the sample length.");
             }
@@ -151,11 +151,11 @@ namespace GBA
             }
         }
 
-        public override Byte[] GetBuffer(int length)
+        public override Byte[] GetBuffer(Int32 length)
         {
-            byte[] result = new byte[length];
-            byte pcm = 0x00;
-            for (int i = 0; i < length; i++)
+            Byte[] result = new Byte[length];
+            Byte pcm = 0x00;
+            for (Int32 i = 0; i < length; i++)
             {
                 if (Position >= Sample.Length)
                 {
@@ -172,7 +172,7 @@ namespace GBA
                 UpdateEnvelope();
                 try
                 {
-                    pcm = (byte)(Sample[Position++] * Envelope);
+                    pcm = (Byte)(Sample[Position++] * Envelope);
                 }
                 catch (Exception ex)
                 {

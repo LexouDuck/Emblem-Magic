@@ -49,11 +49,11 @@ namespace EmblemMagic.Editors
         /// <summary>
         /// Gets the full name of the current entry
         /// </summary>
-        string CurrentEntry
+        String CurrentEntry
         {
             get
             {
-                string prefix = (CurrentType == BackgroundType.Screen) ? "Cutscene Screen 0x" : CurrentType.ToString() + " Background 0x";
+                String prefix = (CurrentType == BackgroundType.Screen) ? "Cutscene Screen 0x" : CurrentType.ToString() + " Background 0x";
                 return prefix + Util.ByteToHex(EntryArrayBox.Value) + " [" + EntryArrayBox.Text + "] - ";
             }
         }
@@ -114,10 +114,10 @@ namespace EmblemMagic.Editors
             {
                 Size bgsize = Background.GetBGSize(CurrentType);
 
-                byte[] palette = Core.ReadData((Pointer)Current["Palette"],
+                Byte[] palette = Core.ReadData((Pointer)Current["Palette"],
                     (CurrentType == BackgroundType.Battle) ? 0 : // is compressed
                     Background.GetPaletteAmount(CurrentType) * GBA.Palette.LENGTH);
-                byte[] tileset;
+                Byte[] tileset;
                 TSA_Array tsa;
 
                 switch (CurrentType)
@@ -148,13 +148,13 @@ namespace EmblemMagic.Editors
                         else // its stored in 32x2 strips
                         {
                             tsa = Core.ReadTSA((Pointer)Current["TSA"], bgsize.Width, bgsize.Height, false, true);
-                            int amount = 10;
-                            int length = 32 * 2 * Tile.LENGTH;
-                            tileset = new byte[amount * length];
+                            Int32 amount = 10;
+                            Int32 length = 32 * 2 * Tile.LENGTH;
+                            tileset = new Byte[amount * length];
                             Pointer table = (Pointer)Current["Tileset"];
                             Pointer address;
-                            byte[] buffer;
-                            for (int i = 0; i < amount; i++)
+                            Byte[] buffer;
+                            for (Int32 i = 0; i < amount; i++)
                             {
                                 address = Core.ReadPointer(table + i * 4);
                                 buffer = Core.ReadData(address, 0);
@@ -211,24 +211,24 @@ namespace EmblemMagic.Editors
             UI.SuspendUpdate();
             try
             {
-                bool compressed = (CurrentType == BackgroundType.Battle);
+                Boolean compressed = (CurrentType == BackgroundType.Battle);
 
-                byte[] data_palette = Palette.Merge(insert.Palettes).ToBytes(compressed);
-                byte[] data_tileset = insert.Graphics.ToBytes(false); // is compressed below
-                byte[] data_tsa     = insert.Tiling.ToBytes(compressed, !compressed);
+                Byte[] data_palette = Palette.Merge(insert.Palettes).ToBytes(compressed);
+                Byte[] data_tileset = insert.Graphics.ToBytes(false); // is compressed below
+                Byte[] data_tsa     = insert.Tiling.ToBytes(compressed, !compressed);
                 
-                var repoints = new List<Tuple<string, Pointer, int>>();
+                var repoints = new List<Tuple<String, Pointer, Int32>>();
                 var writepos = new List<Pointer>();
 
-                List<byte[]> strips = new List<byte[]>();
+                List<Byte[]> strips = new List<Byte[]>();
                 if (CurrentType == BackgroundType.Screen
                     && (Core.CurrentROM is FE8
                     || (Core.CurrentROM is FE7 &&
                         Core.CurrentROM.Version != GameVersion.JAP &&
-                        (byte)Current["Strips"] == 0x01)))
+                        (Byte)Current["Strips"] == 0x01)))
                 {
-                    byte[] buffer = new byte[32 * 2 * GBA.Tile.LENGTH];
-                    for (int i = 0; i < 10; i++)
+                    Byte[] buffer = new Byte[32 * 2 * GBA.Tile.LENGTH];
+                    for (Int32 i = 0; i < 10; i++)
                     {
                         Array.Copy(data_tileset, i * buffer.Length, buffer, 0, Math.Min(data_tileset.Length - i * buffer.Length, buffer.Length));
                         strips.Add(LZ77.Compress(buffer));
@@ -250,7 +250,7 @@ namespace EmblemMagic.Editors
                 repoints.Add(Tuple.Create("TSA", (Pointer)Current["TSA"], data_tsa.Length));
                 writepos.Add(Current.GetAddress(Current.EntryIndex, "TSA"));
 
-                bool cancel = Prompt.ShowRepointDialog(this, "Repoint Background",
+                Boolean cancel = Prompt.ShowRepointDialog(this, "Repoint Background",
                     "The background to insert may need some of its parts to be repointed.",
                     CurrentEntry, repoints.ToArray(), writepos.ToArray());
                 if (cancel) return;
@@ -258,7 +258,7 @@ namespace EmblemMagic.Editors
                 if (CurrentType == BackgroundType.Screen && (Core.CurrentROM is FE8
                     || (Core.CurrentROM is FE7 && Core.ReadByte(Current.Address) == 0x01)))
                 {
-                    for (int i = 0; i < 10; i++)
+                    for (Int32 i = 0; i < 10; i++)
                     {
                         Core.WriteData(this,
                             Core.ReadPointer((Pointer)Current["Tileset"] + i * 4),
@@ -292,7 +292,7 @@ namespace EmblemMagic.Editors
             UI.PerformUpdate();
         }
 
-        void Core_InsertImage(string filepath)
+        void Core_InsertImage(String filepath)
         {
             Background background;
             try
@@ -326,13 +326,13 @@ namespace EmblemMagic.Editors
             }
             Core_Insert(background);
         }
-        void Core_InsertData(string filepath)
+        void Core_InsertData(String filepath)
         {
             Background background;
             try
             {
-                string path = Path.GetDirectoryName(filepath) + '\\';
-                string file = Path.GetFileNameWithoutExtension(filepath);
+                String path = Path.GetDirectoryName(filepath) + '\\';
+                String file = Path.GetFileNameWithoutExtension(filepath);
 
                 if (!File.Exists(path + file + ".pal"))
                     throw new Exception("Could not find Palette file:\n" + path + file + ".pal");
@@ -341,8 +341,8 @@ namespace EmblemMagic.Editors
                 if (!File.Exists(path + file + ".tsa"))
                     throw new Exception("Could not find TSA Array file:\n" + path + file + ".tsa");
 
-                byte[] palette = File.ReadAllBytes(path + file + ".pal");
-                byte[] tileset = File.ReadAllBytes(path + file + ".chr");
+                Byte[] palette = File.ReadAllBytes(path + file + ".pal");
+                Byte[] tileset = File.ReadAllBytes(path + file + ".chr");
                 TSA_Array tsa = new TSA_Array(
                         CurrentBackground.Tiling.Width,
                         CurrentBackground.Tiling.Height,
@@ -357,7 +357,7 @@ namespace EmblemMagic.Editors
             }
             Core_Insert(background);
         }
-        void Core_SaveImage(string filepath)
+        void Core_SaveImage(String filepath)
         {
             try
             {
@@ -365,9 +365,9 @@ namespace EmblemMagic.Editors
                     CurrentBackground.Width,
                     CurrentBackground.Height,
                     CurrentBackground.Palettes,
-                    delegate (int x, int y)
+                    delegate (Int32 x, Int32 y)
                     {
-                        return (byte)CurrentBackground[x, y];
+                        return (Byte)CurrentBackground[x, y];
                     });
             }
             catch (Exception ex)
@@ -375,16 +375,16 @@ namespace EmblemMagic.Editors
                 UI.ShowError("Could not save background image.", ex);
             }
         }
-        void Core_SaveData(string filepath)
+        void Core_SaveData(String filepath)
         {
             try
             {
-                string path = Path.GetDirectoryName(filepath) + '\\';
-                string file = Path.GetFileNameWithoutExtension(filepath);
+                String path = Path.GetDirectoryName(filepath) + '\\';
+                String file = Path.GetFileNameWithoutExtension(filepath);
 
-                byte[] data_palette = Palette.Merge(CurrentBackground.Palettes).ToBytes(false);
-                byte[] data_tileset = CurrentBackground.Graphics.ToBytes(false);
-                byte[] data_tsa = CurrentBackground.Tiling.ToBytes(false, false);
+                Byte[] data_palette = Palette.Merge(CurrentBackground.Palettes).ToBytes(false);
+                Byte[] data_tileset = CurrentBackground.Graphics.ToBytes(false);
+                Byte[] data_tsa = CurrentBackground.Tiling.ToBytes(false, false);
 
                 File.WriteAllBytes(path + file + ".pal", data_palette);
                 File.WriteAllBytes(path + file + ".chr", data_tileset);
@@ -465,7 +465,7 @@ namespace EmblemMagic.Editors
         }
         private void Tool_OpenTSAEditor_Click(Object sender, EventArgs e)
         {
-            bool compressed = (CurrentType == BackgroundType.Battle);
+            Boolean compressed = (CurrentType == BackgroundType.Battle);
 
             UI.OpenTSAEditor(this,
                 CurrentEntry,
@@ -482,12 +482,12 @@ namespace EmblemMagic.Editors
 
 
 
-        private void EntryArrayBox_ValueChanged(object sender, EventArgs e)
+        private void EntryArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Core_Update();
         }
 
-        private void Array_RadioButton_CheckedChanged(object sender, EventArgs e)
+        private void Array_RadioButton_CheckedChanged(Object sender, EventArgs e)
         {
             EntryArrayBox.ValueChanged -= EntryArrayBox_ValueChanged;
             EntryArrayBox.Value = 0;
@@ -500,21 +500,21 @@ namespace EmblemMagic.Editors
             Core_Update();
         }
 
-        private void Palette_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void Palette_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Current.GetAddress(Current.EntryIndex, "Palette"),
                 Palette_PointerBox.Value,
                 CurrentEntry + "palette repoint: " + Palette_PointerBox.Value);
         }
-        private void Tileset_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void Tileset_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Current.GetAddress(Current.EntryIndex, "Tileset"),
                 Tileset_PointerBox.Value,
                 CurrentEntry + "image repoint: " + Tileset_PointerBox.Value);
         }
-        private void TSA_PointerBox_ValueChanged(object sender, EventArgs e)
+        private void TSA_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 Current.GetAddress(Current.EntryIndex, "TSA"),

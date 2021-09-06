@@ -20,33 +20,33 @@ namespace EmblemMagic.Editors
             InitializeComponent();
         }
 
-        void Core_Replace(string text, string replace)
+        void Core_Replace(String text, String replace)
         {
             if (text == null || text == "")
             {
                 UI.ShowMessage("There is no input text to find."); return;
             }
 
-            string current = Owner.Core_GetText(Owner.CurrentIndex);
+            String current = Owner.Core_GetText(Owner.CurrentIndex);
 
-            if (text == current.Substring((int)Owner.CurrentSelection.Start, (int)Owner.CurrentSelection.Length))
+            if (text == current.Substring((Int32)Owner.CurrentSelection.Start, (Int32)Owner.CurrentSelection.Length))
             {
                 Owner.Core_WriteText(
-                    current.Substring(0, (int)Owner.CurrentSelection.Start) + replace +
-                    current.Substring((int)Owner.CurrentSelection.End), Owner.CurrentIndex);
+                    current.Substring(0, (Int32)Owner.CurrentSelection.Start) + replace +
+                    current.Substring((Int32)Owner.CurrentSelection.End), Owner.CurrentIndex);
             }
 
             Find_ProgressBar.Maximum = current.Length;
 
-            for (int i = (int)(Owner.CurrentSelection.Start + Owner.CurrentSelection.Length); i < current.Length; i++)
+            for (Int32 i = (Int32)(Owner.CurrentSelection.Start + Owner.CurrentSelection.Length); i < current.Length; i++)
             {
                 if (Find_Current_Button.Checked)
                     Find_ProgressBar.Value = i;
 
                 if (current[i] == text[0])
                 {
-                    bool match = true;
-                    for (int j = 1; j < text.Length; j++)
+                    Boolean match = true;
+                    for (Int32 j = 1; j < text.Length; j++)
                     {
                         if (current[i + j] == text[j]) continue;
                         else { match = false; break; }
@@ -72,12 +72,12 @@ namespace EmblemMagic.Editors
                     {
                         current = Owner.Core_GetText(entry);
 
-                        for (int i = 0; (i < current.Length); i++)
+                        for (Int32 i = 0; (i < current.Length); i++)
                         {
                             if (current[i] == text[0])
                             {
-                                bool match = true;
-                                for (int j = 1; j < text.Length; j++)
+                                Boolean match = true;
+                                for (Int32 j = 1; j < text.Length; j++)
                                 {
                                     if (current[i + j] == text[j]) continue;
                                     else { match = false; break; }
@@ -97,14 +97,14 @@ namespace EmblemMagic.Editors
                 Find_ProgressBar.Value = 0;
             }
         }
-        void Core_ReplaceAll(string text, string replace)
+        void Core_ReplaceAll(String text, String replace)
         {
             if (text == null || text == "")
             {
                 UI.ShowMessage("There is no input text to find."); return;
             }
 
-            string current = Owner.Core_GetText(Owner.CurrentIndex);
+            String current = Owner.Core_GetText(Owner.CurrentIndex);
 
             Find_ProgressBar.Maximum = MAXIMUM;
 

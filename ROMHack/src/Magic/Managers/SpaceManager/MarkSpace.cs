@@ -17,26 +17,26 @@ namespace Magic
             Space_MarkAsComboBox.DataSource = App.FEH.Marks.GetStringList(true);
         }
 
-        void Space_EndByteLabel_Click(object sender, EventArgs e)
+        void Space_EndByteLabel_Click(Object sender, EventArgs e)
         {
             Space_EndByteBox.Enabled = true;
             Space_EndByteBox.Focus();
             Space_LengthBox.Enabled = false;
             Space_LengthBox.ResetText();
         }
-        void Space_LengthLabel_Click(object sender, EventArgs e)
+        void Space_LengthLabel_Click(Object sender, EventArgs e)
         {
             Space_LengthBox.Enabled = true;
             Space_LengthBox.Focus();
             Space_EndByteBox.Enabled = false;
             Space_EndByteBox.ResetText();
         }
-        void Space_OKButton_Click(object sender, EventArgs e)
+        void Space_OKButton_Click(Object sender, EventArgs e)
         {
-            string mark = Space_MarkAsComboBox.SelectedItem.ToString();
+            String mark = Space_MarkAsComboBox.SelectedItem.ToString();
             GBA.Pointer address = Space_AddressBox.Value;
             GBA.Pointer endbyte = Space_EndByteBox.Value;
-            int length = (int)Space_LengthBox.Value;
+            Int32 length = (Int32)Space_LengthBox.Value;
 
             if ((Space_EndByteLabel.Checked && endbyte <= address)
              || (Space_LengthLabel.Checked && length <= 0))

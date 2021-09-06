@@ -41,31 +41,31 @@ namespace Magic.Components
 		/// Contains string format information for text drawing
 		/// </summary>
 		StringFormat _stringFormat;
-		/// <summary>
-		/// Contains the maximum of visible horizontal bytes
-		/// </summary>
-		int _iHexMaxHBytes;
-		/// <summary>
-		/// Contains the maximum of visible vertical bytes
-		/// </summary>
-		int _iHexMaxVBytes;
-		/// <summary>
-		/// Contains the maximum of visible bytes.
-		/// </summary>
-		int _iHexMaxBytes;
+        /// <summary>
+        /// Contains the maximum of visible horizontal bytes
+        /// </summary>
+        Int32 _iHexMaxHBytes;
+        /// <summary>
+        /// Contains the maximum of visible vertical bytes
+        /// </summary>
+        Int32 _iHexMaxVBytes;
+        /// <summary>
+        /// Contains the maximum of visible bytes.
+        /// </summary>
+        Int32 _iHexMaxBytes;
 
-		/// <summary>
-		/// Contains the scroll bars minimum value
-		/// </summary>
-		long _scrollVmin;
-		/// <summary>
-		/// Contains the scroll bars maximum value
-		/// </summary>
-		long _scrollVmax;
-		/// <summary>
-		/// Contains the scroll bars current position
-		/// </summary>
-		long _scrollVpos;
+        /// <summary>
+        /// Contains the scroll bars minimum value
+        /// </summary>
+        Int64 _scrollVmin;
+        /// <summary>
+        /// Contains the scroll bars maximum value
+        /// </summary>
+        Int64 _scrollVmax;
+        /// <summary>
+        /// Contains the scroll bars current position
+        /// </summary>
+        Int64 _scrollVpos;
 		/// <summary>
 		/// Contains a vertical scroll
 		/// </summary>
@@ -74,62 +74,62 @@ namespace Magic.Components
 		/// Contains a timer for thumbtrack scrolling
 		/// </summary>
 		Timer _thumbTrackTimer = new Timer();
-		/// <summary>
-		/// Contains the thumbtrack scrolling position
-		/// </summary>
-		long _thumbTrackPosition;
+        /// <summary>
+        /// Contains the thumbtrack scrolling position
+        /// </summary>
+        Int64 _thumbTrackPosition;
 		/// <summary>
 		/// Contains the thumptrack delay for scrolling in milliseconds.
 		/// </summary>
-		const int THUMPTRACKDELAY = 50;
-		/// <summary>
-		/// Contains the Enviroment.TickCount of the last refresh
-		/// </summary>
-		int _lastThumbtrack;
-		/// <summary>
-		/// Contains the border큦 left shift
-		/// </summary>
-		int _recBorderLeft = SystemInformation.Border3DSize.Width;
-		/// <summary>
-		/// Contains the border큦 right shift
-		/// </summary>
-		int _recBorderRight = SystemInformation.Border3DSize.Width;
-		/// <summary>
-		/// Contains the border큦 top shift
-		/// </summary>
-		int _recBorderTop = SystemInformation.Border3DSize.Height;
-		/// <summary>
-		/// Contains the border bottom shift
-		/// </summary>
-		int _recBorderBottom = SystemInformation.Border3DSize.Height;
+		const Int32 THUMPTRACKDELAY = 50;
+        /// <summary>
+        /// Contains the Enviroment.TickCount of the last refresh
+        /// </summary>
+        Int32 _lastThumbtrack;
+        /// <summary>
+        /// Contains the border큦 left shift
+        /// </summary>
+        Int32 _recBorderLeft = SystemInformation.Border3DSize.Width;
+        /// <summary>
+        /// Contains the border큦 right shift
+        /// </summary>
+        Int32 _recBorderRight = SystemInformation.Border3DSize.Width;
+        /// <summary>
+        /// Contains the border큦 top shift
+        /// </summary>
+        Int32 _recBorderTop = SystemInformation.Border3DSize.Height;
+        /// <summary>
+        /// Contains the border bottom shift
+        /// </summary>
+        Int32 _recBorderBottom = SystemInformation.Border3DSize.Height;
 
-		/// <summary>
-		/// Contains the index of the first visible byte
-		/// </summary>
-		long _startByte;
-		/// <summary>
-		/// Contains the index of the last visible byte
-		/// </summary>
-		long _endByte;
+        /// <summary>
+        /// Contains the index of the first visible byte
+        /// </summary>
+        Int64 _startByte;
+        /// <summary>
+        /// Contains the index of the last visible byte
+        /// </summary>
+        Int64 _endByte;
 
-		/// <summary>
-		/// Contains the current byte position
-		/// </summary>
-		long _bytePos = -1;
-		/// <summary>
-		/// Contains the current char position in one byte
-		/// </summary>
-		/// <example>
-		/// "1A"
-		/// "1" = char position of 0
-		/// "A" = char position of 1
-		/// </example>
-		int _byteCharacterPos;
+        /// <summary>
+        /// Contains the current byte position
+        /// </summary>
+        Int64 _bytePos = -1;
+        /// <summary>
+        /// Contains the current char position in one byte
+        /// </summary>
+        /// <example>
+        /// "1A"
+        /// "1" = char position of 0
+        /// "A" = char position of 1
+        /// </example>
+        Int32 _byteCharacterPos;
 
-		/// <summary>
-		/// Contains string format information for hex values
-		/// </summary>
-		string _hexStringFormat = "X";
+        /// <summary>
+        /// Contains string format information for hex values
+        /// </summary>
+        String _hexStringFormat = "X";
 
 
 		/// <summary>
@@ -149,24 +149,24 @@ namespace Magic.Components
 		/// </summary>
 		StringKeyInterpreter _ski;
 
-		/// <summary>
-		/// Contains True if caret is visible
-		/// </summary>
-		bool _caretVisible;
+        /// <summary>
+        /// Contains True if caret is visible
+        /// </summary>
+        Boolean _caretVisible;
 
-		/// <summary>
-		/// Contains true, if the find (Find method) should be aborted.
-		/// </summary>
-		bool _abortFind;
-		/// <summary>
-		/// Contains a value of the current finding position.
-		/// </summary>
-		long _findingPos;
+        /// <summary>
+        /// Contains true, if the find (Find method) should be aborted.
+        /// </summary>
+        Boolean _abortFind;
+        /// <summary>
+        /// Contains a value of the current finding position.
+        /// </summary>
+        Int64 _findingPos;
 
-		/// <summary>
-		/// Contains a state value about Insert or Write mode. When this value is true and the ByteProvider SupportsInsert is true bytes are inserted instead of overridden.
-		/// </summary>
-		bool _insertActive;
+        /// <summary>
+        /// Contains a state value about Insert or Write mode. When this value is true and the ByteProvider SupportsInsert is true bytes are inserted instead of overridden.
+        /// </summary>
+        Boolean _insertActive;
         #endregion
         
         #region Properties
@@ -195,7 +195,7 @@ namespace Magic.Components
         /// When set to True, BytesPerLine property determine the maximum count of bytes in one line.
         /// </remarks>
         [DefaultValue(false), Category("Hex"), Description("Gets or sets if the count of bytes in one line is fix.")]
-        public bool ReadOnly
+        public Boolean ReadOnly
         {
             get { return _readOnly; }
             set
@@ -208,7 +208,7 @@ namespace Magic.Components
                 Invalidate();
             }
         }
-        bool _readOnly;
+        Boolean _readOnly;
 
         /// <summary>
         /// Gets or sets the maximum count of bytes in one line.
@@ -217,7 +217,7 @@ namespace Magic.Components
         /// UseFixedBytesPerLine property no longer has to be set to true for this to work
         /// </remarks>
         [DefaultValue(16), Category("Hex"), Description("Gets or sets the maximum count of bytes in one line.")]
-        public int BytesPerLine
+        public Int32 BytesPerLine
         {
             get { return _bytesPerLine; }
             set
@@ -232,7 +232,7 @@ namespace Magic.Components
                 Invalidate();
             }
         }
-        int _bytesPerLine = 16;
+        Int32 _bytesPerLine = 16;
 
         /// <summary>
         /// Gets or sets the number of bytes in a group. Used to show the group separator line (if GroupSeparatorVisible is true)
@@ -241,7 +241,7 @@ namespace Magic.Components
         /// GroupSeparatorVisible property must set to true
         /// </remarks>
         [DefaultValue(4), Category("Hex"), Description("Gets or sets the byte-count between group separators (if visible).")]
-        public int GroupSize
+        public Int32 GroupSize
         {
             get { return _groupSize; }
             set
@@ -256,7 +256,7 @@ namespace Magic.Components
                 Invalidate();
             }
         }
-        int _groupSize = 4;
+        Int32 _groupSize = 4;
         /// <summary>
         /// Gets or sets if the count of bytes in one line is fix.
         /// </summary>
@@ -264,7 +264,7 @@ namespace Magic.Components
         /// When set to True, BytesPerLine property determine the maximum count of bytes in one line.
         /// </remarks>
         [DefaultValue(false), Category("Hex"), Description("Gets or sets if the count of bytes in one line is fix.")]
-        public bool UseFixedBytesPerLine
+        public Boolean UseFixedBytesPerLine
         {
             get { return _useFixedBytesPerLine; }
             set
@@ -279,13 +279,13 @@ namespace Magic.Components
                 Invalidate();
             }
         }
-        bool _useFixedBytesPerLine;
+        Boolean _useFixedBytesPerLine;
 
         /// <summary>
         /// Gets or sets the visibility of a vertical scroll bar.
         /// </summary>
         [DefaultValue(false), Category("Hex"), Description("Gets or sets the visibility of a vertical scroll bar.")]
-        public bool VScrollBarVisible
+        public Boolean VScrollBarVisible
         {
             get { return this._vScrollBarVisible; }
             set
@@ -306,7 +306,7 @@ namespace Magic.Components
                 OnVScrollBarVisibleChanged(EventArgs.Empty);
             }
         }
-        bool _vScrollBarVisible;
+        Boolean _vScrollBarVisible;
 
         /// <summary>
         /// Gets or sets the ByteProvider.
@@ -370,7 +370,7 @@ namespace Magic.Components
         /// Gets or sets the visibility of the group separator.
         /// </summary>
         [DefaultValue(false), Category("Hex"), Description("Gets or sets the visibility of a separator vertical line.")]
-        public bool GroupSeparatorVisible
+        public Boolean GroupSeparatorVisible
         {
             get { return _groupSeparatorVisible; }
             set
@@ -385,13 +385,13 @@ namespace Magic.Components
                 Invalidate();
             }
         }
-        bool _groupSeparatorVisible = false;
+        Boolean _groupSeparatorVisible = false;
 
         /// <summary>
         /// Gets or sets the visibility of the column info
         /// </summary>
         [DefaultValue(false), Category("Hex"), Description("Gets or sets the visibility of header row.")]
-        public bool ColumnInfoVisible
+        public Boolean ColumnInfoVisible
         {
             get { return _columnInfoVisible; }
             set
@@ -406,13 +406,13 @@ namespace Magic.Components
                 Invalidate();
             }
         }
-        bool _columnInfoVisible = false;
+        Boolean _columnInfoVisible = false;
 
         /// <summary>
         /// Gets or sets the visibility of a line info.
         /// </summary>
         [DefaultValue(false), Category("Hex"), Description("Gets or sets the visibility of a line info.")]
-        public bool LineInfoVisible
+        public Boolean LineInfoVisible
         {
             get { return _lineInfoVisible; }
             set
@@ -427,13 +427,13 @@ namespace Magic.Components
                 Invalidate();
             }
         }
-        bool _lineInfoVisible = false;
+        Boolean _lineInfoVisible = false;
 
         /// <summary>
         /// Gets or sets the offset of a line info.
         /// </summary>
-        [DefaultValue((long)0), Category("Hex"), Description("Gets or sets the offset of the line info.")]
-        public long LineInfoOffset
+        [DefaultValue((Int64)0), Category("Hex"), Description("Gets or sets the offset of the line info.")]
+        public Int64 LineInfoOffset
         {
             get { return _lineInfoOffset; }
             set
@@ -446,7 +446,7 @@ namespace Magic.Components
                 Invalidate();
             }
         }
-        long _lineInfoOffset = 0;
+        Int64 _lineInfoOffset = 0;
 
         /// <summary>
         /// Gets or sets the hex box큦 border style.
@@ -487,7 +487,7 @@ namespace Magic.Components
         /// Gets or sets the visibility of the string view.
         /// </summary>
         [DefaultValue(false), Category("Hex"), Description("Gets or sets the visibility of the string view.")]
-        public bool StringViewVisible
+        public Boolean StringViewVisible
         {
             get { return _stringViewVisible; }
             set
@@ -502,7 +502,7 @@ namespace Magic.Components
                 Invalidate();
             }
         }
-        bool _stringViewVisible;
+        Boolean _stringViewVisible;
 
         /// <summary>
         /// Gets or sets whether the HexBox control displays the hex characters in upper or lower case.
@@ -519,7 +519,7 @@ namespace Magic.Components
             }
             set
             {
-                string format;
+                String format;
                 if (value == HexCasing.Upper)
                     format = "X";
                 else
@@ -539,7 +539,7 @@ namespace Magic.Components
         /// Gets and sets the starting point of the bytes selected in the hex box.
         /// </summary>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public long SelectionStart
+        public Int64 SelectionStart
         {
             get { return _bytePos; }
             set
@@ -554,7 +554,7 @@ namespace Magic.Components
         /// Gets and sets the number of bytes selected in the hex box.
         /// </summary>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public long SelectionLength
+        public Int64 SelectionLength
         {
             get { return _selectionLength; }
             set
@@ -564,7 +564,7 @@ namespace Magic.Components
                 Invalidate();
             }
         }
-        long _selectionLength;
+        Int64 _selectionLength;
 
 
         /// <summary>
@@ -604,7 +604,7 @@ namespace Magic.Components
         /// Gets or sets the visibility of a shadow selection.
         /// </summary>
         [DefaultValue(true), Category("Hex"), Description("Gets or sets the visibility of a shadow selection.")]
-        public bool ShadowSelectionVisible
+        public Boolean ShadowSelectionVisible
         {
             get { return _shadowSelectionVisible; }
             set
@@ -615,7 +615,7 @@ namespace Magic.Components
                 Invalidate();
             }
         }
-        bool _shadowSelectionVisible = true;
+        Boolean _shadowSelectionVisible = true;
 
         /// <summary>
         /// Gets or sets the color of the shadow selection. 
@@ -654,7 +654,7 @@ namespace Magic.Components
         /// Gets the width required for the content
         /// </summary>
         [DefaultValue(0), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public int RequiredWidth
+        public Int32 RequiredWidth
         {
             get { return _requiredWidth; }
             private set
@@ -666,13 +666,13 @@ namespace Magic.Components
                     RequiredWidthChanged(this, EventArgs.Empty);
             }
         }
-        int _requiredWidth;
+        Int32 _requiredWidth;
 
         /// <summary>
         /// Gets the number bytes drawn horizontally.
         /// </summary>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public int HorizontalByteCount
+        public Int32 HorizontalByteCount
         {
             get { return _iHexMaxHBytes; }
         }
@@ -681,7 +681,7 @@ namespace Magic.Components
         /// Gets the number bytes drawn vertically.
         /// </summary>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public int VerticalByteCount
+        public Int32 VerticalByteCount
         {
             get { return _iHexMaxVBytes; }
         }
@@ -690,27 +690,27 @@ namespace Magic.Components
         /// Gets the current line
         /// </summary>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public long CurrentLine
+        public Int64 CurrentLine
         {
             get { return _currentLine; }
         }
-        long _currentLine;
+        Int64 _currentLine;
 
         /// <summary>
         /// Gets the current position in the current line
         /// </summary>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public long CurrentPositionInLine
+        public Int64 CurrentPositionInLine
         {
             get { return _currentPositionInLine; }
         }
-        int _currentPositionInLine;
+        Int32 _currentPositionInLine;
 
         /// <summary>
         /// Gets the a value if insertion mode is active or not.
         /// </summary>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public bool InsertActive
+        public Boolean InsertActive
         {
             get { return _insertActive; }
             set
@@ -806,7 +806,7 @@ namespace Magic.Components
         /// Read-only, gets the string of spaced hex currently in the hexbox.
         /// </summary>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), EditorBrowsable(EditorBrowsableState.Never)]
-        public override string Text
+        public override String Text
         {
             get
             {
@@ -814,13 +814,13 @@ namespace Magic.Components
                 return _text;
             }
         }
-        private string _text;
+        private String _text;
 
         /// <summary>
         /// Gets or sets the byte array contained in the hexbox.
         /// </summary>
 		[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), EditorBrowsable(EditorBrowsableState.Never)]
-        public byte[] Value
+        public Byte[] Value
         {
             get
             {
@@ -834,7 +834,7 @@ namespace Magic.Components
                 return;
             }
         }
-        private byte[] _value;
+        private Byte[] _value;
 
         /// <summary>
         /// Not used.
@@ -990,7 +990,7 @@ namespace Magic.Components
             this._builtInContextMenu.SelectAllMenuItemText = "Select All";
 
             BackColor = Color.White;
-            Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, ((Byte)(0)));
             _stringFormat = new StringFormat(StringFormat.GenericTypographic);
 			_stringFormat.FormatFlags = StringFormatFlags.MeasureTrailingSpaces;
 
@@ -1018,8 +1018,8 @@ namespace Magic.Components
             System.Diagnostics.Debug.WriteLine("CreateCaret()", "HexBox");
 
             // define the caret width depending on InsertActive mode
-            int caretWidth = (this.InsertActive) ? 1 : (int)_charSize.Width;
-            int caretHeight = (int)_charSize.Height;
+            Int32 caretWidth = (this.InsertActive) ? 1 : (Int32)_charSize.Width;
+            Int32 caretHeight = (Int32)_charSize.Height;
             NativeMethods.CreateCaret(Handle, IntPtr.Zero, caretWidth, caretHeight);
 
             UpdateCaret();
@@ -1036,10 +1036,10 @@ namespace Magic.Components
 
             System.Diagnostics.Debug.WriteLine("UpdateCaret()", "HexBox");
 
-            long byteIndex = _bytePos - _startByte;
+            Int64 byteIndex = _bytePos - _startByte;
             PointF p = _keyInterpreter.GetCaretPointF(byteIndex);
             p.X += _byteCharacterPos * _charSize.Width;
-            NativeMethods.SetCaretPos((int)p.X, (int)p.Y);
+            NativeMethods.SetCaretPos((Int32)p.X, (Int32)p.Y);
         }
 
         void DestroyCaret()
@@ -1060,8 +1060,8 @@ namespace Magic.Components
             if (_byteProvider == null || _keyInterpreter == null)
                 return;
 
-            long pos = _bytePos;
-            int cp = _byteCharacterPos;
+            Int64 pos = _bytePos;
+            Int32 cp = _byteCharacterPos;
 
             if (_recHex.Contains(p))
             {
@@ -1093,15 +1093,15 @@ namespace Magic.Components
         {
             System.Diagnostics.Debug.WriteLine("GetHexBytePositionInfo()", "HexBox");
 
-            long bytePos;
-            int byteCharaterPos;
+            Int64 bytePos;
+            Int32 byteCharaterPos;
 
-            float x = ((float)(p.X - _recHex.X) / _charSize.Width);
-            float y = ((float)(p.Y - _recHex.Y) / _charSize.Height);
-            int iX = (int)x;
-            int iY = (int)y;
+            Single x = ((Single)(p.X - _recHex.X) / _charSize.Width);
+            Single y = ((Single)(p.Y - _recHex.Y) / _charSize.Height);
+            Int32 iX = (Int32)x;
+            Int32 iY = (Int32)y;
 
-            int hPos = (iX / 3 + 1);
+            Int32 hPos = (iX / 3 + 1);
 
             bytePos = Math.Min(_byteProvider.Length,
                 _startByte + (_iHexMaxHBytes * (iY + 1) - _iHexMaxHBytes) + hPos - 1);
@@ -1121,15 +1121,15 @@ namespace Magic.Components
         {
             System.Diagnostics.Debug.WriteLine("GetStringBytePositionInfo()", "HexBox");
 
-            long bytePos;
-            int byteCharacterPos;
+            Int64 bytePos;
+            Int32 byteCharacterPos;
 
-            float x = ((float)(p.X - _recStringView.X) / _charSize.Width);
-            float y = ((float)(p.Y - _recStringView.Y) / _charSize.Height);
-            int iX = (int)x;
-            int iY = (int)y;
+            Single x = ((Single)(p.X - _recStringView.X) / _charSize.Width);
+            Single y = ((Single)(p.Y - _recStringView.Y) / _charSize.Height);
+            Int32 iX = (Int32)x;
+            Int32 iY = (Int32)y;
 
-            int hPos = iX + 1;
+            Int32 hPos = iX + 1;
 
             bytePos = Math.Min(_byteProvider.Length,
                 _startByte + (_iHexMaxHBytes * (iY + 1) - _iHexMaxHBytes) + hPos - 1);
@@ -1142,7 +1142,7 @@ namespace Magic.Components
         #endregion
 
         #region Scroll methods
-        void _vScrollBar_Scroll(object sender, ScrollEventArgs e)
+        void _vScrollBar_Scroll(Object sender, ScrollEventArgs e)
 		{
 			switch (e.Type)
 			{
@@ -1163,7 +1163,7 @@ namespace Magic.Components
 					PerformScrollPageUp();
 					break;
 				case ScrollEventType.ThumbPosition:
-					long lPos = FromScrollPos(e.NewValue);
+                    Int64 lPos = FromScrollPos(e.NewValue);
 					PerformScrollThumpPosition(lPos);
 					break;
 				case ScrollEventType.ThumbTrack:
@@ -1171,8 +1171,8 @@ namespace Magic.Components
 					if (_thumbTrackTimer.Enabled) // stop old timer
 						_thumbTrackTimer.Enabled = false;
 
-					// perform scroll immediately only if last refresh is very old
-					int currentThumbTrack = System.Environment.TickCount;
+                    // perform scroll immediately only if last refresh is very old
+                    Int32 currentThumbTrack = System.Environment.TickCount;
 					if (currentThumbTrack - _lastThumbtrack > THUMPTRACKDELAY)
 					{
 						PerformScrollThumbTrack(null, null);
@@ -1196,7 +1196,7 @@ namespace Magic.Components
 		/// <summary>
 		/// Performs the thumbtrack scrolling after an delay.
 		/// </summary>
-		void PerformScrollThumbTrack(object sender, EventArgs e)
+		void PerformScrollThumbTrack(Object sender, EventArgs e)
 		{
 			_thumbTrackTimer.Enabled = false;
 			PerformScrollThumpPosition(_thumbTrackPosition);
@@ -1210,10 +1210,10 @@ namespace Magic.Components
 			// calc scroll bar info
 			if (VScrollBarVisible && _byteProvider != null && _byteProvider.Length > 0 && _iHexMaxHBytes != 0)
 			{
-				long scrollmax = (long)Math.Ceiling((double)(_byteProvider.Length + 1) / (double)_iHexMaxHBytes - (double)_iHexMaxVBytes);
+                Int64 scrollmax = (Int64)Math.Ceiling((Double)(_byteProvider.Length + 1) / (Double)_iHexMaxHBytes - (Double)_iHexMaxVBytes);
 				scrollmax = Math.Max(0, scrollmax);
 
-				long scrollpos = _startByte / _iHexMaxHBytes;
+                Int64 scrollpos = _startByte / _iHexMaxHBytes;
 
 				if (scrollmax < _scrollVmax)
 				{
@@ -1245,7 +1245,7 @@ namespace Magic.Components
 		{
 			System.Diagnostics.Debug.WriteLine("UpdateVScroll()", "HexBox");
 
-			int max = ToScrollMax(_scrollVmax);
+            Int32 max = ToScrollMax(_scrollVmax);
 
 			if (max > 0)
 			{
@@ -1260,47 +1260,47 @@ namespace Magic.Components
 			}
 		}
 
-		int ToScrollPos(long value)
+        Int32 ToScrollPos(Int64 value)
 		{
-			int max = 65535;
+            Int32 max = 65535;
 
 			if (_scrollVmax < max)
-				return (int)value;
+				return (Int32)value;
 			else
 			{
-				double valperc = (double)value / (double)_scrollVmax * (double)100;
-				int res = (int)Math.Floor((double)max / (double)100 * valperc);
-				res = (int)Math.Max(_scrollVmin, res);
-				res = (int)Math.Min(_scrollVmax, res);
+                Double valperc = (Double)value / (Double)_scrollVmax * (Double)100;
+                Int32 res = (Int32)Math.Floor((Double)max / (Double)100 * valperc);
+				res = (Int32)Math.Max(_scrollVmin, res);
+				res = (Int32)Math.Min(_scrollVmax, res);
 				return res;
 			}
 		}
 
-		long FromScrollPos(int value)
+        Int64 FromScrollPos(Int32 value)
 		{
-			int max = 65535;
+            Int32 max = 65535;
 			if (_scrollVmax < max)
 			{
-				return (long)value;
+				return (Int64)value;
 			}
 			else
 			{
-				double valperc = (double)value / (double)max * (double)100;
-				long res = (int)Math.Floor((double)_scrollVmax / (double)100 * valperc);
+                Double valperc = (Double)value / (Double)max * (Double)100;
+                Int64 res = (Int32)Math.Floor((Double)_scrollVmax / (Double)100 * valperc);
 				return res;
 			}
 		}
 
-		int ToScrollMax(long value)
+        Int32 ToScrollMax(Int64 value)
 		{
-			long max = 65535;
+            Int64 max = 65535;
 			if (value > max)
-				return (int)max;
+				return (Int32)max;
 			else
-				return (int)value;
+				return (Int32)value;
 		}
 
-		void PerformScrollToLine(long pos)
+		void PerformScrollToLine(Int64 pos)
 		{
 			if (pos < _scrollVmin || pos > _scrollVmax || pos == _scrollVpos)
 				return;
@@ -1313,9 +1313,9 @@ namespace Magic.Components
 			Invalidate();
 		}
 
-		void PerformScrollLines(int lines)
+		void PerformScrollLines(Int32 lines)
 		{
-			long pos;
+            Int64 pos;
 			if (lines > 0)
 			{
 				pos = Math.Min(_scrollVmax, _scrollVpos + lines);
@@ -1352,10 +1352,10 @@ namespace Magic.Components
 			this.PerformScrollLines(-_iHexMaxVBytes);
 		}
 
-		void PerformScrollThumpPosition(long pos)
+		void PerformScrollThumpPosition(Int64 pos)
 		{
-			// Bug fix: Scroll to end, do not scroll to end
-			int difference = (_scrollVmax > 65535) ? 10 : 9;
+            // Bug fix: Scroll to end, do not scroll to end
+            Int32 difference = (_scrollVmax > 65535) ? 10 : 9;
 
 			if (ToScrollPos(pos) == ToScrollMax(_scrollVmax) - difference)
 				pos = _scrollVmax;
@@ -1379,7 +1379,7 @@ namespace Magic.Components
 		/// Scrolls the specific byte into view
 		/// </summary>
 		/// <param name="index">the index of the byte</param>
-		public void ScrollByteIntoView(long index)
+		public void ScrollByteIntoView(Int64 index)
 		{
 			System.Diagnostics.Debug.WriteLine("ScrollByteIntoView(long index)", "HexBox");
 
@@ -1388,12 +1388,12 @@ namespace Magic.Components
 
 			if (index < _startByte)
 			{
-				long line = (long)Math.Floor((double)index / (double)_iHexMaxHBytes);
+                Int64 line = (Int64)Math.Floor((Double)index / (Double)_iHexMaxHBytes);
 				PerformScrollThumpPosition(line);
 			}
 			else if (index > _endByte)
 			{
-				long line = (long)Math.Floor((double)index / (double)_iHexMaxHBytes);
+                Int64 line = (Int64)Math.Floor((Double)index / (Double)_iHexMaxHBytes);
 				line -= _iHexMaxVBytes - 1;
 				PerformScrollThumpPosition(line);
 			}
@@ -1421,7 +1421,7 @@ namespace Magic.Components
 		/// <summary>
 		/// Returns true if Select method could be invoked.
 		/// </summary>
-		public bool CanSelectAll()
+		public Boolean CanSelectAll()
 		{
 			if (!this.Enabled)
 				return false;
@@ -1446,7 +1446,7 @@ namespace Magic.Components
 		/// </summary>
 		/// <param name="start">the start index of the selection</param>
 		/// <param name="length">the length of the selection</param>
-		public void Select(long start, long length)
+		public void Select(Int64 start, Int64 length)
 		{
 			if (this.ByteProvider == null)
 				return;
@@ -1457,11 +1457,11 @@ namespace Magic.Components
 			ScrollByteIntoView();
 		}
 
-		void InternalSelect(long start, long length)
+		void InternalSelect(Int64 start, Int64 length)
 		{
-			long pos = start;
-			long sel = length;
-			int cp = 0;
+            Int64 pos = start;
+            Int64 sel = length;
+            Int32 cp = 0;
 
 			if (sel > 0 && _caretVisible)
 				DestroyCaret();
@@ -1484,18 +1484,18 @@ namespace Magic.Components
         /// <returns>the SelectionStart property value if find was successfull or
         /// -1 if there is no match
         /// -2 if Find was aborted.</returns>
-        public long Find(byte[] findHex)
+        public Int64 Find(Byte[] findHex)
         {
             if (findHex == null || findHex.Length == 0)
                 throw new ArgumentException("Hex can not be null when Type is Hex");
 
             return Search(findHex, null);
         }
-        public long Find(string findText, bool matchCase)
+        public Int64 Find(String findText, Boolean matchCase)
         {
-            byte[] findBuffer = ASCIIEncoding.ASCII.GetBytes(findText);
-            byte[] findBufferLowerCase = ASCIIEncoding.ASCII.GetBytes(findText.ToLower());
-            byte[] findBufferUpperCase = ASCIIEncoding.ASCII.GetBytes(findText.ToUpper());
+            Byte[] findBuffer = ASCIIEncoding.ASCII.GetBytes(findText);
+            Byte[] findBufferLowerCase = ASCIIEncoding.ASCII.GetBytes(findText.ToLower());
+            Byte[] findBufferUpperCase = ASCIIEncoding.ASCII.GetBytes(findText.ToUpper());
 
             if (matchCase)
             {
@@ -1516,16 +1516,16 @@ namespace Magic.Components
                 return Search(findBufferLowerCase, findBufferUpperCase);
             }
         }
-        long Search(byte[] buffer1, byte[] buffer2)
+        Int64 Search(Byte[] buffer1, Byte[] buffer2)
         {
             var startIndex = this.SelectionStart + this.SelectionLength;
-            int match = 0;
+            Int32 match = 0;
 
-            int buffer1Length = buffer1.Length;
+            Int32 buffer1Length = buffer1.Length;
 
             _abortFind = false;
 
-            for (long pos = startIndex; pos < _byteProvider.Length; pos++)
+            for (Int64 pos = startIndex; pos < _byteProvider.Length; pos++)
             {
                 if (_abortFind)
                     return -2;
@@ -1533,11 +1533,11 @@ namespace Magic.Components
                 if (pos % 100 == 0) // for performance reasons: DoEvents only 1 times per 100 loops
                     Application.DoEvents();
 
-                byte compareByte = _byteProvider.ReadByte(pos);
-                bool buffer1Match = compareByte == buffer1[match];
-                bool hasBuffer2 = buffer2 != null;
-                bool buffer2Match = hasBuffer2 ? compareByte == buffer2[match] : false;
-                bool isMatch = buffer1Match || buffer2Match;
+                Byte compareByte = _byteProvider.ReadByte(pos);
+                Boolean buffer1Match = compareByte == buffer1[match];
+                Boolean hasBuffer2 = buffer2 != null;
+                Boolean buffer2Match = hasBuffer2 ? compareByte == buffer2[match] : false;
+                Boolean isMatch = buffer1Match || buffer2Match;
                 if (!isMatch)
                 {
                     pos -= match;
@@ -1550,7 +1550,7 @@ namespace Magic.Components
 
                 if (match == buffer1Length)
                 {
-                    long bytePos = pos - buffer1Length + 1;
+                    Int64 bytePos = pos - buffer1Length + 1;
                     Select(bytePos, buffer1Length);
                     ScrollByteIntoView(_bytePos + _selectionLength);
                     ScrollByteIntoView(_bytePos);
@@ -1574,7 +1574,7 @@ namespace Magic.Components
         /// Gets a value that indicates the current position during Find method execution.
         /// </summary>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public long CurrentFindingPosition
+        public Int64 CurrentFindingPosition
         {
             get
             {
@@ -1584,14 +1584,14 @@ namespace Magic.Components
         #endregion
 
         #region Copy, Cut and Paste methods
-        byte[] GetCopyData()
+        Byte[] GetCopyData()
         {
-            if (!CanCopy()) return new byte[0];
+            if (!CanCopy()) return new Byte[0];
 
             // put bytes into buffer
-            byte[] buffer = new byte[_selectionLength];
-            int id = -1;
-            for (long i = _bytePos; i < _bytePos + _selectionLength; i++)
+            Byte[] buffer = new Byte[_selectionLength];
+            Int32 id = -1;
+            for (Int64 i = _bytePos; i < _bytePos + _selectionLength; i++)
             {
                 id++;
 
@@ -1607,13 +1607,13 @@ namespace Magic.Components
             if (!CanCopy()) return;
 
             // put bytes into buffer
-            byte[] buffer = GetCopyData();
+            Byte[] buffer = GetCopyData();
 
             DataObject da = new DataObject();
 
             // set string buffer clipbard data
-            string sBuffer = System.Text.Encoding.ASCII.GetString(buffer, 0, buffer.Length);
-            da.SetData(typeof(string), sBuffer);
+            String sBuffer = System.Text.Encoding.ASCII.GetString(buffer, 0, buffer.Length);
+            da.SetData(typeof(String), sBuffer);
 
             //set memorystream (BinaryData) clipboard data
             System.IO.MemoryStream ms = new System.IO.MemoryStream(buffer, 0, buffer.Length, false, true);
@@ -1630,7 +1630,7 @@ namespace Magic.Components
         /// <summary>
         /// Return true if Copy method could be invoked.
         /// </summary>
-        public bool CanCopy()
+        public Boolean CanCopy()
         {
             if (_selectionLength < 1 || _byteProvider == null)
                 return false;
@@ -1659,7 +1659,7 @@ namespace Magic.Components
         /// <summary>
         /// Return true if Cut method could be invoked.
         /// </summary>
-        public bool CanCut()
+        public Boolean CanCut()
         {
             if (ReadOnly || !this.Enabled)
                 return false;
@@ -1681,17 +1681,17 @@ namespace Magic.Components
             if (_selectionLength > 0)
                 _byteProvider.DeleteBytes(_bytePos, _selectionLength);
 
-            byte[] data = null;
+            Byte[] data = null;
             IDataObject paste = Clipboard.GetDataObject();
             if (paste.GetDataPresent("BinaryData"))
             {
                 System.IO.MemoryStream ms = (System.IO.MemoryStream)paste.GetData("BinaryData");
-                data = new byte[ms.Length];
+                data = new Byte[ms.Length];
                 ms.Read(data, 0, data.Length);
             }
-            else if (paste.GetDataPresent(typeof(string)))
+            else if (paste.GetDataPresent(typeof(String)))
             {
-                string sBuffer = (string)paste.GetData(typeof(string));
+                String sBuffer = (String)paste.GetData(typeof(String));
                 try
                 {
                     data = Util.SpacedHexToBytes(sBuffer.Trim());
@@ -1719,7 +1719,7 @@ namespace Magic.Components
         /// <summary>
         /// Return true if Paste method could be invoked.
         /// </summary>
-        public bool CanPaste()
+        public Boolean CanPaste()
         {
             if (ReadOnly || !this.Enabled) return false;
 
@@ -1732,7 +1732,7 @@ namespace Magic.Components
             IDataObject da = Clipboard.GetDataObject();
             if (da.GetDataPresent("BinaryData"))
                 return true;
-            else if (da.GetDataPresent(typeof(string)))
+            else if (da.GetDataPresent(typeof(String)))
                 return true;
             else
                 return false;
@@ -1740,15 +1740,15 @@ namespace Magic.Components
         /// <summary>
         /// Return true if PasteHex method could be invoked.
         /// </summary>
-        public bool CanPasteHex()
+        public Boolean CanPasteHex()
         {
             if (!CanPaste()) return false;
 
-            byte[] buffer = null;
+            Byte[] buffer = null;
             IDataObject da = Clipboard.GetDataObject();
-            if (da.GetDataPresent(typeof(string)))
+            if (da.GetDataPresent(typeof(String)))
             {
-                string hexString = (string)da.GetData(typeof(string));
+                String hexString = (String)da.GetData(typeof(String));
                 buffer = ConvertHexToBytes(hexString);
                 return (buffer != null);
             }
@@ -1762,11 +1762,11 @@ namespace Magic.Components
         {
             if (!CanPaste()) return;
 
-            byte[] buffer = null;
+            Byte[] buffer = null;
             IDataObject da = Clipboard.GetDataObject();
-            if (da.GetDataPresent(typeof(string)))
+            if (da.GetDataPresent(typeof(String)))
             {
-                string hexString = (string)da.GetData(typeof(string));
+                String hexString = (String)da.GetData(typeof(String));
                 buffer = ConvertHexToBytes(hexString);
                 if (buffer == null)
                     return;
@@ -1797,13 +1797,13 @@ namespace Magic.Components
             if (!CanCopy()) return;
 
             // put bytes into buffer
-            byte[] buffer = GetCopyData();
+            Byte[] buffer = GetCopyData();
 
             DataObject da = new DataObject();
 
             // set string buffer clipbard data
-            string hexString = ConvertBytesToHex(buffer); ;
-            da.SetData(typeof(string), hexString);
+            String hexString = ConvertBytesToHex(buffer); ;
+            da.SetData(typeof(String), hexString);
 
             //set memorystream (BinaryData) clipboard data
             System.IO.MemoryStream ms = new System.IO.MemoryStream(buffer, 0, buffer.Length, false, true);
@@ -1827,7 +1827,7 @@ namespace Magic.Components
         /// <param name="m">the message to process.</param>
         /// <returns>true, if the message was processed</returns>
         [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true), SecurityPermission(SecurityAction.InheritanceDemand, UnmanagedCode = true)]
-        public override bool PreProcessMessage(ref Message m)
+        public override Boolean PreProcessMessage(ref Message m)
         {
             switch (m.Msg)
             {
@@ -1842,7 +1842,7 @@ namespace Magic.Components
             }
         }
 
-        bool BasePreProcessMessage(ref Message m)
+        Boolean BasePreProcessMessage(ref Message m)
         {
             return base.PreProcessMessage(ref m);
         }
@@ -1914,25 +1914,25 @@ namespace Magic.Components
             /// </summary>
             /// <param name="m">the Message object to process.</param>
             /// <returns>True, if the message was processed.</returns>
-            bool PreProcessWmKeyUp(ref Message m);
+            Boolean PreProcessWmKeyUp(ref Message m);
             /// <summary>
             /// Preprocesses WM_CHAR window message.
             /// </summary>
             /// <param name="m">the Message object to process.</param>
             /// <returns>True, if the message was processed.</returns>
-            bool PreProcessWmChar(ref Message m);
+            Boolean PreProcessWmChar(ref Message m);
             /// <summary>
             /// Preprocesses WM_KEYDOWN window message.
             /// </summary>
             /// <param name="m">the Message object to process.</param>
             /// <returns>True, if the message was processed.</returns>
-            bool PreProcessWmKeyDown(ref Message m);
+            Boolean PreProcessWmKeyDown(ref Message m);
             /// <summary>
             /// Gives some information about where to place the caret.
             /// </summary>
             /// <param name="byteIndex">the index of the byte</param>
             /// <returns>the position where the caret is to place.</returns>
-            PointF GetCaretPointF(long byteIndex);
+            PointF GetCaretPointF(Int64 byteIndex);
         }
         #endregion
         #region EmptyKeyInterpreter class
@@ -1953,16 +1953,16 @@ namespace Magic.Components
             public void Activate() { }
             public void Deactivate() { }
 
-            public bool PreProcessWmKeyUp(ref Message m)
+            public Boolean PreProcessWmKeyUp(ref Message m)
             { return _hexBox.BasePreProcessMessage(ref m); }
 
-            public bool PreProcessWmChar(ref Message m)
+            public Boolean PreProcessWmChar(ref Message m)
             { return _hexBox.BasePreProcessMessage(ref m); }
 
-            public bool PreProcessWmKeyDown(ref Message m)
+            public Boolean PreProcessWmKeyDown(ref Message m)
             { return _hexBox.BasePreProcessMessage(ref m); }
 
-            public PointF GetCaretPointF(long byteIndex)
+            public PointF GetCaretPointF(Int64 byteIndex)
             { return new PointF(); }
 
             #endregion
@@ -1979,7 +1979,7 @@ namespace Magic.Components
             /// </summary>
             /// <param name="m">the message object contains key data information</param>
             /// <returns>True, if the message was processed</returns>
-            delegate bool MessageDelegate(ref Message m);
+            delegate Boolean MessageDelegate(ref Message m);
 
             #region Fields
             /// <summary>
@@ -1990,11 +1990,11 @@ namespace Magic.Components
             /// <summary>
             /// Contains True, if shift key is down
             /// </summary>
-            protected bool _shiftDown;
+            protected Boolean _shiftDown;
             /// <summary>
             /// Contains True, if mouse is down
             /// </summary>
-            bool _mouseDown;
+            Boolean _mouseDown;
             /// <summary>
             /// Contains the selection start position info
             /// </summary>
@@ -2033,7 +2033,7 @@ namespace Magic.Components
             #endregion
 
             #region Mouse selection methods
-            void BeginMouseSelection(object sender, MouseEventArgs e)
+            void BeginMouseSelection(Object sender, MouseEventArgs e)
             {
                 System.Diagnostics.Debug.WriteLine("BeginMouseSelection()", "KeyInterpreter");
 
@@ -2053,15 +2053,15 @@ namespace Magic.Components
                 }
             }
 
-            void UpdateMouseSelection(object sender, MouseEventArgs e)
+            void UpdateMouseSelection(Object sender, MouseEventArgs e)
             {
                 if (!_mouseDown)
                     return;
 
                 _bpi = GetBytePositionInfo(new Point(e.X, e.Y));
-                long selEnd = _bpi.Index;
-                long realselStart;
-                long realselLength;
+                Int64 selEnd = _bpi.Index;
+                Int64 realselStart;
+                Int64 realselLength;
 
                 if (selEnd < _bpiStart.Index)
                 {
@@ -2086,14 +2086,14 @@ namespace Magic.Components
                 }
             }
 
-            void EndMouseSelection(object sender, MouseEventArgs e)
+            void EndMouseSelection(Object sender, MouseEventArgs e)
             {
                 _mouseDown = false;
             }
             #endregion
 
             #region PrePrcessWmKeyDown methods
-            public virtual bool PreProcessWmKeyDown(ref Message m)
+            public virtual Boolean PreProcessWmKeyDown(ref Message m)
             {
                 System.Diagnostics.Debug.WriteLine("PreProcessWmKeyDown(ref Message m)", "KeyInterpreter");
 
@@ -2113,28 +2113,28 @@ namespace Magic.Components
                 return messageHandler(ref m);
             }
 
-            protected bool PreProcessWmKeyDown_Default(ref Message m)
+            protected Boolean PreProcessWmKeyDown_Default(ref Message m)
             {
                 _hexBox.ScrollByteIntoView();
                 return _hexBox.BasePreProcessMessage(ref m);
             }
 
-            protected bool RaiseKeyDown(Keys keyData)
+            protected Boolean RaiseKeyDown(Keys keyData)
             {
                 KeyEventArgs e = new KeyEventArgs(keyData);
                 _hexBox.OnKeyDown(e);
                 return e.Handled;
             }
 
-            protected virtual bool PreProcessWmKeyDown_Left(ref Message m)
+            protected virtual Boolean PreProcessWmKeyDown_Left(ref Message m)
             {
                 return PerformPosMoveLeft();
             }
 
-            protected virtual bool PreProcessWmKeyDown_Up(ref Message m)
+            protected virtual Boolean PreProcessWmKeyDown_Up(ref Message m)
             {
-                long pos = _hexBox._bytePos;
-                int cp = _hexBox._byteCharacterPos;
+                Int64 pos = _hexBox._bytePos;
+                Int32 cp = _hexBox._byteCharacterPos;
 
                 if (!(pos == 0 && cp == 0))
                 {
@@ -2159,15 +2159,15 @@ namespace Magic.Components
                 return true;
             }
 
-            protected virtual bool PreProcessWmKeyDown_Right(ref Message m)
+            protected virtual Boolean PreProcessWmKeyDown_Right(ref Message m)
             {
                 return PerformPosMoveRight();
             }
 
-            protected virtual bool PreProcessWmKeyDown_Down(ref Message m)
+            protected virtual Boolean PreProcessWmKeyDown_Down(ref Message m)
             {
-                long pos = _hexBox._bytePos;
-                int cp = _hexBox._byteCharacterPos;
+                Int64 pos = _hexBox._bytePos;
+                Int32 cp = _hexBox._byteCharacterPos;
 
                 if (pos == _hexBox._byteProvider.Length && cp == 0)
                     return true;
@@ -2192,10 +2192,10 @@ namespace Magic.Components
                 return true;
             }
 
-            protected virtual bool PreProcessWmKeyDown_PageUp(ref Message m)
+            protected virtual Boolean PreProcessWmKeyDown_PageUp(ref Message m)
             {
-                long pos = _hexBox._bytePos;
-                int cp = _hexBox._byteCharacterPos;
+                Int64 pos = _hexBox._bytePos;
+                Int32 cp = _hexBox._byteCharacterPos;
 
                 if (pos == 0 && cp == 0)
                     return true;
@@ -2217,10 +2217,10 @@ namespace Magic.Components
                 return true;
             }
 
-            protected virtual bool PreProcessWmKeyDown_PageDown(ref Message m)
+            protected virtual Boolean PreProcessWmKeyDown_PageDown(ref Message m)
             {
-                long pos = _hexBox._bytePos;
-                int cp = _hexBox._byteCharacterPos;
+                Int64 pos = _hexBox._bytePos;
+                Int32 cp = _hexBox._byteCharacterPos;
 
                 if (pos == _hexBox._byteProvider.Length && cp == 0)
                     return true;
@@ -2244,10 +2244,10 @@ namespace Magic.Components
                 return true;
             }
 
-            protected virtual bool PreProcessWmKeyDown_ShiftLeft(ref Message m)
+            protected virtual Boolean PreProcessWmKeyDown_ShiftLeft(ref Message m)
             {
-                long pos = _hexBox._bytePos;
-                long sel = _hexBox._selectionLength;
+                Int64 pos = _hexBox._bytePos;
+                Int64 sel = _hexBox._selectionLength;
 
                 if (pos + sel < 1)
                     return true;
@@ -2271,10 +2271,10 @@ namespace Magic.Components
                 return true;
             }
 
-            protected virtual bool PreProcessWmKeyDown_ShiftUp(ref Message m)
+            protected virtual Boolean PreProcessWmKeyDown_ShiftUp(ref Message m)
             {
-                long pos = _hexBox._bytePos;
-                long sel = _hexBox._selectionLength;
+                Int64 pos = _hexBox._bytePos;
+                Int64 sel = _hexBox._selectionLength;
 
                 if (pos - _hexBox._iHexMaxHBytes < 0 && pos <= _bpiStart.Index)
                     return true;
@@ -2307,10 +2307,10 @@ namespace Magic.Components
                 return true;
             }
 
-            protected virtual bool PreProcessWmKeyDown_ShiftRight(ref Message m)
+            protected virtual Boolean PreProcessWmKeyDown_ShiftRight(ref Message m)
             {
-                long pos = _hexBox._bytePos;
-                long sel = _hexBox._selectionLength;
+                Int64 pos = _hexBox._bytePos;
+                Int64 sel = _hexBox._selectionLength;
 
                 if (pos + sel >= _hexBox._byteProvider.Length)
                     return true;
@@ -2332,12 +2332,12 @@ namespace Magic.Components
                 return true;
             }
 
-            protected virtual bool PreProcessWmKeyDown_ShiftDown(ref Message m)
+            protected virtual Boolean PreProcessWmKeyDown_ShiftDown(ref Message m)
             {
-                long pos = _hexBox._bytePos;
-                long sel = _hexBox._selectionLength;
+                Int64 pos = _hexBox._bytePos;
+                Int64 sel = _hexBox._selectionLength;
 
-                long max = _hexBox._byteProvider.Length;
+                Int64 max = _hexBox._byteProvider.Length;
 
                 if (pos + sel + _hexBox._iHexMaxHBytes > max)
                     return true;
@@ -2369,7 +2369,7 @@ namespace Magic.Components
                 return true;
             }
 
-            protected virtual bool PreProcessWmKeyDown_Tab(ref Message m)
+            protected virtual Boolean PreProcessWmKeyDown_Tab(ref Message m)
             {
                 if (_hexBox._stringViewVisible && _hexBox._keyInterpreter.GetType() == typeof(KeyInterpreter))
                 {
@@ -2386,7 +2386,7 @@ namespace Magic.Components
                 return true;
             }
 
-            protected virtual bool PreProcessWmKeyDown_ShiftTab(ref Message m)
+            protected virtual Boolean PreProcessWmKeyDown_ShiftTab(ref Message m)
             {
                 if (_hexBox._keyInterpreter is StringKeyInterpreter)
                 {
@@ -2404,7 +2404,7 @@ namespace Magic.Components
                 return true;
             }
 
-            protected virtual bool PreProcessWmKeyDown_Back(ref Message m)
+            protected virtual Boolean PreProcessWmKeyDown_Back(ref Message m)
             {
                 if (!_hexBox._byteProvider.SupportsDeleteBytes())
                     return true;
@@ -2412,15 +2412,15 @@ namespace Magic.Components
                 if (_hexBox.ReadOnly)
                     return true;
 
-                long pos = _hexBox._bytePos;
-                long sel = _hexBox._selectionLength;
-                int cp = _hexBox._byteCharacterPos;
+                Int64 pos = _hexBox._bytePos;
+                Int64 sel = _hexBox._selectionLength;
+                Int32 cp = _hexBox._byteCharacterPos;
 
-                long startDelete = (cp == 0 && sel == 0) ? pos - 1 : pos;
+                Int64 startDelete = (cp == 0 && sel == 0) ? pos - 1 : pos;
                 if (startDelete < 0 && sel < 1)
                     return true;
 
-                long bytesToDelete = (sel > 0) ? sel : 1;
+                Int64 bytesToDelete = (sel > 0) ? sel : 1;
                 _hexBox._byteProvider.DeleteBytes(Math.Max(0, startDelete), bytesToDelete);
                 _hexBox.UpdateScrollSize();
 
@@ -2433,7 +2433,7 @@ namespace Magic.Components
                 return true;
             }
 
-            protected virtual bool PreProcessWmKeyDown_Delete(ref Message m)
+            protected virtual Boolean PreProcessWmKeyDown_Delete(ref Message m)
             {
                 if (!_hexBox._byteProvider.SupportsDeleteBytes())
                     return true;
@@ -2441,13 +2441,13 @@ namespace Magic.Components
                 if (_hexBox.ReadOnly)
                     return true;
 
-                long pos = _hexBox._bytePos;
-                long sel = _hexBox._selectionLength;
+                Int64 pos = _hexBox._bytePos;
+                Int64 sel = _hexBox._selectionLength;
 
                 if (pos >= _hexBox._byteProvider.Length)
                     return true;
 
-                long bytesToDelete = (sel > 0) ? sel : 1;
+                Int64 bytesToDelete = (sel > 0) ? sel : 1;
                 _hexBox._byteProvider.DeleteBytes(pos, bytesToDelete);
 
                 _hexBox.UpdateScrollSize();
@@ -2457,10 +2457,10 @@ namespace Magic.Components
                 return true;
             }
 
-            protected virtual bool PreProcessWmKeyDown_Home(ref Message m)
+            protected virtual Boolean PreProcessWmKeyDown_Home(ref Message m)
             {
-                long pos = _hexBox._bytePos;
-                int cp = _hexBox._byteCharacterPos;
+                Int64 pos = _hexBox._bytePos;
+                Int32 cp = _hexBox._byteCharacterPos;
 
                 if (pos < 1)
                     return true;
@@ -2476,10 +2476,10 @@ namespace Magic.Components
                 return true;
             }
 
-            protected virtual bool PreProcessWmKeyDown_End(ref Message m)
+            protected virtual Boolean PreProcessWmKeyDown_End(ref Message m)
             {
-                long pos = _hexBox._bytePos;
-                int cp = _hexBox._byteCharacterPos;
+                Int64 pos = _hexBox._bytePos;
+                Int32 cp = _hexBox._byteCharacterPos;
 
                 if (pos >= _hexBox._byteProvider.Length - 1)
                     return true;
@@ -2495,7 +2495,7 @@ namespace Magic.Components
                 return true;
             }
 
-            protected virtual bool PreProcessWmKeyDown_ShiftShiftKey(ref Message m)
+            protected virtual Boolean PreProcessWmKeyDown_ShiftShiftKey(ref Message m)
             {
                 if (_mouseDown)
                     return true;
@@ -2512,19 +2512,19 @@ namespace Magic.Components
                 return true;
             }
 
-            protected virtual bool PreProcessWmKeyDown_ControlC(ref Message m)
+            protected virtual Boolean PreProcessWmKeyDown_ControlC(ref Message m)
             {
                 _hexBox.Copy();
                 return true;
             }
 
-            protected virtual bool PreProcessWmKeyDown_ControlX(ref Message m)
+            protected virtual Boolean PreProcessWmKeyDown_ControlX(ref Message m)
             {
                 _hexBox.Cut();
                 return true;
             }
 
-            protected virtual bool PreProcessWmKeyDown_ControlV(ref Message m)
+            protected virtual Boolean PreProcessWmKeyDown_ControlV(ref Message m)
             {
                 _hexBox.Paste();
                 return true;
@@ -2533,20 +2533,20 @@ namespace Magic.Components
             #endregion
 
             #region PreProcessWmChar methods
-            public virtual bool PreProcessWmChar(ref Message m)
+            public virtual Boolean PreProcessWmChar(ref Message m)
             {
                 if (Control.ModifierKeys == Keys.Control)
                 {
                     return _hexBox.BasePreProcessMessage(ref m);
                 }
 
-                bool sw = _hexBox._byteProvider.SupportsWriteByte();
-                bool si = _hexBox._byteProvider.SupportsInsertBytes();
-                bool sd = _hexBox._byteProvider.SupportsDeleteBytes();
+                Boolean sw = _hexBox._byteProvider.SupportsWriteByte();
+                Boolean si = _hexBox._byteProvider.SupportsInsertBytes();
+                Boolean sd = _hexBox._byteProvider.SupportsDeleteBytes();
 
-                long pos = _hexBox._bytePos;
-                long sel = _hexBox._selectionLength;
-                int cp = _hexBox._byteCharacterPos;
+                Int64 pos = _hexBox._bytePos;
+                Int64 sel = _hexBox._selectionLength;
+                Int32 cp = _hexBox._byteCharacterPos;
 
                 if (
                     (!sw && pos != _hexBox._byteProvider.Length) ||
@@ -2555,7 +2555,7 @@ namespace Magic.Components
                     return _hexBox.BasePreProcessMessage(ref m);
                 }
 
-                char c = (char)m.WParam.ToInt32();
+                Char c = (Char)m.WParam.ToInt32();
 
                 if (Uri.IsHexDigit(c))
                 {
@@ -2565,7 +2565,7 @@ namespace Magic.Components
                     if (_hexBox.ReadOnly)
                         return true;
 
-                    bool isInsertMode = (pos == _hexBox._byteProvider.Length);
+                    Boolean isInsertMode = (pos == _hexBox._byteProvider.Length);
 
                     // do insert when insertActive = true
                     if (!isInsertMode && si && _hexBox.InsertActive && cp == 0)
@@ -2581,25 +2581,25 @@ namespace Magic.Components
 
                     _hexBox.ReleaseSelection();
 
-                    byte currentByte;
+                    Byte currentByte;
                     if (isInsertMode)
                         currentByte = 0;
                     else
                         currentByte = _hexBox._byteProvider.ReadByte(pos);
 
-                    string sCb = currentByte.ToString("X", System.Threading.Thread.CurrentThread.CurrentCulture);
+                    String sCb = currentByte.ToString("X", System.Threading.Thread.CurrentThread.CurrentCulture);
                     if (sCb.Length == 1)
                         sCb = "0" + sCb;
 
-                    string sNewCb = c.ToString();
+                    String sNewCb = c.ToString();
                     if (cp == 0)
                         sNewCb += sCb.Substring(1, 1);
                     else
                         sNewCb = sCb.Substring(0, 1) + sNewCb;
-                    byte newcb = byte.Parse(sNewCb, System.Globalization.NumberStyles.AllowHexSpecifier, System.Threading.Thread.CurrentThread.CurrentCulture);
+                    Byte newcb = Byte.Parse(sNewCb, System.Globalization.NumberStyles.AllowHexSpecifier, System.Threading.Thread.CurrentThread.CurrentCulture);
 
                     if (isInsertMode)
-                        _hexBox._byteProvider.InsertBytes(pos, new byte[] { newcb });
+                        _hexBox._byteProvider.InsertBytes(pos, new Byte[] { newcb });
                     else
                         _hexBox._byteProvider.WriteByte(pos, newcb);
 
@@ -2614,7 +2614,7 @@ namespace Magic.Components
                 }
             }
 
-            protected bool RaiseKeyPress(char keyChar)
+            protected Boolean RaiseKeyPress(Char keyChar)
             {
                 KeyPressEventArgs e = new KeyPressEventArgs(keyChar);
                 _hexBox.OnKeyPress(e);
@@ -2623,7 +2623,7 @@ namespace Magic.Components
             #endregion
 
             #region PreProcessWmKeyUp methods
-            public virtual bool PreProcessWmKeyUp(ref Message m)
+            public virtual Boolean PreProcessWmKeyUp(ref Message m)
             {
                 System.Diagnostics.Debug.WriteLine("PreProcessWmKeyUp(ref Message m)", "KeyInterpreter");
 
@@ -2652,13 +2652,13 @@ namespace Magic.Components
                 }
             }
 
-            protected virtual bool PreProcessWmKeyUp_Insert(ref Message m)
+            protected virtual Boolean PreProcessWmKeyUp_Insert(ref Message m)
             {
                 _hexBox.InsertActive = !_hexBox.InsertActive;
                 return true;
             }
 
-            protected bool RaiseKeyUp(Keys keyData)
+            protected Boolean RaiseKeyUp(Keys keyData)
             {
                 KeyEventArgs e = new KeyEventArgs(keyData);
                 _hexBox.OnKeyUp(e);
@@ -2698,11 +2698,11 @@ namespace Magic.Components
                 }
             }
 
-            protected virtual bool PerformPosMoveLeft()
+            protected virtual Boolean PerformPosMoveLeft()
             {
-                long pos = _hexBox._bytePos;
-                long sel = _hexBox._selectionLength;
-                int cp = _hexBox._byteCharacterPos;
+                Int64 pos = _hexBox._bytePos;
+                Int64 sel = _hexBox._selectionLength;
+                Int32 cp = _hexBox._byteCharacterPos;
 
                 if (sel != 0)
                 {
@@ -2738,11 +2738,11 @@ namespace Magic.Components
                 _hexBox.ScrollByteIntoView();
                 return true;
             }
-            protected virtual bool PerformPosMoveRight()
+            protected virtual Boolean PerformPosMoveRight()
             {
-                long pos = _hexBox._bytePos;
-                int cp = _hexBox._byteCharacterPos;
-                long sel = _hexBox._selectionLength;
+                Int64 pos = _hexBox._bytePos;
+                Int32 cp = _hexBox._byteCharacterPos;
+                Int64 sel = _hexBox._selectionLength;
 
                 if (sel != 0)
                 {
@@ -2780,10 +2780,10 @@ namespace Magic.Components
                 _hexBox.ScrollByteIntoView();
                 return true;
             }
-            protected virtual bool PerformPosMoveLeftByte()
+            protected virtual Boolean PerformPosMoveLeftByte()
             {
-                long pos = _hexBox._bytePos;
-                int cp = _hexBox._byteCharacterPos;
+                Int64 pos = _hexBox._bytePos;
+                Int32 cp = _hexBox._byteCharacterPos;
 
                 if (pos == 0)
                     return true;
@@ -2804,10 +2804,10 @@ namespace Magic.Components
                 return true;
             }
 
-            protected virtual bool PerformPosMoveRightByte()
+            protected virtual Boolean PerformPosMoveRightByte()
             {
-                long pos = _hexBox._bytePos;
-                int cp = _hexBox._byteCharacterPos;
+                Int64 pos = _hexBox._bytePos;
+                Int32 cp = _hexBox._byteCharacterPos;
 
                 if (pos == _hexBox._byteProvider.Length)
                     return true;
@@ -2829,7 +2829,7 @@ namespace Magic.Components
             }
 
 
-            public virtual PointF GetCaretPointF(long byteIndex)
+            public virtual PointF GetCaretPointF(Int64 byteIndex)
             {
                 System.Diagnostics.Debug.WriteLine("GetCaretPointF()", "KeyInterpreter");
 
@@ -2858,7 +2858,7 @@ namespace Magic.Components
             #endregion
 
             #region PreProcessWmKeyDown methods
-            public override bool PreProcessWmKeyDown(ref Message m)
+            public override Boolean PreProcessWmKeyDown(ref Message m)
             {
                 Keys vc = (Keys)m.WParam.ToInt32();
 
@@ -2884,12 +2884,12 @@ namespace Magic.Components
                 }
             }
 
-            protected override bool PreProcessWmKeyDown_Left(ref Message m)
+            protected override Boolean PreProcessWmKeyDown_Left(ref Message m)
             {
                 return PerformPosMoveLeftByte();
             }
 
-            protected override bool PreProcessWmKeyDown_Right(ref Message m)
+            protected override Boolean PreProcessWmKeyDown_Right(ref Message m)
             {
                 return PerformPosMoveRightByte();
             }
@@ -2897,20 +2897,20 @@ namespace Magic.Components
             #endregion
 
             #region PreProcessWmChar methods
-            public override bool PreProcessWmChar(ref Message m)
+            public override Boolean PreProcessWmChar(ref Message m)
             {
                 if (Control.ModifierKeys == Keys.Control)
                 {
                     return _hexBox.BasePreProcessMessage(ref m);
                 }
 
-                bool sw = _hexBox._byteProvider.SupportsWriteByte();
-                bool si = _hexBox._byteProvider.SupportsInsertBytes();
-                bool sd = _hexBox._byteProvider.SupportsDeleteBytes();
+                Boolean sw = _hexBox._byteProvider.SupportsWriteByte();
+                Boolean si = _hexBox._byteProvider.SupportsInsertBytes();
+                Boolean sd = _hexBox._byteProvider.SupportsDeleteBytes();
 
-                long pos = _hexBox._bytePos;
-                long sel = _hexBox._selectionLength;
-                int cp = _hexBox._byteCharacterPos;
+                Int64 pos = _hexBox._bytePos;
+                Int64 sel = _hexBox._selectionLength;
+                Int32 cp = _hexBox._byteCharacterPos;
 
                 if (
                     (!sw && pos != _hexBox._byteProvider.Length) ||
@@ -2919,7 +2919,7 @@ namespace Magic.Components
                     return _hexBox.BasePreProcessMessage(ref m);
                 }
 
-                char c = (char)m.WParam.ToInt32();
+                Char c = (Char)m.WParam.ToInt32();
 
                 if (RaiseKeyPress(c))
                     return true;
@@ -2927,7 +2927,7 @@ namespace Magic.Components
                 if (_hexBox.ReadOnly)
                     return true;
 
-                bool isInsertMode = (pos == _hexBox._byteProvider.Length);
+                Boolean isInsertMode = (pos == _hexBox._byteProvider.Length);
 
                 // do insert when insertActive = true
                 if (!isInsertMode && si && _hexBox.InsertActive)
@@ -2943,9 +2943,9 @@ namespace Magic.Components
 
                 _hexBox.ReleaseSelection();
 
-                byte b = _hexBox.ByteCharConverter.ToByte(c);
+                Byte b = _hexBox.ByteCharConverter.ToByte(c);
                 if (isInsertMode)
-                    _hexBox._byteProvider.InsertBytes(pos, new byte[] { b });
+                    _hexBox._byteProvider.InsertBytes(pos, new Byte[] { b });
                 else
                     _hexBox._byteProvider.WriteByte(pos, b);
 
@@ -2957,7 +2957,7 @@ namespace Magic.Components
             #endregion
 
             #region Misc
-            public override PointF GetCaretPointF(long byteIndex)
+            public override PointF GetCaretPointF(Int64 byteIndex)
             {
                 System.Diagnostics.Debug.WriteLine("GetCaretPointF()", "StringKeyInterpreter");
 
@@ -3081,7 +3081,7 @@ namespace Magic.Components
 		}
 
 
-		void PaintLineInfo(Graphics g, long startByte, long endByte)
+		void PaintLineInfo(Graphics g, Int64 startByte, Int64 endByte)
 		{
 			// Ensure endByte isn't > length of array.
 			endByte = Math.Min(_byteProvider.Length - 1, endByte);
@@ -3089,23 +3089,23 @@ namespace Magic.Components
 			Color lineInfoColor = (this.InfoForeColor != Color.Empty) ? this.InfoForeColor : this.ForeColor;
 			Brush brush = new SolidBrush(lineInfoColor);
 
-			int maxLine = GetGridBytePoint(endByte - startByte).Y + 1;
+            Int32 maxLine = GetGridBytePoint(endByte - startByte).Y + 1;
 
-			for (int i = 0; i < maxLine; i++)
+			for (Int32 i = 0; i < maxLine; i++)
 			{
-				long firstLineByte = (startByte + (_iHexMaxHBytes) * i) + _lineInfoOffset;
+                Int64 firstLineByte = (startByte + (_iHexMaxHBytes) * i) + _lineInfoOffset;
 
 				PointF bytePointF = GetBytePointF(new Point(0, 0 + i));
-				string info = firstLineByte.ToString(_hexStringFormat, System.Threading.Thread.CurrentThread.CurrentCulture);
-				int nulls = 8 - info.Length;
-				string formattedInfo;
+                String info = firstLineByte.ToString(_hexStringFormat, System.Threading.Thread.CurrentThread.CurrentCulture);
+                Int32 nulls = 8 - info.Length;
+                String formattedInfo;
 				if (nulls > -1)
 				{
-					formattedInfo = new string('0', 8 - info.Length) + info;
+					formattedInfo = new String('0', 8 - info.Length) + info;
 				}
 				else
 				{
-					formattedInfo = new string('~', 8);
+					formattedInfo = new String('~', 8);
 				}
 
 				g.DrawString(formattedInfo, Font, brush, new PointF(_recLineInfo.X, bytePointF.Y), _stringFormat);
@@ -3115,15 +3115,15 @@ namespace Magic.Components
 		void PaintHeaderRow(Graphics g)
 		{
 			Brush brush = new SolidBrush(this.InfoForeColor);
-			for (int col = 0; col < _iHexMaxHBytes; col++)
+			for (Int32 col = 0; col < _iHexMaxHBytes; col++)
 			{
-				PaintColumnInfo(g, (byte)col, brush, col);
+				PaintColumnInfo(g, (Byte)col, brush, col);
 			}
 		}
 
 		void PaintColumnSeparator(Graphics g)
 		{
-			for (int col = GroupSize; col < _iHexMaxHBytes; col += GroupSize)
+			for (Int32 col = GroupSize; col < _iHexMaxHBytes; col += GroupSize)
 			{
 				var pen = new Pen(new SolidBrush(this.InfoForeColor), 1);
 				PointF headerPointF = GetColumnInfoPointF(col);
@@ -3138,24 +3138,24 @@ namespace Magic.Components
 			}
 		}
 
-		void PaintHex(Graphics g, long startByte, long endByte)
+		void PaintHex(Graphics g, Int64 startByte, Int64 endByte)
 		{
 			Brush brush = new SolidBrush(GetDefaultForeColor());
 			Brush selBrush = new SolidBrush(_selectionForeColor);
 			Brush selBrushBack = new SolidBrush(_selectionBackColor);
 
-			int counter = -1;
-			long intern_endByte = Math.Min(_byteProvider.Length - 1, endByte + _iHexMaxHBytes);
+            Int32 counter = -1;
+            Int64 intern_endByte = Math.Min(_byteProvider.Length - 1, endByte + _iHexMaxHBytes);
 
-			bool isKeyInterpreterActive = _keyInterpreter == null || _keyInterpreter.GetType() == typeof(KeyInterpreter);
+            Boolean isKeyInterpreterActive = _keyInterpreter == null || _keyInterpreter.GetType() == typeof(KeyInterpreter);
 
-			for (long i = startByte; i < intern_endByte + 1; i++)
+			for (Int64 i = startByte; i < intern_endByte + 1; i++)
 			{
 				counter++;
 				Point gridPoint = GetGridBytePoint(counter);
-				byte b = _byteProvider.ReadByte(i);
+                Byte b = _byteProvider.ReadByte(i);
 
-				bool isSelectedByte = i >= _bytePos && i <= (_bytePos + _selectionLength - 1) && _selectionLength != 0;
+                Boolean isSelectedByte = i >= _bytePos && i <= (_bytePos + _selectionLength - 1) && _selectionLength != 0;
 
 				if (isSelectedByte && isKeyInterpreterActive)
 				{
@@ -3168,38 +3168,38 @@ namespace Magic.Components
 			}
 		}
 
-		void PaintHexString(Graphics g, byte b, Brush brush, Point gridPoint)
+		void PaintHexString(Graphics g, Byte b, Brush brush, Point gridPoint)
 		{
 			PointF bytePointF = GetBytePointF(gridPoint);
 
-			string sB = ConvertByteToHex(b);
+            String sB = ConvertByteToHex(b);
 
 			g.DrawString(sB.Substring(0, 1), Font, brush, bytePointF, _stringFormat);
 			bytePointF.X += _charSize.Width;
 			g.DrawString(sB.Substring(1, 1), Font, brush, bytePointF, _stringFormat);
 		}
 
-		void PaintColumnInfo(Graphics g, byte b, Brush brush, int col)
+		void PaintColumnInfo(Graphics g, Byte b, Brush brush, Int32 col)
 		{
 			PointF headerPointF = GetColumnInfoPointF(col);
 
-			string sB = ConvertByteToHex(b);
+            String sB = ConvertByteToHex(b);
 
 			g.DrawString(sB.Substring(0, 1), Font, brush, headerPointF, _stringFormat);
 			headerPointF.X += _charSize.Width;
 			g.DrawString(sB.Substring(1, 1), Font, brush, headerPointF, _stringFormat);
 		}
 
-		void PaintHexStringSelected(Graphics g, byte b, Brush brush, Brush brushBack, Point gridPoint)
+		void PaintHexStringSelected(Graphics g, Byte b, Brush brush, Brush brushBack, Point gridPoint)
 		{
-			string sB = b.ToString(_hexStringFormat, System.Threading.Thread.CurrentThread.CurrentCulture);
+            String sB = b.ToString(_hexStringFormat, System.Threading.Thread.CurrentThread.CurrentCulture);
 			if (sB.Length == 1)
 				sB = "0" + sB;
 
 			PointF bytePointF = GetBytePointF(gridPoint);
 
-			bool isLastLineChar = (gridPoint.X + 1 == _iHexMaxHBytes);
-			float bcWidth = (isLastLineChar) ? _charSize.Width * 2 : _charSize.Width * 3;
+            Boolean isLastLineChar = (gridPoint.X + 1 == _iHexMaxHBytes);
+            Single bcWidth = (isLastLineChar) ? _charSize.Width * 2 : _charSize.Width * 3;
 
 			g.FillRectangle(brushBack, bytePointF.X, bytePointF.Y, bcWidth, _charSize.Height);
 			g.DrawString(sB.Substring(0, 1), Font, brush, bytePointF, _stringFormat);
@@ -3207,26 +3207,26 @@ namespace Magic.Components
 			g.DrawString(sB.Substring(1, 1), Font, brush, bytePointF, _stringFormat);
 		}
 
-		void PaintHexAndStringView(Graphics g, long startByte, long endByte)
+		void PaintHexAndStringView(Graphics g, Int64 startByte, Int64 endByte)
 		{
 			Brush brush = new SolidBrush(GetDefaultForeColor());
 			Brush selBrush = new SolidBrush(_selectionForeColor);
 			Brush selBrushBack = new SolidBrush(_selectionBackColor);
 
-			int counter = -1;
-			long intern_endByte = Math.Min(_byteProvider.Length - 1, endByte + _iHexMaxHBytes);
+            Int32 counter = -1;
+            Int64 intern_endByte = Math.Min(_byteProvider.Length - 1, endByte + _iHexMaxHBytes);
 
-			bool isKeyInterpreterActive = _keyInterpreter == null || _keyInterpreter.GetType() == typeof(KeyInterpreter);
-			bool isStringKeyInterpreterActive = _keyInterpreter != null && _keyInterpreter.GetType() == typeof(StringKeyInterpreter);
+            Boolean isKeyInterpreterActive = _keyInterpreter == null || _keyInterpreter.GetType() == typeof(KeyInterpreter);
+            Boolean isStringKeyInterpreterActive = _keyInterpreter != null && _keyInterpreter.GetType() == typeof(StringKeyInterpreter);
 
-			for (long i = startByte; i < intern_endByte + 1; i++)
+			for (Int64 i = startByte; i < intern_endByte + 1; i++)
 			{
 				counter++;
 				Point gridPoint = GetGridBytePoint(counter);
 				PointF byteStringPointF = GetByteStringPointF(gridPoint);
-				byte b = _byteProvider.ReadByte(i);
+                Byte b = _byteProvider.ReadByte(i);
 
-				bool isSelectedByte = i >= _bytePos && i <= (_bytePos + _selectionLength - 1) && _selectionLength != 0;
+                Boolean isSelectedByte = i >= _bytePos && i <= (_bytePos + _selectionLength - 1) && _selectionLength != 0;
 
 				if (isSelectedByte && isKeyInterpreterActive)
 				{
@@ -3237,7 +3237,7 @@ namespace Magic.Components
 					PaintHexString(g, b, brush, gridPoint);
 				}
 
-				string s = new String(ByteCharConverter.ToChar(b), 1);
+                String s = new String(ByteCharConverter.ToChar(b), 1);
 
 				if (isSelectedByte && isStringKeyInterpreterActive)
 				{
@@ -3261,8 +3261,8 @@ namespace Magic.Components
 					{
 						Point gp = GetGridBytePoint(_bytePos - _startByte);
 						PointF pf = GetByteStringPointF(gp);
-						Size s = new Size((int)_charSize.Width, (int)_charSize.Height);
-						Rectangle r = new Rectangle((int)pf.X, (int)pf.Y, s.Width, s.Height);
+						Size s = new Size((Int32)_charSize.Width, (Int32)_charSize.Height);
+						Rectangle r = new Rectangle((Int32)pf.X, (Int32)pf.Y, s.Width, s.Height);
 						if (r.IntersectsWith(_recStringView))
 						{
 							r.Intersect(_recStringView);
@@ -3271,7 +3271,7 @@ namespace Magic.Components
 					}
 					else
 					{
-						int lineWidth = (int)(_recStringView.Width - _charSize.Width);
+                        Int32 lineWidth = (Int32)(_recStringView.Width - _charSize.Width);
 
 						Point startSelGridPoint = GetGridBytePoint(_bytePos - _startByte);
 						PointF startSelPointF = GetByteStringPointF(startSelGridPoint);
@@ -3279,15 +3279,15 @@ namespace Magic.Components
 						Point endSelGridPoint = GetGridBytePoint(_bytePos - _startByte + _selectionLength - 1);
 						PointF endSelPointF = GetByteStringPointF(endSelGridPoint);
 
-						int multiLine = endSelGridPoint.Y - startSelGridPoint.Y;
+                        Int32 multiLine = endSelGridPoint.Y - startSelGridPoint.Y;
 						if (multiLine == 0)
 						{
 							
 							Rectangle singleLine = new Rectangle(
-								(int)startSelPointF.X,
-								(int)startSelPointF.Y,
-								(int)(endSelPointF.X - startSelPointF.X + _charSize.Width),
-								(int)_charSize.Height);
+								(Int32)startSelPointF.X,
+								(Int32)startSelPointF.Y,
+								(Int32)(endSelPointF.X - startSelPointF.X + _charSize.Width),
+								(Int32)_charSize.Height);
 							if (singleLine.IntersectsWith(_recStringView))
 							{
 								singleLine.Intersect(_recStringView);
@@ -3297,10 +3297,10 @@ namespace Magic.Components
 						else
 						{
 							Rectangle firstLine = new Rectangle(
-								(int)startSelPointF.X,
-								(int)startSelPointF.Y,
-								(int)(_recStringView.X + lineWidth - startSelPointF.X + _charSize.Width),
-								(int)_charSize.Height);
+								(Int32)startSelPointF.X,
+								(Int32)startSelPointF.Y,
+								(Int32)(_recStringView.X + lineWidth - startSelPointF.X + _charSize.Width),
+								(Int32)_charSize.Height);
 							if (firstLine.IntersectsWith(_recStringView))
 							{
 								firstLine.Intersect(_recStringView);
@@ -3311,9 +3311,9 @@ namespace Magic.Components
 							{
 								Rectangle betweenLines = new Rectangle(
 									_recStringView.X,
-									(int)(startSelPointF.Y + _charSize.Height),
-									(int)(_recStringView.Width),
-									(int)(_charSize.Height * (multiLine - 1)));
+									(Int32)(startSelPointF.Y + _charSize.Height),
+									(Int32)(_recStringView.Width),
+									(Int32)(_charSize.Height * (multiLine - 1)));
 								if (betweenLines.IntersectsWith(_recStringView))
 								{
 									betweenLines.Intersect(_recStringView);
@@ -3324,9 +3324,9 @@ namespace Magic.Components
 
 							Rectangle lastLine = new Rectangle(
 								_recStringView.X,
-								(int)endSelPointF.Y,
-								(int)(endSelPointF.X - _recStringView.X + _charSize.Width),
-								(int)_charSize.Height);
+								(Int32)endSelPointF.Y,
+								(Int32)(endSelPointF.X - _recStringView.X + _charSize.Width),
+								(Int32)_charSize.Height);
 							if (lastLine.IntersectsWith(_recStringView))
 							{
 								lastLine.Intersect(_recStringView);
@@ -3341,13 +3341,13 @@ namespace Magic.Components
 					{
 						Point gp = GetGridBytePoint(_bytePos - _startByte);
 						PointF pf = GetBytePointF(gp);
-						Size s = new Size((int)_charSize.Width * 2, (int)_charSize.Height);
-						Rectangle r = new Rectangle((int)pf.X, (int)pf.Y, s.Width, s.Height);
+						Size s = new Size((Int32)_charSize.Width * 2, (Int32)_charSize.Height);
+						Rectangle r = new Rectangle((Int32)pf.X, (Int32)pf.Y, s.Width, s.Height);
 						PaintCurrentByteSign(g, r);
 					}
 					else
 					{
-						int lineWidth = (int)(_recHex.Width - _charSize.Width * 5);
+                        Int32 lineWidth = (Int32)(_recHex.Width - _charSize.Width * 5);
 
 						Point startSelGridPoint = GetGridBytePoint(_bytePos - _startByte);
 						PointF startSelPointF = GetBytePointF(startSelGridPoint);
@@ -3355,14 +3355,14 @@ namespace Magic.Components
 						Point endSelGridPoint = GetGridBytePoint(_bytePos - _startByte + _selectionLength - 1);
 						PointF endSelPointF = GetBytePointF(endSelGridPoint);
 
-						int multiLine = endSelGridPoint.Y - startSelGridPoint.Y;
+                        Int32 multiLine = endSelGridPoint.Y - startSelGridPoint.Y;
 						if (multiLine == 0)
 						{
 							Rectangle singleLine = new Rectangle(
-								(int)startSelPointF.X,
-								(int)startSelPointF.Y,
-								(int)(endSelPointF.X - startSelPointF.X + _charSize.Width * 2),
-								(int)_charSize.Height);
+								(Int32)startSelPointF.X,
+								(Int32)startSelPointF.Y,
+								(Int32)(endSelPointF.X - startSelPointF.X + _charSize.Width * 2),
+								(Int32)_charSize.Height);
 							if (singleLine.IntersectsWith(_recHex))
 							{
 								singleLine.Intersect(_recHex);
@@ -3372,10 +3372,10 @@ namespace Magic.Components
 						else
 						{
 							Rectangle firstLine = new Rectangle(
-								(int)startSelPointF.X,
-								(int)startSelPointF.Y,
-								(int)(_recHex.X + lineWidth - startSelPointF.X + _charSize.Width * 2),
-								(int)_charSize.Height);
+								(Int32)startSelPointF.X,
+								(Int32)startSelPointF.Y,
+								(Int32)(_recHex.X + lineWidth - startSelPointF.X + _charSize.Width * 2),
+								(Int32)_charSize.Height);
 							if (firstLine.IntersectsWith(_recHex))
 							{
 								firstLine.Intersect(_recHex);
@@ -3386,9 +3386,9 @@ namespace Magic.Components
 							{
 								Rectangle betweenLines = new Rectangle(
 									_recHex.X,
-									(int)(startSelPointF.Y + _charSize.Height),
-									(int)(lineWidth + _charSize.Width * 2),
-									(int)(_charSize.Height * (multiLine - 1)));
+									(Int32)(startSelPointF.Y + _charSize.Height),
+									(Int32)(lineWidth + _charSize.Width * 2),
+									(Int32)(_charSize.Height * (multiLine - 1)));
 								if (betweenLines.IntersectsWith(_recHex))
 								{
 									betweenLines.Intersect(_recHex);
@@ -3399,9 +3399,9 @@ namespace Magic.Components
 
 							Rectangle lastLine = new Rectangle(
 								_recHex.X,
-								(int)endSelPointF.Y,
-								(int)(endSelPointF.X - _recHex.X + _charSize.Width * 2),
-								(int)_charSize.Height);
+								(Int32)endSelPointF.Y,
+								(Int32)(endSelPointF.X - _recHex.X + _charSize.Width * 2),
+								(Int32)_charSize.Height);
 							if (lastLine.IntersectsWith(_recHex))
 							{
 								lastLine.Intersect(_recHex);
@@ -3445,7 +3445,7 @@ namespace Magic.Components
 				return;
 
 			_startByte = (_scrollVpos + 1) * _iHexMaxHBytes - _iHexMaxHBytes;
-			_endByte = (long)Math.Min(_byteProvider.Length - 1, _startByte + _iHexMaxBytes);
+			_endByte = (Int64)Math.Min(_byteProvider.Length - 1, _startByte + _iHexMaxBytes);
 		}
 		#endregion
 
@@ -3458,9 +3458,9 @@ namespace Magic.Components
             {
                 charSize = this.CreateGraphics().MeasureString("A", Font, 100, _stringFormat);
             }
-			CharSize = new SizeF((float)Math.Ceiling(charSize.Width), (float)Math.Ceiling(charSize.Height));
+			CharSize = new SizeF((Single)Math.Ceiling(charSize.Width), (Single)Math.Ceiling(charSize.Height));
 
-            int requiredWidth = 0;
+            Int32 requiredWidth = 0;
 
 			// calc content bounds
 			_recContent = ClientRectangle;
@@ -3478,14 +3478,14 @@ namespace Magic.Components
                 requiredWidth += _vScrollBar.Width;
 			}
 
-			int marginLeft = 4;
+            Int32 marginLeft = 4;
 
 			// calc line info bounds
 			if (_lineInfoVisible)
 			{
 				_recLineInfo = new Rectangle(_recContent.X + marginLeft,
 					_recContent.Y,
-					(int)(_charSize.Width * 10),
+					(Int32)(_charSize.Width * 10),
 					_recContent.Height);
                 requiredWidth += _recLineInfo.Width;
 			}
@@ -3497,11 +3497,11 @@ namespace Magic.Components
 			}
 
 			// calc line info bounds
-			_recColumnInfo = new Rectangle(_recLineInfo.X + _recLineInfo.Width, _recContent.Y, _recContent.Width - _recLineInfo.Width, (int)charSize.Height + 4);
+			_recColumnInfo = new Rectangle(_recLineInfo.X + _recLineInfo.Width, _recContent.Y, _recContent.Width - _recLineInfo.Width, (Int32)charSize.Height + 4);
 			if (_columnInfoVisible)
 			{
-				_recLineInfo.Y += (int)charSize.Height + 4;
-				_recLineInfo.Height -= (int)charSize.Height + 4;
+				_recLineInfo.Y += (Int32)charSize.Height + 4;
+				_recLineInfo.Height -= (Int32)charSize.Height + 4;
 			}
 			else
 			{
@@ -3517,28 +3517,28 @@ namespace Magic.Components
 			if (UseFixedBytesPerLine)
 			{
 				SetHorizontalByteCount(_bytesPerLine);
-				_recHex.Width = (int)Math.Floor(((double)_iHexMaxHBytes) * _charSize.Width * 3 + (2 * _charSize.Width));
+				_recHex.Width = (Int32)Math.Floor(((Double)_iHexMaxHBytes) * _charSize.Width * 3 + (2 * _charSize.Width));
                 requiredWidth += _recHex.Width;
 			}
 			else
 			{
-				int hmax = (int)Math.Floor((double)_recHex.Width / (double)_charSize.Width);
+                Int32 hmax = (Int32)Math.Floor((Double)_recHex.Width / (Double)_charSize.Width);
 				if (_stringViewVisible)
 				{
 					hmax -= 2;
 					if (hmax > 1)
-						SetHorizontalByteCount((int)Math.Floor((double)hmax / 4));
+						SetHorizontalByteCount((Int32)Math.Floor((Double)hmax / 4));
 					else
 						SetHorizontalByteCount(1);
 				}
 				else
 				{
 					if (hmax > 1)
-						SetHorizontalByteCount((int)Math.Floor((double)hmax / 3));
+						SetHorizontalByteCount((Int32)Math.Floor((Double)hmax / 3));
 					else
 						SetHorizontalByteCount(1);
 				}
-				_recHex.Width = (int)Math.Floor(((double)_iHexMaxHBytes) * _charSize.Width * 3 + (2 * _charSize.Width));
+				_recHex.Width = (Int32)Math.Floor(((Double)_iHexMaxHBytes) * _charSize.Width * 3 + (2 * _charSize.Width));
                 requiredWidth += _recHex.Width;
 			}
 
@@ -3546,7 +3546,7 @@ namespace Magic.Components
 			{
 				_recStringView = new Rectangle(_recHex.X + _recHex.Width,
 					_recHex.Y,
-					(int)(_charSize.Width * _iHexMaxHBytes),
+					(Int32)(_charSize.Width * _iHexMaxHBytes),
 					_recHex.Height);
                 requiredWidth += _recStringView.Width;
 			}
@@ -3557,7 +3557,7 @@ namespace Magic.Components
 
             RequiredWidth = requiredWidth;
 
-			int vmax = (int)Math.Floor((double)_recHex.Height / (double)_charSize.Height);
+            Int32 vmax = (Int32)Math.Floor((Double)_recHex.Height / (Double)_charSize.Height);
 			SetVerticalByteCount(vmax);
 
 			_iHexMaxBytes = _iHexMaxHBytes * _iHexMaxVBytes;
@@ -3565,7 +3565,7 @@ namespace Magic.Components
 			UpdateScrollSize();
 		}
 
-		PointF GetBytePointF(long byteIndex)
+		PointF GetBytePointF(Int64 byteIndex)
 		{
 			Point gp = GetGridBytePoint(byteIndex);
 
@@ -3574,88 +3574,88 @@ namespace Magic.Components
 
 		PointF GetBytePointF(Point gp)
 		{
-			float x = (3 * _charSize.Width) * gp.X + _recHex.X;
-			float y = (gp.Y + 1) * _charSize.Height - _charSize.Height + _recHex.Y;
+            Single x = (3 * _charSize.Width) * gp.X + _recHex.X;
+            Single y = (gp.Y + 1) * _charSize.Height - _charSize.Height + _recHex.Y;
 
 			return new PointF(x, y);
 		}
-		PointF GetColumnInfoPointF(int col)
+		PointF GetColumnInfoPointF(Int32 col)
 		{
 			Point gp = GetGridBytePoint(col);
-			float x = (3 * _charSize.Width) * gp.X + _recColumnInfo.X;
-			float y = _recColumnInfo.Y;
+            Single x = (3 * _charSize.Width) * gp.X + _recColumnInfo.X;
+            Single y = _recColumnInfo.Y;
 
 			return new PointF(x, y);
 		}
 
 		PointF GetByteStringPointF(Point gp)
 		{
-			float x = (_charSize.Width) * gp.X + _recStringView.X;
-			float y = (gp.Y + 1) * _charSize.Height - _charSize.Height + _recStringView.Y;
+            Single x = (_charSize.Width) * gp.X + _recStringView.X;
+            Single y = (gp.Y + 1) * _charSize.Height - _charSize.Height + _recStringView.Y;
 
 			return new PointF(x, y);
 		}
 
-		Point GetGridBytePoint(long byteIndex)
+		Point GetGridBytePoint(Int64 byteIndex)
 		{
-			int row = (int)Math.Floor((double)byteIndex / (double)_iHexMaxHBytes);
-			int column = (int)(byteIndex + _iHexMaxHBytes - _iHexMaxHBytes * (row + 1));
+            Int32 row = (Int32)Math.Floor((Double)byteIndex / (Double)_iHexMaxHBytes);
+            Int32 column = (Int32)(byteIndex + _iHexMaxHBytes - _iHexMaxHBytes * (row + 1));
 
 			Point res = new Point(column, row);
 			return res;
 		}
-		#endregion
+        #endregion
 
-		#region Misc
-		/// <summary>
-		/// Converts a byte array to a hex string. For example: {10,11} = "0A 0B"
-		/// </summary>
-		/// <param name="data">the byte array</param>
-		/// <returns>the hex string</returns>
-		string ConvertBytesToHex(byte[] data)
+        #region Misc
+        /// <summary>
+        /// Converts a byte array to a hex string. For example: {10,11} = "0A 0B"
+        /// </summary>
+        /// <param name="data">the byte array</param>
+        /// <returns>the hex string</returns>
+        String ConvertBytesToHex(Byte[] data)
 		{
 			StringBuilder sb = new StringBuilder();
-			foreach (byte b in data)
+			foreach (Byte b in data)
 			{
-				string hex = ConvertByteToHex(b);
+                String hex = ConvertByteToHex(b);
 				sb.Append(hex);
 				sb.Append(" ");
 			}
 			if (sb.Length > 0)
 				sb.Remove(sb.Length - 1, 1);
-			string result = sb.ToString();
+            String result = sb.ToString();
 			return result;
 		}
-		/// <summary>
-		/// Converts one byte to a hex string. For example: "10" = "0A";
-		/// </summary>
-		/// <param name="b">the byte to format</param>
-		/// <returns>the hex string</returns>
-		string ConvertByteToHex(byte b)
+        /// <summary>
+        /// Converts one byte to a hex string. For example: "10" = "0A";
+        /// </summary>
+        /// <param name="b">the byte to format</param>
+        /// <returns>the hex string</returns>
+        String ConvertByteToHex(Byte b)
 		{
-			string sB = b.ToString(_hexStringFormat, System.Threading.Thread.CurrentThread.CurrentCulture);
+            String sB = b.ToString(_hexStringFormat, System.Threading.Thread.CurrentThread.CurrentCulture);
 			if (sB.Length == 1)
 				sB = "0" + sB;
 			return sB;
 		}
-		/// <summary>
-		/// Converts a hex string to a byte array. The hex string must be separated by a space char ' '. If there is any invalid hex information in the string the result will be null.
-		/// </summary>
-		/// <param name="hex">the hex string separated by ' '. For example: "0A 0B 0C"</param>
-		/// <returns>the byte array. null if hex is invalid or empty</returns>
-		byte[] ConvertHexToBytes(string hex)
+        /// <summary>
+        /// Converts a hex string to a byte array. The hex string must be separated by a space char ' '. If there is any invalid hex information in the string the result will be null.
+        /// </summary>
+        /// <param name="hex">the hex string separated by ' '. For example: "0A 0B 0C"</param>
+        /// <returns>the byte array. null if hex is invalid or empty</returns>
+        Byte[] ConvertHexToBytes(String hex)
 		{
-			if (string.IsNullOrEmpty(hex))
+			if (String.IsNullOrEmpty(hex))
 				return null;
 			hex = hex.Trim();
 			var hexArray = hex.Split(' ');
-			var byteArray = new byte[hexArray.Length];
+			var byteArray = new Byte[hexArray.Length];
 
-			for (int i = 0; i < hexArray.Length; i++)
+			for (Int32 i = 0; i < hexArray.Length; i++)
 			{
 				var hexValue = hexArray[i];
 
-				byte b;
+                Byte b;
 				var isByte = ConvertHexToByte(hexValue, out b);
 				if (!isByte)
 					return null;
@@ -3665,18 +3665,18 @@ namespace Magic.Components
 			return byteArray;
 		}
 
-		bool ConvertHexToByte(string hex, out byte b)
+        Boolean ConvertHexToByte(String hex, out Byte b)
 		{
-			bool isByte = byte.TryParse(hex, System.Globalization.NumberStyles.HexNumber, System.Threading.Thread.CurrentThread.CurrentCulture, out b);
+            Boolean isByte = Byte.TryParse(hex, System.Globalization.NumberStyles.HexNumber, System.Threading.Thread.CurrentThread.CurrentCulture, out b);
 			return isByte;
 		}
 
-		void SetPosition(long bytePos)
+		void SetPosition(Int64 bytePos)
 		{
 			SetPosition(bytePos, _byteCharacterPos);
 		}
 
-		void SetPosition(long bytePos, int byteCharacterPos)
+		void SetPosition(Int64 bytePos, Int32 byteCharacterPos)
 		{
 			if (_byteCharacterPos != byteCharacterPos)
 			{
@@ -3693,7 +3693,7 @@ namespace Magic.Components
 			}
 		}
 
-		void SetSelectionLength(long selectionLength)
+		void SetSelectionLength(Int64 selectionLength)
 		{
 			if (selectionLength != _selectionLength)
 			{
@@ -3702,7 +3702,7 @@ namespace Magic.Components
 			}
 		}
 
-		void SetHorizontalByteCount(int value)
+		void SetHorizontalByteCount(Int32 value)
 		{
 			if (_iHexMaxHBytes == value)
 				return;
@@ -3711,7 +3711,7 @@ namespace Magic.Components
 			OnHorizontalByteCountChanged(EventArgs.Empty);
 		}
 
-		void SetVerticalByteCount(int value)
+		void SetVerticalByteCount(Int32 value)
 		{
 			if (_iHexMaxVBytes == value)
 				return;
@@ -3722,7 +3722,7 @@ namespace Magic.Components
 
 		void CheckCurrentLineChanged()
 		{
-			long currentLine = (long)Math.Floor((double)_bytePos / (double)_iHexMaxHBytes) + 1;
+            Int64 currentLine = (Int64)Math.Floor((Double)_bytePos / (Double)_iHexMaxHBytes) + 1;
 
 			if (_byteProvider == null && _currentLine != 0)
 			{
@@ -3739,7 +3739,7 @@ namespace Magic.Components
 		void CheckCurrentPositionInLineChanged()
 		{
 			Point gb = GetGridBytePoint(_bytePos);
-			int currentPositionInLine = gb.X + 1;
+            Int32 currentPositionInLine = gb.X + 1;
 
 			if (_byteProvider == null && _currentPositionInLine != 0)
 			{
@@ -3987,7 +3987,7 @@ namespace Magic.Components
 		/// <param name="e">An EventArgs that contains the event data.</param>
 		protected override void OnMouseWheel(MouseEventArgs e)
 		{
-			int linesToScroll = -(e.Delta * SystemInformation.MouseWheelScrollLines / 120);
+            Int32 linesToScroll = -(e.Delta * SystemInformation.MouseWheelScrollLines / 120);
 			this.PerformScrollLines(linesToScroll);
 
 			base.OnMouseWheel(e);
@@ -4030,7 +4030,7 @@ namespace Magic.Components
 			DestroyCaret();
 		}
 
-		void _byteProvider_LengthChanged(object sender, EventArgs e)
+		void _byteProvider_LengthChanged(Object sender, EventArgs e)
 		{
 			UpdateScrollSize();
 		}

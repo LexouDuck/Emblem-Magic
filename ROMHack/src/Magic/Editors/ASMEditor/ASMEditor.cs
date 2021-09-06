@@ -13,7 +13,7 @@ namespace Magic.Editors
 
         ASM.RegisterSet CurrentCPU;
 
-        BindingList<string> CurrentStack;
+        BindingList<String> CurrentStack;
 
 
 
@@ -24,7 +24,7 @@ namespace Magic.Editors
             Read_LengthBox.Maximum = Core.CurrentROMSize;
 
             CurrentCPU = new ASM.RegisterSet(new Pointer(), true);
-            CurrentStack = new BindingList<string>();
+            CurrentStack = new BindingList<String>();
 
             Test_Stack.DataSource = CurrentStack;
         }
@@ -59,12 +59,12 @@ namespace Magic.Editors
             Test_CPSR_Mode.Value = CurrentCPU.M;
 
             CurrentStack.Clear();
-            foreach (uint item in CurrentCPU.Stack)
+            foreach (UInt32 item in CurrentCPU.Stack)
             {
                 CurrentStack.Add(Util.UInt32ToHex(item).PadLeft(8, '0'));
             }
         }
-        void Core_Dissassemble(Pointer address, int length, bool thumb)
+        void Core_Dissassemble(Pointer address, Int32 length, Boolean thumb)
         {
             if (address % 2 == 1)
             {
@@ -80,7 +80,7 @@ namespace Magic.Editors
             CurrentCPU.T = thumb;
             CurrentCPU.PC = address + Pointer.HardwareOffset;
 
-            byte[] data = Core.ReadData(address, (int)length);
+            Byte[] data = Core.ReadData(address, (Int32)length);
 
             CurrentASM = thumb ?
                 GBA.ASM.Disassemble_Thumb(data, address) :
@@ -88,9 +88,9 @@ namespace Magic.Editors
 
             CodeBox.Items.Clear();
             ListViewItem[] code = new ListViewItem[CurrentASM.Length];
-            for (int i = 0; i < CurrentASM.Length; i++)
+            for (Int32 i = 0; i < CurrentASM.Length; i++)
             {
-                code[i] = new ListViewItem(new string[]
+                code[i] = new ListViewItem(new String[]
                 {
                     CurrentASM[i].Address.ToString(),
                     Util.BytesToHex(CurrentASM[i].Data),
@@ -104,18 +104,18 @@ namespace Magic.Editors
 
 
 
-        private void CodeBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void CodeBox_SelectedIndexChanged(Object sender, EventArgs e)
         {
 
         }
 
-        private void DissassembleButton_Click(object sender, EventArgs e)
+        private void DissassembleButton_Click(Object sender, EventArgs e)
         {
             try
             {
                 Core_Dissassemble(
                     Read_AddressBox.Value,
-                    (int)Read_LengthBox.Value,
+                    (Int32)Read_LengthBox.Value,
                     Read_ThumbRadioButton.Checked);
                 Core_LoadValues();
             }
@@ -129,15 +129,15 @@ namespace Magic.Editors
 
 
 
-        private void Test_ResetCPUButton_Click(object sender, EventArgs e)
+        private void Test_ResetCPUButton_Click(Object sender, EventArgs e)
         {
             CurrentCPU = new ASM.RegisterSet(Read_AddressBox.Value, Read_ThumbRadioButton.Checked);
 
             Core_LoadValues();
         }
-        private void Test_ReadLineButton_Click(object sender, EventArgs e)
+        private void Test_ReadLineButton_Click(Object sender, EventArgs e)
         {
-            int currentLine = CodeBox.SelectedIndices[0];
+            Int32 currentLine = CodeBox.SelectedIndices[0];
 
             try
             {
@@ -163,7 +163,7 @@ namespace Magic.Editors
                 {
                     Core_Dissassemble(
                         Read_AddressBox.Value,
-                        (int)Read_LengthBox.Value,
+                        (Int32)Read_LengthBox.Value,
                         Read_ThumbRadioButton.Checked);
                     Core_LoadValues();
                 }

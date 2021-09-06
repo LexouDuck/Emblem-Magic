@@ -7,10 +7,10 @@ namespace EmblemMagic.FireEmblem
 {
     public class WorldMap_FE7_Small : TSA_Image
     {
-        public const int WIDTH = 30;
-        public const int HEIGHT = 20;
+        public const Int32 WIDTH = 30;
+        public const Int32 HEIGHT = 20;
 
-        public const int PALETTES = 4;
+        public const Int32 PALETTES = 4;
 
 
 
@@ -23,7 +23,7 @@ namespace EmblemMagic.FireEmblem
                 Core.ReadData(tiles, 0),
                 Core.ReadTSA(tsa, WIDTH, HEIGHT, false, true)) { }
 
-        public WorldMap_FE7_Small(string path, Palette palette = null) : base(WIDTH, HEIGHT)
+        public WorldMap_FE7_Small(String path, Palette palette = null) : base(WIDTH, HEIGHT)
         {
             TSA_Image image;
             if (palette == null)
@@ -44,17 +44,17 @@ namespace EmblemMagic.FireEmblem
 
     public class WorldMap_FE7_Large : IDisplayable
     {
-        public int this[int x, int y]
+        public Int32 this[Int32 x, Int32 y]
         {
             get
             {
-                int tileX = (x / 8) / 32;
-                int tileY = (y / 8) / 32;
-                int index = tileX + tileY * 4;
+                Int32 tileX = (x / 8) / 32;
+                Int32 tileY = (y / 8) / 32;
+                Int32 index = tileX + tileY * 4;
                 tileX = (x / 8) % 32;
                 tileY = (y / 8) % 32;
-                int tile = TSA_Sections[index][tileX, tileY].TileIndex;
-                int palette = TSA_Sections[index][tileX, tileY].Palette;
+                Int32 tile = TSA_Sections[index][tileX, tileY].TileIndex;
+                Int32 palette = TSA_Sections[index][tileX, tileY].Palette;
                 tileX = (x % 32) % 8;
                 tileY = (y % 32) % 8;
                 return palette * Palette.MAX + Graphics[index][tile][tileX, tileY];
@@ -64,15 +64,15 @@ namespace EmblemMagic.FireEmblem
                 throw new NotImplementedException();
             }
         }
-        public GBA.Color GetColor(int x, int y)
+        public GBA.Color GetColor(Int32 x, Int32 y)
         {
-            int tileX = (x / 8) / 32;
-            int tileY = (y / 8) / 32;
-            int index = tileX + tileY * 4;
+            Int32 tileX = (x / 8) / 32;
+            Int32 tileY = (y / 8) / 32;
+            Int32 index = tileX + tileY * 4;
             tileX = (x / 8) % 32;
             tileY = (y / 8) % 32;
-            int tile = TSA_Sections[index][tileX, tileY].TileIndex;
-            int palette = TSA_Sections[index][tileX, tileY].Palette;
+            Int32 tile = TSA_Sections[index][tileX, tileY].TileIndex;
+            Int32 palette = TSA_Sections[index][tileX, tileY].Palette;
             tileX = (x % 32) % 8;
             tileY = (y % 32) % 8;
             return Palettes[palette][Graphics[index][tile][tileX, tileY]];
@@ -93,11 +93,11 @@ namespace EmblemMagic.FireEmblem
             }
         }
 
-        public const int WIDTH = 128;
-        public const int HEIGHT = 86;
+        public const Int32 WIDTH = 128;
+        public const Int32 HEIGHT = 86;
 
-        public const int PALETTES = 4;
-        public const int SECTIONS = 12;
+        public const Int32 PALETTES = 4;
+        public const Int32 SECTIONS = 12;
 
         public Palette[] Palettes { get; set; }
         public Tileset[] Graphics { get; set; }
@@ -112,27 +112,27 @@ namespace EmblemMagic.FireEmblem
         {
             Pointer[] pointers;
             Palettes = new Palette[PALETTES];
-            for (int i = 0; i < Palettes.Length; i++)
+            for (Int32 i = 0; i < Palettes.Length; i++)
             {
                 Palettes[i] = Core.ReadPalette(palette + i * Palette.LENGTH, Palette.LENGTH);
             }
 
             pointers = GetPointerArray(tiles);
             Graphics = new Tileset[SECTIONS];
-            for (int i = 0; i < Graphics.Length; i++)
+            for (Int32 i = 0; i < Graphics.Length; i++)
             {
                 Graphics[i] = new Tileset(Core.ReadData(pointers[i], 32 * 32 * Tile.LENGTH));
             }
 
             pointers = GetPointerArray(tsa);
             TSA_Sections = new TSA_Array[SECTIONS];
-            for (int i = 0; i < TSA_Sections.Length; i++)
+            for (Int32 i = 0; i < TSA_Sections.Length; i++)
             {
                 TSA_Sections[i] = Core.ReadTSA(pointers[i], 32, 32, false, true);
             }   // sections of 32x32 and 32x22 to make an image thats 128x86 tiles, 1024x688 pixels
         }
 
-        public WorldMap_FE7_Large(string path, Palette palette = null)
+        public WorldMap_FE7_Large(String path, Palette palette = null)
         {
             TSA_Image image;
             if (palette == null)
@@ -148,15 +148,15 @@ namespace EmblemMagic.FireEmblem
             
             Graphics = new Tileset[SECTIONS];
             TSA_Sections = new TSA_Array[SECTIONS];
-            int width = 32;
-            int height = 32;
-            for (int i = 0; i < SECTIONS; i++)
+            Int32 width = 32;
+            Int32 height = 32;
+            for (Int32 i = 0; i < SECTIONS; i++)
             {
                 if (i == 8) height = 22;
 
                 Graphics[i] = new Tileset(width * height);
-                for (int y = 0; y < height; y++)
-                for (int x = 0; x < width; x++)
+                for (Int32 y = 0; y < height; y++)
+                for (Int32 x = 0; x < width; x++)
                 {
                     Graphics[i].Add(image.Graphics[
                         (i % 4 * width + x) +
@@ -164,8 +164,8 @@ namespace EmblemMagic.FireEmblem
                 }
 
                 TSA_Sections[i] = TSA_Array.GetBasicTSA(width, height);
-                for (int y = 0; y < height; y++)
-                for (int x = 0; x < width; x++)
+                for (Int32 y = 0; y < height; y++)
+                for (Int32 x = 0; x < width; x++)
                 {
                     TSA_Sections[i].SetPalette(x, y, image.Tiling[
                         (i % 4 * width) + x,
@@ -177,7 +177,7 @@ namespace EmblemMagic.FireEmblem
         public static Pointer[] GetPointerArray(Pointer address)
         {
             Pointer[] result = new Pointer[SECTIONS];
-            for (int i = 0; i < SECTIONS; i++)
+            for (Int32 i = 0; i < SECTIONS; i++)
             {
                 result[i] = Core.ReadPointer(address + i * 4);
             }
@@ -187,7 +187,7 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// Returns a bitmap of the section number given
         /// </summary>
-        public TSA_Image GetSection(int section)
+        public TSA_Image GetSection(Int32 section)
         {
             return new TSA_Image(
                 Palette.Merge(Palettes),

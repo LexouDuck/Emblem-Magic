@@ -300,10 +300,10 @@ namespace EmblemMagic
         /// <summary>
         /// Checks the differences between the open ROM and a clean ROM to generate an FEH file
         /// </summary>
-        bool Core_CheckHackedROM()
+        Boolean Core_CheckHackedROM()
         {
             if (CurrentROM.IsClean) return false;
-            string same_filename = ROM.FilePath.Remove(ROM.FilePath.Length - 4) + ".feh";
+            String same_filename = ROM.FilePath.Remove(ROM.FilePath.Length - 4) + ".feh";
             if (File.Exists(same_filename))
             {
                 try
@@ -346,13 +346,13 @@ namespace EmblemMagic
             }
             else
             {
-                byte[] cleanROM = File.ReadAllBytes(Core.Path_CleanROM);
+                Byte[] cleanROM = File.ReadAllBytes(Core.Path_CleanROM);
                 List<Write> writes = new List<Write>();
-                List<byte> write_data = new List<byte>();
+                List<Byte> write_data = new List<Byte>();
                 Pointer address = new Pointer();
-                const int LENGTH = 16; // any two byte differences less than 16 bytes apart will be made into a single write
-                int sequence = 0;
-                for (uint i = 0; i < cleanROM.Length; i++)
+                const Int32 LENGTH = 16; // any two byte differences less than 16 bytes apart will be made into a single write
+                Int32 sequence = 0;
+                for (UInt32 i = 0; i < cleanROM.Length; i++)
                 {
                     if (ROM.FileData[i] == cleanROM[i])
                     {
@@ -364,7 +364,7 @@ namespace EmblemMagic
                         {
                             if (sequence >= LENGTH)
                             {
-                                address = new Pointer((uint)(i - sequence - write_data.Count));
+                                address = new Pointer((UInt32)(i - sequence - write_data.Count));
                                 writes.Add(new Write("Unknown", address, write_data.ToArray()));
                                 write_data.Clear();
                             }
@@ -383,8 +383,8 @@ namespace EmblemMagic
                     writes.Add(new Write("Unknown", address, write_data.ToArray()));
                     write_data.Clear();
                 }
-                address = new Pointer((uint)cleanROM.Length);
-                for (uint i = address; i < ROM.FileSize; i++)
+                address = new Pointer((UInt32)cleanROM.Length);
+                for (UInt32 i = address; i < ROM.FileSize; i++)
                 {
                     write_data.Add(ROM.FileData[i]);
                 }
@@ -413,7 +413,7 @@ namespace EmblemMagic
             {
                 Repoint[] pointers = CurrentROM.GetDefaultPointers();
                 List<Repoint> unreferenced = new List<Repoint>();
-                for (int i = 0; i < pointers.Length; i++)
+                for (Int32 i = 0; i < pointers.Length; i++)
                 {
                     if (pointers[i].References.Length == 0)
                         unreferenced.Add(pointers[i]);
@@ -432,7 +432,7 @@ namespace EmblemMagic
         void Core_CheckDataHackDifferences()
         {
             List<Write> writes = new List<Write>();
-            byte[] buffer;
+            Byte[] buffer;
             foreach (Write write in FEH.Write.History)
             {
                 buffer = ROM.Read(write.Address, write.Data.Length);
@@ -471,12 +471,12 @@ namespace EmblemMagic
             Editors.Remove(editor);
             editor.Dispose();
         }
-        public void Core_ExitEditor(int index)
+        public void Core_ExitEditor(Int32 index)
         {
             Core_ExitEditor(Editors[index]);
         }
 
-        void Core_OpenROMFile(string path)
+        void Core_OpenROMFile(String path)
         {
             try
             {
@@ -503,7 +503,7 @@ namespace EmblemMagic
                 Core_ResetDataManager();
             }
         }
-        void Core_OpenFEHFile(string path)
+        void Core_OpenFEHFile(String path)
         {
             try
             {
@@ -522,7 +522,7 @@ namespace EmblemMagic
                 Core_ResetHackManager();
             }
         }
-        public void Core_SaveROMFile(string path)
+        public void Core_SaveROMFile(String path)
         {
             try
             {
@@ -537,7 +537,7 @@ namespace EmblemMagic
                 UI.ShowError("The ROM file could not be saved properly.", ex);
             }
         }
-        public void Core_SaveFEHFile(string path)
+        public void Core_SaveFEHFile(String path)
         {
             try
             {
@@ -552,7 +552,7 @@ namespace EmblemMagic
                 UI.ShowError("FEH Hack file could not be saved properly.", ex);
             }
         }
-        bool Core_ExitROMFile()
+        Boolean Core_ExitROMFile()
         {
             DialogResult answer = ROM.Changed ?
                 Prompt.SaveROMChanges() : DialogResult.No;
@@ -563,7 +563,7 @@ namespace EmblemMagic
                 {
                     Core_SaveROMFile(ROM.FilePath);
                 }
-                for (int i = 0; i < Editors.Count; i++)
+                for (Int32 i = 0; i < Editors.Count; i++)
                 {
                     Editors[i].Close();
                 }
@@ -573,7 +573,7 @@ namespace EmblemMagic
                 return true;
             }
         }
-        bool Core_ExitFEHFile()
+        Boolean Core_ExitFEHFile()
         {
             DialogResult answer = FEH.Changed ?
                 Prompt.SaveFEHChanges() : DialogResult.No;
@@ -584,7 +584,7 @@ namespace EmblemMagic
                 {
                     Core_SaveFEHFile(FEH.FilePath);
                 }
-                for (int i = 0; i < Editors.Count; i++)
+                for (Int32 i = 0; i < Editors.Count; i++)
                 {
                     Editors[i].Close();
                 }
@@ -605,7 +605,7 @@ namespace EmblemMagic
             ROM.Write(UserAction.Overwrite, write, conflict);
             FEH.Space.MarkSpace("USED", write.Address, write.Address + write.Data.Length);
         }
-        void Core_UserRestore(Pointer address, int length)
+        void Core_UserRestore(Pointer address, Int32 length)
         {
             List<WriteConflict> conflict = FEH.Write.Delete(address, address + length);
             ROM.Restore(address, length, conflict);
@@ -668,7 +668,7 @@ namespace EmblemMagic
                 Core_UndoAction(ROM.UndoList.Count - 1);
             }
         }
-        public void Core_UndoAction(int index)
+        public void Core_UndoAction(Int32 index)
         {
             lock (Locked)
             {
@@ -715,7 +715,7 @@ namespace EmblemMagic
                 Core_RedoAction(ROM.RedoList.Count - 1);
             }
         }
-        public void Core_RedoAction(int index)
+        public void Core_RedoAction(Int32 index)
         {
             lock (Locked)
             {
@@ -766,10 +766,10 @@ namespace EmblemMagic
         }
         public void Core_GetFreeSpace()
         {
-            int length = Prompt.ShowNumberDialog(
+            Int32 length = Prompt.ShowNumberDialog(
                 "What length of free space is needed ?",
                 "Request pointer to free space",
-                true, 0, (int)ROM.FileSize);
+                true, 0, (Int32)ROM.FileSize);
             if (length == 0) return;
 
             Pointer address;
@@ -798,7 +798,7 @@ namespace EmblemMagic
                     "Pointer: " + Util.BytesToSpacedHex(write.Address.ToBytes()));
             }
         }
-        public void Core_CheckROMIdentifier(string identifier)
+        public void Core_CheckROMIdentifier(String identifier)
         {
             if (identifier.StartsWith("FE"))
             {
@@ -831,7 +831,7 @@ namespace EmblemMagic
 
 
 
-        void File_OpenROM_Click(object sender, EventArgs e)
+        void File_OpenROM_Click(Object sender, EventArgs e)
         {
             OpenFileDialog openWindow = new OpenFileDialog();
             openWindow.Filter = "GBA ROMs (*.gba)|*.gba|All files (*.*)|*.*";
@@ -847,7 +847,7 @@ namespace EmblemMagic
                 }
             }
         }
-        void File_OpenFEH_Click(object sender, EventArgs e)
+        void File_OpenFEH_Click(Object sender, EventArgs e)
         {
             OpenFileDialog openWindow = new OpenFileDialog();
             openWindow.Filter = "Fire Emblem Hack files (*.feh)|*.feh|All files (*.*)|*.*";
@@ -863,7 +863,7 @@ namespace EmblemMagic
                 }
             }
         }
-        void File_SaveROM_Click(object sender, EventArgs e)
+        void File_SaveROM_Click(Object sender, EventArgs e)
         {
             if (ROM.FilePath == null)
             {
@@ -874,7 +874,7 @@ namespace EmblemMagic
                 Core_SaveROMFile(ROM.FilePath);
             }
         }
-        void File_SaveFEH_Click(object sender, EventArgs e)
+        void File_SaveFEH_Click(Object sender, EventArgs e)
         {
             if (FEH.FilePath == null)
             {
@@ -885,7 +885,7 @@ namespace EmblemMagic
                 Core_SaveFEHFile(FEH.FilePath);
             }
         }
-        void File_SaveROMas_Click(object sender, EventArgs e)
+        void File_SaveROMas_Click(Object sender, EventArgs e)
         {
             SaveFileDialog saveWindow = new SaveFileDialog();
             saveWindow.Filter = "GBA ROMs (*.gba)|*.gba|All files (*.*)|*.*";
@@ -899,7 +899,7 @@ namespace EmblemMagic
                 Core_SaveROMFile(saveWindow.FileName);
             }
         }
-        void File_SaveFEHas_Click(object sender, EventArgs e)
+        void File_SaveFEHas_Click(Object sender, EventArgs e)
         {
             SaveFileDialog saveWindow = new SaveFileDialog();
 
@@ -914,7 +914,7 @@ namespace EmblemMagic
                 Core_SaveFEHFile(saveWindow.FileName);
             }
         }
-        void File_RecentFiles_Click(object sender, ToolStripItemClickedEventArgs e)
+        void File_RecentFiles_Click(Object sender, ToolStripItemClickedEventArgs e)
         {
             Menu_File.HideDropDown();
 
@@ -936,7 +936,7 @@ namespace EmblemMagic
             }
             else UI.ShowError("Chosen file has invalid extension");
         }
-        void File_ExportUPS_Click(object sender, EventArgs e)
+        void File_ExportUPS_Click(Object sender, EventArgs e)
         {
             SaveFileDialog saveWindow = new SaveFileDialog();
 
@@ -957,11 +957,11 @@ namespace EmblemMagic
                     Core.CurrentROMChecksum);
             }
         }
-        void File_CloseROM_Click(object sender, EventArgs e)
+        void File_CloseROM_Click(Object sender, EventArgs e)
         {
             Core_ExitROMFile();
         }
-        void File_Exit_Click(object sender, EventArgs e)
+        void File_Exit_Click(Object sender, EventArgs e)
         {
             if (Core_ExitFEHFile() && Core_ExitROMFile())
             {
@@ -973,156 +973,156 @@ namespace EmblemMagic
                 ((FormClosingEventArgs)e).Cancel = true;
         }
 
-        void Edit_Undo_Click(object sender, EventArgs e)
+        void Edit_Undo_Click(Object sender, EventArgs e)
         {
             Core_Undo();
         }
-        void Edit_Redo_Click(object sender, EventArgs e)
+        void Edit_Redo_Click(Object sender, EventArgs e)
         {
             Core_Redo();
         }
-        void Edit_OpenProperties_Click(object sender, EventArgs e)
+        void Edit_OpenProperties_Click(Object sender, EventArgs e)
         {
             Core_OpenProperties();
         }
-        void Edit_Options_Click(object sender, EventArgs e)
+        void Edit_Options_Click(Object sender, EventArgs e)
         {
             Core_OpenOptions();
         }
 
-        void Tool_ExpandROM_Click(object sender, EventArgs e)
+        void Tool_ExpandROM_Click(Object sender, EventArgs e)
         {
-            int answer = Prompt.ShowNumberDialog(
+            Int32 answer = Prompt.ShowNumberDialog(
                 "Please enter the desired ROM file size\r\n(amount of bytes, in hexadecimal).",
                 "Resize ROM", true, 0, DataManager.ROM_MAX_SIZE);
 
             ROM.Resize(answer, FEH.Space);
             Core_Update();
         }
-        void Tool_MarkSpace_Click(object sender, EventArgs e)
+        void Tool_MarkSpace_Click(Object sender, EventArgs e)
         {
             Core_MarkSpace();
         }
-        void Tool_GetFreeSpace_Click(object sender, EventArgs e)
+        void Tool_GetFreeSpace_Click(Object sender, EventArgs e)
         {
             Core_GetFreeSpace();
         }
-        void Tool_GetLastWrite_Click(object sender, EventArgs e)
+        void Tool_GetLastWrite_Click(Object sender, EventArgs e)
         {
             Core_GetLastWrite();
         }
 
-        void Tool_OpenSpace_Click(object sender, EventArgs e)
+        void Tool_OpenSpace_Click(Object sender, EventArgs e)
         {
             Core_OpenEditor(new SpaceEditor(this));
         }
-        void Tool_OpenWrite_Click(object sender, EventArgs e)
+        void Tool_OpenWrite_Click(Object sender, EventArgs e)
         {
             Core_OpenEditor(new WriteEditor(this));
         }
-        void Tool_OpenPoint_Click(object sender, EventArgs e)
+        void Tool_OpenPoint_Click(Object sender, EventArgs e)
         {
             Core_OpenEditor(new PointEditor(this));
         }
 
 
 
-        void Open_BasicEditor_Click(object sender, EventArgs e)
+        void Open_BasicEditor_Click(Object sender, EventArgs e)
         {
             Core_OpenEditor(new BasicEditor(this));
         }
-        void Open_HexEditor_Click(object sender, EventArgs e)
+        void Open_HexEditor_Click(Object sender, EventArgs e)
         {
             Core_OpenEditor(new HexEditor(this));
         }
-        void Open_PatchEditor_Click(object sender, EventArgs e)
+        void Open_PatchEditor_Click(Object sender, EventArgs e)
         {
             Core_OpenEditor(new PatchEditor(this));
         }
-        void Open_ASMEditor_Click(object sender, EventArgs e)
+        void Open_ASMEditor_Click(Object sender, EventArgs e)
         {
             Core_OpenEditor(new ASMEditor(this));
         }
-        void Open_ModuleEditor_Click(object sender, EventArgs e)
+        void Open_ModuleEditor_Click(Object sender, EventArgs e)
         {
             Core_OpenEditor(new ModuleEditor(this));
         }
-        void Open_EventEditor_Click(object sender, EventArgs e)
+        void Open_EventEditor_Click(Object sender, EventArgs e)
         {
             Core_OpenEditor(new EventEditor(this));
         }
-        void Open_WorldMapEditor_Click(object sender, EventArgs e)
+        void Open_WorldMapEditor_Click(Object sender, EventArgs e)
         {
             if (CurrentROM == null) return;
             else if (CurrentROM is FireEmblem.FE6) Core_OpenEditor(new WorldMapEditor_FE6(this));
             else if (CurrentROM is FireEmblem.FE7) Core_OpenEditor(new WorldMapEditor_FE7(this));
             else if (CurrentROM is FireEmblem.FE8) Core_OpenEditor(new WorldMapEditor_FE8(this));
         }
-        void Open_MapTilesetEditor_Click(object sender, EventArgs e)
+        void Open_MapTilesetEditor_Click(Object sender, EventArgs e)
         {
             Core_OpenEditor(new MapTilesetEditor(this));
         }
-        void Open_MapEditor_Click(object sender, EventArgs e)
+        void Open_MapEditor_Click(Object sender, EventArgs e)
         {
             Core_OpenEditor(new MapEditor(this));
         }
-        void Open_GraphicsEditor_Click(object sender, EventArgs e)
+        void Open_GraphicsEditor_Click(Object sender, EventArgs e)
         {
             Core_OpenEditor(new GraphicsEditor(this));
         }
-        void Open_PortraitEditor_Click(object sender, EventArgs e)
+        void Open_PortraitEditor_Click(Object sender, EventArgs e)
         {
             Core_OpenEditor(new PortraitEditor(this));
         }
-        void Open_MapSpriteEditor_Click(object sender, EventArgs e)
+        void Open_MapSpriteEditor_Click(Object sender, EventArgs e)
         {
             Core_OpenEditor(new MapSpriteEditor(this));
         }
-        void Open_BattleScreenEditor_Click(object sender, EventArgs e)
+        void Open_BattleScreenEditor_Click(Object sender, EventArgs e)
         {
             Core_OpenEditor(new BattleScreenEditor(this));
         }
-        void Open_BattleAnimEditor_Click(object sender, EventArgs e)
+        void Open_BattleAnimEditor_Click(Object sender, EventArgs e)
         {
             Core_OpenEditor(new BattleAnimEditor(this));
         }
-        void Open_SpellAnimEditor_Click(object sender, EventArgs e)
+        void Open_SpellAnimEditor_Click(Object sender, EventArgs e)
         {
             Core_OpenEditor(new SpellAnimEditor(this));
         }
-        void Open_BackgroundEditor_Click(object sender, EventArgs e)
+        void Open_BackgroundEditor_Click(Object sender, EventArgs e)
         {
             Core_OpenEditor(new BackgroundEditor(this));
         }
-        void Open_TextEditor_Click(object sender, EventArgs e)
+        void Open_TextEditor_Click(Object sender, EventArgs e)
         {
             Core_OpenEditor(new TextEditor(this));
         }
-        void Open_MusicEditor_Click(object sender, EventArgs e)
+        void Open_MusicEditor_Click(Object sender, EventArgs e)
         {
             Core_OpenEditor(new MusicEditor(this));
         }
-        void Open_ItemEditor_Click(object sender, EventArgs e)
+        void Open_ItemEditor_Click(Object sender, EventArgs e)
         {
             Core_OpenEditor(new ItemEditor(this));
         }
-        void Open_MenuEditor_Click(object sender, EventArgs e)
+        void Open_MenuEditor_Click(Object sender, EventArgs e)
         {
             //Core_OpenEditor(new MenuEditor(this));
         }
-        void Open_TitleScreenEditor_Click(object sender, EventArgs e)
+        void Open_TitleScreenEditor_Click(Object sender, EventArgs e)
         {
             Core_OpenEditor(new TitleScreenEditor(this));
         }
 
-        void Help_Help_Click(object sender, EventArgs e)
+        void Help_Help_Click(Object sender, EventArgs e)
         {
-            string path = "file://" + Path.Combine(
+            String path = "file://" + Path.Combine(
                     Directory.GetCurrentDirectory(),
                     this.SoftwareName + ".chm");
             Help.ShowHelp(this, path);
         }
-        void Help_About_Click(object sender, EventArgs e)
+        void Help_About_Click(Object sender, EventArgs e)
         {
             FormAbout dialog = new FormAbout();
             

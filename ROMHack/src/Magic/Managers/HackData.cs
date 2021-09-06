@@ -20,7 +20,7 @@ namespace Magic
         /// <summary>
         /// An array containing the length of each entry.
         /// </summary>
-        public uint[] EntryLength;
+        public UInt32[] EntryLength;
 
         /// <summary>
         /// The data, in a jagged array so as to separate the different table entries.
@@ -29,39 +29,39 @@ namespace Magic
 
 
 
-        public HackData(string identifier, byte[][] data)
+        public HackData(String identifier, Byte[][] data)
         {
             TableString = identifier;
-            EntryAmount = (uint)data.Length;
-            EntryLength = new uint[EntryAmount];
-            uint total = 12;
-            for (int i = 0; i < EntryAmount; i++)
+            EntryAmount = (UInt32)data.Length;
+            EntryLength = new UInt32[EntryAmount];
+            UInt32 total = 12;
+            for (Int32 i = 0; i < EntryAmount; i++)
             {
-                EntryLength[i] = (uint)data[i].Length;
+                EntryLength[i] = (UInt32)data[i].Length;
                 total += 4 + EntryLength[i];
             }
             TableLength = total;
             Entries = data;
         }
 
-        public HackData(byte[] data)
+        public HackData(Byte[] data)
         {
-            uint parse = 0;
+            UInt32 parse = 0;
             TableString = data.GetASCII(parse, 4); parse += 4;
             TableLength = data.GetUInt32(parse, false); parse += 4;
             EntryAmount = data.GetUInt32(parse, false); parse += 4;
             if (TableLength != data.Length)
                 throw new Exception("The constructor data given for this HackData (" + TableString + ") shows an invalid length.");
-            EntryLength = new uint[EntryAmount];
-            for (int i = 0; i < EntryAmount; i++)
+            EntryLength = new UInt32[EntryAmount];
+            for (Int32 i = 0; i < EntryAmount; i++)
             {
                 EntryLength[i] = data.GetUInt32(parse, false);
                 parse += 4;
             }
             Entries = new Byte[EntryAmount][];
-            for (int i = 0; i < EntryAmount; i++)
+            for (Int32 i = 0; i < EntryAmount; i++)
             {
-                Entries[i] = new byte[EntryLength[i]];
+                Entries[i] = new Byte[EntryLength[i]];
                 Array.Copy(data, parse, Entries[i], 0, EntryLength[i]);
                 parse += EntryLength[i];
             }
@@ -76,8 +76,8 @@ namespace Magic
         {
             Byte[] result = new Byte[TableLength];
             Byte[] buffer = new Byte[4];
-            int parse = 0;
-            for (int i = 0; i < 3 + EntryAmount; i++)
+            Int32 parse = 0;
+            for (Int32 i = 0; i < 3 + EntryAmount; i++)
             {
                 switch (i)
                 {
@@ -89,7 +89,7 @@ namespace Magic
                 Array.Copy(buffer, 0, result, parse, 4);
                 parse += 4;
             }
-            for (int i = 0; i < Entries.Length; i++)
+            for (Int32 i = 0; i < Entries.Length; i++)
             {
                 buffer = Entries[i];
                 Array.Copy(buffer, 0, result, parse, buffer.Length);
@@ -106,13 +106,13 @@ namespace Magic
         /// </summary>
         public static Byte[] Combine(HackData[] tables)
         {
-            uint length = 0;
+            UInt32 length = 0;
             foreach (HackData table in tables)
             {
                 length += table.TableLength;
             }
-            byte[] result = new byte[length];
-            uint parse = 0;
+            Byte[] result = new Byte[length];
+            UInt32 parse = 0;
 
             foreach (HackData table in tables)
             {

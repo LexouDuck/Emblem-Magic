@@ -17,7 +17,7 @@ namespace GBA
         /// <summary>
         /// the total amount of tracks for this song
         /// </summary>
-        public byte TrackAmount
+        public System.Byte TrackAmount
         {
             get
             {
@@ -27,7 +27,7 @@ namespace GBA
         /// <summary>
         /// No one knooooows
         /// </summary>
-        public byte Unknown
+        public System.Byte Unknown
         {
             get
             {
@@ -42,7 +42,7 @@ namespace GBA
         /// In the case where the priority is equal, the track number comes into play.
         /// Lower tracks numbers always takes the priority on higher track numbers.
         /// </summary>
-        public byte Priority
+        public System.Byte Priority
         {
             get
             {
@@ -54,7 +54,7 @@ namespace GBA
         /// If bit 7 is set, reverb setting is set to this value whenever the song starts to play, overwriting any previous value.
         /// If bit 7 is clear nothing is changed when the song starts to play, and the previously used reverb value is kept.
         /// </summary>
-        public byte Reverb
+        public System.Byte Reverb
         {
             get
             {
@@ -73,7 +73,7 @@ namespace GBA
             get
             {
                 Pointer[] result = new Pointer[TrackAmount];
-                for (int i = 0; i < result.Length; i++)
+                for (System.Int32 i = 0; i < result.Length; i++)
                 {
                     result[i] = Core.ReadPointer(Address + 8 + i * 4);
                 }

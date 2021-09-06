@@ -14,7 +14,7 @@ namespace Magic
         /// <summary>
         /// Shows a window with a highlightable result label
         /// </summary>
-        public static void ShowResult(string text, string caption, string result)
+        public static void ShowResult(String text, String caption, String result)
         {
             MessageBox.Show(result, caption, MessageBoxButtons.OK);
         }
@@ -22,7 +22,7 @@ namespace Magic
         /// <summary>
         /// Show a simple text input prompt, returns empty string if cancelled
         /// </summary>
-        public static string ShowTextDialog(string text, string caption)
+        public static String ShowTextDialog(String text, String caption)
         {
             Form dialog = new Form()
             {
@@ -63,7 +63,7 @@ namespace Magic
         /// <summary>
         /// Show a simple number input prompt, returns 0 if cancelled
         /// </summary>
-        public static int ShowNumberDialog(string text, string caption, bool hex, int min, int max)
+        public static Int32 ShowNumberDialog(String text, String caption, Boolean hex, Int32 min, Int32 max)
         {
             Label label = new Label()
             {
@@ -105,19 +105,19 @@ namespace Magic
             dialog.Controls.Add(label);
             dialog.AcceptButton = confirm;
 
-            return dialog.ShowDialog() == DialogResult.OK ? (int)input.Value : 0;
+            return dialog.ShowDialog() == DialogResult.OK ? (Int32)input.Value : 0;
         }
         /// <summary>
         /// Shows a simple number input prompt, but for a pointer
         /// </summary>
-        public static Pointer ShowPointerDialog(string text, string caption)
+        public static Pointer ShowPointerDialog(String text, String caption)
         {
-            return new Pointer((uint)ShowNumberDialog(text, caption, true, 0, (int)Core.CurrentROMSize));
+            return new Pointer((UInt32)ShowNumberDialog(text, caption, true, 0, (Int32)Core.CurrentROMSize));
         }
         /// <summary>
         /// Shows a simple number input prompt, but for a pointer
         /// </summary>
-        public static Pointer ShowPointerArrayBoxDialog(string text, string caption)
+        public static Pointer ShowPointerArrayBoxDialog(String text, String caption)
         {
             Label label = new Label()
             {
@@ -171,28 +171,28 @@ namespace Magic
         /// <param name="repoints">the actual repoints, tuple is: Name, CurrentAddress, DataLength</param>
         /// <param name="addresses">the addresses at which to write the new pointers, if null does find+replace</param>
         /// <returns>'true' if the operation was cancelled</returns>
-        public static bool ShowRepointDialog(Editor sender,
-            string caption, string text, string writePrefix,
-            Tuple<string, Pointer, int>[] repoints, Pointer[] addresses = null)
+        public static Boolean ShowRepointDialog(Editor sender,
+            String caption, String text, String writePrefix,
+            Tuple<String, Pointer, Int32>[] repoints, Pointer[] addresses = null)
         {
             if (Settings.Default.WriteToFreeSpace)
             {
-                int length = 0;
-                for (int i = 0; i < repoints.Length; i++)
+                Int32 length = 0;
+                for (Int32 i = 0; i < repoints.Length; i++)
                 {
                     length += repoints[i].Item3;
                 }
                 Pointer[] pointers = new Pointer[repoints.Length];
                 pointers[0] = Core.GetFreeSpace(length);
                 length = repoints[0].Item3;
-                for (int i = 1; i < repoints.Length; i++)
+                for (Int32 i = 1; i < repoints.Length; i++)
                 {
                     pointers[i] = pointers[0] + length;
                     length += repoints[i].Item3;
                 }
                 if (addresses == null)
                 {
-                    for (int i = 0; i < repoints.Length; i++)
+                    for (Int32 i = 0; i < repoints.Length; i++)
                     {
                         Core.Repoint(sender,
                             repoints[i].Item2,
@@ -202,7 +202,7 @@ namespace Magic
                 }
                 else
                 {
-                    for (int i = 0; i < repoints.Length; i++)
+                    for (Int32 i = 0; i < repoints.Length; i++)
                     {
                         Core.WritePointer(sender,
                             addresses[i],
@@ -219,7 +219,7 @@ namespace Magic
                 {
                     if (addresses == null)
                     {
-                        for (int i = 0; i < Dialog.Boxes.Length; i++)
+                        for (Int32 i = 0; i < Dialog.Boxes.Length; i++)
                         {
                             if (Dialog.Boxes[i].Value != repoints[i].Item2)
                             {
@@ -232,7 +232,7 @@ namespace Magic
                     }
                     else
                     {
-                        for (int i = 0; i < Dialog.Boxes.Length; i++)
+                        for (Int32 i = 0; i < Dialog.Boxes.Length; i++)
                         {
                             if (Dialog.Boxes[i].Value != Core.ReadPointer(addresses[i]))
                             {
@@ -252,7 +252,7 @@ namespace Magic
         /// <summary>
         /// Shows a prompt asking to create a FEH Repoint tracker and returns that
         /// </summary>
-        public static Repoint ShowRepointCreateDialog(string assetName = "")
+        public static Repoint ShowRepointCreateDialog(String assetName = "")
         {
             CreateRepointDialog dialog = new CreateRepointDialog();
 
@@ -326,11 +326,11 @@ namespace Magic
         }
         public static void ResolveUnreferencedPointers(List<Repoint> unreferenced)
         {
-            Tuple<string, Pointer, int>[] pointers = new Tuple<string, Pointer, int>[unreferenced.Count];
-            string[] pointer_names = new string[unreferenced.Count];
-            for (int i = 0; i < unreferenced.Count; i++)
+            Tuple<String, Pointer, Int32>[] pointers = new Tuple<String, Pointer, Int32>[unreferenced.Count];
+            String[] pointer_names = new String[unreferenced.Count];
+            for (Int32 i = 0; i < unreferenced.Count; i++)
             {
-                pointers[i] = Tuple.Create(unreferenced[i].AssetName, new Pointer(), (int)unreferenced[i].DefaultAddress);
+                pointers[i] = Tuple.Create(unreferenced[i].AssetName, new Pointer(), (Int32)unreferenced[i].DefaultAddress);
                 pointer_names[i] = unreferenced[i].AssetName;
             }
             FormRepoint Dialog = new FormRepoint("Unreferenced pointers to resolve",
@@ -343,7 +343,7 @@ namespace Magic
             500);
             DialogResult answer = Dialog.ShowDialog();
             Pointer address = new GBA.Pointer();
-            for (int i = 0; i < unreferenced.Count; i++)
+            for (Int32 i = 0; i < unreferenced.Count; i++)
             {
                 if (answer == DialogResult.Cancel || Dialog.Boxes[i].Value == 0)
                 {
@@ -377,7 +377,7 @@ namespace Magic
             MessageBoxIcon.Warning);
         }
         
-        public static DialogResult ApplyEditorChanges(string editor)
+        public static DialogResult ApplyEditorChanges(String editor)
         {
             return MessageBox.Show(
             "There have been changes made in the " + editor + ".\r\n Would you like to keep them applied ?",
@@ -387,7 +387,7 @@ namespace Magic
             MessageBoxIcon.Warning);
         }
         
-        public static DialogResult ApplyWritesToROM(int writeTotal, int writesMissing)
+        public static DialogResult ApplyWritesToROM(Int32 writeTotal, Int32 writesMissing)
         {
             return MessageBox.Show(
             "The current ROM file and the FEH file have some differences.\n" +
@@ -412,7 +412,7 @@ namespace Magic
         
         public static DialogResult WriteConflict(List<WriteConflict> conflict)
         {
-            string message;
+            String message;
 
             if (conflict == null || conflict.Count == 0) return DialogResult.Yes;
             else if (conflict.Count == 1)
@@ -425,7 +425,7 @@ namespace Magic
             else
             {
                 message = "Several existing writes will be affected by this action:\n\n";
-                for (int i = 0; i < conflict.Count; i++)
+                for (Int32 i = 0; i < conflict.Count; i++)
                 {
                     message += "by the " + conflict[i].Write.Author + " at address " + conflict[0].Write.Address;
                     message += "\ndescription: " + conflict[0].Write.Phrase + "\n\n";
