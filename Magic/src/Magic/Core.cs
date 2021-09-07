@@ -341,8 +341,8 @@ namespace Magic
         /// </summary>
         public static void WriteByte(Editor sender, Pointer address, Byte data, String description = "")
         {
-            if (address == 0) return;
-
+            if (address == 0)
+                return;
             App.Core_UserAction(UserAction.Write, new Write(sender, address, new Byte[1] { data }, description));
         }
         /// <summary>
@@ -350,8 +350,8 @@ namespace Magic
         /// </summary>
         public static void WriteData(Editor sender, Pointer address, Byte[] data, String description = "")
         {
-            if (address == 0 || data == null) return;
-
+            if (address == 0 || data == null)
+                return;
             App.Core_UserAction(UserAction.Write, new Write(sender, address, data, description));
         }
         /// <summary>
@@ -359,8 +359,8 @@ namespace Magic
         /// </summary>
         public static void WritePointer(Editor sender, Pointer address, Pointer pointer, String description = "")
         {
-            if (address == 0) return;
-
+            if (address == 0)
+                return;
             App.Core_UserAction(UserAction.Write, new Write(sender, address, pointer.ToBytes(true, true), description));
         }
 
@@ -387,15 +387,19 @@ namespace Magic
         /// </summary>
         public static void RestoreData(Pointer address, Int32 length)
         {
-            if (address == 0) return;
-            if (length == 0) throw new Exception("Data to restore cannot be of length 0.");
-
+            if (address == 0)
+                return;
+            if (length == 0)
+                throw new Exception("Data to restore cannot be of length 0.");
             App.Core_UserAction(UserAction.Restore, new Write("", address, new Byte[length]));
         }
 
         //============================ Input/Output ===============================
         
-        public static void SaveImage(String filepath, Int32 width, Int32 height, Palette[] palettes, Func<Int32, Int32, Byte> displayfunc)
+        public static void SaveImage(String filepath,
+            Int32 width, Int32 height,
+            Palette[] palettes,
+            Func<Int32, Int32, Byte> displayfunc)
         {
             using (var image = new System.Drawing.Bitmap(width, height, PixelFormat.Format8bppIndexed))
             {
