@@ -30,6 +30,9 @@ namespace EmblemMagic
         /// </summary>
         private void InitializeComponent()
         {
+            this.File_RecentFiles = new Magic.Components.RecentFileMenu();
+            this.Edit_Undo = new System.Windows.Forms.ToolStripMenuItem();
+            this.Edit_Redo = new System.Windows.Forms.ToolStripMenuItem();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(App));
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
             this.StatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -37,7 +40,6 @@ namespace EmblemMagic
             this.Menu_File = new System.Windows.Forms.ToolStripMenuItem();
             this.File_OpenROM = new System.Windows.Forms.ToolStripMenuItem();
             this.File_OpenFEH = new System.Windows.Forms.ToolStripMenuItem();
-            this.File_RecentFiles = new Magic.Components.RecentFileMenu();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.File_SaveROM = new System.Windows.Forms.ToolStripMenuItem();
             this.File_SaveAsROM = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,8 +54,6 @@ namespace EmblemMagic
             this.File_CloseROM = new System.Windows.Forms.ToolStripMenuItem();
             this.File_Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.Menu_Edit = new System.Windows.Forms.ToolStripMenuItem();
-            this.Edit_Undo = new System.Windows.Forms.ToolStripMenuItem();
-            this.Edit_Redo = new System.Windows.Forms.ToolStripMenuItem();
             this.Edit_Separator = new System.Windows.Forms.ToolStripSeparator();
             this.Edit_OpenProperties = new System.Windows.Forms.ToolStripMenuItem();
             this.Edit_Options = new System.Windows.Forms.ToolStripMenuItem();

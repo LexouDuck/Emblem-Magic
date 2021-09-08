@@ -70,7 +70,8 @@ namespace EmblemMagic
         public System.Windows.Forms.ToolStripMenuItem Edit_Undo { get; set; }
         public System.Windows.Forms.ToolStripMenuItem Edit_Redo { get; set; }
 
-        public String SoftwareName { get; set; }
+        public String AppName { get; set; }
+        public Version AppVersion { get; set; }
 
         /// <summary>
         /// Is responsible for all reading/writing of data, and the IO for the ROM file.
@@ -106,8 +107,9 @@ namespace EmblemMagic
         public App(String software_name)
         {
             Core.App = this;
+            UI.App = this;
 
-            SoftwareName = software_name;
+            AppName = software_name;
 
             ROM = new DataManager();
             FEH = new HackManager(this);
@@ -214,7 +216,7 @@ namespace EmblemMagic
         /// <summary>
         /// Sets this.CurrentROM, which stores fire emblem game specific data, like vanilla pointers
         /// </summary>
-        void Core_LoadFireEmblem()
+        void Core_LoadGame()
         {
             try
             {
@@ -481,7 +483,7 @@ namespace EmblemMagic
             try
             {
                 ROM.OpenFile(path);
-                Core_LoadFireEmblem();
+                Core_LoadGame();
 
                 if (FEH.IsEmpty)
                 {
@@ -1119,12 +1121,24 @@ namespace EmblemMagic
         {
             String path = "file://" + Path.Combine(
                     Directory.GetCurrentDirectory(),
-                    this.SoftwareName + ".chm");
+                    this.AppName + ".chm");
             Help.ShowHelp(this, path);
         }
         void Help_About_Click(Object sender, EventArgs e)
         {
-            FormAbout dialog = new FormAbout();
+            FormAbout dialog = new FormAbout(AppName,
+                "(version " + AppVersion + ")"
+                 + "\n\n" + "The GBA Fire Emblem all-in-one editing tool"
+                 + "\n\n" + "by (Lexou Duck)"
+                 + '\n' + "Thanks to documentation and code written by:"
+                 + '\n' + "(Hextator), (Nintenlord), (Zahlman), (CrazyColors)"
+                 ,
+                "Fire Emblem " + '\u00A9' + " is property of Nintendo."
+                 + '\n' + "Emblem Magic is in no way affiliated with Nintendo or Intelligent Systems." + '\n'
+                 + '\n' + "This software is free and open source, following the GNU General Public License."
+                 ,
+                this.Icon,
+                Resources.Icon_Large);
             
             dialog.Show();
         }

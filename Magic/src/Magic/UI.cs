@@ -9,7 +9,7 @@ namespace Magic
 {
     public static class UI
     {
-        static IApp App;
+        public static IApp App;
 
 
 
@@ -23,7 +23,7 @@ namespace Magic
         public static void ShowMessage(String text)
         {
             MessageBox.Show(text,
-                App.SoftwareName,
+                App.AppName,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
         }
@@ -31,7 +31,7 @@ namespace Magic
         public static void ShowWarning(String text)
         {
             MessageBox.Show(text,
-                App.SoftwareName,
+                App.AppName,
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
         }
@@ -40,7 +40,7 @@ namespace Magic
         {
             DialogResult result = MessageBox.Show(
                 "Error: " + text,
-                App.SoftwareName + " - Error",
+                App.AppName + " - Error",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
             return result;
@@ -77,7 +77,7 @@ namespace Magic
         public static DialogResult ShowQuestion(String text)
         {
             DialogResult result = MessageBox.Show(text,
-                App.SoftwareName,
+                App.AppName,
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
             return result;

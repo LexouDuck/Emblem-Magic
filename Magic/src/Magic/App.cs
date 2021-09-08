@@ -68,7 +68,8 @@ namespace Magic
         /// <summary>
         /// The name of this application, shown on title bars
         /// </summary>
-        public String SoftwareName { get; }
+        public String AppName { get; }
+        public Version AppVersion { get; }
 
         /// <summary>
         /// Is responsible for all reading/writing of data, and the IO for the ROM file.

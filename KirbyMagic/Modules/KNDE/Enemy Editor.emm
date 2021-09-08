@@ -1,0 +1,64 @@
+KNDE
+Enemy Editor
+by LexouDuck
+0x97B4B8
+307
+32
+POIN
+Enemy List.txt
+
+_0
+Unknown
+0
+2
+HEXU(Text Editor)
+NULL
+
+_1
+Unknown
+2
+2
+HEXU(Text Editor)
+NULL
+
+_2
+Unknown
+4
+2
+HEXU(Text Editor)
+NULL
+
+_3
+Unknown
+6
+2
+HEXU(Text Editor)
+NULL
+
+Palette
+General
+8
+2
+POIN(Palette Editor)
+NULL
+
+Tileset
+General
+12
+2
+POIN(Graphics Editor)
+NULL
+
+Unknown
+General
+14
+2
+POIN(Hex Editor)
+NULL
+
+Unknown
+General
+16
+16
+HEXT
+NULL

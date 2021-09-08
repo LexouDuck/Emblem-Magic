@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31613.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ROMHack", "Magic\Magic.csproj", "{2971A4E2-9BD6-440E-84C4-AF6C3989A93E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmblemMagic", "EmblemMagic\EmblemMagic.csproj", "{327F07D4-2E3C-4A9B-B42D-C5505292567A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KirbyMagic", "KirbyMagic\KirbyMagic.csproj", "{0834026C-BF71-433D-ADBC-19AE74321832}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{327F07D4-2E3C-4A9B-B42D-C5505292567A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{327F07D4-2E3C-4A9B-B42D-C5505292567A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{327F07D4-2E3C-4A9B-B42D-C5505292567A}.Debug|x86.ActiveCfg = Debug|x86
+		{327F07D4-2E3C-4A9B-B42D-C5505292567A}.Debug|x86.Build.0 = Debug|x86
+		{327F07D4-2E3C-4A9B-B42D-C5505292567A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{327F07D4-2E3C-4A9B-B42D-C5505292567A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{327F07D4-2E3C-4A9B-B42D-C5505292567A}.Release|x86.ActiveCfg = Release|x86
+		{327F07D4-2E3C-4A9B-B42D-C5505292567A}.Release|x86.Build.0 = Release|x86
+		{2971A4E2-9BD6-440E-84C4-AF6C3989A93E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2971A4E2-9BD6-440E-84C4-AF6C3989A93E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2971A4E2-9BD6-440E-84C4-AF6C3989A93E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2971A4E2-9BD6-440E-84C4-AF6C3989A93E}.Debug|x86.Build.0 = Debug|Any CPU
+		{2971A4E2-9BD6-440E-84C4-AF6C3989A93E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2971A4E2-9BD6-440E-84C4-AF6C3989A93E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2971A4E2-9BD6-440E-84C4-AF6C3989A93E}.Release|x86.ActiveCfg = Release|Any CPU
+		{2971A4E2-9BD6-440E-84C4-AF6C3989A93E}.Release|x86.Build.0 = Release|Any CPU
+		{0834026C-BF71-433D-ADBC-19AE74321832}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0834026C-BF71-433D-ADBC-19AE74321832}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0834026C-BF71-433D-ADBC-19AE74321832}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0834026C-BF71-433D-ADBC-19AE74321832}.Debug|x86.Build.0 = Debug|Any CPU
+		{0834026C-BF71-433D-ADBC-19AE74321832}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0834026C-BF71-433D-ADBC-19AE74321832}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0834026C-BF71-433D-ADBC-19AE74321832}.Release|x86.ActiveCfg = Release|Any CPU
+		{0834026C-BF71-433D-ADBC-19AE74321832}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {74C2796F-1E74-4778-84D8-9F9D93EDF921}
+	EndGlobalSection
+EndGlobal

@@ -450,7 +450,7 @@
     <EmbeddedResource Remove="EventAssembler\Nintenlord.Forms\Properties\Resources.resx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ROMhack\ROMhack.csproj" />
+    <ProjectReference Include="..\Magic\Magic.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="src\Editors\MagicButton.cs" />

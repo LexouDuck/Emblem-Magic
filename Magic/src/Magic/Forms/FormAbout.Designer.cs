@@ -45,13 +45,10 @@
             // TitleLabel
             // 
             this.TitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TitleLabel.Image = ((System.Drawing.Image)(resources.GetObject("TitleLabel.Image")));
-            this.TitleLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.TitleLabel.Location = new System.Drawing.Point(15, 9);
             this.TitleLabel.Name = "TitleLabel";
             this.TitleLabel.Size = new System.Drawing.Size(257, 40);
             this.TitleLabel.TabIndex = 1;
-            this.TitleLabel.Text = "Emblem Magic";
             this.TitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2
@@ -71,7 +68,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.TitleLabel);
             this.Controls.Add(this.label1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "About";
             this.Text = "About";
             this.ResumeLayout(false);
