@@ -1,2 +1,8 @@
 
 *.sublime-workspace
+
+*.DS_Store
+
+.vs
+.vs/
+

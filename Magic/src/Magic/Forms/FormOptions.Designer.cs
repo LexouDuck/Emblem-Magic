@@ -117,9 +117,9 @@
             // 
             this.Paths_CustomStructs_CheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Paths_CustomStructs_CheckBox.AutoSize = true;
-            this.Paths_CustomStructs_CheckBox.Location = new System.Drawing.Point(157, 60);
+            this.Paths_CustomStructs_CheckBox.Location = new System.Drawing.Point(143, 60);
             this.Paths_CustomStructs_CheckBox.Name = "Paths_CustomStructs_CheckBox";
-            this.Paths_CustomStructs_CheckBox.Size = new System.Drawing.Size(151, 17);
+            this.Paths_CustomStructs_CheckBox.Size = new System.Drawing.Size(165, 19);
             this.Paths_CustomStructs_CheckBox.TabIndex = 25;
             this.Paths_CustomStructs_CheckBox.Text = "Use Custom Structs Folder";
             this.Paths_CustomStructs_CheckBox.UseVisualStyleBackColor = true;
@@ -141,7 +141,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Paths_CustomStructs_TextBox.Location = new System.Drawing.Point(9, 80);
             this.Paths_CustomStructs_TextBox.Name = "Paths_CustomStructs_TextBox";
-            this.Paths_CustomStructs_TextBox.Size = new System.Drawing.Size(295, 20);
+            this.Paths_CustomStructs_TextBox.Size = new System.Drawing.Size(295, 23);
             this.Paths_CustomStructs_TextBox.TabIndex = 24;
             // 
             // Paths_Structs_TextBox
@@ -150,7 +150,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Paths_Structs_TextBox.Location = new System.Drawing.Point(9, 158);
             this.Paths_Structs_TextBox.Name = "Paths_Structs_TextBox";
-            this.Paths_Structs_TextBox.Size = new System.Drawing.Size(295, 20);
+            this.Paths_Structs_TextBox.Size = new System.Drawing.Size(295, 23);
             this.Paths_Structs_TextBox.TabIndex = 20;
             // 
             // Paths_CustomStructs_BrowseButton
@@ -169,7 +169,7 @@
             this.Paths_CustomStructs_Label.AutoSize = true;
             this.Paths_CustomStructs_Label.Location = new System.Drawing.Point(6, 64);
             this.Paths_CustomStructs_Label.Name = "Paths_CustomStructs_Label";
-            this.Paths_CustomStructs_Label.Size = new System.Drawing.Size(116, 13);
+            this.Paths_CustomStructs_Label.Size = new System.Drawing.Size(130, 15);
             this.Paths_CustomStructs_Label.TabIndex = 23;
             this.Paths_CustomStructs_Label.Text = "Custom Structs Folder :";
             // 
@@ -190,7 +190,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Paths_Patches_TextBox.Location = new System.Drawing.Point(9, 275);
             this.Paths_Patches_TextBox.Name = "Paths_Patches_TextBox";
-            this.Paths_Patches_TextBox.Size = new System.Drawing.Size(295, 20);
+            this.Paths_Patches_TextBox.Size = new System.Drawing.Size(295, 23);
             this.Paths_Patches_TextBox.TabIndex = 17;
             // 
             // Paths_Structs_Label
@@ -198,7 +198,7 @@
             this.Paths_Structs_Label.AutoSize = true;
             this.Paths_Structs_Label.Location = new System.Drawing.Point(6, 142);
             this.Paths_Structs_Label.Name = "Paths_Structs_Label";
-            this.Paths_Structs_Label.Size = new System.Drawing.Size(78, 13);
+            this.Paths_Structs_Label.Size = new System.Drawing.Size(85, 15);
             this.Paths_Structs_Label.TabIndex = 19;
             this.Paths_Structs_Label.Text = "Structs Folder :";
             // 
@@ -207,7 +207,7 @@
             this.Paths_Patches_Label.AutoSize = true;
             this.Paths_Patches_Label.Location = new System.Drawing.Point(6, 259);
             this.Paths_Patches_Label.Name = "Paths_Patches_Label";
-            this.Paths_Patches_Label.Size = new System.Drawing.Size(108, 13);
+            this.Paths_Patches_Label.Size = new System.Drawing.Size(114, 15);
             this.Paths_Patches_Label.TabIndex = 16;
             this.Paths_Patches_Label.Text = "FEH Patches Folder :";
             // 
@@ -217,7 +217,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Paths_Arrays_TextBox.Location = new System.Drawing.Point(9, 119);
             this.Paths_Arrays_TextBox.Name = "Paths_Arrays_TextBox";
-            this.Paths_Arrays_TextBox.Size = new System.Drawing.Size(295, 20);
+            this.Paths_Arrays_TextBox.Size = new System.Drawing.Size(295, 23);
             this.Paths_Arrays_TextBox.TabIndex = 15;
             // 
             // Paths_Arrays_Label
@@ -225,7 +225,7 @@
             this.Paths_Arrays_Label.AutoSize = true;
             this.Paths_Arrays_Label.Location = new System.Drawing.Point(6, 103);
             this.Paths_Arrays_Label.Name = "Paths_Arrays_Label";
-            this.Paths_Arrays_Label.Size = new System.Drawing.Size(74, 13);
+            this.Paths_Arrays_Label.Size = new System.Drawing.Size(82, 15);
             this.Paths_Arrays_Label.TabIndex = 14;
             this.Paths_Arrays_Label.Text = "Arrays Folder :";
             // 
@@ -243,9 +243,9 @@
             // 
             this.Paths_CustomArrays_CheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Paths_CustomArrays_CheckBox.AutoSize = true;
-            this.Paths_CustomArrays_CheckBox.Location = new System.Drawing.Point(157, 16);
+            this.Paths_CustomArrays_CheckBox.Location = new System.Drawing.Point(142, 16);
             this.Paths_CustomArrays_CheckBox.Name = "Paths_CustomArrays_CheckBox";
-            this.Paths_CustomArrays_CheckBox.Size = new System.Drawing.Size(147, 17);
+            this.Paths_CustomArrays_CheckBox.Size = new System.Drawing.Size(162, 19);
             this.Paths_CustomArrays_CheckBox.TabIndex = 12;
             this.Paths_CustomArrays_CheckBox.Text = "Use Custom Arrays Folder";
             this.Paths_CustomArrays_CheckBox.UseVisualStyleBackColor = true;
@@ -256,7 +256,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Paths_CustomArrays_TextBox.Location = new System.Drawing.Point(9, 36);
             this.Paths_CustomArrays_TextBox.Name = "Paths_CustomArrays_TextBox";
-            this.Paths_CustomArrays_TextBox.Size = new System.Drawing.Size(295, 20);
+            this.Paths_CustomArrays_TextBox.Size = new System.Drawing.Size(295, 23);
             this.Paths_CustomArrays_TextBox.TabIndex = 11;
             // 
             // Paths_CustomArrays_Label
@@ -264,7 +264,7 @@
             this.Paths_CustomArrays_Label.AutoSize = true;
             this.Paths_CustomArrays_Label.Location = new System.Drawing.Point(6, 20);
             this.Paths_CustomArrays_Label.Name = "Paths_CustomArrays_Label";
-            this.Paths_CustomArrays_Label.Size = new System.Drawing.Size(112, 13);
+            this.Paths_CustomArrays_Label.Size = new System.Drawing.Size(127, 15);
             this.Paths_CustomArrays_Label.TabIndex = 10;
             this.Paths_CustomArrays_Label.Text = "Custom Arrays Folder :";
             // 
@@ -307,7 +307,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Paths_Modules_TextBox.Location = new System.Drawing.Point(9, 236);
             this.Paths_Modules_TextBox.Name = "Paths_Modules_TextBox";
-            this.Paths_Modules_TextBox.Size = new System.Drawing.Size(295, 20);
+            this.Paths_Modules_TextBox.Size = new System.Drawing.Size(295, 23);
             this.Paths_Modules_TextBox.TabIndex = 3;
             // 
             // Paths_CleanROMs_TextBox
@@ -316,7 +316,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Paths_CleanROMs_TextBox.Location = new System.Drawing.Point(9, 197);
             this.Paths_CleanROMs_TextBox.Name = "Paths_CleanROMs_TextBox";
-            this.Paths_CleanROMs_TextBox.Size = new System.Drawing.Size(295, 20);
+            this.Paths_CleanROMs_TextBox.Size = new System.Drawing.Size(295, 23);
             this.Paths_CleanROMs_TextBox.TabIndex = 2;
             // 
             // Paths_Modules_Label
@@ -324,7 +324,7 @@
             this.Paths_Modules_Label.AutoSize = true;
             this.Paths_Modules_Label.Location = new System.Drawing.Point(6, 220);
             this.Paths_Modules_Label.Name = "Paths_Modules_Label";
-            this.Paths_Modules_Label.Size = new System.Drawing.Size(113, 13);
+            this.Paths_Modules_Label.Size = new System.Drawing.Size(126, 15);
             this.Paths_Modules_Label.TabIndex = 1;
             this.Paths_Modules_Label.Text = "EMM Modules Folder :";
             // 
@@ -333,7 +333,7 @@
             this.Paths_CleanROMs_Label.AutoSize = true;
             this.Paths_CleanROMs_Label.Location = new System.Drawing.Point(6, 181);
             this.Paths_CleanROMs_Label.Name = "Paths_CleanROMs_Label";
-            this.Paths_CleanROMs_Label.Size = new System.Drawing.Size(105, 13);
+            this.Paths_CleanROMs_Label.Size = new System.Drawing.Size(114, 15);
             this.Paths_CleanROMs_Label.TabIndex = 0;
             this.Paths_CleanROMs_Label.Text = "Clean ROMs Folder :";
             // 
@@ -352,9 +352,9 @@
             // UndoAndRedo_MaxLabel
             // 
             this.UndoAndRedo_MaxLabel.AutoSize = true;
-            this.UndoAndRedo_MaxLabel.Location = new System.Drawing.Point(18, 17);
+            this.UndoAndRedo_MaxLabel.Location = new System.Drawing.Point(6, 17);
             this.UndoAndRedo_MaxLabel.Name = "UndoAndRedo_MaxLabel";
-            this.UndoAndRedo_MaxLabel.Size = new System.Drawing.Size(93, 13);
+            this.UndoAndRedo_MaxLabel.Size = new System.Drawing.Size(107, 15);
             this.UndoAndRedo_MaxLabel.TabIndex = 3;
             this.UndoAndRedo_MaxLabel.Text = "Maximum list size :";
             // 
@@ -362,7 +362,7 @@
             // 
             this.UndoAndRedo_MaxNumBox.Location = new System.Drawing.Point(117, 15);
             this.UndoAndRedo_MaxNumBox.Name = "UndoAndRedo_MaxNumBox";
-            this.UndoAndRedo_MaxNumBox.Size = new System.Drawing.Size(65, 20);
+            this.UndoAndRedo_MaxNumBox.Size = new System.Drawing.Size(65, 23);
             this.UndoAndRedo_MaxNumBox.TabIndex = 4;
             // 
             // RecentFiles
@@ -380,9 +380,10 @@
             // 
             // RecentFiles_MaxLabel
             // 
-            this.RecentFiles_MaxLabel.Location = new System.Drawing.Point(13, 25);
+            this.RecentFiles_MaxLabel.AutoSize = true;
+            this.RecentFiles_MaxLabel.Location = new System.Drawing.Point(4, 25);
             this.RecentFiles_MaxLabel.Name = "RecentFiles_MaxLabel";
-            this.RecentFiles_MaxLabel.Size = new System.Drawing.Size(98, 20);
+            this.RecentFiles_MaxLabel.Size = new System.Drawing.Size(107, 15);
             this.RecentFiles_MaxLabel.TabIndex = 0;
             this.RecentFiles_MaxLabel.Text = "Maximum list size :";
             // 
@@ -390,7 +391,7 @@
             // 
             this.RecentFiles_MaxNumBox.Location = new System.Drawing.Point(117, 23);
             this.RecentFiles_MaxNumBox.Name = "RecentFiles_MaxNumBox";
-            this.RecentFiles_MaxNumBox.Size = new System.Drawing.Size(59, 20);
+            this.RecentFiles_MaxNumBox.Size = new System.Drawing.Size(59, 23);
             this.RecentFiles_MaxNumBox.TabIndex = 2;
             // 
             // RecentFiles_ClearButton
@@ -410,7 +411,7 @@
             this.Options_ApplyButton.Name = "Options_ApplyButton";
             this.Options_ApplyButton.Size = new System.Drawing.Size(99, 34);
             this.Options_ApplyButton.TabIndex = 1;
-            this.Options_ApplyButton.Text = "Apply and Close";
+            this.Options_ApplyButton.Text = "OK";
             this.Options_ApplyButton.UseVisualStyleBackColor = true;
             this.Options_ApplyButton.Click += new System.EventHandler(this.Options_ApplyButton_Click);
             // 
@@ -482,20 +483,22 @@
             this.Repoint_GroupBox.TabStop = false;
             this.Repoint_GroupBox.Text = "Repoint Prompts";
             // 
-            // checkBox1
+            // PreferIndexedBMP_CheckBox
             // 
             this.PreferIndexedBMP_CheckBox.AutoSize = true;
-            this.PreferIndexedBMP_CheckBox.Location = new System.Drawing.Point(12, 447);
-            this.PreferIndexedBMP_CheckBox.Name = "checkBox1";
-            this.PreferIndexedBMP_CheckBox.Size = new System.Drawing.Size(268, 17);
+            this.PreferIndexedBMP_CheckBox.Location = new System.Drawing.Point(21, 447);
+            this.PreferIndexedBMP_CheckBox.Name = "PreferIndexedBMP_CheckBox";
+            this.PreferIndexedBMP_CheckBox.Size = new System.Drawing.Size(289, 19);
             this.PreferIndexedBMP_CheckBox.TabIndex = 6;
             this.PreferIndexedBMP_CheckBox.Text = "Save images as indexed BMP files rather than PNG";
             this.PreferIndexedBMP_CheckBox.UseVisualStyleBackColor = true;
             // 
             // FormOptions
             // 
+            this.AcceptButton = this.Options_ApplyButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.CancelButton = this.Options_CancelButton;
             this.ClientSize = new System.Drawing.Size(414, 562);
             this.Controls.Add(this.PreferIndexedBMP_CheckBox);
             this.Controls.Add(this.Repoint_GroupBox);
@@ -519,6 +522,7 @@
             this.UndoAndRedo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UndoAndRedo_MaxNumBox)).EndInit();
             this.RecentFiles.ResumeLayout(false);
+            this.RecentFiles.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RecentFiles_MaxNumBox)).EndInit();
             this.Overwrite_GroupBox.ResumeLayout(false);
             this.Overwrite_GroupBox.PerformLayout();
