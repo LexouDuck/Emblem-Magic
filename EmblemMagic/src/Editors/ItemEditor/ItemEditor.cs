@@ -60,7 +60,7 @@ namespace EmblemMagic.Editors
                     Attribute_ListBox.Items.Add(ItemAttributes[i]);
                 }
 
-                if (Core.CurrentROM is FE6)
+                if (Core.App.Game is FE6)
                 {
                     Stat_Exp_Label.Enabled = false;
                     Stat_Exp_NumBox.Enabled = false;
@@ -1177,9 +1177,9 @@ namespace EmblemMagic.Editors
             else
             {
                 Int32 item_icon_count = 0;
-                if (Core.CurrentROM is FE6) item_icon_count = 160;
-                if (Core.CurrentROM is FE7) item_icon_count = 192;
-                if (Core.CurrentROM is FE8) item_icon_count = 224;
+                if (Core.App.Game is FE6) item_icon_count = 160;
+                if (Core.App.Game is FE7) item_icon_count = 192;
+                if (Core.App.Game is FE8) item_icon_count = 224;
                 editor.Core_SetEntry(2, item_icon_count * 2,
                     Core.GetPointer("Item Icon Palette"), false,
                     Core.GetPointer("Item Icon Tileset"), false);

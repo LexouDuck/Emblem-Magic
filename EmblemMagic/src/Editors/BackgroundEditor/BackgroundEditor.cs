@@ -94,7 +94,7 @@ namespace EmblemMagic.Editors
             Core_LoadBackground();
             Core_LoadValues();
 
-            if (CurrentType == BackgroundType.Screen && Core.CurrentROM is FE6)
+            if (CurrentType == BackgroundType.Screen && Core.App.Game is FE6)
             {
                 TSA_Label.Enabled = false;
                 TSA_PointerBox.Enabled = false;
@@ -135,12 +135,12 @@ namespace EmblemMagic.Editors
                         break;
 
                     case BackgroundType.Screen:
-                        if (Core.CurrentROM is FE6)
+                        if (Core.App.Game is FE6)
                         {
                             tileset = Core.ReadData((Pointer)Current["Tileset"], 0);
                             tsa = TSA_Array.GetBasicTSA(bgsize.Width, bgsize.Height);
                         }
-                        else if (Core.CurrentROM is FE7 && Core.ReadByte(Current.GetAddress(Current.EntryIndex)) == 0x00)
+                        else if (Core.App.Game is FE7 && Core.ReadByte(Current.GetAddress(Current.EntryIndex)) == 0x00)
                         {
                             tileset = Core.ReadData((Pointer)Current["Tileset"], 0);
                             tsa = Core.ReadTSA((Pointer)Current["TSA"], bgsize.Width, bgsize.Height, false, true);
@@ -188,7 +188,7 @@ namespace EmblemMagic.Editors
             {
                 Palette_PointerBox.Value = (Pointer)Current["Palette"];
                 Tileset_PointerBox.Value = (Pointer)Current["Tileset"];
-                if (!(Core.CurrentROM is FE6 && CurrentType == BackgroundType.Screen))
+                if (!(Core.App.Game is FE6 && CurrentType == BackgroundType.Screen))
                     TSA_PointerBox.Value = (Pointer)Current["TSA"];
                 else TSA_PointerBox.Value = new Pointer();
             }
@@ -222,9 +222,9 @@ namespace EmblemMagic.Editors
 
                 List<Byte[]> strips = new List<Byte[]>();
                 if (CurrentType == BackgroundType.Screen
-                    && (Core.CurrentROM is FE8
-                    || (Core.CurrentROM is FE7 &&
-                        Core.CurrentROM.Version != GameVersion.JAP &&
+                    && (Core.App.Game is FE8
+                    || (Core.App.Game is FE7 &&
+                        Core.App.Game.Region != GameRegion.JAP &&
                         (Byte)Current["Strips"] == 0x01)))
                 {
                     Byte[] buffer = new Byte[32 * 2 * GBA.Tile.LENGTH];
@@ -255,8 +255,8 @@ namespace EmblemMagic.Editors
                     CurrentEntry, repoints.ToArray(), writepos.ToArray());
                 if (cancel) return;
 
-                if (CurrentType == BackgroundType.Screen && (Core.CurrentROM is FE8
-                    || (Core.CurrentROM is FE7 && Core.ReadByte(Current.Address) == 0x01)))
+                if (CurrentType == BackgroundType.Screen && (Core.App.Game is FE8
+                    || (Core.App.Game is FE7 && Core.ReadByte(Current.Address) == 0x01)))
                 {
                     for (Int32 i = 0; i < 10; i++)
                     {
@@ -471,8 +471,8 @@ namespace EmblemMagic.Editors
                 CurrentEntry,
                 (Pointer)Current["Palette"], (CurrentType == BackgroundType.Battle) ?
                     0 : Background.GetPaletteAmount(CurrentType) * GBA.Palette.LENGTH,
-                (Pointer)Current["Tileset"], (CurrentType == BackgroundType.Screen && (Core.CurrentROM is FE8 ||
-                    (Core.CurrentROM is FE7 && Core.ReadByte(Current.GetAddress(Current.EntryIndex)) == 0x01))) ?
+                (Pointer)Current["Tileset"], (CurrentType == BackgroundType.Screen && (Core.App.Game is FE8 ||
+                    (Core.App.Game is FE7 && Core.ReadByte(Current.GetAddress(Current.EntryIndex)) == 0x01))) ?
                     -1 : 0, // -1 if tileset is split into 32x2 strips
                 (Pointer)Current["TSA"],
                 CurrentBackground.Tiling.Width,
@@ -544,13 +544,13 @@ namespace EmblemMagic.Editors
                     break;
 
                 case BackgroundType.Screen:
-                    if (Core.CurrentROM is FE6)
+                    if (Core.App.Game is FE6)
                     {
                         editor.Core_SetEntry(bgsize.Width, bgsize.Height,
                             (Pointer)Current["Palette"], false,
                             (Pointer)Current["Tileset"], true);
                     }
-                    else if (Core.CurrentROM is FE7 && Core.ReadByte(Current.GetAddress(Current.EntryIndex)) == 0x00)
+                    else if (Core.App.Game is FE7 && Core.ReadByte(Current.GetAddress(Current.EntryIndex)) == 0x00)
                     {
                         editor.Core_SetEntry(bgsize.Width, bgsize.Height,
                             (Pointer)Current["Palette"], false,

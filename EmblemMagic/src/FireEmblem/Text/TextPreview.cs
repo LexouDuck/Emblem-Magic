@@ -68,7 +68,7 @@ namespace EmblemMagic.FireEmblem
             {
                 Text.Colors.Add(Glyph.Colors[i]);
             }
-            Dictionary<Char, Byte> fontmap = (Core.CurrentROM.Version == GameVersion.JAP) ?
+            Dictionary<Char, Byte> fontmap = (Core.App.Game.Region == GameRegion.JAP) ?
                 Font.GetFontMap(bubble) : Font.GetFontMap();
             List<Glyph>[] glyphs = new List<Glyph>[text.Length];
             Int32[] lengths = new Int32[text.Length];

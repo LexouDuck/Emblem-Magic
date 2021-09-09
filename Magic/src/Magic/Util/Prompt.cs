@@ -349,7 +349,7 @@ namespace Magic
                 {
                     try
                     {
-                        DataManager rom = new DataManager();
+                        DataManager rom = new DataManager(Core.App);
                         rom.OpenFile(Core.Path_CleanROM);
                         address = Core.ReadPointer(rom.Find(unreferenced[i].DefaultAddress.ToBytes(), 4));
                     }

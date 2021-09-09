@@ -3,60 +3,6 @@ using Magic.Editors;
 
 namespace Magic
 {
-    public enum GameVersion
-    {
-        JAP = 'J',
-        USA = 'U',
-        EUR = 'E'
-    }
-
-
-
-    public interface IGame
-    {
-        /// <summary>
-        /// Tells whether or not this ROM is an unmodified Fire Emblem ROM
-        /// </summary>
-        public Boolean IsClean { get; }
-        /// <summary>
-        /// Tells whether or not the filesize has been changed
-        /// </summary>
-        public Boolean Expanded { get; }
-        /// <summary>
-        /// Which version of the game this is - JAP, USA or EUR
-        /// </summary>
-        public GameVersion Version { get; }
-
-
-
-        /// <summary>
-        /// Returns a 4-character string identifier of this game ROM
-        /// </summary>
-        public String GetIdentifier();
-
-        /// <summary>
-        /// Gets the default file size of the current ROM (according to game and version)
-        /// </summary>
-        public UInt32 GetDefaultROMSize();
-
-        /// <summary>
-        /// Gets the CRC32 checksum of the default version of the current ROM (according to game and version)
-        /// </summary>
-        public UInt32 GetDefaultROMChecksum();
-
-        /// <summary>
-        /// Returns an array of ranges describing known free space for a clean ROM of the given version
-        /// </summary>
-        public Magic.Range[] GetDefaultFreeSpace();
-
-        /// <summary>
-        /// Returns an array of 'Repoint's describing the addresses of different core assets and arrays for the game
-        /// </summary>
-        public Repoint[] GetDefaultPointers();
-    }
-
-
-
     public interface IApp
     {
         public Magic.Components.RecentFileMenu File_RecentFiles { get; }
@@ -81,9 +27,9 @@ namespace Magic
         public HackManager FEH { get; set; }
 
         /// <summary>
-        /// Describes which fire emblem game is open, whether or not it's a clean ROM, and such.
+        /// Describes which game ROM is open, and stores any constant pre-known info
         /// </summary>
-        public IGame CurrentROM { get; set; }
+        public IGame Game { get; set; }
 
         /// <summary>
         /// When `true`, all Magic.App windows should update normally

@@ -42,9 +42,9 @@ namespace EmblemMagic.FireEmblem
         {
             switch (bgtype)
             {
-                case BackgroundType.Dialog: return (Core.CurrentROM is FE6) ? 4 : 8;
+                case BackgroundType.Dialog: return (Core.App.Game is FE6) ? 4 : 8;
                 case BackgroundType.Battle: return 10;
-                case BackgroundType.Screen: return (Core.CurrentROM is FE6) ? 1 : 6;
+                case BackgroundType.Screen: return (Core.App.Game is FE6) ? 1 : 6;
                 default: throw new Exception("background type is null");
             }
         }
@@ -55,7 +55,7 @@ namespace EmblemMagic.FireEmblem
                 case BackgroundType.Dialog: return new Size(30, 20);
                 case BackgroundType.Battle: return new Size(30, 20);
                 case BackgroundType.Screen:
-                    return (Core.CurrentROM is FE6) ?
+                    return (Core.App.Game is FE6) ?
                         new Size(15, 10) :
                         new Size(30, 20);
                 default: throw new Exception("background type is null");

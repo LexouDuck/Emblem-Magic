@@ -264,8 +264,7 @@ namespace Magic
             table_data[2] = tablePoint.ToBytes();
             table_data[3] = tableMarks.ToBytes();
             table_data[4] = tableSpace.ToBytes();
-            String game_identifier = Core.CurrentROM.GetIdentifier();
-            table = new HackData(game_identifier, table_data);
+            table = new HackData(Core.App.Game.Identifier, table_data);
 
             return table.ToBytes();
         }

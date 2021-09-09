@@ -50,7 +50,7 @@ Version 0.7 (BETA 2)
 
 
 
-Version 0.8 (BETA 1)
+Version 0.6 (BETA 1)
 ====================
 This is a copy/paste of the original forum post on FEUniverse:
 """

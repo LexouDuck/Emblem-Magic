@@ -16,27 +16,7 @@ namespace Magic
     {
         public static IApp App;
 
-
         //=============================== ROM-Specific =============================
-
-        /// <summary>
-        /// The Game (FE6, FE7, FE8) corresponding to the currently open ROM
-        /// </summary>
-        public static IGame CurrentROM
-        {
-            get
-            {
-                return App.CurrentROM;
-            }
-        }
-
-        /// <summary>
-        /// Gets the identifier for the current type of ROM open: "FE6J", "FE7U", etc
-        /// </summary>
-        public static String ROMIdentifier
-        {
-            get { return App.CurrentROM.GetIdentifier(); }
-        }
 
         /// <summary>
         /// Gets the current file size of the currently open ROM
@@ -69,14 +49,14 @@ namespace Magic
         {
             get
             {
-                String path = Settings.Default.PathCleanROMs + "\\" + ROMIdentifier + ".gba";
+                String path = Settings.Default.PathCleanROMs + "\\" + App.Game.Identifier + ".gba";
                 Try:
                 if (File.Exists(path))
                     return path;
                 else
                 {
                     UI.ShowError(
-                    "This operation requires an appropriate clean ROM named '" + ROMIdentifier + ".gba'" +
+                    "This operation requires an appropriate clean ROM named '" + App.Game.Identifier + ".gba'" +
                     " in your designated clean ROMs folder to be performed.\n\n" +
                     "Please click 'OK' once this has been done to proceed.");
                     goto Try;
@@ -91,7 +71,7 @@ namespace Magic
             get
             {
                 if (Settings.Default.UseCustomPathArrays) return Settings.Default.PathCustomArrays + "\\";
-                else return Settings.Default.PathArrays + "\\" + CurrentROM.GetIdentifier() + "\\";
+                else return Settings.Default.PathArrays + "\\" + App.Game.Identifier + "\\";
             }
         }
         /// <summary>
@@ -102,7 +82,7 @@ namespace Magic
             get
             {
                 if (Settings.Default.UseCustomPathStructs) return Settings.Default.PathCustomStructs + "\\";
-                else return Settings.Default.PathStructs + "\\" + CurrentROM.GetIdentifier() + "\\";
+                else return Settings.Default.PathStructs + "\\" + App.Game.Identifier + "\\";
             }
         }
         /// <summary>
@@ -112,7 +92,7 @@ namespace Magic
         {
             get
             {
-                return Settings.Default.PathModules + "\\" + CurrentROM.GetIdentifier() + "\\";
+                return Settings.Default.PathModules + "\\" + App.Game.Identifier + "\\";
             }
         }
         /// <summary>
@@ -122,7 +102,7 @@ namespace Magic
         {
             get
             {
-                return Settings.Default.PathPatches + "\\" + CurrentROM.GetIdentifier() + "\\";
+                return Settings.Default.PathPatches + "\\" + App.Game.Identifier + "\\";
             }
         }
 

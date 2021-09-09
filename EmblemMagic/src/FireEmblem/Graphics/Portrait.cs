@@ -24,8 +24,8 @@ namespace EmblemMagic.FireEmblem
         public const Int32 WIDTH = 16;
         public const Int32 HEIGHT = 14;
 
-        public static Int32 Face_Width  = (Core.CurrentROM is FE6) ? 8 : 32;
-        public static Int32 Face_Height = (Core.CurrentROM is FE6) ? 17 : 4;
+        public static Int32 Face_Width  = (Core.App.Game is FE6) ? 8 : 32;
+        public static Int32 Face_Height = (Core.App.Game is FE6) ? 17 : 4;
         public static Int32 Face_Length = Face_Width * Face_Height * Tile.LENGTH;
         public static Int32 Card_Width  = 10;
         public static Int32 Card_Height = 9;
@@ -72,7 +72,7 @@ namespace EmblemMagic.FireEmblem
 
             if (chibi == null)
             {
-                Type = (Core.CurrentROM is FE6) ?
+                Type = (Core.App.Game is FE6) ?
                     PortraitType.Generic :
                     PortraitType.Shop;
                 AddSprite(Sprite.Empty, 0, 0);
@@ -86,7 +86,7 @@ namespace EmblemMagic.FireEmblem
 
             if (mouth == null)
             {
-                if (!(Core.CurrentROM is FE6))
+                if (!(Core.App.Game is FE6))
                     Type = PortraitType.Generic;
                 AddSprite(Sprite.Empty, 0, 0);
             }
@@ -135,7 +135,7 @@ namespace EmblemMagic.FireEmblem
                 tileset = new Tileset(); tileset.Parse(image, TileMap.Place(Map_Chibi(), 12, 2, WIDTH, HEIGHT));
                 AddSprite(new Sprite(image.Colors, tileset, new TileMap(Map_Chibi())), 12 * 8, 2 * 8);
 
-                if (Core.CurrentROM is FE6)
+                if (Core.App.Game is FE6)
                 {
                     AddSprite(Sprite.Empty, 0, 0);
                 }
@@ -182,7 +182,7 @@ namespace EmblemMagic.FireEmblem
         }
         static Int32?[,] Map_Face()
         {
-            if (Program.Core.CurrentROM is FE6)
+            if (Program.Core.Game is FE6)
             {
                 return TileMap.Convert(new Int32?[14, 16]
                 {

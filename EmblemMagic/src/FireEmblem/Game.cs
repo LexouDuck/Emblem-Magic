@@ -6,41 +6,29 @@ using Magic;
 
 namespace EmblemMagic.FireEmblem
 {
-    /// <summary>
-    /// The child classes of this 
-    /// </summary>
-    public abstract class Game : IGame
+    public enum GameType
+    {
+        Invalid = 0,
+        FE6,
+        FE7,
+        FE8,
+    }
+
+
+    public abstract class Game : GBA.Game<GameType>
     {
         /// <summary>
-        /// Tells whether or not this ROM is an unmodified Fire Emblem ROM
+        /// Creates a FireEmblem Game instance from the given parameters
         /// </summary>
-        public Boolean IsClean { get; private set; }
-        /// <summary>
-        /// Tells whether or not the filesize has been changed
-        /// </summary>
-        public Boolean Expanded { get; private set; }
-        /// <summary>
-        /// Which version of the game this is - JAP, USA or EUR
-        /// </summary>
-        public GameVersion Version { get; private set; }
-
-
-
-        /// <summary>
-        /// The address in the ROM at which the game ID is located
-        /// </summary>
-        const UInt32 ID_ADDRESS = 0x0000A0;
-
-
-
-        /// <summary>
-        /// Creates a FE6/FE7/FE8 instance from the given parameters
-        /// </summary>
-        public Game(GameVersion version, Boolean clean, Boolean expanded)
+        public static Game FromTypeAndRegion(GameType type, GameRegion region)
         {
-            Version = version;
-            IsClean = clean;
-            Expanded = expanded;
+            switch (type)
+            {
+                case GameType.FE6: return FE6.FromRegion(region);
+                case GameType.FE7: return FE7.FromRegion(region);
+                case GameType.FE8: return FE8.FromRegion(region);
+            }
+            return null;
         }
 
         /// <summary>
@@ -48,234 +36,65 @@ namespace EmblemMagic.FireEmblem
         /// </summary>
         public static Game FromROM(DataManager ROM)
         {
-            Byte[] id_data = Core.ReadData(new Pointer(ID_ADDRESS), 0x12);
+            Byte[] id_data = Core.ReadData(new Pointer(ID_ADDRESS), (int)ID_LENGTH);
             String id = new String(Encoding.ASCII.GetChars(id_data));
 
-            GameVersion version = 0;
-            Char game = ' ';
-            foreach (GameVersion region in Enum.GetValues(typeof(GameVersion)))
+            GameRegion region = GameRegion.Invalid;
+            GameType   game   = GameType.Invalid;
+            foreach (GameRegion r in Enum.GetValues(typeof(GameRegion)))
             {
-                if (region == GameVersion.JAP)
-                if (id.Equals(FE6.GameID(region))) { game = '6'; version = region; break; }
-                if (id.Equals(FE7.GameID(region))) { game = '7'; version = region; break; }
-                if (id.Equals(FE8.GameID(region))) { game = '8'; version = region; break; }
+                if (r == GameRegion.Invalid) continue;
+                else if (r == GameRegion.JAP)
+                if (id.Equals(FE6.FromRegion(r).ID)) { game = GameType.FE6; region = r; break; }
+                if (id.Equals(FE7.FromRegion(r).ID)) { game = GameType.FE7; region = r; break; }
+                if (id.Equals(FE8.FromRegion(r).ID)) { game = GameType.FE8; region = r; break; }
             }
-
-            Boolean clean;
-            Boolean expanded;
-            switch (game)
-            {
-                case '6':
-                    expanded = (Core.CurrentROMSize == FE6.DefaultFileSize(version));
-                    clean = (CRC32.GetChecksum(ROM.FileData) == FE6.Checksum(version));
-                    break;
-                case '7':
-                    expanded = (Core.CurrentROMSize == FE7.DefaultFileSize(version));
-                    clean = (CRC32.GetChecksum(ROM.FileData) == FE7.Checksum(version));
-                    break;
-                case '8':
-                    expanded = (Core.CurrentROMSize == FE8.DefaultFileSize(version));
-                    clean = (CRC32.GetChecksum(ROM.FileData) == FE8.Checksum(version));
-                    break;
-                default: throw new Exception("The Fire Emblem game ID could not be identified.");
-            }
-
-            switch (game)
-            {
-                case '6': return new FE6(version, clean, expanded);
-                case '7': return new FE7(version, clean, expanded);
-                case '8': return new FE8(version, clean, expanded);
-                default: return null;
-            }
+            return Game.FromTypeAndRegion(game, region);
         }
 
 
+        /*
+        Address_ClassArray();               // Address at which the array of unit classes is located for this ROM
+        Address_ChapterArray();             // Address at which the chapter array is located for this ROM
+        Address_MapDataArray();             // Address at which the big map/event data pointer array is located for this ROM
 
-        override public String ToString()
-        {
-            if (this is FE6) return "Fire Emblem 6" + " (" + Version + ") " + " - " + (IsClean ? "Clean" : "Hacked") + " ROM";
-            if (this is FE7) return "Fire Emblem 7" + " (" + Version + ") " + " - " + (IsClean ? "Clean" : "Hacked") + " ROM";
-            if (this is FE8) return "Fire Emblem 8" + " (" + Version + ") " + " - " + (IsClean ? "Clean" : "Hacked") + " ROM";
-            return "Unknown Game";
-        }
-        override public Boolean Equals(Object other)
-        {
-            if (!(other is Game)) return false;
-            Game game = (Game)other;
-            return (Version == game.Version)
-                && (this.GetType() == game.GetType());
-        }
-        override public Int32 GetHashCode()
-        {
-            return this.GetType().GetHashCode() ^ Version.GetHashCode() ^ IsClean.GetHashCode() ^ Expanded.GetHashCode();
-        }
+        Address_TextArray();                // Address at which the text array is located for this ROM
+        Address_HuffmanTree();              // Address at which the huffman tree begins for this ROM
+        Address_HuffmanTreeRoot();          // Address at which the huffman tree ends for this ROM
 
+        Address_Font_Menu();                // Address at which the menu font for this ROM is
+        Address_Font_Bubble();              // Address at which the dialogue text bubble font for this ROM is
+        Address_TextBubbleTileset();        // Address at which the text bubble graphics is for this game
+        Address_TextBubblePalette();        // Address at which the text bubble palette is for this game
 
+        Address_MusicArray();               // Address at which the array of songs is for this game
 
-        /// <summary>
-        /// Returns a string identifier of this Fire Emblem game : "FE6J", "FE7U", or "FE8E", etc
-        /// </summary>
-        public abstract String GetIdentifier();
+        Address_PortraitArray();            // Address at which the portrait array is located for this ROM
 
-        /// <summary>
-        /// Gets the default file size of the current ROM (according to game and version)
-        /// </summary>
-        public UInt32 GetDefaultROMSize()
-        {
-            if (this is FE6) return FE6.DefaultFileSize(this.Version);
-            if (this is FE7) return FE7.DefaultFileSize(this.Version);
-            if (this is FE8) return FE8.DefaultFileSize(this.Version);
-            return 0;
-        }
+        Address_MapTerrainNames();          // Address at which the map tileset terrain name text index array is located in this ROM
 
-        /// <summary>
-        /// Gets the CRC32 checksum of the default version of the current ROM (according to game and version)
-        /// </summary>
-        public UInt32 GetDefaultROMChecksum()
-        {
-            if (this is FE6) return FE6.Checksum(this.Version);
-            if (this is FE7) return FE7.Checksum(this.Version);
-            if (this is FE8) return FE8.Checksum(this.Version);
-            return 0;
-        }
+        Address_MapSpriteIdleArray();       // Address of the first (standing) map sprite array
+        Address_MapSpriteMoveArray();       // Address of the second (moving) map sprite array
+        Address_MapSpritePalettes();        // Address at which the 4 palettes for map sprites is located in this ROM
 
-        /// <summary>
-        /// Returns an array of ranges describing known free space for a clean ROM of the given version
-        /// </summary>
-        public abstract Magic.Range[] GetDefaultFreeSpace();
+        Address_DialogBackgroundArray();    // Address at which the array of backgrounds for this FE game is located
+        Address_BattleBackgroundArray();    // Address at which the array of battle backgrounds for this game is located
+        Address_CutsceneScreenArray();      // Address at which the array of cutscene screens for this game is located
 
-        /// <summary>
-        /// Returns an array of 'Repoint's describing the addresses of different core assets and arrays for the game
-        /// </summary>
-        public abstract Repoint[] GetDefaultPointers();
+        Address_ItemIconTileset();          // Address at which the item icon graphics are for this game
+        Address_ItemIconPalette();          // Address at which the item icon palette is for this game
 
+        Address_CharacterPaletteArray();    // Address at which the list of character in-battle palettes is
+        Address_BattleAnimationArray();     // Address at which the battle animation array starts in this FE game
 
+        Address_SpellAnimationArray();      // Address at which the spell animations start in this game
 
-        /// <summary>
-        /// Returns the address at which the array of unit classes is located for this ROM
-        /// </summary>
-        public abstract Pointer Address_ClassArray();
-        /// <summary>
-        /// Returns the address at which the chapter array is located for this ROM
-        /// </summary>
-        public abstract Pointer Address_ChapterArray();
-        /// <summary>
-        /// Returns the address at which the big map/event data pointer array is located for this ROM
-        /// </summary>
-        public abstract Pointer Address_MapDataArray();
+        Address_BattlePlatformArray();      // Address at which the array of platforms for the battle screen is
+        Address_BattleScreenFrame();        // Addresses of the battle screen frame
 
-        /// <summary>
-        /// Returns the address at which the text array is located for this ROM
-        /// </summary>
-        public abstract Pointer Address_TextArray();
-        /// <summary>
-        /// Returns the address at which the huffman tree begins for this ROM
-        /// </summary>
-        public abstract Pointer Address_HuffmanTree();
-        /// <summary>
-        /// Returns the address at which the huffman tree ends for this ROM
-        /// </summary>
-        public abstract Pointer Address_HuffmanTreeRoot();
+        Address_WorldMap();                 // Addresses of both the small world map and large world map (and mini if FE8)
 
-        /// <summary>
-        /// Returns the address at which the menu font for this ROM is
-        /// </summary>
-        public abstract Pointer Address_Font_Menu();
-        /// <summary>
-        /// Returns the address at which the dialogue text bubble font for this ROM is
-        /// </summary>
-        public abstract Pointer Address_Font_Bubble();
-        /// <summary>
-        /// Returns the address at which the text bubble graphics is for this game
-        /// </summary>
-        public abstract Pointer Address_TextBubbleTileset();
-        /// <summary>
-        /// Returns the address at which the text bubble palette is for this game
-        /// </summary>
-        public abstract Pointer Address_TextBubblePalette();
-
-        /// <summary>
-        /// Returns the address at which the array of songs is for this game
-        /// </summary>
-        public abstract Pointer Address_MusicArray();
-
-        /// <summary>
-        /// Returns the address at which the portrait array is located for this ROM
-        /// </summary>
-        public abstract Pointer Address_PortraitArray();
-
-        /// <summary>
-        /// Returns the address at which the map tileset terrain name text index array is located in this ROM
-        /// </summary>
-        public abstract Pointer Address_MapTerrainNames();
-
-        /// <summary>
-        /// Returns the address of the first (standing) map sprite array
-        /// </summary>
-        public abstract Pointer Address_MapSpriteIdleArray();
-        /// <summary>
-        /// Returns the address of the second (moving) map sprite array
-        /// </summary>
-        /// <returns></returns>
-        public abstract Pointer Address_MapSpriteMoveArray();
-        /// <summary>
-        /// Returns the address at which the 4 palettes for map sprites is located in this ROM
-        /// </summary>
-        public abstract Pointer Address_MapSpritePalettes();
-
-        /// <summary>
-        /// Returns the address at which the array of backgrounds for this FE game is located
-        /// </summary>
-        public abstract Pointer Address_DialogBackgroundArray();
-        /// <summary>
-        /// Returns the address at which the array of battle backgrounds for this game is located
-        /// </summary>
-        public abstract Pointer Address_BattleBackgroundArray();
-        /// <summary>
-        /// Returns the address at which the array of cutscene screens for this game is located
-        /// </summary>
-        public abstract Pointer Address_CutsceneScreenArray();
-
-        /// <summary>
-        /// Returns the address at which the item icon graphics are for this game
-        /// </summary>
-        public abstract Pointer Address_ItemIconTileset();
-        /// <summary>
-        /// Returns the address at which the item icon palette is for this game
-        /// </summary>
-        public abstract Pointer Address_ItemIconPalette();
-
-        /// <summary>
-        /// Returns the address at which the list of character in-battle palettes is
-        /// </summary>
-        public abstract Pointer Address_CharacterPaletteArray();
-        /// <summary>
-        /// Returns the address at which the battle animation array starts in this FE game
-        /// </summary>
-        public abstract Pointer Address_BattleAnimationArray();
-
-        /// <summary>
-        /// Returns the address at which the spell animations start in this game
-        /// </summary>
-        public abstract Pointer Address_SpellAnimationArray();
-
-        /// <summary>
-        /// Returns the address at which the array of platforms for the battle screen is
-        /// </summary>
-        public abstract Pointer Address_BattlePlatformArray();
-        /// <summary>
-        /// Returns the pointers for the battle screen frame
-        /// </summary>
-        public abstract Pointer[] Address_BattleScreenFrame();
-
-        /// <summary>
-        /// Returns the pointers for both the small world map and large world map (and mini if FE8)
-        /// </summary>
-        public abstract Pointer[] Address_WorldMap();
-
-        /// <summary>
-        /// Returns the pointers for the graphics that make up the title screen
-        /// </summary>
-        public abstract Pointer[] Address_TitleScreen();
+        Address_TitleScreen();              // Addresses of the graphics that make up the title screen
+        */
     }
 }

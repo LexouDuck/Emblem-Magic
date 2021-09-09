@@ -79,7 +79,7 @@ namespace EmblemMagic.Editors
                 String path = Path.GetDirectoryName(filepath) + '\\';
                 String file = Path.GetFileNameWithoutExtension(filepath);
 
-                if (Core.CurrentROM is FE6)
+                if (Core.App.Game is FE6)
                 {
                     String name_mg_palette = "Title Screen MG/FG Palette";
                     String name_mg_tileset = "Title Screen MG/FG Tileset";
@@ -102,7 +102,7 @@ namespace EmblemMagic.Editors
                     File.WriteAllBytes(path + name_bg_tileset + ".pal", Core.ReadPalette(address_bg_palette, Palette.LENGTH).ToBytes(false));
                     File.WriteAllBytes(path + name_bg_palette + ".png", new Tileset(Core.ReadData(address_bg_tileset, 0)).ToBytes(false));
                 }
-                if (Core.CurrentROM is FE7)
+                if (Core.App.Game is FE7)
                 {
                     String name_bg_palette = "Title Screen BG Palette";
                     String name_bg_tileset = "Title Screen BG Tileset";
@@ -120,7 +120,7 @@ namespace EmblemMagic.Editors
                     Pointer address_fg_palette = Core.GetPointer(name_fg_palette);
                     Pointer address_fg_tileset = Core.GetPointer(name_fg_tileset);
 
-                    Boolean tsa = (Core.CurrentROM.Version != GameVersion.JAP);
+                    Boolean tsa = (Core.App.Game.Region != GameRegion.JAP);
 
                     File.WriteAllBytes(path + name_bg_palette + ".pal", Core.ReadPalette(address_bg_palette, Palette.LENGTH).ToBytes(false));
                     File.WriteAllBytes(path + name_bg_tileset + ".chr", new Tileset(Core.ReadData(address_bg_tileset, 0)).ToBytes(false));
@@ -130,7 +130,7 @@ namespace EmblemMagic.Editors
                     File.WriteAllBytes(path + name_fg_palette + ".pal", Core.ReadPalette(address_fg_palette, Palette.LENGTH * 5).ToBytes(false));
                     File.WriteAllBytes(path + name_fg_tileset + ".chr", new Tileset(Core.ReadData(address_fg_tileset, 0)).ToBytes(false));
                 }
-                if (Core.CurrentROM is FE8)
+                if (Core.App.Game is FE8)
                 {
                     String name_bg_palette  = "Title Screen BG Palette";
                     String name_bg_tileset1 = "Title Screen BG Tileset 1";
@@ -176,7 +176,7 @@ namespace EmblemMagic.Editors
         {
             try
             {
-                if (Core.CurrentROM is FE6)
+                if (Core.App.Game is FE6)
                 {
                     Pointer address_mg_palette = Core.GetPointer("Title Screen MG/FG Palette");
                     Pointer address_mg_tileset = Core.GetPointer("Title Screen MG/FG Tileset");
@@ -193,7 +193,7 @@ namespace EmblemMagic.Editors
                         Core.ReadPalette(address_bg_palette, Palette.LENGTH),
                         new Tileset(Core.ReadData(address_bg_tileset, 0)));
                 }
-                if (Core.CurrentROM is FE7)
+                if (Core.App.Game is FE7)
                 {
                     Pointer address_bg_palette = Core.GetPointer("Title Screen BG Palette");
                     Pointer address_bg_tileset = Core.GetPointer("Title Screen BG Tileset");
@@ -203,7 +203,7 @@ namespace EmblemMagic.Editors
                     Pointer address_fg_palette = Core.GetPointer("Title Screen FG Palette");
                     Pointer address_fg_tileset = Core.GetPointer("Title Screen FG Tileset");
 
-                    Boolean tsa = (Core.CurrentROM.Version != GameVersion.JAP);
+                    Boolean tsa = (Core.App.Game.Region != GameRegion.JAP);
                     Core_LoadTitleScreen_FE7(
                         Core.ReadPalette(address_bg_palette, Palette.LENGTH),
                         new Tileset(Core.ReadData(address_bg_tileset, 0)),
@@ -213,7 +213,7 @@ namespace EmblemMagic.Editors
                         Core.ReadPalette(address_fg_palette, Palette.LENGTH * 5),
                         new Tileset(Core.ReadData(address_fg_tileset, 0)));
                 }
-                if (Core.CurrentROM is FE8)
+                if (Core.App.Game is FE8)
                 {
                     Pointer address_bg_palette = Core.GetPointer("Title Screen BG Palette");
                     Pointer address_bg_tileset1 = Core.GetPointer("Title Screen BG Tileset 1");
@@ -353,8 +353,8 @@ namespace EmblemMagic.Editors
             }
             if (FG_CheckBox.Checked)
             {
-                Boolean jap = (Core.CurrentROM.Version == GameVersion.JAP);
-                Boolean eur = (Core.CurrentROM.Version == GameVersion.EUR);
+                Boolean jap = (Core.App.Game.Region == GameRegion.JAP);
+                Boolean eur = (Core.App.Game.Region == GameRegion.EUR);
                 Palette[] palettes = Palette.Split(fg_palette, 8);
                 GBA.Image fg;
                 // durandal sword
@@ -430,7 +430,7 @@ namespace EmblemMagic.Editors
             {
                 Palette[] palettes = Palette.Split(fg_palette, 8);
                 GBA.Image fg;
-                if (Core.CurrentROM.Version == GameVersion.JAP)
+                if (Core.App.Game.Region == GameRegion.JAP)
                 {
                     // large 'FIRE EMBLEM' title logo
                     fg = fg_tileset.ToImage(32, 32, palettes[2].ToBytes(false));
@@ -534,19 +534,19 @@ namespace EmblemMagic.Editors
         {
             GraphicsEditor editor = new GraphicsEditor(App);
 
-            if (Core.CurrentROM is FE6)
+            if (Core.App.Game is FE6)
             {
                 editor.Core_SetEntry(GBA.Screen.W_TILES + 2, GBA.Screen.H_TILES,
                     Core.GetPointer("Title Screen BG Palette"), false,
                     Core.GetPointer("Title Screen BG Tileset"), true);
             }
-            if (Core.CurrentROM is FE7)
+            if (Core.App.Game is FE7)
             {
                 editor.Core_SetEntry(GBA.Screen.W_TILES, GBA.Screen.H_TILES + 1,
                     Core.GetPointer("Title Screen BG Palette"), false,
                     Core.GetPointer("Title Screen BG Tileset"), true);
             }
-            if (Core.CurrentROM is FE8)
+            if (Core.App.Game is FE8)
             {
                 editor.Core_SetEntry(GBA.Screen.W_TILES + 2, GBA.Screen.H_TILES,
                     Core.GetPointer("Title Screen BG Palette"), false,
@@ -560,22 +560,22 @@ namespace EmblemMagic.Editors
         {
             GraphicsEditor editor = new GraphicsEditor(App);
 
-            if (Core.CurrentROM is FE6)
+            if (Core.App.Game is FE6)
             {
                 editor.Core_SetEntry(GBA.Screen.W_TILES + 2, GBA.Screen.H_TILES,
                     Core.GetPointer("Title Screen MG/FG Palette"), false,
                     Core.GetPointer("Title Screen MG/FG Tileset"), true,
                     Core.GetPointer("Title Screen MG TSA"), true, false);
             }
-            if (Core.CurrentROM is FE7)
+            if (Core.App.Game is FE7)
             {
-                Boolean tsa = (Core.CurrentROM.Version != GameVersion.JAP);
+                Boolean tsa = (Core.App.Game.Region != GameRegion.JAP);
                 editor.Core_SetEntry(GBA.Screen.W_TILES + 2, GBA.Screen.H_TILES,
                     Core.GetPointer("Title Screen MG Palette"), false,
                     Core.GetPointer("Title Screen MG Tileset"), true,
                     Core.GetPointer("Title Screen MG TSA"), tsa, true);
             }
-            if (Core.CurrentROM is FE8)
+            if (Core.App.Game is FE8)
             {
                 editor.Core_SetEntry(GBA.Screen.W_TILES + 2, GBA.Screen.H_TILES,
                     Core.GetPointer("Title Screen MG Palette"), false,
@@ -589,19 +589,19 @@ namespace EmblemMagic.Editors
         {
             GraphicsEditor editor = new GraphicsEditor(App);
 
-            if (Core.CurrentROM is FE6)
+            if (Core.App.Game is FE6)
             {
                 editor.Core_SetEntry(32, 25,
                     Core.GetPointer("Title Screen MG/FG Palette"), false,
                     Core.GetPointer("Title Screen FG Tileset"), true);
             }
-            if (Core.CurrentROM is FE7)
+            if (Core.App.Game is FE7)
             {
                 editor.Core_SetEntry(32, 32,
                     Core.GetPointer("Title Screen FG Palette"), false,
                     Core.GetPointer("Title Screen FG Tileset"), true);
             }
-            if (Core.CurrentROM is FE8)
+            if (Core.App.Game is FE8)
             {
                 editor.Core_SetEntry(32, 32,
                     Core.GetPointer("Title Screen FG Palette"), false,

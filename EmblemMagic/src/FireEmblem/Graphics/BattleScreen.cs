@@ -10,19 +10,19 @@ namespace EmblemMagic.FireEmblem
         public const Int32 HEIGHT = 13;
         public const Int32 HALFWIDTH = 16;
 
-        public static Int32 NAME_WIDTH      { get { return Core.CurrentROM is FE8 ? 7 : 6; } } 
-        public static Int32 WEAPON_WIDTH    { get { return Core.CurrentROM is FE8 ? 8 : 7; } }
+        public static Int32 NAME_WIDTH      { get { return Core.App.Game is FE8 ? 7 : 6; } } 
+        public static Int32 WEAPON_WIDTH    { get { return Core.App.Game is FE8 ? 8 : 7; } }
         public const Int32 NAME_HEIGHT = 6;
         public const Int32 WEAPON_HEIGHT = 7;
 
-        public static Int32 L_NAME_OFFSET   { get { return Core.CurrentROM is FE8 ? 68 : 32; } } 
-        public static Int32 L_WEAPON_OFFSET { get { return Core.CurrentROM is FE8 ? 82 : 44; } } 
-        public static Int32 R_NAME_OFFSET   { get { return Core.CurrentROM is FE8 ? 98 : 58; } } 
-        public static Int32 R_WEAPON_OFFSET { get { return Core.CurrentROM is FE8 ? 112 : 70; } } 
+        public static Int32 L_NAME_OFFSET   { get { return Core.App.Game is FE8 ? 68 : 32; } } 
+        public static Int32 L_WEAPON_OFFSET { get { return Core.App.Game is FE8 ? 82 : 44; } } 
+        public static Int32 R_NAME_OFFSET   { get { return Core.App.Game is FE8 ? 98 : 58; } } 
+        public static Int32 R_WEAPON_OFFSET { get { return Core.App.Game is FE8 ? 112 : 70; } } 
 
-        public static Int32 EMPTY_TILE     { get { return Core.CurrentROM is FE8 ? 0 : 31; } }
-        public static Int32 TILE_LIMIT     { get { return Core.CurrentROM is FE8 ? 68 : 32; } }
-        public static Int32 TILE_LIMIT_END { get { return Core.CurrentROM is FE8 ? 128 : 84; } }
+        public static Int32 EMPTY_TILE     { get { return Core.App.Game is FE8 ? 0 : 31; } }
+        public static Int32 TILE_LIMIT     { get { return Core.App.Game is FE8 ? 68 : 32; } }
+        public static Int32 TILE_LIMIT_END { get { return Core.App.Game is FE8 ? 128 : 84; } }
 
         public Tileset L_Name
         {
@@ -89,7 +89,7 @@ namespace EmblemMagic.FireEmblem
 
             const Int32 X_L_NAME = 1;
             const Int32 X_L_WEAPON = 8;
-            Int32 X_R_NAME = Core.CurrentROM is FE8 ? 24 : 25;
+            Int32 X_R_NAME = Core.App.Game is FE8 ? 24 : 25;
             const Int32 X_R_WEAPON = 18;
             const Int32 Y_NAME = 1;
             const Int32 Y_WEAPON = 8;
@@ -216,7 +216,7 @@ namespace EmblemMagic.FireEmblem
             {
                 result[HALFWIDTH + 2 + x, NAME_HEIGHT + y] = tsa_array[x, 18 + y];
             }
-            if (Core.CurrentROM is FE8)
+            if (Core.App.Game is FE8)
             {
                 for (Int32 i = 0; i < WEAPON_HEIGHT; i++)
                 {
@@ -248,7 +248,7 @@ namespace EmblemMagic.FireEmblem
         /// </summary>
         public static TSA_Array GetInsertableTSA(TSA_Array tsa_array)
         {
-            TSA_Array result = (Core.CurrentROM is FE8) ? new TSA_Array(16, 32) : new TSA_Array(16, 28);
+            TSA_Array result = (Core.App.Game is FE8) ? new TSA_Array(16, 32) : new TSA_Array(16, 28);
 
             result.Width = 15;
             // top left
@@ -282,7 +282,7 @@ namespace EmblemMagic.FireEmblem
                 result[x, 18 + y] = tsa_array[HALFWIDTH + 2 + x, NAME_HEIGHT + y];
             }
             // bottom right, set the rest of the TSA
-            if (Core.CurrentROM is FE8)
+            if (Core.App.Game is FE8)
             {   // (used for unit promotion)
                 for (Int32 y = 0; y < WEAPON_HEIGHT; y++)
                 for (Int32 x = 0; x < 2; x++)

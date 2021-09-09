@@ -172,7 +172,7 @@ namespace Magic.Editors
                 file.Add(line);
             }
 
-            CurrentModule = new Module(App.CurrentROM.GetIdentifier(), file.ToArray());
+            CurrentModule = new Module(App.Game.Identifier, file.ToArray());
 
             Status_Module.Text = CurrentModule.Name;
             Status_Author.Text = "Author of this module: " + CurrentModule.Author;

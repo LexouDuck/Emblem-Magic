@@ -12,20 +12,7 @@ using Magic;
 using Magic.Components;
 using Magic.Editors;
 
-/* TODO
 
-    Features:
-    - everything
-
-    Keep in mind for release to check:
-    - File_RecentFiles.Enabled field being set to 'false' in Suite.Designer.cs, go delete that line
-    - MarkingComboBox "Datasource modified error" because of generated code in designer files, go delete that too
-    - The automatically defined "DEBUG" constant (not defined when compiling as 'Release' build in visual studio), will take care of:
-        - Main Suite window (this file): Disabling the "open" buttons for WIP/unfinished Editor windows
-        - ./src/Editors/EventEditor.cs, line 95 or so, absolute folderpath changes to appropriate function call
-    - Do a "Release" build (any CPU) in Visual studio
-    - Run the ./dist.sh shell script (if you're on Windows, use Cygwin), to prepare the "dist" folder for release.
-*/
 
 namespace KirbyMagic
 {
@@ -51,7 +38,7 @@ namespace KirbyMagic
         /// Describes which fire emblem game is open, whether or not it's a clean ROM, and such.
         /// </summary>
         Kirby.Game currentROM;
-        public IGame CurrentROM { get; set; }
+        public IGame Game { get; set; }
 
         /// <summary>
         /// When true, all Emblem Magic windows should update normally
@@ -77,7 +64,7 @@ namespace KirbyMagic
             AppName = software_name;
             AppVersion = System.Reflection.Assembly.GetEntryAssembly().GetName().Version;
 
-            ROM = new DataManager();
+            ROM = new DataManager(this);
             FEH = new HackManager(this);
             Editors = new List<Editor>();
 
@@ -110,7 +97,7 @@ namespace KirbyMagic
         
         public void Update_FileMenu()
         {
-            File_SaveROM.Enabled = (ROM.FilePath == null || ROM.FilePath.Length == 0) ? false : ROM.Changed;
+            File_SaveROM.Enabled = (ROM.FilePath == null || ROM.FilePath.Length == 0) ? false : ROM.WasChanged;
             File_SaveFEH.Enabled = (FEH.FilePath == null || FEH.FilePath.Length == 0) ? false : FEH.Changed;
         }
         public void Update_EditMenu()
@@ -172,11 +159,13 @@ namespace KirbyMagic
         {
             Tabs_Info_ROM_FileSize.Text = Util.GetDisplayBytes(ROM.FileSize);
             Tabs_Info_ROM_FilePath.Text = ROM.FilePath;
-            Tabs_Info_FEH_Name.Text = FEH.HackName;
-            Tabs_Info_FEH_Author.Text = FEH.HackAuthor;
+            Tabs_Info_FEH_Name.Text     = FEH.HackName;
+            Tabs_Info_FEH_Author.Text   = FEH.HackAuthor;
             Tabs_Info_FEH_FileInfo.Text = FEH.Write.History.Count + " writes in this file.\n";
             Tabs_Info_FEH_FilePath.Text = FEH.FilePath;
-            StatusLabel.Text = (CurrentROM == null) ? "" : CurrentROM.ToString();
+            StatusLabel.Text =
+                (Game == null ? "" : Game.ToString()) + " - " +
+                (ROM.IsClean ? "Clean" : "Hacked") + " ROM";
         }
 
         /// <summary>
@@ -186,7 +175,7 @@ namespace KirbyMagic
         {
             try
             {
-                CurrentROM = Kirby.Game.FromROM(ROM);
+                Game = Kirby.Game.FromROM(ROM);
             }
             catch (Exception ex)
             {
@@ -249,7 +238,7 @@ namespace KirbyMagic
 
         void Core_ResetDataManager()
         {
-            ROM = new DataManager();
+            ROM = new DataManager(this);
             foreach (Editor editor in Editors)
             {
                 editor.Dispose();
@@ -270,7 +259,7 @@ namespace KirbyMagic
         /// </summary>
         Boolean Core_CheckHackedROM()
         {
-            if (CurrentROM.IsClean) return false;
+            if (ROM.IsClean) return false;
             String same_filename = ROM.FilePath.Remove(ROM.FilePath.Length - 4) + ".feh";
             if (File.Exists(same_filename))
             {
@@ -370,16 +359,16 @@ namespace KirbyMagic
         /// </summary>
         void Core_CheckPointers()
         {
-            if (CurrentROM.IsClean)
+            if (ROM.IsClean)
             {
-                FEH.Space.Load(CurrentROM.GetDefaultFreeSpace());
-                FEH.Point.Load(CurrentROM.GetDefaultPointers());
+                FEH.Space.Load(Game.FreeSpace);
+                FEH.Point.Load(Game.GetDefaultPointers());
                 
                 FEH.Changed = false;
             }
             else
             {
-                Repoint[] pointers = CurrentROM.GetDefaultPointers();
+                Repoint[] pointers = Game.GetDefaultPointers();
                 List<Repoint> unreferenced = new List<Repoint>();
                 for (Int32 i = 0; i < pointers.Length; i++)
                 {
@@ -522,7 +511,7 @@ namespace KirbyMagic
         }
         Boolean Core_ExitROMFile()
         {
-            DialogResult answer = ROM.Changed ?
+            DialogResult answer = ROM.WasChanged ?
                 Prompt.SaveROMChanges() : DialogResult.No;
             if (answer == DialogResult.Cancel) return false;
             else
@@ -644,7 +633,7 @@ namespace KirbyMagic
 
                 if (ROM.UndoList.Count == 0)
                 {
-                    ROM.Changed = false;
+                    ROM.WasChanged = false;
                     FEH.Changed = false;
                 }
 
@@ -689,7 +678,7 @@ namespace KirbyMagic
             {
                 Write write = ROM.RedoList[index].Associated;
 
-                ROM.Changed = true;
+                ROM.WasChanged = true;
                 FEH.Changed = true;
 
                 switch (ROM.RedoList[index].Action)
@@ -772,15 +761,15 @@ namespace KirbyMagic
                 throw new Exception("Given ROM identifier is invalid, should have 4 chars (" + identifier + ")");
             if (identifier.StartsWith("K"))
             {
-                GameVersion version;
+                GameRegion version;
                 switch (identifier[3])
                 {
-                    case 'J': version = GameVersion.JAP; break;
-                    case 'U': version = GameVersion.USA; break;
-                    case 'E': version = GameVersion.EUR; break;
+                    case 'J': version = GameRegion.JAP; break;
+                    case 'U': version = GameRegion.USA; break;
+                    case 'E': version = GameRegion.EUR; break;
                     default: throw new Exception("FEH file describes an invalid game region (" + identifier + ")");
                 }
-                if (Core.CurrentROM.Version != version)
+                if (Game.Region != version)
                     throw new Exception("Loaded ROM has invalid version (" + identifier + ")");
                 if (false) { }
                 else if (identifier.Substring(1, 2).Equals("ND", StringComparison.Ordinal)) return;
@@ -919,8 +908,8 @@ namespace KirbyMagic
             {
                 UPS.WriteFile(saveWindow.FileName,
                     File.ReadAllBytes(Core.Path_CleanROM),
-                    Core.CurrentROM.GetDefaultROMSize(),
-                    Core.CurrentROM.GetDefaultROMChecksum(),
+                    Game.FileSize,
+                    Game.Checksum,
                     this.ROM.FileData,
                     Core.CurrentROMSize,
                     Core.CurrentROMChecksum);

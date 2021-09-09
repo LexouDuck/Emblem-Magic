@@ -20,6 +20,10 @@ namespace Magic
 
         //============================= Popup messages ============================
 
+        /// <summary>
+        /// Displays a simple modal popup message to the user
+        /// </summary>
+        /// <param name="text">The text to display in this message popup</param>
         public static void ShowMessage(String text)
         {
             MessageBox.Show(text,
@@ -28,6 +32,10 @@ namespace Magic
                 MessageBoxIcon.Information);
         }
 
+        /// <summary>
+        /// Displays a simple modal popup warning message to the user
+        /// </summary>
+        /// <param name="text">The text to display in this warning popup</param>
         public static void ShowWarning(String text)
         {
             MessageBox.Show(text,
@@ -36,6 +44,11 @@ namespace Magic
                 MessageBoxIcon.Warning);
         }
 
+        /// <summary>
+        /// Displays a simple modal popup error message to the user
+        /// </summary>
+        /// <param name="text">The text to display in this error popup</param>
+        /// <param name="ex">The exception holding the actual error message to display, if applicable</param>
         public static DialogResult ShowError(String text)
         {
             DialogResult result = MessageBox.Show(
@@ -54,6 +67,10 @@ namespace Magic
             return ShowError(text + "\n\n" + GetMethodName(ex) + " :\n" + ex.Message);
         }
 
+        /// <summary>
+        /// Displays a simple modal popup debug message to the user (in a copy/paste-able TextBox)
+        /// </summary>
+        /// <param name="text">The text to display in this debug message popup</param>
         public static void ShowDebug(String text)
         {
             Form debug = new Form()
@@ -74,6 +91,10 @@ namespace Magic
             debug.ShowDialog();
         }
 
+        /// <summary>
+        /// Displays a question prompt modal popup to the user (with Yes/No buttons for the user to reply)
+        /// </summary>
+        /// <param name="text">The text to display in this debug message popup</param>
         public static DialogResult ShowQuestion(String text)
         {
             DialogResult result = MessageBox.Show(text,
@@ -86,7 +107,7 @@ namespace Magic
         //============================= Editor Updating ============================
 
         /// <summary>
-        /// Stops all editor windows from updating
+        /// Stops all editor windows from updating (until ResumeUpdate is called)
         /// </summary>
         public static void SuspendUpdate()
         {
@@ -94,7 +115,7 @@ namespace Magic
         }
 
         /// <summary>
-        /// Allows editor windows to update upon writing
+        /// Allows editor windows to update automatically, as they normally do upon writing
         /// </summary>
         public static void ResumeUpdate()
         {
@@ -102,7 +123,7 @@ namespace Magic
         }
 
         /// <summary>
-        /// Forces all editor windows to update
+        /// Manually forces all editor windows to update
         /// </summary>
         public static void PerformUpdate()
         {
@@ -110,10 +131,10 @@ namespace Magic
             App.Core_Update();
         }
 
-        //============================= Context Editors ============================
+        //============================= Contextual Editors ============================
 
         /// <summary>
-        /// Opens a Palette Editor for the palette at 'address' (set paletteAmount as 0 if palette is compressed)
+        /// Opens a PaletteEditor for the palette at 'address' (set paletteAmount as 0 if palette is compressed)
         /// </summary>
         public static void OpenPaletteEditor(
             Editor sender,

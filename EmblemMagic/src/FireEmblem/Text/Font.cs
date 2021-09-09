@@ -36,7 +36,7 @@ namespace EmblemMagic.FireEmblem
         {
             get
             {
-                return (Core.CurrentROM.Version == GameVersion.JAP ? 512 : 256);
+                return (Core.App.Game.Region == GameRegion.JAP ? 512 : 256);
             }
         }
 
@@ -54,11 +54,11 @@ namespace EmblemMagic.FireEmblem
         public Font(Pointer address)
         {
             Address = address;
-            Glyphs = new Glyph[(Core.CurrentROM.Version == GameVersion.JAP ? 512 : 256)];
+            Glyphs = new Glyph[(Core.App.Game.Region == GameRegion.JAP ? 512 : 256)];
             Pointer pointer;
             for (System.Int32 i = 0; i < Glyphs.Length; i++)
             {
-                if (Core.CurrentROM.Version == GameVersion.JAP)
+                if (Core.App.Game.Region == GameRegion.JAP)
                 {
                     // normally you would compare the first byte of the Shift-JIS char to the 5th byte of the glyph; 
                     // if not equal, use the pointer which directs us to the next glyph (linked list)

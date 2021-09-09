@@ -32,7 +32,7 @@ namespace EmblemMagic.Editors
         {
             get
             {
-                return (Core.CurrentROM is FE6) ? (Current["Chibi"] == 0) : (Current["Face"] == 0);
+                return (Core.App.Game is FE6) ? (Current["Chibi"] == 0) : (Current["Face"] == 0);
             }
         }
 
@@ -86,17 +86,17 @@ namespace EmblemMagic.Editors
                 {
                     CurrentPortrait = new Portrait(
                         Core.ReadPalette((Pointer)Current["Palette"], Palette.LENGTH),
-                        Core.ReadData((Pointer)Current[(Core.CurrentROM is FE6) ? "Main" : "Card"], 0));
+                        Core.ReadData((Pointer)Current[(Core.App.Game is FE6) ? "Main" : "Card"], 0));
                 }
                 else
                 {
                     CurrentPortrait = new Portrait(
                         Core.ReadPalette((Pointer)Current["Palette"], Palette.LENGTH),
-                        ((Core.CurrentROM is FE7 && Core.CurrentROM.Version == GameVersion.JAP) || Core.CurrentROM is FE8) ?
+                        ((Core.App.Game is FE7 && Core.App.Game.Region == GameRegion.JAP) || Core.App.Game is FE8) ?
                             Core.ReadData((Pointer)Current["Face"] + 4, Portrait.Face_Length) :
-                            Core.ReadData((Pointer)Current[(Core.CurrentROM is FE6) ? "Main" : "Face"], 0),
-                        Core.ReadData((Pointer)Current["Chibi"], (Core.CurrentROM is FE6) ? Portrait.Chibi_Length : 0),
-                        (Core.CurrentROM is FE6) ? null :
+                            Core.ReadData((Pointer)Current[(Core.App.Game is FE6) ? "Main" : "Face"], 0),
+                        Core.ReadData((Pointer)Current["Chibi"], (Core.App.Game is FE6) ? Portrait.Chibi_Length : 0),
+                        (Core.App.Game is FE6) ? null :
                         Core.ReadData((Pointer)Current["Mouth"], Portrait.Mouth_Length));
                 }
 
@@ -131,7 +131,7 @@ namespace EmblemMagic.Editors
                         Test_Mouth_TrackBar.Value));
                     TestPortrait.AddSprite(
                         new Sprite(palette,
-                        (Core.CurrentROM is FE6 || (Test_Mouth_Smile_RadioButton.Checked && Test_Mouth_TrackBar.Value == 0)) ?
+                        (Core.App.Game is FE6 || (Test_Mouth_Smile_RadioButton.Checked && Test_Mouth_TrackBar.Value == 0)) ?
                         CurrentPortrait.Sprites[Portrait.MAIN].Sheet :
                         CurrentPortrait.Sprites[Portrait.MOUTH].Sheet,
                         tilemap),
@@ -185,7 +185,7 @@ namespace EmblemMagic.Editors
                 BlinkX_ByteBox.Value = (Byte)Current["BlinkX"];
                 BlinkY_ByteBox.Value = (Byte)Current["BlinkY"];
 
-                if (Core.CurrentROM is FE6)
+                if (Core.App.Game is FE6)
                 {
                     Image_PointerBox.Value = (Pointer)Current["Main"];
                 }
@@ -228,11 +228,11 @@ namespace EmblemMagic.Editors
             switch (CurrentPortrait.Type)
             {
                 case PortraitType.Portrait:
-                    Test_Blink_Label.Enabled = !(Core.CurrentROM is FE6);
-                    Test_Blink_TrackBar.Enabled = !(Core.CurrentROM is FE6);
+                    Test_Blink_Label.Enabled = !(Core.App.Game is FE6);
+                    Test_Blink_TrackBar.Enabled = !(Core.App.Game is FE6);
                     Test_Mouth_TrackBar.Enabled = true;
                     Test_Mouth_TrackBar.Minimum = 0;
-                    Test_Mouth_TrackBar.Maximum = (Core.CurrentROM is FE6) ? 2 : 3;
+                    Test_Mouth_TrackBar.Maximum = (Core.App.Game is FE6) ? 2 : 3;
                     Test_Mouth_Smile_RadioButton.Enabled = true;
                     Test_Mouth_Frown_RadioButton.Enabled = true;
                     break;
@@ -263,8 +263,8 @@ namespace EmblemMagic.Editors
             UI.SuspendUpdate();
             try
             {
-                Int32 header = ((Core.CurrentROM is FE8 ||
-                    (Core.CurrentROM is FE7 && Core.CurrentROM.Version == GameVersion.JAP)) ? 4 : 0);
+                Int32 header = ((Core.App.Game is FE8 ||
+                    (Core.App.Game is FE7 && Core.App.Game.Region == GameRegion.JAP)) ? 4 : 0);
                 Byte[] data_main = insert.Sprites[Portrait.MAIN].Sheet.ToBytes(false);
                 Byte[] data_chibi = null;
                 Byte[] data_mouth = null;
@@ -289,14 +289,14 @@ namespace EmblemMagic.Editors
                     data_chibi = insert.Sprites[Portrait.CHIBI].Sheet.ToBytes(false);
                     data_mouth = insert.Sprites[Portrait.MOUTH].Sheet.ToBytes(false);
 
-                    if (Core.CurrentROM is FE6 ||
-                       (Core.CurrentROM is FE7 && Core.CurrentROM.Version != GameVersion.JAP))
+                    if (Core.App.Game is FE6 ||
+                       (Core.App.Game is FE7 && Core.App.Game.Region != GameRegion.JAP))
                         data_main = LZ77.Compress(data_main);
 
                     repoints.Add(Tuple.Create("Face", (Pointer)Current["Face"], header + data_main.Length));
                     writepos.Add(Current.GetAddress(Current.EntryIndex, "Face"));
 
-                    if (!(Core.CurrentROM is FE6))
+                    if (!(Core.App.Game is FE6))
                     {
                         repoints.Add(Tuple.Create("Mouth", (Pointer)Current["Mouth"], data_mouth.Length));
                         writepos.Add(Current.GetAddress(Current.EntryIndex, "Mouth"));
@@ -336,7 +336,7 @@ namespace EmblemMagic.Editors
                         data_chibi,
                         CurrentEntry + "Chibi image changed");
 
-                    if (!(Program.Core.CurrentROM is FE6))
+                    if (!(Program.Core.Game is FE6))
                         Core.WriteData(this,
                             (Pointer)Current["Mouth"],
                             data_mouth,
@@ -426,7 +426,7 @@ namespace EmblemMagic.Editors
         /// </summary>
         Int32?[,] GetTileMap_Eyes(Boolean closed, Int32 blink)
         {
-            if (Program.Core.CurrentROM is FE6)
+            if (Program.Core.Game is FE6)
             {
                 return new Int32?[0, 0];
             }
@@ -456,7 +456,7 @@ namespace EmblemMagic.Editors
         /// </summary>
         Int32?[,] GetTileMap_Mouth(Boolean smiling, Int32 openness)
         {
-            if (Program.Core.CurrentROM is FE6)
+            if (Program.Core.Game is FE6)
             {
                 if (smiling) switch (openness)
                 {
@@ -625,7 +625,7 @@ namespace EmblemMagic.Editors
         private void Image_PointerBox_Changed(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                (Core.CurrentROM is FE6) ?
+                (Core.App.Game is FE6) ?
                     Current.GetAddress(Current.EntryIndex, "Main") :
                 (IsGenericClassCard) ?
                     Current.GetAddress(Current.EntryIndex, "Card") :

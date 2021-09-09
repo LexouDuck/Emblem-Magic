@@ -13,11 +13,12 @@ namespace Magic
         
         private Object Locked = new Object();
 
-        /// <summary>
-        /// Whether or not the ROM file has been changed since it was last saved.
-        /// </summary>
-        public Boolean Changed { get; set; }
+        private IApp App;
 
+        /// <summary>
+        /// The path of the .gba file to open and save to.
+        /// </summary>
+        public String FilePath { get; private set; }
         /// <summary>
         /// Gets just the name and extension of the file at FilePath
         /// </summary>
@@ -25,10 +26,7 @@ namespace Magic
         {
             get { return Path.GetFileName(FilePath); }
         }
-        /// <summary>
-        /// The path of the .gba file to open and save to.
-        /// </summary>
-        public String FilePath { get; private set; }
+
         /// <summary>
         /// The byte array holding loaded ROM data to edit
         /// </summary>
@@ -42,6 +40,19 @@ namespace Magic
         }
 
         /// <summary>
+        /// Tells whether or not this ROM is an unmodified Fire Emblem ROM
+        /// </summary>
+        public Boolean IsClean { get; set; }
+        /// <summary>
+        /// Whether or not the ROM file has been changed since it was last saved.
+        /// </summary>
+        public Boolean WasChanged { get; set; }
+        /// <summary>
+        /// Tells whether or not the filesize has been changed
+        /// </summary>
+        public Boolean WasExpanded { get; set; }
+
+        /// <summary>
         /// Stores the original ROM data in case the user wishes to undo a write, a modification to write, or a data restore.
         /// </summary>
         public List<UndoRedo> UndoList { get; private set; }
@@ -52,10 +63,17 @@ namespace Magic
 
 
 
-        public DataManager()
+        public DataManager(IApp app)
         {
-            FilePath = "";
+            App = app;
+
+            FilePath = null;
             FileData = new Byte[ROM_MAX_SIZE];
+
+            IsClean = true;
+            WasChanged = false;
+            WasExpanded = false;
+
             UndoList = new List<UndoRedo>(Settings.Default.UndoListMax);
             RedoList = new List<UndoRedo>(Settings.Default.UndoListMax);
         }
@@ -83,7 +101,7 @@ namespace Magic
                 FilePath = path;
                 FileData = File.ReadAllBytes(FilePath);
 
-                this.Changed = false;
+                this.WasChanged = false;
             }
         }
         /// <summary>
@@ -97,7 +115,7 @@ namespace Magic
                 
                 File.WriteAllBytes(FilePath, FileData);
 
-                this.Changed = false;
+                this.WasChanged = false;
             }
         }
 
@@ -219,7 +237,7 @@ namespace Magic
                     RedoList.Clear();
                     UndoList.Add(new UndoRedo(action, write, old_data, conflict));
 
-                    this.Changed = true;
+                    this.WasChanged = true;
                 }
                 catch (Exception ex)
                 {
@@ -343,7 +361,7 @@ namespace Magic
                     UI.ShowError("Action could not be redone.", ex);
                 }
 
-                this.Changed = true;
+                this.WasChanged = true;
             }
         }
     }

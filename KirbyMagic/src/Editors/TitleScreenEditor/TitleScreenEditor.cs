@@ -82,7 +82,7 @@ namespace KirbyMagic.Editors
                 string path = Path.GetDirectoryName(filepath) + '\\';
                 string file = Path.GetFileNameWithoutExtension(filepath);
 
-                if (Core.CurrentROM is KND)
+                if (Core.App.Game is KND)
                 {
                     string name_mg_palette = "Title Screen MG/FG Palette";
                     string name_mg_tileset = "Title Screen MG/FG Tileset";
@@ -105,7 +105,7 @@ namespace KirbyMagic.Editors
                     File.WriteAllBytes(path + name_bg_tileset + ".pal", Core.ReadPalette(address_bg_palette, Palette.LENGTH).ToBytes(false));
                     File.WriteAllBytes(path + name_bg_palette + ".png", new Tileset(Core.ReadData(address_bg_tileset, 0)).ToBytes(false));
                 }
-                if (Core.CurrentROM is KAM)
+                if (Core.App.Game is KAM)
                 {
                     string name_bg_palette = "Title Screen BG Palette";
                     string name_bg_tileset = "Title Screen BG Tileset";
@@ -123,7 +123,7 @@ namespace KirbyMagic.Editors
                     Pointer address_fg_palette = Core.GetPointer(name_fg_palette);
                     Pointer address_fg_tileset = Core.GetPointer(name_fg_tileset);
 
-                    bool tsa = (Core.CurrentROM.Version != GameVersion.JAP);
+                    bool tsa = (Core.App.Game.Region != GameRegion.JAP);
 
                     File.WriteAllBytes(path + name_bg_palette + ".pal", Core.ReadPalette(address_bg_palette, Palette.LENGTH).ToBytes(false));
                     File.WriteAllBytes(path + name_bg_tileset + ".chr", new Tileset(Core.ReadData(address_bg_tileset, 0)).ToBytes(false));
@@ -144,7 +144,7 @@ namespace KirbyMagic.Editors
         {
             try
             {
-                if (Core.CurrentROM is KND)
+                if (Core.App.Game is KND)
                 {
                     Pointer address_mg_palette = Core.GetPointer("Title Screen MG/FG Palette");
                     Pointer address_mg_tileset = Core.GetPointer("Title Screen MG/FG Tileset");
@@ -161,7 +161,7 @@ namespace KirbyMagic.Editors
                         Core.ReadPalette(address_bg_palette, Palette.LENGTH),
                         new Tileset(Core.ReadData(address_bg_tileset, 0)));
                 }
-                if (Core.CurrentROM is KAM)
+                if (Core.App.Game is KAM)
                 {
                     Pointer address_bg_palette = Core.GetPointer("Title Screen BG Palette");
                     Pointer address_bg_tileset = Core.GetPointer("Title Screen BG Tileset");
@@ -171,7 +171,7 @@ namespace KirbyMagic.Editors
                     Pointer address_fg_palette = Core.GetPointer("Title Screen FG Palette");
                     Pointer address_fg_tileset = Core.GetPointer("Title Screen FG Tileset");
 
-                    bool tsa = (Core.CurrentROM.Version != GameVersion.JAP);
+                    bool tsa = (Core.App.Game.Region != GameRegion.JAP);
                     Core_LoadTitleScreen_FE7(
                         Core.ReadPalette(address_bg_palette, Palette.LENGTH),
                         new Tileset(Core.ReadData(address_bg_tileset, 0)),
@@ -293,8 +293,8 @@ namespace KirbyMagic.Editors
             }
             if (FG_CheckBox.Checked)
             {
-                bool jap = (Core.CurrentROM.Version == GameVersion.JAP);
-                bool eur = (Core.CurrentROM.Version == GameVersion.EUR);
+                bool jap = (Core.App.Game.Region == GameRegion.JAP);
+                bool eur = (Core.App.Game.Region == GameRegion.EUR);
                 Palette[] palettes = Palette.Split(fg_palette, 8);
                 GBA.Image fg;
                 // durandal sword
@@ -370,7 +370,7 @@ namespace KirbyMagic.Editors
             {
                 Palette[] palettes = Palette.Split(fg_palette, 8);
                 GBA.Image fg;
-                if (Core.CurrentROM.Version == GameVersion.JAP)
+                if (Core.App.Game.Region == GameRegion.JAP)
                 {
                     // large 'FIRE EMBLEM' title logo
                     fg = fg_tileset.ToImage(32, 32, palettes[2].ToBytes(false));
@@ -474,13 +474,13 @@ namespace KirbyMagic.Editors
         {
             GraphicsEditor editor = new GraphicsEditor(App);
 
-            if (Core.CurrentROM is KND)
+            if (Core.App.Game is KND)
             {
                 editor.Core_SetEntry(GBA.Screen.W_TILES + 2, GBA.Screen.H_TILES,
                     Core.GetPointer("Title Screen BG Palette"), false,
                     Core.GetPointer("Title Screen BG Tileset"), true);
             }
-            if (Core.CurrentROM is KAM)
+            if (Core.App.Game is KAM)
             {
                 editor.Core_SetEntry(GBA.Screen.W_TILES, GBA.Screen.H_TILES + 1,
                     Core.GetPointer("Title Screen BG Palette"), false,
@@ -493,16 +493,16 @@ namespace KirbyMagic.Editors
         {
             GraphicsEditor editor = new GraphicsEditor(App);
 
-            if (Core.CurrentROM is KND)
+            if (Core.App.Game is KND)
             {
                 editor.Core_SetEntry(GBA.Screen.W_TILES + 2, GBA.Screen.H_TILES,
                     Core.GetPointer("Title Screen MG/FG Palette"), false,
                     Core.GetPointer("Title Screen MG/FG Tileset"), true,
                     Core.GetPointer("Title Screen MG TSA"), true, false);
             }
-            if (Core.CurrentROM is KAM)
+            if (Core.App.Game is KAM)
             {
-                bool tsa = (Core.CurrentROM.Version != GameVersion.JAP);
+                bool tsa = (Core.App.Game.Region != GameRegion.JAP);
                 editor.Core_SetEntry(GBA.Screen.W_TILES + 2, GBA.Screen.H_TILES,
                     Core.GetPointer("Title Screen MG Palette"), false,
                     Core.GetPointer("Title Screen MG Tileset"), true,
@@ -515,13 +515,13 @@ namespace KirbyMagic.Editors
         {
             GraphicsEditor editor = new GraphicsEditor(App);
 
-            if (Core.CurrentROM is KND)
+            if (Core.App.Game is KND)
             {
                 editor.Core_SetEntry(32, 25,
                     Core.GetPointer("Title Screen MG/FG Palette"), false,
                     Core.GetPointer("Title Screen FG Tileset"), true);
             }
-            if (Core.CurrentROM is KAM)
+            if (Core.App.Game is KAM)
             {
                 editor.Core_SetEntry(32, 32,
                     Core.GetPointer("Title Screen FG Palette"), false,

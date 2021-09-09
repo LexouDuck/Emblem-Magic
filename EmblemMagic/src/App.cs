@@ -26,11 +26,11 @@ namespace EmblemMagic
         public Version AppVersion { get; set; }
 
         /// <summary>
-        /// Is responsible for all reading/writing of data, and the IO for the ROM file.
+        /// The DataManager: is responsible for all reading/writing of data, and the IO for the ROM file.
         /// </summary>
         public DataManager ROM { get; set; }
         /// <summary>
-        /// The HackManager does the IO for the FEH file, and its submanagers record all relevant hack information.
+        /// The HackManager: does the IO for the FEH file, and its submanagers record all relevant hack information.
         /// </summary>
         public HackManager FEH { get; set; }
 
@@ -38,7 +38,7 @@ namespace EmblemMagic
         /// Describes which fire emblem game is open, whether or not it's a clean ROM, and such.
         /// </summary>
         FireEmblem.Game currentROM;
-        public IGame CurrentROM { get; set; }
+        public IGame Game { get; set; }
 
         /// <summary>
         /// When true, all Emblem Magic windows should update normally
@@ -63,7 +63,7 @@ namespace EmblemMagic
 
             AppName = software_name;
 
-            ROM = new DataManager();
+            ROM = new DataManager(this);
             FEH = new HackManager(this);
             Editors = new List<Editor>();
 
@@ -96,7 +96,7 @@ namespace EmblemMagic
         
         public void Update_FileMenu()
         {
-            File_SaveROM.Enabled = (ROM.FilePath == null || ROM.FilePath.Length == 0) ? false : ROM.Changed;
+            File_SaveROM.Enabled = (ROM.FilePath == null || ROM.FilePath.Length == 0) ? false : ROM.WasChanged;
             File_SaveFEH.Enabled = (FEH.FilePath == null || FEH.FilePath.Length == 0) ? false : FEH.Changed;
         }
         public void Update_EditMenu()
@@ -162,7 +162,9 @@ namespace EmblemMagic
             Tabs_Info_FEH_Author.Text = FEH.HackAuthor;
             Tabs_Info_FEH_FileInfo.Text = FEH.Write.History.Count + " writes in this file.\n";
             Tabs_Info_FEH_FilePath.Text = FEH.FilePath;
-            StatusLabel.Text = (CurrentROM == null) ? "" : CurrentROM.ToString();
+            StatusLabel.Text =
+                (Game == null ? "" : Game.ToString()) + " - " +
+                (ROM.IsClean ? "Clean" : "Hacked") + " ROM";
         }
 
         /// <summary>
@@ -172,7 +174,9 @@ namespace EmblemMagic
         {
             try
             {
-                CurrentROM = FireEmblem.Game.FromROM(ROM);
+                Game = FireEmblem.Game.FromROM(ROM);
+                ROM.WasExpanded = (ROM.FileSize == Game.FileSize);
+                ROM.IsClean = (CRC32.GetChecksum(ROM.FileData) == Game.Checksum);
             }
             catch (Exception ex)
             {
@@ -235,7 +239,7 @@ namespace EmblemMagic
 
         void Core_ResetDataManager()
         {
-            ROM = new DataManager();
+            ROM = new DataManager(this);
             foreach (Editor editor in Editors)
             {
                 editor.Dispose();
@@ -256,7 +260,7 @@ namespace EmblemMagic
         /// </summary>
         Boolean Core_CheckHackedROM()
         {
-            if (CurrentROM.IsClean) return false;
+            if (ROM.IsClean) return false;
             String same_filename = ROM.FilePath.Remove(ROM.FilePath.Length - 4) + ".feh";
             if (File.Exists(same_filename))
             {
@@ -356,16 +360,16 @@ namespace EmblemMagic
         /// </summary>
         void Core_CheckPointers()
         {
-            if (CurrentROM.IsClean)
+            if (ROM.IsClean)
             {
-                FEH.Space.Load(CurrentROM.GetDefaultFreeSpace());
-                FEH.Point.Load(CurrentROM.GetDefaultPointers());
+                FEH.Space.Load(Game.FreeSpace);
+                FEH.Point.Load(Game.GetDefaultPointers());
                 
                 FEH.Changed = false;
             }
             else
             {
-                Repoint[] pointers = CurrentROM.GetDefaultPointers();
+                Repoint[] pointers = Game.GetDefaultPointers();
                 List<Repoint> unreferenced = new List<Repoint>();
                 for (Int32 i = 0; i < pointers.Length; i++)
                 {
@@ -508,7 +512,7 @@ namespace EmblemMagic
         }
         Boolean Core_ExitROMFile()
         {
-            DialogResult answer = ROM.Changed ?
+            DialogResult answer = ROM.WasChanged ?
                 Prompt.SaveROMChanges() : DialogResult.No;
             if (answer == DialogResult.Cancel) return false;
             else
@@ -630,7 +634,7 @@ namespace EmblemMagic
 
                 if (ROM.UndoList.Count == 0)
                 {
-                    ROM.Changed = false;
+                    ROM.WasChanged = false;
                     FEH.Changed = false;
                 }
 
@@ -675,7 +679,7 @@ namespace EmblemMagic
             {
                 Write write = ROM.RedoList[index].Associated;
 
-                ROM.Changed = true;
+                ROM.WasChanged = true;
                 FEH.Changed = true;
 
                 switch (ROM.RedoList[index].Action)
@@ -756,19 +760,19 @@ namespace EmblemMagic
         {
             if (identifier.StartsWith("FE"))
             {
-                GameVersion version;
+                GameRegion version;
                 switch (identifier[3])
                 {
-                    case 'J': version = GameVersion.JAP; break;
-                    case 'U': version = GameVersion.USA; break;
-                    case 'E': version = GameVersion.EUR; break;
+                    case 'J': version = GameRegion.JAP; break;
+                    case 'U': version = GameRegion.USA; break;
+                    case 'E': version = GameRegion.EUR; break;
                     default: throw new Exception("FEH file describes an invalid game version.");
                 }
                 switch (identifier[2])
                 {
-                    case '6': if (Core.CurrentROM is FE6 && Core.CurrentROM.Version == version) return; break;
-                    case '7': if (Core.CurrentROM is FE7 && Core.CurrentROM.Version == version) return; break;
-                    case '8': if (Core.CurrentROM is FE8 && Core.CurrentROM.Version == version) return; break;
+                    case '6': if (Core.App.Game is FE6 && Core.App.Game.Region == version) return; break;
+                    case '7': if (Core.App.Game is FE7 && Core.App.Game.Region == version) return; break;
+                    case '8': if (Core.App.Game is FE8 && Core.App.Game.Region == version) return; break;
                     default: throw new Exception("FEH file describes an FE game other than 6,7 or 8, oddly enough.");
                 }
 
@@ -904,8 +908,8 @@ namespace EmblemMagic
             {
                 UPS.WriteFile(saveWindow.FileName,
                     File.ReadAllBytes(Core.Path_CleanROM),
-                    Core.CurrentROM.GetDefaultROMSize(),
-                    Core.CurrentROM.GetDefaultROMChecksum(),
+                    Game.FileSize,
+                    Game.Checksum,
                     this.ROM.FileData,
                     Core.CurrentROMSize,
                     Core.CurrentROMChecksum);
@@ -1007,10 +1011,10 @@ namespace EmblemMagic
         }
         void Open_WorldMapEditor_Click(Object sender, EventArgs e)
         {
-            if (CurrentROM == null) return;
-            else if (CurrentROM is FireEmblem.FE6) Core_OpenEditor(new WorldMapEditor_FE6(this));
-            else if (CurrentROM is FireEmblem.FE7) Core_OpenEditor(new WorldMapEditor_FE7(this));
-            else if (CurrentROM is FireEmblem.FE8) Core_OpenEditor(new WorldMapEditor_FE8(this));
+            if (Game == null) return;
+            else if (Game is FireEmblem.FE6) Core_OpenEditor(new WorldMapEditor_FE6(this));
+            else if (Game is FireEmblem.FE7) Core_OpenEditor(new WorldMapEditor_FE7(this));
+            else if (Game is FireEmblem.FE8) Core_OpenEditor(new WorldMapEditor_FE8(this));
         }
         void Open_MapTilesetEditor_Click(Object sender, EventArgs e)
         {

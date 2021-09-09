@@ -1,5 +1,6 @@
 ﻿
 Features:
+- App: icons for the "open editor" buttons
 - Spell anims yo
 - Adding items to the item array ?
 - Control with pretty map sprites for weapon effectiveness, in item editor

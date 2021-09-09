@@ -31,8 +31,8 @@ namespace EmblemMagic.Editors
 
         List<Event> EventList = new List<Event>();
 
-        static Int32 UNIT_argX = (Core.CurrentROM is FE8) ? 4 : 6;
-        static Int32 UNIT_argY = (Core.CurrentROM is FE8) ? 5 : 7;
+        static Int32 UNIT_argX = (Core.App.Game is FE8) ? 4 : 6;
+        static Int32 UNIT_argY = (Core.App.Game is FE8) ? 5 : 7;
 
 
 
@@ -102,7 +102,7 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
 #endif
                     LanguageProcessor = EA.Program.LoadCodes(folder + "\\Language Raws", ".txt", true, true);
                 }
-                Language = EA.Program.Languages[Core.CurrentROM.GetIdentifier().Substring(0, 3)];
+                Language = EA.Program.Languages[Core.App.Game.GetIdentifier().Substring(0, 3)];
                 String keywords = "";
                 IEnumerable<String> codes = Language.GetCodeNames();
                 foreach (String code in codes)
@@ -297,7 +297,7 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
                 if (EventList[i].Command == "UNIT" && EventList[i].Label != null)
                 {
                     display_units = EventList[i].Label.StartsWith("Beginning");
-                    if (Core.CurrentROM is FE7 &&
+                    if (Core.App.Game is FE7 &&
                         (EventList[i].Label.StartsWith("AllyUnits") ||
                         EventList[i].Label.StartsWith("EnemyUnits")))
                     {
@@ -395,7 +395,7 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
                     palettes[i] = Core.ReadData(address + i * Palette.LENGTH, Palette.LENGTH);
                     result.Colors.Add(new Palette(palettes[i]));
                 }
-                Int32 class_length = (Core.CurrentROM is FE6 ? 72 : 84);
+                Int32 class_length = (Core.App.Game is FE6 ? 72 : 84);
                 GBA.Image image;
                 Byte unitclass;
                 Byte mapsprite;
@@ -775,7 +775,7 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
                     if (caption == "")
                     {
                         caption = LanguageProcessor.GetDoc(command,
-                            Core.CurrentROM.GetIdentifier().Substring(0, 3));
+                            Core.App.Game.GetIdentifier().Substring(0, 3));
                         if (caption.StartsWith("command:"))
                         {
                             Int32 length = caption.IndexOf('\n');

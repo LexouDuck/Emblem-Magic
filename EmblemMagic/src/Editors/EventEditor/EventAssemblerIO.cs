@@ -201,7 +201,7 @@ namespace EmblemMagic.Editors
         public override Boolean CanRead { get { return false; } }
         public override Boolean CanSeek { get { return true; } }
         public override Boolean CanWrite { get { return true; } }
-        public override Int64 Length { get { return Core.CurrentROMSize; } }
+        public override Int64 Length { get { return Core.App.GameSize; } }
         public override Int64 Position
         {
             get { return position; }
@@ -225,7 +225,7 @@ namespace EmblemMagic.Editors
                     position += (Int32)offset;
                     break;
                 case SeekOrigin.End:
-                    position = (Int32)Core.CurrentROMSize + (Int32)offset;
+                    position = (Int32)Core.App.GameSize + (Int32)offset;
                     break;
             }
             return position;

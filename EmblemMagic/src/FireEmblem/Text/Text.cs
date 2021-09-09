@@ -80,7 +80,7 @@ namespace EmblemMagic.FireEmblem
                 }
                 else
                 {
-                    if (Core.CurrentROM.Version == GameVersion.JAP)
+                    if (Core.App.Game.Region == GameRegion.JAP)
                     {
                         Byte[] buffer = System.Text.Encoding.Convert(
                             System.Text.Encoding.GetEncoding(932), // Shift-JIS

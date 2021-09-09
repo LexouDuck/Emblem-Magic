@@ -22,7 +22,7 @@ namespace EmblemMagic.Editors
         {
             get
             {
-                return ((Game)Core.CurrentROM).Address_MapSpritePalettes() + PaletteArrayBox.Value * GBA.Palette.LENGTH;
+                return ((Game)Core.App.Game).Address_MapSpritePalettes() + PaletteArrayBox.Value * GBA.Palette.LENGTH;
             }
         }
 
@@ -67,7 +67,7 @@ namespace EmblemMagic.Editors
                 Idle_Size_ComboBox.ValueMember = "Value";
                 Idle_Size_ComboBox.DisplayMember = "Key";
 
-                CurrentPalette = Core.ReadPalette(((Game)Core.CurrentROM).Address_MapSpritePalettes(), GBA.Palette.LENGTH);
+                CurrentPalette = Core.ReadPalette(((Game)Core.App.Game).Address_MapSpritePalettes(), GBA.Palette.LENGTH);
 
                 Test_PaletteBox.Load(CurrentPalette);
             }
@@ -485,7 +485,7 @@ namespace EmblemMagic.Editors
             GBA.Bitmap result = new GBA.Bitmap(
                 MapSprite.WIDTH,
                 MapSprite.HEIGHT);
-            result.Colors = Core.ReadPalette(((Game)Core.CurrentROM).Address_MapSpritePalettes(), GBA.Palette.LENGTH * 8);
+            result.Colors = Core.ReadPalette(((Game)Core.App.Game).Address_MapSpritePalettes(), GBA.Palette.LENGTH * 8);
             result.SetPixels(delegate (Int32 x, Int32 y) { return ((Byte)move[x, y + 32 *  0]); }, new Rectangle( 32,  0, 32, 32 * 4)); // MOVE side
             result.SetPixels(delegate (Int32 x, Int32 y) { return ((Byte)move[x, y + 32 *  4]); }, new Rectangle( 64,  0, 32, 32 * 4)); // MOVE down
             result.SetPixels(delegate (Int32 x, Int32 y) { return ((Byte)move[x, y + 32 *  8]); }, new Rectangle( 96,  0, 32, 32 * 4)); // MOVE up

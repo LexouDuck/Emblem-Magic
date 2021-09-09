@@ -25,7 +25,7 @@ namespace EmblemMagic.Editors
 
         String CurrentEntry(String prefix)
         {
-            if (prefix.Equals("Mini") && Core.CurrentROM.Version == GameVersion.EUR)
+            if (prefix.Equals("Mini") && Core.App.Game.Region == GameRegion.EUR)
                 return prefix + " World Map " + Mini_Map_NumberBox.Value + " - ";
             else return prefix + " World Map - ";
         }
@@ -38,7 +38,7 @@ namespace EmblemMagic.Editors
             {
                 InitializeComponent();
 
-                if (Core.CurrentROM.Version == GameVersion.EUR)
+                if (Core.App.Game.Region == GameRegion.EUR)
                     Mini_Map_NumberBox.Enabled = true;
             }
             catch (Exception ex)
@@ -80,7 +80,7 @@ namespace EmblemMagic.Editors
             {
                 CurrentMiniMap = new WorldMap_FE8_Mini(
                     pointers[MINI_MAP_PALETTE],
-                    (Core.CurrentROM.Version == GameVersion.EUR) ?
+                    (Core.App.Game.Region == GameRegion.EUR) ?
                     Core.ReadPointer(pointers[MINI_MAP_TILESET] + (Int32)Mini_Map_NumberBox.Value * 4) :
                     pointers[MINI_MAP_TILESET]);
                 Mini_Map_ImageBox.Load(CurrentMiniMap);
@@ -293,15 +293,13 @@ namespace EmblemMagic.Editors
 
         private void Mini_Map_NumberBox_ValueChanged(Object sender, EventArgs e)
         {
-            Pointer[] pointers = ((Game)Core.CurrentROM).Address_WorldMap();
-
             try
             {
                 CurrentMiniMap = new WorldMap_FE8_Mini(
-                    pointers[MINI_MAP_PALETTE],
-                    (Core.CurrentROM.Version == GameVersion.EUR) ?
-                    Core.ReadPointer(pointers[MINI_MAP_TILESET] + (Int32)Mini_Map_NumberBox.Value * 4) :
-                    pointers[MINI_MAP_TILESET]);
+                    Core.GetPointer("Mini World Map Palette"),
+                    (Core.App.Game.Region == GameRegion.EUR) ?
+                    Core.ReadPointer(Core.GetPointer("Mini World Map Tileset") + (Int32)Mini_Map_NumberBox.Value * 4) :
+                    Core.GetPointer("Mini World Map Tileset"));
                 Mini_Map_ImageBox.Load(CurrentMiniMap);
                 Mini_Map_PaletteBox.Load(CurrentMiniMap.Colors);
             }

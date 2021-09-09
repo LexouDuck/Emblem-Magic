@@ -1,523 +1,275 @@
-﻿using GBA;
+﻿using System;
+using System.Collections.Generic;
+using GBA;
 using Magic;
-using System;
 
 namespace EmblemMagic.FireEmblem
 {
-    public class FE7 : Game
+    public abstract class FE7 : FireEmblem.Game
     {
-        public FE7(GameVersion version, Boolean clean, Boolean expanded) : base(version, clean, expanded) { }
-        
-        public static String GameID(GameVersion version)
+        //public FE7(GameRegion region) : base(GameType.FE7, region) { }
+
+        public override GameType Type => GameType.FE7;
+        public override String Name => "Fire Emblem 7";
+
+        public static Game FromRegion(GameRegion version)
         {
             switch (version)
             {
-                case GameVersion.JAP: return "FIREEMBLEM7" + '\u0000' + "AE7J01";
-                case GameVersion.USA: return "FIREEMBLEME" + '\u0000' + "AE7E01";
-                case GameVersion.EUR: return "FIREEMBLEMY" + '\u0000' + "AE7Y01";
-                default: throw new Exception("Invalid game version.");
+                case GameRegion.JAP: return new FE7J();
+                case GameRegion.USA: return new FE7U();
+                case GameRegion.EUR: return new FE7E();
             }
+            throw new Exception("Invalid game ROM region (" + version + ")");
         }
-        public static UInt32 Checksum(GameVersion version)
-        {
-            switch (version)
-            {
-                case GameVersion.JAP: return 0xF0C10E72;
-                case GameVersion.USA: return 0x2A524221;
-                case GameVersion.EUR: return 0x9DECC754;
-                default: throw new Exception("Invalid game version.");
-            }
-        }
-        public static UInt32 DefaultFileSize(GameVersion version)
-        {
-            switch (version)
-            {
-                case GameVersion.JAP: return 0x01000000;
-                case GameVersion.USA: return 0x01000000;
-                case GameVersion.EUR: return 0x01000000;
-                default: throw new Exception("Invalid game version.");
-            }
-        }
-
-        override public String GetIdentifier()
-        {
-            return "FE7" + (Char)Version;
-        }
-        override public Magic.Range[] GetDefaultFreeSpace()
-        {
-            switch (Version)
-            {
-                case GameVersion.JAP: return new Magic.Range[]
-                    {
-                        new Magic.Range(0xDCC200, 0xE00000),
-                        new Magic.Range(0xFA5100, 0xFC0000),
-                        new Magic.Range(0xFD2E00, 0xFD8000),
-                        new Magic.Range(0xFE4000, 0xFFF000),
-                        new Magic.Range(0xFDC000, 0xFE0000)
-                    };
-                case GameVersion.USA: return new Magic.Range[]
-                    {
-                        new Magic.Range(0xD00000, 0xD90000),
-                        new Magic.Range(0xFA5000, 0xFC0000),
-                        new Magic.Range(0xFD3E00, 0xFD9000),
-                        new Magic.Range(0xFDC000, 0xFE0000),
-                        new Magic.Range(0xFE3100, 0xFFD000),
-                        new Magic.Range(0xFFE000, 0xFFF140)
-                    };
-                case GameVersion.EUR: return new Magic.Range[]
-                    {
-
-                    };
-                default: throw new Exception("Invalid game version.");
-            }
-        }
-        override public Repoint[] GetDefaultPointers()
-        {
-            return new Repoint[]
-            {
-                new Repoint("Class Array", Address_ClassArray()),
-                new Repoint("Chapter Array", Address_ChapterArray()),
-                new Repoint("Map Data Array", Address_MapDataArray()),
-
-                new Repoint("Text Array", Address_TextArray()),
-                new Repoint("Huffman Tree", Address_HuffmanTree()),
-                new Repoint("Huffman Tree Root", Address_HuffmanTreeRoot()),
-
-                new Repoint("Menu Font", Address_Font_Menu()),
-                new Repoint("Text Bubble Font", Address_Font_Bubble()),
-                new Repoint("Text Bubble Tileset", Address_TextBubbleTileset()),
-                new Repoint("Text Bubble Palette", Address_TextBubblePalette()),
-
-                new Repoint("Music Array", Address_MusicArray()),
-
-                new Repoint("Portrait Array", Address_PortraitArray()),
-
-                new Repoint("Map Terrain Names", Address_MapTerrainNames()),
-
-                new Repoint("Map Sprite Idle Array", Address_MapSpriteIdleArray()),
-                new Repoint("Map Sprite Move Array", Address_MapSpriteMoveArray()),
-                new Repoint("Map Sprite Palettes", Address_MapSpritePalettes()),
-
-                new Repoint("Dialog Background Array", Address_DialogBackgroundArray()),
-                new Repoint("Battle Background Array", Address_BattleBackgroundArray()),
-                new Repoint("Cutscene Screen Array",   Address_CutsceneScreenArray()),
-
-                new Repoint("Item Icon Tileset", Address_ItemIconTileset()),
-                new Repoint("Item Icon Palette", Address_ItemIconPalette()),
-
-                new Repoint("Character Palette Array", Address_CharacterPaletteArray()),
-                new Repoint("Battle Animation Array", Address_BattleAnimationArray()),
-
-                new Repoint("Spell Animation Array", Address_SpellAnimationArray()),
-
-                new Repoint("Battle Platform Array", Address_BattlePlatformArray()),
-
-                new Repoint("Battle Screen Tileset",  Address_BattleScreenFrame()[0]),
-                new Repoint("Battle Screen Palettes", Address_BattleScreenFrame()[1]),
-                new Repoint("Battle Screen TSA",      Address_BattleScreenFrame()[2]),
-                new Repoint("Battle Screen L Name",   Address_BattleScreenFrame()[3]),
-                new Repoint("Battle Screen L Weapon", Address_BattleScreenFrame()[4]),
-                new Repoint("Battle Screen R Name",   Address_BattleScreenFrame()[5]),
-                new Repoint("Battle Screen R Weapon", Address_BattleScreenFrame()[6]),
-
-                new Repoint("Small World Map Tileset", Address_WorldMap()[0]),
-                new Repoint("Small World Map Palette", Address_WorldMap()[1]),
-                new Repoint("Small World Map TSA",     Address_WorldMap()[2]),
-                new Repoint("Large World Map Tileset", Address_WorldMap()[3]),
-                new Repoint("Large World Map Palette", Address_WorldMap()[4]),
-                new Repoint("Large World Map TSA",     Address_WorldMap()[5]),
-
-                new Repoint("Title Screen BG Palette", Address_TitleScreen()[0]),
-                new Repoint("Title Screen BG Tileset", Address_TitleScreen()[1]),
-                new Repoint("Title Screen MG Palette", Address_TitleScreen()[2]),
-                new Repoint("Title Screen MG Tileset", Address_TitleScreen()[3]),
-                new Repoint("Title Screen MG TSA",     Address_TitleScreen()[4]),
-                new Repoint("Title Screen FG Palette", Address_TitleScreen()[5]),
-                new Repoint("Title Screen FG Tileset", Address_TitleScreen()[6]),
-            };
-        }
+    }
 
 
 
-        override public Pointer Address_ClassArray()
-        {
-            switch (Version)
-            {
-                case GameVersion.JAP: return new Pointer(0x0);
-                case GameVersion.USA: return new Pointer(0xBE015C);
-                case GameVersion.EUR: return new Pointer(0x0);
-                default: throw new Exception("Invalid game version.");
-            }
-        }
-        override public Pointer Address_ChapterArray()
-        {
-            switch (Version)
-            {
-                case GameVersion.JAP: return new Pointer(0xD62110);
-                case GameVersion.USA: return new Pointer(0xC9A200);
-                case GameVersion.EUR: return new Pointer(0xD612B0);
-                default: throw new Exception("Invalid game version.");
-            }
-        }
-        override public Pointer Address_MapDataArray()
-        {
-            switch (Version)
-            {
-                case GameVersion.JAP: return new Pointer(0xD648F4);
-                case GameVersion.USA: return new Pointer(0xC9C9C8);
-                case GameVersion.EUR: return new Pointer(0xD63A78);
-                default: throw new Exception("Invalid game version.");
-            }
-        }
+    public class FE7J : FE7
+    {
+        //public FE7J() : base(GameRegion.JAP) { }
 
-        override public Pointer Address_TextArray()
-        {
-            switch (Version)
-            {
-                case GameVersion.JAP: return new Pointer(0xBBB370);
-                case GameVersion.USA: return new Pointer(0xB808AC);
-                case GameVersion.EUR: return new Pointer(0xC397A0);
-                default: throw new Exception("Invalid game version.");
-            }
-        }
-        override public Pointer Address_HuffmanTree()
-        {
-            switch (Version)
-            {
-                case GameVersion.JAP: return new Pointer(0xBB72E0);
-                case GameVersion.USA: return new Pointer(0xB7D71C);
-                case GameVersion.EUR: return new Pointer(0xC34E30);
-                default: throw new Exception("Invalid game version.");
-            }
-        }
-        override public Pointer Address_HuffmanTreeRoot()
-        {
-            switch (Version)
-            {
-                case GameVersion.JAP: return new Pointer(0xBBB36C);
-                case GameVersion.USA: return new Pointer(0xB808A8);
-                case GameVersion.EUR: return new Pointer(0xC3979C);
-                default: throw new Exception("Invalid game version.");
-            }
-        }
+        public override GameRegion Region => GameRegion.JAP;
 
-        override public Pointer Address_Font_Menu()
+        public override String Identifier => "FE7J";
+        public override String ID => "FIREEMBLEM7\0AE7J01";
+        public override UInt32 Checksum => 0xF0C10E72;
+        public override UInt32 FileSize => 0x01000000;
+        public override Magic.Range[] FreeSpace => new Magic.Range[]
         {
-            switch (Version)
-            {
-                case GameVersion.JAP: return new Pointer(0xBC1FEC);
-                case GameVersion.USA: return new Pointer(0xB896B0);
-                case GameVersion.EUR: return new Pointer(0xC4C90C);
-                default: throw new Exception("Invalid game version.");
-            }
-        }
-        override public Pointer Address_Font_Bubble()
+            new Magic.Range(0xDCC200, 0xE00000),
+            new Magic.Range(0xFA5100, 0xFC0000),
+            new Magic.Range(0xFD2E00, 0xFD8000),
+            new Magic.Range(0xFE4000, 0xFFF000),
+            new Magic.Range(0xFDC000, 0xFE0000),
+        };
+        public override Dictionary<String, Pointer> Addresses => new()
         {
-            switch (Version)
-            {
-                case GameVersion.JAP: return new Pointer(0xBDC134);
-                case GameVersion.USA: return new Pointer(0xB8B5B0);
-                case GameVersion.EUR: return new Pointer(0xC4F6F4);
-                default: throw new Exception("Invalid game version.");
-            }
-        }
-        override public Pointer Address_TextBubbleTileset()
-        {
-            switch (Version)
-            {
-                case GameVersion.JAP: return new Pointer(0x4027B0);
-                case GameVersion.USA: return new Pointer(0x3FBD34);
-                case GameVersion.EUR: return new Pointer(0x1E4810);
-                default: throw new Exception("Invalid game version.");
-            }
-        }
-        override public Pointer Address_TextBubblePalette()
-        {
-            switch (Version)
-            {
-                case GameVersion.JAP: return new Pointer(0x402A4C);
-                case GameVersion.USA: return new Pointer(0x3FBFD0);
-                case GameVersion.EUR: return new Pointer(0x1E4AAC);
-                default: throw new Exception("Invalid game version.");
-            }
-        }
+            ["Class Array"]             = new Pointer(0x0),//Address_ClassArray()
+            ["Chapter Array"]           = new Pointer(0xD62110),//Address_ChapterArray()
+            ["Map Data Array"]          = new Pointer(0xD648F4),//Address_MapDataArray()
 
-        override public Pointer Address_MusicArray()
-        {
-            switch (Version)
-            {
-                case GameVersion.JAP: return new Pointer(0x6EA8D0);
-                case GameVersion.USA: return new Pointer(0x69D6E0);
-                case GameVersion.EUR: return new Pointer(0x67F200);
-                default: throw new Exception("Invalid game version.");
-            }
-        }
+            ["Text Array"]              = new Pointer(0xBBB370),//Address_TextArray()
+            ["Huffman Tree"]            = new Pointer(0xBB72E0),//Address_HuffmanTree()
+            ["Huffman Tree Root"]       = new Pointer(0xBBB36C),//Address_HuffmanTreeRoot()
 
-        override public Pointer Address_PortraitArray()
-        {
-            switch (Version)
-            {
-                case GameVersion.JAP: return new Pointer(0xD5E23C);
-                case GameVersion.USA: return new Pointer(0xC96584); // Elibian nights 0x1877E6C
-                case GameVersion.EUR: return new Pointer(0xD5D634);
-                default: throw new Exception("Invalid game version.");
-            }
-        }
+            ["Menu Font"]               = new Pointer(0xBC1FEC),//Address_Font_Menu()
+            ["Text Bubble Font"]        = new Pointer(0xBDC134),//Address_Font_Bubble()
+            ["Text Bubble Tileset"]     = new Pointer(0x4027B0),//Address_TextBubbleTileset()
+            ["Text Bubble Palette"]     = new Pointer(0x402A4C),//Address_TextBubblePalette()
 
-        override public Pointer Address_MapTerrainNames()
-        {
-            switch (Version)
-            {
-                case GameVersion.JAP: return new Pointer(0x0);
-                case GameVersion.USA: return new Pointer(0xBE50E8);
-                case GameVersion.EUR: return new Pointer(0x0);
-                default: throw new Exception("Invalid game version.");
-            }
-        }
+            ["Music Array"]             = new Pointer(0x6EA8D0),//Address_MusicArray()
 
-        override public Pointer Address_MapSpriteIdleArray()
-        {
-            switch (Version)
-            {
-                case GameVersion.JAP: return new Pointer(0xD613B8);
-                case GameVersion.USA: return new Pointer(0xC99700);
-                case GameVersion.EUR: return new Pointer(0xD607B0);
-                default: throw new Exception("Invalid game version.");
-            }
-        }
-        override public Pointer Address_MapSpriteMoveArray()
-        {
-            switch (Version)
-            {
-                case GameVersion.JAP: return new Pointer(0xD650B4);
-                case GameVersion.USA: return new Pointer(0xC9D174);
-                case GameVersion.EUR: return new Pointer(0xD64224);
-                default: throw new Exception("Invalid game version.");
-            }
-        }
-        override public Pointer Address_MapSpritePalettes()
-        {
-            switch (Version)
-            {
-                case GameVersion.JAP: return new Pointer(0x1900E8);
-                case GameVersion.USA: return new Pointer(0x194594);
-                case GameVersion.EUR: return new Pointer(0x0D13D0);
-                default: throw new Exception("Invalid game version.");
-            }
-        }
+            ["Portrait Array"]          = new Pointer(0xD5E23C),//Address_PortraitArray()
 
-        override public Pointer Address_DialogBackgroundArray()
-        {
-            switch (Version)
-            {
-                case GameVersion.JAP: return new Pointer(0xC00798);
-                case GameVersion.USA: return new Pointer(0xB91588);
-                case GameVersion.EUR: return new Pointer(0xC556CC);
-                default: throw new Exception("Invalid game version.");
-            }
-        }
-        override public Pointer Address_BattleBackgroundArray()
-        {
-            switch (Version)
-            {
-                case GameVersion.JAP: return new Pointer(0xC4BD70);
-                case GameVersion.USA: return new Pointer(0xBDCA64);
-                case GameVersion.EUR: return new Pointer(0xCA3B14);
-                default: throw new Exception("Invalid game version.");
-            }
-        }
-        override public Pointer Address_CutsceneScreenArray()
-        {
-            switch (Version)
-            {
-                case GameVersion.JAP: return new Pointer(0xDB793C);
-                case GameVersion.USA: return new Pointer(0xCED888);
-                case GameVersion.EUR: return new Pointer(0xDB4CB0);
-                default: throw new Exception("Invalid game version.");
-            }
-        }
+            ["Map Terrain Names"]       = new Pointer(0x0),//Address_MapTerrainNames()
 
-        override public Pointer Address_ItemIconTileset()
-        {
-            switch (Version)
-            {
-                case GameVersion.JAP: return new Pointer(0x0);
-                case GameVersion.USA: return new Pointer(0xC5EA4);
-                case GameVersion.EUR: return new Pointer(0x0);
-                default: throw new Exception("Invalid game version.");
-            }
-        }
-        override public Pointer Address_ItemIconPalette()
-        {
-            switch (Version)
-            {
-                case GameVersion.JAP: return new Pointer(0x0);
-                case GameVersion.USA: return new Pointer(0xCBEA4);
-                case GameVersion.EUR: return new Pointer(0x0);
-                default: throw new Exception("Invalid game version.");
-            }
-        }
+            ["Map Sprite Idle Array"]   = new Pointer(0xD613B8),//Address_MapSpriteIdleArray()
+            ["Map Sprite Move Array"]   = new Pointer(0xD650B4),//Address_MapSpriteMoveArray()
+            ["Map Sprite Palettes"]     = new Pointer(0x1900E8),//Address_MapSpritePalettes()
 
-        override public Pointer Address_CharacterPaletteArray()
-        {
-            switch (Version)
-            {
-                case GameVersion.JAP: return new Pointer(0xFD8008);
-                case GameVersion.USA: return new Pointer(0xFD8008);
-                case GameVersion.EUR: return new Pointer(0xFD8008);
-                default: throw new Exception("Invalid game version.");
-            }
-        }
-        override public Pointer Address_BattleAnimationArray()
-        {
-            switch (Version)
-            {
-                case GameVersion.JAP: return new Pointer(0xE00008);
-                case GameVersion.USA: return new Pointer(0xE00008);
-                case GameVersion.EUR: return new Pointer(0xE00008);
-                default: throw new Exception("Invalid game version.");
-            }
-        }
+            ["Dialog Background Array"] = new Pointer(0xC00798),//Address_DialogBackgroundArray()
+            ["Battle Background Array"] = new Pointer(0xC4BD70),//Address_BattleBackgroundArray()
+            ["Cutscene Screen Array"  ] = new Pointer(0xDB793C),//Address_CutsceneScreenArray()
 
-        override public Pointer Address_SpellAnimationArray()
-        {
-            switch (Version)
-            {
-                case GameVersion.JAP: return new Pointer(0xC1071C);
-                case GameVersion.USA: return new Pointer(0xBA13D0);
-                case GameVersion.EUR: return new Pointer(0xC68540);
-                default: throw new Exception("Invalid game version.");
-            }
-        }
+            ["Item Icon Tileset"]       = new Pointer(0x0),//Address_ItemIconTileset()
+            ["Item Icon Palette"]       = new Pointer(0x0),//Address_ItemIconPalette()
 
-        override public Pointer Address_BattlePlatformArray()
-        {
-            switch (Version)
-            {
-                case GameVersion.JAP: return new Pointer(0xFC0008);
-                case GameVersion.USA: return new Pointer(0xFC0008);
-                case GameVersion.EUR: return new Pointer(0xFC0008);
-                default: throw new Exception("Invalid game version.");
-            }
-        }
-        override public Pointer[] Address_BattleScreenFrame()
-        {
-            switch (Version)
-            {
-                case GameVersion.JAP:
-                    return new Pointer[7]
-                    {
-                        new Pointer(0x1DE528), // Tileset
-                        new Pointer(0x1DEC14), // Palette
-                        new Pointer(0x1DE8A8), // TSA
-                        new Pointer(0x1DE730), // Enemy Name BG
-                        new Pointer(0x1DE780), // Enemy Weapon BG
-                        new Pointer(0x1DE7EC), // Player Name BG
-                        new Pointer(0x1DE83C), // Player Weapon BG
-                    };
-                case GameVersion.USA:
-                    return new Pointer[7]
-                    {
-                        new Pointer(0x1D88B4), // Tileset
-                        new Pointer(0x1D8FA0), // Palette
-                        new Pointer(0x1D8C34), // TSA
-                        new Pointer(0x1D8ABC), // Enemy Name BG
-                        new Pointer(0x1D8B0C), // Enemy Weapon BG
-                        new Pointer(0x1D8B78), // Player Name BG
-                        new Pointer(0x1D8BC8), // Player Weapon BG
-                    };
-                case GameVersion.EUR:
-                    return new Pointer[7]
-                    {
-                        new Pointer(0x2BE6DC), // Tileset
-                        new Pointer(0x2BEDC8), // Palette
-                        new Pointer(0x2BEA5C), // TSA
-                        new Pointer(0x2BE8E4), // Enemy Name BG
-                        new Pointer(0x2BE934), // Enemy Weapon BG
-                        new Pointer(0x2BE9A0), // Player Name BG
-                        new Pointer(0x2BE9F0), // Player Weapon BG
-                    };
-                default: throw new Exception("Invalid game version.");
-            }
-        }
+            ["Character Palette Array"] = new Pointer(0xFD8008),//Address_CharacterPaletteArray()
+            ["Battle Animation Array"]  = new Pointer(0xE00008),//Address_BattleAnimationArray()
 
-        override public Pointer[] Address_WorldMap()
-        {
-            switch (Version)
-            {
-                case GameVersion.JAP:
-                    return new Pointer[6]
-                    {
-                        new Pointer(0x60A8EC), // small map graphics
-                        new Pointer(0x60A86C), // small map palette
-                        new Pointer(0x60F964), // small map TSA
-                        new Pointer(0xDB1074), // large map graphics
-                        new Pointer(0x5AE7BC), // large map palette
-                        new Pointer(0xDB10A4)  // large map TSA
-                    };
-                case GameVersion.USA:
-                    return new Pointer[6]
-                    {
-                        new Pointer(0x5D0AC0), // small map graphics
-                        new Pointer(0x5D0A40), // small map palette
-                        new Pointer(0x5D5B38), // small map TSA
-                        new Pointer(0xCE7818), // large map graphics
-                        new Pointer(0x574990), // large map palette
-                        new Pointer(0xCE7848)  // large map TSA
-                    };
-                case GameVersion.EUR:
-                    return new Pointer[6]
-                    {
-                        new Pointer(0x64DB88), // small map graphics
-                        new Pointer(0x64DB08), // small map palette
-                        new Pointer(0x652C00), // small map TSA
-                        new Pointer(0xDAEC40), // large map graphics
-                        new Pointer(0x5F1A58), // large map palette
-                        new Pointer(0xDAEC70)  // large map TSA
-                    };
-                default: throw new Exception("Invalid game version.");
-            }
-        }
+            ["Spell Animation Array"]   = new Pointer(0xC1071C),//Address_SpellAnimationArray()
 
-        override public Pointer[] Address_TitleScreen()
+            ["Battle Platform Array"]   = new Pointer(0xFC0008),//Address_BattlePlatformArray()
+
+            ["Battle Screen Tileset" ]  = new Pointer(0x1DE528),//Address_BattleScreenFrame()[0]
+            ["Battle Screen Palettes"]  = new Pointer(0x1DEC14),//Address_BattleScreenFrame()[1]
+            ["Battle Screen TSA"     ]  = new Pointer(0x1DE8A8),//Address_BattleScreenFrame()[2]
+            ["Battle Screen L Name"  ]  = new Pointer(0x1DE730),//Address_BattleScreenFrame()[3]
+            ["Battle Screen L Weapon"]  = new Pointer(0x1DE780),//Address_BattleScreenFrame()[4]
+            ["Battle Screen R Name"  ]  = new Pointer(0x1DE7EC),//Address_BattleScreenFrame()[5]
+            ["Battle Screen R Weapon"]  = new Pointer(0x1DE83C),//Address_BattleScreenFrame()[6]
+
+            ["Small World Map Tileset"] = new Pointer(0x60A8EC),//Address_WorldMap()[0]
+            ["Small World Map Palette"] = new Pointer(0x60A86C),//Address_WorldMap()[1]
+            ["Small World Map TSA"    ] = new Pointer(0x60F964),//Address_WorldMap()[2]
+            ["Large World Map Tileset"] = new Pointer(0xDB1074),//Address_WorldMap()[3]
+            ["Large World Map Palette"] = new Pointer(0x5AE7BC),//Address_WorldMap()[4]
+            ["Large World Map TSA"    ] = new Pointer(0xDB10A4),//Address_WorldMap()[5]
+
+            ["Title Screen BG Palette"] = new Pointer(0x6B73E0),//Address_TitleScreen()[0]
+            ["Title Screen BG Tileset"] = new Pointer(0x6B7400),//Address_TitleScreen()[1]
+            ["Title Screen MG Palette"] = new Pointer(0x6BB6E8),//Address_TitleScreen()[2]
+            ["Title Screen MG Tileset"] = new Pointer(0x6BB708),//Address_TitleScreen()[3]
+            ["Title Screen MG TSA"    ] = new Pointer(0x6BBF90),//Address_TitleScreen()[4]
+            ["Title Screen FG Palette"] = new Pointer(0x6BC444),//Address_TitleScreen()[5]
+            ["Title Screen FG Tileset"] = new Pointer(0x6BC4E4),//Address_TitleScreen()[6]
+        };
+    }
+
+
+
+    public class FE7U : FE7
+    {
+        //public FE7U() : base(GameRegion.USA) { }
+
+        public override GameRegion Region => GameRegion.USA;
+
+        public override String Identifier => "FE7U";
+        public override String ID => "FIREEMBLEME\0AE7E01";
+        public override UInt32 Checksum => 0x2A524221;
+        public override UInt32 FileSize => 0x01000000;
+        public override Magic.Range[] FreeSpace => new Magic.Range[]
         {
-            switch (Version)
-            {
-                case GameVersion.JAP:
-                    return new Pointer[]
-                    {
-                        new Pointer(0x6B73E0), // background palette
-                        new Pointer(0x6B7400), // background tileset
-                        new Pointer(0x6BB6E8), // middlelayer palette
-                        new Pointer(0x6BB708), // middlelayer tileset
-                        new Pointer(0x6BBF90), // middlelayer TSA
-                        new Pointer(0x6BC444), // foreground palette
-                        new Pointer(0x6BC4E4), // foreground tileset
-                    };
-                case GameVersion.USA:
-                    return new Pointer[]
-                    {
-                        new Pointer(0x66AF6C), // background palette
-                        new Pointer(0x66AF8C), // background tileset
-                        new Pointer(0x66F274), // middlelayer palette
-                        new Pointer(0x66F294), // middlelayer tileset
-                        new Pointer(0x66FB1C), // middlelayer TSA
-                        new Pointer(0x66FCE0), // foreground palette
-                        new Pointer(0x66FD80), // foreground tileset
-                    };
-                case GameVersion.EUR:
-                    return new Pointer[]
-                    {
-                        new Pointer(0x1C7424), // background palette
-                        new Pointer(0x1C7444), // background tileset
-                        new Pointer(0x1CB72C), // middlelayer palette
-                        new Pointer(0x1CB74C), // middlelayer tileset
-                        new Pointer(0x1CBFD4), // middlelayer TSA
-                        new Pointer(0x1CC198), // foreground palette
-                        new Pointer(0x1CC238), // foreground tileset
-                    };
-                default: throw new Exception("Invalid game version.");
-            }
-        }
+            new Magic.Range(0xD00000, 0xD90000),
+            new Magic.Range(0xFA5000, 0xFC0000),
+            new Magic.Range(0xFD3E00, 0xFD9000),
+            new Magic.Range(0xFDC000, 0xFE0000),
+            new Magic.Range(0xFE3100, 0xFFD000),
+            new Magic.Range(0xFFE000, 0xFFF140),
+        };
+        public override Dictionary<String, Pointer> Addresses => new()
+        {
+            ["Class Array"]             = new Pointer(0xBE015C),//Address_ClassArray()
+            ["Chapter Array"]           = new Pointer(0xC9A200),//Address_ChapterArray()
+            ["Map Data Array"]          = new Pointer(0xC9C9C8),//Address_MapDataArray()
+
+            ["Text Array"]              = new Pointer(0xB808AC),//Address_TextArray()
+            ["Huffman Tree"]            = new Pointer(0xB7D71C),//Address_HuffmanTree()
+            ["Huffman Tree Root"]       = new Pointer(0xB808A8),//Address_HuffmanTreeRoot()
+
+            ["Menu Font"]               = new Pointer(0xB896B0),//Address_Font_Menu()
+            ["Text Bubble Font"]        = new Pointer(0xB8B5B0),//Address_Font_Bubble()
+            ["Text Bubble Tileset"]     = new Pointer(0x3FBD34),//Address_TextBubbleTileset()
+            ["Text Bubble Palette"]     = new Pointer(0x3FBFD0),//Address_TextBubblePalette()
+
+            ["Music Array"]             = new Pointer(0x69D6E0),//Address_MusicArray()
+
+            ["Portrait Array"]          = new Pointer(0xC96584),//Address_PortraitArray() // Elibian nights 0x1877E6C
+
+            ["Map Terrain Names"]       = new Pointer(0xBE50E8),//Address_MapTerrainNames()
+
+            ["Map Sprite Idle Array"]   = new Pointer(0xC99700),//Address_MapSpriteIdleArray()
+            ["Map Sprite Move Array"]   = new Pointer(0xC9D174),//Address_MapSpriteMoveArray()
+            ["Map Sprite Palettes"]     = new Pointer(0x194594),//Address_MapSpritePalettes()
+
+            ["Dialog Background Array"] = new Pointer(0xB91588),//Address_DialogBackgroundArray()
+            ["Battle Background Array"] = new Pointer(0xBDCA64),//Address_BattleBackgroundArray()
+            ["Cutscene Screen Array"  ] = new Pointer(0xCED888),//Address_CutsceneScreenArray()
+
+            ["Item Icon Tileset"]       = new Pointer(0xC5EA4),//Address_ItemIconTileset()
+            ["Item Icon Palette"]       = new Pointer(0xCBEA4),//Address_ItemIconPalette()
+
+            ["Character Palette Array"] = new Pointer(0xFD8008),//Address_CharacterPaletteArray()
+            ["Battle Animation Array"]  = new Pointer(0xE00008),//Address_BattleAnimationArray()
+
+            ["Spell Animation Array"]   = new Pointer(0xBA13D0),//Address_SpellAnimationArray()
+
+            ["Battle Platform Array"]   = new Pointer(0xFC0008),//Address_BattlePlatformArray()
+
+            ["Battle Screen Tileset" ]  = new Pointer(0x1D88B4),//Address_BattleScreenFrame()[0]
+            ["Battle Screen Palettes"]  = new Pointer(0x1D8FA0),//Address_BattleScreenFrame()[1]
+            ["Battle Screen TSA"     ]  = new Pointer(0x1D8C34),//Address_BattleScreenFrame()[2]
+            ["Battle Screen L Name"  ]  = new Pointer(0x1D8ABC),//Address_BattleScreenFrame()[3]
+            ["Battle Screen L Weapon"]  = new Pointer(0x1D8B0C),//Address_BattleScreenFrame()[4]
+            ["Battle Screen R Name"  ]  = new Pointer(0x1D8B78),//Address_BattleScreenFrame()[5]
+            ["Battle Screen R Weapon"]  = new Pointer(0x1D8BC8),//Address_BattleScreenFrame()[6]
+
+            ["Small World Map Tileset"] = new Pointer(0x5D0AC0),//Address_WorldMap()[0]
+            ["Small World Map Palette"] = new Pointer(0x5D0A40),//Address_WorldMap()[1]
+            ["Small World Map TSA"    ] = new Pointer(0x5D5B38),//Address_WorldMap()[2]
+            ["Large World Map Tileset"] = new Pointer(0xCE7818),//Address_WorldMap()[3]
+            ["Large World Map Palette"] = new Pointer(0x574990),//Address_WorldMap()[4]
+            ["Large World Map TSA"    ] = new Pointer(0xCE7848),//Address_WorldMap()[5]
+
+            ["Title Screen BG Palette"] = new Pointer(0x66AF6C),//Address_TitleScreen()[0]
+            ["Title Screen BG Tileset"] = new Pointer(0x66AF8C),//Address_TitleScreen()[1]
+            ["Title Screen MG Palette"] = new Pointer(0x66F274),//Address_TitleScreen()[2]
+            ["Title Screen MG Tileset"] = new Pointer(0x66F294),//Address_TitleScreen()[3]
+            ["Title Screen MG TSA"    ] = new Pointer(0x66FB1C),//Address_TitleScreen()[4]
+            ["Title Screen FG Palette"] = new Pointer(0x66FCE0),//Address_TitleScreen()[5]
+            ["Title Screen FG Tileset"] = new Pointer(0x66FD80),//Address_TitleScreen()[6]
+        };
+    }
+
+
+
+    public class FE7E : FE7
+    {
+        //public FE7E() : base(GameRegion.EUR) { }
+
+        public override GameRegion Region => GameRegion.EUR;
+
+        public override String Identifier => "FE7E";
+        public override String ID => "FIREEMBLEMY\0AE7Y01";
+        public override UInt32 Checksum => 0x9DECC754;
+        public override UInt32 FileSize => 0x01000000;
+        public override Magic.Range[] FreeSpace => new Magic.Range[]
+        {
+            // TODO
+        };
+        public override Dictionary<String, Pointer> Addresses => new()
+        {
+            ["Class Array"]             = new Pointer(0x0),//Address_ClassArray()
+            ["Chapter Array"]           = new Pointer(0xD612B0),//Address_ChapterArray()
+            ["Map Data Array"]          = new Pointer(0xD63A78),//Address_MapDataArray()
+
+            ["Text Array"]              = new Pointer(0xC397A0),//Address_TextArray()
+            ["Huffman Tree"]            = new Pointer(0xC34E30),//Address_HuffmanTree()
+            ["Huffman Tree Root"]       = new Pointer(0xC3979C),//Address_HuffmanTreeRoot()
+
+            ["Menu Font"]               = new Pointer(0xC4C90C),//Address_Font_Menu()
+            ["Text Bubble Font"]        = new Pointer(0xC4F6F4),//Address_Font_Bubble()
+            ["Text Bubble Tileset"]     = new Pointer(0x1E4810),//Address_TextBubbleTileset()
+            ["Text Bubble Palette"]     = new Pointer(0x1E4AAC),//Address_TextBubblePalette()
+
+            ["Music Array"]             = new Pointer(0x67F200),//Address_MusicArray()
+
+            ["Portrait Array"]          = new Pointer(0xD5D634),//Address_PortraitArray()
+
+            ["Map Terrain Names"]       = new Pointer(0x0),//Address_MapTerrainNames()
+
+            ["Map Sprite Idle Array"]   = new Pointer(0xD607B0),//Address_MapSpriteIdleArray()
+            ["Map Sprite Move Array"]   = new Pointer(0xD64224),//Address_MapSpriteMoveArray()
+            ["Map Sprite Palettes"]     = new Pointer(0x0D13D0),//Address_MapSpritePalettes()
+
+            ["Dialog Background Array"] = new Pointer(0xC556CC),//Address_DialogBackgroundArray()
+            ["Battle Background Array"] = new Pointer(0xCA3B14),//Address_BattleBackgroundArray()
+            ["Cutscene Screen Array"  ] = new Pointer(0xDB4CB0),//Address_CutsceneScreenArray()
+
+            ["Item Icon Tileset"]       = new Pointer(0x0),//Address_ItemIconTileset()
+            ["Item Icon Palette"]       = new Pointer(0x0),//Address_ItemIconPalette()
+
+            ["Character Palette Array"] = new Pointer(0xFD8008),//Address_CharacterPaletteArray()
+            ["Battle Animation Array"]  = new Pointer(0xE00008),//Address_BattleAnimationArray()
+
+            ["Spell Animation Array"]   = new Pointer(0xC68540),//Address_SpellAnimationArray()
+
+            ["Battle Platform Array"]   = new Pointer(0xFC0008),//Address_BattlePlatformArray()
+
+            ["Battle Screen Tileset" ]  = new Pointer(0x2BE6DC),//Address_BattleScreenFrame()[0]
+            ["Battle Screen Palettes"]  = new Pointer(0x2BEDC8),//Address_BattleScreenFrame()[1]
+            ["Battle Screen TSA"     ]  = new Pointer(0x2BEA5C),//Address_BattleScreenFrame()[2]
+            ["Battle Screen L Name"  ]  = new Pointer(0x2BE8E4),//Address_BattleScreenFrame()[3]
+            ["Battle Screen L Weapon"]  = new Pointer(0x2BE934),//Address_BattleScreenFrame()[4]
+            ["Battle Screen R Name"  ]  = new Pointer(0x2BE9A0),//Address_BattleScreenFrame()[5]
+            ["Battle Screen R Weapon"]  = new Pointer(0x2BE9F0),//Address_BattleScreenFrame()[6]
+
+            ["Small World Map Tileset"] = new Pointer(0x64DB88),//Address_WorldMap()[0]
+            ["Small World Map Palette"] = new Pointer(0x64DB08),//Address_WorldMap()[1]
+            ["Small World Map TSA"    ] = new Pointer(0x652C00),//Address_WorldMap()[2]
+            ["Large World Map Tileset"] = new Pointer(0xDAEC40),//Address_WorldMap()[3]
+            ["Large World Map Palette"] = new Pointer(0x5F1A58),//Address_WorldMap()[4]
+            ["Large World Map TSA"    ] = new Pointer(0xDAEC70),//Address_WorldMap()[5]
+
+            ["Title Screen BG Palette"] = new Pointer(0x1C7424),//Address_TitleScreen()[0]
+            ["Title Screen BG Tileset"] = new Pointer(0x1C7444),//Address_TitleScreen()[1]
+            ["Title Screen MG Palette"] = new Pointer(0x1CB72C),//Address_TitleScreen()[2]
+            ["Title Screen MG Tileset"] = new Pointer(0x1CB74C),//Address_TitleScreen()[3]
+            ["Title Screen MG TSA"    ] = new Pointer(0x1CBFD4),//Address_TitleScreen()[4]
+            ["Title Screen FG Palette"] = new Pointer(0x1CC198),//Address_TitleScreen()[5]
+            ["Title Screen FG Tileset"] = new Pointer(0x1CC238),//Address_TitleScreen()[6]
+        };
     }
 }
