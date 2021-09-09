@@ -30,9 +30,9 @@ namespace KirbyMagic
         /// </summary>
         public DataManager ROM { get; set; }
         /// <summary>
-        /// The HackManager does the IO for the FEH file, and its submanagers record all relevant hack information.
+        /// The HackManager does the IO for the MHF file, and its submanagers record all relevant hack information.
         /// </summary>
-        public HackManager FEH { get; set; }
+        public HackManager MHF { get; set; }
 
         /// <summary>
         /// Describes which fire emblem game is open, whether or not it's a clean ROM, and such.
@@ -65,7 +65,7 @@ namespace KirbyMagic
             AppVersion = System.Reflection.Assembly.GetEntryAssembly().GetName().Version;
 
             ROM = new DataManager(this);
-            FEH = new HackManager(this);
+            MHF = new HackManager(this);
             Editors = new List<Editor>();
 
             InitializeComponent();
@@ -98,7 +98,7 @@ namespace KirbyMagic
         public void Update_FileMenu()
         {
             File_SaveROM.Enabled = (ROM.FilePath == null || ROM.FilePath.Length == 0) ? false : ROM.WasChanged;
-            File_SaveFEH.Enabled = (FEH.FilePath == null || FEH.FilePath.Length == 0) ? false : FEH.Changed;
+            File_SaveMHF.Enabled = (MHF.FilePath == null || MHF.FilePath.Length == 0) ? false : MHF.Changed;
         }
         public void Update_EditMenu()
         {
@@ -124,11 +124,11 @@ namespace KirbyMagic
                 Edit_Redo.Text = "Redo";
             }
         }
-        public void Update_AutoSaveFEH()
+        public void Update_AutoSaveMHF()
         {
-            if (File_AutoSaveFEH.Selected)
+            if (File_AutoSaveMHF.Selected)
             {
-                File_SaveFEH_Click(null, new EventArgs());
+                File_SaveMHF_Click(null, new EventArgs());
             }
         }
         public void Update_AutoSaveROM()
@@ -140,7 +140,7 @@ namespace KirbyMagic
         }
         public void Update_Editors()
         {
-            Update_AutoSaveFEH();
+            Update_AutoSaveMHF();
             Update_AutoSaveROM();
 
             foreach (Editor editor in Editors)
@@ -159,10 +159,10 @@ namespace KirbyMagic
         {
             Tabs_Info_ROM_FileSize.Text = Util.GetDisplayBytes(ROM.FileSize);
             Tabs_Info_ROM_FilePath.Text = ROM.FilePath;
-            Tabs_Info_FEH_Name.Text     = FEH.HackName;
-            Tabs_Info_FEH_Author.Text   = FEH.HackAuthor;
-            Tabs_Info_FEH_FileInfo.Text = FEH.Write.History.Count + " writes in this file.\n";
-            Tabs_Info_FEH_FilePath.Text = FEH.FilePath;
+            Tabs_Info_MHF_Name.Text     = MHF.HackName;
+            Tabs_Info_MHF_Author.Text   = MHF.HackAuthor;
+            Tabs_Info_MHF_FileInfo.Text = MHF.Write.History.Count + " writes in this file.\n";
+            Tabs_Info_MHF_FilePath.Text = MHF.FilePath;
             StatusLabel.Text =
                 (Game == null ? "" : Game.ToString()) + " - " +
                 (ROM.IsClean ? "Clean" : "Hacked") + " ROM";
@@ -175,7 +175,7 @@ namespace KirbyMagic
         {
             try
             {
-                Game = Kirby.Game.FromROM(ROM);
+                Game = Kirby.Game.FromROM();
             }
             catch (Exception ex)
             {
@@ -190,8 +190,8 @@ namespace KirbyMagic
             Suite_Tabs.Visible = true;
             Suite_Tabs.SelectedIndex = 0;
 
-            File_OpenFEH.Enabled = true;
-            File_SaveAsFEH.Enabled = true;
+            File_OpenMHF.Enabled = true;
+            File_SaveAsMHF.Enabled = true;
             File_SaveAsROM.Enabled = true;
             File_CloseROM.Enabled = true;
             File_Export.Enabled = true;
@@ -216,10 +216,10 @@ namespace KirbyMagic
 
             StatusLabel.Text = null;
 
-            File_OpenFEH.Enabled = false;
-            File_SaveFEH.Enabled = false;
+            File_OpenMHF.Enabled = false;
+            File_SaveMHF.Enabled = false;
             File_SaveROM.Enabled = false;
-            File_SaveAsFEH.Enabled = false;
+            File_SaveAsMHF.Enabled = false;
             File_SaveAsROM.Enabled = false;
             File_CloseROM.Enabled = false;
             File_Export.Enabled = false;
@@ -249,53 +249,53 @@ namespace KirbyMagic
         }
         void Core_ResetHackManager()
         {
-            FEH = new HackManager(this);
+            MHF = new HackManager(this);
 
             Core_Update();
         }
 
         /// <summary>
-        /// Checks the differences between the open ROM and a clean ROM to generate an FEH file
+        /// Checks the differences between the open ROM and a clean ROM to generate an MHF file
         /// </summary>
         Boolean Core_CheckHackedROM()
         {
             if (ROM.IsClean) return false;
-            String same_filename = ROM.FilePath.Remove(ROM.FilePath.Length - 4) + ".feh";
+            String same_filename = ROM.FilePath.Remove(ROM.FilePath.Length - 4) + ".mhf";
             if (File.Exists(same_filename))
             {
                 try
                 {
-                    FEH.OpenFile(same_filename);
+                    MHF.OpenFile(same_filename);
                     return true;
                 }
                 catch (Exception ex)
                 {
                     if (ex.Message != "ABORT")
-                        UI.ShowError("Could not open the FEH hack file.", ex);
+                        UI.ShowError("Could not open the MHF hack file.", ex);
                     Core_ResetHackManager();
                 }
             }
-            if (Prompt.AskForFEHForHackedROM() == DialogResult.Yes)
+            if (Prompt.AskForMHFForHackedROM() == DialogResult.Yes)
             {
                 OpenFileDialog openWindow = new OpenFileDialog();
-                openWindow.Filter = "Fire Emblem Hack files (*.feh)|*.feh|All files (*.*)|*.*";
+                openWindow.Filter = "Fire Emblem Hack files (*.mhf)|*.mhf|All files (*.*)|*.*";
                 openWindow.FilterIndex = 1;
                 openWindow.RestoreDirectory = true;
                 openWindow.Multiselect = false;
 
                 if (openWindow.ShowDialog() == DialogResult.OK)
                 {
-                    if (Core_ExitFEHFile())
+                    if (Core_ExitMHFFile())
                     {
                         try
                         {
-                            FEH.OpenFile(openWindow.FileName);
+                            MHF.OpenFile(openWindow.FileName);
                             return true;
                         }
                         catch (Exception ex)
                         {
                             if (ex.Message != "ABORT")
-                                UI.ShowError("Could not open the FEH hack file.", ex);
+                                UI.ShowError("Could not open the MHF hack file.", ex);
                             Core_ResetHackManager();
                         }
                     }
@@ -350,7 +350,7 @@ namespace KirbyMagic
                     writes.Add(new Write("Expanded", address, write_data.ToArray()));
                     write_data.Clear();
                 }
-                FEH.Write.History = writes;
+                MHF.Write.History = writes;
             }
             return false;
         }
@@ -361,10 +361,10 @@ namespace KirbyMagic
         {
             if (ROM.IsClean)
             {
-                FEH.Space.Load(Game.FreeSpace);
-                FEH.Point.Load(Game.GetDefaultPointers());
+                MHF.Space.Load(Game.FreeSpace);
+                MHF.Point.Load(Game.GetDefaultPointers());
                 
-                FEH.Changed = false;
+                MHF.Changed = false;
             }
             else
             {
@@ -379,18 +379,18 @@ namespace KirbyMagic
                 {
                     Prompt.ResolveUnreferencedPointers(unreferenced);
                 }
-                //FEH.Space.Load(CurrentROM.DefaultFreeSpace());
-                FEH.Point.Load(pointers);
+                //MHF.Space.Load(CurrentROM.DefaultFreeSpace());
+                MHF.Point.Load(pointers);
             }
         }
         /// <summary>
-        /// Checks the differences between the open ROM file and FEH file and resolves them.
+        /// Checks the differences between the open ROM file and MHF file and resolves them.
         /// </summary>
         void Core_CheckDataHackDifferences()
         {
             List<Write> writes = new List<Write>();
             Byte[] buffer;
-            foreach (Write write in FEH.Write.History)
+            foreach (Write write in MHF.Write.History)
             {
                 buffer = ROM.Read(write.Address, write.Data.Length);
 
@@ -398,10 +398,10 @@ namespace KirbyMagic
                 {
                     writes.Add(write);
                 }
-            }    // Create a list of differing writes between the FEH and open ROM
+            }    // Create a list of differing writes between the MHF and open ROM
 
             if (writes.Count != 0 &&
-                Prompt.ApplyWritesToROM(FEH.Write.History.Count, writes.Count) == DialogResult.Yes)
+                Prompt.ApplyWritesToROM(MHF.Write.History.Count, writes.Count) == DialogResult.Yes)
             {
                 foreach (Write write in writes)
                 {
@@ -440,14 +440,14 @@ namespace KirbyMagic
                 ROM.OpenFile(path);
                 Core_LoadGame();
 
-                if (FEH.IsEmpty)
+                if (MHF.IsEmpty)
                 {
                     if (Core_CheckHackedROM())
                         goto Continue;
                 }
                 else Core_CheckDataHackDifferences();
 
-                if (FEH.IsEmpty) Core_CheckPointers();
+                if (MHF.IsEmpty) Core_CheckPointers();
 
                 Continue:
                 File_RecentFiles.AddFile(path);
@@ -460,11 +460,11 @@ namespace KirbyMagic
                 Core_ResetDataManager();
             }
         }
-        void Core_OpenFEHFile(String path)
+        void Core_OpenMHFFile(String path)
         {
             try
             {
-                FEH.OpenFile(path);
+                MHF.OpenFile(path);
 
                 Core_CheckDataHackDifferences();
                 Core_CheckHackedROM();
@@ -475,7 +475,7 @@ namespace KirbyMagic
             catch (Exception ex)
             {
                 if (ex.Message != "ABORT")
-                    UI.ShowError("Could not open the FEH hack file.", ex);
+                    UI.ShowError("Could not open the MHF hack file.", ex);
                 Core_ResetHackManager();
             }
         }
@@ -483,7 +483,7 @@ namespace KirbyMagic
         {
             try
             {
-                FEH.Write.Update_ROMSaved();
+                MHF.Write.Update_ROMSaved();
 
                 ROM.SaveFile(path);
 
@@ -494,19 +494,19 @@ namespace KirbyMagic
                 UI.ShowError("The ROM file could not be saved properly.", ex);
             }
         }
-        public void Core_SaveFEHFile(String path)
+        public void Core_SaveMHFFile(String path)
         {
             try
             {
-                FEH.Write.Update_FEHSaved();
+                MHF.Write.Update_MHFSaved();
 
-                FEH.SaveFile(path);
+                MHF.SaveFile(path);
 
                 Core_Update();
             }
             catch (IOException ex)
             {
-                UI.ShowError("FEH Hack file could not be saved properly.", ex);
+                UI.ShowError("MHF Hack file could not be saved properly.", ex);
             }
         }
         Boolean Core_ExitROMFile()
@@ -530,16 +530,16 @@ namespace KirbyMagic
                 return true;
             }
         }
-        Boolean Core_ExitFEHFile()
+        Boolean Core_ExitMHFFile()
         {
-            DialogResult answer = FEH.Changed ?
-                Prompt.SaveFEHChanges() : DialogResult.No;
+            DialogResult answer = MHF.Changed ?
+                Prompt.SaveMHFChanges() : DialogResult.No;
             if (answer == DialogResult.Cancel) return false;
             else
             {
                 if (answer == DialogResult.Yes)
                 {
-                    Core_SaveFEHFile(FEH.FilePath);
+                    Core_SaveMHFFile(MHF.FilePath);
                 }
                 for (Int32 i = 0; i < Editors.Count; i++)
                 {
@@ -552,22 +552,22 @@ namespace KirbyMagic
 
         void Core_UserWrite(Write write)
         {
-            FEH.Write.Add(write);
+            MHF.Write.Add(write);
             ROM.Write(UserAction.Write, write, null);
-            FEH.Space.MarkSpace("USED", write.Address, write.Address + write.Data.Length);
+            MHF.Space.MarkSpace("USED", write.Address, write.Address + write.Data.Length);
         }
         void Core_UserOverwrite(Write write, List<WriteConflict> conflict)
         {
-            FEH.Write.Add(write);
+            MHF.Write.Add(write);
             ROM.Write(UserAction.Overwrite, write, conflict);
-            FEH.Space.MarkSpace("USED", write.Address, write.Address + write.Data.Length);
+            MHF.Space.MarkSpace("USED", write.Address, write.Address + write.Data.Length);
         }
         void Core_UserRestore(Pointer address, Int32 length)
         {
-            List<WriteConflict> conflict = FEH.Write.Delete(address, address + length);
+            List<WriteConflict> conflict = MHF.Write.Delete(address, address + length);
             ROM.Restore(address, length, conflict);
             // not too sure about the space unmarking on data restore
-            FEH.Space.UnmarkSpace(address, address + length);
+            MHF.Space.UnmarkSpace(address, address + length);
         }
 
         public void Core_UserAction(UserAction action, Write write)
@@ -577,7 +577,7 @@ namespace KirbyMagic
                 switch (action)
                 {
                     case UserAction.Write:
-                        List<WriteConflict> conflict = FEH.Write.Check(write.Address, write.Address + write.Data.Length);
+                        List<WriteConflict> conflict = MHF.Write.Check(write.Address, write.Address + write.Data.Length);
 
                         if (conflict == null || conflict.Count == 0)
                         {
@@ -604,7 +604,7 @@ namespace KirbyMagic
                         }
                         break;
                     case UserAction.Overwrite:
-                        Core_UserOverwrite(write, FEH.Write.Check(write.Address, write.Address + write.Data.Length));
+                        Core_UserOverwrite(write, MHF.Write.Check(write.Address, write.Address + write.Data.Length));
                         break;
                     case UserAction.Restore:
                         Core_UserRestore(write.Address, write.Data.Length);
@@ -634,27 +634,27 @@ namespace KirbyMagic
                 if (ROM.UndoList.Count == 0)
                 {
                     ROM.WasChanged = false;
-                    FEH.Changed = false;
+                    MHF.Changed = false;
                 }
 
                 switch (ROM.UndoList[index].Action)
                 {
                     case UserAction.Write:
-                        FEH.Write.Delete(write);
+                        MHF.Write.Delete(write);
                         ROM.UndoAction(index);
                         break;
                     case UserAction.Overwrite:
-                        FEH.Write.Delete(write);
+                        MHF.Write.Delete(write);
                         foreach (WriteConflict conflict in ROM.UndoList[index].Conflicts)
                         {
-                            FEH.Write.Add(conflict.Write);
+                            MHF.Write.Add(conflict.Write);
                         }
                         ROM.UndoAction(index);
                         break;
                     case UserAction.Restore:
                         foreach (WriteConflict conflict in ROM.UndoList[index].Conflicts)
                         {
-                            FEH.Write.Add(conflict.Write);
+                            MHF.Write.Add(conflict.Write);
                         }
                         ROM.UndoAction(index);
                         break;
@@ -679,20 +679,20 @@ namespace KirbyMagic
                 Write write = ROM.RedoList[index].Associated;
 
                 ROM.WasChanged = true;
-                FEH.Changed = true;
+                MHF.Changed = true;
 
                 switch (ROM.RedoList[index].Action)
                 {
                     case UserAction.Write:
-                        FEH.Write.Add(write);
+                        MHF.Write.Add(write);
                         ROM.RedoAction(index);
                         break;
                     case UserAction.Overwrite:
-                        FEH.Write.Add(write);
+                        MHF.Write.Add(write);
                         ROM.RedoAction(index);
                         break;
                     case UserAction.Restore:
-                        FEH.Write.Delete(write.Address, write.Address + write.Data.Length);
+                        MHF.Write.Delete(write.Address, write.Address + write.Data.Length);
                         ROM.RedoAction(index);
                         break;
                     case UserAction.Cancel:
@@ -744,13 +744,13 @@ namespace KirbyMagic
         }
         public void Core_GetLastWrite()
         {
-            if (FEH.Write.History.Count == 0)
+            if (MHF.Write.History.Count == 0)
             {
                 UI.ShowMessage("No writes have been made to this ROM file.");
             }
             else
             {
-                Write write = FEH.Write.History[FEH.Write.History.Count - 1];
+                Write write = MHF.Write.History[MHF.Write.History.Count - 1];
                 UI.ShowMessage("Address: " + write.Address + "\n\n" +
                     "Pointer: " + Util.BytesToSpacedHex(write.Address.ToBytes()));
             }
@@ -767,14 +767,14 @@ namespace KirbyMagic
                     case 'J': version = GameRegion.JAP; break;
                     case 'U': version = GameRegion.USA; break;
                     case 'E': version = GameRegion.EUR; break;
-                    default: throw new Exception("FEH file describes an invalid game region (" + identifier + ")");
+                    default: throw new Exception("MHF file describes an invalid game region (" + identifier + ")");
                 }
                 if (Game.Region != version)
                     throw new Exception("Loaded ROM has invalid version (" + identifier + ")");
                 if (false) { }
                 else if (identifier.Substring(1, 2).Equals("ND", StringComparison.Ordinal)) return;
                 else if (identifier.Substring(1, 2).Equals("AM", StringComparison.Ordinal)) return;
-                else throw new Exception("FEH file describes an invalid Kirby game (" + identifier + ")");
+                else throw new Exception("MHF file describes an invalid Kirby game (" + identifier + ")");
 
                 if (Prompt.DifferentGameTypes() == DialogResult.No)
                 {
@@ -783,7 +783,7 @@ namespace KirbyMagic
             }
             else
             {
-                throw new Exception("FEH file has an invalid identifier.");
+                throw new Exception("MHF file has an invalid identifier.");
             }
         }
 
@@ -805,19 +805,19 @@ namespace KirbyMagic
                 }
             }
         }
-        void File_OpenFEH_Click(Object sender, EventArgs e)
+        void File_OpenMHF_Click(Object sender, EventArgs e)
         {
             OpenFileDialog openWindow = new OpenFileDialog();
-            openWindow.Filter = "Fire Emblem Hack files (*.feh)|*.feh|All files (*.*)|*.*";
+            openWindow.Filter = "Fire Emblem Hack files (*.mhf)|*.mhf|All files (*.*)|*.*";
             openWindow.FilterIndex = 1;
             openWindow.RestoreDirectory = true;
             openWindow.Multiselect = false;
                 
             if (openWindow.ShowDialog() == DialogResult.OK)
             {
-                if (Core_ExitFEHFile())
+                if (Core_ExitMHFFile())
                 {
-                    Core_OpenFEHFile(openWindow.FileName);
+                    Core_OpenMHFFile(openWindow.FileName);
                 }
             }
         }
@@ -832,15 +832,15 @@ namespace KirbyMagic
                 Core_SaveROMFile(ROM.FilePath);
             }
         }
-        void File_SaveFEH_Click(Object sender, EventArgs e)
+        void File_SaveMHF_Click(Object sender, EventArgs e)
         {
-            if (FEH.FilePath == null)
+            if (MHF.FilePath == null)
             {
-                UI.ShowError("There is no file path set for the FEH file.");
+                UI.ShowError("There is no file path set for the MHF file.");
             }
             else
             {
-                Core_SaveFEHFile(FEH.FilePath);
+                Core_SaveMHFFile(MHF.FilePath);
             }
         }
         void File_SaveROMas_Click(Object sender, EventArgs e)
@@ -857,11 +857,11 @@ namespace KirbyMagic
                 Core_SaveROMFile(saveWindow.FileName);
             }
         }
-        void File_SaveFEHas_Click(Object sender, EventArgs e)
+        void File_SaveMHFas_Click(Object sender, EventArgs e)
         {
             SaveFileDialog saveWindow = new SaveFileDialog();
 
-            saveWindow.Filter = "Fire Emblem Hack (*.feh)|*.feh|All files (*.*)|*.*";
+            saveWindow.Filter = "Fire Emblem Hack (*.mhf)|*.mhf|All files (*.*)|*.*";
             saveWindow.FilterIndex = 1;
             saveWindow.RestoreDirectory = true;
             saveWindow.CreatePrompt = true;
@@ -869,7 +869,7 @@ namespace KirbyMagic
 
             if (saveWindow.ShowDialog() == DialogResult.OK)
             {
-                Core_SaveFEHFile(saveWindow.FileName);
+                Core_SaveMHFFile(saveWindow.FileName);
             }
         }
         void File_RecentFiles_Click(Object sender, ToolStripItemClickedEventArgs e)
@@ -885,11 +885,11 @@ namespace KirbyMagic
                     Core_OpenROMFile(menu_item.FileName);
                 }
             }
-            else if (menu_item.Text.EndsWith(".feh") || menu_item.Text.EndsWith(".FEH"))
+            else if (menu_item.Text.EndsWith(".mhf") || menu_item.Text.EndsWith(".MHF"))
             {
-                if (Core_ExitFEHFile())
+                if (Core_ExitMHFFile())
                 {
-                    Core_OpenFEHFile(menu_item.FileName);
+                    Core_OpenMHFFile(menu_item.FileName);
                 }
             }
             else UI.ShowError("Chosen file has invalid extension");
@@ -921,7 +921,7 @@ namespace KirbyMagic
         }
         void File_Exit_Click(Object sender, EventArgs e)
         {
-            if (Core_ExitFEHFile() && Core_ExitROMFile())
+            if (Core_ExitMHFFile() && Core_ExitROMFile())
             {
                 Settings.Default.Save();
 
@@ -954,7 +954,7 @@ namespace KirbyMagic
                 "Please enter the desired ROM file size\r\n(amount of bytes, in hexadecimal).",
                 "Resize ROM", true, 0, DataManager.ROM_MAX_SIZE);
 
-            ROM.Resize(answer, FEH.Space);
+            ROM.Resize(answer, MHF.Space);
             Core_Update();
         }
         void Tool_MarkSpace_Click(Object sender, EventArgs e)

@@ -14,7 +14,7 @@ namespace Magic
         /// </summary>
         public Boolean Patched { get; set; }
         /// <summary>
-        /// Is true if this Write is in the last saved version of the FEH hack file.
+        /// Is true if this Write is in the last saved version of the MHF hack file.
         /// </summary>
         public Boolean IsSaved { get; set; }
 

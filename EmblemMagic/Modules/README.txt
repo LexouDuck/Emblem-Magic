@@ -1,4 +1,4 @@
-This folder is meant to hold .emm "modules" (the file extension stands for Emblem Magic Module).
+This folder is meant to hold .mmf "modules" (the file extension stands for Emblem Magic Module).
 These are simply text files with a specific syntax, which define how to generate a GUI for a certain struct/bit of data.
 
 You can find a more detailed explanation of how modules work, and what the syntax is, in the Help documents.

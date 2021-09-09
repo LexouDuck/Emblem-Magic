@@ -39,15 +39,15 @@ namespace EmblemMagic
             this.Suite_Menu = new System.Windows.Forms.MenuStrip();
             this.Menu_File = new System.Windows.Forms.ToolStripMenuItem();
             this.File_OpenROM = new System.Windows.Forms.ToolStripMenuItem();
-            this.File_OpenFEH = new System.Windows.Forms.ToolStripMenuItem();
+            this.File_OpenMHF = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.File_SaveROM = new System.Windows.Forms.ToolStripMenuItem();
             this.File_SaveAsROM = new System.Windows.Forms.ToolStripMenuItem();
-            this.File_SaveFEH = new System.Windows.Forms.ToolStripMenuItem();
-            this.File_SaveAsFEH = new System.Windows.Forms.ToolStripMenuItem();
+            this.File_SaveMHF = new System.Windows.Forms.ToolStripMenuItem();
+            this.File_SaveAsMHF = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.File_AutoSaveROM = new System.Windows.Forms.ToolStripMenuItem();
-            this.File_AutoSaveFEH = new System.Windows.Forms.ToolStripMenuItem();
+            this.File_AutoSaveMHF = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.File_Export = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -77,17 +77,17 @@ namespace EmblemMagic
             this.Tabs_Info = new System.Windows.Forms.TabPage();
             this.InfoLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.Tabs_Info_ROMPathLabel = new System.Windows.Forms.Label();
-            this.Tabs_Info_FEH_FileInfo = new System.Windows.Forms.Label();
+            this.Tabs_Info_MHF_FileInfo = new System.Windows.Forms.Label();
             this.Tabs_Info_ROMInfoLabel = new System.Windows.Forms.Label();
             this.Tabs_Info_ROM_FileSize = new System.Windows.Forms.Label();
-            this.Tabs_Info_FEH_FilePath = new System.Windows.Forms.Label();
+            this.Tabs_Info_MHF_FilePath = new System.Windows.Forms.Label();
             this.Tabs_Info_ROM_FilePath = new System.Windows.Forms.Label();
-            this.Tabs_Info_FEHPathLabel = new System.Windows.Forms.Label();
-            this.Tabs_Info_FEHInfoLabel = new System.Windows.Forms.Label();
-            this.Tabs_Info_FEH_AuthorLabel = new System.Windows.Forms.Label();
-            this.Tabs_Info_FEH_NameLabel = new System.Windows.Forms.Label();
-            this.Tabs_Info_FEH_Author = new System.Windows.Forms.Label();
-            this.Tabs_Info_FEH_Name = new System.Windows.Forms.Label();
+            this.Tabs_Info_MHFPathLabel = new System.Windows.Forms.Label();
+            this.Tabs_Info_MHFInfoLabel = new System.Windows.Forms.Label();
+            this.Tabs_Info_MHF_AuthorLabel = new System.Windows.Forms.Label();
+            this.Tabs_Info_MHF_NameLabel = new System.Windows.Forms.Label();
+            this.Tabs_Info_MHF_Author = new System.Windows.Forms.Label();
+            this.Tabs_Info_MHF_Name = new System.Windows.Forms.Label();
             this.Tabs_Open = new System.Windows.Forms.TabPage();
             this.Open_MenuEditor = new System.Windows.Forms.Button();
             this.Open_ItemEditor = new System.Windows.Forms.Button();
@@ -149,16 +149,16 @@ namespace EmblemMagic
             // 
             this.Menu_File.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.File_OpenROM,
-            this.File_OpenFEH,
+            this.File_OpenMHF,
             this.File_RecentFiles,
             this.toolStripSeparator1,
             this.File_SaveROM,
             this.File_SaveAsROM,
-            this.File_SaveFEH,
-            this.File_SaveAsFEH,
+            this.File_SaveMHF,
+            this.File_SaveAsMHF,
             this.toolStripSeparator2,
             this.File_AutoSaveROM,
-            this.File_AutoSaveFEH,
+            this.File_AutoSaveMHF,
             this.toolStripSeparator3,
             this.File_Export,
             this.toolStripSeparator4,
@@ -176,14 +176,14 @@ namespace EmblemMagic
             this.File_OpenROM.Text = "Open ROM...";
             this.File_OpenROM.Click += new System.EventHandler(this.File_OpenROM_Click);
             // 
-            // File_OpenFEH
+            // File_OpenMHF
             // 
-            this.File_OpenFEH.Name = "File_OpenFEH";
-            this.File_OpenFEH.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            this.File_OpenMHF.Name = "File_OpenMHF";
+            this.File_OpenMHF.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.O)));
-            this.File_OpenFEH.Size = new System.Drawing.Size(242, 22);
-            this.File_OpenFEH.Text = "Open FEH...";
-            this.File_OpenFEH.Click += new System.EventHandler(this.File_OpenFEH_Click);
+            this.File_OpenMHF.Size = new System.Drawing.Size(242, 22);
+            this.File_OpenMHF.Text = "Open MHF...";
+            this.File_OpenMHF.Click += new System.EventHandler(this.File_OpenMHF_Click);
             // 
             // File_RecentFiles
             // 
@@ -216,26 +216,26 @@ namespace EmblemMagic
             this.File_SaveAsROM.Text = "Save ROM As...";
             this.File_SaveAsROM.Click += new System.EventHandler(this.File_SaveROMas_Click);
             // 
-            // File_SaveFEH
+            // File_SaveMHF
             // 
-            this.File_SaveFEH.Enabled = false;
-            this.File_SaveFEH.Name = "File_SaveFEH";
-            this.File_SaveFEH.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            this.File_SaveMHF.Enabled = false;
+            this.File_SaveMHF.Name = "File_SaveMHF";
+            this.File_SaveMHF.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.S)));
-            this.File_SaveFEH.Size = new System.Drawing.Size(242, 22);
-            this.File_SaveFEH.Text = "Save FEH";
-            this.File_SaveFEH.Click += new System.EventHandler(this.File_SaveFEH_Click);
+            this.File_SaveMHF.Size = new System.Drawing.Size(242, 22);
+            this.File_SaveMHF.Text = "Save MHF";
+            this.File_SaveMHF.Click += new System.EventHandler(this.File_SaveMHF_Click);
             // 
-            // File_SaveAsFEH
+            // File_SaveAsMHF
             // 
-            this.File_SaveAsFEH.Enabled = false;
-            this.File_SaveAsFEH.Name = "File_SaveAsFEH";
-            this.File_SaveAsFEH.ShortcutKeys = ((System.Windows.Forms.Keys)((((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            this.File_SaveAsMHF.Enabled = false;
+            this.File_SaveAsMHF.Name = "File_SaveAsMHF";
+            this.File_SaveAsMHF.ShortcutKeys = ((System.Windows.Forms.Keys)((((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.File_SaveAsFEH.Size = new System.Drawing.Size(242, 22);
-            this.File_SaveAsFEH.Text = "Save FEH As...";
-            this.File_SaveAsFEH.Click += new System.EventHandler(this.File_SaveFEHas_Click);
+            this.File_SaveAsMHF.Size = new System.Drawing.Size(242, 22);
+            this.File_SaveAsMHF.Text = "Save MHF As...";
+            this.File_SaveAsMHF.Click += new System.EventHandler(this.File_SaveMHFas_Click);
             // 
             // toolStripSeparator2
             // 
@@ -249,12 +249,12 @@ namespace EmblemMagic
             this.File_AutoSaveROM.Size = new System.Drawing.Size(242, 22);
             this.File_AutoSaveROM.Text = "Auto-Patch to ROM";
             // 
-            // File_AutoSaveFEH
+            // File_AutoSaveMHF
             // 
-            this.File_AutoSaveFEH.CheckOnClick = true;
-            this.File_AutoSaveFEH.Name = "File_AutoSaveFEH";
-            this.File_AutoSaveFEH.Size = new System.Drawing.Size(242, 22);
-            this.File_AutoSaveFEH.Text = "Auto-Save Hack";
+            this.File_AutoSaveMHF.CheckOnClick = true;
+            this.File_AutoSaveMHF.Name = "File_AutoSaveMHF";
+            this.File_AutoSaveMHF.Size = new System.Drawing.Size(242, 22);
+            this.File_AutoSaveMHF.Text = "Auto-Save Hack";
             // 
             // toolStripSeparator3
             // 
@@ -496,17 +496,17 @@ namespace EmblemMagic
             this.InfoLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.InfoLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
             this.InfoLayoutPanel.Controls.Add(this.Tabs_Info_ROMPathLabel, 0, 1);
-            this.InfoLayoutPanel.Controls.Add(this.Tabs_Info_FEH_FileInfo, 1, 4);
+            this.InfoLayoutPanel.Controls.Add(this.Tabs_Info_MHF_FileInfo, 1, 4);
             this.InfoLayoutPanel.Controls.Add(this.Tabs_Info_ROMInfoLabel, 0, 0);
             this.InfoLayoutPanel.Controls.Add(this.Tabs_Info_ROM_FileSize, 1, 0);
-            this.InfoLayoutPanel.Controls.Add(this.Tabs_Info_FEH_FilePath, 1, 5);
+            this.InfoLayoutPanel.Controls.Add(this.Tabs_Info_MHF_FilePath, 1, 5);
             this.InfoLayoutPanel.Controls.Add(this.Tabs_Info_ROM_FilePath, 1, 1);
-            this.InfoLayoutPanel.Controls.Add(this.Tabs_Info_FEHPathLabel, 0, 5);
-            this.InfoLayoutPanel.Controls.Add(this.Tabs_Info_FEHInfoLabel, 0, 4);
-            this.InfoLayoutPanel.Controls.Add(this.Tabs_Info_FEH_AuthorLabel, 0, 3);
-            this.InfoLayoutPanel.Controls.Add(this.Tabs_Info_FEH_NameLabel, 0, 2);
-            this.InfoLayoutPanel.Controls.Add(this.Tabs_Info_FEH_Author, 1, 3);
-            this.InfoLayoutPanel.Controls.Add(this.Tabs_Info_FEH_Name, 1, 2);
+            this.InfoLayoutPanel.Controls.Add(this.Tabs_Info_MHFPathLabel, 0, 5);
+            this.InfoLayoutPanel.Controls.Add(this.Tabs_Info_MHFInfoLabel, 0, 4);
+            this.InfoLayoutPanel.Controls.Add(this.Tabs_Info_MHF_AuthorLabel, 0, 3);
+            this.InfoLayoutPanel.Controls.Add(this.Tabs_Info_MHF_NameLabel, 0, 2);
+            this.InfoLayoutPanel.Controls.Add(this.Tabs_Info_MHF_Author, 1, 3);
+            this.InfoLayoutPanel.Controls.Add(this.Tabs_Info_MHF_Name, 1, 2);
             this.InfoLayoutPanel.Location = new System.Drawing.Point(0, 3);
             this.InfoLayoutPanel.Name = "InfoLayoutPanel";
             this.InfoLayoutPanel.RowCount = 6;
@@ -530,14 +530,14 @@ namespace EmblemMagic
             this.Tabs_Info_ROMPathLabel.Text = "ROM File path:";
             this.Tabs_Info_ROMPathLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // Tabs_Info_FEH_FileInfo
+            // Tabs_Info_MHF_FileInfo
             // 
-            this.Tabs_Info_FEH_FileInfo.AutoSize = true;
-            this.Tabs_Info_FEH_FileInfo.Location = new System.Drawing.Point(103, 144);
-            this.Tabs_Info_FEH_FileInfo.Name = "Tabs_Info_FEH_FileInfo";
-            this.Tabs_Info_FEH_FileInfo.Size = new System.Drawing.Size(10, 13);
-            this.Tabs_Info_FEH_FileInfo.TabIndex = 3;
-            this.Tabs_Info_FEH_FileInfo.Text = "-";
+            this.Tabs_Info_MHF_FileInfo.AutoSize = true;
+            this.Tabs_Info_MHF_FileInfo.Location = new System.Drawing.Point(103, 144);
+            this.Tabs_Info_MHF_FileInfo.Name = "Tabs_Info_MHF_FileInfo";
+            this.Tabs_Info_MHF_FileInfo.Size = new System.Drawing.Size(10, 13);
+            this.Tabs_Info_MHF_FileInfo.TabIndex = 3;
+            this.Tabs_Info_MHF_FileInfo.Text = "-";
             // 
             // Tabs_Info_ROMInfoLabel
             // 
@@ -559,14 +559,14 @@ namespace EmblemMagic
             this.Tabs_Info_ROM_FileSize.TabIndex = 1;
             this.Tabs_Info_ROM_FileSize.Text = "-";
             // 
-            // Tabs_Info_FEH_FilePath
+            // Tabs_Info_MHF_FilePath
             // 
-            this.Tabs_Info_FEH_FilePath.AutoSize = true;
-            this.Tabs_Info_FEH_FilePath.Location = new System.Drawing.Point(103, 164);
-            this.Tabs_Info_FEH_FilePath.Name = "Tabs_Info_FEH_FilePath";
-            this.Tabs_Info_FEH_FilePath.Size = new System.Drawing.Size(31, 13);
-            this.Tabs_Info_FEH_FilePath.TabIndex = 2;
-            this.Tabs_Info_FEH_FilePath.Text = "none";
+            this.Tabs_Info_MHF_FilePath.AutoSize = true;
+            this.Tabs_Info_MHF_FilePath.Location = new System.Drawing.Point(103, 164);
+            this.Tabs_Info_MHF_FilePath.Name = "Tabs_Info_MHF_FilePath";
+            this.Tabs_Info_MHF_FilePath.Size = new System.Drawing.Size(31, 13);
+            this.Tabs_Info_MHF_FilePath.TabIndex = 2;
+            this.Tabs_Info_MHF_FilePath.Text = "none";
             // 
             // Tabs_Info_ROM_FilePath
             // 
@@ -577,65 +577,65 @@ namespace EmblemMagic
             this.Tabs_Info_ROM_FilePath.TabIndex = 0;
             this.Tabs_Info_ROM_FilePath.Text = "none";
             // 
-            // Tabs_Info_FEHPathLabel
+            // Tabs_Info_MHFPathLabel
             // 
-            this.Tabs_Info_FEHPathLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Tabs_Info_FEHPathLabel.AutoSize = true;
-            this.Tabs_Info_FEHPathLabel.Location = new System.Drawing.Point(18, 164);
-            this.Tabs_Info_FEHPathLabel.Name = "Tabs_Info_FEHPathLabel";
-            this.Tabs_Info_FEHPathLabel.Size = new System.Drawing.Size(79, 13);
-            this.Tabs_Info_FEHPathLabel.TabIndex = 6;
-            this.Tabs_Info_FEHPathLabel.Text = "Hack File path:";
-            this.Tabs_Info_FEHPathLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.Tabs_Info_MHFPathLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Tabs_Info_MHFPathLabel.AutoSize = true;
+            this.Tabs_Info_MHFPathLabel.Location = new System.Drawing.Point(18, 164);
+            this.Tabs_Info_MHFPathLabel.Name = "Tabs_Info_MHFPathLabel";
+            this.Tabs_Info_MHFPathLabel.Size = new System.Drawing.Size(79, 13);
+            this.Tabs_Info_MHFPathLabel.TabIndex = 6;
+            this.Tabs_Info_MHFPathLabel.Text = "Hack File path:";
+            this.Tabs_Info_MHFPathLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // Tabs_Info_FEHInfoLabel
+            // Tabs_Info_MHFInfoLabel
             // 
-            this.Tabs_Info_FEHInfoLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Tabs_Info_FEHInfoLabel.AutoSize = true;
-            this.Tabs_Info_FEHInfoLabel.Location = new System.Drawing.Point(22, 144);
-            this.Tabs_Info_FEHInfoLabel.Name = "Tabs_Info_FEHInfoLabel";
-            this.Tabs_Info_FEHInfoLabel.Size = new System.Drawing.Size(75, 13);
-            this.Tabs_Info_FEHInfoLabel.TabIndex = 7;
-            this.Tabs_Info_FEHInfoLabel.Text = "Hack File info:";
-            this.Tabs_Info_FEHInfoLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.Tabs_Info_MHFInfoLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Tabs_Info_MHFInfoLabel.AutoSize = true;
+            this.Tabs_Info_MHFInfoLabel.Location = new System.Drawing.Point(22, 144);
+            this.Tabs_Info_MHFInfoLabel.Name = "Tabs_Info_MHFInfoLabel";
+            this.Tabs_Info_MHFInfoLabel.Size = new System.Drawing.Size(75, 13);
+            this.Tabs_Info_MHFInfoLabel.TabIndex = 7;
+            this.Tabs_Info_MHFInfoLabel.Text = "Hack File info:";
+            this.Tabs_Info_MHFInfoLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // Tabs_Info_FEH_AuthorLabel
+            // Tabs_Info_MHF_AuthorLabel
             // 
-            this.Tabs_Info_FEH_AuthorLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Tabs_Info_FEH_AuthorLabel.AutoSize = true;
-            this.Tabs_Info_FEH_AuthorLabel.Location = new System.Drawing.Point(13, 124);
-            this.Tabs_Info_FEH_AuthorLabel.Name = "Tabs_Info_FEH_AuthorLabel";
-            this.Tabs_Info_FEH_AuthorLabel.Size = new System.Drawing.Size(84, 13);
-            this.Tabs_Info_FEH_AuthorLabel.TabIndex = 8;
-            this.Tabs_Info_FEH_AuthorLabel.Text = "Hack Author(s) :";
+            this.Tabs_Info_MHF_AuthorLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Tabs_Info_MHF_AuthorLabel.AutoSize = true;
+            this.Tabs_Info_MHF_AuthorLabel.Location = new System.Drawing.Point(13, 124);
+            this.Tabs_Info_MHF_AuthorLabel.Name = "Tabs_Info_MHF_AuthorLabel";
+            this.Tabs_Info_MHF_AuthorLabel.Size = new System.Drawing.Size(84, 13);
+            this.Tabs_Info_MHF_AuthorLabel.TabIndex = 8;
+            this.Tabs_Info_MHF_AuthorLabel.Text = "Hack Author(s) :";
             // 
-            // Tabs_Info_FEH_NameLabel
+            // Tabs_Info_MHF_NameLabel
             // 
-            this.Tabs_Info_FEH_NameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Tabs_Info_FEH_NameLabel.AutoSize = true;
-            this.Tabs_Info_FEH_NameLabel.Location = new System.Drawing.Point(27, 104);
-            this.Tabs_Info_FEH_NameLabel.Name = "Tabs_Info_FEH_NameLabel";
-            this.Tabs_Info_FEH_NameLabel.Size = new System.Drawing.Size(70, 13);
-            this.Tabs_Info_FEH_NameLabel.TabIndex = 9;
-            this.Tabs_Info_FEH_NameLabel.Text = "Hack Name :";
+            this.Tabs_Info_MHF_NameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Tabs_Info_MHF_NameLabel.AutoSize = true;
+            this.Tabs_Info_MHF_NameLabel.Location = new System.Drawing.Point(27, 104);
+            this.Tabs_Info_MHF_NameLabel.Name = "Tabs_Info_MHF_NameLabel";
+            this.Tabs_Info_MHF_NameLabel.Size = new System.Drawing.Size(70, 13);
+            this.Tabs_Info_MHF_NameLabel.TabIndex = 9;
+            this.Tabs_Info_MHF_NameLabel.Text = "Hack Name :";
             // 
-            // Tabs_Info_FEH_Author
+            // Tabs_Info_MHF_Author
             // 
-            this.Tabs_Info_FEH_Author.AutoSize = true;
-            this.Tabs_Info_FEH_Author.Location = new System.Drawing.Point(103, 124);
-            this.Tabs_Info_FEH_Author.Name = "Tabs_Info_FEH_Author";
-            this.Tabs_Info_FEH_Author.Size = new System.Drawing.Size(10, 13);
-            this.Tabs_Info_FEH_Author.TabIndex = 10;
-            this.Tabs_Info_FEH_Author.Text = "-";
+            this.Tabs_Info_MHF_Author.AutoSize = true;
+            this.Tabs_Info_MHF_Author.Location = new System.Drawing.Point(103, 124);
+            this.Tabs_Info_MHF_Author.Name = "Tabs_Info_MHF_Author";
+            this.Tabs_Info_MHF_Author.Size = new System.Drawing.Size(10, 13);
+            this.Tabs_Info_MHF_Author.TabIndex = 10;
+            this.Tabs_Info_MHF_Author.Text = "-";
             // 
-            // Tabs_Info_FEH_Name
+            // Tabs_Info_MHF_Name
             // 
-            this.Tabs_Info_FEH_Name.AutoSize = true;
-            this.Tabs_Info_FEH_Name.Location = new System.Drawing.Point(103, 104);
-            this.Tabs_Info_FEH_Name.Name = "Tabs_Info_FEH_Name";
-            this.Tabs_Info_FEH_Name.Size = new System.Drawing.Size(10, 13);
-            this.Tabs_Info_FEH_Name.TabIndex = 11;
-            this.Tabs_Info_FEH_Name.Text = "-";
+            this.Tabs_Info_MHF_Name.AutoSize = true;
+            this.Tabs_Info_MHF_Name.Location = new System.Drawing.Point(103, 104);
+            this.Tabs_Info_MHF_Name.Name = "Tabs_Info_MHF_Name";
+            this.Tabs_Info_MHF_Name.Size = new System.Drawing.Size(10, 13);
+            this.Tabs_Info_MHF_Name.TabIndex = 11;
+            this.Tabs_Info_MHF_Name.Text = "-";
             // 
             // Tabs_Open
             // 
@@ -914,14 +914,14 @@ namespace EmblemMagic
         private System.Windows.Forms.MenuStrip Suite_Menu;
         private System.Windows.Forms.ToolStripMenuItem Menu_File;
         private System.Windows.Forms.ToolStripMenuItem File_OpenROM;
-        private System.Windows.Forms.ToolStripMenuItem File_OpenFEH;
+        private System.Windows.Forms.ToolStripMenuItem File_OpenMHF;
         private System.Windows.Forms.ToolStripMenuItem File_SaveROM;
         private System.Windows.Forms.ToolStripMenuItem File_SaveAsROM;
-        private System.Windows.Forms.ToolStripMenuItem File_SaveFEH;
-        private System.Windows.Forms.ToolStripMenuItem File_SaveAsFEH;
+        private System.Windows.Forms.ToolStripMenuItem File_SaveMHF;
+        private System.Windows.Forms.ToolStripMenuItem File_SaveAsMHF;
         private System.Windows.Forms.ToolStripMenuItem File_Export;
         private System.Windows.Forms.ToolStripMenuItem File_AutoSaveROM;
-        private System.Windows.Forms.ToolStripMenuItem File_AutoSaveFEH;
+        private System.Windows.Forms.ToolStripMenuItem File_AutoSaveMHF;
         private System.Windows.Forms.ToolStripMenuItem File_CloseROM;
         private System.Windows.Forms.ToolStripMenuItem File_Exit;
 
@@ -943,12 +943,12 @@ namespace EmblemMagic
         private System.Windows.Forms.TabPage Tabs_Info;
         private System.Windows.Forms.Label Tabs_Info_ROMPathLabel;
         private System.Windows.Forms.Label Tabs_Info_ROMInfoLabel;
-        private System.Windows.Forms.Label Tabs_Info_FEHPathLabel;
-        private System.Windows.Forms.Label Tabs_Info_FEHInfoLabel;
+        private System.Windows.Forms.Label Tabs_Info_MHFPathLabel;
+        private System.Windows.Forms.Label Tabs_Info_MHFInfoLabel;
         private System.Windows.Forms.Label Tabs_Info_ROM_FilePath;
         private System.Windows.Forms.Label Tabs_Info_ROM_FileSize;
-        private System.Windows.Forms.Label Tabs_Info_FEH_FilePath;
-        private System.Windows.Forms.Label Tabs_Info_FEH_FileInfo;
+        private System.Windows.Forms.Label Tabs_Info_MHF_FilePath;
+        private System.Windows.Forms.Label Tabs_Info_MHF_FileInfo;
 
         private System.Windows.Forms.TabPage Tabs_Open;
         private System.Windows.Forms.Button Open_BattleScreenEditor;
@@ -983,10 +983,10 @@ namespace EmblemMagic
         private System.Windows.Forms.ToolStripSeparator Help_Separator;
         private System.Windows.Forms.ToolStripMenuItem Help_About;
         private System.Windows.Forms.TableLayoutPanel InfoLayoutPanel;
-        private System.Windows.Forms.Label Tabs_Info_FEH_AuthorLabel;
-        private System.Windows.Forms.Label Tabs_Info_FEH_NameLabel;
-        private System.Windows.Forms.Label Tabs_Info_FEH_Author;
-        private System.Windows.Forms.Label Tabs_Info_FEH_Name;
+        private System.Windows.Forms.Label Tabs_Info_MHF_AuthorLabel;
+        private System.Windows.Forms.Label Tabs_Info_MHF_NameLabel;
+        private System.Windows.Forms.Label Tabs_Info_MHF_Author;
+        private System.Windows.Forms.Label Tabs_Info_MHF_Name;
         private System.Windows.Forms.Button Open_GraphicsEditor;
         private System.Windows.Forms.Button Open_MapTilesetEditor;
         private System.Windows.Forms.ToolStripMenuItem Edit_OpenProperties;

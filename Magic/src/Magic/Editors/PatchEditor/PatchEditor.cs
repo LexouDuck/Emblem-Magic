@@ -61,7 +61,7 @@ namespace Magic.Editors
 
                 foreach (String file in files)
                 {
-                    if (file.EndsWith(".feh", StringComparison.OrdinalIgnoreCase))
+                    if (file.EndsWith(".mhf", StringComparison.OrdinalIgnoreCase))
                     {
                         HackManager patch = new HackManager(App);
                         patch.OpenFile(file);
@@ -121,7 +121,7 @@ namespace Magic.Editors
                 }
                 // else Core.Repoint(this, repoint.DefaultAddress, repoint.CurrentAddress, repoint.AssetName + " repoint");
 
-                App.FEH.Point.Add(repoint);
+                App.MHF.Point.Add(repoint);
             }
 
             UI.ResumeUpdate();

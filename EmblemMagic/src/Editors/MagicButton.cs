@@ -36,7 +36,7 @@ namespace EmblemMagic
                     {
                         String module = EditorToOpen.Substring(7, EditorToOpen.Length - 7);
                         editor = new ModuleEditor(App);
-                        ((ModuleEditor)editor).Core_OpenFile(Core.Path_Modules + module +".emm");
+                        ((ModuleEditor)editor).Core_OpenFile(Core.Path_Modules + module +".mmf");
                     }
                     else editor = null;
                     break;

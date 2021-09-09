@@ -250,7 +250,7 @@ namespace Magic
             return false;
         }
         /// <summary>
-        /// Shows a prompt asking to create a FEH Repoint tracker and returns that
+        /// Shows a prompt asking to create a MHF Repoint tracker and returns that
         /// </summary>
         public static Repoint ShowRepointCreateDialog(String assetName = "")
         {
@@ -273,10 +273,10 @@ namespace Magic
 
 
 
-        public static DialogResult SaveFEHChanges()
+        public static DialogResult SaveMHFChanges()
         {
             return MessageBox.Show(
-            "The hack has been modified, would you like to save the FEH file ?",
+            "The hack has been modified, would you like to save the MHF file ?",
 
             "Save changes to FE Hack ?",
             MessageBoxButtons.YesNoCancel,
@@ -313,14 +313,14 @@ namespace Magic
             MessageBoxIcon.Warning);
         }
 
-        public static DialogResult AskForFEHForHackedROM()
+        public static DialogResult AskForMHFForHackedROM()
         {
             return MessageBox.Show(
             "The ROM loaded is a hacked ROM.\n" +
-            "Click 'Yes' to browse for an FEH corresponding to this ROM if you have one.\n" +
-            "Otherwise, the program will generate FEH hack information for this ROM.",
+            "Click 'Yes' to browse for an MHF corresponding to this ROM if you have one.\n" +
+            "Otherwise, the program will generate MHF hack information for this ROM.",
 
-            "Open FEH for Hacked ROM ?",
+            "Open MHF for Hacked ROM ?",
             MessageBoxButtons.YesNo,
             MessageBoxIcon.Warning);
         }
@@ -390,8 +390,8 @@ namespace Magic
         public static DialogResult ApplyWritesToROM(Int32 writeTotal, Int32 writesMissing)
         {
             return MessageBox.Show(
-            "The current ROM file and the FEH file have some differences.\n" +
-            "Of the " + writeTotal + " writes in this FEH file,\n" +
+            "The current ROM file and the MHF file have some differences.\n" +
+            "Of the " + writeTotal + " writes in this MHF file,\n" +
             writesMissing + " writes are not applied to the loaded ROM file.\n" +
             "Would you like to apply them ? (Clicking 'No' will delete these writes)",
 
@@ -402,10 +402,10 @@ namespace Magic
         public static DialogResult DifferentGameTypes()
         {
             return MessageBox.Show(
-            "The FEH file and the loaded ROM are of different games/versions.\n" +
+            "The MHF file and the loaded ROM are of different games/versions.\n" +
             "Are you sure you want to proceed ?",
 
-            "ROM and FEH aren't the same game",
+            "ROM and MHF aren't the same game",
             MessageBoxButtons.YesNo,
             MessageBoxIcon.Warning);
         }

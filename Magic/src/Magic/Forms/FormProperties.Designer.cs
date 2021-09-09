@@ -57,7 +57,7 @@ namespace Magic
             this.EditGroupBox.Size = new System.Drawing.Size(260, 195);
             this.EditGroupBox.TabIndex = 0;
             this.EditGroupBox.TabStop = false;
-            this.EditGroupBox.Text = "Edit FEH Properties";
+            this.EditGroupBox.Text = "Edit MHF Properties";
             // 
             // ApplyButton
             // 

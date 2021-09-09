@@ -25,16 +25,16 @@ namespace Magic
 
         void LoadProperties()
         {
-            NameTextBox.Text        = App.FEH.HackName;
-            AuthorTextBox.Text      = App.FEH.HackAuthor;
-            DescriptionTextBox.Text = App.FEH.HackDescription;
+            NameTextBox.Text        = App.MHF.HackName;
+            AuthorTextBox.Text      = App.MHF.HackAuthor;
+            DescriptionTextBox.Text = App.MHF.HackDescription;
         }
 
         private void ApplyButton_Click(Object sender, EventArgs e)
         {
-            App.FEH.HackName        = NameTextBox.Text;
-            App.FEH.HackAuthor      = AuthorTextBox.Text;
-            App.FEH.HackDescription = DescriptionTextBox.Text;
+            App.MHF.HackName        = NameTextBox.Text;
+            App.MHF.HackAuthor      = AuthorTextBox.Text;
+            App.MHF.HackDescription = DescriptionTextBox.Text;
 
             this.DialogResult = DialogResult.Yes;
         }

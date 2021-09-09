@@ -41,12 +41,12 @@ namespace Magic
         /// </summary>
         public void MarkSpace(String markname, Pointer address, Pointer endbyte)
         {
-            Mark mark = App.FEH.Marks.Get(markname);
+            Mark mark = App.MHF.Marks.Get(markname);
             if (mark == null)
             {
                 if (Prompt.CreateMarkingType() == DialogResult.Yes)
                 {
-                    mark = App.FEH.Marks.Add(markname, 0, System.Drawing.Color.Aquamarine);
+                    mark = App.MHF.Marks.Add(markname, 0, System.Drawing.Color.Aquamarine);
                 }
                 else return;
             }
@@ -59,7 +59,7 @@ namespace Magic
             
             ListCleanup(i);
 
-            App.FEH.Changed = true;
+            App.MHF.Changed = true;
         }
         /// <summary>
         /// Unmarks the given range of space in the ROM, shortens or deletes existing ranges appropriately.
@@ -134,7 +134,7 @@ namespace Magic
                 }
             }
 
-            App.FEH.Changed = true;
+            App.MHF.Changed = true;
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace Magic
         /// </summary>
         public Boolean IsMarked(String markname, Pointer address, Int32 length = 1)
         {
-            Mark mark = App.FEH.Marks.Get(markname);
+            Mark mark = App.MHF.Marks.Get(markname);
 
             List<Range> ranges = GetAllMarkedAs(markname);
 
@@ -160,7 +160,7 @@ namespace Magic
         /// </summary>
         public List<Range> GetAllMarkedAs(String markname)
         {
-            Mark mark = App.FEH.Marks.Get(markname);
+            Mark mark = App.MHF.Marks.Get(markname);
             List<Range> list = new List<Range>();
 
             foreach (Space space in MarkedRanges)

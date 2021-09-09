@@ -7,7 +7,7 @@ using System.Windows.Forms;
 namespace Magic
 {
     /// <summary>
-    /// Manages everything relating to the Fire Emblem hack file (.FEH), opening and saving files.
+    /// Manages everything relating to the Fire Emblem hack file (.MHF), opening and saving files.
     /// </summary>
     public class HackManager
     {
@@ -38,7 +38,7 @@ namespace Magic
         /// </summary>
         public Boolean IsEmpty { get { return (FilePath.Length == 0); } }
         /// <summary>
-        /// Returns 'true' if every write of this FEH HackManager is applied to the current ROM
+        /// Returns 'true' if every write of this MHF HackManager is applied to the current ROM
         /// </summary>
         public Boolean IsApplied()
         {
@@ -119,7 +119,7 @@ namespace Magic
             }
         }
         /// <summary>
-        /// Makes the byte array of HackData, then overwrites or creates an FEH file at the given path.
+        /// Makes the byte array of HackData, then overwrites or creates an MHF file at the given path.
         /// </summary>
         public void SaveFile(String path)
         {
@@ -166,7 +166,7 @@ namespace Magic
                 subtable = new HackData(buffer);
                 switch (subtable.TableString)
                 {
-                    case "_FEH": LoadData_Properties(subtable); break;
+                    case "_MHF": LoadData_Properties(subtable); break;
                     case "_WRT": LoadData_Write(subtable); break;
                     case "_PNT": LoadData_Point(subtable); break;
                     case "_MRK": LoadData_Marks(subtable); break;
@@ -242,11 +242,11 @@ namespace Magic
 
 
         /// <summary>
-        /// Returns a byte array in FEH format of the current hack
+        /// Returns a byte array in MHF format of the current hack
         /// </summary>
         public Byte[] MakeData()
         {
-            HackData tableProperties = new HackData("_FEH", new Byte[3][]
+            HackData tableProperties = new HackData("_MHF", new Byte[3][]
             {
                 ByteArray.Make_ASCII(HackName),
                 ByteArray.Make_ASCII(HackAuthor),

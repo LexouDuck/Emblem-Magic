@@ -47,11 +47,11 @@ namespace Magic.Editors
 
 
         /// <summary>
-        /// The name of this EMM module
+        /// The name of this MMF module
         /// </summary>
         public String Name { get; }
         /// <summary>
-        /// The author of this EMM module
+        /// The author of this MMF module
         /// </summary>
         public String Author { get; }
         /// <summary>
@@ -150,7 +150,7 @@ namespace Magic.Editors
             throw new Exception("Invalid module entry type written: " + text);
         }
         /// <summary>
-        /// Reads the editor shortcut between parentheses from the EMM file
+        /// Reads the editor shortcut between parentheses from the MMF file
         /// </summary>
         public static String ReadShortcut(String text)
         {

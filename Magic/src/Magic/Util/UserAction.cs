@@ -14,7 +14,7 @@ namespace Magic
         /// </summary>
         Write,
         /// <summary>
-        /// An overwrite - where the FEH Hack Manager recorded a write and a new write is to replace it.
+        /// An overwrite - where the MHF Hack Manager recorded a write and a new write is to replace it.
         /// </summary>
         Overwrite,
         /// <summary>

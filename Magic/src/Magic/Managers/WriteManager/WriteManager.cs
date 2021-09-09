@@ -7,13 +7,13 @@ namespace Magic
 {
     /// <summary>
     /// This class handles the storing and manipulation of the Write history, in 2 lists.
-    /// All the fields and methods with prefix "User" refer to writes done since the last FEH save.
-    /// The prefix "File" for writes saved to the open FEH file, or loaded from it.
+    /// All the fields and methods with prefix "User" refer to writes done since the last MHF save.
+    /// The prefix "File" for writes saved to the open MHF file, or loaded from it.
     /// </summary>
     public class WriteManager
     {
         /// <summary>
-        /// Describes all the writes done to the ROM in the current session - saving to FEH clears this list.
+        /// Describes all the writes done to the ROM in the current session - saving to MHF clears this list.
         /// </summary>
         public List<Write> History { get; set; }
         /// <summary>
@@ -36,7 +36,7 @@ namespace Magic
         /// </summary>
         public void Add(Write write)
         {
-            App.FEH.Changed = true;
+            App.MHF.Changed = true;
 
             Delete(write.Address, write.Address + write.Data.Length);
             History.Add(write);
@@ -60,7 +60,7 @@ namespace Magic
         /// </summary>
         public Boolean Delete(Write write)
         {
-            App.FEH.Changed = true;
+            App.MHF.Changed = true;
 
             DeadList.Add(write);
             return History.Remove(write);
@@ -173,9 +173,9 @@ namespace Magic
 
 
         /// <summary>
-        /// Called when FEH is saved - Sets 'Saved' to true for every write
+        /// Called when MHF is saved - Sets 'Saved' to true for every write
         /// </summary>
-        public void Update_FEHSaved()
+        public void Update_MHFSaved()
         {
             for (Int32 i = 0; i < History.Count; i++)
             {

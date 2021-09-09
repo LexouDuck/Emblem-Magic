@@ -29,7 +29,7 @@ Version 0.8 (BETA 3)
 - MapSpriteEditor: Added functionality to convert MapSprites from the ingame format (2 images, 'idle' and 'move') to EmblemMagic format (1 image, 160x128)
 - MapSpriteEditor: Added the map sprite anim data .bin files to './Utils/MapSprites/' (useful if you wish to insert a dancer class or something).
 - PatchEditor: Added the FE8U version of the "Anti-Huffman Text Patch" to the 'Patches' folder
-- ModuleEditor: Added Chapter Unit Editor.emm module for FE8.
+- ModuleEditor: Added Chapter Unit Editor.mmf module for FE8.
 - ModuleEditor: fixed several problems concerning bit-index module fields (like if it traverses several distinct bytes, etc)
 - ModuleEditor: POIN entry selector lists (for structs found at arbitrary addresses, rather than contiguous arrays) now work much better (open the Chapter Unit Editor to see what I mean by this)
 - TitleScreenEditor: implemented 'File -> Save image...' functionality for this editor.
@@ -66,7 +66,7 @@ These core tools include:
 - an editor to manage which areas of the ROM are marked (by default the markings “FREE” and “USED” exist, but the user can create their own marking types)
 - tools for easier repointing (the user can choose whether the program should prompt them to repoint upon insertion or not, for instance)
 
-All this information can be stored by the user in an FEH file (FEH stands for Fire Emblem Hack); also note that with this file, the ROMhack can be recreated from an approriate clean ROM.
+All this information can be stored by the user in an MHF file (MHF stands for Fire Emblem Hack); also note that with this file, the ROMhack can be recreated from an approriate clean ROM.
 Also, Emblem Magic reads external text files to associate names to array entries in the ROM (kinda like the dropdowns from Nightmare, and the user can have their own set of text files, seperate from
 the ones for the vanilla ROMs).
 
@@ -75,10 +75,10 @@ The ones that have an “X” instead of a “-” are the more incomplete ones (I say t
 
 - Basic ROM Editor (read/write bytes, potentially with LZ77 compression)
 - Hex Editor (like any hex editor, really)
-- Patch Editor (for applying various patches to the ROM through FEH files in the “Patches” folder)
+- Patch Editor (for applying various patches to the ROM through MHF files in the “Patches” folder)
 - ASM Editor (dissassemble/assemble ASM code, and can somewhat “test run” code line-per-line)
 X Event Editor
-- Module Editor (basically Nightmare, uses “EMM” text files to load GUI to edit arrays or other data in the ROM)
+- Module Editor (basically Nightmare, uses “MMF” text files to load GUI to edit arrays or other data in the ROM)
 - World Map Editor (pretty simple image inserting for the large/small world maps for the game)
 X Map Tileset Editor (to change the tilesets of 16x16 tiles used for maps, their animations, their terrain associations)
 - Map Editor (to edit the maps for each chapter of the game, as well as the triggerable tile changes for these maps)

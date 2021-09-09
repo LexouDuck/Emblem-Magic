@@ -48,7 +48,7 @@ namespace Magic.Editors
             this.WriteLengthLabel = new System.Windows.Forms.Label();
             this.WriteMergeButton = new System.Windows.Forms.Button();
             this.WritePhraseTextBox = new System.Windows.Forms.TextBox();
-            this.MarkSpaceBox = new Magic.Components.MarkingBox(App.FEH.Marks);
+            this.MarkSpaceBox = new Magic.Components.MarkingBox(App.MHF.Marks);
             this.WritePointerBox = new Magic.Components.PointerBox();
             this.MarkSpaceButton = new System.Windows.Forms.Button();
             this.AddressLabel = new System.Windows.Forms.Label();
@@ -158,7 +158,7 @@ namespace Magic.Editors
             // List_IsSavedColumn
             // 
             this.List_IsSavedColumn.FillWeight = 50F;
-            this.List_IsSavedColumn.HeaderText = "Saved to FEH";
+            this.List_IsSavedColumn.HeaderText = "Saved to MHF";
             this.List_IsSavedColumn.MinimumWidth = 50;
             this.List_IsSavedColumn.Name = "List_IsSavedColumn";
             this.List_IsSavedColumn.ReadOnly = true;

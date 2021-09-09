@@ -76,7 +76,7 @@ namespace Magic.Editors
             this.Space_LengthBox = new System.Windows.Forms.NumericUpDown();
             this.Space_Panel = new System.Windows.Forms.GroupBox();
             this.Space_MarkAsLabel = new System.Windows.Forms.Label();
-            this.Space_MarkAsComboBox = new Magic.Components.MarkingBox(App.FEH.Marks);
+            this.Space_MarkAsComboBox = new Magic.Components.MarkingBox(App.MHF.Marks);
             this.Marks_Panel = new System.Windows.Forms.GroupBox();
             this.Marks_DeleteMarkButton = new System.Windows.Forms.Button();
             this.Marks_CreateMarkButton = new System.Windows.Forms.Button();

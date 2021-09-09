@@ -34,7 +34,7 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// This creates a GameType instance by checking the current ROM
         /// </summary>
-        public static Game FromROM(DataManager ROM)
+        public static Game FromROM()
         {
             Byte[] id_data = Core.ReadData(new Pointer(ID_ADDRESS), (int)ID_LENGTH);
             String id = new String(Encoding.ASCII.GetChars(id_data));

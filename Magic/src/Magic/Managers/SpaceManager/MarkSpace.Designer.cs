@@ -30,7 +30,7 @@ namespace Magic
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MarkSpace));
             this.Space_MarkAsLabel = new System.Windows.Forms.Label();
-            this.Space_MarkAsComboBox = new Magic.Components.MarkingBox(App.FEH.Marks);
+            this.Space_MarkAsComboBox = new Magic.Components.MarkingBox(App.MHF.Marks);
             this.Space_EndByteLabel = new System.Windows.Forms.RadioButton();
             this.Space_LengthLabel = new System.Windows.Forms.RadioButton();
             this.Space_EndByteBox = new Magic.Components.PointerBox();

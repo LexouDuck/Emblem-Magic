@@ -14,7 +14,7 @@ namespace Magic
 
             Space_LengthBox.Maximum = Core.CurrentROMSize;
 
-            Space_MarkAsComboBox.DataSource = App.FEH.Marks.GetStringList(true);
+            Space_MarkAsComboBox.DataSource = App.MHF.Marks.GetStringList(true);
         }
 
         void Space_EndByteLabel_Click(Object sender, EventArgs e)
@@ -51,16 +51,16 @@ namespace Magic
             if (mark == "(unmark)")
             {
                 if (Space_EndByteLabel.Checked)
-                    App.FEH.Space.UnmarkSpace(address, endbyte);
+                    App.MHF.Space.UnmarkSpace(address, endbyte);
                 else
-                    App.FEH.Space.UnmarkSpace(address, address + length);
+                    App.MHF.Space.UnmarkSpace(address, address + length);
             }
             else
             {
                 if (Space_EndByteLabel.Checked)
-                    App.FEH.Space.MarkSpace(mark, address, endbyte);
+                    App.MHF.Space.MarkSpace(mark, address, endbyte);
                 else
-                    App.FEH.Space.MarkSpace(mark, address, address + length);
+                    App.MHF.Space.MarkSpace(mark, address, address + length);
             }
 
             UI.PerformUpdate();

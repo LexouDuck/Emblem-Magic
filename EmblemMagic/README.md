@@ -13,7 +13,7 @@ These core tools include:
 - a history of writes done to the ROM (thanks to which the user can use Ctrl+Z/Ctrl+Y to undo/redo changes)
 - an editor to manage which areas of the ROM are marked (by default the markings "FREE" and "USED" exist, but the user can create their own marking types)
 - tools for easier repointing (the user can choose whether the program should prompt them to repoint upon insertion or not, for instance)
-All this information can be stored by the user in an FEH file (FEH stands for Fire Emblem Hack); also note that with this file, the ROMhack can be recreated from an approriate clean ROM.
+All this information can be stored by the user in an MHF file (MHF stands for Fire Emblem Hack); also note that with this file, the ROMhack can be recreated from an approriate clean ROM.
 Also, Emblem Magic reads external text files to associate names to array entries in the ROM (kinda like the dropdowns from Nightmare, and the user can have their own set of text files, seperate from 
 
 the ones for the vanilla ROMs).
@@ -29,7 +29,7 @@ _Note_: The editors in the following list which have an "X" before their name ar
 
 ![](https://i.imgur.com/c12seK8.png)
 
-- **Patch Editor** (for applying various patches to the ROM through FEH files located in the "Patches" folder)
+- **Patch Editor** (for applying various patches to the ROM through MHF files located in the "Patches" folder)
 
 ![](https://i.imgur.com/Iu0RGxa.png)
 
@@ -41,7 +41,7 @@ _Note_: The editors in the following list which have an "X" before their name ar
 
 ![](https://i.imgur.com/78eDICB.png)
 
-- **Module Editor** (basically like Nightmare, uses .emm text files to load GUI to edit arrays or other data in the ROM - create your own struct editors this way)
+- **Module Editor** (basically like Nightmare, uses .mmf text files to load GUI to edit arrays or other data in the ROM - create your own struct editors this way)
 
 ![](https://i.imgur.com/gvm4P8k.png)
 

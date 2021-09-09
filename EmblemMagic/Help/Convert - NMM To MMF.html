@@ -3,12 +3,12 @@
 <head>
 	<meta charset="utf-8">
     <link rel="stylesheet" href="Emblem Magic.css">
-	<title>NMM To EMM</title></title>
+	<title>NMM To MMF</title></title>
 </head>
 <body>
-	<h1>Converting Modules - NMM To EMM</h1>
+	<h1>Converting Modules - NMM To MMF</h1>
 	<br>
-	<p>The changes from the NMM file format to EMM are relatively few, but significant nonetheless.</p>
+	<p>The changes from the NMM file format to MMF are relatively few, but significant nonetheless.</p>
 	<br><br>
 	<h2>• THE FILE HEADER</h2>
 	<br><p>
@@ -21,7 +21,7 @@
 	<b>[file.txt]</b> TXT file detailing the  names of entries in the array<br>
 	<b>[NULL]</b> I think this line has to be NULL ? Not sure<br>
 	<br>
-	And the beginning of an EMM file goes as such:<br>
+	And the beginning of an MMF file goes as such:<br>
 	<b>[FE__]</b> FE Game identifier (FE7U, FE6J, etc)<br>
 	<b>[text]</b> Title of the module<br>
 	<b>[text]</b> Author of the module<br>
@@ -46,7 +46,7 @@
 	<b>[NULL]</b> The kind of control for this field (NEHU, NDHU, etc)<br>
 	<b>[file.txt]</b> The list file used for this field's control<br>
 	<br>
-	In an EMM file, it's:<br>
+	In an MMF file, it's:<br>
 	<b>[text]</b> Name of the field<br>
 	<b>[text]</b> Category of the field (if the Category is 'Unused', it will be the last category to show up)<br>
 	<b>[number]</b> byte/bit index of the field<br>
@@ -57,7 +57,7 @@
 	Here is the list of controls, and what to change them to if converting from an NMM file.<br>
 	<br>
 	<code>
-| .nmm | .emm  | Control type<br>
+| .nmm | .mmf  | Control type<br>
 | NULL -> NULL | nothing<br>
 |(none)-> BOOL | CheckBox (some NMMs have it as a NDHU/LIST dropdown reading from an OnOff.txt list file)<br>
 | TEXT -> TEXT | TextBox (one-line)<br>

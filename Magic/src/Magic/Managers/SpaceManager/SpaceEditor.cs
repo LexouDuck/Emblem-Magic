@@ -47,7 +47,7 @@ namespace Magic.Editors
 
         void Update_MarksPanel()
         {
-            Mark current = App.FEH.Marks.MarkingTypes[Marks_ListBox.SelectedIndex];
+            Mark current = App.MHF.Marks.MarkingTypes[Marks_ListBox.SelectedIndex];
             if (current == null)
             {
                 Marks_NameTextBox.Text = "";
@@ -63,12 +63,12 @@ namespace Magic.Editors
         }
         void Update_MarkTypesList()
         {
-            Space_MarkAsComboBox.DataSource = App.FEH.Marks.GetStringList(true);
-            Marks_ListBox.DataSource = App.FEH.Marks.GetStringList(false);
+            Space_MarkAsComboBox.DataSource = App.MHF.Marks.GetStringList(true);
+            Marks_ListBox.DataSource = App.MHF.Marks.GetStringList(false);
         }
         void Update_OutputTextBox()
         {
-            List<Space> ranges = new List<Space>(App.FEH.Space.MarkedRanges);
+            List<Space> ranges = new List<Space>(App.MHF.Space.MarkedRanges);
 
             switch (Sorting)
             {
@@ -100,7 +100,7 @@ namespace Magic.Editors
         }
         void Update_OutputSpaceBar()
         {
-            Output_SpaceBar.Load(App.ROM.FileSize, App.FEH.Space.MarkedRanges);
+            Output_SpaceBar.Load(App.ROM.FileSize, App.MHF.Space.MarkedRanges);
         }
 
 
@@ -138,16 +138,16 @@ namespace Magic.Editors
             if (mark == "(unmark)")
             {
                 if (Space_EndByteLabel.Checked)
-                    App.FEH.Space.UnmarkSpace(address, endbyte);
+                    App.MHF.Space.UnmarkSpace(address, endbyte);
                 else
-                    App.FEH.Space.UnmarkSpace(address, address + length);
+                    App.MHF.Space.UnmarkSpace(address, address + length);
             }
             else
             {
                 if (Space_EndByteLabel.Checked)
-                    App.FEH.Space.MarkSpace(mark, address, endbyte);
+                    App.MHF.Space.MarkSpace(mark, address, endbyte);
                 else
-                    App.FEH.Space.MarkSpace(mark, address, address + length);
+                    App.MHF.Space.MarkSpace(mark, address, address + length);
             }
             Space_AddressBox.ResetText();
             Space_EndByteBox.ResetText();
@@ -166,7 +166,7 @@ namespace Magic.Editors
         }
         void Marks_NameTextChanged(Object sender, EventArgs e)
         {
-            Mark current = App.FEH.Marks.MarkingTypes[Marks_ListBox.SelectedIndex];
+            Mark current = App.MHF.Marks.MarkingTypes[Marks_ListBox.SelectedIndex];
 
             current.Name = Marks_NameTextBox.Text;
 
@@ -179,7 +179,7 @@ namespace Magic.Editors
 
             if (colorWindow.ShowDialog(this) == DialogResult.OK)
             {
-                Mark current = App.FEH.Marks.MarkingTypes[Marks_ListBox.SelectedIndex];
+                Mark current = App.MHF.Marks.MarkingTypes[Marks_ListBox.SelectedIndex];
 
                 current.Color = colorWindow.Color;
 
@@ -188,7 +188,7 @@ namespace Magic.Editors
         }
         void Marks_LayerValueChanged(Object sender, EventArgs e)
         {
-            Mark current = App.FEH.Marks.MarkingTypes[Marks_ListBox.SelectedIndex];
+            Mark current = App.MHF.Marks.MarkingTypes[Marks_ListBox.SelectedIndex];
 
             current.Layer = (Int32)Marks_LayerNumBox.Value;
 
@@ -196,15 +196,15 @@ namespace Magic.Editors
         }
         void Marks_CreateMarkButton_Click(Object sender, EventArgs e)
         {
-            App.FEH.Marks.Add("NEW ", 0, Color.Black);
+            App.MHF.Marks.Add("NEW ", 0, Color.Black);
 
             Core_Update();
         }
         void Marks_DeleteMarkButton_Click(Object sender, EventArgs e)
         {
-            Mark current = App.FEH.Marks.MarkingTypes[Marks_ListBox.SelectedIndex];
+            Mark current = App.MHF.Marks.MarkingTypes[Marks_ListBox.SelectedIndex];
 
-            App.FEH.Marks.Remove(current);
+            App.MHF.Marks.Remove(current);
 
             Core_Update();
         }

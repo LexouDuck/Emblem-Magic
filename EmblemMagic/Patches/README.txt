@@ -1,4 +1,4 @@
-This folder is meant to hold .feh files which serve to apply a certain hack/mod/ASM feature to a ROM.
+This folder is meant to hold .mhf files which serve to apply a certain hack/mod/ASM feature to a ROM.
 You can apply these patches by opening the "Patch Editor" in Emblem Magic.
 Some ASM hacks are bundled with Emblem Magic by default:
 - Anti-Huffman Text Patch:

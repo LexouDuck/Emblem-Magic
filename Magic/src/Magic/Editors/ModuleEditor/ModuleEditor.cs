@@ -86,7 +86,7 @@ namespace Magic.Editors
 
             WriteDisabled = true;
 
-            File_OpenModule.LoadFiles(Core.Path_Modules, ".emm");
+            File_OpenModule.LoadFiles(Core.Path_Modules, ".mmf");
 
             LayoutPanel.Padding = new Padding(0, 0, SystemInformation.VerticalScrollBarWidth, 0);
 
@@ -147,7 +147,7 @@ namespace Magic.Editors
             }
         }
         /// <summary>
-        /// Loads the EMM module at the given filepath into this window
+        /// Loads the MMF module at the given filepath into this window
         /// </summary>
         void Core_LoadModule(String path)
         {
@@ -513,10 +513,10 @@ namespace Magic.Editors
 
             Core_OpenFile(menu_item.FilePath);
         }
-        void File_OpenEMMFile_Click(Object sender, EventArgs e)
+        void File_OpenMMFFile_Click(Object sender, EventArgs e)
         {
             OpenFileDialog openWindow = new OpenFileDialog();
-            openWindow.Filter = "All files (*.*)|*.*|Emblem Magic Modules (*.emm)|*.emm";
+            openWindow.Filter = "All files (*.*)|*.*|Emblem Magic Modules (*.mmf)|*.mmf";
             openWindow.FilterIndex = 1;
             openWindow.InitialDirectory = Settings.Default.PathModules;
             openWindow.RestoreDirectory = true;

@@ -33,7 +33,7 @@ namespace KirbyMagic.Kirby
         /// <summary>
         /// This creates a GameType instance by checking the current ROM
         /// </summary>
-        public static Game FromROM(DataManager ROM)
+        public static Game FromROM()
         {
             byte[] id_data = Core.ReadData(new Pointer(ID_ADDRESS), (int)ID_LENGTH);
             String id = new String(Encoding.ASCII.GetChars(id_data));
@@ -47,7 +47,7 @@ namespace KirbyMagic.Kirby
                 if (id.Equals(KAM.FromRegion(r).ID)) { game = GameType.KAM; region = r; break; }
             }
 #if DEBUG
-            UI.ShowMessage(Util.IntToHex(CRC32.GetChecksum(ROM.FileData)));
+            UI.ShowMessage(Util.IntToHex(CRC32.GetChecksum(Core.App.ROM.FileData)));
 #endif
             return Game.FromTypeAndRegion(game, region);
         }

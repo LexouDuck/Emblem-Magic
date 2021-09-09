@@ -56,7 +56,7 @@ namespace Magic
 
                 if (ShowHideCheckBox.Checked)
                 {
-                    foreach (var repoint in App.FEH.Point.Repoints)
+                    foreach (var repoint in App.MHF.Point.Repoints)
                     {
                         if (repoint.DefaultAddress != repoint.CurrentAddress)
                         {
@@ -70,7 +70,7 @@ namespace Magic
                 }
                 else
                 {
-                    foreach (var repoint in App.FEH.Point.Repoints)
+                    foreach (var repoint in App.MHF.Point.Repoints)
                     {
                         List.Add(Tuple.Create(
                             repoint.AssetName,
@@ -115,7 +115,7 @@ namespace Magic
             {
                 String asset = (String)PointerDataGrid.CurrentRow.Cells[0].Value;
 
-                Update_EditPanel(App.FEH.Point.Get(asset));
+                Update_EditPanel(App.MHF.Point.Get(asset));
             }
             else
             {
@@ -131,7 +131,7 @@ namespace Magic
             }
             else if (PointerDataGrid.SelectedRows.Count == 1)
             {
-                Repoint asset = App.FEH.Point.Get((String)PointerDataGrid.CurrentRow.Cells[0].Value);
+                Repoint asset = App.MHF.Point.Get((String)PointerDataGrid.CurrentRow.Cells[0].Value);
                 asset.AssetName = Repoint_NameTextBox.Text;
                 Core.Repoint(this, asset.CurrentAddress, Repoint_CurrentPointerBox.Value, asset.AssetName + " repointed");
             }
@@ -145,7 +145,7 @@ namespace Magic
         {
             Repoint repoint = Prompt.ShowRepointCreateDialog();
 
-            App.FEH.Point.Add(repoint);
+            App.MHF.Point.Add(repoint);
 
             if (repoint.CurrentAddress != repoint.DefaultAddress)
             {
@@ -161,11 +161,11 @@ namespace Magic
             }
             else if (PointerDataGrid.SelectedRows.Count == 1)
             {
-                App.FEH.Point.Remove((String)PointerDataGrid.CurrentRow.Cells[0].Value);
+                App.MHF.Point.Remove((String)PointerDataGrid.CurrentRow.Cells[0].Value);
             }
             else foreach (DataGridViewRow row in PointerDataGrid.SelectedRows)
             {
-                App.FEH.Point.Remove((String)row.Cells[0].Value);
+                App.MHF.Point.Remove((String)row.Cells[0].Value);
             }
             Core_Update();
         }

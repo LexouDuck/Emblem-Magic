@@ -54,7 +54,7 @@ namespace Magic
             Mark mark = new Mark(name, layer, color);
             MarkingTypes.Add(mark);
 
-            App.FEH.Changed = true;
+            App.MHF.Changed = true;
 
             return mark;
         }
@@ -69,9 +69,9 @@ namespace Magic
             {
                 MarkingTypes.Remove(mark);
 
-                App.FEH.Space.RemoveAllMarkedAs(mark);
+                App.MHF.Space.RemoveAllMarkedAs(mark);
 
-                App.FEH.Changed = true;
+                App.MHF.Changed = true;
             }
         }
 

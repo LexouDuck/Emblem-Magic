@@ -25,7 +25,7 @@ namespace Magic
             UpdateReferences();
         }
         /// <summary>
-        /// Called when loading an FEH file
+        /// Called when loading an MHF file
         /// </summary>
         public Repoint(System.String assetName, System.UInt32 defaultAddress, System.UInt32 currentAddress)
         {

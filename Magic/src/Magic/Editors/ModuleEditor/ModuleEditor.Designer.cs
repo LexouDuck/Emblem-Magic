@@ -33,7 +33,7 @@ namespace Magic.Editors
             this.MenuBar = new System.Windows.Forms.MenuStrip();
             this.Menu_File = new System.Windows.Forms.ToolStripMenuItem();
             this.File_OpenModule = new Magic.Components.FolderViewMenu();
-            this.File_OpenEMMFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.File_OpenMMFFile = new System.Windows.Forms.ToolStripMenuItem();
             this.Status_Module = new System.Windows.Forms.ToolStripLabel();
             this.LayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.Offset_Plus_Button = new System.Windows.Forms.Button();
@@ -74,7 +74,7 @@ namespace Magic.Editors
             // 
             this.Menu_File.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.File_OpenModule,
-            this.File_OpenEMMFile});
+            this.File_OpenMMFFile});
             this.Menu_File.Name = "Menu_File";
             this.Menu_File.Size = new System.Drawing.Size(37, 20);
             this.Menu_File.Text = "File";
@@ -86,12 +86,12 @@ namespace Magic.Editors
             this.File_OpenModule.Text = "Open Module";
             this.File_OpenModule.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.File_OpenModule_Click);
             // 
-            // File_OpenEMMFile
+            // File_OpenMMFFile
             // 
-            this.File_OpenEMMFile.Name = "File_OpenEMMFile";
-            this.File_OpenEMMFile.Size = new System.Drawing.Size(165, 22);
-            this.File_OpenEMMFile.Text = "Open .EMM file...";
-            this.File_OpenEMMFile.Click += new System.EventHandler(this.File_OpenEMMFile_Click);
+            this.File_OpenMMFFile.Name = "File_OpenMMFFile";
+            this.File_OpenMMFFile.Size = new System.Drawing.Size(165, 22);
+            this.File_OpenMMFFile.Text = "Open .MMF file...";
+            this.File_OpenMMFFile.Click += new System.EventHandler(this.File_OpenMMFFile_Click);
             // 
             // Status_Module
             // 
@@ -176,7 +176,7 @@ namespace Magic.Editors
         private System.Windows.Forms.MenuStrip MenuBar;
         private System.Windows.Forms.ToolStripMenuItem Menu_File;
         private Magic.Components.FolderViewMenu File_OpenModule;
-        private System.Windows.Forms.ToolStripMenuItem File_OpenEMMFile;
+        private System.Windows.Forms.ToolStripMenuItem File_OpenMMFFile;
         private System.Windows.Forms.FlowLayoutPanel LayoutPanel;
         private System.Windows.Forms.StatusStrip Status;
         private System.Windows.Forms.ToolStripLabel Status_Module;

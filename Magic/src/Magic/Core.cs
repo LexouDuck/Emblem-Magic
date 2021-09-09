@@ -146,7 +146,7 @@ namespace Magic
         {
             if (address == 0) return 0x00;
 
-            //App.FEH.Space.MarkSpace("BYTE", address, address + 1);
+            //App.MHF.Space.MarkSpace("BYTE", address, address + 1);
 
             try
             {
@@ -165,7 +165,7 @@ namespace Magic
         {
             if (address == 0) return new Byte[0];
 
-            //App.FEH.Space.MarkSpace("DATA", address, address + length);
+            //App.MHF.Space.MarkSpace("DATA", address, address + length);
 
             try
             {
@@ -188,7 +188,7 @@ namespace Magic
         {
             if (address == 0) return new Pointer();
 
-            //App.FEH.Space.MarkSpace("POIN", address, address + 4);
+            //App.MHF.Space.MarkSpace("POIN", address, address + 4);
 
             Byte[] data = App.ROM.Read(address, 4);
 
@@ -204,7 +204,7 @@ namespace Magic
         {
             if (address == 0) return null;
 
-            //App.FEH.Space.MarkSpace("PAL ", address, address + length);
+            //App.MHF.Space.MarkSpace("PAL ", address, address + length);
 
             Byte[] palette = Core.ReadData(address, length);
 
@@ -223,7 +223,7 @@ namespace Magic
         {
             if (address == 0) return null;
 
-            //App.FEH.Space.MarkSpace("TSA ", address, address + length);
+            //App.MHF.Space.MarkSpace("TSA ", address, address + length);
 
             Byte[] data;
             if (compressed)
@@ -289,7 +289,7 @@ namespace Magic
         /// </summary>
         public static Repoint GetRepoint(String asset)
         {
-            Repoint result = App.FEH.Point.Get(asset);
+            Repoint result = App.MHF.Point.Get(asset);
             if (result == null)
                 throw new Exception("Couldn't find pointer with asset name: " + asset);
             else return result;
@@ -307,7 +307,7 @@ namespace Magic
         /// </summary>
         public static Pointer GetFreeSpace(Int32 length)
         {
-            Pointer result = App.FEH.Space.GetPointer("FREE", length);
+            Pointer result = App.MHF.Space.GetPointer("FREE", length);
 
             if (result == new Pointer()) throw new Exception("No suitable length of free space was found.");
 
@@ -350,9 +350,9 @@ namespace Magic
         public static void Repoint(Editor sender, Pointer original, Pointer repoint, String description = "")
         {
             if (original == repoint) return;
-            Repoint pointer = App.FEH.Point.Get(original);
+            Repoint pointer = App.MHF.Point.Get(original);
             if (pointer == null)
-                throw new Exception("Couldn't find any FEH Repoint of address: " + original);
+                throw new Exception("Couldn't find any MHF Repoint of address: " + original);
             pointer.UpdateReferences();
             for (Int32 i = 0; i < pointer.References.Length; i++)
             {

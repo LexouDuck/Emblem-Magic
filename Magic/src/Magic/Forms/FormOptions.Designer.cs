@@ -209,7 +209,7 @@ namespace Magic
             this.Paths_Patches_Label.Name = "Paths_Patches_Label";
             this.Paths_Patches_Label.Size = new System.Drawing.Size(114, 15);
             this.Paths_Patches_Label.TabIndex = 16;
-            this.Paths_Patches_Label.Text = "FEH Patches Folder :";
+            this.Paths_Patches_Label.Text = "MHF Patches Folder :";
             // 
             // Paths_Arrays_TextBox
             // 
@@ -326,7 +326,7 @@ namespace Magic
             this.Paths_Modules_Label.Name = "Paths_Modules_Label";
             this.Paths_Modules_Label.Size = new System.Drawing.Size(126, 15);
             this.Paths_Modules_Label.TabIndex = 1;
-            this.Paths_Modules_Label.Text = "EMM Modules Folder :";
+            this.Paths_Modules_Label.Text = "MMF Modules Folder :";
             // 
             // Paths_CleanROMs_Label
             // 

@@ -25,11 +25,11 @@ You can choose to check the 'Use Custom Array Path' option to read array entry n
 
 - The 'Structs' folder holds text files detailing how bytes are laid out for certain important arrays.
 
-- The 'Modules' folder holds Emblem Magic Module (.emm) text files, for use with the Module Editor.
+- The 'Modules' folder holds Emblem Magic Module (.mmf) text files, for use with the Module Editor.
   The Module Editor is equivalent to Nightmare (with some changes, mostly to allow categories).
 
-- The 'Patches' folder holds .feh files, these are the files used by Emblem Magic to save hack information.
+- The 'Patches' folder holds .mhf files, these are the files used by Emblem Magic to save hack information.
 
-- The .feh files in this folder are used by the Patch Editor, for quick and easy functionality hacking.
+- The .mhf files in this folder are used by the Patch Editor, for quick and easy functionality hacking.
 
 - Lastly, the 'ROMs' folder holds clean ROMs to use as reference to restore data, or find certain pointers.

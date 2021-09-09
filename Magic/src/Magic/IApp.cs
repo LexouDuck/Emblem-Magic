@@ -22,9 +22,9 @@ namespace Magic
         /// </summary>
         public DataManager ROM { get; set; }
         /// <summary>
-        /// The HackManager does the IO for the FEH file, and its submanagers record all relevant hack information.
+        /// The HackManager does the IO for the MHF file, and its submanagers record all relevant hack information.
         /// </summary>
-        public HackManager FEH { get; set; }
+        public HackManager MHF { get; set; }
 
         /// <summary>
         /// Describes which game ROM is open, and stores any constant pre-known info
@@ -57,7 +57,7 @@ namespace Magic
         public void Core_ExitEditor(Editor editor);
 
         public void Core_SaveROMFile(String path);
-        public void Core_SaveFEHFile(String path);
+        public void Core_SaveMHFFile(String path);
 
         /// <summary>
         /// Performs a user-requested write operation of any sort

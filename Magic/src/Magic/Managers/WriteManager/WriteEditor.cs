@@ -65,7 +65,7 @@ namespace Magic.Editors
             {
                 List.Clear();
 
-                foreach (var write in App.FEH.Write.History)
+                foreach (var write in App.MHF.Write.History)
                 {
                     List.Add(Tuple.Create(
                         write.Time,
@@ -113,7 +113,7 @@ namespace Magic.Editors
             {
                 Pointer address = (Pointer)WriteHistoryList.CurrentRow.Cells[1].Value;
 
-                Update_EditPanel(App.FEH.Write.Find(address));
+                Update_EditPanel(App.MHF.Write.Find(address));
             }
             else
             {
@@ -213,7 +213,7 @@ namespace Magic.Editors
             else if (WriteHistoryList.SelectedRows.Count == 1)
             {
                 Pointer address = (Pointer)WriteHistoryList.SelectedRows[0].Cells[1].Value;
-                App.FEH.Space.MarkSpace((String)MarkSpaceBox.SelectedValue,
+                App.MHF.Space.MarkSpace((String)MarkSpaceBox.SelectedValue,
                     address, address + (Int32)WriteHistoryList.SelectedRows[0].Cells[2].Value);
                 UI.PerformUpdate();
             }
@@ -222,7 +222,7 @@ namespace Magic.Editors
                 foreach (DataGridViewRow row in WriteHistoryList.SelectedRows)
                 {
                     Pointer address = (Pointer)row.Cells[1].Value;
-                    App.FEH.Space.MarkSpace((String)MarkSpaceBox.SelectedValue,
+                    App.MHF.Space.MarkSpace((String)MarkSpaceBox.SelectedValue,
                         address, address + (Int32)row.Cells[2].Value);
                 }
                 UI.PerformUpdate();

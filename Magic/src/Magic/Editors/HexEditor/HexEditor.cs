@@ -634,7 +634,7 @@ namespace Magic.Editors
         void File_Open_Click(Object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "All files (*.*)|*.*|ROMs (*.gba)|*.gba|Hacks (*.feh)|*.feh";
+            openFileDialog.Filter = "All files (*.*)|*.*|ROMs (*.gba)|*.gba|Hacks (*.mhf)|*.mhf";
             openFileDialog.FilterIndex = 1;
             openFileDialog.RestoreDirectory = true;
             openFileDialog.Multiselect = false;

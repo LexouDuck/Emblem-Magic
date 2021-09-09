@@ -710,7 +710,7 @@ namespace EmblemMagic.Editors
 
                 for (Int32 i = 0; i < repoints.Count; i++)
                 {
-                    Program.Core.FEH.Space.MarkSpace("USED", pointers[i], pointers[i] + repoints[i].Item3);
+                    Program.Core.MHF.Space.MarkSpace("USED", pointers[i], pointers[i] + repoints[i].Item3);
                 }
 
                 animdata = LZ77.Compress(BattleAnimation.PrepareAnimationData(animdata, pointers));
