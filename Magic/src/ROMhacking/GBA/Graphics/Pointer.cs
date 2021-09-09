@@ -1,4 +1,4 @@
-﻿using Magic;
+using Magic;
 using System;
 
 namespace GBA

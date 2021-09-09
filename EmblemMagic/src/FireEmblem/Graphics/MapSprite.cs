@@ -1,4 +1,4 @@
-﻿using Compression;
+using Compression;
 using GBA;
 using System;
 using System.Drawing;

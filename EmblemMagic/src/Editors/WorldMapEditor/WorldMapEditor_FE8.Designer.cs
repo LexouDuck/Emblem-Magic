@@ -1,4 +1,4 @@
-﻿namespace EmblemMagic.Editors
+namespace EmblemMagic.Editors
 {
     partial class WorldMapEditor_FE8
     {

@@ -1,4 +1,4 @@
-﻿using Magic.Components;
+using Magic.Components;
 using System;
 using System.Drawing;
 using System.IO;

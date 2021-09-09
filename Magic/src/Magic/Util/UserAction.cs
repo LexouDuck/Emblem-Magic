@@ -1,4 +1,4 @@
-﻿namespace Magic
+namespace Magic
 {
     /// <summary>
     /// Describes an action done by the user onto the loaded ROM

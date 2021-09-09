@@ -1,4 +1,4 @@
-﻿namespace Compression
+namespace Compression
 {
     public static class CRC32
     {

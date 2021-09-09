@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Magic.Components;
 using Magic;
 using System.Collections.Generic;

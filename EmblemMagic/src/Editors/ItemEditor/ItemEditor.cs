@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing;
 using EmblemMagic.FireEmblem;
 using System.Windows.Forms;

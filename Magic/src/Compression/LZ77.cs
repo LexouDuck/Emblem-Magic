@@ -1,4 +1,4 @@
-﻿using Magic;
+using Magic;
 using GBA;
 using System;
 using System.Collections.Generic;

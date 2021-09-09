@@ -1,4 +1,4 @@
-﻿namespace GBA
+namespace GBA
 {
     public static class Screen
     {

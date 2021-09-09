@@ -1,4 +1,4 @@
-﻿/*
+/*
  *  FE Editor - GBA Fire Emblem (U) ROM editor
  *
  *  Copyright (C) 2008-2011 Hextator,

@@ -1,4 +1,4 @@
-﻿using Compression;
+using Compression;
 using Magic;
 using System;
 using System.Collections.Generic;

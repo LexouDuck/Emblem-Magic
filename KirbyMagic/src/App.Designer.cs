@@ -1,4 +1,4 @@
-﻿using KirbyMagic.Properties;
+using KirbyMagic.Properties;
 
 namespace KirbyMagic
 {

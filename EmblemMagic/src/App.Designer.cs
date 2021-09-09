@@ -1,4 +1,4 @@
-﻿using EmblemMagic.Properties;
+using EmblemMagic.Properties;
 
 namespace EmblemMagic
 {

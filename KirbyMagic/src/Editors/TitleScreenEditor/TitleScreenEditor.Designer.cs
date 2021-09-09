@@ -1,4 +1,4 @@
-﻿namespace KirbyMagic.Editors
+namespace KirbyMagic.Editors
 {
     partial class TitleScreenEditor
     {

@@ -1,4 +1,4 @@
-﻿using GBA;
+using GBA;
 using System.ComponentModel;
 using System.Windows.Forms;
 

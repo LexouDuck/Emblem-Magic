@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Magic.Editors;
 
 namespace Magic

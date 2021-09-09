@@ -1,4 +1,4 @@
-﻿namespace Magic.Components
+namespace Magic.Components
 {
     public partial class ColorBox
     {

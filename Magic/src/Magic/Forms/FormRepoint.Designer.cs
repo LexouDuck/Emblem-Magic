@@ -1,4 +1,4 @@
-﻿namespace Magic
+namespace Magic
 {
     partial class FormRepoint
     {

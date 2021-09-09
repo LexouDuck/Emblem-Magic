@@ -1,4 +1,4 @@
-﻿namespace Magic
+namespace Magic
 {
     /// <summary>
     /// Describes methods of sorting the space ranges in the marked Space output box

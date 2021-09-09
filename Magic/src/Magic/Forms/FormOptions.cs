@@ -1,4 +1,4 @@
-﻿using Magic.Components;
+using Magic.Components;
 using Magic.Properties;
 using System;
 using System.Windows.Forms;

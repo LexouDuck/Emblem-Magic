@@ -1,4 +1,4 @@
-﻿using Magic.Editors;
+using Magic.Editors;
 using GBA;
 using System;
 using System.Collections.Generic;

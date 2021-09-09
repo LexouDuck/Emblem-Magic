@@ -1,4 +1,4 @@
-﻿namespace Magic.Editors
+namespace Magic.Editors
 {
     partial class PaletteEditor
     {

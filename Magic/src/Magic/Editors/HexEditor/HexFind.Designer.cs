@@ -1,4 +1,4 @@
-﻿namespace Magic.Editors
+namespace Magic.Editors
 {
     public partial class HexFind : System.Windows.Forms.Form
     {

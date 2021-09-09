@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using GBA;
 using Magic;
 using Magic.Components;

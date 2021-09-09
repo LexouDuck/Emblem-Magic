@@ -1,4 +1,4 @@
-﻿namespace Magic.Components
+namespace Magic.Components
 {
     /// <summary>
     /// Any class implementing this interface can be drawn onto an ImageBox

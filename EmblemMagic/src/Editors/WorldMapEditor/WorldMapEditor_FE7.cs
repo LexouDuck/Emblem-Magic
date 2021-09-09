@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using EmblemMagic.FireEmblem;
 using GBA;
 using System.Windows.Forms;

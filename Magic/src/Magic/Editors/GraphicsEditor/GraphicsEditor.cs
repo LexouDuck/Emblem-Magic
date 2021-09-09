@@ -1,4 +1,4 @@
-﻿using Compression;
+using Compression;
 using Magic.Components;
 using Magic.Properties;
 using GBA;
