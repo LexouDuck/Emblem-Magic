@@ -358,18 +358,32 @@ namespace Magic.Editors
 
 
 
+        public static void Core_DrawRectangle(ImageBox control, Graphics g, System.Drawing.Color color, Point location, Size size)
+        {
+            using Pen pen = new(color);
+            Point offset = new(
+                (control.Width  / 2) - (control.Display.Width  / 2),
+                (control.Height / 2) - (control.Display.Height / 2));
+            g.DrawRectangle(pen, new Rectangle(
+                offset.X + location.X,
+                offset.Y + location.Y,
+                size.Width  - 1,
+                size.Height - 1));
+        }
+
+
+
         private void OAM_ImageBox_Paint(Object sender, PaintEventArgs e)
         {
-            using (Pen pen = new Pen(SystemColors.Highlight))
             {
                 Size size = Current[Entry_NumBox.Value].GetDimensions();
                 if (Current[Entry_NumBox.Value].OBJMode == OAM_OBJMode.BigAffine)
                     size = new Size(size.Width * 2, size.Height * 2);
 
-                e.Graphics.DrawRectangle(pen, new Rectangle(
+                Core_DrawRectangle(this.OAM_ImageBox, e.Graphics, SystemColors.Highlight, new Point(
                     Current[Entry_NumBox.Value].ScreenX + OffsetX,
-                    Current[Entry_NumBox.Value].ScreenY + OffsetY,
-                    size.Width * 8 - 1, size.Height * 8 - 1));
+                    Current[Entry_NumBox.Value].ScreenY + OffsetY),
+                    size * 8);
             }
         }
         private void Tileset_ImageBox_Paint(Object sender, PaintEventArgs e)
@@ -378,10 +392,10 @@ namespace Magic.Editors
             {
                 Size size = Current[Entry_NumBox.Value].GetDimensions();
 
-                e.Graphics.DrawRectangle(pen, new Rectangle(
+                Core_DrawRectangle(this.Tileset_ImageBox, e.Graphics, SystemColors.Highlight, new Point(
                     Current[Entry_NumBox.Value].SheetX * 8,
-                    Current[Entry_NumBox.Value].SheetY * 8,
-                    size.Width * 8 - 1, size.Height * 8 - 1));
+                    Current[Entry_NumBox.Value].SheetY * 8),
+                    size * 8);
             }
         }
 

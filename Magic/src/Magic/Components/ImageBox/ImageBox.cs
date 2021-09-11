@@ -65,29 +65,37 @@ namespace Magic.Components
                 {
                     using (Brush outline = new SolidBrush(this.ForeColor))
                     {
-                        e.Graphics.FillRectangle(outline, 0, 0, Width, Height);
+                        e.Graphics.FillRectangle(outline,
+                            0, 0,
+                            this.Width,
+                            this.Height);
                     }
                     using (Brush filling = new SolidBrush(this.BackColor))
                     {
-                        e.Graphics.FillRectangle(filling, 1, 1, Width - 2, Height - 2);
+                        e.Graphics.FillRectangle(filling,
+                            1, 1,
+                            this.Width  - 2,
+                            this.Height - 2);
                     }
                 }
                 else
                 {
-                    Int32 offsetX = (Width / 2) - (Display.Width / 2);
-                    Int32 offsetY = (Height / 2) - (Display.Height / 2);
+                    Int32 offsetX = (this.Width  / 2) - (this.Display.Width  / 2);
+                    Int32 offsetY = (this.Height / 2) - (this.Display.Height / 2);
                     Color pixel;
                     Brush color;
-                    for (Int32 y = 0; y < Display.Height; y++)
-                    for (Int32 x = 0; x < Display.Width; x++)
+                    for (Int32 y = 0; y < this.Display.Height; y++)
+                    for (Int32 x = 0; x < this.Display.Width; x++)
                     {
-                        pixel = (Color)Display.GetColor(x, y);
+                        pixel = (Color)this.Display.GetColor(x, y);
                         color = new SolidBrush(pixel);
 
-                        e.Graphics.FillRectangle(color, offsetX + x, offsetY + y, 1, 1);
+                        e.Graphics.FillRectangle(color,
+                            offsetX + x,
+                            offsetY + y,
+                            1, 1);
                     }
                 }
-
                 base.OnPaint(e);
             }
             catch (Exception ex)
@@ -107,7 +115,7 @@ namespace Magic.Components
 
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.Name = "GBAImageBox";
+            this.Name = "ImageBox";
             this.Size = new System.Drawing.Size(Width, Height);
             this.TabStop = false;
 
