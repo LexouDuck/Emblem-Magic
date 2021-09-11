@@ -28,9 +28,7 @@ namespace EmblemMagic.Editors
             }
         }
 
-        public SampleEditor(IApp app,
-            Pointer address)
-            : base(app)
+        public SampleEditor(Pointer address)
         {
             Address = address;
             InitializeComponent();

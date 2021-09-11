@@ -130,7 +130,7 @@ namespace EmblemMagic.Editors
 
 
 
-        public BattleAnimEditor(IApp app) : base(app)
+        public BattleAnimEditor()
         {
             try
             {

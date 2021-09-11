@@ -1,0 +1,9 @@
+0x0 32
+
+0x00 2 UInt16	_1
+0x02 2 UInt16	_2
+0x04 2 UInt16	_3
+0x06 2 UInt16	_4
+0x0C 4 Pointer	Palette
+0x10 4 Pointer	Tileset
+0x14 4 Pointer	Unknown

@@ -24,18 +24,18 @@ namespace EmblemMagic
             Editor editor;
             switch (EditorToOpen)
             {
-                case             "Text Editor": editor = new       TextEditor(App); break;
-                case            "Music Editor": editor = new      MusicEditor(App); break;
-                case         "Portrait Editor": editor = new   PortraitEditor(App); break;
-                case       "Map Sprite Editor": editor = new  MapSpriteEditor(App); break;
-                case "Battle Animation Editor": editor = new BattleAnimEditor(App); break;
+                case             "Text Editor": editor = new       TextEditor(); break;
+                case            "Music Editor": editor = new      MusicEditor(); break;
+                case         "Portrait Editor": editor = new   PortraitEditor(); break;
+                case       "Map Sprite Editor": editor = new  MapSpriteEditor(); break;
+                case "Battle Animation Editor": editor = new BattleAnimEditor(); break;
                 default:
                     if (EditorToOpen != null &&
                         EditorToOpen.Length > 7 &&
                         EditorToOpen.Substring(0, 7) == "Module:")
                     {
                         String module = EditorToOpen.Substring(7, EditorToOpen.Length - 7);
-                        editor = new ModuleEditor(App);
+                        editor = new ModuleEditor();
                         ((ModuleEditor)editor).Core_OpenFile(Core.Path_Modules + module +".mmf");
                     }
                     else editor = null;

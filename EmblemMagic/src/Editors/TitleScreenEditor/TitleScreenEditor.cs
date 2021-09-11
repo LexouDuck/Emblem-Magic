@@ -40,7 +40,7 @@ namespace EmblemMagic.Editors
 
 
 
-        public TitleScreenEditor(IApp app) : base(app)
+        public TitleScreenEditor()
         {
             InitializeComponent();
         }
@@ -532,7 +532,7 @@ namespace EmblemMagic.Editors
 
         private void BG_MagicButton_Click(Object sender, EventArgs e)
         {
-            GraphicsEditor editor = new GraphicsEditor(App);
+            GraphicsEditor editor = new GraphicsEditor();
 
             if (Core.App.Game is FE6)
             {
@@ -558,7 +558,7 @@ namespace EmblemMagic.Editors
         }
         private void MG_MagicButton_Click(Object sender, EventArgs e)
         {
-            GraphicsEditor editor = new GraphicsEditor(App);
+            GraphicsEditor editor = new GraphicsEditor();
 
             if (Core.App.Game is FE6)
             {
@@ -587,7 +587,7 @@ namespace EmblemMagic.Editors
         }
         private void FG_MagicButton_Click(Object sender, EventArgs e)
         {
-            GraphicsEditor editor = new GraphicsEditor(App);
+            GraphicsEditor editor = new GraphicsEditor();
 
             if (Core.App.Game is FE6)
             {

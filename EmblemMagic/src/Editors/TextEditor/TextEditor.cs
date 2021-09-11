@@ -54,7 +54,7 @@ namespace EmblemMagic.Editors
 
 
 
-        public TextEditor(IApp app) : base(app)
+        public TextEditor()
         {
             try
             {
@@ -205,7 +205,7 @@ namespace EmblemMagic.Editors
 
             if ((address & 0x80000000) == 0)
             {
-                if (address > Core.App.GameSize)
+                if (address > Core.App.Game.FileSize)
                     throw new Exception("Invalid pointer read in the Text Array: " + address);
 
                 return FireEmblem.Text.BytesToText(
@@ -220,7 +220,7 @@ namespace EmblemMagic.Editors
             else
             {
                 address = new Pointer((UInt32)(address & 0x7FFFFFFF));
-                if (address > Core.App.GameSize)
+                if (address > Core.App.Game.FileSize)
                     throw new Exception("Invalid pointer read in the Text Array: " + address);
 
                 List<Byte> data = new List<Byte>();

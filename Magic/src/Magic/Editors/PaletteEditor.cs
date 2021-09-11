@@ -129,12 +129,10 @@ namespace Magic.Editors
 
 
 
-        public PaletteEditor(IApp app,
-            Editor owner,
+        public PaletteEditor(Editor owner,
             String entry,
             Pointer address,
             Byte amount)
-            : base(app)
         {
             InitializeComponent();
 

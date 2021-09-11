@@ -10,9 +10,7 @@ namespace EmblemMagic.Editors
         Pointer Address;
         KeyMap Current;
 
-        public KeyMapEditor(IApp app,
-            Pointer address)
-            : base(app)
+        public KeyMapEditor(Pointer address)
         {
             Address = address;
 

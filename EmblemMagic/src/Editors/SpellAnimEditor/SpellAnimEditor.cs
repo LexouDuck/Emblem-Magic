@@ -22,7 +22,7 @@ namespace EmblemMagic.Editors
 
 
 
-        public SpellAnimEditor(IApp app) : base(app)
+        public SpellAnimEditor()
         {
             try
             {
@@ -566,7 +566,7 @@ namespace EmblemMagic.Editors
 
         private void MagicButton_Click(Object sender, EventArgs e)
         {
-            GraphicsEditor editor = new GraphicsEditor(App);
+            GraphicsEditor editor = new GraphicsEditor();
 
             editor.Core_SetEntry(GBA.Screen.W_TILES, GBA.Screen.H_TILES,
                 Palette_PointerBox.Value, Palette_CheckBox.Checked,

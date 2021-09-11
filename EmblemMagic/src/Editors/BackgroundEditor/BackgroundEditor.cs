@@ -60,7 +60,7 @@ namespace EmblemMagic.Editors
 
 
 
-        public BackgroundEditor(IApp app) : base(app)
+        public BackgroundEditor()
         {
             try
             {
@@ -524,7 +524,7 @@ namespace EmblemMagic.Editors
 
         private void MagicButton_Click(Object sender, EventArgs e)
         {
-            GraphicsEditor editor = new GraphicsEditor(App);
+            GraphicsEditor editor = new GraphicsEditor();
 
             Size bgsize = Background.GetBGSize(CurrentType);
             switch (CurrentType)

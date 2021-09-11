@@ -29,7 +29,7 @@ namespace EmblemMagic.Editors
 
 
 
-        public BattleScreenEditor(IApp app) : base(app)
+        public BattleScreenEditor()
         {
             try
             {
@@ -710,7 +710,7 @@ namespace EmblemMagic.Editors
 
         private void Screen_MagicButton_Click(Object sender, EventArgs e)
         {
-            GraphicsEditor editor = new GraphicsEditor(App);
+            GraphicsEditor editor = new GraphicsEditor();
 
             editor.Core_SetEntry(15, 34,
                 Core.GetPointer("Battle Screen Palettes"), false,
@@ -758,7 +758,7 @@ namespace EmblemMagic.Editors
 
         private void Platform_MagicButton_Click(Object sender, EventArgs e)
         {
-            GraphicsEditor editor = new GraphicsEditor(App);
+            GraphicsEditor editor = new GraphicsEditor();
 
             editor.Core_SetEntry(32, 4,
                 (Pointer)Current["Palette"], false,

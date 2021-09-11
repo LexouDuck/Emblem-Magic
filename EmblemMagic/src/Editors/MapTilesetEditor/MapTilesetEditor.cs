@@ -32,7 +32,7 @@ namespace EmblemMagic.Editors
 
 
 
-        public MapTilesetEditor(IApp app) : base(app)
+        public MapTilesetEditor()
         {
             try
             {
@@ -205,7 +205,7 @@ namespace EmblemMagic.Editors
 
                 List<UInt16> names = new List<UInt16>();
                 Pointer address = Core.GetPointer("Map Terrain Names");
-                while (address < Core.App.GameSize)
+                while (address < Core.App.Game.FileSize)
                 {
                     names.Add((UInt16)((Core.ReadByte(address + 1) << 8) | Core.ReadByte(address)));
                     if (names[names.Count - 1] == 0x0000) break;

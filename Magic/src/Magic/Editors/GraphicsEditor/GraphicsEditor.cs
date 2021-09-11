@@ -16,7 +16,7 @@ namespace Magic.Editors
 
 
 
-        public GraphicsEditor(IApp app) : base(app)
+        public GraphicsEditor()
         {
             InitializeComponent();
 

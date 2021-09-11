@@ -32,7 +32,7 @@ namespace EmblemMagic.Editors
 
 
 
-        public WorldMapEditor_FE8(IApp app) : base(app)
+        public WorldMapEditor_FE8()
         {
             try
             {

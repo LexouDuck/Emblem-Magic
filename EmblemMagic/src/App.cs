@@ -37,7 +37,6 @@ namespace EmblemMagic
         /// <summary>
         /// Describes which fire emblem game is open, whether or not it's a clean ROM, and such.
         /// </summary>
-        FireEmblem.Game currentROM;
         public IGame Game { get; set; }
 
         /// <summary>
@@ -972,105 +971,105 @@ namespace EmblemMagic
 
         void Tool_OpenSpace_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new SpaceEditor(this));
+            Core_OpenEditor(new SpaceEditor());
         }
         void Tool_OpenWrite_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new WriteEditor(this));
+            Core_OpenEditor(new WriteEditor());
         }
         void Tool_OpenPoint_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new PointEditor(this));
+            Core_OpenEditor(new PointEditor());
         }
 
 
 
         void Open_BasicEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new BasicEditor(this));
+            Core_OpenEditor(new BasicEditor());
         }
         void Open_HexEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new HexEditor(this));
+            Core_OpenEditor(new HexEditor());
         }
         void Open_PatchEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new PatchEditor(this));
+            Core_OpenEditor(new PatchEditor());
         }
         void Open_ASMEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new ASMEditor(this));
+            Core_OpenEditor(new ASMEditor());
         }
         void Open_ModuleEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new ModuleEditor(this));
+            Core_OpenEditor(new ModuleEditor());
         }
         void Open_EventEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new EventEditor(this));
+            Core_OpenEditor(new EventEditor());
         }
         void Open_WorldMapEditor_Click(Object sender, EventArgs e)
         {
             if (Game == null) return;
-            else if (Game is FireEmblem.FE6) Core_OpenEditor(new WorldMapEditor_FE6(this));
-            else if (Game is FireEmblem.FE7) Core_OpenEditor(new WorldMapEditor_FE7(this));
-            else if (Game is FireEmblem.FE8) Core_OpenEditor(new WorldMapEditor_FE8(this));
+            else if (Game is FireEmblem.FE6) Core_OpenEditor(new WorldMapEditor_FE6());
+            else if (Game is FireEmblem.FE7) Core_OpenEditor(new WorldMapEditor_FE7());
+            else if (Game is FireEmblem.FE8) Core_OpenEditor(new WorldMapEditor_FE8());
         }
         void Open_MapTilesetEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new MapTilesetEditor(this));
+            Core_OpenEditor(new MapTilesetEditor());
         }
         void Open_MapEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new MapEditor(this));
+            Core_OpenEditor(new MapEditor());
         }
         void Open_GraphicsEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new GraphicsEditor(this));
+            Core_OpenEditor(new GraphicsEditor());
         }
         void Open_PortraitEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new PortraitEditor(this));
+            Core_OpenEditor(new PortraitEditor());
         }
         void Open_MapSpriteEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new MapSpriteEditor(this));
+            Core_OpenEditor(new MapSpriteEditor());
         }
         void Open_BattleScreenEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new BattleScreenEditor(this));
+            Core_OpenEditor(new BattleScreenEditor());
         }
         void Open_BattleAnimEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new BattleAnimEditor(this));
+            Core_OpenEditor(new BattleAnimEditor());
         }
         void Open_SpellAnimEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new SpellAnimEditor(this));
+            Core_OpenEditor(new SpellAnimEditor());
         }
         void Open_BackgroundEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new BackgroundEditor(this));
+            Core_OpenEditor(new BackgroundEditor());
         }
         void Open_TextEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new TextEditor(this));
+            Core_OpenEditor(new TextEditor());
         }
         void Open_MusicEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new MusicEditor(this));
+            Core_OpenEditor(new MusicEditor());
         }
         void Open_ItemEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new ItemEditor(this));
+            Core_OpenEditor(new ItemEditor());
         }
         void Open_MenuEditor_Click(Object sender, EventArgs e)
         {
-            //Core_OpenEditor(new MenuEditor(this));
+            //Core_OpenEditor(new MenuEditor());
         }
         void Open_TitleScreenEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new TitleScreenEditor(this));
+            Core_OpenEditor(new TitleScreenEditor());
         }
 
         void Help_Help_Click(Object sender, EventArgs e)
@@ -1094,7 +1093,7 @@ namespace EmblemMagic
                  + '\n' + "This software is free and open source, following the GNU General Public License."
                  ,
                 this.Icon,
-                Resources.Icon_Large);
+                Properties.Resources.icon_large);
             
             dialog.Show();
         }

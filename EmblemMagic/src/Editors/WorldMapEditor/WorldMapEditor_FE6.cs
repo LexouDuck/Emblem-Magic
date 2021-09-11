@@ -25,7 +25,7 @@ namespace EmblemMagic.Editors
 
 
 
-        public WorldMapEditor_FE6(IApp app) : base(app)
+        public WorldMapEditor_FE6()
         {
             try
             {
@@ -287,19 +287,19 @@ namespace EmblemMagic.Editors
         private void LargeMap_TL_PalettePointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                ((Game)Core.App.Game).Address_WorldMap()[LARGEMAP_PALETTE],
+                Core.App.Game.Addresses["Large World Map Palette"] + 0,
                 LargeMap_PalettePointerBox.Value,
                 CurrentEntry(false) + "Palette (TL) repoint");
             Core.WritePointer(this,
-                ((Game)Core.App.Game).Address_WorldMap()[LARGEMAP_PALETTE] + 8,
+                Core.App.Game.Addresses["Large World Map Palette"] + 8,
                 LargeMap_PalettePointerBox.Value,
                 CurrentEntry(false) + "Palette (TR) repoint");
             Core.WritePointer(this,
-                ((Game)Core.App.Game).Address_WorldMap()[LARGEMAP_PALETTE] + 16,
+                Core.App.Game.Addresses["Large World Map Palette"] + 16,
                 LargeMap_PalettePointerBox.Value,
                 CurrentEntry(false) + "Palette (BL) repoint");
             Core.WritePointer(this,
-                ((Game)Core.App.Game).Address_WorldMap()[LARGEMAP_PALETTE] + 24,
+                Core.App.Game.Addresses["Large World Map Palette"] + 24,
                 LargeMap_PalettePointerBox.Value,
                 CurrentEntry(false) + "Palette (BR) repoint");
         }

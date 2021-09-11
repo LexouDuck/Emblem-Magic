@@ -187,6 +187,7 @@ namespace EmblemMagic
             // 
             // File_RecentFiles
             // 
+            this.File_RecentFiles.Enabled = true;
             this.File_RecentFiles.Name = "File_RecentFiles";
             this.File_RecentFiles.Size = new System.Drawing.Size(242, 22);
             this.File_RecentFiles.Text = "Recent Files";

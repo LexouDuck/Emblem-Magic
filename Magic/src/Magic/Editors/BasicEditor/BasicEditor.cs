@@ -12,7 +12,7 @@ namespace Magic.Editors
 
 
 
-        public BasicEditor(IApp app) : base(app)
+        public BasicEditor()
         {
             try
             {

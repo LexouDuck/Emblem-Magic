@@ -27,7 +27,7 @@ namespace EmblemMagic.Editors
 
 
 
-        public MusicEditor(IApp app) : base(app)
+        public MusicEditor()
         {
             try
             {
@@ -243,7 +243,7 @@ namespace EmblemMagic.Editors
         }
         private void Instrument_ListBox_MouseDoubleClick(Object sender, MouseEventArgs e)
         {
-            App.Core_OpenEditor(new InstrumentEditor(App, Instruments,
+            App.Core_OpenEditor(new InstrumentEditor(Instruments,
                 Util.HexToByte(((String)Instrument_ListBox.SelectedItem).Substring(0, 2))));
         }
 

@@ -17,9 +17,9 @@ namespace Magic.Editors
 
         public IApp App;
 
-        public Editor(IApp app)
+        public Editor()
         {
-            this.App = app;
+            this.App = Core.App;
 
             InitializeComponent();
 

@@ -38,10 +38,7 @@ namespace EmblemMagic.Editors
             "Percussion"
         };
 
-        public InstrumentEditor(IApp app,
-            InstrumentArray instruments,
-            Byte index)
-            : base(app)
+        public InstrumentEditor(InstrumentArray instruments, Byte index)
         {
             try
             {
@@ -346,16 +343,16 @@ namespace EmblemMagic.Editors
         {
             if (Current.Type == InstrumentType.Drums)
             {
-                Program.Core.Core_OpenEditor(new InstrumentEditor(App, new InstrumentArray(Current.Sample), Current.BaseKey));
+                Program.Core.Core_OpenEditor(new InstrumentEditor( new InstrumentArray(Current.Sample), Current.BaseKey));
             }
             else
             {
-                Program.Core.Core_OpenEditor(new SampleEditor(App, Current.Sample));
+                Program.Core.Core_OpenEditor(new SampleEditor(Current.Sample));
             }
         }
         private void KeyMap_Button_Click(Object sender, EventArgs e)
         {
-            Program.Core.Core_OpenEditor(new KeyMapEditor(App, Current.KeyMap));
+            Program.Core.Core_OpenEditor(new KeyMapEditor(Current.KeyMap));
         }
     }
 }

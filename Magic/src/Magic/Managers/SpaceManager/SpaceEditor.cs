@@ -12,7 +12,7 @@ namespace Magic.Editors
     {
         SpaceSortingMode Sorting;
 
-        public SpaceEditor(IApp app) : base(app)
+        public SpaceEditor()
         {
             InitializeComponent();
             

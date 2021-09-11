@@ -38,7 +38,7 @@ namespace EmblemMagic.Editors
 
 
 
-        public PortraitEditor(IApp app) : base(app)
+        public PortraitEditor()
         {
             try
             {

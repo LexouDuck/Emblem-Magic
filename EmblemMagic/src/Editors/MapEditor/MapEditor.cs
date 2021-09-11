@@ -37,7 +37,7 @@ namespace EmblemMagic.Editors
 
 
 
-        public MapEditor(IApp app) : base(app)
+        public MapEditor()
         {
             try
             {
@@ -151,14 +151,14 @@ namespace EmblemMagic.Editors
                 Tileset2_ArrayBox.Value   = (Byte)Current["Tileset2"];
 
                 GBA.Pointer address = Core.GetPointer("Map Data Array");
-                MapData_PointerBox.Value   = Core.ReadPointer(address + 4 * MapData_ArrayBox.Value);
-                Changes_PointerBox.Value   = Core.ReadPointer(address + 4 * Changes_ArrayBox.Value);
-                TileAnim1_PointerBox.Value = Core.ReadPointer(address + 4 * TileAnim1_ArrayBox.Value);
-                TileAnim2_PointerBox.Value = Core.ReadPointer(address + 4 * TileAnim2_ArrayBox.Value);
-                Palette_PointerBox.Value   = Core.ReadPointer(address + 4 * Palette_ArrayBox.Value);
-                TilesetTSA_PointerBox.Value   = Core.ReadPointer(address + 4 * TilesetTSA_ArrayBox.Value);
-                Tileset1_PointerBox.Value  = Core.ReadPointer(address + 4 * Tileset1_ArrayBox.Value);
-                Tileset2_PointerBox.Value  = Core.ReadPointer(address + 4 * Tileset2_ArrayBox.Value);
+                MapData_PointerBox.Value    = Core.ReadPointer(address + 4 * MapData_ArrayBox.Value);
+                Changes_PointerBox.Value    = Core.ReadPointer(address + 4 * Changes_ArrayBox.Value);
+                TileAnim1_PointerBox.Value  = Core.ReadPointer(address + 4 * TileAnim1_ArrayBox.Value);
+                TileAnim2_PointerBox.Value  = Core.ReadPointer(address + 4 * TileAnim2_ArrayBox.Value);
+                Palette_PointerBox.Value    = Core.ReadPointer(address + 4 * Palette_ArrayBox.Value);
+                TilesetTSA_PointerBox.Value = Core.ReadPointer(address + 4 * TilesetTSA_ArrayBox.Value);
+                Tileset1_PointerBox.Value   = Core.ReadPointer(address + 4 * Tileset1_ArrayBox.Value);
+                Tileset2_PointerBox.Value   = Core.ReadPointer(address + 4 * Tileset2_ArrayBox.Value);
             }
             catch (Exception ex)
             {
@@ -834,7 +834,7 @@ namespace EmblemMagic.Editors
 
         private void MapTileset_MagicButton_Click(Object sender, EventArgs e)
         {
-            MapTilesetEditor editor = new MapTilesetEditor(App);
+            MapTilesetEditor editor = new MapTilesetEditor();
             Program.Core.Core_OpenEditor(editor);
 
             editor.Core_SetEntry(

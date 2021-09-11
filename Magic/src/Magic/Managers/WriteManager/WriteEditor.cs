@@ -16,7 +16,7 @@ namespace Magic.Editors
             Boolean,
             Boolean>> List { get; set; }
         
-        public WriteEditor(IApp app) : base(app)
+        public WriteEditor()
         {
             List = new SortableBindingList<Tuple<
             DateTime,

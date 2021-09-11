@@ -47,8 +47,7 @@ namespace Magic.Editors
 
 
 
-        public TSAEditor(IApp app,
-            Editor owner,
+        public TSAEditor(Editor owner,
             String entry,
             Pointer palette_address, Int32 palette_length,
             Pointer tileset_address, Int32 tileset_length,
@@ -56,7 +55,6 @@ namespace Magic.Editors
             Int32 width, Int32 height,
             Boolean compressed,
             Boolean flipRows)
-            : base(app)
         {
             try
             {

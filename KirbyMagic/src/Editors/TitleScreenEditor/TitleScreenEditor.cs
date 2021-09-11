@@ -40,11 +40,8 @@ namespace KirbyMagic.Editors
 
 
 
-        public IApp App;
-        public TitleScreenEditor(IApp app) : base(app)
+        public TitleScreenEditor()
         {
-            App = app;
-
             InitializeComponent();
         }
 
@@ -472,7 +469,7 @@ namespace KirbyMagic.Editors
 
         private void BG_MagicButton_Click(object sender, EventArgs e)
         {
-            GraphicsEditor editor = new GraphicsEditor(App);
+            GraphicsEditor editor = new GraphicsEditor();
 
             if (Core.App.Game is KND)
             {
@@ -491,7 +488,7 @@ namespace KirbyMagic.Editors
         }
         private void MG_MagicButton_Click(object sender, EventArgs e)
         {
-            GraphicsEditor editor = new GraphicsEditor(App);
+            GraphicsEditor editor = new GraphicsEditor();
 
             if (Core.App.Game is KND)
             {
@@ -513,7 +510,7 @@ namespace KirbyMagic.Editors
         }
         private void FG_MagicButton_Click(object sender, EventArgs e)
         {
-            GraphicsEditor editor = new GraphicsEditor(App);
+            GraphicsEditor editor = new GraphicsEditor();
 
             if (Core.App.Game is KND)
             {

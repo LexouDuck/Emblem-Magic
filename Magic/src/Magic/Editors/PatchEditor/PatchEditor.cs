@@ -19,7 +19,7 @@ namespace Magic.Editors
 
 
 
-        public PatchEditor(IApp app) : base(app)
+        public PatchEditor()
         {
             try
             {

@@ -69,7 +69,7 @@ namespace Magic.Editors
 
         List<Tuple<Pointer, Byte>> Differences;
 
-        public HexEditor(IApp app) : base(app)
+        public HexEditor()
         {
             try
             {
@@ -762,7 +762,7 @@ namespace Magic.Editors
             HexBox hexbox = CurrentTabIsROM() ?
                 MainHexBox :
                 FileHexBoxes[CurrentTab];
-            BasicEditor editor = new BasicEditor(App);
+            BasicEditor editor = new BasicEditor();
             App.Core_OpenEditor(editor);
 
             Pointer address = new Pointer((UInt32)hexbox.SelectionStart);

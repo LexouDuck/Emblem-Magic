@@ -23,10 +23,10 @@ Bugfixes:
 - When opening a second ROM, moushover doc in the event editor doesn't work anymore
 
 Keep in mind for release to check:
-- File_RecentFiles.Enabled field being set to 'false' in Suite.Designer.cs, go delete that line
+- File_RecentFiles.Enabled field being set to 'false' in App.Designer.cs, go delete that line
 - MarkingComboBox "Datasource modified error" because of generated code in designer files, go delete that too
 - The automatically defined "DEBUG" constant (not defined when compiling as 'Release' build in visual studio), will take care of:
-    - Main Suite window (this file): Disabling the "open" buttons for WIP/unfinished Editor windows
+    - Main App window (this file): Disabling the "open" buttons for WIP/unfinished Editor windows
     - ./src/Editors/EventEditor.cs, line 95 or so, absolute folderpath changes to appropriate function call
 - Do a "Release" build (any CPU) in Visual studio
 - Run the ./dist.sh shell script (if you're on Windows, use Cygwin), to prepare the "dist" folder for release.

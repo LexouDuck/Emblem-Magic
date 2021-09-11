@@ -32,7 +32,7 @@ namespace EmblemMagic.Editors
             return "Item 0x" + Util.ByteToHex(entry) + " [" + EntryListBox.Items[entry].Text + "] - ";
         }
 
-        public ItemEditor(IApp app) : base(app)
+        public ItemEditor()
         {
             try
             {
@@ -1166,7 +1166,7 @@ namespace EmblemMagic.Editors
 
         private void ItemIcon_MagicButton_Click(Object sender, EventArgs e)
         {
-            GraphicsEditor editor = new GraphicsEditor(App);
+            GraphicsEditor editor = new GraphicsEditor();
 
             if (EntryListBox.SelectedIndices.Count == 1)
             {

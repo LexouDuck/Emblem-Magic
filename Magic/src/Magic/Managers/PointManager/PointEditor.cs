@@ -14,7 +14,7 @@ namespace Magic
             Pointer,
             Int32>> List { get; set; }
 
-        public PointEditor(IApp app) : base(app)
+        public PointEditor()
         {
             List = new SortableBindingList<Tuple<
                 String,

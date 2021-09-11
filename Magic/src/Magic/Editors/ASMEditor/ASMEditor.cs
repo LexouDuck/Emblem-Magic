@@ -17,7 +17,7 @@ namespace Magic.Editors
 
 
 
-        public ASMEditor(IApp app) : base(app)
+        public ASMEditor()
         {
             InitializeComponent();
 

@@ -78,15 +78,13 @@ namespace Magic.Editors
 
 
 
-        public OAMEditor(IApp app,
-            Editor owner,
+        public OAMEditor(Editor owner,
             String entry,
             Pointer address,
             Int32 compressed,
             Int32 offsetX, Int32 offsetY,
             Palette palette,
             Tileset tileset)
-            : base(app)
         {
             try
             {

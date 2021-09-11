@@ -153,6 +153,7 @@ namespace KirbyMagic
             this.Menu_File.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.File_OpenROM,
             this.File_OpenMHF,
+            this.File_RecentFiles,
             this.toolStripSeparator1,
             this.File_SaveROM,
             this.File_SaveAsROM,
@@ -174,7 +175,7 @@ namespace KirbyMagic
             // 
             this.File_OpenROM.Name = "File_OpenROM";
             this.File_OpenROM.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.File_OpenROM.Size = new System.Drawing.Size(242, 22);
+            this.File_OpenROM.Size = new System.Drawing.Size(247, 22);
             this.File_OpenROM.Text = "Open ROM...";
             this.File_OpenROM.Click += new System.EventHandler(this.File_OpenROM_Click);
             // 
@@ -183,21 +184,29 @@ namespace KirbyMagic
             this.File_OpenMHF.Name = "File_OpenMHF";
             this.File_OpenMHF.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.O)));
-            this.File_OpenMHF.Size = new System.Drawing.Size(242, 22);
+            this.File_OpenMHF.Size = new System.Drawing.Size(247, 22);
             this.File_OpenMHF.Text = "Open MHF...";
             this.File_OpenMHF.Click += new System.EventHandler(this.File_OpenMHF_Click);
+            // 
+            // File_RecentFiles
+            // 
+            this.File_RecentFiles.Enabled = true;
+            this.File_RecentFiles.Name = "File_RecentFiles";
+            this.File_RecentFiles.Size = new System.Drawing.Size(242, 22);
+            this.File_RecentFiles.Text = "Recent Files";
+            this.File_RecentFiles.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.File_RecentFiles_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(239, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(244, 6);
             // 
             // File_SaveROM
             // 
             this.File_SaveROM.Enabled = false;
             this.File_SaveROM.Name = "File_SaveROM";
             this.File_SaveROM.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.File_SaveROM.Size = new System.Drawing.Size(242, 22);
+            this.File_SaveROM.Size = new System.Drawing.Size(247, 22);
             this.File_SaveROM.Text = "Save ROM";
             this.File_SaveROM.Click += new System.EventHandler(this.File_SaveROM_Click);
             // 
@@ -207,7 +216,7 @@ namespace KirbyMagic
             this.File_SaveAsROM.Name = "File_SaveAsROM";
             this.File_SaveAsROM.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.File_SaveAsROM.Size = new System.Drawing.Size(242, 22);
+            this.File_SaveAsROM.Size = new System.Drawing.Size(247, 22);
             this.File_SaveAsROM.Text = "Save ROM As...";
             this.File_SaveAsROM.Click += new System.EventHandler(this.File_SaveROMas_Click);
             // 
@@ -217,7 +226,7 @@ namespace KirbyMagic
             this.File_SaveMHF.Name = "File_SaveMHF";
             this.File_SaveMHF.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.S)));
-            this.File_SaveMHF.Size = new System.Drawing.Size(242, 22);
+            this.File_SaveMHF.Size = new System.Drawing.Size(247, 22);
             this.File_SaveMHF.Text = "Save MHF";
             this.File_SaveMHF.Click += new System.EventHandler(this.File_SaveMHF_Click);
             // 
@@ -228,70 +237,90 @@ namespace KirbyMagic
             this.File_SaveAsMHF.ShortcutKeys = ((System.Windows.Forms.Keys)((((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.File_SaveAsMHF.Size = new System.Drawing.Size(242, 22);
+            this.File_SaveAsMHF.Size = new System.Drawing.Size(247, 22);
             this.File_SaveAsMHF.Text = "Save MHF As...";
             this.File_SaveAsMHF.Click += new System.EventHandler(this.File_SaveMHFas_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(239, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(244, 6);
             // 
             // File_AutoSaveROM
             // 
             this.File_AutoSaveROM.CheckOnClick = true;
             this.File_AutoSaveROM.Name = "File_AutoSaveROM";
-            this.File_AutoSaveROM.Size = new System.Drawing.Size(242, 22);
+            this.File_AutoSaveROM.Size = new System.Drawing.Size(247, 22);
             this.File_AutoSaveROM.Text = "Auto-Patch to ROM";
             // 
             // File_AutoSaveMHF
             // 
             this.File_AutoSaveMHF.CheckOnClick = true;
             this.File_AutoSaveMHF.Name = "File_AutoSaveMHF";
-            this.File_AutoSaveMHF.Size = new System.Drawing.Size(242, 22);
+            this.File_AutoSaveMHF.Size = new System.Drawing.Size(247, 22);
             this.File_AutoSaveMHF.Text = "Auto-Save Hack";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(239, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(244, 6);
             // 
             // File_Export
             // 
             this.File_Export.Enabled = false;
             this.File_Export.Name = "File_Export";
-            this.File_Export.Size = new System.Drawing.Size(242, 22);
+            this.File_Export.Size = new System.Drawing.Size(247, 22);
             this.File_Export.Text = "Export to UPS Patch";
             this.File_Export.Click += new System.EventHandler(this.File_ExportUPS_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(239, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(244, 6);
             // 
             // File_CloseROM
             // 
             this.File_CloseROM.Enabled = false;
             this.File_CloseROM.Name = "File_CloseROM";
-            this.File_CloseROM.Size = new System.Drawing.Size(242, 22);
+            this.File_CloseROM.Size = new System.Drawing.Size(247, 22);
             this.File_CloseROM.Text = "Close ROM";
             this.File_CloseROM.Click += new System.EventHandler(this.File_CloseROM_Click);
             // 
             // File_Exit
             // 
             this.File_Exit.Name = "File_Exit";
-            this.File_Exit.Size = new System.Drawing.Size(242, 22);
+            this.File_Exit.Size = new System.Drawing.Size(247, 22);
             this.File_Exit.Text = "Exit";
             // 
             // Menu_Edit
             // 
             this.Menu_Edit.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Edit_Undo,
+            this.Edit_Redo,
             this.Edit_Separator,
             this.Edit_OpenProperties,
             this.Edit_Options});
             this.Menu_Edit.Name = "Menu_Edit";
             this.Menu_Edit.Size = new System.Drawing.Size(39, 20);
             this.Menu_Edit.Text = "Edit";
+            // 
+            // Edit_Undo
+            // 
+            this.Edit_Undo.Enabled = false;
+            this.Edit_Undo.Name = "Edit_Undo";
+            this.Edit_Undo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+            this.Edit_Undo.Size = new System.Drawing.Size(166, 22);
+            this.Edit_Undo.Text = "Undo";
+            this.Edit_Undo.Click += new System.EventHandler(this.Edit_Undo_Click);
+            // 
+            // Edit_Redo
+            // 
+            this.Edit_Redo.Enabled = false;
+            this.Edit_Redo.Name = "Edit_Redo";
+            this.Edit_Redo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
+            this.Edit_Redo.Size = new System.Drawing.Size(166, 22);
+            this.Edit_Redo.Text = "Redo";
+            this.Edit_Redo.Click += new System.EventHandler(this.Edit_Redo_Click);
             // 
             // Edit_Separator
             // 
@@ -677,7 +706,7 @@ namespace KirbyMagic
             this.Open_ItemEditor.Name = "Open_ItemEditor";
             this.Open_ItemEditor.Size = new System.Drawing.Size(152, 35);
             this.Open_ItemEditor.TabIndex = 20;
-            this.Open_ItemEditor.Text = "Item Editor";
+            this.Open_ItemEditor.Text = "Enemy Editor";
             this.Open_ItemEditor.UseVisualStyleBackColor = true;
             this.Open_ItemEditor.Click += new System.EventHandler(this.Open_ItemEditor_Click);
             // 
@@ -699,7 +728,7 @@ namespace KirbyMagic
             this.Open_MapTilesetEditor.Name = "Open_MapTilesetEditor";
             this.Open_MapTilesetEditor.Size = new System.Drawing.Size(152, 35);
             this.Open_MapTilesetEditor.TabIndex = 18;
-            this.Open_MapTilesetEditor.Text = "Map Tileset Editor";
+            this.Open_MapTilesetEditor.Text = "Object Editor";
             this.Open_MapTilesetEditor.UseVisualStyleBackColor = true;
             this.Open_MapTilesetEditor.Click += new System.EventHandler(this.Open_MapTilesetEditor_Click);
             // 
@@ -732,7 +761,7 @@ namespace KirbyMagic
             this.Open_MapSpriteEditor.Name = "Open_MapSpriteEditor";
             this.Open_MapSpriteEditor.Size = new System.Drawing.Size(152, 35);
             this.Open_MapSpriteEditor.TabIndex = 10;
-            this.Open_MapSpriteEditor.Text = "Map Sprite Editor";
+            this.Open_MapSpriteEditor.Text = "Cutscene Editor";
             this.Open_MapSpriteEditor.UseVisualStyleBackColor = true;
             this.Open_MapSpriteEditor.Click += new System.EventHandler(this.Open_MapSpriteEditor_Click);
             // 
@@ -776,7 +805,7 @@ namespace KirbyMagic
             this.Open_WorldMapEditor.Name = "Open_WorldMapEditor";
             this.Open_WorldMapEditor.Size = new System.Drawing.Size(152, 35);
             this.Open_WorldMapEditor.TabIndex = 5;
-            this.Open_WorldMapEditor.Text = "World Map Editor";
+            this.Open_WorldMapEditor.Text = "Mini-Game Editor";
             this.Open_WorldMapEditor.UseVisualStyleBackColor = true;
             this.Open_WorldMapEditor.Click += new System.EventHandler(this.Open_WorldMapEditor_Click);
             // 
@@ -789,7 +818,7 @@ namespace KirbyMagic
             this.Open_EventEditor.TabIndex = 12;
             this.Open_EventEditor.Text = "Event Editor";
             this.Open_EventEditor.UseVisualStyleBackColor = true;
-            this.Open_EventEditor.Click += new System.EventHandler(this.Open_EventEditor_Click);
+            this.Open_EventEditor.Click += new System.EventHandler(this.Open_EnemyEditor_Click);
             // 
             // Open_BattleScreenEditor
             // 
@@ -798,7 +827,7 @@ namespace KirbyMagic
             this.Open_BattleScreenEditor.Name = "Open_BattleScreenEditor";
             this.Open_BattleScreenEditor.Size = new System.Drawing.Size(152, 35);
             this.Open_BattleScreenEditor.TabIndex = 10;
-            this.Open_BattleScreenEditor.Text = "Battle Screen Editor";
+            this.Open_BattleScreenEditor.Text = "World Editor";
             this.Open_BattleScreenEditor.UseVisualStyleBackColor = true;
             this.Open_BattleScreenEditor.Click += new System.EventHandler(this.Open_BattleScreenEditor_Click);
             // 
@@ -820,7 +849,7 @@ namespace KirbyMagic
             this.Open_BackgroundEditor.Name = "Open_BackgroundEditor";
             this.Open_BackgroundEditor.Size = new System.Drawing.Size(152, 35);
             this.Open_BackgroundEditor.TabIndex = 9;
-            this.Open_BackgroundEditor.Text = "Backgrounds Editor";
+            this.Open_BackgroundEditor.Text = "Ability Editor";
             this.Open_BackgroundEditor.UseVisualStyleBackColor = true;
             this.Open_BackgroundEditor.Click += new System.EventHandler(this.Open_BackgroundEditor_Click);
             // 
@@ -831,7 +860,7 @@ namespace KirbyMagic
             this.Open_SpellAnimEditor.Name = "Open_SpellAnimEditor";
             this.Open_SpellAnimEditor.Size = new System.Drawing.Size(152, 35);
             this.Open_SpellAnimEditor.TabIndex = 8;
-            this.Open_SpellAnimEditor.Text = "Spell Animation Editor";
+            this.Open_SpellAnimEditor.Text = "Background Editor";
             this.Open_SpellAnimEditor.UseVisualStyleBackColor = true;
             this.Open_SpellAnimEditor.Click += new System.EventHandler(this.Open_SpellAnimEditor_Click);
             // 
@@ -842,7 +871,7 @@ namespace KirbyMagic
             this.Open_BattleAnimEditor.Name = "Open_BattleAnimEditor";
             this.Open_BattleAnimEditor.Size = new System.Drawing.Size(152, 35);
             this.Open_BattleAnimEditor.TabIndex = 7;
-            this.Open_BattleAnimEditor.Text = "Battle Animation Editor";
+            this.Open_BattleAnimEditor.Text = "Level Editor";
             this.Open_BattleAnimEditor.UseVisualStyleBackColor = true;
             this.Open_BattleAnimEditor.Click += new System.EventHandler(this.Open_BattleAnimEditor_Click);
             // 
@@ -853,7 +882,7 @@ namespace KirbyMagic
             this.Open_PortraitEditor.Name = "Open_PortraitEditor";
             this.Open_PortraitEditor.Size = new System.Drawing.Size(152, 35);
             this.Open_PortraitEditor.TabIndex = 6;
-            this.Open_PortraitEditor.Text = "Portrait Editor";
+            this.Open_PortraitEditor.Text = "Player Editor";
             this.Open_PortraitEditor.UseVisualStyleBackColor = true;
             this.Open_PortraitEditor.Click += new System.EventHandler(this.Open_PortraitEditor_Click);
             // 

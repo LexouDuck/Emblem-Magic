@@ -20,6 +20,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="FastColoredTextBox">
       <HintPath>src\Magic\Components\CodeBox\FastColoredTextBox.dll</HintPath>
     </Reference>

@@ -36,7 +36,7 @@ namespace EmblemMagic.Editors
 
 
 
-        public EventEditor(IApp app) : base(app)
+        public EventEditor()
         {
             try
             {
@@ -102,7 +102,7 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
 #endif
                     LanguageProcessor = EA.Program.LoadCodes(folder + "\\Language Raws", ".txt", true, true);
                 }
-                Language = EA.Program.Languages[Core.App.Game.GetIdentifier().Substring(0, 3)];
+                Language = EA.Program.Languages[Core.App.Game.Identifier.Substring(0, 3)];
                 String keywords = "";
                 IEnumerable<String> codes = Language.GetCodeNames();
                 foreach (String code in codes)
@@ -775,7 +775,7 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
                     if (caption == "")
                     {
                         caption = LanguageProcessor.GetDoc(command,
-                            Core.App.Game.GetIdentifier().Substring(0, 3));
+                            Core.App.Game.Identifier.Substring(0, 3));
                         if (caption.StartsWith("command:"))
                         {
                             Int32 length = caption.IndexOf('\n');

@@ -80,7 +80,7 @@ namespace Magic.Editors
 
         
 
-        public ModuleEditor(IApp app) : base(app)
+        public ModuleEditor()
         {
             InitializeComponent();
 
@@ -141,7 +141,7 @@ namespace Magic.Editors
             }
             else
             {
-                ModuleEditor module = new ModuleEditor(App);
+                ModuleEditor module = new ModuleEditor();
                 module.Core_OpenFile(path);
                 App.Core_OpenEditor(module);
             }
@@ -547,7 +547,7 @@ namespace Magic.Editors
 
         private void Entry_MagicButton_Click(Object sender, EventArgs e)
         {
-            BasicEditor editor = new BasicEditor(App);
+            BasicEditor editor = new BasicEditor();
             App.Core_OpenEditor(editor);
 
             Pointer address = CurrentAddress;

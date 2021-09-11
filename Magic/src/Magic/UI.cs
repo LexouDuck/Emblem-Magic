@@ -142,7 +142,7 @@ namespace Magic
             Pointer address,
             Int32 paletteAmount)
         {
-            App.Core_OpenEditor(new PaletteEditor(App,
+            App.Core_OpenEditor(new PaletteEditor(
                 sender,
                 prefix,
                 address,
@@ -162,7 +162,7 @@ namespace Magic
             Boolean compressed,
             Boolean flipRows)
         {
-            App.Core_OpenEditor(new TSAEditor(App,
+            App.Core_OpenEditor(new TSAEditor(
                 sender,
                 prefix,
                 palette_address, palette_length,
@@ -185,7 +185,7 @@ namespace Magic
             Palette palette,
             Tileset tileset)
         {
-            App.Core_OpenEditor(new OAMEditor(App,
+            App.Core_OpenEditor(new OAMEditor(
                 sender,
                 prefix,
                 address,

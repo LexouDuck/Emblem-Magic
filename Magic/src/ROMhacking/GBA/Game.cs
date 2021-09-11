@@ -42,28 +42,6 @@ namespace GBA
         public abstract UInt32        FileSize                {get;}//=> filesize;  
         public abstract Magic.Range[] FreeSpace               {get;}//=> freespace; 
         public abstract Dictionary<String, Pointer> Addresses {get;}//=> addresses; 
-        /*
-        public Game(
-            T             type,
-            GameRegion    region,
-            String        name,
-            String        identifier,
-            String        id,
-            UInt32        checksum,
-            UInt32        filesize,
-            Magic.Range[] freespace,
-            Dictionary<String, Pointer> addresses)
-        {
-            this.type       = type;
-            this.region     = region;
-            this.name       = name;
-            this.identifier = identifier;
-            this.id         = id;
-            this.checksum   = checksum;
-            this.filesize   = filesize;
-            this.freespace  = freespace;
-        }
-        */
 
         /*
         public static Game<T> FromROM(DataManager ROM)
@@ -93,8 +71,7 @@ namespace GBA
             throw new Exception("The Kirby game ID could not be identified.");
         }
 
-        public static String GetGameID<T>(T type, GameRegion region)
-            where T : Enum
+        public static String GetGameID(T type, GameRegion region)
         {
             throw new NotImplementedException();
         }
