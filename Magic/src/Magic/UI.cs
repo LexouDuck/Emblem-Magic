@@ -176,7 +176,7 @@ namespace Magic
         /// <summary>
         /// Opens an OAM Editor for the OAM data at 'address'
         /// </summary>
-        public static void OpenOAMEditor(
+        public static void OpenSpriteEditor(
             Editor sender,
             String prefix,
             Pointer address,
@@ -185,7 +185,7 @@ namespace Magic
             Palette palette,
             Tileset tileset)
         {
-            App.Core_OpenEditor(new OAMEditor(
+            App.Core_OpenEditor(new SpriteEditor(
                 sender,
                 prefix,
                 address,

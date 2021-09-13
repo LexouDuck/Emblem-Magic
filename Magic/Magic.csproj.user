@@ -92,13 +92,13 @@
     <Compile Update="src\Magic\Editors\ModuleEditor\ModuleEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="src\Magic\Editors\OAMEditor\OAMEditor.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="src\Magic\Editors\PaletteEditor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="src\Magic\Editors\PatchEditor\PatchEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="src\Magic\Editors\SpriteEditor\SpriteEditor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="src\Magic\Editors\TSAEditor.cs">

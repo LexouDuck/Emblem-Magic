@@ -119,29 +119,34 @@ namespace GBA
             Size size = oam.GetDimensions();
             Load(palette, tileset, new TileMap(oam.GetTileMap(size)), false, false);
 
-            Int32 width = (oam.OBJMode == OAM_OBJMode.BigAffine) ? size.Width * 16 : size.Width * 8;
-            Int32 height = (oam.OBJMode == OAM_OBJMode.BigAffine) ? size.Height * 16: size.Height * 8;
+            Int32 width  = 8 * size.Width;
+            Int32 height = 8 * size.Height;
+            if (oam.OBJMode == OAM_OBJMode.BigAffine)
+            {
+                width  *= 2;
+                height *= 2;
+            }
             Byte[] data = new Byte[width * height];
-            Int32 tileX, tileY;
-            Int32 affX, affY;
+            Point tile = new();
+            Point affine = new();
             Int32 halfW = width / 2;
             Int32 halfH = height / 2;
-            for (Int32 y = halfH * -1; y < halfH; y++)
-            for (Int32 x = halfW * -1; x < halfW; x++)
+            for (Int32 y = -halfH; y < halfH; y++)
+            for (Int32 x = -halfW; x < halfW; x++)
             {
-                affX = (Int32)(transform.Ux * x + transform.Vx * y) + size.Width * 4;
-                affY = (Int32)(transform.Uy * x + transform.Vy * y) + size.Height * 4;
-                if (affX < 0 || affX >= size.Width * 8) continue;
-                if (affY < 0 || affY >= size.Height * 8) continue;
+                affine.X = (Int32)(transform.Ux * x + transform.Uy * y) + size.Width * 4;
+                affine.Y = (Int32)(transform.Vx * x + transform.Vy * y) + size.Height * 4;
+                if (affine.X < 0 || affine.X >= size.Width * 8) continue;
+                if (affine.Y < 0 || affine.Y >= size.Height * 8) continue;
 
-                tileX = affX / Tile.SIZE;
-                tileY = affY / Tile.SIZE;
-                    Int32 index = Tiles[tileX, tileY];
+                tile.X = affine.X / Tile.SIZE;
+                tile.Y = affine.Y / Tile.SIZE;
+                    Int32 index = Tiles[tile.X, tile.Y];
                 if (index < 0 || index >= Sheet.Count) continue;
-                tileX = affX % Tile.SIZE;
-                tileY = affY % Tile.SIZE;
+                tile.X = affine.X % Tile.SIZE;
+                tile.Y = affine.Y % Tile.SIZE;
 
-                data[(halfW + x) + (halfH + y) * width] = (Byte)Sheet[index][tileX, tileY];
+                data[(halfW + x) + (halfH + y) * width] = (Byte)Sheet[index][tile.X, tile.Y];
             }
             Transform = new Bitmap(width, height, palette.ToBytes(false), data);
         }

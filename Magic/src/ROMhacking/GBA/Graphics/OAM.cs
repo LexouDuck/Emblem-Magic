@@ -1,31 +1,67 @@
-using Magic;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
+using Magic;
 
 namespace GBA
 {
+    public enum OAM_Shape
+    {
+        Square  = 0x0, // the sprite is square shaped:    8x8, 16x16, 32x32 or 64x64
+        Rect_H  = 0x1, // the sprite is rectangle shaped: 16x8, 32x8, 32x16 or 64x32
+        Rect_V  = 0x2, // the sprite is rectangle shaped: 8x16, 8x32, 16x32 or 32x64
+        Invalid = 0x3,
+    }
+    public enum OAM_Size
+    {
+        Times1 = 0x0, // the sprite is small:   8x8,  16x8  or  8x16
+        Times2 = 0x1, // the sprite is medium: 16x16, 32x8  or  8x32
+        Times4 = 0x2, // the sprite is large:  32x32, 32x16 or 16x32
+        Times8 = 0x3, // the sprite is huge:   64x64, 64x32 or 32x64
+    }
+
+    public enum OAM_GFXMode
+    {
+        Normal     = 0x0, // the sprite renders normally
+        AlphaBlend = 0x1, // the sprite is rendered with semi-transparency, blended with graphics behind it
+        OBJ_Window = 0x2, // the sprite is rendered as an alpha mask onto which another sprite/BG is displayed
+        Invalid    = 0x3,
+    }
+    public enum OAM_OBJMode
+    {
+        Normal    = 0x0, // the sprite renders normally                                       [ Ux Vx ]
+        Affine    = 0x1, // the sprite is an affine sprite, transformed along the matrix: A = [ Uy Vy ]
+        Hidden    = 0x2, // the sprite is not rendered
+        BigAffine = 0x3, // the sprite is an affine sprite with a 2x bigger draw surface, to accomodate rotations
+    }
+
+
+
     /// <summary>
     /// This struct is a wrapper to interpret 12-byte OAM affine sprite transformation data blocks
     /// </summary>
-    public struct OAM_Affine
+    public class OAM_Affine
     {
+        public static readonly OAM_Affine IDENTITY = new(
+            1, 0,
+            0, 1);
+
         Int16 a;
         Int16 b;
         Int16 c;
         Int16 d;
 
-        public OAM_Affine(Single ux, Single vx, Single uy, Single vy)
+        public OAM_Affine(Double u_x, Double u_y, Double v_x, Double v_y)
         {
             a = 0;
             b = 0;
             c = 0;
             d = 0;
 
-            Ux = ux;
-            Vx = vx;
-            Uy = uy;
-            Vy = vy;
+            Ux = u_x;
+            Uy = u_y;
+            Vx = v_x;
+            Vy = v_y;
         }
         public OAM_Affine(Byte[] data)
         {
@@ -38,11 +74,40 @@ namespace GBA
             d = data.GetInt16(index, true); index += 2;
         }
 
-        public Single Ux { get { return GetFloat16(a); } set { a = (Int16)(value * 256); } }
-        public Single Vx { get { return GetFloat16(b); } set { b = (Int16)(value * 256); } }
-        public Single Uy { get { return GetFloat16(c); } set { c = (Int16)(value * 256); } }
-        public Single Vy { get { return GetFloat16(d); } set { d = (Int16)(value * 256); } }
+        public Double Ux { get { return GetFixedPoint16(a); } set { a = (Int16)(value * 256); } }
+        public Double Uy { get { return GetFixedPoint16(b); } set { b = (Int16)(value * 256); } }
+        public Double Vx { get { return GetFixedPoint16(c); } set { c = (Int16)(value * 256); } }
+        public Double Vy { get { return GetFixedPoint16(d); } set { d = (Int16)(value * 256); } }
 
+        /// <summary>
+        /// Returns a boolean indicating whether or not 'this' and 'other' have the same value.
+        /// </summary>
+        public Boolean Equals(OAM_Affine other)
+        {
+            if (this.a != other.a) return false;
+            if (this.b != other.b) return false;
+            if (this.c != other.c) return false;
+            if (this.d != other.d) return false;
+            return true;
+        }
+        /// <summary>
+        /// Returns a string describing this OAM struct
+        /// </summary>
+        public override String ToString()
+        {
+            NumberFormatInfo nfi = new NumberFormatInfo();
+            nfi.NumberDecimalSeparator = ".";
+            if (a == d && b == -c)
+            {
+                Double angle = (Math.Acos(this.Ux) / Math.PI * 180);
+                return "{ Rotation: " + angle.ToString("0.0", nfi) + "° }";
+            }
+            return ("{ " +
+                this.Ux.ToString("0.00", nfi).PadRight(4) + "," +
+                this.Vx.ToString("0.00", nfi).PadRight(4) + " | " +
+                this.Uy.ToString("0.00", nfi).PadRight(4) + "," +
+                this.Vy.ToString("0.00", nfi).PadRight(4) + " }");
+        }
         /// <summary>
         /// Returns a 12-length byte array of this OAM affine transformation data
         /// </summary>
@@ -60,7 +125,18 @@ namespace GBA
             Array.Copy(Util.Int16ToBytes(d, true), 0, result, index, 2); index += 2;
             return result;
         }
-        static Single GetFloat16(Int32 value)
+
+
+
+        /// <summary>
+        /// Returns true if the four affine matrix numbers follow the canonical 2d rotation formula (sin/cos)
+        /// </summary>
+        public Boolean IsRotation()
+        {
+            return (a == d && b == -c);
+        }
+
+        static Single GetFixedPoint16(Int32 value)
         {
             return ((Single)value / (Single)256);
         }
@@ -71,12 +147,16 @@ namespace GBA
     /// <summary>
     /// This struct is a wrapper to interpret 12-byte OAM sprite data blocks
     /// </summary>
-    public struct OAM
+    public class OAM
     {
+        public static readonly OAM NULL = new OAM(new Byte[OAM.LENGTH]);
+
         /// <summary>
         /// The length of one block of OAM data
         /// </summary>
         public const Int32 LENGTH = 12;
+
+
 
         /// <summary>
         /// The entire struct is just a wrapper for this field.
@@ -93,7 +173,7 @@ namespace GBA
             // Length is 12 bytes per sprite OAM
             // Fire Emblem stores OAM a bit differently, since it wants 16bit signed ints for the X and Y coordinates
             //Byte|_Length_|______________________________________Description_________________________________________|
-            //__0_|_1 byte_|_ID, is 0x00 for normal OAMentry , or 0x01 for the terminator of the OAM array____________|
+            //__0_|_1 byte_|_ID, is 0x00 for normal OAM entry , or 0x01 for the terminator of the OAM array___________|
             //  1 |bits 0-1| OBJ_Mode - the kind of rendering, whether the sprite supports affine transforms or not   |
             //  1 |bits 2-3| GFX_Mode - whether or not the sprite supports alpha blending or alpha masking            |
             //  1 |  bit 4 | DrawMosaic Flag, blocks out select lines of pixels to draw a 'blocky' sprite             |
@@ -485,6 +565,19 @@ namespace GBA
             }
             return true;
         }
+
+        /// <summary>
+        /// Returns a string describing this OAM struct
+        /// </summary>
+        public override String ToString()
+        {
+            Size size = this.GetDimensions() * 8;
+            return (
+                "X:" + this.ScreenX.ToString().PadRight(6) +
+                "Y:" + this.ScreenY.ToString().PadRight(6) +
+                size.Width .ToString().PadLeft(2) + "x" +
+                size.Height.ToString().PadLeft(2) + " ");
+        }
         /// <summary>
         /// Returns a 12-length byte array of this OAM struct
         /// </summary>
@@ -605,37 +698,5 @@ namespace GBA
                 default: return null;
             }
         }
-    }
-
-
-
-    public enum OAM_Shape
-    {
-        Square = 0x0, // the sprite is square shaped:    8x8, 16x16, 32x32 or 64x64
-        Rect_H = 0x1, // the sprite is rectangle shaped: 16x8, 32x8, 32x16 or 64x32
-        Rect_V = 0x2, // the sprite is rectangle shaped: 8x16, 8x32, 16x32 or 32x64
-        Invalid = 0x3,
-    }
-    public enum OAM_Size
-    {
-        Times1 = 0x0, // the sprite is small:   8x8,  16x8  or  8x16
-        Times2 = 0x1, // the sprite is medium: 16x16, 32x8  or  8x32
-        Times4 = 0x2, // the sprite is large:  32x32, 32x16 or 16x32
-        Times8 = 0x3, // the sprite is huge:   64x64, 64x32 or 32x64
-    }
-
-    public enum OAM_GFXMode
-    {
-        Normal     = 0x0, // the sprite renders normally
-        AlphaBlend = 0x1, // the sprite is rendered with semi-transparency, blended with graphics behind it
-        OBJ_Window = 0x2, // the sprite is rendered as an alpha mask onto which another sprite/BG is displayed
-        Invalid    = 0x3,
-    }
-    public enum OAM_OBJMode
-    {
-        Normal    = 0x0, // the sprite renders normally                                       [ Ux Vx ]
-        Affine    = 0x1, // the sprite is an affine sprite, transformed along the matrix: A = [ Uy Vy ]
-        Hidden    = 0x2, // the sprite is not rendered
-        BigAffine = 0x3, // the sprite is an affine sprite with a 2x bigger draw surface, to accomodate rotations
     }
 }

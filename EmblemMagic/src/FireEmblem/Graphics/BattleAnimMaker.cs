@@ -214,19 +214,19 @@ namespace EmblemMagic.FireEmblem
                                     arguments = ReadArgument_Numbers(ref file, ref line, ref i);
                                     if (arguments.Length != 1 && arguments.Length != 4) throw new Exception(
                                         "Expected affine sprite (angle) argument, or (Ux, Vx, Uy, and Vy) vector arguments.");
-                                    Single[] vectors;
+                                    Double[] vectors;
                                     if (arguments.Length == 1) // convert angle into (Ux Vx Uy Vy)
                                     {
-                                        Single cos = (Single)Math.Cos((Double)arguments[0]);
-                                        Single sin = (Single)Math.Sin((Double)arguments[1]);
-                                        vectors = new Single[4] { cos, sin, -sin, cos };
+                                        Double cos = Math.Cos((Double)arguments[0]);
+                                        Double sin = Math.Sin((Double)arguments[1]);
+                                        vectors = new Double[4] { cos, sin, -sin, cos };
                                     }
-                                    else vectors = new Single[4]
+                                    else vectors = new Double[4]
                                     {
-                                        (Single)arguments[0],
-                                        (Single)arguments[1],
-                                        (Single)arguments[2],
-                                        (Single)arguments[3]
+                                        (Double)arguments[0],
+                                        (Double)arguments[1],
+                                        (Double)arguments[2],
+                                        (Double)arguments[3]
                                     };
                                     if (new_frame == false)
                                     {   // if there's an affine on a preexisting frame, duplicate the OAM data
@@ -429,7 +429,7 @@ namespace EmblemMagic.FireEmblem
         /// <summary>
         /// Adds an affine sprite to the given frame, positioned at 'screen' coordinates, transformed by 'vectors'
         /// </summary>
-        void AddAffine(Boolean bigAffine, Int32 frame, Point screen, Single[] vectors, Point sheet, Size size)
+        void AddAffine(Boolean bigAffine, Int32 frame, Point screen, Double[] vectors, Point sheet, Size size)
         {
             var shapesize = OAM.GetShapeSize(size);
 
@@ -475,7 +475,7 @@ namespace EmblemMagic.FireEmblem
         /// Duplicates the OAM data for frames that are the same but use different affine sprites.
         /// Checks if the given frame has identical affine sprites to any other duplicate frame, so as to save up on OAM data
         /// </summary>
-        Boolean AddDuplicateFrameWithAffines(Int32 mode, ref Int32 frame, ref List<String> filenames, Point coords, Single[] vectors)
+        Boolean AddDuplicateFrameWithAffines(Int32 mode, ref Int32 frame, ref List<String> filenames, Point coords, Double[] vectors)
         {
             String frame_old = "f" + Util.ByteToHex((Byte)frame);
             String frame_new;
@@ -497,8 +497,8 @@ namespace EmblemMagic.FireEmblem
                         if (Frames[f].Sprites[s].ScreenX + BattleAnimation.SCREEN_OFFSET_X_R == coords.X &&
                             Frames[f].Sprites[s].ScreenY + BattleAnimation.SCREEN_OFFSET_Y == coords.Y &&
                             Frames[f].Affines[Frames[f].Sprites[s].AffineIndex].Ux == vectors[0] &&
-                            Frames[f].Affines[Frames[f].Sprites[s].AffineIndex].Vx == vectors[1] &&
-                            Frames[f].Affines[Frames[f].Sprites[s].AffineIndex].Uy == vectors[2] &&
+                            Frames[f].Affines[Frames[f].Sprites[s].AffineIndex].Uy == vectors[1] &&
+                            Frames[f].Affines[Frames[f].Sprites[s].AffineIndex].Vx == vectors[2] &&
                             Frames[f].Affines[Frames[f].Sprites[s].AffineIndex].Vy == vectors[3])
                         {
                             continue;

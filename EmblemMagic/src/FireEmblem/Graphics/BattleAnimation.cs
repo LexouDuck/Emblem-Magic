@@ -815,8 +815,8 @@ namespace EmblemMagic.FireEmblem
                     result += " (" + (oam.Sprites[s].ScreenX + SCREEN_OFFSET_X_R);
                     result += ", " + (oam.Sprites[s].ScreenY + SCREEN_OFFSET_Y);
                     result += ") ("+ oam.Affines[index].Ux.ToString("0.00000").Replace(',', '.');
-                    result += ", " + oam.Affines[index].Vx.ToString("0.00000").Replace(',', '.');
                     result += ", " + oam.Affines[index].Uy.ToString("0.00000").Replace(',', '.');
+                    result += ", " + oam.Affines[index].Vx.ToString("0.00000").Replace(',', '.');
                     result += ", " + oam.Affines[index].Vy.ToString("0.00000").Replace(',', '.');
                     result += ")";
                 }

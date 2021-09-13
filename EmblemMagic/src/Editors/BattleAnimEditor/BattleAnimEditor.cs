@@ -1116,7 +1116,7 @@ namespace EmblemMagic.Editors
 
         private void Tool_OpenOAMEditor_Click(Object sender, EventArgs e)
         {
-            UI.OpenOAMEditor(this,
+            UI.OpenSpriteEditor(this,
                 CurrentEntry + "Frame 0x" + Util.ByteToHex(CurrentFrame) + " - ",
                 OAM_R_Button.Checked ? OAM_R_PointerBox.Value : OAM_L_PointerBox.Value,
                 (Int32)CurrentAnim.Frames[CurrentFrame].OAM_Offset,
