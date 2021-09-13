@@ -241,7 +241,7 @@ namespace Magic.Editors
 
                 if (this.Entry_ListBox.SelectedIndices.Count == 1)
                 {
-                    int index = this.Entry_ListBox.SelectedIndex;
+                    Int32 index = this.Entry_ListBox.SelectedIndex;
                     if (index >= this.Current.Sprites.Count)
                         throw new Exception("index is outside the bounds of this OAM array");
 
@@ -465,22 +465,22 @@ namespace Magic.Editors
                     (size.Width / 2),
                     (size.Height / 2));
                 offset = new(
-                    offset.X - ((int)(affine.Ux * offset.X) + (int)(affine.Vx * offset.Y)),
-                    offset.Y - ((int)(affine.Uy * offset.X) + (int)(affine.Vy * offset.Y)));
+                    offset.X - ((Int32)(affine.Ux * offset.X) + (Int32)(affine.Vx * offset.Y)),
+                    offset.Y - ((Int32)(affine.Uy * offset.X) + (Int32)(affine.Vy * offset.Y)));
                 pos += new Size(offset);
             }
 
             // U vector (horizontal axis)
             Core_DrawVector(control, g, System.Drawing.Color.Red,
                 pos, new Point(
-                pos.X + (int)(affine.Ux * size.Width),
-                pos.Y + (int)(affine.Uy * size.Width)));
+                pos.X + (Int32)(affine.Ux * size.Width),
+                pos.Y + (Int32)(affine.Uy * size.Width)));
 
             // V vector (vertical axis)
             Core_DrawVector(control, g, System.Drawing.Color.Green,
                 pos, new Point(
-                pos.X + (int)(affine.Vx * size.Height),
-                pos.Y + (int)(affine.Vy * size.Height)));
+                pos.X + (Int32)(affine.Vx * size.Height),
+                pos.Y + (Int32)(affine.Vy * size.Height)));
         }
 
 
@@ -489,7 +489,7 @@ namespace Magic.Editors
         {
             if (this.Sprite_ImageBox == null)
                 return;
-            foreach (int index in this.Entry_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Entry_ListBox.SelectedIndices)
             {
                 OAM obj = this.Current[index];
                 Size size = 8 * obj.GetDimensions();
@@ -512,7 +512,7 @@ namespace Magic.Editors
         {
             if (this.Tileset_ImageBox == null)
                 return;
-            foreach (int index in this.Entry_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Entry_ListBox.SelectedIndices)
             {
                 OAM obj = this.Current[index];
                 Size size = 8 * obj.GetDimensions();
@@ -540,7 +540,7 @@ namespace Magic.Editors
         }
         private void Entry_ListBox_MouseDown(Object sender, MouseEventArgs e)
         {   // deselect list item when user clicks empty area
-            int index = this.Entry_ListBox.IndexFromPoint(e.X, e.Y);
+            Int32 index = this.Entry_ListBox.IndexFromPoint(e.X, e.Y);
             if (index < 0)
             {
                 this.Entry_ListBox.SelectedItems.Clear();
@@ -549,7 +549,7 @@ namespace Magic.Editors
 
         private void Entry_DeleteButton_Click(Object sender, EventArgs e)
         {
-            foreach (int index in this.Entry_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Entry_ListBox.SelectedIndices)
             {
                 this.Current.Sprites.RemoveAt(index);
             }
@@ -563,7 +563,7 @@ namespace Magic.Editors
         }
         private void Entry_MoveUp_Button_Click(Object sender, EventArgs e)
         {
-            foreach (int index in this.Entry_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Entry_ListBox.SelectedIndices)
             {
                 OAM tmp = this.Current.Sprites[index - 1];
                 this.Current.Sprites[index - 1] = this.Current.Sprites[index];
@@ -573,7 +573,7 @@ namespace Magic.Editors
         }
         private void Entry_MoveDown_Button_Click(Object sender, EventArgs e)
         {
-            foreach (int index in this.Entry_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Entry_ListBox.SelectedIndices)
             {
                 OAM tmp = this.Current.Sprites[index + 1];
                 this.Current.Sprites[index + 1] = this.Current.Sprites[index];
@@ -590,7 +590,7 @@ namespace Magic.Editors
         }
         private void Affine_ListBox_MouseDown(Object sender, MouseEventArgs e)
         {   // deselect list item when user clicks empty area
-            int index = this.Affine_ListBox.IndexFromPoint(e.X, e.Y);
+            Int32 index = this.Affine_ListBox.IndexFromPoint(e.X, e.Y);
             if (index < 0)
             {
                 this.Affine_ListBox.SelectedItems.Clear();
@@ -599,7 +599,7 @@ namespace Magic.Editors
 
         private void Affine_DeleteButton_Click(Object sender, EventArgs e)
         {
-            foreach (int index in this.Affine_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Affine_ListBox.SelectedIndices)
             {
                 this.Current.Affines.RemoveAt(index);
             }
@@ -613,7 +613,7 @@ namespace Magic.Editors
         }
         private void Affine_MoveUp_Button_Click(Object sender, EventArgs e)
         {
-            foreach (int index in this.Affine_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Affine_ListBox.SelectedIndices)
             {
                 OAM_Affine tmp = this.Current.Affines[index - 1];
                 this.Current.Affines[index - 1] = this.Current.Affines[index];
@@ -623,7 +623,7 @@ namespace Magic.Editors
         }
         private void Affine_MoveDown_Button_Click(Object sender, EventArgs e)
         {
-            foreach (int index in this.Affine_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Affine_ListBox.SelectedIndices)
             {
                 OAM_Affine tmp = this.Current.Affines[index + 1];
                 this.Current.Affines[index + 1] = this.Current.Affines[index];
@@ -636,7 +636,7 @@ namespace Magic.Editors
 
         private void ScreenX_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            foreach (int index in this.Entry_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Entry_ListBox.SelectedIndices)
             {
                 this.Current[index].ScreenX = (Int16)this.ScreenX_NumBox.Value;
             }
@@ -644,7 +644,7 @@ namespace Magic.Editors
         }
         private void ScreenY_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            foreach (int index in this.Entry_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Entry_ListBox.SelectedIndices)
             {
                 this.Current[index].ScreenY = (Int16)this.ScreenY_NumBox.Value;
             }
@@ -652,7 +652,7 @@ namespace Magic.Editors
         }
         private void Shape_ComboBox_SelectedIndexChanged(Object sender, EventArgs e)
         {
-            foreach (int index in this.Entry_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Entry_ListBox.SelectedIndices)
             {
                 this.Current[index].SpriteShape = (OAM_Shape)this.Shape_ComboBox.SelectedValue;
             }
@@ -660,7 +660,7 @@ namespace Magic.Editors
         }
         private void Size_ComboBox_SelectedIndexChanged(Object sender, EventArgs e)
         {
-            foreach (int index in this.Entry_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Entry_ListBox.SelectedIndices)
             {
                 this.Current[index].SpriteSize = (OAM_Size)this.Size_ComboBox.SelectedValue;
             }
@@ -669,7 +669,7 @@ namespace Magic.Editors
 
         private void SheetX_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            foreach (int index in this.Entry_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Entry_ListBox.SelectedIndices)
             {
                 this.Current[index].SheetX = (Byte)this.SheetX_NumBox.Value;
             }
@@ -677,7 +677,7 @@ namespace Magic.Editors
         }
         private void SheetY_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            foreach (int index in this.Entry_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Entry_ListBox.SelectedIndices)
             {
                 this.Current[index].SheetY = (Byte)this.SheetY_NumBox.Value;
             }
@@ -686,7 +686,7 @@ namespace Magic.Editors
 
         private void GFX_Mode_ComboBox_SelectedIndexChanged(Object sender, EventArgs e)
         {
-            foreach (int index in this.Entry_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Entry_ListBox.SelectedIndices)
             {
                 this.Current[index].GFXMode = (OAM_GFXMode)this.GFX_Mode_ComboBox.SelectedValue;
             }
@@ -694,7 +694,7 @@ namespace Magic.Editors
         }
         private void OBJ_Mode_ComboBox_SelectedIndexChanged(Object sender, EventArgs e)
         {
-            foreach (int index in this.Entry_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Entry_ListBox.SelectedIndices)
             {
                 this.Current[index].OBJMode = (OAM_OBJMode)this.OBJ_Mode_ComboBox.SelectedValue;
             }
@@ -703,7 +703,7 @@ namespace Magic.Editors
 
         private void FullColors_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
-            foreach (int index in this.Entry_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Entry_ListBox.SelectedIndices)
             {
                 this.Current[index].FullColors = this.FullColors_CheckBox.Checked;
             }
@@ -711,7 +711,7 @@ namespace Magic.Editors
         }
         private void DrawMosaic_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
-            foreach (int index in this.Entry_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Entry_ListBox.SelectedIndices)
             {
                 this.Current[index].DrawMosaic = this.DrawMosaic_CheckBox.Checked;
             }
@@ -719,7 +719,7 @@ namespace Magic.Editors
         }
         private void Palette_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            foreach (int index in this.Entry_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Entry_ListBox.SelectedIndices)
             {
                 this.Current[index].Palette = (Byte)this.Palette_NumBox.Value;
             }
@@ -727,7 +727,7 @@ namespace Magic.Editors
         }
         private void Priority_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            foreach (int index in this.Entry_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Entry_ListBox.SelectedIndices)
             {
                 this.Current[index].Priority = (Byte)this.Priority_NumBox.Value;
             }
@@ -736,7 +736,7 @@ namespace Magic.Editors
 
         private void FlipH_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
-            foreach (int index in this.Entry_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Entry_ListBox.SelectedIndices)
             {
                 this.Current[index].FlipH = this.FlipH_CheckBox.Checked;
             }
@@ -744,7 +744,7 @@ namespace Magic.Editors
         }
         private void FlipV_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
-            foreach (int index in this.Entry_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Entry_ListBox.SelectedIndices)
             {
                 this.Current[index].FlipV = this.FlipV_CheckBox.Checked;
             }
@@ -755,7 +755,7 @@ namespace Magic.Editors
 
         private void Affine_Index_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            foreach (int index in this.Entry_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Entry_ListBox.SelectedIndices)
             {
                 this.Current[index].AffineIndex = this.Affine_Index_NumBox.Value;
             }
@@ -763,7 +763,7 @@ namespace Magic.Editors
         }
         private void Affine_Ux_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            foreach (int index in this.Affine_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Affine_ListBox.SelectedIndices)
             {
                 this.Current.Affines[index].Ux = (Double)this.Affine_Ux_NumBox.Value;
             }
@@ -771,7 +771,7 @@ namespace Magic.Editors
         }
         private void Affine_Vx_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            foreach (int index in this.Affine_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Affine_ListBox.SelectedIndices)
             {
                 this.Current.Affines[index].Uy = (Double)this.Affine_Uy_NumBox.Value;
             }
@@ -779,7 +779,7 @@ namespace Magic.Editors
         }
         private void Affine_Uy_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            foreach (int index in this.Affine_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Affine_ListBox.SelectedIndices)
             {
                 this.Current.Affines[index].Vx = (Double)this.Affine_Vx_NumBox.Value;
             }
@@ -787,7 +787,7 @@ namespace Magic.Editors
         }
         private void Affine_Vy_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            foreach (int index in this.Affine_ListBox.SelectedIndices)
+            foreach (Int32 index in this.Affine_ListBox.SelectedIndices)
             {
                 this.Current.Affines[index].Vy = (Double)this.Affine_Vy_NumBox.Value;
             }

@@ -35,7 +35,7 @@ namespace KirbyMagic.Kirby
         /// </summary>
         public static Game FromROM()
         {
-            byte[] id_data = Core.ReadData(new Pointer(ID_ADDRESS), (int)ID_LENGTH);
+            Byte[] id_data = Core.ReadData(new Pointer(ID_ADDRESS), (Int32)ID_LENGTH);
             String id = new String(Encoding.ASCII.GetChars(id_data));
             
             GameRegion region = GameRegion.Invalid;

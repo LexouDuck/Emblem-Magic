@@ -214,14 +214,14 @@ namespace GBA
                         if (result[index][col_effects] != null)
                             result[index][col_effects] += '\n';
                         if (i + 4 >= this.Data.Length) result[index][col_effects] += "loop";
-                        else result[index][col_effects] += "jump:" + this.GetAddress(this.Data.GetUInt32((uint)++i, true));
+                        else result[index][col_effects] += "jump:" + this.GetAddress(this.Data.GetUInt32((System.UInt32)++i, true));
                         i += 3;
                         break;
                     case 0xB3: // Call subsection (4-byte arg)
                         if (result[index][col_effects] != null)
                             result[index][col_effects] += '\n';
                         if (i + 4 >= this.Data.Length) result[index][col_effects] += "call";
-                        else result[index][col_effects] += "call:" + this.GetAddress(this.Data.GetUInt32((uint)++i, true));
+                        else result[index][col_effects] += "call:" + this.GetAddress(this.Data.GetUInt32((System.UInt32)++i, true));
                         i += 3;
                         break;
                     case 0xB4: // End subsection
@@ -232,7 +232,7 @@ namespace GBA
                     case 0xB5: // Call and repeat subsection. (1-byte and 4-byte args)
                         if (result[index][col_effects] != null)
                             result[index][col_effects] += '\n';
-                        result[index][col_effects] += "loop:" + this.Data[++i] + "*" + this.GetAddress(this.Data.GetUInt32((uint)++i, true));
+                        result[index][col_effects] += "loop:" + this.Data[++i] + "*" + this.GetAddress(this.Data.GetUInt32((System.UInt32)++i, true));
                         i += 4;
                         break;
 
