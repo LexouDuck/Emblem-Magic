@@ -50,21 +50,21 @@ namespace EmblemMagic.FireEmblem
             FormLoading loading = new FormLoading();
             loading.SetMessage("Processing animation...");
             loading.Show();
-            
-            AnimCode = new List<String>[12];
-            Graphics = new List<TileSheet>();
-            for (Int32 i = 0; i < AnimCode.Length; i++)
+
+            this.AnimCode = new List<String>[12];
+            this.Graphics = new List<TileSheet>();
+            for (Int32 i = 0; i < this.AnimCode.Length; i++)
             {
-                AnimCode[i] = new List<String>();
+                this.AnimCode[i] = new List<String>();
             }
-            AddTileSheet();
-            
-            Palettes = Palette.Split(GetPaletteFromFile(folder), 4);
+            this.AddTileSheet();
+
+            this.Palettes = Palette.Split(GetPaletteFromFile(folder), 4);
 
 
 
-            Frames = new List<OAM_Array>();
-            FrameData = new List<Tuple<UInt32, UInt32>>();
+            this.Frames = new List<OAM_Array>();
+            this.FrameData = new List<Tuple<UInt32, UInt32>>();
             List<String> filenames = new List<String>();
             List<Tuple<String, Point, Size>> affines = new List<Tuple<String, Point, Size>>();
             CompileMode compile = CompileMode.Usual;
@@ -107,10 +107,10 @@ namespace EmblemMagic.FireEmblem
                                     compile = CompileMode.Usual;
                                 if (compile == CompileMode.Usual)
                                 {
-                                    AnimCode[mode].Add("c" + file[line].Substring(i + 1, 2));
+                                    this.AnimCode[mode].Add("c" + file[line].Substring(i + 1, 2));
                                     if (mode == 0 || mode == 2)
                                     {
-                                        AnimCode[mode + 1].Add("c" + file[line].Substring(i + 1, 2));
+                                        this.AnimCode[mode + 1].Add("c" + file[line].Substring(i + 1, 2));
                                     }
                                     i += 2;
                                     continue;
@@ -160,7 +160,7 @@ namespace EmblemMagic.FireEmblem
                                 if ((bg && compile == CompileMode.Extra) || compile == CompileMode.Frame)
                                 {
                                     i++;
-                                    String filename = ReadArgument_FileName(ref file, ref line, ref i);
+                                    String filename = this.ReadArgument_FileName(ref file, ref line, ref i);
                                     frame = -1;
                                     new_frame = true;
                                     for (Int32 f = 0; f < filenames.Count; f++)
@@ -176,19 +176,19 @@ namespace EmblemMagic.FireEmblem
                                     {
                                         frame = filenames.Count;
                                         filenames.Add(filename);
-                                        AddFrame(bg, new GBA.Image(folder + filename, Palettes[0]), filename);
+                                        this.AddFrame(bg, new GBA.Image(folder + filename, this.Palettes[0]), filename);
                                     }   // add the new frame's OAM if it hasn't yet been used
                                     
                                     if (bg)
                                     {
                                         if (mode == 0 || mode == 2 || mode == 8)
-                                            AnimCode[mode + 1][AnimCode[mode + 1].Count - 1] = duration + " f" + Util.ByteToHex((Byte)frame);
+                                            this.AnimCode[mode + 1][this.AnimCode[mode + 1].Count - 1] = duration + " f" + Util.ByteToHex((Byte)frame);
                                         else throw new Exception("'b' background layer frame commands can only be used in animation modes 1, 3 and 9.");
                                     }
                                     else
                                     {
-                                        AnimCode[mode].Add(duration + " f" + Util.ByteToHex((Byte)frame));
-                                        if (mode == 0 || mode == 2 || mode == 8) AnimCode[mode + 1].Add(duration + " fFF");
+                                        this.AnimCode[mode].Add(duration + " f" + Util.ByteToHex((Byte)frame));
+                                        if (mode == 0 || mode == 2 || mode == 8) this.AnimCode[mode + 1].Add(duration + " fFF");
                                     }
 
                                     compile = CompileMode.Extra;
@@ -204,14 +204,14 @@ namespace EmblemMagic.FireEmblem
                                 if (compile == CompileMode.Extra)
                                 {
                                     i++;
-                                    String affinefile = ReadArgument_FileName(ref file, ref line, ref i);
+                                    String affinefile = this.ReadArgument_FileName(ref file, ref line, ref i);
                                     i++;
-                                    arguments = ReadArgument_Numbers(ref file, ref line, ref i);
+                                    arguments = this.ReadArgument_Numbers(ref file, ref line, ref i);
                                     if (arguments.Length != 2) throw new Exception(
                                         "Expected affine sprite X and Y screen coordinates.");
                                     Point coords = new Point((Int32)arguments[0], (Int32)arguments[1]);
 
-                                    arguments = ReadArgument_Numbers(ref file, ref line, ref i);
+                                    arguments = this.ReadArgument_Numbers(ref file, ref line, ref i);
                                     if (arguments.Length != 1 && arguments.Length != 4) throw new Exception(
                                         "Expected affine sprite (angle) argument, or (Ux, Vx, Uy, and Vy) vector arguments.");
                                     Double[] vectors;
@@ -230,7 +230,7 @@ namespace EmblemMagic.FireEmblem
                                     };
                                     if (new_frame == false)
                                     {   // if there's an affine on a preexisting frame, duplicate the OAM data
-                                        if (AddDuplicateFrameWithAffines(mode, ref frame, ref filenames, coords, vectors))
+                                        if (this.AddDuplicateFrameWithAffines(mode, ref frame, ref filenames, coords, vectors))
                                         {   // if it returned true, that means an identical frame with identical affine exists
                                             continue;
                                         }
@@ -247,11 +247,11 @@ namespace EmblemMagic.FireEmblem
                                     if (affine == -1)
                                     {
                                         affine = affines.Count;
-                                        Tuple<Point, Size> sheet = AddAffineToTilesheet(
-                                            frame, new GBA.Image(folder + affinefile, Palettes[0]));
+                                        Tuple<Point, Size> sheet = this.AddAffineToTilesheet(
+                                            frame, new GBA.Image(folder + affinefile, this.Palettes[0]));
                                         affines.Add(Tuple.Create(affinefile, sheet.Item1, sheet.Item2));
                                     }
-                                    AddAffine(big, frame, coords, vectors,
+                                    this.AddAffine(big, frame, coords, vectors,
                                         affines[affine].Item2, affines[affine].Item3);
                                     continue;
                                 }
@@ -266,10 +266,10 @@ namespace EmblemMagic.FireEmblem
                                     if ((file[line][i + 1] == 'n' || file[line][i + 1] == 'N') &&
                                         (file[line][i + 2] == 'd' || file[line][i + 2] == 'D'))
                                     {
-                                        AnimCode[mode].Add("end");
+                                        this.AnimCode[mode].Add("end");
                                         if (mode == 0 || mode == 2 || mode == 8)
                                         {
-                                            AnimCode[mode + 1].Add("end");
+                                            this.AnimCode[mode + 1].Add("end");
                                             mode += 2;
                                         }
                                         else mode++;
@@ -289,18 +289,18 @@ namespace EmblemMagic.FireEmblem
                     throw new Exception("At line " + line + ":\r\n'" + file[line] + "'\r\n" + ex.Message);
                 }*/
             }
-            UInt32 emptyFrame = (UInt32)(Frames[0].Sprites.Count * OAM.LENGTH);
+            UInt32 emptyFrame = (UInt32)(this.Frames[0].Sprites.Count * OAM.LENGTH);
             // this uint is just the offset to the 1st terminator, so it produces an empty frame
-            while (FrameData.Count < 256)
+            while (this.FrameData.Count < 256)
             {
-                FrameData.Add(Tuple.Create((UInt32)0x00000000, emptyFrame));
+                this.FrameData.Add(Tuple.Create((UInt32)0x00000000, emptyFrame));
             }   // fill framedata with empty frames so 'fFF' commands or such are proeperly compiled
             Int32 oam_total = 0;
-            for (Int32 i = 0; i < Frames.Count; i++)
+            for (Int32 i = 0; i < this.Frames.Count; i++)
             {
                 oam_total +=
-                    Frames[i].Affines.Count * OAM.LENGTH +
-                    Frames[i].Sprites.Count * OAM.LENGTH +
+                    this.Frames[i].Affines.Count * OAM.LENGTH +
+                    this.Frames[i].Sprites.Count * OAM.LENGTH +
                     OAM.LENGTH;
             }
             if (oam_total > BattleAnimation.MAXIMUM_OAM_LENGTH)
@@ -331,7 +331,7 @@ namespace EmblemMagic.FireEmblem
         /// </summary>
         String ReadArgument_FileName(ref String[] file, ref Int32 line, ref Int32 i)
         {
-            ReadWhitespace(ref file, ref line, ref i);
+            this.ReadWhitespace(ref file, ref line, ref i);
             if (file[line][i] == '[') i++;
             else throw new Exception("Expected bracket arguments on this line.");
             Int32 length = 0;
@@ -356,10 +356,10 @@ namespace EmblemMagic.FireEmblem
         /// </summary>
         Decimal[] ReadArgument_Numbers(ref String[] file, ref Int32 line, ref Int32 i)
         {
-            ReadWhitespace(ref file, ref line, ref i);
+            this.ReadWhitespace(ref file, ref line, ref i);
             if (file[line][i] == '(') i++;
             else throw new Exception("Expected parenthese arguments, found: " + file[line][i]);
-            ReadWhitespace(ref file, ref line, ref i);
+            this.ReadWhitespace(ref file, ref line, ref i);
             Int32 length;
             List<Decimal> result = new List<Decimal>();
             while (file[line][i] != ')')
@@ -381,11 +381,11 @@ namespace EmblemMagic.FireEmblem
                     throw new Exception("Could not parse number: " + file[line].Substring(i, length) + " | " + result.Count);
                 }
                 i += length;
-                ReadWhitespace(ref file, ref line, ref i);
+                this.ReadWhitespace(ref file, ref line, ref i);
                 if (file[line][i] == ',') i++;
                 else if (file[line][i] == ')') { i++; break; }
                 else throw new Exception("Unexpected number argument separator: " + file[line][i]);
-                ReadWhitespace(ref file, ref line, ref i);
+                this.ReadWhitespace(ref file, ref line, ref i);
             }
             return result.ToArray();
         }
@@ -397,8 +397,8 @@ namespace EmblemMagic.FireEmblem
         /// </summary>
         Int32 AddTileSheet()
         {
-            Int32 index = Graphics.Count;
-            Graphics.Add(new TileSheet(32, 8));
+            Int32 index = this.Graphics.Count;
+            this.Graphics.Add(new TileSheet(32, 8));
             return index;
         }
         /// <summary>
@@ -412,7 +412,7 @@ namespace EmblemMagic.FireEmblem
             {
                 try
                 {
-                    oam = new OAM_Maker(ref Graphics, frame,
+                    oam = new OAM_Maker(ref this.Graphics, frame,
                         BattleAnimation.SCREEN_OFFSET_X_R,
                         BattleAnimation.SCREEN_OFFSET_Y);
                 }
@@ -420,8 +420,8 @@ namespace EmblemMagic.FireEmblem
                 {
                     throw new Exception("An error occurred while creating OAM for the image:\n" + filename + "\n\n" + ex.Message);
                 }
-                FrameData.Add(Tuple.Create((UInt32)oam.TilesetIndex, GetCurrentOAMOffset(Frames)));
-                Frames.Add(oam.SpriteData);
+                this.FrameData.Add(Tuple.Create((UInt32)oam.TilesetIndex, GetCurrentOAMOffset(this.Frames)));
+                this.Frames.Add(oam.SpriteData);
             }
             else throw new Exception("Frame image must be 240x160 pixels. Invalid image given:\n" + filename);
             return Tuple.Create(filename, oam.SpriteData);
@@ -433,7 +433,7 @@ namespace EmblemMagic.FireEmblem
         {
             var shapesize = OAM.GetShapeSize(size);
 
-            Frames[frame].Sprites.Add(new OAM(
+            this.Frames[frame].Sprites.Add(new OAM(
                 shapesize.Item1, shapesize.Item2,
                 (Int16)(screen.X - BattleAnimation.SCREEN_OFFSET_X_R),
                 (Int16)(screen.Y - BattleAnimation.SCREEN_OFFSET_Y),
@@ -443,9 +443,9 @@ namespace EmblemMagic.FireEmblem
                 false,
                 false,
                 (Byte)sheet.X, (Byte)sheet.Y,
-                (Byte)Frames[frame].Affines.Count));
+                (Byte)this.Frames[frame].Affines.Count));
 
-            Frames[frame].Affines.Add(new OAM_Affine(
+            this.Frames[frame].Affines.Add(new OAM_Affine(
                 vectors[0],
                 vectors[1],
                 vectors[2],
@@ -456,9 +456,9 @@ namespace EmblemMagic.FireEmblem
         /// </summary>
         Tuple<Point, Size> AddAffineToTilesheet(Int32 frame, GBA.Image sprite)
         {
-            Int32 index = (Int32)FrameData[frame].Item1;
+            Int32 index = (Int32)this.FrameData[frame].Item1;
             Size size = new Size(sprite.Width / Tile.SIZE, sprite.Height / Tile.SIZE);
-            Point sheet = Graphics[index].CheckIfFits(size);
+            Point sheet = this.Graphics[index].CheckIfFits(size);
             if (sheet == new Point(-1, -1))
             {
                 sheet = new Point(32 - size.Width, 8 - size.Height);
@@ -467,7 +467,7 @@ namespace EmblemMagic.FireEmblem
             for (Int32 y = 0; y < size.Height; y++)
             for (Int32 x = 0; x < size.Width; x++)
             {
-                Graphics[index][sheet.X + x, sheet.Y + y] = sprite.GetTile(x * Tile.SIZE, y * Tile.SIZE);
+                    this.Graphics[index][sheet.X + x, sheet.Y + y] = sprite.GetTile(x * Tile.SIZE, y * Tile.SIZE);
             }
             return Tuple.Create(sheet, size);
         }
@@ -480,26 +480,26 @@ namespace EmblemMagic.FireEmblem
             String frame_old = "f" + Util.ByteToHex((Byte)frame);
             String frame_new;
             Boolean duplicate_found = false;
-            for (Int32 f = frame + 1; f < Frames.Count; f++)
+            for (Int32 f = frame + 1; f < this.Frames.Count; f++)
             {
                 Boolean equal = true;
-                for (Int32 s = 0; s < Frames[frame].Sprites.Count; s++)
+                for (Int32 s = 0; s < this.Frames[frame].Sprites.Count; s++)
                 {
-                    if (s >= Frames[f].Sprites.Count)
+                    if (s >= this.Frames[f].Sprites.Count)
                         break;
-                    if (!Frames[f].Sprites[s].Equals(Frames[frame].Sprites[s]))
+                    if (!this.Frames[f].Sprites[s].Equals(this.Frames[frame].Sprites[s]))
                     {
                         equal = false;
                         break;
                     }
-                    if (Frames[f].Sprites[s].IsAffineSprite())
+                    if (this.Frames[f].Sprites[s].IsAffineSprite())
                     {
-                        if (Frames[f].Sprites[s].ScreenX + BattleAnimation.SCREEN_OFFSET_X_R == coords.X &&
-                            Frames[f].Sprites[s].ScreenY + BattleAnimation.SCREEN_OFFSET_Y == coords.Y &&
-                            Frames[f].Affines[Frames[f].Sprites[s].AffineIndex].Ux == vectors[0] &&
-                            Frames[f].Affines[Frames[f].Sprites[s].AffineIndex].Uy == vectors[1] &&
-                            Frames[f].Affines[Frames[f].Sprites[s].AffineIndex].Vx == vectors[2] &&
-                            Frames[f].Affines[Frames[f].Sprites[s].AffineIndex].Vy == vectors[3])
+                        if (this.Frames[f].Sprites[s].ScreenX + BattleAnimation.SCREEN_OFFSET_X_R == coords.X &&
+                            this.Frames[f].Sprites[s].ScreenY + BattleAnimation.SCREEN_OFFSET_Y == coords.Y &&
+                            this.Frames[f].Affines[this.Frames[f].Sprites[s].AffineIndex].Ux == vectors[0] &&
+                            this.Frames[f].Affines[this.Frames[f].Sprites[s].AffineIndex].Uy == vectors[1] &&
+                            this.Frames[f].Affines[this.Frames[f].Sprites[s].AffineIndex].Vx == vectors[2] &&
+                            this.Frames[f].Affines[this.Frames[f].Sprites[s].AffineIndex].Vy == vectors[3])
                         {
                             continue;
                         }
@@ -518,28 +518,28 @@ namespace EmblemMagic.FireEmblem
                 frame_new = "f" + Util.ByteToHex((Byte)frame);
             else
             {
-                frame_new = "f" + Util.ByteToHex((Byte)Frames.Count);
+                frame_new = "f" + Util.ByteToHex((Byte)this.Frames.Count);
                 filenames.Add(filenames[frame]);
-                FrameData.Add(Tuple.Create(FrameData[frame].Item1, GetCurrentOAMOffset(Frames)));
-                Frames.Add(new OAM_Array(new List<OAM>(Frames[frame].Sprites)));
-                frame = Frames.Count - 1;
+                this.FrameData.Add(Tuple.Create(this.FrameData[frame].Item1, GetCurrentOAMOffset(this.Frames)));
+                this.Frames.Add(new OAM_Array(new List<OAM>(this.Frames[frame].Sprites)));
+                frame = this.Frames.Count - 1;
             }
-            Int32 line_number = AnimCode[mode].Count - 1;
-            Int32 result = AnimCode[mode][line_number].IndexOf(frame_old);
+            Int32 line_number = this.AnimCode[mode].Count - 1;
+            Int32 result = this.AnimCode[mode][line_number].IndexOf(frame_old);
             if (result != -1)
             {
                 //UI.ShowDebug("old:" + frame_old + ", new:" + frame_new + "\r\n" + AnimCode[mode][line_number]);
-                AnimCode[mode][line_number] =
-                AnimCode[mode][line_number].Replace(frame_old, frame_new);
+                this.AnimCode[mode][line_number] =
+                this.AnimCode[mode][line_number].Replace(frame_old, frame_new);
             }
             else
             {
-                line_number = AnimCode[mode + 1].Count - 1;
-                result = AnimCode[mode + 1][line_number].IndexOf(frame_old);
+                line_number = this.AnimCode[mode + 1].Count - 1;
+                result = this.AnimCode[mode + 1][line_number].IndexOf(frame_old);
                 if (result != -1)
                 {
-                    AnimCode[mode + 1][line_number] =
-                    AnimCode[mode + 1][line_number].Replace(frame_old, frame_new);
+                    this.AnimCode[mode + 1][line_number] =
+                    this.AnimCode[mode + 1][line_number].Replace(frame_old, frame_new);
                 }
                 else throw new Exception("Could not link affine sprite to its frame.");
             }

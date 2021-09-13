@@ -11,7 +11,7 @@ namespace GBA
 
         public MusicHeader(Pointer address)
         {
-            Address = address;
+            this.Address = address;
         }
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace GBA
         {
             get
             {
-                return Core.ReadByte(Address);
+                return Core.ReadByte(this.Address);
             }
         }
         /// <summary>
@@ -31,7 +31,7 @@ namespace GBA
         {
             get
             {
-                return Core.ReadByte(Address + 1);
+                return Core.ReadByte(this.Address + 1);
             }
         }
         /// <summary>
@@ -46,7 +46,7 @@ namespace GBA
         {
             get
             {
-                return Core.ReadByte(Address + 2);
+                return Core.ReadByte(this.Address + 2);
             }
         }
         /// <summary>
@@ -58,24 +58,24 @@ namespace GBA
         {
             get
             {
-                return Core.ReadByte(Address + 3);
+                return Core.ReadByte(this.Address + 3);
             }
         }
         public Pointer Instruments
         {
             get
             {
-                return Core.ReadPointer(Address + 4);
+                return Core.ReadPointer(this.Address + 4);
             }
         }
         public Pointer[] Tracks
         {
             get
             {
-                Pointer[] result = new Pointer[TrackAmount];
+                Pointer[] result = new Pointer[this.TrackAmount];
                 for (System.Int32 i = 0; i < result.Length; i++)
                 {
-                    result[i] = Core.ReadPointer(Address + 8 + i * 4);
+                    result[i] = Core.ReadPointer(this.Address + 8 + i * 4);
                 }
                 return result;
             }

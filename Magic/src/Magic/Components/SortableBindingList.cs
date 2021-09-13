@@ -43,7 +43,7 @@ namespace Library.Forms
         /// </summary>
         protected override Boolean IsSortedCore
         {
-            get { return _isSorted; }
+            get { return this._isSorted; }
         }
 
         /// <summary>
@@ -51,14 +51,14 @@ namespace Library.Forms
         /// </summary>
         protected override ListSortDirection SortDirectionCore
         {
-            get { return _sortDirection; }
+            get { return this._sortDirection; }
         }
         /// <summary>
         /// Gets the property descriptor that is used for sorting the list if sorting is implemented in a derived class; otherwise, returns null
         /// </summary>
         protected override PropertyDescriptor SortPropertyCore
         {
-            get { return _sortProperty; }
+            get { return this._sortProperty; }
         }
 
         /// <summary>
@@ -68,42 +68,42 @@ namespace Library.Forms
         /// <param name="direction"></param>
         protected override void ApplySortCore(PropertyDescriptor prop, ListSortDirection direction)
         {
-            _sortProperty = prop;
-            _sortDirection = direction;
+            this._sortProperty = prop;
+            this._sortDirection = direction;
 
-            List<T> list = Items as List<T>;
+            List<T> list = this.Items as List<T>;
             if (list == null) return;
 
-            list.Sort(Compare);
+            list.Sort(this.Compare);
 
-            _isSorted = true;
+            this._isSorted = true;
             //fire an event that the list has been changed.
-            OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));
+            this.OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));
         }
         /// <summary>
         /// Removes any sort applied with ApplySortCore if sorting is implemented
         /// </summary>
         protected override void RemoveSortCore()
         {
-            _sortDirection = ListSortDirection.Ascending;
-            _sortProperty = null;
-            _isSorted = false; //thanks Luca
+            this._sortDirection = ListSortDirection.Ascending;
+            this._sortProperty = null;
+            this._isSorted = false; //thanks Luca
         }
 
 
         private Int32 Compare(T lhs, T rhs)
         {
-            var result = OnComparison(lhs, rhs);
+            var result = this.OnComparison(lhs, rhs);
             //invert if descending
-            if (_sortDirection == ListSortDirection.Descending)
+            if (this._sortDirection == ListSortDirection.Descending)
                 result = -result;
             return result;
         }
 
         private Int32 OnComparison(T lhs, T rhs)
         {
-            Object lhsValue = lhs == null ? null : _sortProperty.GetValue(lhs);
-            Object rhsValue = rhs == null ? null : _sortProperty.GetValue(rhs);
+            Object lhsValue = lhs == null ? null : this._sortProperty.GetValue(lhs);
+            Object rhsValue = rhs == null ? null : this._sortProperty.GetValue(rhs);
             if (lhsValue == null)
             {
                 return (rhsValue == null) ? 0 : -1; //nulls are equal

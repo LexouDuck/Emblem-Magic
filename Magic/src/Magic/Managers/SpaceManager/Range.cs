@@ -25,7 +25,7 @@ namespace Magic
         {
             get
             {
-                return End - Start;
+                return this.End - this.Start;
             }
         }
 
@@ -34,8 +34,8 @@ namespace Magic
             // if (start == end) throw new Exception("Range cannot be of length 0");
             if (end < start) throw new Exception("Range cannot be negative, 'End' must be greater than 'Start'.");
 
-            Start = (UInt32)start;
-            End = (UInt32)end;
+            this.Start = (UInt32)start;
+            this.End = (UInt32)end;
         }
 
 
@@ -43,15 +43,15 @@ namespace Magic
         {
             if (!(other is Range)) return false;
             Range range = (Range)other;
-            return (Start == range.Start && End == range.End);
+            return (this.Start == range.Start && this.End == range.End);
         }
         override public Int32 GetHashCode()
         {
-            return Start.GetHashCode() ^ End.GetHashCode();
+            return this.Start.GetHashCode() ^ this.End.GetHashCode();
         }
         override public String ToString()
         {
-            return "Range, from " + Util.AddressToString(Start, 8) + " to " + Util.AddressToString(End, 8);
+            return "Range, from " + Util.AddressToString(this.Start, 8) + " to " + Util.AddressToString(this.End, 8);
         }
 
         public static Boolean operator ==(Range left, Range right)

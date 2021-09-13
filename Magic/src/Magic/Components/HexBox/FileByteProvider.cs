@@ -33,20 +33,20 @@ namespace Magic.Components
         /// <param name="readOnly">True, opens the file in read-only mode.</param>
         public FileByteProvider(String fileName, Boolean readOnly)
         {
-            _fileName = fileName;
+            this._fileName = fileName;
 
             if (!readOnly)
             {
-                _stream = File.Open(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
+                this._stream = File.Open(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.Read);
             }
             else
             {
-                _stream = File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                this._stream = File.Open(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             }
 
-            _readOnly = readOnly;
+            this._readOnly = readOnly;
 
-            ReInitialize();
+            this.ReInitialize();
         }
 
         /// <summary>
@@ -63,9 +63,9 @@ namespace Magic.Components
             if (!stream.CanSeek)
                 throw new ArgumentException("stream must supported seek operations(CanSeek)");
 
-            _stream = stream;
-            _readOnly = !stream.CanWrite;
-            ReInitialize();
+            this._stream = stream;
+            this._readOnly = !stream.CanWrite;
+            this.ReInitialize();
         }
 
         #region IByteProvider Members
@@ -85,11 +85,11 @@ namespace Magic.Components
         public Byte ReadByte(Int64 index)
         {
             Int64 blockOffset;
-            DataBlock block = GetDataBlock(index, out blockOffset);
+            DataBlock block = this.GetDataBlock(index, out blockOffset);
             FileDataBlock fileBlock = block as FileDataBlock;
             if (fileBlock != null)
             {
-                return ReadByteFromFile(fileBlock.FileOffset + index - blockOffset);
+                return this.ReadByteFromFile(fileBlock.FileOffset + index - blockOffset);
             }
             else
             {
@@ -107,7 +107,7 @@ namespace Magic.Components
             {
                 // Find the block affected.
                 Int64 blockOffset;
-                DataBlock block = GetDataBlock(index, out blockOffset);
+                DataBlock block = this.GetDataBlock(index, out blockOffset);
 
                 // If the byte is already in a memory block, modify it.
                 MemoryDataBlock memoryBlock = block as MemoryDataBlock;
@@ -129,7 +129,7 @@ namespace Magic.Components
                         fileBlock.RemoveBytesFromStart(1);
                         if (fileBlock.Length == 0)
                         {
-                            _dataMap.Remove(fileBlock);
+                            this._dataMap.Remove(fileBlock);
                         }
                         return;
                     }
@@ -145,7 +145,7 @@ namespace Magic.Components
                         fileBlock.RemoveBytesFromEnd(1);
                         if (fileBlock.Length == 0)
                         {
-                            _dataMap.Remove(fileBlock);
+                            this._dataMap.Remove(fileBlock);
                         }
                         return;
                     }
@@ -166,21 +166,21 @@ namespace Magic.Components
                         fileBlock.Length - (index - blockOffset + 1));
                 }
 
-				block = _dataMap.Replace(block, new MemoryDataBlock(value));
+				block = this._dataMap.Replace(block, new MemoryDataBlock(value));
 
                 if (prefixBlock != null)
                 {
-                    _dataMap.AddBefore(block, prefixBlock);
+                    this._dataMap.AddBefore(block, prefixBlock);
                 }
 
                 if (suffixBlock != null)
                 {
-                    _dataMap.AddAfter(block, suffixBlock);
+                    this._dataMap.AddAfter(block, suffixBlock);
                 }
             }
             finally
             {
-                OnChanged(EventArgs.Empty);
+                this.OnChanged(EventArgs.Empty);
             }
         }
 
@@ -193,7 +193,7 @@ namespace Magic.Components
             {
                 // Find the block affected.
                 Int64 blockOffset;
-                DataBlock block = GetDataBlock(index, out blockOffset);
+                DataBlock block = this.GetDataBlock(index, out blockOffset);
 
                 // If the insertion point is in a memory block, just insert it.
                 MemoryDataBlock memoryBlock = block as MemoryDataBlock;
@@ -231,23 +231,23 @@ namespace Magic.Components
                         fileBlock.Length - (index - blockOffset));
                 }
 
-				block = _dataMap.Replace(block, new MemoryDataBlock(bs));
+				block = this._dataMap.Replace(block, new MemoryDataBlock(bs));
 
                 if (prefixBlock != null)
                 {
-                    _dataMap.AddBefore(block, prefixBlock);
+                    this._dataMap.AddBefore(block, prefixBlock);
                 }
 
                 if (suffixBlock != null)
                 {
-                    _dataMap.AddAfter(block, suffixBlock);
+                    this._dataMap.AddAfter(block, suffixBlock);
                 }
             }
             finally
             {
-                _totalLength += bs.Length;
-                OnLengthChanged(EventArgs.Empty);
-                OnChanged(EventArgs.Empty);
+                this._totalLength += bs.Length;
+                this.OnLengthChanged(EventArgs.Empty);
+                this.OnChanged(EventArgs.Empty);
             }
         }
 
@@ -262,7 +262,7 @@ namespace Magic.Components
 
                 // Find the first block affected.
                 Int64 blockOffset;
-                DataBlock block = GetDataBlock(index, out blockOffset);
+                DataBlock block = this.GetDataBlock(index, out blockOffset);
 
                 // Truncate or remove each block as necessary.
                 while ((bytesToDelete > 0) && (block != null))
@@ -276,10 +276,10 @@ namespace Magic.Components
 
                     if (block.Length == 0)
                     {
-                        _dataMap.Remove(block);
-                        if (_dataMap.FirstBlock == null)
+                        this._dataMap.Remove(block);
+                        if (this._dataMap.FirstBlock == null)
                         {
-                            _dataMap.AddFirst(new MemoryDataBlock(new Byte[0]));
+                            this._dataMap.AddFirst(new MemoryDataBlock(new Byte[0]));
                         }
                     }
                     
@@ -290,9 +290,9 @@ namespace Magic.Components
             }
             finally
             {
-                _totalLength -= length;
-                OnLengthChanged(EventArgs.Empty);
-                OnChanged(EventArgs.Empty);
+                this._totalLength -= length;
+                this.OnLengthChanged(EventArgs.Empty);
+                this.OnChanged(EventArgs.Empty);
             }
         }
 
@@ -303,7 +303,7 @@ namespace Magic.Components
         {
             get
             {
-                return _totalLength;
+                return this._totalLength;
             }
         }
 
@@ -312,16 +312,16 @@ namespace Magic.Components
         /// </summary>
         public Boolean HasChanges()
         {
-            if (_readOnly)
+            if (this._readOnly)
                 return false;
 
-            if (_totalLength != _stream.Length)
+            if (this._totalLength != this._stream.Length)
             {
                 return true;
             }
 
             Int64 offset = 0;
-            for (DataBlock block = _dataMap.FirstBlock; block != null; block = block.NextBlock)
+            for (DataBlock block = this._dataMap.FirstBlock; block != null; block = block.NextBlock)
             {
                 FileDataBlock fileBlock = block as FileDataBlock;
                 if (fileBlock == null)
@@ -336,7 +336,7 @@ namespace Magic.Components
 
                 offset += fileBlock.Length;
             }
-            return (offset != _stream.Length);
+            return (offset != this._stream.Length);
         }
 
         /// <summary>
@@ -344,49 +344,49 @@ namespace Magic.Components
         /// </summary>
         public void ApplyChanges()
         {
-            if (_readOnly)
+            if (this._readOnly)
                 throw new OperationCanceledException("File is in read-only mode");
 
             // This method is implemented to efficiently save the changes to the same file stream opened for reading.
             // Saving to a separate file would be a much simpler implementation.
 
             // Firstly, extend the file length (if necessary) to ensure that there is enough disk space.
-            if (_totalLength > _stream.Length)
+            if (this._totalLength > this._stream.Length)
             {
-                _stream.SetLength(_totalLength);
+                this._stream.SetLength(this._totalLength);
             }
 
             // Secondly, shift around any file sections that have moved.
             Int64 dataOffset = 0;
-            for (DataBlock block = _dataMap.FirstBlock; block != null; block = block.NextBlock)
+            for (DataBlock block = this._dataMap.FirstBlock; block != null; block = block.NextBlock)
             {
                 FileDataBlock fileBlock = block as FileDataBlock;
                 if (fileBlock != null && fileBlock.FileOffset != dataOffset)
                 {
-                    MoveFileBlock(fileBlock, dataOffset);
+                    this.MoveFileBlock(fileBlock, dataOffset);
                 }
                 dataOffset += block.Length;
             }
 
             // Next, write in-memory changes.
             dataOffset = 0;
-            for (DataBlock block = _dataMap.FirstBlock; block != null; block = block.NextBlock)
+            for (DataBlock block = this._dataMap.FirstBlock; block != null; block = block.NextBlock)
             {
                 MemoryDataBlock memoryBlock = block as MemoryDataBlock;
                 if (memoryBlock != null)
                 {
-                    _stream.Position = dataOffset;
+                    this._stream.Position = dataOffset;
                     for (Int32 memoryOffset = 0; memoryOffset < memoryBlock.Length; memoryOffset += COPY_BLOCK_SIZE)
                     {
-                        _stream.Write(memoryBlock.Data, memoryOffset, (Int32)Math.Min(COPY_BLOCK_SIZE, memoryBlock.Length - memoryOffset));
+                        this._stream.Write(memoryBlock.Data, memoryOffset, (Int32)Math.Min(COPY_BLOCK_SIZE, memoryBlock.Length - memoryOffset));
                     }
                 }
                 dataOffset += block.Length;
             }
 
             // Finally, if the file has shortened, truncate the stream.
-            _stream.SetLength(_totalLength);
-            ReInitialize();
+            this._stream.SetLength(this._totalLength);
+            this.ReInitialize();
         }
 
         /// <summary>
@@ -394,7 +394,7 @@ namespace Magic.Components
         /// </summary>
         public Boolean SupportsWriteByte()
         {
-            return !_readOnly;
+            return !this._readOnly;
         }
 
         /// <summary>
@@ -402,7 +402,7 @@ namespace Magic.Components
         /// </summary>
         public Boolean SupportsInsertBytes()
         {
-            return !_readOnly;
+            return !this._readOnly;
         }
 
         /// <summary>
@@ -410,7 +410,7 @@ namespace Magic.Components
         /// </summary>
         public Boolean SupportsDeleteBytes()
         {
-            return !_readOnly;
+            return !this._readOnly;
         }
         #endregion
 
@@ -420,7 +420,7 @@ namespace Magic.Components
         /// </summary>
         ~FileByteProvider()
         {
-            Dispose();
+            this.Dispose();
         }
 
         /// <summary>
@@ -428,13 +428,13 @@ namespace Magic.Components
         /// </summary>
         public void Dispose()
         {
-            if (_stream != null)
+            if (this._stream != null)
             {
-                _stream.Close();
-                _stream = null;
+                this._stream.Close();
+                this._stream = null;
             }
-            _fileName = null;
-            _dataMap = null;
+            this._fileName = null;
+            this._dataMap = null;
             GC.SuppressFinalize(this);
         }
         #endregion
@@ -444,7 +444,7 @@ namespace Magic.Components
         /// </summary>
         public Boolean ReadOnly
         {
-            get { return _readOnly; }
+            get { return this._readOnly; }
         }
 
         void OnLengthChanged(EventArgs e)
@@ -463,14 +463,14 @@ namespace Magic.Components
 
         DataBlock GetDataBlock(Int64 findOffset, out Int64 blockOffset)
         {
-            if (findOffset < 0 || findOffset > _totalLength)
+            if (findOffset < 0 || findOffset > this._totalLength)
             {
                 throw new ArgumentOutOfRangeException("findOffset");
             }
 
             // Iterate over the blocks until the block containing the required offset is encountered.
             blockOffset = 0;
-            for (DataBlock block = _dataMap.FirstBlock; block != null; block = block.NextBlock)
+            for (DataBlock block = this._dataMap.FirstBlock; block != null; block = block.NextBlock)
             {
                 if ((blockOffset <= findOffset && blockOffset + block.Length > findOffset) || block.NextBlock == null)
                 {
@@ -502,22 +502,22 @@ namespace Magic.Components
         Byte ReadByteFromFile(Int64 fileOffset)
         {
             // Move to the correct position and read the byte.
-            if (_stream.Position != fileOffset)
+            if (this._stream.Position != fileOffset)
             {
-                _stream.Position = fileOffset;
+                this._stream.Position = fileOffset;
             }
-            return (Byte)_stream.ReadByte();
+            return (Byte)this._stream.ReadByte();
         }
 
         void MoveFileBlock(FileDataBlock fileBlock, Int64 dataOffset)
         {
             // First, determine whether the next file block needs to move before this one.
             Int64 nextDataOffset;
-			FileDataBlock nextFileBlock = GetNextFileDataBlock(fileBlock, dataOffset, out nextDataOffset);
+			FileDataBlock nextFileBlock = this.GetNextFileDataBlock(fileBlock, dataOffset, out nextDataOffset);
             if (nextFileBlock != null && dataOffset + fileBlock.Length > nextFileBlock.FileOffset)
             {
                 // The next block needs to move first, so do that now.
-                MoveFileBlock(nextFileBlock, nextDataOffset);
+                this.MoveFileBlock(nextFileBlock, nextDataOffset);
             }
 
             // Now, move the block.
@@ -529,12 +529,12 @@ namespace Magic.Components
                 {
                     Int64 readOffset = fileBlock.FileOffset + relativeOffset;
                     Int32 bytesToRead = (Int32)Math.Min(buffer.Length, fileBlock.Length - relativeOffset);
-                    _stream.Position = readOffset;
-                    _stream.Read(buffer, 0, bytesToRead);
+                    this._stream.Position = readOffset;
+                    this._stream.Read(buffer, 0, bytesToRead);
 
                     Int64 writeOffset = dataOffset + relativeOffset;
-                    _stream.Position = writeOffset;
-                    _stream.Write(buffer, 0, bytesToRead);
+                    this._stream.Position = writeOffset;
+                    this._stream.Write(buffer, 0, bytesToRead);
                 }
             }
             else
@@ -545,12 +545,12 @@ namespace Magic.Components
                 {
                     Int32 bytesToRead = (Int32)Math.Min(buffer.Length, fileBlock.Length - relativeOffset);
                     Int64 readOffset = fileBlock.FileOffset + fileBlock.Length - relativeOffset - bytesToRead;
-                    _stream.Position = readOffset;
-                    _stream.Read(buffer, 0, bytesToRead);
+                    this._stream.Position = readOffset;
+                    this._stream.Read(buffer, 0, bytesToRead);
 
                     Int64 writeOffset = dataOffset + fileBlock.Length - relativeOffset - bytesToRead;
-                    _stream.Position = writeOffset;
-                    _stream.Write(buffer, 0, bytesToRead);
+                    this._stream.Position = writeOffset;
+                    this._stream.Write(buffer, 0, bytesToRead);
                 }
             }
 
@@ -560,9 +560,9 @@ namespace Magic.Components
 
         void ReInitialize()
         {
-            _dataMap = new DataMap();
-            _dataMap.AddFirst(new FileDataBlock(0, _stream.Length));
-            _totalLength = _stream.Length;
+            this._dataMap = new DataMap();
+            this._dataMap.AddFirst(new FileDataBlock(0, this._stream.Length));
+            this._totalLength = this._stream.Length;
         }
     }
 }

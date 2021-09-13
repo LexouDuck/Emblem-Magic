@@ -23,7 +23,7 @@ namespace Magic.Components
 
             foreach (DataBlock item in collection)
             {
-                AddLast(item);
+                this.AddLast(item);
             }
         }
 
@@ -31,86 +31,86 @@ namespace Magic.Components
         {
             get
             {
-                return _firstBlock;
+                return this._firstBlock;
             }
         }
 
         public void AddAfter(DataBlock block, DataBlock newBlock)
         {
-            AddAfterInternal(block, newBlock);
+            this.AddAfterInternal(block, newBlock);
         }
 
         public void AddBefore(DataBlock block, DataBlock newBlock)
         {
-            AddBeforeInternal(block, newBlock);
+            this.AddBeforeInternal(block, newBlock);
         }
 
         public void AddFirst(DataBlock block)
         {
-            if (_firstBlock == null)
+            if (this._firstBlock == null)
             {
-                AddBlockToEmptyMap(block);
+                this.AddBlockToEmptyMap(block);
             }
             else
             {
-                AddBeforeInternal(_firstBlock, block);
+                this.AddBeforeInternal(this._firstBlock, block);
             }
         }
 
         public void AddLast(DataBlock block)
         {
-            if (_firstBlock == null)
+            if (this._firstBlock == null)
             {
-                AddBlockToEmptyMap(block);
+                this.AddBlockToEmptyMap(block);
             }
             else
             {
-                AddAfterInternal(GetLastBlock(), block);
+                this.AddAfterInternal(this.GetLastBlock(), block);
             }
         }
 
         public void Remove(DataBlock block)
         {
-            RemoveInternal(block);
+            this.RemoveInternal(block);
         }
 
         public void RemoveFirst()
         {
-            if (_firstBlock == null)
+            if (this._firstBlock == null)
             {
                 throw new InvalidOperationException("The collection is empty.");
             }
-            RemoveInternal(_firstBlock);
+            this.RemoveInternal(this._firstBlock);
         }
 
         public void RemoveLast()
         {
-            if (_firstBlock == null)
+            if (this._firstBlock == null)
             {
                 throw new InvalidOperationException("The collection is empty.");
             }
-            RemoveInternal(GetLastBlock());
+            this.RemoveInternal(this.GetLastBlock());
 		}
 
 		public DataBlock Replace(DataBlock block, DataBlock newBlock)
 		{
-			AddAfterInternal(block, newBlock);
-			RemoveInternal(block);
+            this.AddAfterInternal(block, newBlock);
+            this.RemoveInternal(block);
 			return newBlock;
 		}
 
         public void Clear()
         {
-            DataBlock block = FirstBlock;
+            DataBlock block = this.FirstBlock;
             while (block != null)
             {
                 DataBlock nextBlock = block.NextBlock;
-                InvalidateBlock(block);
+                this.InvalidateBlock(block);
                 block = nextBlock;
             }
-            _firstBlock = null;
-            _count = 0;
-            _version++;
+            this._firstBlock = null;
+            this._count = 0;
+            this._version++;
         }
 
         void AddAfterInternal(DataBlock block, DataBlock newBlock)
@@ -141,9 +141,9 @@ namespace Magic.Components
             }
             block._previousBlock = newBlock;
 
-            if (_firstBlock == block)
+            if (this._firstBlock == block)
             {
-                _firstBlock = newBlock;
+                this._firstBlock = newBlock;
             }
             this._version++;
             this._count++;
@@ -164,21 +164,21 @@ namespace Magic.Components
                 nextBlock._previousBlock = previousBlock;
             }
 
-            if (_firstBlock == block)
+            if (this._firstBlock == block)
             {
-                _firstBlock = nextBlock;
+                this._firstBlock = nextBlock;
             }
 
-            InvalidateBlock(block);
+            this.InvalidateBlock(block);
 
-            _count--;
-            _version++;
+            this._count--;
+            this._version++;
         }
 
         DataBlock GetLastBlock()
         {
             DataBlock lastBlock = null;
-            for (DataBlock block = FirstBlock; block != null; block = block.NextBlock)
+            for (DataBlock block = this.FirstBlock; block != null; block = block.NextBlock)
             {
                 lastBlock = block;
             }
@@ -198,16 +198,16 @@ namespace Magic.Components
             block._nextBlock = null;
             block._previousBlock = null;
 
-            _firstBlock = block;
-            _version++;
-            _count++;
+            this._firstBlock = block;
+            this._version++;
+            this._count++;
         }
 
         #region ICollection Members
         public void CopyTo(Array array, Int32 index)
         {
             DataBlock[] blockArray = array as DataBlock[];
-            for (DataBlock block = FirstBlock; block != null; block = block.NextBlock)
+            for (DataBlock block = this.FirstBlock; block != null; block = block.NextBlock)
             {
                 blockArray[index++] = block;
             }
@@ -217,7 +217,7 @@ namespace Magic.Components
         {
             get
             {
-                return _count;
+                return this._count;
             }
         }
 
@@ -233,7 +233,7 @@ namespace Magic.Components
         {
             get
             {
-                return _syncRoot;
+                return this._syncRoot;
             }
         }
         #endregion
@@ -255,46 +255,46 @@ namespace Magic.Components
 
             internal Enumerator(DataMap map)
             {
-                _map = map;
-                _version = map._version;
-                _current = null;
-                _index = -1;
+                this._map = map;
+                this._version = map._version;
+                this._current = null;
+                this._index = -1;
             }
 
             Object IEnumerator.Current
             {
                 get
                 {
-                    if (_index < 0 || _index > _map.Count)
+                    if (this._index < 0 || this._index > this._map.Count)
                     {
                         throw new InvalidOperationException("Enumerator is positioned before the first element or after the last element of the collection.");
                     }
-                    return _current;
+                    return this._current;
                 }
             }
 
             public Boolean MoveNext()
             {
-                if (this._version != _map._version)
+                if (this._version != this._map._version)
                 {
                     throw new InvalidOperationException("Collection was modified after the enumerator was instantiated.");
                 }
 
-                if (_index >= _map.Count)
+                if (this._index >= this._map.Count)
                 {
                     return false;
                 }
 
-                if (++_index == 0)
+                if (++this._index == 0)
                 {
-                    _current = _map.FirstBlock;
+                    this._current = this._map.FirstBlock;
                 }
                 else
                 {
-                    _current = _current.NextBlock;
+                    this._current = this._current.NextBlock;
                 }
 
-                return (_index < _map.Count);
+                return (this._index < this._map.Count);
             }
 
             void IEnumerator.Reset()

@@ -11,7 +11,7 @@ namespace GBA
         {
             get
             {
-                return Data[index];
+                return this.Data[index];
             }
         }
 
@@ -20,14 +20,14 @@ namespace GBA
             if (data.Length != LENGTH)
                 throw new Exception("Data given has invalid length.");
 
-            Data = data;
+            this.Data = data;
         }
 
         Byte[] Data;
 
         public Byte[] ToBytes()
         {
-            return Data;
+            return this.Data;
         }
     }
 }

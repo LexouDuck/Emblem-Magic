@@ -22,7 +22,7 @@ namespace EmblemMagic.Editors
         {
             get
             {
-                return Core.App.Game.Addresses["Map Sprite Palettes"] + PaletteArrayBox.Value * GBA.Palette.LENGTH;
+                return Core.App.Game.Addresses["Map Sprite Palettes"] + this.PaletteArrayBox.Value * GBA.Palette.LENGTH;
             }
         }
 
@@ -30,14 +30,14 @@ namespace EmblemMagic.Editors
         {
             get
             {
-                return "Map Sprite (Idle) 0x" + Util.ByteToHex(Idle_EntryArrayBox.Value) + " [" + Idle_EntryArrayBox.Text + "] - ";
+                return "Map Sprite (Idle) 0x" + Util.ByteToHex(this.Idle_EntryArrayBox.Value) + " [" + this.Idle_EntryArrayBox.Text + "] - ";
             }
         }
         String CurrentMoveEntry
         {
             get
             {
-                return "Map Sprite (Move) 0x" + Util.ByteToHex(Move_EntryArrayBox.Value) + " [" + Move_EntryArrayBox.Text + "] - ";
+                return "Map Sprite (Move) 0x" + Util.ByteToHex(this.Move_EntryArrayBox.Value) + " [" + this.Move_EntryArrayBox.Text + "] - ";
             }
         }
 
@@ -45,137 +45,137 @@ namespace EmblemMagic.Editors
 
         public MapSpriteEditor()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             try
             {
-                Idle_EntryArrayBox.Load("Map Sprite List.txt");
-                Move_EntryArrayBox.Load("Class List.txt");
-                CurrentIdle = new StructFile("Map Sprite Idle Struct.txt");
-                CurrentMove = new StructFile("Map Sprite Move Struct.txt");
-                CurrentIdle.Address = Core.GetPointer("Map Sprite Idle Array");
-                CurrentMove.Address = Core.GetPointer("Map Sprite Move Array");
+                this.Idle_EntryArrayBox.Load("Map Sprite List.txt");
+                this.Move_EntryArrayBox.Load("Class List.txt");
+                this.CurrentIdle = new StructFile("Map Sprite Idle Struct.txt");
+                this.CurrentMove = new StructFile("Map Sprite Move Struct.txt");
+                this.CurrentIdle.Address = Core.GetPointer("Map Sprite Idle Array");
+                this.CurrentMove.Address = Core.GetPointer("Map Sprite Move Array");
 
-                PaletteArrayBox.Load("Map Sprite Palettes.txt");
+                this.PaletteArrayBox.Load("Map Sprite Palettes.txt");
 
-                Idle_Size_ComboBox.DataSource = new KeyValuePair<String, Byte>[3]
+                this.Idle_Size_ComboBox.DataSource = new KeyValuePair<String, Byte>[3]
                 {
                     new KeyValuePair<String, Byte>("16x16", 0x00),
                     new KeyValuePair<String, Byte>("16x32", 0x01),
                     new KeyValuePair<String, Byte>("32x32", 0x02)
                 };
-                Idle_Size_ComboBox.ValueMember = "Value";
-                Idle_Size_ComboBox.DisplayMember = "Key";
+                this.Idle_Size_ComboBox.ValueMember = "Value";
+                this.Idle_Size_ComboBox.DisplayMember = "Key";
 
-                CurrentPalette = Core.ReadPalette(Core.App.Game.Addresses["Map Sprite Palettes"], GBA.Palette.LENGTH);
+                this.CurrentPalette = Core.ReadPalette(Core.App.Game.Addresses["Map Sprite Palettes"], GBA.Palette.LENGTH);
 
-                Test_PaletteBox.Load(CurrentPalette);
+                this.Test_PaletteBox.Load(this.CurrentPalette);
             }
             catch (Exception ex)
             {
                 UI.ShowError("Could not properly open the " + this.Text, ex);
 
-                Core_CloseEditor(this, null);
+                this.Core_CloseEditor(this, null);
             }
         }
 
         public override void Core_SetEntry(UInt32 entry)
         {
-            Idle_EntryArrayBox.Value = (Byte)entry;
-            Move_EntryArrayBox.Value = (Byte)Move_EntryArrayBox.File.FindEntry(Idle_EntryArrayBox.Text);
+            this.Idle_EntryArrayBox.Value = (Byte)entry;
+            this.Move_EntryArrayBox.Value = (Byte)this.Move_EntryArrayBox.File.FindEntry(this.Idle_EntryArrayBox.Text);
         }
         public override void Core_OnOpen()
         {
-            Move_EntryArrayBox.ValueChanged -= EntryArrayBox_ValueChanged;
-            Move_EntryArrayBox.Value = 1;
-            Move_EntryArrayBox.ValueChanged += EntryArrayBox_ValueChanged;
+            this.Move_EntryArrayBox.ValueChanged -= this.EntryArrayBox_ValueChanged;
+            this.Move_EntryArrayBox.Value = 1;
+            this.Move_EntryArrayBox.ValueChanged += this.EntryArrayBox_ValueChanged;
 
-            Core_Update();
+            this.Core_Update();
         }
         public override void Core_Update()
         {
-            CurrentIdle.EntryIndex = Idle_EntryArrayBox.Value;
-            CurrentMove.EntryIndex = Move_EntryArrayBox.Value - 1;
+            this.CurrentIdle.EntryIndex = this.Idle_EntryArrayBox.Value;
+            this.CurrentMove.EntryIndex = this.Move_EntryArrayBox.Value - 1;
 
-            Core_LoadPalette();
-            Core_LoadImage();
-            Core_LoadValues();
-            Core_LoadTestView();
+            this.Core_LoadPalette();
+            this.Core_LoadImage();
+            this.Core_LoadValues();
+            this.Core_LoadTestView();
         }
 
         void Core_LoadPalette()
         {
             try
             {
-                CurrentPalette = Core.ReadPalette(CurrentPaletteAddress, GBA.Palette.LENGTH);
+                this.CurrentPalette = Core.ReadPalette(this.CurrentPaletteAddress, GBA.Palette.LENGTH);
 
-                Test_PaletteBox.Load(CurrentPalette);
+                this.Test_PaletteBox.Load(this.CurrentPalette);
             }
             catch (Exception ex)
             {
                 UI.ShowError("Could not load the palette.", ex);
-                Test_PaletteBox.Reset();
+                this.Test_PaletteBox.Reset();
             }
         }
         void Core_LoadImage()
         {
             try
             {
-                CurrentMapSprite = new MapSprite(CurrentPalette,
-                    Core.ReadData((Pointer)CurrentIdle["Sprite"], 0),
-                    Core.ReadData((Pointer)CurrentMove["Sprite"], 0),
-                    (Byte)CurrentIdle["Size"]);
+                this.CurrentMapSprite = new MapSprite(this.CurrentPalette,
+                    Core.ReadData((Pointer)this.CurrentIdle["Sprite"], 0),
+                    Core.ReadData((Pointer)this.CurrentMove["Sprite"], 0),
+                    (Byte)this.CurrentIdle["Size"]);
 
-                Edit_ImageBox.Load(CurrentMapSprite);
+                this.Edit_ImageBox.Load(this.CurrentMapSprite);
             }
             catch (Exception ex)
             {
                 UI.ShowError("Could not load the map sprite image.", ex);
-                Edit_ImageBox.Reset();
-                Test_ImageBox.Reset();
+                this.Edit_ImageBox.Reset();
+                this.Test_ImageBox.Reset();
             }
         }
         void Core_LoadTestView()
         {
             try
             {
-                GBA.Palette palette = new GBA.Palette(CurrentPalette);
+                GBA.Palette palette = new GBA.Palette(this.CurrentPalette);
                 palette[0] = palette[0].SetAlpha(true);
                 GBA.Tileset tileset = null;
-                Byte size = (Byte)CurrentIdle["Size"];
-                Int32 frame = Test_TrackBar.Value * 16;
+                Byte size = (Byte)this.CurrentIdle["Size"];
+                Int32 frame = this.Test_TrackBar.Value * 16;
                 GBA.TileMap tilemap = new TileMap(4, 4);
-                if (Test_Idle.Checked)
+                if (this.Test_Idle.Checked)
                 {
                     tilemap.Map(MapSprite.Map_Test(frame, size));
-                    tileset = CurrentMapSprite.Sprites[MapSprite.IDLE].Sheet;
+                    tileset = this.CurrentMapSprite.Sprites[MapSprite.IDLE].Sheet;
                 }
                 frame++;
-                if (Test_MoveSide.Checked)
+                if (this.Test_MoveSide.Checked)
                 {
                     tilemap.Map(MapSprite.Map_Test(frame));
-                    tileset = CurrentMapSprite.Sprites[MapSprite.WALK].Sheet;
+                    tileset = this.CurrentMapSprite.Sprites[MapSprite.WALK].Sheet;
                 }
                 frame += 16 * 4;
-                if (Test_MoveDown.Checked)
+                if (this.Test_MoveDown.Checked)
                 {
                     tilemap.Map(MapSprite.Map_Test(frame));
-                    tileset = CurrentMapSprite.Sprites[MapSprite.WALK].Sheet;
+                    tileset = this.CurrentMapSprite.Sprites[MapSprite.WALK].Sheet;
                 }
                 frame += 16 * 4;
-                if (Test_MoveUp.Checked)
+                if (this.Test_MoveUp.Checked)
                 {
                     tilemap.Map(MapSprite.Map_Test(frame));
-                    tileset = CurrentMapSprite.Sprites[MapSprite.WALK].Sheet;
+                    tileset = this.CurrentMapSprite.Sprites[MapSprite.WALK].Sheet;
                 }
                 frame += 16 * 4;
-                if (Test_Selected.Checked)
+                if (this.Test_Selected.Checked)
                 {
                     tilemap.Map(MapSprite.Map_Test(frame));
-                    tileset = CurrentMapSprite.Sprites[MapSprite.WALK].Sheet;
+                    tileset = this.CurrentMapSprite.Sprites[MapSprite.WALK].Sheet;
                 }
-                TestSprite = new GBA.Sprite(palette, tileset, tilemap);
-                Test_ImageBox.Load(TestSprite);
+                this.TestSprite = new GBA.Sprite(palette, tileset, tilemap);
+                this.Test_ImageBox.Load(this.TestSprite);
             }
             catch (Exception ex)
             {
@@ -184,36 +184,36 @@ namespace EmblemMagic.Editors
         }
         void Core_LoadValues()
         {
-            Idle_Size_ComboBox.SelectedValueChanged -= Idle_Size_ComboBox_ValueChanged;
-            UnknownNumberBox.ValueChanged -= Unknown_NumBox_ValueChanged;
-            Idle_PointerBox.ValueChanged -= Idle_PointerBox_ValueChanged;
-            Move_PointerBox.ValueChanged -= Move_PointerBox_ValueChanged;
-            AnimPointerBox.ValueChanged -= Anim_PointerBox_ValueChanged;
+            this.Idle_Size_ComboBox.SelectedValueChanged -= this.Idle_Size_ComboBox_ValueChanged;
+            this.UnknownNumberBox.ValueChanged -= this.Unknown_NumBox_ValueChanged;
+            this.Idle_PointerBox.ValueChanged -= this.Idle_PointerBox_ValueChanged;
+            this.Move_PointerBox.ValueChanged -= this.Move_PointerBox_ValueChanged;
+            this.AnimPointerBox.ValueChanged -= this.Anim_PointerBox_ValueChanged;
 
             try
             {
-                Idle_Size_ComboBox.SelectedValue = (Byte)CurrentIdle["Size"];
-                UnknownNumberBox.Value = (Byte)CurrentIdle["Unknown"];
-                Idle_PointerBox.Value = (Pointer)CurrentIdle["Sprite"];
-                Move_PointerBox.Value = (Pointer)CurrentMove["Sprite"];
-                AnimPointerBox.Value = (Pointer)CurrentMove["AnimData"];
+                this.Idle_Size_ComboBox.SelectedValue = (Byte)this.CurrentIdle["Size"];
+                this.UnknownNumberBox.Value = (Byte)this.CurrentIdle["Unknown"];
+                this.Idle_PointerBox.Value = (Pointer)this.CurrentIdle["Sprite"];
+                this.Move_PointerBox.Value = (Pointer)this.CurrentMove["Sprite"];
+                this.AnimPointerBox.Value = (Pointer)this.CurrentMove["AnimData"];
             }
             catch (Exception ex)
             {
                 UI.ShowError("There has been an error while trying to load the values.", ex);
 
-                Idle_Size_ComboBox.SelectedValue = 0;
-                Idle_PointerBox.Value = new Pointer();
-                Move_PointerBox.Value = new Pointer();
-                AnimPointerBox.Value = new Pointer();
-                UnknownNumberBox.Value = 0;
+                this.Idle_Size_ComboBox.SelectedValue = 0;
+                this.Idle_PointerBox.Value = new Pointer();
+                this.Move_PointerBox.Value = new Pointer();
+                this.AnimPointerBox.Value = new Pointer();
+                this.UnknownNumberBox.Value = 0;
             }
 
-            Idle_Size_ComboBox.SelectedValueChanged += Idle_Size_ComboBox_ValueChanged;
-            UnknownNumberBox.ValueChanged += Unknown_NumBox_ValueChanged;
-            Idle_PointerBox.ValueChanged += Idle_PointerBox_ValueChanged;
-            Move_PointerBox.ValueChanged += Move_PointerBox_ValueChanged;
-            AnimPointerBox.ValueChanged += Anim_PointerBox_ValueChanged;
+            this.Idle_Size_ComboBox.SelectedValueChanged += this.Idle_Size_ComboBox_ValueChanged;
+            this.UnknownNumberBox.ValueChanged += this.Unknown_NumBox_ValueChanged;
+            this.Idle_PointerBox.ValueChanged += this.Idle_PointerBox_ValueChanged;
+            this.Move_PointerBox.ValueChanged += this.Move_PointerBox_ValueChanged;
+            this.AnimPointerBox.ValueChanged += this.Anim_PointerBox_ValueChanged;
         }
         
         void Core_Insert(MapSprite insert)
@@ -226,29 +226,29 @@ namespace EmblemMagic.Editors
 
                 Boolean cancel = Prompt.ShowRepointDialog(this, "Repoint Map Sprite",
                     "The Map Sprite to insert might need to be repointed.",
-                        CurrentIdleEntry,
+                        this.CurrentIdleEntry,
                     new Tuple<String, Pointer, Int32>[] {
-                        Tuple.Create("Idle Sprite", (Pointer)CurrentIdle["Sprite"], data_idle.Length),
-                        Tuple.Create("Move Sprite", (Pointer)CurrentMove["Sprite"], data_move.Length)},
+                        Tuple.Create("Idle Sprite", (Pointer)this.CurrentIdle["Sprite"], data_idle.Length),
+                        Tuple.Create("Move Sprite", (Pointer)this.CurrentMove["Sprite"], data_move.Length)},
                     new Pointer[] {
-                        CurrentIdle.GetAddress(CurrentIdle.EntryIndex, "Sprite"),
-                        CurrentMove.GetAddress(CurrentMove.EntryIndex, "Sprite")});
+                        this.CurrentIdle.GetAddress(this.CurrentIdle.EntryIndex, "Sprite"),
+                        this.CurrentMove.GetAddress(this.CurrentMove.EntryIndex, "Sprite")});
                 if (cancel) return;
 
                 Core.WriteData(this,
-                    (Pointer)CurrentIdle["Sprite"],
+                    (Pointer)this.CurrentIdle["Sprite"],
                     data_idle,
-                    CurrentIdleEntry + "Idle Sprite changed");
+                    this.CurrentIdleEntry + "Idle Sprite changed");
 
                 Core.WriteData(this,
-                    (Pointer)CurrentMove["Sprite"],
+                    (Pointer)this.CurrentMove["Sprite"],
                     data_move,
-                    CurrentMoveEntry + "Move Sprite changed");
+                    this.CurrentMoveEntry + "Move Sprite changed");
 
                 Core.WriteByte(this,
-                    CurrentIdle.GetAddress(CurrentIdle.EntryIndex, "Size"),
+                    this.CurrentIdle.GetAddress(this.CurrentIdle.EntryIndex, "Size"),
                     insert.IdleSize,
-                    CurrentIdleEntry + "Size changed");
+                    this.CurrentIdleEntry + "Size changed");
             }
             catch (Exception ex)
             {
@@ -263,7 +263,7 @@ namespace EmblemMagic.Editors
             MapSprite mapsprite;
             try
             {
-                GBA.Image image = new GBA.Image(filepath, CurrentPalette);
+                GBA.Image image = new GBA.Image(filepath, this.CurrentPalette);
 
                 if (image.Width != MapSprite.W_TILES * 8 || image.Height != MapSprite.H_TILES * 8)
                     throw new Exception("Image given has invalid dimensions. It must be 160x128");
@@ -275,7 +275,7 @@ namespace EmblemMagic.Editors
                 UI.ShowError("Could not load the image file.", ex);
                 return;
             }
-            Core_Insert(mapsprite);
+            this.Core_Insert(mapsprite);
         }
         void Core_InsertData(String filepath)
         {
@@ -303,20 +303,20 @@ namespace EmblemMagic.Editors
                  if (idle.Length == Tile.LENGTH * 4 * 3) size = 0x00;
             else if (idle.Length == Tile.LENGTH * 8 * 3) size = 0x01;
             else if (idle.Length == Tile.LENGTH * 16 * 3) size = 0x02;
-            MapSprite result = new MapSprite(CurrentPalette, idle, move, size);
-            Core_Insert(result);
+            MapSprite result = new MapSprite(this.CurrentPalette, idle, move, size);
+            this.Core_Insert(result);
         }
         void Core_SaveImage(String filepath)
         {
             try
             {
                 Core.SaveImage(filepath,
-                    CurrentMapSprite.Width,
-                    CurrentMapSprite.Height,
-                    new Palette[1] { CurrentPalette },
+                    this.CurrentMapSprite.Width,
+                    this.CurrentMapSprite.Height,
+                    new Palette[1] { this.CurrentPalette },
                     delegate (Int32 x, Int32 y)
                     {
-                        return (Byte)CurrentMapSprite[x, y];
+                        return (Byte)this.CurrentMapSprite[x, y];
                     });
             }
             catch (Exception ex)
@@ -331,8 +331,8 @@ namespace EmblemMagic.Editors
                 String path = Path.GetDirectoryName(filepath) + "\\";
                 String file = Path.GetFileNameWithoutExtension(filepath);
 
-                Byte[] data_idle = CurrentMapSprite.Sprites[MapSprite.IDLE].Sheet.ToBytes(false);
-                Byte[] data_move = CurrentMapSprite.Sprites[MapSprite.WALK].Sheet.ToBytes(false);
+                Byte[] data_idle = this.CurrentMapSprite.Sprites[MapSprite.IDLE].Sheet.ToBytes(false);
+                Byte[] data_move = this.CurrentMapSprite.Sprites[MapSprite.WALK].Sheet.ToBytes(false);
 
                 File.WriteAllBytes(path + file + " idle.chr", data_idle);
                 File.WriteAllBytes(path + file + " move.chr", data_move);
@@ -362,12 +362,12 @@ namespace EmblemMagic.Editors
                     openWindow.FileName.EndsWith(".bmp", StringComparison.OrdinalIgnoreCase) ||
                     openWindow.FileName.EndsWith(".gif", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_InsertImage(openWindow.FileName);
+                    this.Core_InsertImage(openWindow.FileName);
                     return;
                 }
                 if (openWindow.FileName.EndsWith(".chr", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_InsertData(openWindow.FileName);
+                    this.Core_InsertData(openWindow.FileName);
                     return;
                 }
                 UI.ShowError("File chosen has invalid extension.\r\n" + openWindow.FileName);
@@ -388,7 +388,7 @@ namespace EmblemMagic.Editors
             {
                 if (saveWindow.FileName.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_SaveImage(saveWindow.FileName.Remove(saveWindow.FileName.Length - 4));
+                    this.Core_SaveImage(saveWindow.FileName.Remove(saveWindow.FileName.Length - 4));
                     return;
                 }
                 UI.ShowError("File chosen has invalid extension.\r\n" + saveWindow.FileName);
@@ -416,7 +416,7 @@ namespace EmblemMagic.Editors
                 {
                     try
                     {
-                        idle = new GBA.Bitmap(openWindow_idle.FileName, CurrentPalette);
+                        idle = new GBA.Bitmap(openWindow_idle.FileName, this.CurrentPalette);
                     }
                     catch (Exception ex)
                     {
@@ -456,7 +456,7 @@ namespace EmblemMagic.Editors
                 {
                     try
                     {
-                        move = new GBA.Bitmap(openWindow_move.FileName, CurrentPalette);
+                        move = new GBA.Bitmap(openWindow_move.FileName, this.CurrentPalette);
                     }
                     catch (Exception ex)
                     {
@@ -523,7 +523,7 @@ namespace EmblemMagic.Editors
                         Core.SaveImage(saveWindow.FileName.Remove(saveWindow.FileName.Length - 4),
                             Tile.SIZE * MapSprite.W_TILES,
                             Tile.SIZE * MapSprite.H_TILES,
-                            Palette.Split(CurrentPalette, 8),
+                            Palette.Split(this.CurrentPalette, 8),
                             delegate (Int32 x, Int32 y)
                             {
                                 return (Byte)result[x, y];
@@ -547,133 +547,133 @@ namespace EmblemMagic.Editors
 
         private void EntryArrayBox_ValueChanged(Object sender, EventArgs e)
         {
-            Core_Update();
+            this.Core_Update();
         }
         private void Entry_DecrementBoth_Button_Click(Object sender, EventArgs e)
         {
-            Idle_EntryArrayBox.ValueChanged -= EntryArrayBox_ValueChanged;
-            Move_EntryArrayBox.ValueChanged -= EntryArrayBox_ValueChanged;
+            this.Idle_EntryArrayBox.ValueChanged -= this.EntryArrayBox_ValueChanged;
+            this.Move_EntryArrayBox.ValueChanged -= this.EntryArrayBox_ValueChanged;
 
-            Idle_EntryArrayBox.Value -= 1;
-            Move_EntryArrayBox.Value -= 1;
+            this.Idle_EntryArrayBox.Value -= 1;
+            this.Move_EntryArrayBox.Value -= 1;
 
-            Idle_EntryArrayBox.ValueChanged += EntryArrayBox_ValueChanged;
-            Move_EntryArrayBox.ValueChanged += EntryArrayBox_ValueChanged;
+            this.Idle_EntryArrayBox.ValueChanged += this.EntryArrayBox_ValueChanged;
+            this.Move_EntryArrayBox.ValueChanged += this.EntryArrayBox_ValueChanged;
 
-            Core_Update();
+            this.Core_Update();
         }
         private void Entry_IncrementBoth_Button_Click(Object sender, EventArgs e)
         {
-            Idle_EntryArrayBox.ValueChanged -= EntryArrayBox_ValueChanged;
-            Move_EntryArrayBox.ValueChanged -= EntryArrayBox_ValueChanged;
+            this.Idle_EntryArrayBox.ValueChanged -= this.EntryArrayBox_ValueChanged;
+            this.Move_EntryArrayBox.ValueChanged -= this.EntryArrayBox_ValueChanged;
 
-            Idle_EntryArrayBox.Value += 1;
-            Move_EntryArrayBox.Value += 1;
+            this.Idle_EntryArrayBox.Value += 1;
+            this.Move_EntryArrayBox.Value += 1;
 
-            Idle_EntryArrayBox.ValueChanged += EntryArrayBox_ValueChanged;
-            Move_EntryArrayBox.ValueChanged += EntryArrayBox_ValueChanged;
+            this.Idle_EntryArrayBox.ValueChanged += this.EntryArrayBox_ValueChanged;
+            this.Move_EntryArrayBox.ValueChanged += this.EntryArrayBox_ValueChanged;
 
-            Core_Update();
+            this.Core_Update();
         }
 
         private void Idle_Size_ComboBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                CurrentIdle.GetAddress(CurrentIdle.EntryIndex, "Size"),
-                (Byte)Idle_Size_ComboBox.SelectedValue,
-                CurrentIdleEntry + "Size changed");
+                this.CurrentIdle.GetAddress(this.CurrentIdle.EntryIndex, "Size"),
+                (Byte)this.Idle_Size_ComboBox.SelectedValue,
+                this.CurrentIdleEntry + "Size changed");
         }
         private void Idle_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                CurrentIdle.GetAddress(CurrentIdle.EntryIndex, "Sprite"),
-                Idle_PointerBox.Value,
-                CurrentIdleEntry + "Sprite repointed");
+                this.CurrentIdle.GetAddress(this.CurrentIdle.EntryIndex, "Sprite"),
+                this.Idle_PointerBox.Value,
+                this.CurrentIdleEntry + "Sprite repointed");
         }
         private void Move_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                CurrentMove.GetAddress(CurrentMove.EntryIndex, "Sprite"),
-                Move_PointerBox.Value,
-                CurrentMoveEntry + "Sprite repointed");
+                this.CurrentMove.GetAddress(this.CurrentMove.EntryIndex, "Sprite"),
+                this.Move_PointerBox.Value,
+                this.CurrentMoveEntry + "Sprite repointed");
         }
         private void Anim_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                CurrentMove.GetAddress(CurrentMove.EntryIndex, "AnimData"),
-                AnimPointerBox.Value,
-                CurrentMoveEntry + "Animation repointed");
+                this.CurrentMove.GetAddress(this.CurrentMove.EntryIndex, "AnimData"),
+                this.AnimPointerBox.Value,
+                this.CurrentMoveEntry + "Animation repointed");
         }
         private void Unknown_NumBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                CurrentIdle.GetAddress(CurrentIdle.EntryIndex),
-                UnknownNumberBox.Value,
-                CurrentIdleEntry + "Unknown byte changed");
+                this.CurrentIdle.GetAddress(this.CurrentIdle.EntryIndex),
+                this.UnknownNumberBox.Value,
+                this.CurrentIdleEntry + "Unknown byte changed");
         }
 
         private void Test_TrackBar_ValueChanged(Object sender, EventArgs e)
         {
-            Core_LoadTestView();
+            this.Core_LoadTestView();
         }
         private void Test_Idle_CheckedChanged(Object sender, EventArgs e)
         {
-            if (Test_Idle.Checked)
-                Test_TrackBar.Maximum = 2;
+            if (this.Test_Idle.Checked)
+                this.Test_TrackBar.Maximum = 2;
 
-            Core_LoadTestView();
+            this.Core_LoadTestView();
         }
         private void Test_MoveUp_CheckedChanged(Object sender, EventArgs e)
         {
-            if (Test_MoveSide.Checked)
-                Test_TrackBar.Maximum = 3;
+            if (this.Test_MoveSide.Checked)
+                this.Test_TrackBar.Maximum = 3;
 
-            Core_LoadTestView();
+            this.Core_LoadTestView();
         }
         private void Test_MoveSide_CheckedChanged(Object sender, EventArgs e)
         {
-            if (Test_MoveDown.Checked)
-                Test_TrackBar.Maximum = 3;
+            if (this.Test_MoveDown.Checked)
+                this.Test_TrackBar.Maximum = 3;
 
-            Core_LoadTestView();
+            this.Core_LoadTestView();
         }
         private void Test_MoveDown_CheckedChanged(Object sender, EventArgs e)
         {
-            if (Test_MoveUp.Checked)
-                Test_TrackBar.Maximum = 3;
+            if (this.Test_MoveUp.Checked)
+                this.Test_TrackBar.Maximum = 3;
 
-            Core_LoadTestView();
+            this.Core_LoadTestView();
         }
         private void Test_Selected_CheckedChanged(Object sender, EventArgs e)
         {
-            if (Test_Selected.Checked)
-                Test_TrackBar.Maximum = 2;
+            if (this.Test_Selected.Checked)
+                this.Test_TrackBar.Maximum = 2;
 
-            Core_LoadTestView();
+            this.Core_LoadTestView();
         }
 
         private void PaletteArrayBox_ValueChanged(Object sender, EventArgs e)
         {
-            Core_Update();
+            this.Core_Update();
         }
         private void PaletteBox_Click(Object sender, EventArgs e)
         {
             UI.OpenPaletteEditor(this,
-                "Map Sprite Palette 0x" + PaletteArrayBox.Value + " [" + PaletteArrayBox.Text + "] - ",
-                CurrentPaletteAddress, 1);
+                "Map Sprite Palette 0x" + this.PaletteArrayBox.Value + " [" + this.PaletteArrayBox.Text + "] - ",
+                this.CurrentPaletteAddress, 1);
         }
 
         private void Idle_MagicButton_Click(Object sender, EventArgs e)
         {
             GraphicsEditor editor = new GraphicsEditor();
 
-            Byte size = (Byte)CurrentIdle["Size"];
+            Byte size = (Byte)this.CurrentIdle["Size"];
 
             editor.Core_SetEntry(
                 (size < 0x2 ? 2 : 4),
                 (size < 0x1 ? 2 : 4) * 3,
-                CurrentPaletteAddress, false,
-                (Pointer)CurrentIdle["Sprite"], true);
+                this.CurrentPaletteAddress, false,
+                (Pointer)this.CurrentIdle["Sprite"], true);
 
             Program.Core.Core_OpenEditor(editor);
         }
@@ -682,8 +682,8 @@ namespace EmblemMagic.Editors
             GraphicsEditor editor = new GraphicsEditor();
 
             editor.Core_SetEntry(4, 60,
-                CurrentPaletteAddress, false,
-                (Pointer)CurrentMove["Sprite"], true);
+                this.CurrentPaletteAddress, false,
+                (Pointer)this.CurrentMove["Sprite"], true);
 
             Program.Core.Core_OpenEditor(editor);
         }

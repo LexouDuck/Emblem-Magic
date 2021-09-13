@@ -19,13 +19,13 @@ namespace Magic.Components
 
         public PaletteBox()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            SetStyle(ControlStyles.Opaque, false);
-            SetStyle(ControlStyles.Selectable, true);
-            SetStyle(ControlStyles.UserPaint, true);
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            this.SetStyle(ControlStyles.Opaque, false);
+            this.SetStyle(ControlStyles.Selectable, true);
+            this.SetStyle(ControlStyles.UserPaint, true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
         }
         /// <summary>
         /// Loads the given GBA.Palette onto the control.
@@ -34,7 +34,7 @@ namespace Magic.Components
         {
             if (palette == null)
                 throw new Exception("Palette given is null.");
-            Colors = palette;
+            this.Colors = palette;
             this.Invalidate();
         }
         /// <summary>
@@ -42,7 +42,7 @@ namespace Magic.Components
         /// </summary>
         public void Reset()
         {
-            Colors = null;
+            this.Colors = null;
             this.Invalidate();
         }
 
@@ -55,20 +55,20 @@ namespace Magic.Components
         {
             using (Brush gap = new SolidBrush(SystemColors.Control))
             {
-                e.Graphics.FillRectangle(gap, 0, 0, Width, Height);
+                e.Graphics.FillRectangle(gap, 0, 0, this.Width, this.Height);
             }
 
-            Int32 size = Width / ColorsPerLine;
+            Int32 size = this.Width / this.ColorsPerLine;
             Int32 x, y;
             Int32 length;
-            if (Colors == null)
+            if (this.Colors == null)
             {
-                length = ColorsPerLine * (Height / size);
+                length = this.ColorsPerLine * (this.Height / size);
 
                 for (Int32 i = 0; i < length; i++)
                 {
-                    x = (i % ColorsPerLine) * size;
-                    y = (i / ColorsPerLine) * size;
+                    x = (i % this.ColorsPerLine) * size;
+                    y = (i / this.ColorsPerLine) * size;
                     
                     using (Pen brush = new Pen(SystemColors.AppWorkspace))
                     {
@@ -78,14 +78,14 @@ namespace Magic.Components
             }
             else
             {
-                length = Colors.Count;
+                length = this.Colors.Count;
 
                 for (Int32 i = 0; i < length; i++)
                 {
-                    x = (i % ColorsPerLine) * size;
-                    y = (i / ColorsPerLine) * size;
+                    x = (i % this.ColorsPerLine) * size;
+                    y = (i / this.ColorsPerLine) * size;
 
-                    if (Colors[i].GetAlpha())
+                    if (this.Colors[i].GetAlpha())
                     {
                         using (Pen brush = new Pen(SystemColors.AppWorkspace))
                         {
@@ -94,7 +94,7 @@ namespace Magic.Components
                     }
                     else
                     {
-                        using (Brush brush = new SolidBrush((Color)Colors[i]))
+                        using (Brush brush = new SolidBrush((Color)this.Colors[i]))
                         {
                             e.Graphics.FillRectangle(brush, x + 1, y + 1, size - 2, size - 2);
                         }

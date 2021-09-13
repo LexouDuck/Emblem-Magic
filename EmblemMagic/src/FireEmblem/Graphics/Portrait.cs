@@ -50,7 +50,7 @@ namespace EmblemMagic.FireEmblem
         {
             get
             {
-                return Sprites[MAIN].Colors;
+                return this.Sprites[MAIN].Colors;
             }
         }
 
@@ -64,22 +64,22 @@ namespace EmblemMagic.FireEmblem
         {
             if (palette == null) throw new Exception("Palette given is null.");
             if (face == null) throw new Exception("Portrait main image is null.");
-            
-            Type = PortraitType.Portrait;
-            AddSprite(new Sprite(palette,
+
+            this.Type = PortraitType.Portrait;
+            this.AddSprite(new Sprite(palette,
                 new Tileset(face),
                 new TileMap(Map_Face())), 0, 0);
 
             if (chibi == null)
             {
-                Type = (Core.App.Game is FE6) ?
+                this.Type = (Core.App.Game is FE6) ?
                     PortraitType.Generic :
                     PortraitType.Shop;
-                AddSprite(Sprite.Empty, 0, 0);
+                this.AddSprite(Sprite.Empty, 0, 0);
             }
             else
             {
-                AddSprite(new Sprite(palette,
+                this.AddSprite(new Sprite(palette,
                     new Tileset(chibi),
                     new TileMap(Map_Chibi())), 12 * Tile.SIZE, 2 * Tile.SIZE);
             }
@@ -87,12 +87,12 @@ namespace EmblemMagic.FireEmblem
             if (mouth == null)
             {
                 if (!(Core.App.Game is FE6))
-                    Type = PortraitType.Generic;
-                AddSprite(Sprite.Empty, 0, 0);
+                    this.Type = PortraitType.Generic;
+                this.AddSprite(Sprite.Empty, 0, 0);
             }
             else
             {
-                AddSprite(new Sprite(palette,
+                this.AddSprite(new Sprite(palette,
                     new Tileset(mouth),
                     new TileMap(Map_Mouth())), 0 * Tile.SIZE, 10 * Tile.SIZE);
             }
@@ -105,8 +105,8 @@ namespace EmblemMagic.FireEmblem
         {
             if (card == null) throw new Exception("Portrait main image is null");
 
-            Type = PortraitType.Generic;
-            AddSprite(new Sprite(palette, new Tileset(card), new TileMap(Map_Card())), 0, 0);
+            this.Type = PortraitType.Generic;
+            this.AddSprite(new Sprite(palette, new Tileset(card), new TileMap(Map_Card())), 0, 0);
         }
         /// <summary>
         /// Creates a FireEmblem.Portrait from the given image.
@@ -125,24 +125,24 @@ namespace EmblemMagic.FireEmblem
             if (generic)
             {
                 tileset = new Tileset(); tileset.Parse(image, Map_Card());
-                AddSprite(new Sprite(image.Colors, tileset, new TileMap(Map_Card())), 0, 0);
+                this.AddSprite(new Sprite(image.Colors, tileset, new TileMap(Map_Card())), 0, 0);
             }
             else
             {
                 tileset = new Tileset(); tileset.Parse(image, Map_Face());
-                AddSprite(new Sprite(image.Colors, tileset, new TileMap(Map_Face())), 0, 0);
+                this.AddSprite(new Sprite(image.Colors, tileset, new TileMap(Map_Face())), 0, 0);
 
                 tileset = new Tileset(); tileset.Parse(image, TileMap.Place(Map_Chibi(), 12, 2, WIDTH, HEIGHT));
-                AddSprite(new Sprite(image.Colors, tileset, new TileMap(Map_Chibi())), 12 * 8, 2 * 8);
+                this.AddSprite(new Sprite(image.Colors, tileset, new TileMap(Map_Chibi())), 12 * 8, 2 * 8);
 
                 if (Core.App.Game is FE6)
                 {
-                    AddSprite(Sprite.Empty, 0, 0);
+                    this.AddSprite(Sprite.Empty, 0, 0);
                 }
                 else
                 {
                     tileset = new Tileset(); tileset.Parse(image, TileMap.Place(Map_Mouth(), 0, 10, WIDTH, HEIGHT));
-                    AddSprite(new Sprite(image.Colors, tileset, new TileMap(Map_Mouth())), 0 * 8, 10 * 8);
+                    this.AddSprite(new Sprite(image.Colors, tileset, new TileMap(Map_Mouth())), 0 * 8, 10 * 8);
                 }
             }
         }

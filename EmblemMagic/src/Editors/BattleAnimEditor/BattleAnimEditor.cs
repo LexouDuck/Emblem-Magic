@@ -59,7 +59,7 @@ namespace EmblemMagic.Editors
         {
             get
             {
-                return "Battle Anim 0x" + Util.ByteToHex(Entry_ArrayBox.Value) + " [" + Entry_ArrayBox.Text + "] - ";
+                return "Battle Anim 0x" + Util.ByteToHex(this.Entry_ArrayBox.Value) + " [" + this.Entry_ArrayBox.Text + "] - ";
             }
         }
         /// <summary>
@@ -69,9 +69,9 @@ namespace EmblemMagic.Editors
         {
             get
             {
-                return (View_AllFrames.Checked) ?
-                    Frame_ByteBox.Value :
-                    Frames[CurrentMode][Frame_ByteBox.Value];
+                return (this.View_AllFrames.Checked) ?
+                    this.Frame_ByteBox.Value :
+                    this.Frames[this.CurrentMode][this.Frame_ByteBox.Value];
             }
         }
         /// <summary>
@@ -81,20 +81,20 @@ namespace EmblemMagic.Editors
         {
             get
             {
-                if (View_Layered.Checked)
+                if (this.View_Layered.Checked)
                 {
-                    switch (Anim_Mode_ListBox.SelectedIndex)
+                    switch (this.Anim_Mode_ListBox.SelectedIndex)
                     {
                         case 0: return 0;
                         case 1: return 2;
                         case 2: case 3: case 4: case 5: case 6:
-                            return Anim_Mode_ListBox.SelectedIndex + 2;
+                            return this.Anim_Mode_ListBox.SelectedIndex + 2;
                         case 7: return 10;
                         case 8: return 11;
                         default: return -1;
                     }
                 }
-                else return Anim_Mode_ListBox.SelectedIndex;
+                else return this.Anim_Mode_ListBox.SelectedIndex;
             }
         }
         /// <summary>
@@ -104,9 +104,9 @@ namespace EmblemMagic.Editors
         {
             get
             {
-                return (Palette_Default_Button.Checked) ?
-                    DefaultPalette[Palette_Default_ArrayBox.Value] :
-                    CharacterPalette[Palette_Character_Current_ArrayBox.Value];
+                return (this.Palette_Default_Button.Checked) ?
+                    this.DefaultPalette[this.Palette_Default_ArrayBox.Value] :
+                    this.CharacterPalette[this.Palette_Character_Current_ArrayBox.Value];
             }
         }
         /// <summary>
@@ -116,7 +116,7 @@ namespace EmblemMagic.Editors
         {
             get
             {
-                return "Character Palette 0x" + Palette_Character_ArrayBox.Value + " [" + Palette_Character_ArrayBox.Text + "] - ";
+                return "Character Palette 0x" + this.Palette_Character_ArrayBox.Value + " [" + this.Palette_Character_ArrayBox.Text + "] - ";
             }
         }
         /// <summary>
@@ -124,8 +124,8 @@ namespace EmblemMagic.Editors
         /// </summary>
         String CurrentItemPointerEntry(Int32 word)
         {
-            return "Battle Anim association at " + Item_PointerArrayBox.Value +
-                                            " [" + Item_PointerArrayBox.Text + "], word " + word + " - ";
+            return "Battle Anim association at " + this.Item_PointerArrayBox.Value +
+                                            " [" + this.Item_PointerArrayBox.Text + "], word " + word + " - ";
         }
 
 
@@ -134,95 +134,95 @@ namespace EmblemMagic.Editors
         {
             try
             {
-                InitializeComponent();
+                this.InitializeComponent();
 
-                Entry_ArrayBox.Load("Battle Animation List.txt");
-                Current = new StructFile("Battle Animation Struct.txt");
-                Current.Address = Core.GetPointer("Battle Animation Array");
+                this.Entry_ArrayBox.Load("Battle Animation List.txt");
+                this.Current = new StructFile("Battle Animation Struct.txt");
+                this.Current.Address = Core.GetPointer("Battle Animation Array");
 
-                Item_PointerArrayBox.Load("Battle Animation Pointers.txt");
+                this.Item_PointerArrayBox.Load("Battle Animation Pointers.txt");
 
-                Palette_Default_ArrayBox.Load("Battle Animation Palettes.txt");
-                Palette_Character_ArrayBox.Load("Character Palettes.txt");
-                Palette_Character_Current_ArrayBox.Load("Battle Animation Character Palettes.txt");
-                Palettes = new StructFile("Character Palette Struct.txt");
-                Palettes.Address = Core.GetPointer("Character Palette Array");
+                this.Palette_Default_ArrayBox.Load("Battle Animation Palettes.txt");
+                this.Palette_Character_ArrayBox.Load("Character Palettes.txt");
+                this.Palette_Character_Current_ArrayBox.Load("Battle Animation Character Palettes.txt");
+                this.Palettes = new StructFile("Character Palette Struct.txt");
+                this.Palettes.Address = Core.GetPointer("Character Palette Array");
 
-                AnimCodeBox.KeyDown += new KeyEventHandler(this.TextBox_SelectAll);
-                Anim_Name_TextBox.KeyDown += new KeyEventHandler(this.TextBox_SelectAll);
-                Palette_Character_TextBox.KeyDown += new KeyEventHandler(this.TextBox_SelectAll);
+                this.AnimCodeBox.KeyDown += new KeyEventHandler(this.TextBox_SelectAll);
+                this.Anim_Name_TextBox.KeyDown += new KeyEventHandler(this.TextBox_SelectAll);
+                this.Palette_Character_TextBox.KeyDown += new KeyEventHandler(this.TextBox_SelectAll);
 
-                Anim_Mode_ListBox.DataSource = BattleAnimation.Modes;
-                Anim_Mode_ListBox.SelectedIndexChanged += AnimListBox_SelectedIndexChanged;
+                this.Anim_Mode_ListBox.DataSource = BattleAnimation.Modes;
+                this.Anim_Mode_ListBox.SelectedIndexChanged += this.AnimListBox_SelectedIndexChanged;
 
-                AnimCodeBox.AddSyntax("#.*", SystemColors.ControlDark);
-                AnimCodeBox.AddSyntax(@"(a|b|c|d|f|end)(?=[0-9a-fA-F][0-9a-fA-F])", SystemColors.Highlight, FontStyle.Bold);
-                AnimCodeBox.AddSyntax(@"(end)", SystemColors.Highlight, FontStyle.Bold);
-                AnimCodeBox.AddSyntax(@"(?<=(a|b|c|d|f))([0-9a-fA-F][0-9a-fA-F])", System.Drawing.Color.SlateBlue);
+                this.AnimCodeBox.AddSyntax("#.*", SystemColors.ControlDark);
+                this.AnimCodeBox.AddSyntax(@"(a|b|c|d|f|end)(?=[0-9a-fA-F][0-9a-fA-F])", SystemColors.Highlight, FontStyle.Bold);
+                this.AnimCodeBox.AddSyntax(@"(end)", SystemColors.Highlight, FontStyle.Bold);
+                this.AnimCodeBox.AddSyntax(@"(?<=(a|b|c|d|f))([0-9a-fA-F][0-9a-fA-F])", System.Drawing.Color.SlateBlue);
             }
             catch (Exception ex)
             {
                 UI.ShowError("Could not properly open the " + this.Text, ex);
 
-                Core_CloseEditor(this, null);
+                this.Core_CloseEditor(this, null);
             }
         }
 
         override public void Core_SetEntry(UInt32 entry)
         {
-            Item_PointerArrayBox.Value = new Pointer(entry);
+            this.Item_PointerArrayBox.Value = new Pointer(entry);
             if (entry != 0)
-                Entry_ArrayBox.Value = ((ByteArrayBox)Item_LayoutPanel.Controls[0].Controls[1]).Value;
+                this.Entry_ArrayBox.Value = ((ByteArrayBox)this.Item_LayoutPanel.Controls[0].Controls[1]).Value;
         }
         override public void Core_OnOpen()
         {
-            Entry_ArrayBox.ValueChanged -= EntryArrayBox_ValueChanged;
-            Entry_ArrayBox.Value = 1;
-            Entry_ArrayBox.ValueChanged += EntryArrayBox_ValueChanged;
+            this.Entry_ArrayBox.ValueChanged -= this.EntryArrayBox_ValueChanged;
+            this.Entry_ArrayBox.Value = 1;
+            this.Entry_ArrayBox.ValueChanged += this.EntryArrayBox_ValueChanged;
 
-            Palette_Character_ArrayBox.ValueChanged -= Palette_Character_ArrayBox_ValueChanged;
-            Palette_Character_ArrayBox.Value = 1;
-            Palette_Character_ArrayBox.ValueChanged += Palette_Character_ArrayBox_ValueChanged;
+            this.Palette_Character_ArrayBox.ValueChanged -= this.Palette_Character_ArrayBox_ValueChanged;
+            this.Palette_Character_ArrayBox.Value = 1;
+            this.Palette_Character_ArrayBox.ValueChanged += this.Palette_Character_ArrayBox_ValueChanged;
 
-            Core_Update();
+            this.Core_Update();
         }
         override public void Core_Update()
         {
-            Current.EntryIndex = Entry_ArrayBox.Value - 1;
-            Palettes.EntryIndex = Palette_Character_ArrayBox.Value - 1;
+            this.Current.EntryIndex = this.Entry_ArrayBox.Value - 1;
+            this.Palettes.EntryIndex = this.Palette_Character_ArrayBox.Value - 1;
 
-            Core_LoadAnimation();
-            Core_LoadPalettes();
-            Core_LoadAnimCode();
-            Core_LoadValues();
-            Core_LoadPaletteValues();
-            Core_LoadItemValues();
+            this.Core_LoadAnimation();
+            this.Core_LoadPalettes();
+            this.Core_LoadAnimCode();
+            this.Core_LoadValues();
+            this.Core_LoadPaletteValues();
+            this.Core_LoadItemValues();
 
-            Core_UpdatePalettes();
-            Core_UpdateImageBox();
+            this.Core_UpdatePalettes();
+            this.Core_UpdateImageBox();
         }
 
         void Core_LoadAnimation()
         {
             try
             {
-                Byte[] animdata = Core.ReadData((Pointer)Current["AnimData"], 0);
-                Byte[] oam_L = Core.ReadData((Pointer)Current["OAM_Left"], 0);
-                Byte[] oam_R = Core.ReadData((Pointer)Current["OAM_Right"], 0);
+                Byte[] animdata = Core.ReadData((Pointer)this.Current["AnimData"], 0);
+                Byte[] oam_L = Core.ReadData((Pointer)this.Current["OAM_Left"], 0);
+                Byte[] oam_R = Core.ReadData((Pointer)this.Current["OAM_Right"], 0);
                 UInt32[] sections = new UInt32[12];
                 Byte[] buffer;
                 for (Int32 i = 0; i < sections.Length; i++)
                 {
-                    buffer = Core.ReadData((Pointer)Current["Sections"] + i * 4, 4);
+                    buffer = Core.ReadData((Pointer)this.Current["Sections"] + i * 4, 4);
                     sections[i] = Util.BytesToUInt32(buffer, true);
                 }
 
-                CurrentAnim = new BattleAnimation(sections, animdata, oam_L, oam_R);
+                this.CurrentAnim = new BattleAnimation(sections, animdata, oam_L, oam_R);
             }
             catch (Exception ex)
             {
                 UI.ShowError("Could not load the animation.", ex);
-                CurrentAnim = null;
+                this.CurrentAnim = null;
             }
         }
         void Core_LoadPalettes()
@@ -235,22 +235,22 @@ namespace EmblemMagic.Editors
                 Int32 paletteAmount;
 
                 paletteAmount = 4;
-                address = (Pointer)Current["Palettes"];
+                address = (Pointer)this.Current["Palettes"];
                 is_uncompressed = (address > 0x80000000);
                 if (address >= 0x80000000)
                     address -= 0x80000000;
                 palettes = Core.ReadPalette(address, (is_uncompressed ? Palette.LENGTH : 0) * paletteAmount);
-                DefaultPalette = Palette.Split(Palette.Opacify(palettes), paletteAmount);
+                this.DefaultPalette = Palette.Split(Palette.Opacify(palettes), paletteAmount);
 
                 paletteAmount = 5;
-                address = (Pointer)Palettes["Address"];
+                address = (Pointer)this.Palettes["Address"];
                 is_uncompressed = (address > 0x80000000);
                 if (address >= 0x80000000)
                     address -= 0x80000000;
                 palettes = Core.ReadPalette(address, (is_uncompressed ? Palette.LENGTH : 0) * paletteAmount);
-                CharacterPalette = Palette.Split(Palette.Opacify(palettes), paletteAmount);
+                this.CharacterPalette = Palette.Split(Palette.Opacify(palettes), paletteAmount);
 
-                Palette_PaletteBox.Load(CurrentPalette);
+                this.Palette_PaletteBox.Load(this.CurrentPalette);
             }
             catch (Exception ex)
             {
@@ -259,39 +259,39 @@ namespace EmblemMagic.Editors
         }
         void Core_LoadAnimCode()
         {
-            if (CurrentAnim == null)
+            if (this.CurrentAnim == null)
                 return;
             List<Tuple<UInt32, OAM>> not_used = null; Int32[] not_used_either = null;
             String result = BattleAnimation.GetAnimationCode(
-                    CurrentAnim.AnimCode,
-                    CurrentMode,
-                    View_Layered.Checked,
-                    View_AllAnimCode.Checked,
+                    this.CurrentAnim.AnimCode,
+                    this.CurrentMode,
+                    this.View_Layered.Checked,
+                    this.View_AllAnimCode.Checked,
                     ref not_used, ref not_used_either);
 
-            AnimCodeBox.TextChanged -= AnimCode_TextBox_TextChanged;
-            AnimCodeBox.Text = result;
-            AnimCodeBox.TextChanged -= AnimCode_TextBox_TextChanged;
+            this.AnimCodeBox.TextChanged -= this.AnimCode_TextBox_TextChanged;
+            this.AnimCodeBox.Text = result;
+            this.AnimCodeBox.TextChanged -= this.AnimCode_TextBox_TextChanged;
 
             String[] animcode;
-            Frames = new List<Byte>[BattleAnimation.MODES];
-            Durations = new List<Int32>[BattleAnimation.MODES];
-            for (Int32 mode = 0; mode < Frames.Length; mode++)
+            this.Frames = new List<Byte>[BattleAnimation.MODES];
+            this.Durations = new List<Int32>[BattleAnimation.MODES];
+            for (Int32 mode = 0; mode < this.Frames.Length; mode++)
             {
-                Frames[mode] = new List<Byte>();
-                Durations[mode] = new List<Int32>();
-                animcode = CurrentAnim.AnimCode[mode];
+                this.Frames[mode] = new List<Byte>();
+                this.Durations[mode] = new List<Int32>();
+                animcode = this.CurrentAnim.AnimCode[mode];
 
                 for (Int32 i = 0; i < animcode.Length; i++)
                 {
                     if (animcode[i][0] >= '0' && animcode[i][0] <= '9')
                     {
-                        Durations[mode].Add(Int32.Parse(animcode[i].Substring(0, animcode[i].IndexOf(' '))));
+                        this.Durations[mode].Add(Int32.Parse(animcode[i].Substring(0, animcode[i].IndexOf(' '))));
                         for (Int32 j = 0; j < animcode[i].Length; j++)
                         {
                             if (animcode[i][j] == 'f' || animcode[i][j] == 'F')
                             {
-                                Frames[mode].Add(Util.HexToByte(animcode[i].Substring(j + 1, 2)));
+                                this.Frames[mode].Add(Util.HexToByte(animcode[i].Substring(j + 1, 2)));
                                 break;
                             }
                         }
@@ -299,84 +299,84 @@ namespace EmblemMagic.Editors
                 }
             }   // Create the frame array for all the animation modes of the current anim
 
-            if (View_AllFrames.Checked)
-                 Frame_ByteBox.Maximum = Math.Max(0, CurrentAnim.Frames.Length - 1);
-            else Frame_ByteBox.Maximum = Math.Max(0, Frames[CurrentMode].Count - 1);
+            if (this.View_AllFrames.Checked)
+                this.Frame_ByteBox.Maximum = Math.Max(0, this.CurrentAnim.Frames.Length - 1);
+            else this.Frame_ByteBox.Maximum = Math.Max(0, this.Frames[this.CurrentMode].Count - 1);
         }
         void Core_LoadValues()
         {
-            Anim_Name_TextBox.TextChanged -= Anim_NameTextBox_TextChanged;
-            Sections_PointerBox.ValueChanged -= SectionsPointerBox_ValueChanged;
-            AnimData_PointerBox.ValueChanged -= AnimDataPointerBox_ValueChanged;
-            OAM_R_PointerBox.ValueChanged -= OAM_R_PointerBox_ValueChanged;
-            OAM_L_PointerBox.ValueChanged -= OAM_L_PointerBox_ValueChanged;
-            Palette_Default_PointerBox.ValueChanged -= Palette_Default_PointerBox_ValueChanged;
+            this.Anim_Name_TextBox.TextChanged -= this.Anim_NameTextBox_TextChanged;
+            this.Sections_PointerBox.ValueChanged -= this.SectionsPointerBox_ValueChanged;
+            this.AnimData_PointerBox.ValueChanged -= this.AnimDataPointerBox_ValueChanged;
+            this.OAM_R_PointerBox.ValueChanged -= this.OAM_R_PointerBox_ValueChanged;
+            this.OAM_L_PointerBox.ValueChanged -= this.OAM_L_PointerBox_ValueChanged;
+            this.Palette_Default_PointerBox.ValueChanged -= this.Palette_Default_PointerBox_ValueChanged;
 
             try
             {
-                Anim_Name_TextBox.Text = (String)Current["Name"];
-                Sections_PointerBox.Value        = (Pointer)Current["Sections"];
-                AnimData_PointerBox.Value        = (Pointer)Current["AnimData"];
-                OAM_R_PointerBox.Value           = (Pointer)Current["OAM_Right"];
-                OAM_L_PointerBox.Value           = (Pointer)Current["OAM_Left"];
-                Palette_Default_PointerBox.Value = (Pointer)Current["Palettes"];
+                this.Anim_Name_TextBox.Text = (String)this.Current["Name"];
+                this.Sections_PointerBox.Value        = (Pointer)this.Current["Sections"];
+                this.AnimData_PointerBox.Value        = (Pointer)this.Current["AnimData"];
+                this.OAM_R_PointerBox.Value           = (Pointer)this.Current["OAM_Right"];
+                this.OAM_L_PointerBox.Value           = (Pointer)this.Current["OAM_Left"];
+                this.Palette_Default_PointerBox.Value = (Pointer)this.Current["Palettes"];
             }
             catch (Exception ex)
             {
                 UI.ShowError("There has been an error while trying to load the values.", ex);
 
-                Anim_Name_TextBox.Text = "";
-                Sections_PointerBox.Value = new Pointer();
-                AnimData_PointerBox.Value = new Pointer();
-                OAM_L_PointerBox.Value = new Pointer();
-                OAM_R_PointerBox.Value = new Pointer();
-                Palette_Default_PointerBox.Value = new Pointer();
+                this.Anim_Name_TextBox.Text = "";
+                this.Sections_PointerBox.Value = new Pointer();
+                this.AnimData_PointerBox.Value = new Pointer();
+                this.OAM_L_PointerBox.Value = new Pointer();
+                this.OAM_R_PointerBox.Value = new Pointer();
+                this.Palette_Default_PointerBox.Value = new Pointer();
             }
 
-            Anim_Name_TextBox.TextChanged += Anim_NameTextBox_TextChanged;
-            Sections_PointerBox.ValueChanged += SectionsPointerBox_ValueChanged;
-            AnimData_PointerBox.ValueChanged += AnimDataPointerBox_ValueChanged;
-            OAM_R_PointerBox.ValueChanged += OAM_R_PointerBox_ValueChanged;
-            OAM_L_PointerBox.ValueChanged += OAM_L_PointerBox_ValueChanged;
-            Palette_Default_PointerBox.ValueChanged += Palette_Default_PointerBox_ValueChanged;
+            this.Anim_Name_TextBox.TextChanged += this.Anim_NameTextBox_TextChanged;
+            this.Sections_PointerBox.ValueChanged += this.SectionsPointerBox_ValueChanged;
+            this.AnimData_PointerBox.ValueChanged += this.AnimDataPointerBox_ValueChanged;
+            this.OAM_R_PointerBox.ValueChanged += this.OAM_R_PointerBox_ValueChanged;
+            this.OAM_L_PointerBox.ValueChanged += this.OAM_L_PointerBox_ValueChanged;
+            this.Palette_Default_PointerBox.ValueChanged += this.Palette_Default_PointerBox_ValueChanged;
         }
         void Core_LoadPaletteValues()
         {
-            Palette_Character_PointerBox.ValueChanged -= Palette_Character_PointerBox_ValueChanged;
-            Palette_Character_TextBox.TextChanged -= Palette_Character_TextBox_TextChanged;
+            this.Palette_Character_PointerBox.ValueChanged -= this.Palette_Character_PointerBox_ValueChanged;
+            this.Palette_Character_TextBox.TextChanged -= this.Palette_Character_TextBox_TextChanged;
 
             try
             {
-                Pointer address = (Pointer)Palettes["Address"];
+                Pointer address = (Pointer)this.Palettes["Address"];
                 if (address >= 0x80000000)
                     address -= 0x80000000;
-                Palette_Character_PointerBox.Value = address;
-                Palette_Character_TextBox.Text = (String)Palettes["Name"];
+                this.Palette_Character_PointerBox.Value = address;
+                this.Palette_Character_TextBox.Text = (String)this.Palettes["Name"];
             }
             catch (Exception ex)
             {
                 UI.ShowError("There has been an error while loading the character palette values.", ex);
 
-                Palette_Character_PointerBox.Value = new Pointer();
-                Palette_Character_TextBox.Text = "";
+                this.Palette_Character_PointerBox.Value = new Pointer();
+                this.Palette_Character_TextBox.Text = "";
             }
 
-            Palette_Character_PointerBox.ValueChanged += Palette_Character_PointerBox_ValueChanged;
-            Palette_Character_TextBox.TextChanged += Palette_Character_TextBox_TextChanged;
+            this.Palette_Character_PointerBox.ValueChanged += this.Palette_Character_PointerBox_ValueChanged;
+            this.Palette_Character_TextBox.TextChanged += this.Palette_Character_TextBox_TextChanged;
         }
         void Core_LoadItemValues()
         {
-            for (Int32 i = 0; i < Item_LayoutPanel.Controls.Count; i++)
+            for (Int32 i = 0; i < this.Item_LayoutPanel.Controls.Count; i++)
             {
-                for (Int32 j = 0; j < Item_LayoutPanel.Controls[i].Controls.Count; j++)
+                for (Int32 j = 0; j < this.Item_LayoutPanel.Controls[i].Controls.Count; j++)
                 {
-                    Item_LayoutPanel.Controls[i].Controls[j].Dispose();
+                    this.Item_LayoutPanel.Controls[i].Controls[j].Dispose();
                 }
-                Item_LayoutPanel.Controls[i].Dispose();
+                this.Item_LayoutPanel.Controls[i].Dispose();
             }
-            Item_LayoutPanel.Controls.Clear();
+            this.Item_LayoutPanel.Controls.Clear();
 
-            Pointer address = Item_PointerArrayBox.Value;
+            Pointer address = this.Item_PointerArrayBox.Value;
             if (address != 0)
             {
                 List<UInt32> anims = new List<UInt32>();
@@ -393,7 +393,7 @@ namespace EmblemMagic.Editors
                 Int32 index = 0;
                 Int32 length = anims.Count;
                 GroupBox[] groupboxes = new GroupBox[length];
-                Item_Controls = new Control[length * 8];
+                this.Item_Controls = new Control[length * 8];
                 try
                 {
                     StructFile word = new StructFile("Battle Animation Association.txt");
@@ -411,10 +411,10 @@ namespace EmblemMagic.Editors
                             Location = new Point(2, 150 * i),
                             Size = new Size(235, 140),
                         };
-                        Item_LayoutPanel.Controls.Add(groupboxes[i]);
+                        this.Item_LayoutPanel.Controls.Add(groupboxes[i]);
 
                         Core_LoadItemControl(groupboxes[i], i, ref index,
-                            "Anim", word["Anim"], word.GetAddress(i, "Anim"), Entry_ArrayBox.File);
+                            "Anim", word["Anim"], word.GetAddress(i, "Anim"), this.Entry_ArrayBox.File);
                         Core_LoadItemControl(groupboxes[i], i, ref index,
                             "Type", word["Type"], word.GetAddress(i, "Type"), animtype, true, word["Bool"], 0x01);
                         Core_LoadItemControl(groupboxes[i], i, ref index,
@@ -426,7 +426,7 @@ namespace EmblemMagic.Editors
                 catch (Exception ex)
                 {
                     UI.ShowError("There has been error while trying to load the item association values." +
-                         "\r\n\r\n" + "Error at word " + (index / 8) + ", control is " + Item_Controls[index].Name, ex);
+                         "\r\n\r\n" + "Error at word " + (index / 8) + ", control is " + this.Item_Controls[index].Name, ex);
                 }
             }
         }
@@ -457,26 +457,26 @@ namespace EmblemMagic.Editors
                     Location = new Point(4, 20 + 30 * control_index),
                     Size = new Size(60, 20),
                 };
-            Item_Controls[index++] = label;
-            Item_Controls[index] = new ByteArrayBox()
+            this.Item_Controls[index++] = label;
+            this.Item_Controls[index] = new ByteArrayBox()
             {
                 Name = name.Substring(0, 4) + "_" + num,
                 Location = new Point(70, 20 + 30 * control_index),
                 Size = new Size(160, 20),
             };
             if (entrylist != null)
-                ((ByteArrayBox)Item_Controls[index]).Load(entrylist);
+                ((ByteArrayBox)this.Item_Controls[index]).Load(entrylist);
             box.Controls.Add(label);
-            box.Controls.Add(Item_Controls[index]);
-            ((ByteArrayBox)Item_Controls[index]).Name = name.Substring(0, 4) + "_" + num;
+            box.Controls.Add(this.Item_Controls[index]);
+            ((ByteArrayBox)this.Item_Controls[index]).Name = name.Substring(0, 4) + "_" + num;
             if (radiobutton)
             {
                 if (boolvalue == radiovalue)
-                    ((ByteArrayBox)Item_Controls[index]).Value = value;
+                    ((ByteArrayBox)this.Item_Controls[index]).Value = value;
                 else
                 {
-                    ((ByteArrayBox)Item_Controls[index]).Value = 0x00;
-                    ((ByteArrayBox)Item_Controls[index]).Enabled = false;
+                    ((ByteArrayBox)this.Item_Controls[index]).Value = 0x00;
+                    ((ByteArrayBox)this.Item_Controls[index]).Enabled = false;
                 }
                 Byte notradiovalue = (radiovalue == 0x00) ? (Byte)0x01 : (Byte)0x00;
                 ((RadioButton)label).CheckedChanged += delegate (Object sender, EventArgs e)
@@ -485,28 +485,28 @@ namespace EmblemMagic.Editors
                     Boolean radiochecked = ((RadioButton)sender).Checked;
                     if (((RadioButton)sender).Name.Substring(0, 4) == "Type")
                     {
-                        Item_Controls[word * 8 + 3].Enabled = radiochecked;
-                        Item_Controls[word * 8 + 5].Enabled = !radiochecked;
+                        this.Item_Controls[word * 8 + 3].Enabled = radiochecked;
+                        this.Item_Controls[word * 8 + 5].Enabled = !radiochecked;
                     }
                     else
                     {
-                        Item_Controls[word * 8 + 3].Enabled = !radiochecked;
-                        Item_Controls[word * 8 + 5].Enabled = radiochecked;
+                        this.Item_Controls[word * 8 + 3].Enabled = !radiochecked;
+                        this.Item_Controls[word * 8 + 5].Enabled = radiochecked;
                     }
                     Core.WriteByte(this,
                         address + 1,
                         (Byte)(((RadioButton)sender).Checked ? radiovalue : notradiovalue),
-                        CurrentItemPointerEntry(num) + "Bool " + num + " changed");
+                        this.CurrentItemPointerEntry(num) + "Bool " + num + " changed");
                 };
             }
-            else ((ByteArrayBox)Item_Controls[index]).Value = value;
+            else ((ByteArrayBox)this.Item_Controls[index]).Value = value;
 
-            ((ByteArrayBox)Item_Controls[index]).ValueChanged += delegate (Object sender, EventArgs e)
+            ((ByteArrayBox)this.Item_Controls[index]).ValueChanged += delegate (Object sender, EventArgs e)
             {
                 Core.WriteByte(this,
                     address,
                     ((ByteBox)sender).Value,
-                    CurrentItemPointerEntry(num) + name + " " + num + " changed");
+                    this.CurrentItemPointerEntry(num) + name + " " + num + " changed");
             };
             index++;
         }
@@ -515,39 +515,39 @@ namespace EmblemMagic.Editors
         {
             try
             {
-                CurrentAnim.ShowFrame(CurrentPalette, CurrentFrame, OAM_L_Button.Checked);
+                this.CurrentAnim.ShowFrame(this.CurrentPalette, this.CurrentFrame, this.OAM_L_Button.Checked);
 
-                if (!View_AllFrames.Checked && View_Layered.Checked &&
-                    (CurrentMode == 0 || CurrentMode == 2 || CurrentMode == 8))
+                if (!this.View_AllFrames.Checked && this.View_Layered.Checked &&
+                    (this.CurrentMode == 0 || this.CurrentMode == 2 || this.CurrentMode == 8))
                 {
-                    BattleAnimFrame frame = CurrentAnim.Frames[Frames[CurrentMode + 1][Frame_ByteBox.Value]];
+                    BattleAnimFrame frame = this.CurrentAnim.Frames[this.Frames[this.CurrentMode + 1][this.Frame_ByteBox.Value]];
 
-                    CurrentAnim.AddSprite(CurrentPalette,
-                        CurrentAnim.Tilesets[frame.TilesetIndex],
-                        OAM_L_Button.Checked ? frame.OAM_Data_L : frame.OAM_Data_R,
-                        OAM_L_Button.Checked ? BattleAnimation.SCREEN_OFFSET_X_L : BattleAnimation.SCREEN_OFFSET_X_R,
+                    this.CurrentAnim.AddSprite(this.CurrentPalette,
+                        this.CurrentAnim.Tilesets[frame.TilesetIndex],
+                        this.OAM_L_Button.Checked ? frame.OAM_Data_L : frame.OAM_Data_R,
+                        this.OAM_L_Button.Checked ? BattleAnimation.SCREEN_OFFSET_X_L : BattleAnimation.SCREEN_OFFSET_X_R,
                         BattleAnimation.SCREEN_OFFSET_Y);
                 }
-                Anim_ImageBox.Load(CurrentAnim);
+                this.Anim_ImageBox.Load(this.CurrentAnim);
             }
             catch (Exception ex)
             {
                 UI.ShowError("There has been an error while trying to show the animation frame.", ex);
 
-                Anim_ImageBox.Reset();
+                this.Anim_ImageBox.Reset();
             }
         }
         void Core_UpdatePalettes()
         {
             try
             {
-                Palette_PaletteBox.Load(CurrentPalette);
+                this.Palette_PaletteBox.Load(this.CurrentPalette);
             }
             catch (Exception ex)
             {
                 UI.ShowError("There has been an error while updating the displayed palette.", ex);
 
-                Palette_PaletteBox.Reset();
+                this.Palette_PaletteBox.Reset();
             }
         }
 
@@ -630,7 +630,7 @@ namespace EmblemMagic.Editors
                 String path = Path.GetDirectoryName(filepath) + "\\";
                 String file = Path.GetFileNameWithoutExtension(filepath);
 
-                List<Pointer> pointers = BattleAnimation.GetTilesetPointers(Core.ReadData((Pointer)Current["AnimData"], 0));
+                List<Pointer> pointers = BattleAnimation.GetTilesetPointers(Core.ReadData((Pointer)this.Current["AnimData"], 0));
 
                 Byte[] animdata = File.ReadAllBytes(filepath);
                 Byte[] sections = BattleAnimation.GetSections(animdata);
@@ -718,46 +718,46 @@ namespace EmblemMagic.Editors
                 Boolean cancel = Prompt.ShowRepointDialog(this, "Repoint Animation",
                     "The animation to insert has several parts that must be written.\n" +
                     "Some of these may need to be repointed so as to not overwrite each other.",
-                    CurrentEntry, new Tuple<String, Pointer, Int32>[5] {
-                        Tuple.Create("Anim Data Sections", (Pointer)Current["Sections"], sections.Length),
-                        Tuple.Create("Anim Data",          (Pointer)Current["AnimData"], animdata.Length),
-                        Tuple.Create("Right-side OAM",     (Pointer)Current["OAM_Right"],oam_data.Item2.Length),
-                        Tuple.Create("Left-side OAM",      (Pointer)Current["OAM_Left"], oam_data.Item1.Length),
-                        Tuple.Create("Palettes",           (Pointer)Current["Palettes"], palettes.Length)},
+                    this.CurrentEntry, new Tuple<String, Pointer, Int32>[5] {
+                        Tuple.Create("Anim Data Sections", (Pointer)this.Current["Sections"], sections.Length),
+                        Tuple.Create("Anim Data",          (Pointer)this.Current["AnimData"], animdata.Length),
+                        Tuple.Create("Right-side OAM",     (Pointer)this.Current["OAM_Right"],oam_data.Item2.Length),
+                        Tuple.Create("Left-side OAM",      (Pointer)this.Current["OAM_Left"], oam_data.Item1.Length),
+                        Tuple.Create("Palettes",           (Pointer)this.Current["Palettes"], palettes.Length)},
                     new Pointer[5] {
-                        Current.GetAddress(Current.EntryIndex, "Sections"),
-                        Current.GetAddress(Current.EntryIndex, "AnimData"),
-                        Current.GetAddress(Current.EntryIndex, "OAM_Right"),
-                        Current.GetAddress(Current.EntryIndex, "OAM_Left"),
-                        Current.GetAddress(Current.EntryIndex, "Palettes")});
+                        this.Current.GetAddress(this.Current.EntryIndex, "Sections"),
+                        this.Current.GetAddress(this.Current.EntryIndex, "AnimData"),
+                        this.Current.GetAddress(this.Current.EntryIndex, "OAM_Right"),
+                        this.Current.GetAddress(this.Current.EntryIndex, "OAM_Left"),
+                        this.Current.GetAddress(this.Current.EntryIndex, "Palettes")});
                 if (cancel) return;
 
                 for (Int32 i = 0; i < tilesets.Count; i++)
                 {
                     Core.WriteData(this,
                         pointers[i], graphics[i],
-                        CurrentEntry + "Tileset " + i + " changed");
+                        this.CurrentEntry + "Tileset " + i + " changed");
                 }
 
                 Core.WriteData(this,
-                    (Pointer)Current["Sections"], sections,
-                    CurrentEntry + "Anim Data Sections changed");
+                    (Pointer)this.Current["Sections"], sections,
+                    this.CurrentEntry + "Anim Data Sections changed");
 
                 Core.WriteData(this,
-                    (Pointer)Current["AnimData"], animdata,
-                    CurrentEntry + "Anim Data changed");
+                    (Pointer)this.Current["AnimData"], animdata,
+                    this.CurrentEntry + "Anim Data changed");
 
                 Core.WriteData(this,
-                    (Pointer)Current["OAM_Right"], oam_data.Item2,
-                    CurrentEntry + "Right-side OAM changed");
+                    (Pointer)this.Current["OAM_Right"], oam_data.Item2,
+                    this.CurrentEntry + "Right-side OAM changed");
 
                 Core.WriteData(this,
-                    (Pointer)Current["OAM_Left"], oam_data.Item1,
-                    CurrentEntry + "Left-side OAM changed");
+                    (Pointer)this.Current["OAM_Left"], oam_data.Item1,
+                    this.CurrentEntry + "Left-side OAM changed");
 
                 Core.WriteData(this,
-                    (Pointer)Current["Palettes"], palettes,
-                    CurrentEntry + "Palettes changed");
+                    (Pointer)this.Current["Palettes"], palettes,
+                    this.CurrentEntry + "Palettes changed");
             }
             catch (Exception ex)
             {
@@ -777,17 +777,17 @@ namespace EmblemMagic.Editors
                 String file = Path.GetFileNameWithoutExtension(filepath);
 
                 List<Tuple<UInt32, OAM>> affines = new List<Tuple<UInt32, OAM>>();
-                Int32[] duplicates = new Int32[CurrentAnim.Frames.Length];
+                Int32[] duplicates = new Int32[this.CurrentAnim.Frames.Length];
                 for (Int32 i = 0; i < duplicates.Length; i++) duplicates[i] = -1;
                 String animcode = BattleAnimation.GetAnimationCode(
-                    CurrentAnim.AnimCode,
-                    CurrentMode, true, true,
+                    this.CurrentAnim.AnimCode,
+                    this.CurrentMode, true, true,
                     ref affines, ref duplicates,
-                    file, CurrentAnim.Frames);
+                    file, this.CurrentAnim.Frames);
                 File.WriteAllText(path + file + ".txt", animcode);
 
-                Byte[] palette = CurrentPalette.ToBytes(false);
-                Palette[] palettes = (Palette_Default_Button.Checked) ? DefaultPalette : CharacterPalette;
+                Byte[] palette = this.CurrentPalette.ToBytes(false);
+                Palette[] palettes = (this.Palette_Default_Button.Checked) ? this.DefaultPalette : this.CharacterPalette;
                 Int32 width = 16;
                 Int32 height = 4;
                 Core.SaveImage(path + "palette",
@@ -803,7 +803,7 @@ namespace EmblemMagic.Editors
                 for (Int32 i = 0; i < affines.Count; i++)
                 {
                     size = affines[i].Item2.GetDimensions();
-                    GBA.Image tileset = CurrentAnim.Tilesets[affines[i].Item1].ToImage(32, 8, palette);
+                    GBA.Image tileset = this.CurrentAnim.Tilesets[affines[i].Item1].ToImage(32, 8, palette);
                     Int32 offsetX = affines[i].Item2.SheetX * Tile.SIZE;
                     Int32 offsetY = affines[i].Item2.SheetY * Tile.SIZE;
                     Core.SaveImage(path + file + "_affine_" + i,
@@ -816,28 +816,28 @@ namespace EmblemMagic.Editors
                         });
                 }
                 
-                for (Byte i = 0; i < CurrentAnim.Frames.Length; i++)
+                for (Byte i = 0; i < this.CurrentAnim.Frames.Length; i++)
                 {
-                    if (CurrentAnim.Frames[i] == null)
+                    if (this.CurrentAnim.Frames[i] == null)
                         continue;
                     if (duplicates[i] != -1)
                         continue;
-                    CurrentAnim.Clear();
-                    CurrentAnim.AddSprite(CurrentPalette,
-                        CurrentAnim.Tilesets[CurrentAnim.Frames[i].TilesetIndex],
-                        CurrentAnim.Frames[i].OAM_Data_R,
+                    this.CurrentAnim.Clear();
+                    this.CurrentAnim.AddSprite(this.CurrentPalette,
+                        this.CurrentAnim.Tilesets[this.CurrentAnim.Frames[i].TilesetIndex],
+                        this.CurrentAnim.Frames[i].OAM_Data_R,
                         BattleAnimation.SCREEN_OFFSET_X_R,
                         BattleAnimation.SCREEN_OFFSET_Y,
                         false);
-                    if (CurrentAnim.Count > 0)
+                    if (this.CurrentAnim.Count > 0)
                     {
                         Core.SaveImage(path + file + "_" + i,
-                            CurrentAnim.Width,
-                            CurrentAnim.Height,
-                            new Palette[1] { CurrentPalette },
+                            this.CurrentAnim.Width,
+                            this.CurrentAnim.Height,
+                            new Palette[1] { this.CurrentPalette },
                             delegate (Int32 x, Int32 y)
                             {
-                                return (Byte)CurrentAnim[x, y];
+                                return (Byte)this.CurrentAnim[x, y];
                             });
                     }
                 }
@@ -846,7 +846,7 @@ namespace EmblemMagic.Editors
             {
                 UI.ShowError("Could not save battle animation to folder.", ex);
             }
-            Core_Update();
+            this.Core_Update();
         }
         /// <summary>
         /// Exports the current animation into FEA (with .oam, .pal and the sheets)
@@ -855,15 +855,15 @@ namespace EmblemMagic.Editors
         {
             try
             {
-                Byte[] fea = Core.ReadData((Pointer)Current["AnimData"], 0);
-                Byte[] oam = Core.ReadData((Pointer)Current["OAM_Right"], 0);
-                Byte[] pal = Core.ReadData((Pointer)Current["Palettes"], 0);
+                Byte[] fea = Core.ReadData((Pointer)this.Current["AnimData"], 0);
+                Byte[] oam = Core.ReadData((Pointer)this.Current["OAM_Right"], 0);
+                Byte[] pal = Core.ReadData((Pointer)this.Current["Palettes"], 0);
             
-                GBA.Image[] sheets = new GBA.Image[CurrentAnim.Tilesets.Length];
-                Byte[] palette = DefaultPalette[0].ToBytes(false);
+                GBA.Image[] sheets = new GBA.Image[this.CurrentAnim.Tilesets.Length];
+                Byte[] palette = this.DefaultPalette[0].ToBytes(false);
                 for (Int32 i = 0; i < sheets.Length; i++)
                 {
-                    sheets[i] = CurrentAnim.Tilesets[i].ToImage(32, 8, palette);
+                    sheets[i] = this.CurrentAnim.Tilesets[i].ToImage(32, 8, palette);
                 }
 
                 fea = BattleAnimation.ExportAnimationData(fea, BattleAnimation.GetTilesetPointers(fea));
@@ -905,15 +905,15 @@ namespace EmblemMagic.Editors
                 // Header:
                 gif.AddRange(new Byte[3] { 0x47, 0x49, 0x46 }); // "GIF" - File type
                 gif.AddRange(new Byte[3] { 0x38, 0x39, 0x61 }); // "89a" - File version
-                gif.AddRange(Util.UInt16ToBytes((UInt16)CurrentAnim.Width, true)); // Logical screen width
-                gif.AddRange(Util.UInt16ToBytes((UInt16)CurrentAnim.Height, true)); // Logical screen height
+                gif.AddRange(Util.UInt16ToBytes((UInt16)this.CurrentAnim.Width, true)); // Logical screen width
+                gif.AddRange(Util.UInt16ToBytes((UInt16)this.CurrentAnim.Height, true)); // Logical screen height
                 gif.Add(0xB3); // Packed field - 0xB3 indicates a 16-color global palette
                 gif.Add(0x00); // Background Color Index in the color table
                 gif.Add(0x00); // Pixel Aspect Ratio - not really used apparently
                 // Global Color Table:
                 for (Int32 i = 0; i < Palette.MAX; i++)
                 {   // set the Global Color Table, 3 bytes per color
-                    UInt32 color = CurrentPalette[i].To32bit();
+                    UInt32 color = this.CurrentPalette[i].To32bit();
                     gif.Add((Byte)((color >> 16) & 0xFF)); // R channel
                     gif.Add((Byte)((color >> 8) & 0xFF));  // G channel
                     gif.Add((Byte)(color & 0xFF));         // B channel
@@ -929,37 +929,37 @@ namespace EmblemMagic.Editors
                 gif.Add(0x00); // Block Terminator (0x00)
                 List<Int32> wait_frames = new List<Int32>();
                 Int32 wait_frame = 0;
-                for (Int32 i = 0; i < CurrentAnim.AnimCode[mode].Length; i++)
+                for (Int32 i = 0; i < this.CurrentAnim.AnimCode[mode].Length; i++)
                 {
-                    if (CurrentAnim.AnimCode[mode][i].StartsWith("c01") || // Wait for HP deplete
-                        CurrentAnim.AnimCode[mode][i].StartsWith("c13"))   // Wait for Handaxe return
+                    if (this.CurrentAnim.AnimCode[mode][i].StartsWith("c01") || // Wait for HP deplete
+                        this.CurrentAnim.AnimCode[mode][i].StartsWith("c13"))   // Wait for Handaxe return
                     {
                         wait_frames.Add(wait_frame - 1);
                     }
-                    else if (CurrentAnim.AnimCode[mode][i].IndexOf(" f") > 0 &&
-                        !CurrentAnim.AnimCode[mode][i].StartsWith("c") &&
-                        !CurrentAnim.AnimCode[mode][i].StartsWith("#"))
+                    else if (this.CurrentAnim.AnimCode[mode][i].IndexOf(" f") > 0 &&
+                        !this.CurrentAnim.AnimCode[mode][i].StartsWith("c") &&
+                        !this.CurrentAnim.AnimCode[mode][i].StartsWith("#"))
                     {
                         wait_frame += 1;
                     }
                 }
                 //MessageBox.Show(string.Join(";", wait_frames));
-                for (Byte i = 0; i < Frames[mode].Count; i++)
+                for (Byte i = 0; i < this.Frames[mode].Count; i++)
                 {
-                    CurrentAnim.ShowFrame(CurrentPalette, Frames[mode][i], OAM_L_Button.Checked);
-                    UInt16 duration = (UInt16)Math.Round(Durations[mode][i] * (100f / 60f));
+                    this.CurrentAnim.ShowFrame(this.CurrentPalette, this.Frames[mode][i], this.OAM_L_Button.Checked);
+                    UInt16 duration = (UInt16)Math.Round(this.Durations[mode][i] * (100f / 60f));
                     if (i == 0 || wait_frames.Contains(i))
                         duration = 60;
                     else if (browserFriendly && duration < 4)
                         duration = 4;
-                    if (!View_AllFrames.Checked && View_Layered.Checked && (mode == 0 || mode == 2 || mode == 8))
+                    if (!this.View_AllFrames.Checked && this.View_Layered.Checked && (mode == 0 || mode == 2 || mode == 8))
                     {
-                        BattleAnimFrame frame = CurrentAnim.Frames[Frames[mode + 1][i]];
+                        BattleAnimFrame frame = this.CurrentAnim.Frames[this.Frames[mode + 1][i]];
 
-                        CurrentAnim.AddSprite(CurrentPalette,
-                            CurrentAnim.Tilesets[frame.TilesetIndex],
-                            OAM_L_Button.Checked ? frame.OAM_Data_L : frame.OAM_Data_R,
-                            OAM_L_Button.Checked ? BattleAnimation.SCREEN_OFFSET_X_L : BattleAnimation.SCREEN_OFFSET_X_R,
+                        this.CurrentAnim.AddSprite(this.CurrentPalette,
+                            this.CurrentAnim.Tilesets[frame.TilesetIndex],
+                            this.OAM_L_Button.Checked ? frame.OAM_Data_L : frame.OAM_Data_R,
+                            this.OAM_L_Button.Checked ? BattleAnimation.SCREEN_OFFSET_X_L : BattleAnimation.SCREEN_OFFSET_X_R,
                             BattleAnimation.SCREEN_OFFSET_Y);
                     }
                     // Graphic Control Extension Block:
@@ -973,17 +973,17 @@ namespace EmblemMagic.Editors
                     // Image block:
                     gif.Add(0x2C); // Image Introducer (0x2C)
                     gif.AddRange(new Byte[4] { 0x00, 0x00, 0x00, 0x00 }); // Image X and Y
-                    gif.AddRange(Util.UInt16ToBytes((UInt16)CurrentAnim.Width, true)); // Image Width
-                    gif.AddRange(Util.UInt16ToBytes((UInt16)CurrentAnim.Height, true));// Image Height
+                    gif.AddRange(Util.UInt16ToBytes((UInt16)this.CurrentAnim.Width, true)); // Image Width
+                    gif.AddRange(Util.UInt16ToBytes((UInt16)this.CurrentAnim.Height, true));// Image Height
                     gif.Add(0x00); // Packed field - 0x00 indicates no interlacing, no local color table
-                    Byte[] pixels = new Byte[CurrentAnim.Width * CurrentAnim.Height];
+                    Byte[] pixels = new Byte[this.CurrentAnim.Width * this.CurrentAnim.Height];
                     Int32 index = 0;
-                    for (Int32 y = 0; y < CurrentAnim.Height; y++)
-                    for (Int32 x = 0; x < CurrentAnim.Width; x++)
+                    for (Int32 y = 0; y < this.CurrentAnim.Height; y++)
+                    for (Int32 x = 0; x < this.CurrentAnim.Width; x++)
                     {
-                        pixels[index++] = (Byte)CurrentAnim[x, y];
+                        pixels[index++] = (Byte)this.CurrentAnim[x, y];
                     }
-                    gif.AddRange(new LZW(CurrentAnim.Width, CurrentAnim.Height, pixels, 0x04).Compress());
+                    gif.AddRange(new LZW(this.CurrentAnim.Width, this.CurrentAnim.Height, pixels, 0x04).Compress());
                 }
                 gif.Add(0x3B); // Trailer (0x3B) - every GIF file ends with this byte
 
@@ -993,7 +993,7 @@ namespace EmblemMagic.Editors
             {
                 UI.ShowError("Could not save the animation to GIF file.", ex); return;
             }
-            CurrentAnim.ShowFrame(CurrentPalette, CurrentFrame, OAM_L_Button.Checked);
+            this.CurrentAnim.ShowFrame(this.CurrentPalette, this.CurrentFrame, this.OAM_L_Button.Checked);
         }
 
 
@@ -1010,7 +1010,7 @@ namespace EmblemMagic.Editors
 
             if (openWindow.ShowDialog() == DialogResult.OK)
             {
-                Core_CreateAnim(openWindow.FileName);
+                this.Core_CreateAnim(openWindow.FileName);
             }
         }
         private void File_Insert_Click(Object sender, EventArgs e)
@@ -1025,7 +1025,7 @@ namespace EmblemMagic.Editors
 
             if (openWindow.ShowDialog() == DialogResult.OK)
             {
-                Core_InsertAnim(openWindow.FileName, Entry_ArrayBox.Value);
+                this.Core_InsertAnim(openWindow.FileName, this.Entry_ArrayBox.Value);
             }
         }
         private void File_SaveFolder_Click(Object sender, EventArgs e)
@@ -1038,11 +1038,11 @@ namespace EmblemMagic.Editors
             saveWindow.Filter =
                 "Text file (*.txt)|*.txt|" +
                 "All files (*.*)|*.*";
-            saveWindow.FileName = Entry_ArrayBox.Text;
+            saveWindow.FileName = this.Entry_ArrayBox.Text;
 
             if (saveWindow.ShowDialog() == DialogResult.OK)
             {
-                Core_SaveAnimFolder(saveWindow.FileName);
+                this.Core_SaveAnimFolder(saveWindow.FileName);
             }
         }
         private void File_SaveFiles_Click(Object sender, EventArgs e)
@@ -1055,11 +1055,11 @@ namespace EmblemMagic.Editors
             saveWindow.Filter =
                 "Fire Emblem Animation (*.fea)|*.fea|" +
                 "All files (*.*)|*.*";
-            saveWindow.FileName = Entry_ArrayBox.Text;
+            saveWindow.FileName = this.Entry_ArrayBox.Text;
 
             if (saveWindow.ShowDialog() == DialogResult.OK)
             {
-                Core_SaveAnimFiles(saveWindow.FileName);
+                this.Core_SaveAnimFiles(saveWindow.FileName);
             }
         }
         private void File_SaveGIF_Click(Object sender, EventArgs e)
@@ -1073,12 +1073,12 @@ namespace EmblemMagic.Editors
                 "Browser-friendly GIF File (*.gif)|*.gif|" +
                 "Faithful GIF File (*.gif)|*.gif|" +
                 "All files (*.*)|*.*";
-            saveWindow.FileName = Entry_ArrayBox.Text + " - " + Anim_Mode_ListBox.GetItemText(Anim_Mode_ListBox.SelectedItem);
+            saveWindow.FileName = this.Entry_ArrayBox.Text + " - " + this.Anim_Mode_ListBox.GetItemText(this.Anim_Mode_ListBox.SelectedItem);
 
             if (saveWindow.ShowDialog() == DialogResult.OK)
             {
-                Core_SaveAnimGIF(saveWindow.FileName,
-                    CurrentMode, saveWindow.FilterIndex == 1);
+                this.Core_SaveAnimGIF(saveWindow.FileName,
+                    this.CurrentMode, saveWindow.FilterIndex == 1);
             }
         }
         private void File_SaveAllGIF_Click(Object sender, EventArgs e)
@@ -1092,60 +1092,60 @@ namespace EmblemMagic.Editors
                 "Browser-friendly GIF File (*.gif)|*.gif|" +
                 "Faithful GIF File (*.gif)|*.gif|" +
                 "All files (*.*)|*.*";
-            saveWindow.FileName = Entry_ArrayBox.Text;
+            saveWindow.FileName = this.Entry_ArrayBox.Text;
 
             if (saveWindow.ShowDialog() == DialogResult.OK)
             {
                 String filename = saveWindow.FileName;
                 if (filename.EndsWith(".gif"))
                     filename = filename.Substring(0, filename.Length - 4);
-                Int32 length = View_Layered.Checked ? BattleAnimation.Modes_Layered.Length : BattleAnimation.Modes.Length;
+                Int32 length = this.View_Layered.Checked ? BattleAnimation.Modes_Layered.Length : BattleAnimation.Modes.Length;
                 Int32 mode = 0;
                 for (Int32 i = 0; i < length; i++)
                 {
-                    Anim_Mode_ListBox.SelectedIndex = i;
-                    Core_SaveAnimGIF(filename + " - " + Anim_Mode_ListBox.GetItemText(Anim_Mode_ListBox.SelectedItem) + ".gif",
+                    this.Anim_Mode_ListBox.SelectedIndex = i;
+                    this.Core_SaveAnimGIF(filename + " - " + this.Anim_Mode_ListBox.GetItemText(this.Anim_Mode_ListBox.SelectedItem) + ".gif",
                         mode, saveWindow.FilterIndex == 1);
-                    if (View_Layered.Checked && (mode == 0 || mode == 2 || mode == 8))
+                    if (this.View_Layered.Checked && (mode == 0 || mode == 2 || mode == 8))
                         mode++;
                     mode++;
                 }
-                Anim_Mode_ListBox.SelectedIndex = 0;
+                this.Anim_Mode_ListBox.SelectedIndex = 0;
             }
         }
 
         private void Tool_OpenOAMEditor_Click(Object sender, EventArgs e)
         {
             UI.OpenSpriteEditor(this,
-                CurrentEntry + "Frame 0x" + Util.ByteToHex(CurrentFrame) + " - ",
-                OAM_R_Button.Checked ? OAM_R_PointerBox.Value : OAM_L_PointerBox.Value,
-                (Int32)CurrentAnim.Frames[CurrentFrame].OAM_Offset,
-                OAM_R_Button.Checked ?
+                this.CurrentEntry + "Frame 0x" + Util.ByteToHex(this.CurrentFrame) + " - ",
+                this.OAM_R_Button.Checked ? this.OAM_R_PointerBox.Value : this.OAM_L_PointerBox.Value,
+                (Int32)this.CurrentAnim.Frames[this.CurrentFrame].OAM_Offset,
+                this.OAM_R_Button.Checked ?
                     BattleAnimation.SCREEN_OFFSET_X_R :
                     BattleAnimation.SCREEN_OFFSET_X_L,
                 BattleAnimation.SCREEN_OFFSET_Y,
-                CurrentPalette,
-                CurrentAnim.Tilesets[CurrentAnim.Frames[CurrentFrame].TilesetIndex]);
+                this.CurrentPalette,
+                this.CurrentAnim.Tilesets[this.CurrentAnim.Frames[this.CurrentFrame].TilesetIndex]);
         }
         private void Tool_OpenPaletteEditor_Click(Object sender, EventArgs e)
         {
             Pointer address;
             Boolean is_uncompressed;
-            if (Palette_Default_Button.Checked)
+            if (this.Palette_Default_Button.Checked)
             {
-                address = (Pointer)Current["Palettes"];
+                address = (Pointer)this.Current["Palettes"];
                 is_uncompressed = (address >= 0x80000000);
                 UI.OpenPaletteEditor(this,
-                    CurrentEntry,
+                    this.CurrentEntry,
                     (is_uncompressed ? address - 0x80000000 : address),
                     (is_uncompressed ? 5 : 0));
             }
             else
             {
-                address = (Pointer)Palettes["Address"];
+                address = (Pointer)this.Palettes["Address"];
                 is_uncompressed = (address >= 0x80000000);
                 UI.OpenPaletteEditor(this,
-                    "Character Palette 0x" + Palette_Character_ArrayBox.Value + " [" + Palette_Character_ArrayBox.Text + "] - ",
+                    "Character Palette 0x" + this.Palette_Character_ArrayBox.Value + " [" + this.Palette_Character_ArrayBox.Text + "] - ",
                     (is_uncompressed ? address - 0x80000000 : address),
                     (is_uncompressed ? 5 : 0));
             }
@@ -1153,35 +1153,35 @@ namespace EmblemMagic.Editors
 
         private void View_AllFrames_Click(Object sender, EventArgs e)
         {
-            Frame_ByteBox.ValueChanged -= FrameByteBox_ValueChanged;
-            Frame_ByteBox.Value = 0;
-            Frame_ByteBox.ValueChanged += FrameByteBox_ValueChanged;
+            this.Frame_ByteBox.ValueChanged -= this.FrameByteBox_ValueChanged;
+            this.Frame_ByteBox.Value = 0;
+            this.Frame_ByteBox.ValueChanged += this.FrameByteBox_ValueChanged;
 
-            Core_LoadAnimCode();
-            Core_UpdateImageBox();
+            this.Core_LoadAnimCode();
+            this.Core_UpdateImageBox();
         }
         private void View_Layered_Click(Object sender, EventArgs e)
         {
-            if (View_Layered.Checked)
-                 Anim_Mode_ListBox.DataSource = BattleAnimation.Modes_Layered;
-            else Anim_Mode_ListBox.DataSource = BattleAnimation.Modes;
+            if (this.View_Layered.Checked)
+                this.Anim_Mode_ListBox.DataSource = BattleAnimation.Modes_Layered;
+            else this.Anim_Mode_ListBox.DataSource = BattleAnimation.Modes;
 
-            Core_UpdateImageBox();
+            this.Core_UpdateImageBox();
         }
         private void View_AllAnimCode_Click(Object sender, EventArgs e)
         {
-            Core_LoadAnimCode();
+            this.Core_LoadAnimCode();
         }
 
 
 
         private void Item_PointerArrayBox_ValueChanged(Object sender, EventArgs e)
         {
-            Core_LoadItemValues();
+            this.Core_LoadItemValues();
         }
         private void Item_AppendButton_Click(Object sender, EventArgs e)
         {
-            Pointer address = Item_PointerArrayBox.Value;
+            Pointer address = this.Item_PointerArrayBox.Value;
             UInt32 offset = 0;
             UInt32 buffer;
             do
@@ -1195,11 +1195,11 @@ namespace EmblemMagic.Editors
             Core.WriteByte(this,
                 address + offset + 1,
                 0x01,
-                CurrentItemPointerEntry((Int32)offset / 4) + "Bool changed");
+                this.CurrentItemPointerEntry((Int32)offset / 4) + "Bool changed");
         }
         private void Item_RemoveButton_Click(Object sender, EventArgs e)
         {
-            Pointer address = Item_PointerArrayBox.Value;
+            Pointer address = this.Item_PointerArrayBox.Value;
             UInt32 offset = 0;
             UInt32 buffer;
             do
@@ -1213,140 +1213,140 @@ namespace EmblemMagic.Editors
             Core.WriteData(this,
                 address + offset,
                 new Byte[4] { 0x00, 0x00, 0x00, 0x00 },
-                CurrentItemPointerEntry((Int32)offset / 4) + "Bool changed");
+                this.CurrentItemPointerEntry((Int32)offset / 4) + "Bool changed");
         }
 
         private void EntryArrayBox_ValueChanged(Object sender, EventArgs e)
         {
-            Frame_ByteBox.ValueChanged -= FrameByteBox_ValueChanged;
-            Frame_ByteBox.Value = 0;
-            Frame_ByteBox.ValueChanged += FrameByteBox_ValueChanged;
+            this.Frame_ByteBox.ValueChanged -= this.FrameByteBox_ValueChanged;
+            this.Frame_ByteBox.Value = 0;
+            this.Frame_ByteBox.ValueChanged += this.FrameByteBox_ValueChanged;
 
-            Core_Update();
+            this.Core_Update();
         }
         private void FrameByteBox_ValueChanged(Object sender, EventArgs e)
         {
-            Core_UpdateImageBox();
+            this.Core_UpdateImageBox();
         }
         private void AnimListBox_SelectedIndexChanged(Object sender, EventArgs e)
         {
-            Frame_ByteBox.ValueChanged -= FrameByteBox_ValueChanged;
-            Frame_ByteBox.Value = 0;
-            Frame_ByteBox.ValueChanged += FrameByteBox_ValueChanged;
+            this.Frame_ByteBox.ValueChanged -= this.FrameByteBox_ValueChanged;
+            this.Frame_ByteBox.Value = 0;
+            this.Frame_ByteBox.ValueChanged += this.FrameByteBox_ValueChanged;
 
-            Core_Update();
+            this.Core_Update();
         }
 
         private void Anim_NameTextBox_TextChanged(Object sender, EventArgs e)
         {
             Core.WriteData(this,
-                Current.Address,
-                ByteArray.Make_ASCII(Anim_Name_TextBox.Text),
-                CurrentEntry + "Anim name changed");
+                this.Current.Address,
+                ByteArray.Make_ASCII(this.Anim_Name_TextBox.Text),
+                this.CurrentEntry + "Anim name changed");
         }
         private void OAM_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
-            Core_UpdateImageBox();
+            this.Core_UpdateImageBox();
         }
         
         private void SectionsPointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                Current.GetAddress(Current.EntryIndex, "Sections"),
-                Sections_PointerBox.Value,
-                CurrentEntry + "Anim Data Sections repoint");
+                this.Current.GetAddress(this.Current.EntryIndex, "Sections"),
+                this.Sections_PointerBox.Value,
+                this.CurrentEntry + "Anim Data Sections repoint");
         }
         private void AnimDataPointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                Current.GetAddress(Current.EntryIndex, "AnimData"),
-                AnimData_PointerBox.Value,
-                CurrentEntry + "Anim Data repoint");
+                this.Current.GetAddress(this.Current.EntryIndex, "AnimData"),
+                this.AnimData_PointerBox.Value,
+                this.CurrentEntry + "Anim Data repoint");
         }
         private void OAM_R_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                Current.GetAddress(Current.EntryIndex, "OAM_Right"),
-                OAM_R_PointerBox.Value,
-                CurrentEntry + "Right-side OAM repoint");
+                this.Current.GetAddress(this.Current.EntryIndex, "OAM_Right"),
+                this.OAM_R_PointerBox.Value,
+                this.CurrentEntry + "Right-side OAM repoint");
         }
         private void OAM_L_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                Current.GetAddress(Current.EntryIndex, "OAM_Left"),
-                OAM_L_PointerBox.Value,
-                CurrentEntry + "Left-side OAM repoint");
+                this.Current.GetAddress(this.Current.EntryIndex, "OAM_Left"),
+                this.OAM_L_PointerBox.Value,
+                this.CurrentEntry + "Left-side OAM repoint");
         }
 
         private void Palette_CheckedChanged(Object sender, EventArgs e)
         {
-            Palette_Default_ArrayBox.Enabled        = Palette_Default_Button.Checked;
-            Palette_Default_PointerBox.Enabled      = Palette_Default_Button.Checked;
-            Palette_Character_TextBox.Enabled          = Palette_Character_Button.Checked;
-            Palette_Character_ArrayBox.Enabled         = Palette_Character_Button.Checked;
-            Palette_Character_PointerBox.Enabled       = Palette_Character_Button.Checked;
-            Palette_Character_Current_ArrayBox.Enabled = Palette_Character_Button.Checked;
-            Core_UpdatePalettes();
-            Core_UpdateImageBox();
+            this.Palette_Default_ArrayBox.Enabled        = this.Palette_Default_Button.Checked;
+            this.Palette_Default_PointerBox.Enabled      = this.Palette_Default_Button.Checked;
+            this.Palette_Character_TextBox.Enabled          = this.Palette_Character_Button.Checked;
+            this.Palette_Character_ArrayBox.Enabled         = this.Palette_Character_Button.Checked;
+            this.Palette_Character_PointerBox.Enabled       = this.Palette_Character_Button.Checked;
+            this.Palette_Character_Current_ArrayBox.Enabled = this.Palette_Character_Button.Checked;
+            this.Core_UpdatePalettes();
+            this.Core_UpdateImageBox();
         }
         private void Palette_Default_ArrayBox_ValueChanged(Object sender, EventArgs e)
         {
-            if (Palette_Default_Button.Checked)
+            if (this.Palette_Default_Button.Checked)
             {
-                Core_UpdatePalettes();
-                Core_UpdateImageBox();
+                this.Core_UpdatePalettes();
+                this.Core_UpdateImageBox();
             }
         }
         private void Palette_Default_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                Current.GetAddress(Current.EntryIndex, "Palettes"),
-                Palette_Default_PointerBox.Value,
-                CurrentEntry + "Default Palettes repoint");
+                this.Current.GetAddress(this.Current.EntryIndex, "Palettes"),
+                this.Palette_Default_PointerBox.Value,
+                this.CurrentEntry + "Default Palettes repoint");
         }
         private void Palette_Character_TextBox_TextChanged(Object sender, EventArgs e)
         {
             Core.WriteData(this,
-                Current.Address,
-                ByteArray.Make_ASCII(Anim_Name_TextBox.Text),
-                CurrentPaletteEntry + "Name changed");
+                this.Current.Address,
+                ByteArray.Make_ASCII(this.Anim_Name_TextBox.Text),
+                this.CurrentPaletteEntry + "Name changed");
         }
         private void Palette_Character_ArrayBox_ValueChanged(Object sender, EventArgs e)
         {
-            Palettes.EntryIndex = Palette_Character_ArrayBox.Value - 1;
-            Core_LoadPalettes();
-            Core_LoadPaletteValues();
-            if (Palette_Character_Button.Checked)
+            this.Palettes.EntryIndex = this.Palette_Character_ArrayBox.Value - 1;
+            this.Core_LoadPalettes();
+            this.Core_LoadPaletteValues();
+            if (this.Palette_Character_Button.Checked)
             {
-                Core_UpdatePalettes();
-                Core_UpdateImageBox();
+                this.Core_UpdatePalettes();
+                this.Core_UpdateImageBox();
             }
         }
         private void Palette_Character_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                Palettes.GetAddress(Palettes.EntryIndex, "Address"),
-                Palette_Character_PointerBox.Value,
-                CurrentPaletteEntry + "repoint");
+                this.Palettes.GetAddress(this.Palettes.EntryIndex, "Address"),
+                this.Palette_Character_PointerBox.Value,
+                this.CurrentPaletteEntry + "repoint");
         }
         private void Palette_Character_Current_ArrayBox_ValueChanged(Object sender, EventArgs e)
         {
-            if (Palette_Character_Button.Checked)
+            if (this.Palette_Character_Button.Checked)
             {
-                Core_UpdatePalettes();
-                Core_UpdateImageBox();
+                this.Core_UpdatePalettes();
+                this.Core_UpdateImageBox();
             }
         }
 
         private void AnimCode_Apply_Button_Click(Object sender, EventArgs e)
         {
-            Tuple<UInt32, UInt32>[] frames = new Tuple<UInt32, UInt32>[CurrentAnim.Frames.Length];
+            Tuple<UInt32, UInt32>[] frames = new Tuple<UInt32, UInt32>[this.CurrentAnim.Frames.Length];
             for (Int32 i = 0; i < frames.Length; i++)
             {
-                if (CurrentAnim.Frames[i] != null)
+                if (this.CurrentAnim.Frames[i] != null)
                     frames[i] = Tuple.Create(
-                        CurrentAnim.Frames[i].TilesetIndex,
-                        CurrentAnim.Frames[i].OAM_Offset);
+                        this.CurrentAnim.Frames[i].TilesetIndex,
+                        this.CurrentAnim.Frames[i].OAM_Offset);
             }
             Byte[] animdata;
             Byte[] sections = new Byte[BattleAnimation.MODES * 4];
@@ -1360,26 +1360,26 @@ namespace EmblemMagic.Editors
                 Int32 length;
                 for (Int32 i = 0; i < BattleAnimation.MODES; i++)
                 {
-                    if (View_AllAnimCode.Checked)
+                    if (this.View_AllAnimCode.Checked)
                     {
-                        length = AnimCodeBox.Text.IndexOf("end", index) + 3 - index;
-                        animcode = AnimCodeBox.Text.Substring(index, length).Split(
+                        length = this.AnimCodeBox.Text.IndexOf("end", index) + 3 - index;
+                        animcode = this.AnimCodeBox.Text.Substring(index, length).Split(
                             new String[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
                         index += length;
 
-                        if (View_Layered.Checked && (i == 0 || i == 2 || i == 8)) // two-layer anim modes
+                        if (this.View_Layered.Checked && (i == 0 || i == 2 || i == 8)) // two-layer anim modes
                             layers = BattleAnimation.SplitLayeredAnimationCode(animcode);
                     }
-                    else if (CurrentMode == i)
+                    else if (this.CurrentMode == i)
                     {
-                        animcode = AnimCodeBox.Text.Split(new String[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                        animcode = this.AnimCodeBox.Text.Split(new String[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
 
-                        if (View_Layered.Checked && (i == 0 || i == 2 || i == 8)) // two-layer anim modes
+                        if (this.View_Layered.Checked && (i == 0 || i == 2 || i == 8)) // two-layer anim modes
                             layers = BattleAnimation.SplitLayeredAnimationCode(animcode);
                     }
                     else
                     {
-                        animcode = CurrentAnim.AnimCode[i];
+                        animcode = this.CurrentAnim.AnimCode[i];
                     }
 
                     if (layers != null) // two-layer anim modes
@@ -1404,7 +1404,7 @@ namespace EmblemMagic.Editors
                     offset += modes[i].Length;
                 }
                 animdata = LZ77.Compress(BattleAnimation.PrepareAnimationData(animdata,
-                    BattleAnimation.GetTilesetPointers(Core.ReadData((Pointer)Current["AnimData"], 0))));
+                    BattleAnimation.GetTilesetPointers(Core.ReadData((Pointer)this.Current["AnimData"], 0))));
             }
             catch (Exception ex)
             {
@@ -1415,34 +1415,34 @@ namespace EmblemMagic.Editors
             UI.SuspendUpdate();
             try
             {
-                Pointer sections_pointer = (Pointer)Current["Sections"];
-                Pointer animdata_pointer = (Pointer)Current["AnimData"];
+                Pointer sections_pointer = (Pointer)this.Current["Sections"];
+                Pointer animdata_pointer = (Pointer)this.Current["AnimData"];
                 if ((sections_pointer > animdata_pointer) && (animdata.Length > (animdata_pointer - sections_pointer))
                  || (animdata_pointer > sections_pointer) && (sections.Length > (sections_pointer - animdata_pointer)))
                 {
                     Boolean cancel = Prompt.ShowRepointDialog(this, "Repoint Animation Data",
                         "The animation code and/or animation sectioning data is too large.\n" +
                         "At least one of the two must be repointed before attempting to write.",
-                            CurrentEntry,
+                            this.CurrentEntry,
                         new Tuple<String, Pointer, Int32>[2] {
-                            Tuple.Create("Sections", (Pointer)Current["Sections"], sections.Length),
-                            Tuple.Create("Anim Data", (Pointer)Current["AnimData"], animdata.Length)},
+                            Tuple.Create("Sections", (Pointer)this.Current["Sections"], sections.Length),
+                            Tuple.Create("Anim Data", (Pointer)this.Current["AnimData"], animdata.Length)},
                         new Pointer[2] {
-                            Current.GetAddress(Current.EntryIndex, "Sections"),
-                            Current.GetAddress(Current.EntryIndex, "AnimData")
+                            this.Current.GetAddress(this.Current.EntryIndex, "Sections"),
+                            this.Current.GetAddress(this.Current.EntryIndex, "AnimData")
                         });
                     if (cancel) return;
                 }
 
                 Core.WriteData(this,
-                    (Pointer)Current["AnimData"],
+                    (Pointer)this.Current["AnimData"],
                     animdata,
-                    CurrentEntry + "Animation code changed");
+                    this.CurrentEntry + "Animation code changed");
 
                 Core.WriteData(this,
-                    (Pointer)Current["Sections"],
+                    (Pointer)this.Current["Sections"],
                     sections,
-                    CurrentEntry + "Animation sections changed");
+                    this.CurrentEntry + "Animation sections changed");
             }
             catch (Exception ex)
             {
@@ -1453,13 +1453,13 @@ namespace EmblemMagic.Editors
         }
         private void AnimCode_Reset_Button_Click(Object sender, EventArgs e)
         {
-            Core_LoadAnimCode();
+            this.Core_LoadAnimCode();
         }
         private void AnimCode_TextBox_TextChanged(Object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
         {
-            String[] animcode = AnimCodeBox.Text.Split(new String[] { "\r\n", "\n" }, StringSplitOptions.None);
+            String[] animcode = this.AnimCodeBox.Text.Split(new String[] { "\r\n", "\n" }, StringSplitOptions.None);
 
-            if (View_AllAnimCode.Checked)
+            if (this.View_AllAnimCode.Checked)
             {
                 String[][] result = new String[BattleAnimation.MODES][];
                 Int32 index = 0;
@@ -1469,36 +1469,36 @@ namespace EmblemMagic.Editors
                     result[i] = new String[++index];
                     Array.Copy(animcode, index, result[i], 0, result[i].Length);
                 }
-                CurrentAnim.AnimCode = result;
+                this.CurrentAnim.AnimCode = result;
             }
             else
             {
-                CurrentAnim.AnimCode[CurrentMode] = animcode;
+                this.CurrentAnim.AnimCode[this.CurrentMode] = animcode;
             }
         }
         
         private void PlayAnimButton_Click(Object sender, EventArgs e)
         {
-            Anim_Play_Button.Enabled = false;
+            this.Anim_Play_Button.Enabled = false;
 
-            View_AllFrames.Checked = false;
+            this.View_AllFrames.Checked = false;
 
-            PlayAnimTimer.Enabled = true;
+            this.PlayAnimTimer.Enabled = true;
         }
         private void PlayAnimTimer_Tick(Object sender, EventArgs e)
         {
-            if (Frame_ByteBox.Value >= Frame_ByteBox.Maximum ||
-                Frame_ByteBox.Value >= Frames[CurrentMode].Count)
+            if (this.Frame_ByteBox.Value >= this.Frame_ByteBox.Maximum ||
+                this.Frame_ByteBox.Value >= this.Frames[this.CurrentMode].Count)
             {
-                Anim_Play_Button.Enabled = true;
-                PlayAnimTimer.Enabled = false;
+                this.Anim_Play_Button.Enabled = true;
+                this.PlayAnimTimer.Enabled = false;
 
-                Frame_ByteBox.Value = 0;
+                this.Frame_ByteBox.Value = 0;
             }
             else
             {
-                Frame_ByteBox.Value++;
-                PlayAnimTimer.Interval = (Int32)Math.Round(Durations[CurrentMode][Frame_ByteBox.Value] * 1000f / 60f);
+                this.Frame_ByteBox.Value++;
+                this.PlayAnimTimer.Interval = (Int32)Math.Round(this.Durations[this.CurrentMode][this.Frame_ByteBox.Value] * 1000f / 60f);
             }
         }
     }

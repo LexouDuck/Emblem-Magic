@@ -33,14 +33,14 @@ namespace GBA
             if (data.Length != LENGTH)
                 throw new Exception("Data given has invalid length.");
 
-            Data = data;
+            this.Data = data;
         }
 
 
 
         public Byte[] ToBytes()
         {
-            return Data;
+            return this.Data;
         }
 
         /// <summary>
@@ -49,18 +49,18 @@ namespace GBA
         public Boolean IsUnused()
         {
             return (
-                Data[0x0] == 0x01 &&
-                Data[0x1] == 0x3C &&
-                Data[0x2] == 0x00 &&
-                Data[0x3] == 0x00 &&
-                Data[0x4] == 0x02 &&
-                Data[0x5] == 0x00 &&
-                Data[0x6] == 0x00 &&
-                Data[0x7] == 0x00 &&
-                Data[0x8] == 0x00 &&
-                Data[0x9] == 0x00 &&
-                Data[0xA] == 0x0F &&
-                Data[0xB] == 0x00);
+                this.Data[0x0] == 0x01 &&
+                this.Data[0x1] == 0x3C &&
+                this.Data[0x2] == 0x00 &&
+                this.Data[0x3] == 0x00 &&
+                this.Data[0x4] == 0x02 &&
+                this.Data[0x5] == 0x00 &&
+                this.Data[0x6] == 0x00 &&
+                this.Data[0x7] == 0x00 &&
+                this.Data[0x8] == 0x00 &&
+                this.Data[0x9] == 0x00 &&
+                this.Data[0xA] == 0x0F &&
+                this.Data[0xB] == 0x00);
         } 
 
 
@@ -72,7 +72,7 @@ namespace GBA
         {
             get
             {
-                return (InstrumentType)Data[0];
+                return (InstrumentType)this.Data[0];
             }
         }
         /// <summary>
@@ -82,7 +82,7 @@ namespace GBA
         {
             get
             {
-                return Data[1];
+                return this.Data[1];
             }
         }
         /// <summary>
@@ -92,7 +92,7 @@ namespace GBA
         {
             get
             {
-                return Data[2];
+                return this.Data[2];
             }
         }
         /// <summary>
@@ -102,7 +102,7 @@ namespace GBA
         {
             get
             {
-                return Data[3];
+                return this.Data[3];
             }
         }
         
@@ -113,7 +113,7 @@ namespace GBA
         {
             get
             {
-                return new Pointer(Data.GetUInt32(4, true), false, true);
+                return new Pointer(this.Data.GetUInt32(4, true), false, true);
             }
         }
         
@@ -125,7 +125,7 @@ namespace GBA
         {
             get
             {
-                return new Pointer(Data.GetUInt32(8, true), false, true);
+                return new Pointer(this.Data.GetUInt32(8, true), false, true);
             }
         }
         /// <summary>
@@ -136,7 +136,7 @@ namespace GBA
         {
             get
             {
-                return Data[8];
+                return this.Data[8];
             }
         }
         
@@ -149,7 +149,7 @@ namespace GBA
         {
             get
             {
-                return Data[8];
+                return this.Data[8];
             }
         }
         /// <summary>
@@ -161,7 +161,7 @@ namespace GBA
         {
             get
             {
-                return Data[9];
+                return this.Data[9];
             }
         }
         /// <summary>
@@ -173,7 +173,7 @@ namespace GBA
         {
             get
             {
-                return Data[10];
+                return this.Data[10];
             }
         }
         /// <summary>
@@ -185,7 +185,7 @@ namespace GBA
         {
             get
             {
-                return Data[11];
+                return this.Data[11];
             }
         }
     }

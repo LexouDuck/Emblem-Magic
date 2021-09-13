@@ -60,7 +60,7 @@ namespace Magic.Editors
         {
             get
             {
-                return (Position >> 3);
+                return (this.Position >> 3);
             }
         }
         /// <summary>
@@ -70,7 +70,7 @@ namespace Magic.Editors
         {
             get
             {
-                return (7 - (Position % 8));
+                return (7 - (this.Position % 8));
             }
         }
 
@@ -87,13 +87,13 @@ namespace Magic.Editors
         {
             try
             {
-                Name = name;
-                Section = category;
-                Position = Module.ReadNumber(propertyIndex);
-                Length = Module.ReadNumber(propertyLength);
-                ControlType = Module.ReadControl(controlType);
-                EditorShortcut = Module.ReadShortcut(controlType);
-                FileName = (fileName == "NULL") ? null : fileName;
+                this.Name = name;
+                this.Section = category;
+                this.Position = Module.ReadNumber(propertyIndex);
+                this.Length = Module.ReadNumber(propertyLength);
+                this.ControlType = Module.ReadControl(controlType);
+                this.EditorShortcut = Module.ReadShortcut(controlType);
+                this.FileName = (fileName == "NULL") ? null : fileName;
             }
             catch (Exception ex)
             {
@@ -109,13 +109,13 @@ namespace Magic.Editors
         public Object GetValue(Byte[] entry)
         {
 
-            if (Length % 8 == 0)
+            if (this.Length % 8 == 0)
             {   // if this is a byte entry
-                Int32 length = Length >> 3;
+                Int32 length = this.Length >> 3;
                 Byte[] data = new Byte[length];
-                Array.Copy(entry, Position / 8, data, 0, length);
+                Array.Copy(entry, this.Position / 8, data, 0, length);
 
-                switch (ControlType)
+                switch (this.ControlType)
                 {
                     case PropertyType.TEXT: return data.GetASCII(0, length);
                     case PropertyType.BOOL: return (data[0] == 0) ? false : true;
@@ -131,8 +131,8 @@ namespace Magic.Editors
             }
             else
             {   // so its a bit entry
-                if (Length == 1) return Util.GetBit(entry[Position / 8], BitIndex);
-                else return Util.GetBits(entry, Position, Length);
+                if (this.Length == 1) return Util.GetBit(entry[this.Position / 8], this.BitIndex);
+                else return Util.GetBits(entry, this.Position, this.Length);
             }
         }
         /// <summary>
@@ -141,8 +141,8 @@ namespace Magic.Editors
         public Control GetControl()
         {
             Control control;
-            Int64 max = (Int64)Math.Pow(2, Length);
-            switch (ControlType)
+            Int64 max = (Int64)Math.Pow(2, this.Length);
+            switch (this.ControlType)
             {
                 case PropertyType.BOOL: control = new CheckBox() {
                     Size = new Size(20, 20),
@@ -150,7 +150,7 @@ namespace Magic.Editors
 
                 case PropertyType.TEXT: control = new TextBox() {
                     Size = new Size(100, 20),
-                    MaxLength = Length >> 3,
+                    MaxLength = this.Length >> 3,
                 }; break;
 
                 case PropertyType.HEXT: control = new HexBox() {
@@ -159,38 +159,38 @@ namespace Magic.Editors
                 }; break;
 
                 case PropertyType.HEXU: control = new NumericUpDown() {
-                    Size = new Size(32 + Length, 20),
+                    Size = new Size(32 + this.Length, 20),
                     Minimum = 0,
                     Maximum = max,
                     Hexadecimal = true,
                 }; break;
 
                 case PropertyType.NUMU: control = new NumericUpDown() {
-                    Size = new Size(40 + Length, 20),
+                    Size = new Size(40 + this.Length, 20),
                     Minimum = 0,
                     Maximum = max,
                     Hexadecimal = false,
                 }; break;
 
                 case PropertyType.NUMS: control = new NumericUpDown() {
-                    Size = new Size(40 + Length, 20),
+                    Size = new Size(40 + this.Length, 20),
                     Minimum = (max / 2) * -1,
                     Maximum = (max / 2),
                     Hexadecimal = false,
                 }; break;
 
                 case PropertyType.LIST:
-                    if (FileName == null) control = new ByteBox() { };
+                    if (this.FileName == null) control = new ByteBox() { };
                     else {
                         control = new ByteArrayBox() { AutoSize = true };
-                        ((ByteArrayBox)control).Load(FileName);
+                        ((ByteArrayBox)control).Load(this.FileName);
                     } break;
 
                 case PropertyType.POIN:
-                    if (FileName == null) control = new PointerBox() { };
+                    if (this.FileName == null) control = new PointerBox() { };
                     else {
                         control = new PointerArrayBox() { AutoSize = true };
-                        ((PointerArrayBox)control).Load(FileName);
+                        ((PointerArrayBox)control).Load(this.FileName);
                     } break;
 
                 default: return null;

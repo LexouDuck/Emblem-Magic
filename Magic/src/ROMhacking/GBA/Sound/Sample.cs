@@ -10,15 +10,15 @@ namespace GBA
     {
         public Sample(Pointer address)
         {
-            Data = Core.ReadData(address, 16);
-            Data = Core.ReadData(address, 16 + (System.Int32)PCM_Size);
+            this.Data = Core.ReadData(address, 16);
+            this.Data = Core.ReadData(address, 16 + (System.Int32)this.PCM_Size);
         }
 
         System.Byte[] Data;
 
         public System.Byte[] ToBytes()
         {
-            return Data;
+            return this.Data;
         }
 
 
@@ -29,7 +29,7 @@ namespace GBA
         {
             get
             {
-                return (Data[3] == 0x40);
+                return (this.Data[3] == 0x40);
             }
         }
         /// <summary>
@@ -39,7 +39,7 @@ namespace GBA
         {
             get
             {
-                return Data.GetUInt32(4, true);
+                return this.Data.GetUInt32(4, true);
             }
         }
         /// <summary>
@@ -49,7 +49,7 @@ namespace GBA
         {
             get
             {
-                return Data.GetUInt32(8, true);
+                return this.Data.GetUInt32(8, true);
             }
         }
         /// <summary>
@@ -59,7 +59,7 @@ namespace GBA
         {
             get
             {
-                return Data.GetUInt32(12, true);
+                return this.Data.GetUInt32(12, true);
             }
         }
         /// <summary>
@@ -69,7 +69,7 @@ namespace GBA
         {
             get
             {
-                return Data.GetBytes(16);
+                return this.Data.GetBytes(16);
             }
         }
     }

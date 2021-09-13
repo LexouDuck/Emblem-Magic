@@ -14,28 +14,28 @@ namespace Magic.Editors
 
         public SpaceEditor()
         {
-            InitializeComponent();
-            
-            Space_LengthBox.Maximum = Core.CurrentROMSize;
+            this.InitializeComponent();
 
-            Output_SpaceBar.MouseLeave += new EventHandler(Output_SpaceBar_MouseLeave);
-            Output_SpaceBar.MouseMove += new MouseEventHandler(Output_SpaceBar_MouseMove);
+            this.Space_LengthBox.Maximum = Core.CurrentROMSize;
 
-            Update_MarkTypesList();
+            this.Output_SpaceBar.MouseLeave += new EventHandler(this.Output_SpaceBar_MouseLeave);
+            this.Output_SpaceBar.MouseMove += new MouseEventHandler(this.Output_SpaceBar_MouseMove);
+
+            this.Update_MarkTypesList();
         }
 
         public override void Core_OnOpen()
         {
-            Core_Update();
+            this.Core_Update();
         }
         public override void Core_Update()
         {
             try
             {
-                Update_MarkTypesList();
-                Update_MarksPanel();
-                Update_OutputTextBox();
-                Update_OutputSpaceBar();
+                this.Update_MarkTypesList();
+                this.Update_MarksPanel();
+                this.Update_OutputTextBox();
+                this.Update_OutputSpaceBar();
             }
             catch (Exception ex)
             {
@@ -47,30 +47,30 @@ namespace Magic.Editors
 
         void Update_MarksPanel()
         {
-            Mark current = App.MHF.Marks.MarkingTypes[Marks_ListBox.SelectedIndex];
+            Mark current = this.App.MHF.Marks.MarkingTypes[this.Marks_ListBox.SelectedIndex];
             if (current == null)
             {
-                Marks_NameTextBox.Text = "";
-                Marks_ColorBox.Color = Color.White;
-                Marks_LayerNumBox.Value = 0;
+                this.Marks_NameTextBox.Text = "";
+                this.Marks_ColorBox.Color = Color.White;
+                this.Marks_LayerNumBox.Value = 0;
             }
             else
             {
-                Marks_NameTextBox.Text = current.Name;
-                Marks_ColorBox.Color = current.Color;
-                Marks_LayerNumBox.Value = current.Layer;
+                this.Marks_NameTextBox.Text = current.Name;
+                this.Marks_ColorBox.Color = current.Color;
+                this.Marks_LayerNumBox.Value = current.Layer;
             }
         }
         void Update_MarkTypesList()
         {
-            Space_MarkAsComboBox.DataSource = App.MHF.Marks.GetStringList(true);
-            Marks_ListBox.DataSource = App.MHF.Marks.GetStringList(false);
+            this.Space_MarkAsComboBox.DataSource = this.App.MHF.Marks.GetStringList(true);
+            this.Marks_ListBox.DataSource = this.App.MHF.Marks.GetStringList(false);
         }
         void Update_OutputTextBox()
         {
-            List<Space> ranges = new List<Space>(App.MHF.Space.MarkedRanges);
+            List<Space> ranges = new List<Space>(this.App.MHF.Space.MarkedRanges);
 
-            switch (Sorting)
+            switch (this.Sorting)
             {
                 case SpaceSortingMode.Marked: ranges.Sort(delegate (Space first, Space second)
                 {
@@ -96,81 +96,81 @@ namespace Magic.Editors
                     " | " + range.Address + " - " + range.EndByte +  " | " +
                     "Length: " + length.PadLeft(10) + "\r\n";
             }
-            Output_TextBox.Text = result;
+            this.Output_TextBox.Text = result;
         }
         void Update_OutputSpaceBar()
         {
-            Output_SpaceBar.Load(App.ROM.FileSize, App.MHF.Space.MarkedRanges);
+            this.Output_SpaceBar.Load(this.App.ROM.FileSize, this.App.MHF.Space.MarkedRanges);
         }
 
 
 
         void Space_EndOffLabel_Click(Object sender, EventArgs e)
         {
-            Space_EndByteBox.Enabled = true;
-            Space_EndByteBox.Focus();
-            Space_LengthBox.Enabled = false;
-            Space_LengthBox.ResetText();
+            this.Space_EndByteBox.Enabled = true;
+            this.Space_EndByteBox.Focus();
+            this.Space_LengthBox.Enabled = false;
+            this.Space_LengthBox.ResetText();
         }
         void Space_LengthLabel_Click(Object sender, EventArgs e)
         {
-            Space_LengthBox.Enabled = true;
-            Space_LengthBox.Focus();
-            Space_EndByteBox.Enabled = false;
-            Space_EndByteBox.ResetText();
+            this.Space_LengthBox.Enabled = true;
+            this.Space_LengthBox.Focus();
+            this.Space_EndByteBox.Enabled = false;
+            this.Space_EndByteBox.ResetText();
         }
         void Space_OKButton_Click(Object sender, EventArgs e)
         {
-            String mark = Space_MarkAsComboBox.SelectedItem.ToString();
-            GBA.Pointer address = Space_AddressBox.Value;
-            GBA.Pointer endbyte = Space_EndByteBox.Value;
-            Int32 length = (Int32)Space_LengthBox.Value;
+            String mark = this.Space_MarkAsComboBox.SelectedItem.ToString();
+            GBA.Pointer address = this.Space_AddressBox.Value;
+            GBA.Pointer endbyte = this.Space_EndByteBox.Value;
+            Int32 length = (Int32)this.Space_LengthBox.Value;
 
-            if ((Space_EndByteLabel.Checked && (endbyte <= address)) || (Space_LengthLabel.Checked && length <= 0))
+            if ((this.Space_EndByteLabel.Checked && (endbyte <= address)) || (this.Space_LengthLabel.Checked && length <= 0))
             {
                 UI.ShowMessage("Marked space can't be of null or negative length.");
-                Space_AddressBox.ResetText();
-                Space_EndByteBox.ResetText();
-                Space_LengthBox.ResetText();
+                this.Space_AddressBox.ResetText();
+                this.Space_EndByteBox.ResetText();
+                this.Space_LengthBox.ResetText();
                 return;
             }
 
             if (mark == "(unmark)")
             {
-                if (Space_EndByteLabel.Checked)
-                    App.MHF.Space.UnmarkSpace(address, endbyte);
+                if (this.Space_EndByteLabel.Checked)
+                    this.App.MHF.Space.UnmarkSpace(address, endbyte);
                 else
-                    App.MHF.Space.UnmarkSpace(address, address + length);
+                    this.App.MHF.Space.UnmarkSpace(address, address + length);
             }
             else
             {
-                if (Space_EndByteLabel.Checked)
-                    App.MHF.Space.MarkSpace(mark, address, endbyte);
+                if (this.Space_EndByteLabel.Checked)
+                    this.App.MHF.Space.MarkSpace(mark, address, endbyte);
                 else
-                    App.MHF.Space.MarkSpace(mark, address, address + length);
+                    this.App.MHF.Space.MarkSpace(mark, address, address + length);
             }
-            Space_AddressBox.ResetText();
-            Space_EndByteBox.ResetText();
-            Space_LengthBox.ResetText();
+            this.Space_AddressBox.ResetText();
+            this.Space_EndByteBox.ResetText();
+            this.Space_LengthBox.ResetText();
 
-            Space_AddressBox.Focus();
+            this.Space_AddressBox.Focus();
 
-            Core_Update();
+            this.Core_Update();
         }
 
 
 
         void Marks_ListBox_Click(Object sender, EventArgs e)
         {
-            Update_MarksPanel();
+            this.Update_MarksPanel();
         }
         void Marks_NameTextChanged(Object sender, EventArgs e)
         {
-            Mark current = App.MHF.Marks.MarkingTypes[Marks_ListBox.SelectedIndex];
+            Mark current = this.App.MHF.Marks.MarkingTypes[this.Marks_ListBox.SelectedIndex];
 
-            current.Name = Marks_NameTextBox.Text;
+            current.Name = this.Marks_NameTextBox.Text;
 
-            Core_Update();
+            this.Core_Update();
         }
         void Marks_ColorButton_Click(Object sender, EventArgs e)
         {
@@ -179,84 +179,84 @@ namespace Magic.Editors
 
             if (colorWindow.ShowDialog(this) == DialogResult.OK)
             {
-                Mark current = App.MHF.Marks.MarkingTypes[Marks_ListBox.SelectedIndex];
+                Mark current = this.App.MHF.Marks.MarkingTypes[this.Marks_ListBox.SelectedIndex];
 
                 current.Color = colorWindow.Color;
 
-                Core_Update();
+                this.Core_Update();
             }
         }
         void Marks_LayerValueChanged(Object sender, EventArgs e)
         {
-            Mark current = App.MHF.Marks.MarkingTypes[Marks_ListBox.SelectedIndex];
+            Mark current = this.App.MHF.Marks.MarkingTypes[this.Marks_ListBox.SelectedIndex];
 
-            current.Layer = (Int32)Marks_LayerNumBox.Value;
+            current.Layer = (Int32)this.Marks_LayerNumBox.Value;
 
-            Core_Update();
+            this.Core_Update();
         }
         void Marks_CreateMarkButton_Click(Object sender, EventArgs e)
         {
-            App.MHF.Marks.Add("NEW ", 0, Color.Black);
+            this.App.MHF.Marks.Add("NEW ", 0, Color.Black);
 
-            Core_Update();
+            this.Core_Update();
         }
         void Marks_DeleteMarkButton_Click(Object sender, EventArgs e)
         {
-            Mark current = App.MHF.Marks.MarkingTypes[Marks_ListBox.SelectedIndex];
+            Mark current = this.App.MHF.Marks.MarkingTypes[this.Marks_ListBox.SelectedIndex];
 
-            App.MHF.Marks.Remove(current);
+            this.App.MHF.Marks.Remove(current);
 
-            Core_Update();
+            this.Core_Update();
         }
 
 
 
         void Output_SpaceBar_MouseMove(Object sender, MouseEventArgs e)
         {
-            Double ratio = (Single)Output_SpaceBar.Total / (Single)Output_SpaceBar.Width;
+            Double ratio = (Single)this.Output_SpaceBar.Total / (Single)this.Output_SpaceBar.Width;
             UInt32 current = (UInt32)(ratio * e.Location.X);
 
-            Output_CurrentAddressStatusLabel.Text = Util.AddressToString(current, 8);
+            this.Output_CurrentAddressStatusLabel.Text = Util.AddressToString(current, 8);
 
-            foreach (var range in Output_SpaceBar.Ranges)
+            foreach (var range in this.Output_SpaceBar.Ranges)
             {
                 if (e.Location.X >= (range.Item2.Start - 1) && e.Location.X <= (range.Item2.End + 1))
                 {
-                    Output_SpaceAddressStatusLabel.Text = "Start Offset: " + range.Item1.Address;
-                    Output_SpaceEndByteStatusLabel.Text = "End Offset: " +   range.Item1.EndByte;
-                    Output_SpaceLengthStatusLabel.Text = "Length: " + range.Item1.Length.ToString();
-                    Output_SpaceMarkedStatusLabel.Text = "Marked: " + range.Item1.Marked.Name;
+                    this.Output_SpaceAddressStatusLabel.Text = "Start Offset: " + range.Item1.Address;
+                    this.Output_SpaceEndByteStatusLabel.Text = "End Offset: " +   range.Item1.EndByte;
+                    this.Output_SpaceLengthStatusLabel.Text = "Length: " + range.Item1.Length.ToString();
+                    this.Output_SpaceMarkedStatusLabel.Text = "Marked: " + range.Item1.Marked.Name;
                     return;
                 }
             }
-            Output_SpaceAddressStatusLabel.Text = "Start Offset: ";
-            Output_SpaceEndByteStatusLabel.Text = "End Offset: ";
-            Output_SpaceLengthStatusLabel.Text = "Length: ";
-            Output_SpaceMarkedStatusLabel.Text = "Marked: ";
+            this.Output_SpaceAddressStatusLabel.Text = "Start Offset: ";
+            this.Output_SpaceEndByteStatusLabel.Text = "End Offset: ";
+            this.Output_SpaceLengthStatusLabel.Text = "Length: ";
+            this.Output_SpaceMarkedStatusLabel.Text = "Marked: ";
         }
         void Output_SpaceBar_MouseLeave(Object sender, EventArgs e)
         {
-            Output_CurrentAddressStatusLabel.Text = "";
-            Output_SpaceAddressStatusLabel.Text = "Start Offset: ";
-            Output_SpaceEndByteStatusLabel.Text = "End Offset: ";
-            Output_SpaceLengthStatusLabel.Text = "Length: ";
-            Output_SpaceMarkedStatusLabel.Text = "Marked: ";
+            this.Output_CurrentAddressStatusLabel.Text = "";
+            this.Output_SpaceAddressStatusLabel.Text = "Start Offset: ";
+            this.Output_SpaceEndByteStatusLabel.Text = "End Offset: ";
+            this.Output_SpaceLengthStatusLabel.Text = "Length: ";
+            this.Output_SpaceMarkedStatusLabel.Text = "Marked: ";
         }
 
         void Output_SortOffsetButton_Click(Object sender, EventArgs e)
         {
-            Sorting = SpaceSortingMode.Offset;
-            Update_OutputTextBox();
+            this.Sorting = SpaceSortingMode.Offset;
+            this.Update_OutputTextBox();
         }
         void Output_SortLengthButton_Click(Object sender, EventArgs e)
         {
-            Sorting = SpaceSortingMode.Length;
-            Update_OutputTextBox();
+            this.Sorting = SpaceSortingMode.Length;
+            this.Update_OutputTextBox();
         }
         void Output_SortByNameButton_Click(Object sender, EventArgs e)
         {
-            Sorting = SpaceSortingMode.Marked;
-            Update_OutputTextBox();
+            this.Sorting = SpaceSortingMode.Marked;
+            this.Update_OutputTextBox();
         }
     }
 }

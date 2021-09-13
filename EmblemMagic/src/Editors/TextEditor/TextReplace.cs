@@ -15,9 +15,9 @@ namespace EmblemMagic.Editors
         public TextReplace(TextEditor owner)
         {
             base.Owner = owner;
-            Owner = owner;
-            
-            InitializeComponent();
+            this.Owner = owner;
+
+            this.InitializeComponent();
         }
 
         void Core_Replace(String text, String replace)
@@ -27,21 +27,21 @@ namespace EmblemMagic.Editors
                 UI.ShowMessage("There is no input text to find."); return;
             }
 
-            String current = Owner.Core_GetText(Owner.CurrentIndex);
+            String current = this.Owner.Core_GetText(this.Owner.CurrentIndex);
 
-            if (text == current.Substring((Int32)Owner.CurrentSelection.Start, (Int32)Owner.CurrentSelection.Length))
+            if (text == current.Substring((Int32)this.Owner.CurrentSelection.Start, (Int32)this.Owner.CurrentSelection.Length))
             {
-                Owner.Core_WriteText(
-                    current.Substring(0, (Int32)Owner.CurrentSelection.Start) + replace +
-                    current.Substring((Int32)Owner.CurrentSelection.End), Owner.CurrentIndex);
+                this.Owner.Core_WriteText(
+                    current.Substring(0, (Int32)this.Owner.CurrentSelection.Start) + replace +
+                    current.Substring((Int32)this.Owner.CurrentSelection.End), this.Owner.CurrentIndex);
             }
 
-            Find_ProgressBar.Maximum = current.Length;
+            this.Find_ProgressBar.Maximum = current.Length;
 
-            for (Int32 i = (Int32)(Owner.CurrentSelection.Start + Owner.CurrentSelection.Length); i < current.Length; i++)
+            for (Int32 i = (Int32)(this.Owner.CurrentSelection.Start + this.Owner.CurrentSelection.Length); i < current.Length; i++)
             {
-                if (Find_Current_Button.Checked)
-                    Find_ProgressBar.Value = i;
+                if (this.Find_Current_Button.Checked)
+                    this.Find_ProgressBar.Value = i;
 
                 if (current[i] == text[0])
                 {
@@ -53,24 +53,24 @@ namespace EmblemMagic.Editors
                     }
                     if (match)
                     {
-                        Find_ProgressBar.Value = Find_ProgressBar.Maximum - 1;
-                        Owner.CurrentSelection = new Magic.Range(i, i + text.Length);
+                        this.Find_ProgressBar.Value = this.Find_ProgressBar.Maximum - 1;
+                        this.Owner.CurrentSelection = new Magic.Range(i, i + text.Length);
                         return;
                     }
                 }
             }
-            Find_ProgressBar.Value = 0;
+            this.Find_ProgressBar.Value = 0;
 
-            if (Find_Complete_Button.Checked)
+            if (this.Find_Complete_Button.Checked)
             {
-                Find_ProgressBar.Maximum = MAXIMUM;
+                this.Find_ProgressBar.Maximum = MAXIMUM;
 
-                for (UInt16 entry = (UInt16)(Owner.CurrentIndex + 1); entry < MAXIMUM; entry++)
+                for (UInt16 entry = (UInt16)(this.Owner.CurrentIndex + 1); entry < MAXIMUM; entry++)
                 {
-                    Find_ProgressBar.Value = entry;
+                    this.Find_ProgressBar.Value = entry;
                     try
                     {
-                        current = Owner.Core_GetText(entry);
+                        current = this.Owner.Core_GetText(entry);
 
                         for (Int32 i = 0; (i < current.Length); i++)
                         {
@@ -84,9 +84,9 @@ namespace EmblemMagic.Editors
                                 }
                                 if (match)
                                 {
-                                    Find_ProgressBar.Value = Find_ProgressBar.Maximum - 1;
-                                    Owner.Core_SetEntry((UInt16)entry);
-                                    Owner.CurrentSelection = new Magic.Range(i, i + text.Length);
+                                    this.Find_ProgressBar.Value = this.Find_ProgressBar.Maximum - 1;
+                                    this.Owner.Core_SetEntry((UInt16)entry);
+                                    this.Owner.CurrentSelection = new Magic.Range(i, i + text.Length);
                                     return;
                                 }
                             }
@@ -94,7 +94,7 @@ namespace EmblemMagic.Editors
                     }
                     catch { continue; }
                 }
-                Find_ProgressBar.Value = 0;
+                this.Find_ProgressBar.Value = 0;
             }
         }
         void Core_ReplaceAll(String text, String replace)
@@ -104,31 +104,31 @@ namespace EmblemMagic.Editors
                 UI.ShowMessage("There is no input text to find."); return;
             }
 
-            String current = Owner.Core_GetText(Owner.CurrentIndex);
+            String current = this.Owner.Core_GetText(this.Owner.CurrentIndex);
 
-            Find_ProgressBar.Maximum = MAXIMUM;
+            this.Find_ProgressBar.Maximum = MAXIMUM;
 
             for (UInt16 entry = 0; entry < MAXIMUM; entry++)
             {
-                Find_ProgressBar.Value = entry;
+                this.Find_ProgressBar.Value = entry;
                 try
                 {
-                    current = Owner.Core_GetText(entry);
-                    
-                    Owner.Core_WriteText(current.Replace(text, replace), Owner.CurrentIndex);
+                    current = this.Owner.Core_GetText(entry);
+
+                    this.Owner.Core_WriteText(current.Replace(text, replace), this.Owner.CurrentIndex);
                 }
                 catch { continue; }
             }
-            Find_ProgressBar.Value = 0;
+            this.Find_ProgressBar.Value = 0;
         }
 
         private void ReplaceNext_Button_Click(Object sender, EventArgs e)
         {
-            Core_Replace(Find_TextBox.Text, Replace_TextBox.Text);
+            this.Core_Replace(this.Find_TextBox.Text, this.Replace_TextBox.Text);
         }
         private void ReplaceAll_Button_Click(Object sender, EventArgs e)
         {
-            Core_ReplaceAll(Find_TextBox.Text, Replace_TextBox.Text);
+            this.Core_ReplaceAll(this.Find_TextBox.Text, this.Replace_TextBox.Text);
         }
     }
 }

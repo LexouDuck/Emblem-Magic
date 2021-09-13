@@ -17,23 +17,23 @@ namespace Magic.Components
 
         public ImageBox()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            Display = null;
+            this.Display = null;
 
-            SetStyle(ControlStyles.Opaque, false);
-            SetStyle(ControlStyles.Selectable, false);
-            SetStyle(ControlStyles.UserPaint, true);
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            this.SetStyle(ControlStyles.Opaque, false);
+            this.SetStyle(ControlStyles.Selectable, false);
+            this.SetStyle(ControlStyles.UserPaint, true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
         }
         /// <summary>
         /// Loads the image given to display it onto this ImageBox.
         /// </summary>
         public void Load(IDisplayable image)
         {
-            Display = image;
+            this.Display = image;
             this.Invalidate();
         }
         /// <summary>
@@ -41,7 +41,7 @@ namespace Magic.Components
         /// </summary>
         public void Reset()
         {
-            Display = null;
+            this.Display = null;
             this.Invalidate();
         }
 
@@ -61,7 +61,7 @@ namespace Magic.Components
         {
             try
             {
-                if (Display == null)
+                if (this.Display == null)
                 {
                     using (Brush outline = new SolidBrush(this.ForeColor))
                     {
@@ -116,7 +116,7 @@ namespace Magic.Components
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.Name = "ImageBox";
-            this.Size = new System.Drawing.Size(Width, Height);
+            this.Size = new System.Drawing.Size(this.Width, this.Height);
             this.TabStop = false;
 
             this.ResumeLayout(false);
@@ -131,9 +131,9 @@ namespace Magic.Components
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(Boolean disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(disposing);
         }

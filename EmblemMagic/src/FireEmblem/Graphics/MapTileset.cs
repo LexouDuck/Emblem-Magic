@@ -19,54 +19,54 @@ namespace EmblemMagic.FireEmblem
 
         public MapTile(TSA tsa_00, TSA tsa_01, TSA tsa_10, TSA tsa_11)
         {
-            ComboTile_00 = (tsa_00.Value & TSA.BITS_TILE);
-            ComboTile_01 = (tsa_01.Value & TSA.BITS_TILE);
-            ComboTile_10 = (tsa_10.Value & TSA.BITS_TILE);
-            ComboTile_11 = (tsa_11.Value & TSA.BITS_TILE);
+            this.ComboTile_00 = (tsa_00.Value & TSA.BITS_TILE);
+            this.ComboTile_01 = (tsa_01.Value & TSA.BITS_TILE);
+            this.ComboTile_10 = (tsa_10.Value & TSA.BITS_TILE);
+            this.ComboTile_11 = (tsa_11.Value & TSA.BITS_TILE);
 
-            Palette_00 = (tsa_00.Value & TSA.BITS_PALETTE) >> 12;
-            Palette_01 = (tsa_01.Value & TSA.BITS_PALETTE) >> 12;
-            Palette_10 = (tsa_10.Value & TSA.BITS_PALETTE) >> 12;
-            Palette_11 = (tsa_11.Value & TSA.BITS_PALETTE) >> 12;
+            this.Palette_00 = (tsa_00.Value & TSA.BITS_PALETTE) >> 12;
+            this.Palette_01 = (tsa_01.Value & TSA.BITS_PALETTE) >> 12;
+            this.Palette_10 = (tsa_10.Value & TSA.BITS_PALETTE) >> 12;
+            this.Palette_11 = (tsa_11.Value & TSA.BITS_PALETTE) >> 12;
 
-            FlipH_00 = (tsa_00.Value & TSA.BITS_FLIPH) != 0;
-            FlipH_01 = (tsa_01.Value & TSA.BITS_FLIPH) != 0;
-            FlipH_10 = (tsa_10.Value & TSA.BITS_FLIPH) != 0;
-            FlipH_11 = (tsa_11.Value & TSA.BITS_FLIPH) != 0;
+            this.FlipH_00 = (tsa_00.Value & TSA.BITS_FLIPH) != 0;
+            this.FlipH_01 = (tsa_01.Value & TSA.BITS_FLIPH) != 0;
+            this.FlipH_10 = (tsa_10.Value & TSA.BITS_FLIPH) != 0;
+            this.FlipH_11 = (tsa_11.Value & TSA.BITS_FLIPH) != 0;
 
-            FlipV_00 = (tsa_00.Value & TSA.BITS_FLIPV) != 0;
-            FlipV_01 = (tsa_01.Value & TSA.BITS_FLIPV) != 0;
-            FlipV_10 = (tsa_10.Value & TSA.BITS_FLIPV) != 0;
-            FlipV_11 = (tsa_11.Value & TSA.BITS_FLIPV) != 0;
+            this.FlipV_00 = (tsa_00.Value & TSA.BITS_FLIPV) != 0;
+            this.FlipV_01 = (tsa_01.Value & TSA.BITS_FLIPV) != 0;
+            this.FlipV_10 = (tsa_10.Value & TSA.BITS_FLIPV) != 0;
+            this.FlipV_11 = (tsa_11.Value & TSA.BITS_FLIPV) != 0;
         }
 
         public Byte[] ToBytes()
         {
             Byte[] result = new Byte[8];
 
-            result[0] = (Byte)(ComboTile_00 & 0xFF);
-            result[1] = (Byte)(ComboTile_00 >> 8);
-            result[1] |= (Byte)((FlipH_00 ? 1 : 0) << 2);
-            result[1] |= (Byte)((FlipV_00 ? 1 : 0) << 3);
-            result[1] |= (Byte)(Palette_00 << 4);
+            result[0] = (Byte)(this.ComboTile_00 & 0xFF);
+            result[1] = (Byte)(this.ComboTile_00 >> 8);
+            result[1] |= (Byte)((this.FlipH_00 ? 1 : 0) << 2);
+            result[1] |= (Byte)((this.FlipV_00 ? 1 : 0) << 3);
+            result[1] |= (Byte)(this.Palette_00 << 4);
 
-            result[2] = (Byte)(ComboTile_01 & 0xFF);
-            result[3] = (Byte)(ComboTile_01 >> 8);
-            result[3] |= (Byte)((FlipH_01 ? 1 : 0) << 2);
-            result[3] |= (Byte)((FlipV_01 ? 1 : 0) << 3);
-            result[3] |= (Byte)(Palette_01 << 4);
+            result[2] = (Byte)(this.ComboTile_01 & 0xFF);
+            result[3] = (Byte)(this.ComboTile_01 >> 8);
+            result[3] |= (Byte)((this.FlipH_01 ? 1 : 0) << 2);
+            result[3] |= (Byte)((this.FlipV_01 ? 1 : 0) << 3);
+            result[3] |= (Byte)(this.Palette_01 << 4);
 
-            result[4] = (Byte)(ComboTile_10 & 0xFF);
-            result[5] = (Byte)(ComboTile_10 >> 8);
-            result[5] |= (Byte)((FlipH_10 ? 1 : 0) << 2);
-            result[5] |= (Byte)((FlipV_10 ? 1 : 0) << 3);
-            result[5] |= (Byte)(Palette_10 << 4);
+            result[4] = (Byte)(this.ComboTile_10 & 0xFF);
+            result[5] = (Byte)(this.ComboTile_10 >> 8);
+            result[5] |= (Byte)((this.FlipH_10 ? 1 : 0) << 2);
+            result[5] |= (Byte)((this.FlipV_10 ? 1 : 0) << 3);
+            result[5] |= (Byte)(this.Palette_10 << 4);
 
-            result[6] = (Byte)(ComboTile_11 & 0xFF);
-            result[7] = (Byte)(ComboTile_11 >> 8);
-            result[7] |= (Byte)((FlipH_11 ? 1 : 0) << 2);
-            result[7] |= (Byte)((FlipV_11 ? 1 : 0) << 3);
-            result[7] |= (Byte)(Palette_11 << 4);
+            result[6] = (Byte)(this.ComboTile_11 & 0xFF);
+            result[7] = (Byte)(this.ComboTile_11 >> 8);
+            result[7] |= (Byte)((this.FlipH_11 ? 1 : 0) << 2);
+            result[7] |= (Byte)((this.FlipV_11 ? 1 : 0) << 3);
+            result[7] |= (Byte)(this.Palette_11 << 4);
 
             return result;
         }
@@ -81,12 +81,12 @@ namespace EmblemMagic.FireEmblem
         {
             get
             {
-                if (x < 0 || x >= Width)  throw new ArgumentException("X given is out of bounds: " + x);
-                if (y < 0 || y >= Height) throw new ArgumentException("Y given is out of bounds: " + y);
+                if (x < 0 || x >= this.Width)  throw new ArgumentException("X given is out of bounds: " + x);
+                if (y < 0 || y >= this.Height) throw new ArgumentException("Y given is out of bounds: " + y);
 
                 Int32 tileX = x / 16;
                 Int32 tileY = y / 16;
-                MapTile combo = Tiles[tileX + tileY * 32];
+                MapTile combo = this.Tiles[tileX + tileY * 32];
 
                 tileX = x % 16;
                 tileY = y % 16;
@@ -124,18 +124,18 @@ namespace EmblemMagic.FireEmblem
                     if (combo.FlipH_11) tileX = 7 - tileX;
                     if (combo.FlipV_11) tileY = 7 - tileY;
                 }
-                Tile tile = (Tileset2 == null) ?
-                    Tileset1[tileIndex] :
+                Tile tile = (this.Tileset2 == null) ?
+                    this.Tileset1[tileIndex] :
                     (tileIndex < 512) ?
-                    Tileset1[tileIndex] :
-                    Tileset2[tileIndex - 512];
+                    this.Tileset1[tileIndex] :
+                    this.Tileset2[tileIndex - 512];
                 return palette * Palette.MAX + tile[tileX, tileY];
             }
         }
         public Color GetColor(Int32 x, Int32 y)
         {
             Int32 color = this[x, y];
-            return Palettes[color / Palette.MAX][color % Palette.MAX];
+            return this.Palettes[color / Palette.MAX][color % Palette.MAX];
         }
 
         public const Int32 WIDTH = 2;
@@ -187,30 +187,30 @@ namespace EmblemMagic.FireEmblem
 
         public MapTileset(Byte[] palettes, Byte[] tileset1, Byte[] tileset2, Byte[] tsa_terrain)
         {
-            Palettes = new Palette[palettes.Length / Palette.LENGTH];
+            this.Palettes = new Palette[palettes.Length / Palette.LENGTH];
             Byte[] buffer = new Byte[Palette.LENGTH];
-            for (Int32 p = 0; p < Palettes.Length; p++)
+            for (Int32 p = 0; p < this.Palettes.Length; p++)
             {
                 Array.Copy(palettes, p * Palette.LENGTH, buffer, 0, Palette.LENGTH);
-                Palettes[p] = new Palette(buffer);
+                this.Palettes[p] = new Palette(buffer);
             }
             if (tileset2 == null || tileset2.Length == 0)
             {
-                Tileset1 = new Tileset(tileset1, 1024);
-                Tileset2 = null;
+                this.Tileset1 = new Tileset(tileset1, 1024);
+                this.Tileset2 = null;
             }
             else
             {
-                Tileset1 = new Tileset(tileset1, 512);
-                Tileset2 = new Tileset(tileset2, 512);
+                this.Tileset1 = new Tileset(tileset1, 512);
+                this.Tileset2 = new Tileset(tileset2, 512);
             }
-            Terrain = tsa_terrain.GetBytes(WIDTH * HEIGHT * 2);
-            Tiles = new List<MapTile>();
+            this.Terrain = tsa_terrain.GetBytes(WIDTH * HEIGHT * 2);
+            this.Tiles = new List<MapTile>();
             TSA_Array tsa = new TSA_Array(WIDTH, HEIGHT, tsa_terrain);
             Int32 length = 32 * 32;
             for (Int32 i = 0; i < length; i++)
             {
-                Tiles.Add(new MapTile(
+                this.Tiles.Add(new MapTile(
                     tsa[0, i * 2],
                     tsa[0, i * 2 + 1],
                     tsa[1, i * 2],
@@ -223,19 +223,19 @@ namespace EmblemMagic.FireEmblem
             if (palette == null)
             {
                 maptileset = new TSA_Image(64, 64, tileset, 4, true);
-                Palettes = new Palette[8];
+                this.Palettes = new Palette[8];
                 for (Int32 i = 0; i < 4; i++)
                 {
-                    Palettes[i] = maptileset.Palettes[i];
+                    this.Palettes[i] = maptileset.Palettes[i];
                 }
                 for (Int32 i = 0; i < 4; i++)
                 {
-                    Palettes[4 + i] = new Palette();
+                    this.Palettes[4 + i] = new Palette();
                     Color color;
                     for (Int32 j = 0; j < Palette.MAX; j++)
                     {
                         color = maptileset.Palettes[i][j];
-                        Palettes[4 + i].Add(new GBA.Color(0,
+                        this.Palettes[4 + i].Add(new GBA.Color(0,
                             (Byte)(color.GetValueR() + 32),
                             (Byte)(color.GetValueG() + 32),
                             (Byte)(color.GetValueB() + 32)));
@@ -245,10 +245,10 @@ namespace EmblemMagic.FireEmblem
             else
             {
                 maptileset = new TSA_Image(64, 64, tileset, palette, 8, true);
-                Palettes = Palette.Split(palette, 8);
+                this.Palettes = Palette.Split(palette, 8);
             }
 
-            if (tileset1 == null) Tileset1 = maptileset.Graphics;
+            if (tileset1 == null) this.Tileset1 = maptileset.Graphics;
             else
             {
                 
@@ -266,13 +266,13 @@ namespace EmblemMagic.FireEmblem
         public Byte[] GetTSAandTerrain(Boolean compressed)
         {
             List<Byte> tsa = new List<Byte>();
-            foreach (MapTile tile in Tiles)
+            foreach (MapTile tile in this.Tiles)
             {
                 tsa.AddRange(tile.ToBytes());
             }
-            Byte[] result = new Byte[tsa.Count + Terrain.Length];
+            Byte[] result = new Byte[tsa.Count + this.Terrain.Length];
             Array.Copy(tsa.ToArray(), result, tsa.Count);
-            Array.Copy(Terrain, 0, result, tsa.Count, Terrain.Length);
+            Array.Copy(this.Terrain, 0, result, tsa.Count, this.Terrain.Length);
             return compressed ? LZ77.Compress(result) : result;
         }
     }

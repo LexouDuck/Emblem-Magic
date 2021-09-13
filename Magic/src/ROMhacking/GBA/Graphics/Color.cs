@@ -30,59 +30,59 @@ namespace GBA
 
         public Color(Byte[] data)
         {
-            Value = Util.BytesToUInt16(data, false);
+            this.Value = Util.BytesToUInt16(data, false);
         }
         public Color(UInt16 value)
         {
-            Value = value;
+            this.Value = value;
         }
         public Color(UInt32 value)
         {
-            Value = Get16bitColor(value, (value & 0xFF000000) != 0);
+            this.Value = Get16bitColor(value, (value & 0xFF000000) != 0);
         }
         public Color(Byte alpha, Byte red, Byte green, Byte blue)
         {
-            Value = Get16bitColor((alpha == 0) ? false : true, red, green, blue);
+            this.Value = Get16bitColor((alpha == 0) ? false : true, red, green, blue);
         }
 
 
 
         public Byte GetValueR()
         {
-            return (Byte)(Value & BITS_R);
+            return (Byte)(this.Value & BITS_R);
         }
         public Byte GetValueG()
         {
-            return (Byte)((Value & BITS_G) >> 5);
+            return (Byte)((this.Value & BITS_G) >> 5);
         }
         public Byte GetValueB()
         {
-            return (Byte)((Value & BITS_B) >> 10);
+            return (Byte)((this.Value & BITS_B) >> 10);
         }
         public Boolean GetAlpha()
         {
-            return ((Value & ALPHA) == ALPHA);
+            return ((this.Value & ALPHA) == ALPHA);
         }
 
         public Color SetValueR(Byte set)
         {
             if (set >= 32) throw new Exception("Cannot set GBA.Color channel to " + set);
-            return new Color((UInt16)((Value & (ALPHA | BITS_G | BITS_B)) | set));
+            return new Color((UInt16)((this.Value & (ALPHA | BITS_G | BITS_B)) | set));
         }
         public Color SetValueG(Byte set)
         {
             if (set >= 32) throw new Exception("Cannot set GBA.Color channel to " + set);
-            return new Color((UInt16)((Value & (ALPHA | BITS_R | BITS_B)) | (set << 5)));
+            return new Color((UInt16)((this.Value & (ALPHA | BITS_R | BITS_B)) | (set << 5)));
         }
         public Color SetValueB(Byte set)
         {
             if (set >= 32) throw new Exception("Cannot set GBA.Color channel to " + set);
-            return new Color((UInt16)((Value & (ALPHA | BITS_R | BITS_G)) | (set << 10)));
+            return new Color((UInt16)((this.Value & (ALPHA | BITS_R | BITS_G)) | (set << 10)));
         }
         public Color SetAlpha(Boolean set)
         {
-            if (set) return new Color((UInt16)(Value | ALPHA));
-            else  return new Color((UInt16)(Value & NO_ALPHA));
+            if (set) return new Color((UInt16)(this.Value | ALPHA));
+            else  return new Color((UInt16)(this.Value & NO_ALPHA));
         }
 
         /// <summary>
@@ -90,21 +90,21 @@ namespace GBA
         /// </summary>
         public UInt16 To16bit()
         {
-            return Value;
+            return this.Value;
         }
         /// <summary>
         /// Returns 'this' Color as a 32-bit AARRGGBB color.
         /// </summary>
         public UInt32 To32bit()
         {
-            return Get32bitColor(Value);
+            return Get32bitColor(this.Value);
         }
         /// <summary>
         /// Returns 'this' Color as a 2-length byte array.
         /// </summary>
         public Byte[] ToBytes(Boolean littleEndian)
         {
-            return Util.UInt16ToBytes(Value, littleEndian);
+            return Util.UInt16ToBytes(this.Value, littleEndian);
         }
 
         /// <summary>
@@ -148,9 +148,9 @@ namespace GBA
         /// </summary>
         public Color Blend(Color color)
         {
-            Byte r1 = GetValueR(); Byte r2 = color.GetValueR();
-            Byte g1 = GetValueG(); Byte g2 = color.GetValueG();
-            Byte b1 = GetValueB(); Byte b2 = color.GetValueB();
+            Byte r1 = this.GetValueR(); Byte r2 = color.GetValueR();
+            Byte g1 = this.GetValueG(); Byte g2 = color.GetValueG();
+            Byte b1 = this.GetValueB(); Byte b2 = color.GetValueB();
             Color result = new Color();
             result.Value |= (UInt16) ((r1 + r2) / 2);
             result.Value |= (UInt16)(((g1 + g2) / 2) << 5);
@@ -192,21 +192,21 @@ namespace GBA
         override public String ToString()
         {
             return "GBA.Color: "
-                + Util.UInt16ToHex(Value) + " | "
-                + "R: " + GetValueR() + ", "
-                + "G: " + GetValueG() + ", "
-                + "B: " + GetValueB() + ", "
-                + "A: " + (Value >= ALPHA);
+                + Util.UInt16ToHex(this.Value) + " | "
+                + "R: " + this.GetValueR() + ", "
+                + "G: " + this.GetValueG() + ", "
+                + "B: " + this.GetValueB() + ", "
+                + "A: " + (this.Value >= ALPHA);
         }
         override public Boolean Equals(Object other)
         {
             if (!(other is Color)) return false;
             Color color = (Color)other;
-            return (Value == color.Value);
+            return (this.Value == color.Value);
         }
         override public Int32 GetHashCode()
         {
-            return Value.GetHashCode();
+            return this.Value.GetHashCode();
         }
         
         public static Boolean operator ==(Color left, Color right)

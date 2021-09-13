@@ -16,25 +16,25 @@ namespace Magic
 
         public FormProperties(IApp app)
         {
-            App = app;
+            this.App = app;
 
-            InitializeComponent();
+            this.InitializeComponent();
 
-            LoadProperties();
+            this.LoadProperties();
         }
 
         void LoadProperties()
         {
-            NameTextBox.Text        = App.MHF.HackName;
-            AuthorTextBox.Text      = App.MHF.HackAuthor;
-            DescriptionTextBox.Text = App.MHF.HackDescription;
+            this.NameTextBox.Text        = this.App.MHF.HackName;
+            this.AuthorTextBox.Text      = this.App.MHF.HackAuthor;
+            this.DescriptionTextBox.Text = this.App.MHF.HackDescription;
         }
 
         private void ApplyButton_Click(Object sender, EventArgs e)
         {
-            App.MHF.HackName        = NameTextBox.Text;
-            App.MHF.HackAuthor      = AuthorTextBox.Text;
-            App.MHF.HackDescription = DescriptionTextBox.Text;
+            this.App.MHF.HackName        = this.NameTextBox.Text;
+            this.App.MHF.HackAuthor      = this.AuthorTextBox.Text;
+            this.App.MHF.HackDescription = this.DescriptionTextBox.Text;
 
             this.DialogResult = DialogResult.Yes;
         }

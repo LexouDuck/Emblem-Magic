@@ -24,7 +24,7 @@ namespace Magic
         /// </summary>
         public String FileName
         {
-            get { return Path.GetFileName(FilePath); }
+            get { return Path.GetFileName(this.FilePath); }
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Magic
         /// </summary>
         public UInt32 FileSize
         {
-            get { return (UInt32)FileData.Length; }
+            get { return (UInt32)this.FileData.Length; }
         }
 
         /// <summary>
@@ -65,17 +65,17 @@ namespace Magic
 
         public DataManager(IApp app)
         {
-            App = app;
+            this.App = app;
 
-            FilePath = null;
-            FileData = new Byte[ROM_MAX_SIZE];
+            this.FilePath = null;
+            this.FileData = new Byte[ROM_MAX_SIZE];
 
-            IsClean = true;
-            WasChanged = false;
-            WasExpanded = false;
+            this.IsClean = true;
+            this.WasChanged = false;
+            this.WasExpanded = false;
 
-            UndoList = new List<UndoRedo>(Settings.Default.UndoListMax);
-            RedoList = new List<UndoRedo>(Settings.Default.UndoListMax);
+            this.UndoList = new List<UndoRedo>(Settings.Default.UndoListMax);
+            this.RedoList = new List<UndoRedo>(Settings.Default.UndoListMax);
         }
 
 
@@ -91,15 +91,15 @@ namespace Magic
             if (!File.Exists(path))
                 throw new Exception("The ROM file was not found: " + path);
 
-            lock (Locked)
+            lock (this.Locked)
             {
                 FileInfo file = new FileInfo(path);
 
                 if (file.Length > ROM_MAX_SIZE)
                     throw new Exception("The ROM file is too big to be opened by this program.");
-                
-                FilePath = path;
-                FileData = File.ReadAllBytes(FilePath);
+
+                this.FilePath = path;
+                this.FileData = File.ReadAllBytes(this.FilePath);
 
                 this.WasChanged = false;
             }
@@ -109,11 +109,11 @@ namespace Magic
         /// </summary>
         public void SaveFile(String path)
         {
-            lock (Locked)
+            lock (this.Locked)
             {
-                FilePath = path;
+                this.FilePath = path;
                 
-                File.WriteAllBytes(FilePath, FileData);
+                File.WriteAllBytes(this.FilePath, this.FileData);
 
                 this.WasChanged = false;
             }
@@ -127,11 +127,11 @@ namespace Magic
         public Byte[] Read(Pointer address, Int32 length)
         {
             Byte[] result = new Byte[length];
-            lock (Locked)
+            lock (this.Locked)
             {
                 try
                 {
-                    Array.Copy(FileData, address, result, 0, length);
+                    Array.Copy(this.FileData, address, result, 0, length);
                 }
                 catch (Exception ex)
                 {
@@ -145,17 +145,17 @@ namespace Magic
         /// </summary>
         public Pointer Find(Byte[] data, UInt32 align)
         {
-            lock (Locked)
+            lock (this.Locked)
             {
                 Byte[] buffer = new Byte[data.Length];
                 try
                 {
-                    for (UInt32 parse = 0; parse < FileData.Length; parse += align)
+                    for (UInt32 parse = 0; parse < this.FileData.Length; parse += align)
                     {
-                        if (data[0] == FileData[parse])
+                        if (data[0] == this.FileData[parse])
                         {
                             Boolean match = true;
-                            Array.Copy(FileData, parse, buffer, 0, data.Length);
+                            Array.Copy(this.FileData, parse, buffer, 0, data.Length);
 
                             for (Int32 i = 0; i < data.Length; i++)
                             {
@@ -183,17 +183,17 @@ namespace Magic
         public Pointer[] Search(Byte[] data, UInt32 align)
         {
             List<Pointer> result = new List<Pointer>();
-            lock (Locked)
+            lock (this.Locked)
             {
                 Byte[] buffer = new Byte[data.Length];
                 try
                 {
-                    for (UInt32 parse = 0; parse < FileData.Length; parse += align)
+                    for (UInt32 parse = 0; parse < this.FileData.Length; parse += align)
                     {
-                        if (data[0] == FileData[parse])
+                        if (data[0] == this.FileData[parse])
                         {
                             Boolean match = true;
-                            Array.Copy(FileData, parse, buffer, 0, data.Length);
+                            Array.Copy(this.FileData, parse, buffer, 0, data.Length);
 
                             for (Int32 i = 0; i < data.Length; i++)
                             {
@@ -220,7 +220,7 @@ namespace Magic
         /// </summary>
         public void Write(UserAction action, Write write, List<WriteConflict> conflict)
         {
-            lock (Locked)
+            lock (this.Locked)
             {
                 try
                 {
@@ -234,8 +234,8 @@ namespace Magic
 
                     if (action == UserAction.Cancel) return;
 
-                    RedoList.Clear();
-                    UndoList.Add(new UndoRedo(action, write, old_data, conflict));
+                    this.RedoList.Clear();
+                    this.UndoList.Add(new UndoRedo(action, write, old_data, conflict));
 
                     this.WasChanged = true;
                 }
@@ -250,12 +250,12 @@ namespace Magic
         /// </summary>
         public void Restore(Pointer address, Int32 length, List<WriteConflict> conflict)
         {
-            lock (Locked)
+            lock (this.Locked)
             {
                 try
                 {
                     Byte[] old_data = new Byte[length];
-                    Array.Copy(FileData, address, old_data, 0, length);
+                    Array.Copy(this.FileData, address, old_data, 0, length);
                     Byte[] restore = new Byte[length];
                     using (FileStream file = File.OpenRead(Core.Path_CleanROM))
                     {
@@ -263,14 +263,14 @@ namespace Magic
                         file.Read(restore, 0, length);
                     }
 
-                    UndoList.Add(new UndoRedo(
+                    this.UndoList.Add(new UndoRedo(
                         UserAction.Restore,
                         new Write("", new Pointer(address), restore),
                         old_data, conflict));
 
                     for (Int32 i = 0; i < length; i++)
                     {
-                        FileData[address + i] = restore[i];
+                        this.FileData[address + i] = restore[i];
                     }
                 }
                 catch (Exception ex)
@@ -285,7 +285,7 @@ namespace Magic
         public void Resize(Int32 newFileSize, SpaceManager space)
         {
             if (newFileSize == 0 ||
-                newFileSize == FileSize)
+                newFileSize == this.FileSize)
             {
                 return;
             }
@@ -294,16 +294,16 @@ namespace Magic
                 UI.ShowMessage("The ROM cannot be expanded beyond 32MB.");
                 return;
             }
-            Byte[] data = FileData;
-            FileData = new Byte[newFileSize];
+            Byte[] data = this.FileData;
+            this.FileData = new Byte[newFileSize];
             if (newFileSize > data.Length)
             {
-                Array.Copy(data, FileData, data.Length);
+                Array.Copy(data, this.FileData, data.Length);
                 space.MarkSpace("FREE",
                     new Pointer((UInt32)data.Length),
-                    new Pointer((UInt32)FileData.Length));
+                    new Pointer((UInt32)this.FileData.Length));
             }
-            else Array.Copy(data, FileData, FileData.Length);
+            else Array.Copy(data, this.FileData, this.FileData.Length);
         }
 
         
@@ -313,20 +313,20 @@ namespace Magic
         /// </summary>
         public void UndoAction(Int32 index)
         {
-            lock (Locked)
+            lock (this.Locked)
             {
-                if (index >= 0 && index < UndoList.Count) try
+                if (index >= 0 && index < this.UndoList.Count) try
                 {
-                    Byte[] old_data = new Byte[UndoList[index].Data.Length];
-                    Array.Copy(FileData, UndoList[index].Associated.Address, old_data, 0, old_data.Length);
+                    Byte[] old_data = new Byte[this.UndoList[index].Data.Length];
+                    Array.Copy(this.FileData, this.UndoList[index].Associated.Address, old_data, 0, old_data.Length);
 
-                    RedoList.Add(new UndoRedo(UndoList[index].Action, UndoList[index].Associated, old_data, UndoList[index].Conflicts));
+                        this.RedoList.Add(new UndoRedo(this.UndoList[index].Action, this.UndoList[index].Associated, old_data, this.UndoList[index].Conflicts));
 
-                    for (Int32 i = 0; i < UndoList[index].Data.Length; i++)
+                    for (Int32 i = 0; i < this.UndoList[index].Data.Length; i++)
                     {
-                        FileData[UndoList[index].Associated.Address + i] = UndoList[index].Data[i];
+                            this.FileData[this.UndoList[index].Associated.Address + i] = this.UndoList[index].Data[i];
                     }
-                    UndoList.RemoveAt(index);
+                        this.UndoList.RemoveAt(index);
                 }
                 catch (Exception ex)
                 {
@@ -339,22 +339,22 @@ namespace Magic
         /// </summary>
         public void RedoAction(Int32 index)
         {
-            lock (Locked)
+            lock (this.Locked)
             {
-                if (index >= 0 && index < RedoList.Count) try
+                if (index >= 0 && index < this.RedoList.Count) try
                 {
-                    Byte[] old_data = new Byte[RedoList[index].Data.Length];
-                    Array.Copy(FileData, RedoList[index].Associated.Address, old_data, 0, old_data.Length);
-                    UserAction action = RedoList[index].Action;
+                    Byte[] old_data = new Byte[this.RedoList[index].Data.Length];
+                    Array.Copy(this.FileData, this.RedoList[index].Associated.Address, old_data, 0, old_data.Length);
+                    UserAction action = this.RedoList[index].Action;
                     if (action == UserAction.Cancel) action = UserAction.Overwrite;
 
-                    UndoList.Add(new UndoRedo(action, RedoList[index].Associated, old_data, RedoList[index].Conflicts));
+                        this.UndoList.Add(new UndoRedo(action, this.RedoList[index].Associated, old_data, this.RedoList[index].Conflicts));
 
-                    for (Int32 i = 0; i < RedoList[index].Data.Length; i++)
+                    for (Int32 i = 0; i < this.RedoList[index].Data.Length; i++)
                     {
-                        FileData[RedoList[index].Associated.Address + i] = RedoList[index].Data[i];
+                            this.FileData[this.RedoList[index].Associated.Address + i] = this.RedoList[index].Data[i];
                     }
-                    RedoList.RemoveAt(index);
+                        this.RedoList.RemoveAt(index);
                 }
                 catch (Exception ex)
                 {

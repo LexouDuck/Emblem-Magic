@@ -12,51 +12,51 @@ namespace EmblemMagic.Editors
 
         public KeyMapEditor(Pointer address)
         {
-            Address = address;
+            this.Address = address;
 
-            InitializeComponent();
+            this.InitializeComponent();
 
-            KeyMap_PianoBox.SelectionChanged += KeyMap_PianoBox_SelectionChanged;
+            this.KeyMap_PianoBox.SelectionChanged += this.KeyMap_PianoBox_SelectionChanged;
         }
 
 
 
         public override void Core_OnOpen()
         {
-            Core_Update();
+            this.Core_Update();
         }
         public override void Core_Update()
         {
-            Current = new KeyMap(Core.ReadData(Address, KeyMap.LENGTH));
+            this.Current = new KeyMap(Core.ReadData(this.Address, KeyMap.LENGTH));
 
-            KeyMap_PianoBox.SelectionChanged -= KeyMap_PianoBox_SelectionChanged;
-            for (Int32 i = 0; i < KeyMap_PianoBox.Selection.Length; i++)
+            this.KeyMap_PianoBox.SelectionChanged -= this.KeyMap_PianoBox_SelectionChanged;
+            for (Int32 i = 0; i < this.KeyMap_PianoBox.Selection.Length; i++)
             {
-                if (Current[i] == Sample_ByteBox.Value)
+                if (this.Current[i] == this.Sample_ByteBox.Value)
                 {
-                    KeyMap_PianoBox.Selection[i] = true;
+                    this.KeyMap_PianoBox.Selection[i] = true;
                 }
             }
-            KeyMap_PianoBox.SelectionChanged += KeyMap_PianoBox_SelectionChanged;
+            this.KeyMap_PianoBox.SelectionChanged += this.KeyMap_PianoBox_SelectionChanged;
         }
 
 
 
         private void Sample_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
-            Core_Update();
+            this.Core_Update();
         }
 
         private void KeyMap_PianoBox_SelectionChanged(Object sender, EventArgs e)
         {
-            for (Int32 i = 0; i < KeyMap_PianoBox.Selection.Length; i++)
+            for (Int32 i = 0; i < this.KeyMap_PianoBox.Selection.Length; i++)
             {
-                if (KeyMap_PianoBox.Selection[i] && Current[i] != Sample_ByteBox.Value)
+                if (this.KeyMap_PianoBox.Selection[i] && this.Current[i] != this.Sample_ByteBox.Value)
                 {
                     Core.WriteByte(this,
-                        Address + i,
-                        Sample_ByteBox.Value,
-                        "Key Map at " + Address + " - Byte " + i + "changed");
+                        this.Address + i,
+                        this.Sample_ByteBox.Value,
+                        "Key Map at " + this.Address + " - Byte " + i + "changed");
                 }
             }
         }

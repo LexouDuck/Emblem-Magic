@@ -24,10 +24,10 @@ namespace EmblemMagic.Editors
 
         public Event(String command, String label, Int32 line, UInt32[] args)
         {
-            Command = command;
-            Label = label;
-            CodeLineNumber = line;
-            Arguments = args;
+            this.Command = command;
+            this.Label = label;
+            this.CodeLineNumber = line;
+            this.Arguments = args;
         }
 
 

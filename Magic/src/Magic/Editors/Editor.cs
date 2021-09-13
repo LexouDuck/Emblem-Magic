@@ -21,11 +21,11 @@ namespace Magic.Editors
         {
             this.App = Core.App;
 
-            InitializeComponent();
+            this.InitializeComponent();
 
-            this.Load += new EventHandler(Core_OnLoad);
-            this.FormClosing += new FormClosingEventHandler(Core_OnExit);
-            this.FormClosed += new FormClosedEventHandler(Core_CloseEditor);
+            this.Load += new EventHandler(this.Core_OnLoad);
+            this.FormClosing += new FormClosingEventHandler(this.Core_OnExit);
+            this.FormClosed += new FormClosedEventHandler(this.Core_CloseEditor);
         }
         private void InitializeComponent()
         {
@@ -46,7 +46,7 @@ namespace Magic.Editors
         {
             try
             {
-                Core_OnOpen();
+                this.Core_OnOpen();
             }
             catch (Exception ex)
             {
@@ -76,7 +76,7 @@ namespace Magic.Editors
         /// </summary>
         public void Core_CloseEditor(Object sender, FormClosedEventArgs e)
         {
-            App.Core_ExitEditor(this);
+            this.App.Core_ExitEditor(this);
             this.Dispose();
         }
 
@@ -101,19 +101,19 @@ namespace Magic.Editors
         /// </summary>
         protected override Boolean ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (App.Edit_Undo.Enabled && keyData == (Keys.Control | Keys.Z))
+            if (this.App.Edit_Undo.Enabled && keyData == (Keys.Control | Keys.Z))
             {
-                App.Core_Undo();
+                this.App.Core_Undo();
                 return true;
             }
-            if (App.Edit_Redo.Enabled && keyData == (Keys.Control | Keys.Y))
+            if (this.App.Edit_Redo.Enabled && keyData == (Keys.Control | Keys.Y))
             {
-                App.Core_Redo();
+                this.App.Core_Redo();
                 return true;
             }
             if (keyData == (Keys.Control | Keys.M))
             {
-                App.Core_MarkSpace();
+                this.App.Core_MarkSpace();
                 return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);

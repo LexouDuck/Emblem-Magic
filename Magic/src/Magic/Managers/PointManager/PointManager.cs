@@ -15,16 +15,16 @@ namespace Magic
         public IApp App;
         public PointManager(IApp app)
         {
-            App = app;
-            Repoints = new List<Repoint>();
+            this.App = app;
+            this.Repoints = new List<Repoint>();
         }
         public void Load(Repoint[] pointers)
         {
-            Repoints.Clear();
+            this.Repoints.Clear();
 
             for (Int32 i = 0; i < pointers.Length; i++)
             {
-                Repoints.Add(pointers[i]);
+                this.Repoints.Add(pointers[i]);
             }
         }
 
@@ -36,17 +36,17 @@ namespace Magic
         /// <param name="repoint"></param>
         public void Add(Repoint repoint)
         {
-            Repoints.Add(repoint);
+            this.Repoints.Add(repoint);
         }
         /// <summary>
         /// Removes a repoint tracker from the list
         /// </summary>
         public void Remove(String assetName)
         {
-            for (Int32 i = 0; i < Repoints.Count; i++)
+            for (Int32 i = 0; i < this.Repoints.Count; i++)
             {
-                if (assetName.Equals(Repoints[i].AssetName))
-                    Repoints.RemoveAt(i);
+                if (assetName.Equals(this.Repoints[i].AssetName))
+                    this.Repoints.RemoveAt(i);
             }
         }
 
@@ -55,10 +55,10 @@ namespace Magic
         /// </summary>
         public Repoint Get(String assetName)
         {
-            for (Int32 i = 0; i < Repoints.Count; i++)
+            for (Int32 i = 0; i < this.Repoints.Count; i++)
             {
-                if (assetName.Equals(Repoints[i].AssetName))
-                    return Repoints[i];
+                if (assetName.Equals(this.Repoints[i].AssetName))
+                    return this.Repoints[i];
             }
             return null;
         }
@@ -67,10 +67,10 @@ namespace Magic
         /// </summary>
         public Repoint Get(Pointer address)
         {
-            for (Int32 i = 0; i < Repoints.Count; i++)
+            for (Int32 i = 0; i < this.Repoints.Count; i++)
             {
-                if (address == Repoints[i].CurrentAddress)
-                    return Repoints[i];
+                if (address == this.Repoints[i].CurrentAddress)
+                    return this.Repoints[i];
             }
             return null;
         }

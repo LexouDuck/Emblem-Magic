@@ -34,9 +34,9 @@ namespace EmblemMagic.FireEmblem
             {
                 image = new TSA_Image(WIDTH, HEIGHT, new GBA.Bitmap(path), palette, PALETTES, true);
             }
-            Palettes = image.Palettes;
-            Graphics = image.Graphics;
-            Tiling = image.Tiling;
+            this.Palettes = image.Palettes;
+            this.Graphics = image.Graphics;
+            this.Tiling = image.Tiling;
         }
     }
 
@@ -53,11 +53,11 @@ namespace EmblemMagic.FireEmblem
                 Int32 index = tileX + tileY * 4;
                 tileX = (x / 8) % 32;
                 tileY = (y / 8) % 32;
-                Int32 tile = TSA_Sections[index][tileX, tileY].TileIndex;
-                Int32 palette = TSA_Sections[index][tileX, tileY].Palette;
+                Int32 tile = this.TSA_Sections[index][tileX, tileY].TileIndex;
+                Int32 palette = this.TSA_Sections[index][tileX, tileY].Palette;
                 tileX = (x % 32) % 8;
                 tileY = (y % 32) % 8;
-                return palette * Palette.MAX + Graphics[index][tile][tileX, tileY];
+                return palette * Palette.MAX + this.Graphics[index][tile][tileX, tileY];
             }
             set
             {
@@ -71,11 +71,11 @@ namespace EmblemMagic.FireEmblem
             Int32 index = tileX + tileY * 4;
             tileX = (x / 8) % 32;
             tileY = (y / 8) % 32;
-            Int32 tile = TSA_Sections[index][tileX, tileY].TileIndex;
-            Int32 palette = TSA_Sections[index][tileX, tileY].Palette;
+            Int32 tile = this.TSA_Sections[index][tileX, tileY].TileIndex;
+            Int32 palette = this.TSA_Sections[index][tileX, tileY].Palette;
             tileX = (x % 32) % 8;
             tileY = (y % 32) % 8;
-            return Palettes[palette][Graphics[index][tile][tileX, tileY]];
+            return this.Palettes[palette][this.Graphics[index][tile][tileX, tileY]];
         }
 
         public Int32 Width
@@ -111,24 +111,24 @@ namespace EmblemMagic.FireEmblem
             Pointer tsa)
         {
             Pointer[] pointers;
-            Palettes = new Palette[PALETTES];
-            for (Int32 i = 0; i < Palettes.Length; i++)
+            this.Palettes = new Palette[PALETTES];
+            for (Int32 i = 0; i < this.Palettes.Length; i++)
             {
-                Palettes[i] = Core.ReadPalette(palette + i * Palette.LENGTH, Palette.LENGTH);
+                this.Palettes[i] = Core.ReadPalette(palette + i * Palette.LENGTH, Palette.LENGTH);
             }
 
             pointers = GetPointerArray(tiles);
-            Graphics = new Tileset[SECTIONS];
-            for (Int32 i = 0; i < Graphics.Length; i++)
+            this.Graphics = new Tileset[SECTIONS];
+            for (Int32 i = 0; i < this.Graphics.Length; i++)
             {
-                Graphics[i] = new Tileset(Core.ReadData(pointers[i], 32 * 32 * Tile.LENGTH));
+                this.Graphics[i] = new Tileset(Core.ReadData(pointers[i], 32 * 32 * Tile.LENGTH));
             }
 
             pointers = GetPointerArray(tsa);
-            TSA_Sections = new TSA_Array[SECTIONS];
-            for (Int32 i = 0; i < TSA_Sections.Length; i++)
+            this.TSA_Sections = new TSA_Array[SECTIONS];
+            for (Int32 i = 0; i < this.TSA_Sections.Length; i++)
             {
-                TSA_Sections[i] = Core.ReadTSA(pointers[i], 32, 32, false, true);
+                this.TSA_Sections[i] = Core.ReadTSA(pointers[i], 32, 32, false, true);
             }   // sections of 32x32 and 32x22 to make an image thats 128x86 tiles, 1024x688 pixels
         }
 
@@ -144,30 +144,30 @@ namespace EmblemMagic.FireEmblem
                 image = new TSA_Image(WIDTH, HEIGHT, new GBA.Bitmap(path), palette, PALETTES, false);
             }
 
-            Palettes = image.Palettes;
-            
-            Graphics = new Tileset[SECTIONS];
-            TSA_Sections = new TSA_Array[SECTIONS];
+            this.Palettes = image.Palettes;
+
+            this.Graphics = new Tileset[SECTIONS];
+            this.TSA_Sections = new TSA_Array[SECTIONS];
             Int32 width = 32;
             Int32 height = 32;
             for (Int32 i = 0; i < SECTIONS; i++)
             {
                 if (i == 8) height = 22;
 
-                Graphics[i] = new Tileset(width * height);
+                this.Graphics[i] = new Tileset(width * height);
                 for (Int32 y = 0; y < height; y++)
                 for (Int32 x = 0; x < width; x++)
                 {
-                    Graphics[i].Add(image.Graphics[
+                        this.Graphics[i].Add(image.Graphics[
                         (i % 4 * width + x) +
                         (i / 4 * width + y) * WIDTH]);
                 }
 
-                TSA_Sections[i] = TSA_Array.GetBasicTSA(width, height);
+                this.TSA_Sections[i] = TSA_Array.GetBasicTSA(width, height);
                 for (Int32 y = 0; y < height; y++)
                 for (Int32 x = 0; x < width; x++)
                 {
-                    TSA_Sections[i].SetPalette(x, y, image.Tiling[
+                        this.TSA_Sections[i].SetPalette(x, y, image.Tiling[
                         (i % 4 * width) + x,
                         (i / 4 * width) + y].Palette);
                 }
@@ -190,9 +190,9 @@ namespace EmblemMagic.FireEmblem
         public TSA_Image GetSection(Int32 section)
         {
             return new TSA_Image(
-                Palette.Merge(Palettes),
-                Graphics[section],
-                TSA_Sections[section]);
+                Palette.Merge(this.Palettes),
+                this.Graphics[section],
+                this.TSA_Sections[section]);
         }
     }
 }

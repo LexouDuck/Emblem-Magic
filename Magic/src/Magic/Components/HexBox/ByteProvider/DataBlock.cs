@@ -17,7 +17,7 @@ namespace Magic.Components
         {
             get
             {
-                return _map;
+                return this._map;
             }
         }
 
@@ -25,7 +25,7 @@ namespace Magic.Components
         {
             get
             {
-                return _nextBlock;
+                return this._nextBlock;
             }
         }
 
@@ -33,7 +33,7 @@ namespace Magic.Components
         {
             get
             {
-                return _previousBlock;
+                return this._previousBlock;
             }
         }
 

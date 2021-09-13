@@ -36,9 +36,9 @@ namespace EmblemMagic.FireEmblem
             if (move == null) throw new Exception("Map sprite move sheet is null.");
             if (size > IDLE_SIZE_32x32) throw new Exception("Map Sprite size byte is invalid: " + size);
 
-            AddSprite(new Sprite(palette, new Tileset(idle), new TileMap(Map_Idle(size))), 0, 32);
-            AddSprite(new Sprite(palette, new Tileset(move), new TileMap(Map_Move())),     32, 0);
-            IdleSize = size;
+            this.AddSprite(new Sprite(palette, new Tileset(idle), new TileMap(Map_Idle(size))), 0, 32);
+            this.AddSprite(new Sprite(palette, new Tileset(move), new TileMap(Map_Move())),     32, 0);
+            this.IdleSize = size;
         }
         /// <summary>
         /// Creates a Map Sprite from the given image
@@ -46,8 +46,8 @@ namespace EmblemMagic.FireEmblem
         public MapSprite(GBA.Image image)
             : base(WIDTH, HEIGHT)
         {
-            if (image.Width != Width || image.Height != Height) throw new Exception(
-                "Image given has invalid dimensions: it should be " + Width + "x" + Height + " pixels");
+            if (image.Width != this.Width || image.Height != this.Height) throw new Exception(
+                "Image given has invalid dimensions: it should be " + this.Width + "x" + this.Height + " pixels");
 
             Tileset idleTiles = new GBA.Tileset();
             Tileset moveTiles = new GBA.Tileset();
@@ -67,10 +67,10 @@ namespace EmblemMagic.FireEmblem
 
             idleTiles.Parse(image, TileMap.Place(Map_Idle(size), 0, 4, W_TILES, H_TILES));
             moveTiles.Parse(image, TileMap.Place(Map_Move(),     4, 0, W_TILES, H_TILES));
-                
-            AddSprite(new Sprite(image.Colors, idleTiles, new TileMap(Map_Idle(size))), 0 * 8, 4 * 8);
-            AddSprite(new Sprite(image.Colors, moveTiles, new TileMap(Map_Move())),     4 * 8, 0 * 8);
-            IdleSize = size;
+
+            this.AddSprite(new Sprite(image.Colors, idleTiles, new TileMap(Map_Idle(size))), 0 * 8, 4 * 8);
+            this.AddSprite(new Sprite(image.Colors, moveTiles, new TileMap(Map_Move())),     4 * 8, 0 * 8);
+            this.IdleSize = size;
         }
 
         public static Int32?[,] Map_Idle(Byte size)

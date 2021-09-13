@@ -16,9 +16,9 @@ namespace EmblemMagic.Editors
         public TextFind(TextEditor owner)
         {
             base.Owner = owner;
-            Owner = owner;
+            this.Owner = owner;
 
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         void Core_Find(String text, Boolean forward)
@@ -27,20 +27,20 @@ namespace EmblemMagic.Editors
             {
                 UI.ShowMessage("There is no input text to find."); return;
             }
-            String current = Owner.Core_GetText(Owner.CurrentIndex);
+            String current = this.Owner.Core_GetText(this.Owner.CurrentIndex);
 
-            Find_ProgressBar.Maximum = MAXIMUM;
+            this.Find_ProgressBar.Maximum = MAXIMUM;
 
             for (Int32 i = forward ?
-                    (Int32)(Owner.CurrentSelection.Start + Owner.CurrentSelection.Length) :
-                    (Int32)(Owner.CurrentSelection.Start - 1);
+                    (Int32)(this.Owner.CurrentSelection.Start + this.Owner.CurrentSelection.Length) :
+                    (Int32)(this.Owner.CurrentSelection.Start - 1);
                 forward ?
                     (i < current.Length) :
                     (i >= 0);
                 i += forward ? 1 : -1)
             {
-                if (Find_Current_Button.Checked)
-                    Find_ProgressBar.Value = i;
+                if (this.Find_Current_Button.Checked)
+                    this.Find_ProgressBar.Value = i;
 
                 if (current[i] == text[0])
                 {
@@ -52,30 +52,30 @@ namespace EmblemMagic.Editors
                     }
                     if (match)
                     {
-                        Find_ProgressBar.Value = MAXIMUM;
-                        Owner.CurrentSelection = new Magic.Range(i, i + text.Length);
+                        this.Find_ProgressBar.Value = MAXIMUM;
+                        this.Owner.CurrentSelection = new Magic.Range(i, i + text.Length);
                         return;
                     }
                 }
             }
-            Find_ProgressBar.Value = 0;
+            this.Find_ProgressBar.Value = 0;
 
-            if (Find_Complete_Button.Checked)
+            if (this.Find_Complete_Button.Checked)
             {
-                Find_ProgressBar.Maximum = MAXIMUM;
+                this.Find_ProgressBar.Maximum = MAXIMUM;
 
                 for (UInt16 entry = forward ?
-                        (UInt16)(Owner.CurrentIndex + 1):
-                        (UInt16)(Owner.CurrentIndex - 1);
+                        (UInt16)(this.Owner.CurrentIndex + 1):
+                        (UInt16)(this.Owner.CurrentIndex - 1);
                     forward ? 
                         (entry < MAXIMUM) :
                         (entry >= 0);
                     entry += (UInt16)(forward ? 1 : -1))
                 {
-                    Find_ProgressBar.Value = entry;
+                    this.Find_ProgressBar.Value = entry;
                     try
                     {
-                        current = Owner.Core_GetText(entry);
+                        current = this.Owner.Core_GetText(entry);
 
                         for (Int32 i = forward ? 0 : current.Length - 1;
                             forward ?
@@ -93,9 +93,9 @@ namespace EmblemMagic.Editors
                                 }
                                 if (match)
                                 {
-                                    Find_ProgressBar.Value = MAXIMUM;
-                                    Owner.Core_SetEntry((UInt16)entry);
-                                    Owner.CurrentSelection = new Magic.Range(i, i + text.Length);
+                                    this.Find_ProgressBar.Value = MAXIMUM;
+                                    this.Owner.Core_SetEntry((UInt16)entry);
+                                    this.Owner.CurrentSelection = new Magic.Range(i, i + text.Length);
                                     return;
                                 }
                             }
@@ -103,17 +103,17 @@ namespace EmblemMagic.Editors
                     }
                     catch { continue; }
                 }
-                Find_ProgressBar.Value = 0;
+                this.Find_ProgressBar.Value = 0;
             }
         }
 
         private void Find_Prev_Button_Click(Object sender, EventArgs e)
         {
-            Core_Find(Find_TextBox.Text, false);
+            this.Core_Find(this.Find_TextBox.Text, false);
         }
         private void Find_Next_Button_Click(Object sender, EventArgs e)
         {
-            Core_Find(Find_TextBox.Text, true);
+            this.Core_Find(this.Find_TextBox.Text, true);
         }
     }
 }

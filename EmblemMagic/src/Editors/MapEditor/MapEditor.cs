@@ -31,7 +31,7 @@ namespace EmblemMagic.Editors
         {
             get
             {
-                return "Chapter 0x" + Util.ByteToHex(EntryArrayBox.Value) + " [" + EntryArrayBox.Text + "] - ";
+                return "Chapter 0x" + Util.ByteToHex(this.EntryArrayBox.Value) + " [" + this.EntryArrayBox.Text + "] - ";
             }
         }
 
@@ -41,63 +41,63 @@ namespace EmblemMagic.Editors
         {
             try
             {
-                InitializeComponent();
+                this.InitializeComponent();
 
-                EntryArrayBox.Load("Chapter List.txt");
-                Current = new StructFile("Chapter Struct.txt");
-                Current.Address = Core.GetPointer("Chapter Array");
+                this.EntryArrayBox.Load("Chapter List.txt");
+                this.Current = new StructFile("Chapter Struct.txt");
+                this.Current.Address = Core.GetPointer("Chapter Array");
 
                 ArrayFile map_file = new ArrayFile("Map List.txt");
-                MapData_ArrayBox.Load(map_file);
-                Changes_ArrayBox.Load(map_file);
-                TileAnim1_ArrayBox.Load(map_file);
-                TileAnim2_ArrayBox.Load(map_file);
-                Palette_ArrayBox.Load(map_file);
-                TilesetTSA_ArrayBox.Load(map_file);
-                Tileset1_ArrayBox.Load(map_file);
-                Tileset2_ArrayBox.Load(map_file);
+                this.MapData_ArrayBox.Load(map_file);
+                this.Changes_ArrayBox.Load(map_file);
+                this.TileAnim1_ArrayBox.Load(map_file);
+                this.TileAnim2_ArrayBox.Load(map_file);
+                this.Palette_ArrayBox.Load(map_file);
+                this.TilesetTSA_ArrayBox.Load(map_file);
+                this.Tileset1_ArrayBox.Load(map_file);
+                this.Tileset2_ArrayBox.Load(map_file);
 
-                Chapter_MagicButton.EditorToOpen = "Module:Chapter Editor";
+                this.Chapter_MagicButton.EditorToOpen = "Module:Chapter Editor";
             }
             catch (Exception ex)
             {
                 UI.ShowError("Could not properly open the " + this.Text, ex);
 
-                Core_CloseEditor(this, null);
+                this.Core_CloseEditor(this, null);
             }
         }
 
         override public void Core_OnOpen()
         {
-            Core_Update();
+            this.Core_Update();
         }
         override public void Core_Update()
         {
-            Current.EntryIndex = EntryArrayBox.Value;
-            
-            Core_LoadValues();
-            Core_LoadTileset();
-            Core_LoadMap();
-            Core_LoadMapValues();
+            this.Current.EntryIndex = this.EntryArrayBox.Value;
+
+            this.Core_LoadValues();
+            this.Core_LoadTileset();
+            this.Core_LoadMap();
+            this.Core_LoadMapValues();
         }
 
         void Core_LoadTileset()
         {
             try
             {
-                Byte[] palette_data = Core.ReadData(Palette_PointerBox.Value, Map.PALETTES * GBA.Palette.LENGTH);
+                Byte[] palette_data = Core.ReadData(this.Palette_PointerBox.Value, Map.PALETTES * GBA.Palette.LENGTH);
 
-                CurrentTileset = new MapTileset(palette_data,
-                    Core.ReadData(Tileset1_PointerBox.Value, 0),
-                    Core.ReadData(Tileset2_PointerBox.Value, 0),
-                    Core.ReadData(TilesetTSA_PointerBox.Value, 0));
+                this.CurrentTileset = new MapTileset(palette_data,
+                    Core.ReadData(this.Tileset1_PointerBox.Value, 0),
+                    Core.ReadData(this.Tileset2_PointerBox.Value, 0),
+                    Core.ReadData(this.TilesetTSA_PointerBox.Value, 0));
 
-                Tileset_GridBox.Load(CurrentTileset);
-                Palette_PaletteBox.Load(new GBA.Palette(palette_data, Map.PALETTES * GBA.Palette.MAX));
+                this.Tileset_GridBox.Load(this.CurrentTileset);
+                this.Palette_PaletteBox.Load(new GBA.Palette(palette_data, Map.PALETTES * GBA.Palette.MAX));
             }
             catch (Exception ex)
             {
-                CurrentTileset = null;
+                this.CurrentTileset = null;
                 UI.ShowError("Could not load the the tileset for this chapter.", ex);
             }
         }
@@ -105,120 +105,120 @@ namespace EmblemMagic.Editors
         {
             try
             {
-                CurrentMap = new Map(
-                    CurrentTileset,
-                    Core.ReadData(MapData_PointerBox.Value, 0),
-                    Changes_PointerBox.Value);
+                this.CurrentMap = new Map(
+                    this.CurrentTileset,
+                    Core.ReadData(this.MapData_PointerBox.Value, 0),
+                    this.Changes_PointerBox.Value);
 
-                Map_GridBox.Load(CurrentMap);
+                this.Map_GridBox.Load(this.CurrentMap);
             }
             catch (Exception ex)
             {
-                CurrentMap = null;
-                Map_GridBox.Load(CurrentMap);
+                this.CurrentMap = null;
+                this.Map_GridBox.Load(this.CurrentMap);
                 UI.ShowError("Could not read the map for this chapter.", ex);
             }
         }
         void Core_LoadValues()
         {
-            MapData_ArrayBox.ValueChanged -= MapData_ArrayBox_ValueChanged;
-            Changes_ArrayBox.ValueChanged -= Changes_ArrayBox_ValueChanged;
-            TileAnim1_ArrayBox.ValueChanged -= TileAnim1_ArrayBox_ValueChanged;
-            TileAnim2_ArrayBox.ValueChanged -= TileAnim2_ArrayBox_ValueChanged;
-            Palette_ArrayBox.ValueChanged -= Palette_ArrayBox_ValueChanged;
-            TilesetTSA_ArrayBox.ValueChanged -= TilesetTSA_ArrayBox_ValueChanged;
-            Tileset1_ArrayBox.ValueChanged -= Tileset1_ArrayBox_ValueChanged;
-            Tileset2_ArrayBox.ValueChanged -= Tileset2_ArrayBox_ValueChanged;
+            this.MapData_ArrayBox.ValueChanged -= this.MapData_ArrayBox_ValueChanged;
+            this.Changes_ArrayBox.ValueChanged -= this.Changes_ArrayBox_ValueChanged;
+            this.TileAnim1_ArrayBox.ValueChanged -= this.TileAnim1_ArrayBox_ValueChanged;
+            this.TileAnim2_ArrayBox.ValueChanged -= this.TileAnim2_ArrayBox_ValueChanged;
+            this.Palette_ArrayBox.ValueChanged -= this.Palette_ArrayBox_ValueChanged;
+            this.TilesetTSA_ArrayBox.ValueChanged -= this.TilesetTSA_ArrayBox_ValueChanged;
+            this.Tileset1_ArrayBox.ValueChanged -= this.Tileset1_ArrayBox_ValueChanged;
+            this.Tileset2_ArrayBox.ValueChanged -= this.Tileset2_ArrayBox_ValueChanged;
 
-            MapData_PointerBox.ValueChanged -= MapData_PointerBox_ValueChanged;
-            Changes_PointerBox.ValueChanged -= Changes_PointerBox_ValueChanged;
-            TileAnim1_PointerBox.ValueChanged -= TileAnim1_PointerBox_ValueChanged;
-            TileAnim2_PointerBox.ValueChanged -= TileAnim2_PointerBox_ValueChanged;
-            Palette_PointerBox.ValueChanged -= Palette_PointerBox_ValueChanged;
-            TilesetTSA_PointerBox.ValueChanged -= TilesetTSA_PointerBox_ValueChanged;
-            Tileset1_PointerBox.ValueChanged -= Tileset1_PointerBox_ValueChanged;
-            Tileset2_PointerBox.ValueChanged -= Tileset2_PointerBox_ValueChanged;
+            this.MapData_PointerBox.ValueChanged -= this.MapData_PointerBox_ValueChanged;
+            this.Changes_PointerBox.ValueChanged -= this.Changes_PointerBox_ValueChanged;
+            this.TileAnim1_PointerBox.ValueChanged -= this.TileAnim1_PointerBox_ValueChanged;
+            this.TileAnim2_PointerBox.ValueChanged -= this.TileAnim2_PointerBox_ValueChanged;
+            this.Palette_PointerBox.ValueChanged -= this.Palette_PointerBox_ValueChanged;
+            this.TilesetTSA_PointerBox.ValueChanged -= this.TilesetTSA_PointerBox_ValueChanged;
+            this.Tileset1_PointerBox.ValueChanged -= this.Tileset1_PointerBox_ValueChanged;
+            this.Tileset2_PointerBox.ValueChanged -= this.Tileset2_PointerBox_ValueChanged;
             
             try
             {
-                MapData_ArrayBox.Value    = (Byte)Current["Map"];
-                Changes_ArrayBox.Value    = (Byte)Current["MapChanges"];
-                TileAnim1_ArrayBox.Value  = (Byte)Current["TileAnim1"];
-                TileAnim2_ArrayBox.Value  = (Byte)Current["TileAnim2"];
-                Palette_ArrayBox.Value    = (Byte)Current["Palette"];
-                TilesetTSA_ArrayBox.Value = (Byte)Current["TSA"];
-                Tileset1_ArrayBox.Value   = (Byte)Current["Tileset1"];
-                Tileset2_ArrayBox.Value   = (Byte)Current["Tileset2"];
+                this.MapData_ArrayBox.Value    = (Byte)this.Current["Map"];
+                this.Changes_ArrayBox.Value    = (Byte)this.Current["MapChanges"];
+                this.TileAnim1_ArrayBox.Value  = (Byte)this.Current["TileAnim1"];
+                this.TileAnim2_ArrayBox.Value  = (Byte)this.Current["TileAnim2"];
+                this.Palette_ArrayBox.Value    = (Byte)this.Current["Palette"];
+                this.TilesetTSA_ArrayBox.Value = (Byte)this.Current["TSA"];
+                this.Tileset1_ArrayBox.Value   = (Byte)this.Current["Tileset1"];
+                this.Tileset2_ArrayBox.Value   = (Byte)this.Current["Tileset2"];
 
                 GBA.Pointer address = Core.GetPointer("Map Data Array");
-                MapData_PointerBox.Value    = Core.ReadPointer(address + 4 * MapData_ArrayBox.Value);
-                Changes_PointerBox.Value    = Core.ReadPointer(address + 4 * Changes_ArrayBox.Value);
-                TileAnim1_PointerBox.Value  = Core.ReadPointer(address + 4 * TileAnim1_ArrayBox.Value);
-                TileAnim2_PointerBox.Value  = Core.ReadPointer(address + 4 * TileAnim2_ArrayBox.Value);
-                Palette_PointerBox.Value    = Core.ReadPointer(address + 4 * Palette_ArrayBox.Value);
-                TilesetTSA_PointerBox.Value = Core.ReadPointer(address + 4 * TilesetTSA_ArrayBox.Value);
-                Tileset1_PointerBox.Value   = Core.ReadPointer(address + 4 * Tileset1_ArrayBox.Value);
-                Tileset2_PointerBox.Value   = Core.ReadPointer(address + 4 * Tileset2_ArrayBox.Value);
+                this.MapData_PointerBox.Value    = Core.ReadPointer(address + 4 * this.MapData_ArrayBox.Value);
+                this.Changes_PointerBox.Value    = Core.ReadPointer(address + 4 * this.Changes_ArrayBox.Value);
+                this.TileAnim1_PointerBox.Value  = Core.ReadPointer(address + 4 * this.TileAnim1_ArrayBox.Value);
+                this.TileAnim2_PointerBox.Value  = Core.ReadPointer(address + 4 * this.TileAnim2_ArrayBox.Value);
+                this.Palette_PointerBox.Value    = Core.ReadPointer(address + 4 * this.Palette_ArrayBox.Value);
+                this.TilesetTSA_PointerBox.Value = Core.ReadPointer(address + 4 * this.TilesetTSA_ArrayBox.Value);
+                this.Tileset1_PointerBox.Value   = Core.ReadPointer(address + 4 * this.Tileset1_ArrayBox.Value);
+                this.Tileset2_PointerBox.Value   = Core.ReadPointer(address + 4 * this.Tileset2_ArrayBox.Value);
             }
             catch (Exception ex)
             {
                 UI.ShowError("There has been an error while trying to load the values.", ex);
             }
 
-            MapData_ArrayBox.ValueChanged += MapData_ArrayBox_ValueChanged;
-            Changes_ArrayBox.ValueChanged += Changes_ArrayBox_ValueChanged;
-            TileAnim1_ArrayBox.ValueChanged += TileAnim1_ArrayBox_ValueChanged;
-            TileAnim2_ArrayBox.ValueChanged += TileAnim2_ArrayBox_ValueChanged;
-            Palette_ArrayBox.ValueChanged += Palette_ArrayBox_ValueChanged;
-            TilesetTSA_ArrayBox.ValueChanged += TilesetTSA_ArrayBox_ValueChanged;
-            Tileset1_ArrayBox.ValueChanged += Tileset1_ArrayBox_ValueChanged;
-            Tileset2_ArrayBox.ValueChanged += Tileset2_ArrayBox_ValueChanged;
+            this.MapData_ArrayBox.ValueChanged += this.MapData_ArrayBox_ValueChanged;
+            this.Changes_ArrayBox.ValueChanged += this.Changes_ArrayBox_ValueChanged;
+            this.TileAnim1_ArrayBox.ValueChanged += this.TileAnim1_ArrayBox_ValueChanged;
+            this.TileAnim2_ArrayBox.ValueChanged += this.TileAnim2_ArrayBox_ValueChanged;
+            this.Palette_ArrayBox.ValueChanged += this.Palette_ArrayBox_ValueChanged;
+            this.TilesetTSA_ArrayBox.ValueChanged += this.TilesetTSA_ArrayBox_ValueChanged;
+            this.Tileset1_ArrayBox.ValueChanged += this.Tileset1_ArrayBox_ValueChanged;
+            this.Tileset2_ArrayBox.ValueChanged += this.Tileset2_ArrayBox_ValueChanged;
 
-            MapData_PointerBox.ValueChanged += MapData_PointerBox_ValueChanged;
-            Changes_PointerBox.ValueChanged += Changes_PointerBox_ValueChanged;
-            TileAnim1_PointerBox.ValueChanged += TileAnim1_PointerBox_ValueChanged;
-            TileAnim2_PointerBox.ValueChanged += TileAnim2_PointerBox_ValueChanged;
-            Palette_PointerBox.ValueChanged += Palette_PointerBox_ValueChanged;
-            TilesetTSA_PointerBox.ValueChanged += TilesetTSA_PointerBox_ValueChanged;
-            Tileset1_PointerBox.ValueChanged += Tileset1_PointerBox_ValueChanged;
-            Tileset2_PointerBox.ValueChanged += Tileset2_PointerBox_ValueChanged;
+            this.MapData_PointerBox.ValueChanged += this.MapData_PointerBox_ValueChanged;
+            this.Changes_PointerBox.ValueChanged += this.Changes_PointerBox_ValueChanged;
+            this.TileAnim1_PointerBox.ValueChanged += this.TileAnim1_PointerBox_ValueChanged;
+            this.TileAnim2_PointerBox.ValueChanged += this.TileAnim2_PointerBox_ValueChanged;
+            this.Palette_PointerBox.ValueChanged += this.Palette_PointerBox_ValueChanged;
+            this.TilesetTSA_PointerBox.ValueChanged += this.TilesetTSA_PointerBox_ValueChanged;
+            this.Tileset1_PointerBox.ValueChanged += this.Tileset1_PointerBox_ValueChanged;
+            this.Tileset2_PointerBox.ValueChanged += this.Tileset2_PointerBox_ValueChanged;
 
-            Chapter_MagicButton.EntryToSelect = EntryArrayBox.Value;
+            this.Chapter_MagicButton.EntryToSelect = this.EntryArrayBox.Value;
         }
         void Core_LoadMapValues()
         {
-            if (Changes_PointerBox.Value == new GBA.Pointer())
+            if (this.Changes_PointerBox.Value == new GBA.Pointer())
             {
-                Changes_CheckBox.Enabled = false;
+                this.Changes_CheckBox.Enabled = false;
             }
             else
             {
-                Changes_CheckBox.Enabled = true;
+                this.Changes_CheckBox.Enabled = true;
             }
-            Changes_CheckBox.CheckedChanged -= Changes_CheckBox_CheckedChanged;
-            Changes_CheckBox.Checked = false;
-            Changes_CheckBox.CheckedChanged += Changes_CheckBox_CheckedChanged;
+            this.Changes_CheckBox.CheckedChanged -= this.Changes_CheckBox_CheckedChanged;
+            this.Changes_CheckBox.Checked = false;
+            this.Changes_CheckBox.CheckedChanged += this.Changes_CheckBox_CheckedChanged;
 
-            Changes_Total_NumBox.Value = (CurrentMap == null || CurrentMap.Changes == null) ?
-                (Byte)(0x00) : (Byte)(CurrentMap.Changes.Count - 1);
-            Changes_Total_NumBox.Enabled = false;
-            Changes_Total_Label.Enabled = false;
-            Changes_NumBox.Enabled = false;
-            Changes_NumBox.ValueChanged -= Changes_NumBox_ValueChanged;
-            Changes_NumBox.Value = 0;
-            Changes_NumBox.Maximum = Changes_Total_NumBox.Value;
-            Changes_NumBox.ValueChanged += Changes_NumBox_ValueChanged;
+            this.Changes_Total_NumBox.Value = (this.CurrentMap == null || this.CurrentMap.Changes == null) ?
+                (Byte)(0x00) : (Byte)(this.CurrentMap.Changes.Count - 1);
+            this.Changes_Total_NumBox.Enabled = false;
+            this.Changes_Total_Label.Enabled = false;
+            this.Changes_NumBox.Enabled = false;
+            this.Changes_NumBox.ValueChanged -= this.Changes_NumBox_ValueChanged;
+            this.Changes_NumBox.Value = 0;
+            this.Changes_NumBox.Maximum = this.Changes_Total_NumBox.Value;
+            this.Changes_NumBox.ValueChanged += this.Changes_NumBox_ValueChanged;
 
-            View_AltPalette.Click -= View_AltPalette_Click;
-            View_AltPalette.Checked = false;
-            View_AltPalette.Click += View_AltPalette_Click;
+            this.View_AltPalette.Click -= this.View_AltPalette_Click;
+            this.View_AltPalette.Checked = false;
+            this.View_AltPalette.Click += this.View_AltPalette_Click;
 
-            Map_Width_NumBox.ValueChanged -= Map_WidthNumBox_ValueChanged;
-            Map_Height_NumBox.ValueChanged -= Map_HeightNumBox_ValueChanged;
-            Map_Width_NumBox.Value = (CurrentMap == null) ? 15 : CurrentMap.WidthTiles;
-            Map_Height_NumBox.Value = (CurrentMap == null) ? 10 : CurrentMap.HeightTiles;
-            Map_Width_NumBox.ValueChanged += Map_WidthNumBox_ValueChanged;
-            Map_Height_NumBox.ValueChanged += Map_HeightNumBox_ValueChanged;
+            this.Map_Width_NumBox.ValueChanged -= this.Map_WidthNumBox_ValueChanged;
+            this.Map_Height_NumBox.ValueChanged -= this.Map_HeightNumBox_ValueChanged;
+            this.Map_Width_NumBox.Value = (this.CurrentMap == null) ? 15 : this.CurrentMap.WidthTiles;
+            this.Map_Height_NumBox.Value = (this.CurrentMap == null) ? 10 : this.CurrentMap.HeightTiles;
+            this.Map_Width_NumBox.ValueChanged += this.Map_WidthNumBox_ValueChanged;
+            this.Map_Height_NumBox.ValueChanged += this.Map_HeightNumBox_ValueChanged;
         }
 
         /// <summary>
@@ -226,40 +226,40 @@ namespace EmblemMagic.Editors
         /// </summary>
         void Core_WriteMap()
         {
-            Boolean[,] selected = Tileset_GridBox.Selection;
-            Boolean viewpalette = View_AltPalette.Checked;
-            Boolean changes = Changes_CheckBox.Checked;
-            Byte number = Changes_NumBox.Value;
+            Boolean[,] selected = this.Tileset_GridBox.Selection;
+            Boolean viewpalette = this.View_AltPalette.Checked;
+            Boolean changes = this.Changes_CheckBox.Checked;
+            Byte number = this.Changes_NumBox.Value;
 
             Core.WriteData(this,
-                MapData_PointerBox.Value,
-                CurrentMap.ToBytes(),
-                CurrentEntry + "Map changed");
+                this.MapData_PointerBox.Value,
+                this.CurrentMap.ToBytes(),
+                this.CurrentEntry + "Map changed");
 
-            Tileset_GridBox.Selection = selected;
-            View_AltPalette.Checked = viewpalette;
-            Changes_CheckBox.Checked = changes;
-            Changes_NumBox.Value = number;
+            this.Tileset_GridBox.Selection = selected;
+            this.View_AltPalette.Checked = viewpalette;
+            this.Changes_CheckBox.Checked = changes;
+            this.Changes_NumBox.Value = number;
         }
         /// <summary>
         /// Writes the triggerable map changes associated with the CurrentMap onto the ROM
         /// </summary>
         void Core_WriteMapChanges()
         {
-            Boolean[,] selected = Tileset_GridBox.Selection;
-            Boolean viewpalette = View_AltPalette.Checked;
-            Boolean changes = Changes_CheckBox.Checked;
-            Byte number = Changes_NumBox.Value;
+            Boolean[,] selected = this.Tileset_GridBox.Selection;
+            Boolean viewpalette = this.View_AltPalette.Checked;
+            Boolean changes = this.Changes_CheckBox.Checked;
+            Byte number = this.Changes_NumBox.Value;
 
             Core.WriteData(this,
-                Changes_PointerBox.Value,
-                CurrentMap.Changes.ToBytes(Changes_PointerBox.Value),
-                CurrentEntry + "Map Changes changed");
+                this.Changes_PointerBox.Value,
+                this.CurrentMap.Changes.ToBytes(this.Changes_PointerBox.Value),
+                this.CurrentEntry + "Map Changes changed");
 
-            Tileset_GridBox.Selection = selected;
-            View_AltPalette.Checked = viewpalette;
-            Changes_CheckBox.Checked = changes;
-            Changes_NumBox.Value = number;
+            this.Tileset_GridBox.Selection = selected;
+            this.View_AltPalette.Checked = viewpalette;
+            this.Changes_CheckBox.Checked = changes;
+            this.Changes_NumBox.Value = number;
         }
 
         void Core_InsertMAR(String filepath, Int32 width, Int32 height)
@@ -297,9 +297,9 @@ namespace EmblemMagic.Editors
                 }
             }
 
-            CurrentMap.Layout = layout;
+            this.CurrentMap.Layout = layout;
 
-            Core_WriteMap();
+            this.Core_WriteMap();
         }
         void Core_InsertTMX(String filepath, Int32 width, Int32 height)
         {
@@ -308,7 +308,7 @@ namespace EmblemMagic.Editors
 
             width = Int32.Parse(file["map"].Attributes["width"].Value);
             height = Int32.Parse(file["map"].Attributes["height"].Value);
-            CurrentMap.Layout = new Int32[width, height];
+            this.CurrentMap.Layout = new Int32[width, height];
 
             List <Tuple<Byte, Rectangle, Int32[,]>> changes = new List<Tuple<Byte, Rectangle, Int32[,]>>();
             XmlNodeList layers = file.SelectNodes("/map/layer");
@@ -322,7 +322,7 @@ namespace EmblemMagic.Editors
                     Int32 y = 0;
                     foreach (XmlNode tile in data)
                     {
-                        CurrentMap.Layout[x, y] = Int32.Parse(tile.Attributes["gid"].Value) - 1;
+                        this.CurrentMap.Layout[x, y] = Int32.Parse(tile.Attributes["gid"].Value) - 1;
                         x++;
                         if (x == width)
                         {
@@ -366,11 +366,11 @@ namespace EmblemMagic.Editors
             UI.SuspendUpdate();
             try
             {
-                Core_WriteMap();
+                this.Core_WriteMap();
                 if (changes.Count > 0)
                 {
-                    CurrentMap.Changes = new MapChanges(changes);
-                    Core_WriteMapChanges();
+                    this.CurrentMap.Changes = new MapChanges(changes);
+                    this.Core_WriteMapChanges();
                 }
             }
             catch (Exception ex)
@@ -388,7 +388,7 @@ namespace EmblemMagic.Editors
             Int32 y = 0;
             for (Int32 i = 0; i < mar.Length; i += 2)
             {
-                Int32 tile = CurrentMap.Layout[x, y] << 3;
+                Int32 tile = this.CurrentMap.Layout[x, y] << 3;
                 mar[i] = (Byte)(tile & 0xFF);
                 mar[i + 1] = (Byte)(tile >> 8);
                 x++;
@@ -408,44 +408,44 @@ namespace EmblemMagic.Editors
 
         void Core_TileTool()
         {
-            Rectangle selection = Tileset_GridBox.GetSelectionRectangle();
+            Rectangle selection = this.Tileset_GridBox.GetSelectionRectangle();
 
-            if (Changes_CheckBox.Checked)
+            if (this.Changes_CheckBox.Checked)
             {
                 for (Int32 y = 0; y < selection.Height; y++)
                 for (Int32 x = 0; x < selection.Width; x++)
                 {
-                    if (Map_GridBox.Hovered.X + x < 0 || Map_GridBox.Hovered.X + x >= CurrentMap.WidthTiles ||
-                        Map_GridBox.Hovered.Y + y < 0 || Map_GridBox.Hovered.Y + y >= CurrentMap.HeightTiles)
+                    if (this.Map_GridBox.Hovered.X + x < 0 || this.Map_GridBox.Hovered.X + x >= this.CurrentMap.WidthTiles ||
+                        this.Map_GridBox.Hovered.Y + y < 0 || this.Map_GridBox.Hovered.Y + y >= this.CurrentMap.HeightTiles)
                             continue;
 
-                    if (Map_GridBox.Hover[x, y])
+                    if (this.Map_GridBox.Hover[x, y])
                     {
-                        CurrentMap.Changes.SetTile(
-                            Changes_NumBox.Value,
-                            Map_GridBox.Hovered.X + x,
-                            Map_GridBox.Hovered.Y + y,
+                            this.CurrentMap.Changes.SetTile(
+                            this.Changes_NumBox.Value,
+                            this.Map_GridBox.Hovered.X + x,
+                            this.Map_GridBox.Hovered.Y + y,
                             (selection.X + x) + (selection.Y + y) * 32);
                     }
                 }
 
                 UI.SuspendUpdate();
-                Core_WriteMapChanges();
+                this.Core_WriteMapChanges();
                 UI.ResumeUpdate();
             }
-            else if (Map_GridBox.Hover != null)
+            else if (this.Map_GridBox.Hover != null)
             {
                 for (Int32 y = 0; y < selection.Height; y++)
                 for (Int32 x = 0; x < selection.Width; x++)
                 {
-                    if (Map_GridBox.Hovered.X + x < 0 || Map_GridBox.Hovered.X + x >= CurrentMap.WidthTiles ||
-                        Map_GridBox.Hovered.Y + y < 0 || Map_GridBox.Hovered.Y + y >= CurrentMap.HeightTiles)
+                    if (this.Map_GridBox.Hovered.X + x < 0 || this.Map_GridBox.Hovered.X + x >= this.CurrentMap.WidthTiles ||
+                        this.Map_GridBox.Hovered.Y + y < 0 || this.Map_GridBox.Hovered.Y + y >= this.CurrentMap.HeightTiles)
                             continue;
 
-                    if (Map_GridBox.Hover[x, y])
+                    if (this.Map_GridBox.Hover[x, y])
                     {
-                        CurrentMap.Layout[Map_GridBox.Hovered.X + x,
-                                          Map_GridBox.Hovered.Y + y] =
+                            this.CurrentMap.Layout[this.Map_GridBox.Hovered.X + x,
+                                          this.Map_GridBox.Hovered.Y + y] =
                             (selection.X + x) + (selection.Y + y) * 32;
                     }
                 }
@@ -453,49 +453,49 @@ namespace EmblemMagic.Editors
         }
         void Core_EraseTool()
         {
-            if (Changes_CheckBox.Checked)
+            if (this.Changes_CheckBox.Checked)
             {
-                CurrentMap.Changes.SetTile(
-                    (Int32)Changes_NumBox.Value,
-                    Map_GridBox.Hovered.X,
-                    Map_GridBox.Hovered.Y,
+                this.CurrentMap.Changes.SetTile(
+                    (Int32)this.Changes_NumBox.Value,
+                    this.Map_GridBox.Hovered.X,
+                    this.Map_GridBox.Hovered.Y,
                     0);
 
                 UI.SuspendUpdate();
-                Core_WriteMapChanges();
+                this.Core_WriteMapChanges();
                 UI.ResumeUpdate();
             }
             else
             {
-                CurrentMap.Layout[Map_GridBox.Hovered.X, Map_GridBox.Hovered.Y] = 0;
+                this.CurrentMap.Layout[this.Map_GridBox.Hovered.X, this.Map_GridBox.Hovered.Y] = 0;
             }
         }
         void Core_PickTool()
         {
-            Int32 width = Tileset_GridBox.Selection.GetLength(0);
-            Int32 height = Tileset_GridBox.Selection.GetLength(1);
+            Int32 width = this.Tileset_GridBox.Selection.GetLength(0);
+            Int32 height = this.Tileset_GridBox.Selection.GetLength(1);
             Int32 tile;
-            if (Changes_CheckBox.Checked)
+            if (this.Changes_CheckBox.Checked)
             {
-                tile = CurrentMap.Changes.GetTile((Int32)Changes_NumBox.Value, Map_GridBox.Hovered.X, Map_GridBox.Hovered.Y);
-                if (tile == 0) tile = CurrentMap.Layout[Map_GridBox.Hovered.X, Map_GridBox.Hovered.Y];
+                tile = this.CurrentMap.Changes.GetTile((Int32)this.Changes_NumBox.Value, this.Map_GridBox.Hovered.X, this.Map_GridBox.Hovered.Y);
+                if (tile == 0) tile = this.CurrentMap.Layout[this.Map_GridBox.Hovered.X, this.Map_GridBox.Hovered.Y];
             }
             else
             {
-                tile = CurrentMap.Layout[Map_GridBox.Hovered.X, Map_GridBox.Hovered.Y];
+                tile = this.CurrentMap.Layout[this.Map_GridBox.Hovered.X, this.Map_GridBox.Hovered.Y];
             }
-            Tileset_GridBox.Selection = new Boolean[width, height];
-            Tileset_GridBox.Selection[tile % width, tile / width] = true;
+            this.Tileset_GridBox.Selection = new Boolean[width, height];
+            this.Tileset_GridBox.Selection[tile % width, tile / width] = true;
         }
         void Core_FillTool()
         {
-            Rectangle selection = Tileset_GridBox.GetSelectionRectangle();
-            Int32[] tiles = new Int32[Tileset_GridBox.GetSelectionAmount()];
+            Rectangle selection = this.Tileset_GridBox.GetSelectionRectangle();
+            Int32[] tiles = new Int32[this.Tileset_GridBox.GetSelectionAmount()];
             Int32 index = 0;
             for (Int32 y = 0; y < selection.Height; y++)
             for (Int32 x = 0; x < selection.Width; x++)
             {
-                if (Tileset_GridBox.Selection[selection.X + x, selection.Y + y])
+                if (this.Tileset_GridBox.Selection[selection.X + x, selection.Y + y])
                 {
                     tiles[index++] = (selection.X + x) + (selection.Y + y) * 32;
                 }
@@ -506,37 +506,37 @@ namespace EmblemMagic.Editors
             }
             else
             {
-                Point start = Map_GridBox.Hovered;
-                Boolean[,] map = new Boolean[CurrentMap.WidthTiles, CurrentMap.HeightTiles];
-                Int32 tile = CurrentMap.Layout[start.X, start.Y];
-                Core_FillHelper(ref map, ref tile, start.X, start.Y);
+                Point start = this.Map_GridBox.Hovered;
+                Boolean[,] map = new Boolean[this.CurrentMap.WidthTiles, this.CurrentMap.HeightTiles];
+                Int32 tile = this.CurrentMap.Layout[start.X, start.Y];
+                this.Core_FillHelper(ref map, ref tile, start.X, start.Y);
 
                 Random random = new Random();
-                for (Int32 y = 0; y < CurrentMap.HeightTiles; y++)
-                for (Int32 x = 0; x < CurrentMap.WidthTiles; x++)
+                for (Int32 y = 0; y < this.CurrentMap.HeightTiles; y++)
+                for (Int32 x = 0; x < this.CurrentMap.WidthTiles; x++)
                 {
                     if (map[x, y])
                     {
-                        CurrentMap.Layout[x, y] = tiles[random.Next(tiles.Length)];
+                            this.CurrentMap.Layout[x, y] = tiles[random.Next(tiles.Length)];
                     }
                 }
             }
         }
         void Core_FillHelper(ref Boolean[,] map, ref Int32 tile, Int32 x, Int32 y)
         {
-            if (x < 0 || x >= CurrentMap.WidthTiles
-             || y < 0 || y >= CurrentMap.HeightTiles
+            if (x < 0 || x >= this.CurrentMap.WidthTiles
+             || y < 0 || y >= this.CurrentMap.HeightTiles
              || map[x, y]
-             || CurrentMap.Layout[x, y] != tile)
+             || this.CurrentMap.Layout[x, y] != tile)
                 return;
             else
             {
                 map[x, y] = true;
 
-                Core_FillHelper(ref map, ref tile, x - 1, y);
-                Core_FillHelper(ref map, ref tile, x + 1, y);
-                Core_FillHelper(ref map, ref tile, x, y - 1);
-                Core_FillHelper(ref map, ref tile, x, y + 1);
+                this.Core_FillHelper(ref map, ref tile, x - 1, y);
+                this.Core_FillHelper(ref map, ref tile, x + 1, y);
+                this.Core_FillHelper(ref map, ref tile, x, y - 1);
+                this.Core_FillHelper(ref map, ref tile, x, y + 1);
             }
         }
 
@@ -557,12 +557,12 @@ namespace EmblemMagic.Editors
             {
                 if (openWindow.FileName.EndsWith(".tmx"))
                 {
-                    Core_InsertTMX(openWindow.FileName, (Int32)Map_Width_NumBox.Value, (Int32)Map_Height_NumBox.Value);
+                    this.Core_InsertTMX(openWindow.FileName, (Int32)this.Map_Width_NumBox.Value, (Int32)this.Map_Height_NumBox.Value);
                     return;
                 }
                 if (openWindow.FileName.EndsWith(".mar"))
                 {
-                    Core_InsertMAR(openWindow.FileName, (Int32)Map_Width_NumBox.Value, (Int32)Map_Height_NumBox.Value);
+                    this.Core_InsertMAR(openWindow.FileName, (Int32)this.Map_Width_NumBox.Value, (Int32)this.Map_Height_NumBox.Value);
                     return;
                 }
                 UI.ShowError("File chosen has invalid extension.\r\n" + openWindow.FileName);
@@ -584,12 +584,12 @@ namespace EmblemMagic.Editors
             {
                 if (saveWindow.FileName.EndsWith(".tmx", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_SaveTMX(saveWindow.FileName, (Int32)Map_Width_NumBox.Value, (Int32)Map_Height_NumBox.Value);
+                    this.Core_SaveTMX(saveWindow.FileName, (Int32)this.Map_Width_NumBox.Value, (Int32)this.Map_Height_NumBox.Value);
                     return;
                 }
                 if (saveWindow.FileName.EndsWith(".mar", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_SaveMAR(saveWindow.FileName, (Int32)Map_Width_NumBox.Value, (Int32)Map_Height_NumBox.Value);
+                    this.Core_SaveMAR(saveWindow.FileName, (Int32)this.Map_Width_NumBox.Value, (Int32)this.Map_Height_NumBox.Value);
                     return;
                 }
                 UI.ShowError("File chosen has invalid extension.\r\n" + saveWindow.FileName);
@@ -598,68 +598,68 @@ namespace EmblemMagic.Editors
         private void Tool_OpenPaletteEditor_Click(Object sender, EventArgs e)
         {
             UI.OpenPaletteEditor(this,
-                "Map Palette 0x" + Util.ByteToHex(Palette_ArrayBox.Value) + " [" + Palette_ArrayBox.Text + "] - ",
-                Palette_PointerBox.Value, 10);
+                "Map Palette 0x" + Util.ByteToHex(this.Palette_ArrayBox.Value) + " [" + this.Palette_ArrayBox.Text + "] - ",
+                this.Palette_PointerBox.Value, 10);
         }
         private void View_AltPalette_Click(Object sender, EventArgs e)
         {
-            CurrentMap.ShowFog = View_AltPalette.Checked;
+            this.CurrentMap.ShowFog = this.View_AltPalette.Checked;
 
-            Map_GridBox.Load(CurrentMap);
+            this.Map_GridBox.Load(this.CurrentMap);
         }
 
 
 
         private void EntryArrayBox_ValueChanged(Object sender, EventArgs e)
         {
-            Core_Update();
+            this.Core_Update();
         }
 
         private void Map_GridBox_MouseMove(Object sender, MouseEventArgs e)
         {
-            if (Tileset_GridBox.SelectionIsEmpty())
+            if (this.Tileset_GridBox.SelectionIsEmpty())
             {
-                Map_GridBox.Hover = new Boolean[1, 1] { { false } };
+                this.Map_GridBox.Hover = new Boolean[1, 1] { { false } };
             }
-            else if (Tool_Tile_Button.Checked)
+            else if (this.Tool_Tile_Button.Checked)
             {
-                Rectangle selection = Tileset_GridBox.GetSelectionRectangle();
-                Map_GridBox.Hover = new Boolean[selection.Width, selection.Height];
+                Rectangle selection = this.Tileset_GridBox.GetSelectionRectangle();
+                this.Map_GridBox.Hover = new Boolean[selection.Width, selection.Height];
                 for (Int32 y = 0; y < selection.Height; y++)
                     for (Int32 x = 0; x < selection.Width; x++)
                     {
-                        Map_GridBox.Hover[x, y] = Tileset_GridBox.Selection[selection.X + x, selection.Y + y];
+                        this.Map_GridBox.Hover[x, y] = this.Tileset_GridBox.Selection[selection.X + x, selection.Y + y];
                     }
             }
             else
             {
-                Map_GridBox.Hover = new Boolean[1, 1] { { true } };
+                this.Map_GridBox.Hover = new Boolean[1, 1] { { true } };
             }
         }
         private void Map_GridBox_MouseDown(Object sender, EventArgs e)
         {
-            if (Tool_Tile_Button.Checked)
+            if (this.Tool_Tile_Button.Checked)
             {
-                Core_TileTool();
-                Map_MouseTimer.Enabled = true;
-                Map_GridBox.Load(CurrentMap);
+                this.Core_TileTool();
+                this.Map_MouseTimer.Enabled = true;
+                this.Map_GridBox.Load(this.CurrentMap);
             }
-            else if (Tool_Fill_Button.Checked)
+            else if (this.Tool_Fill_Button.Checked)
             {
-                Core_FillTool();
-                Map_MouseTimer.Enabled = true;
-                Map_GridBox.Load(CurrentMap);
+                this.Core_FillTool();
+                this.Map_MouseTimer.Enabled = true;
+                this.Map_GridBox.Load(this.CurrentMap);
             }
-            else if (Tool_Erase_Button.Checked)
+            else if (this.Tool_Erase_Button.Checked)
             {
-                Core_EraseTool();
-                Map_MouseTimer.Enabled = true;
-                Map_GridBox.Load(CurrentMap);
+                this.Core_EraseTool();
+                this.Map_MouseTimer.Enabled = true;
+                this.Map_GridBox.Load(this.CurrentMap);
             }
-            else if (Tool_Pick_Button.Checked)
+            else if (this.Tool_Pick_Button.Checked)
             {
-                Core_PickTool();
-                Map_MouseTimer.Enabled = false;
+                this.Core_PickTool();
+                this.Map_MouseTimer.Enabled = false;
             }
             else
             {
@@ -668,168 +668,168 @@ namespace EmblemMagic.Editors
         }
         private void Map_GridBox_MouseUp(Object sender, EventArgs e)
         {
-            if (Tool_Pick_Button.Checked) return;
-            Map_MouseTimer.Enabled = false;
-            Core_WriteMap();
+            if (this.Tool_Pick_Button.Checked) return;
+            this.Map_MouseTimer.Enabled = false;
+            this.Core_WriteMap();
         }
         private void Map_MouseTimer_Tick(Object sender, EventArgs e)
         {
-            Map_GridBox_MouseDown(this, null);
+            this.Map_GridBox_MouseDown(this, null);
         }
 
         private void Map_WidthNumBox_ValueChanged(Object sender, EventArgs e)
         {
-            CurrentMap.WidthTiles = (Byte)Map_Width_NumBox.Value;
+            this.CurrentMap.WidthTiles = (Byte)this.Map_Width_NumBox.Value;
 
-            Core_WriteMap();
+            this.Core_WriteMap();
         }
         private void Map_HeightNumBox_ValueChanged(Object sender, EventArgs e)
         {
-            CurrentMap.HeightTiles = (Byte)Map_Height_NumBox.Value;
+            this.CurrentMap.HeightTiles = (Byte)this.Map_Height_NumBox.Value;
 
-            Core_WriteMap();
+            this.Core_WriteMap();
         }
 
         private void Changes_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
-            CurrentMap.ShowChanges = new Boolean[Changes_Total_NumBox.Value];
-            CurrentMap.ShowChanges[0] = Changes_CheckBox.Checked;
+            this.CurrentMap.ShowChanges = new Boolean[this.Changes_Total_NumBox.Value];
+            this.CurrentMap.ShowChanges[0] = this.Changes_CheckBox.Checked;
 
-            Tool_Fill_Button.Enabled = !Changes_CheckBox.Checked;
+            this.Tool_Fill_Button.Enabled = !this.Changes_CheckBox.Checked;
 
-            Changes_Total_NumBox.Enabled = Changes_CheckBox.Checked;
-            Changes_Total_Label.Enabled = Changes_CheckBox.Checked;
-            Changes_NumBox.Enabled = Changes_CheckBox.Checked;
-            Changes_NumBox.Value = 0;
+            this.Changes_Total_NumBox.Enabled = this.Changes_CheckBox.Checked;
+            this.Changes_Total_Label.Enabled = this.Changes_CheckBox.Checked;
+            this.Changes_NumBox.Enabled = this.Changes_CheckBox.Checked;
+            this.Changes_NumBox.Value = 0;
 
-            Map_GridBox.Load(CurrentMap);
+            this.Map_GridBox.Load(this.CurrentMap);
         }
         private void Changes_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            CurrentMap.ShowChanges = new Boolean[Changes_Total_NumBox.Value + 1];
-            CurrentMap.ShowChanges[Changes_NumBox.Value] = true;
-            Map_GridBox.Load(CurrentMap);
+            this.CurrentMap.ShowChanges = new Boolean[this.Changes_Total_NumBox.Value + 1];
+            this.CurrentMap.ShowChanges[this.Changes_NumBox.Value] = true;
+            this.Map_GridBox.Load(this.CurrentMap);
         }
 
         private void Palette_ArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                Current.GetAddress(Current.EntryIndex, "Palette"),
-                Palette_ArrayBox.Value,
-                CurrentEntry + "Palette changed");
+                this.Current.GetAddress(this.Current.EntryIndex, "Palette"),
+                this.Palette_ArrayBox.Value,
+                this.CurrentEntry + "Palette changed");
         }
         private void Tileset1_ArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                Current.GetAddress(Current.EntryIndex, "Tileset1"),
-                Tileset1_ArrayBox.Value,
-                CurrentEntry + "Tileset 1 changed");
+                this.Current.GetAddress(this.Current.EntryIndex, "Tileset1"),
+                this.Tileset1_ArrayBox.Value,
+                this.CurrentEntry + "Tileset 1 changed");
         }
         private void Tileset2_ArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                Current.GetAddress(Current.EntryIndex, "Tileset2"),
-                Tileset2_ArrayBox.Value,
-                CurrentEntry + "Tileset 2 changed");
+                this.Current.GetAddress(this.Current.EntryIndex, "Tileset2"),
+                this.Tileset2_ArrayBox.Value,
+                this.CurrentEntry + "Tileset 2 changed");
         }
         private void TilesetTSA_ArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                Current.GetAddress(Current.EntryIndex, "TSA"),
-                TilesetTSA_ArrayBox.Value,
-                CurrentEntry + "Tileset TSA changed");
+                this.Current.GetAddress(this.Current.EntryIndex, "TSA"),
+                this.TilesetTSA_ArrayBox.Value,
+                this.CurrentEntry + "Tileset TSA changed");
         }
         private void MapData_ArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                Current.GetAddress(Current.EntryIndex, "Map"),
-                MapData_ArrayBox.Value,
-                CurrentEntry + "Map changed");
+                this.Current.GetAddress(this.Current.EntryIndex, "Map"),
+                this.MapData_ArrayBox.Value,
+                this.CurrentEntry + "Map changed");
         }
         private void Changes_ArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                Current.GetAddress(Current.EntryIndex, "Changes"),
-                Changes_ArrayBox.Value,
-                CurrentEntry + "Map Changes changed");
+                this.Current.GetAddress(this.Current.EntryIndex, "Changes"),
+                this.Changes_ArrayBox.Value,
+                this.CurrentEntry + "Map Changes changed");
         }
         private void TileAnim1_ArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                Current.GetAddress(Current.EntryIndex, "TileAnim1"),
-                TileAnim1_ArrayBox.Value,
-                CurrentEntry + "Map Anim 1 changed");
+                this.Current.GetAddress(this.Current.EntryIndex, "TileAnim1"),
+                this.TileAnim1_ArrayBox.Value,
+                this.CurrentEntry + "Map Anim 1 changed");
         }
         private void TileAnim2_ArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                Current.GetAddress(Current.EntryIndex, "TileAnim2"),
-                TileAnim2_ArrayBox.Value,
-                CurrentEntry + "Map Anim 2 changed");
+                this.Current.GetAddress(this.Current.EntryIndex, "TileAnim2"),
+                this.TileAnim2_ArrayBox.Value,
+                this.CurrentEntry + "Map Anim 2 changed");
         }
 
         private void Palette_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                Core.GetPointer("Map Data Array") + 4 * Palette_ArrayBox.Value,
-                Palette_PointerBox.Value,
-                CurrentEntry + "Palette repoint");
+                Core.GetPointer("Map Data Array") + 4 * this.Palette_ArrayBox.Value,
+                this.Palette_PointerBox.Value,
+                this.CurrentEntry + "Palette repoint");
         }
         private void Tileset1_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                Core.GetPointer("Map Data Array") + 4 * Tileset1_ArrayBox.Value,
-                Tileset1_PointerBox.Value,
-                CurrentEntry + "Tileset 1 repoint");
+                Core.GetPointer("Map Data Array") + 4 * this.Tileset1_ArrayBox.Value,
+                this.Tileset1_PointerBox.Value,
+                this.CurrentEntry + "Tileset 1 repoint");
         }
         private void Tileset2_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                Core.GetPointer("Map Data Array") + 4 * Tileset2_ArrayBox.Value,
-                Tileset2_PointerBox.Value,
-                CurrentEntry + "Tileset 2 repoint");
+                Core.GetPointer("Map Data Array") + 4 * this.Tileset2_ArrayBox.Value,
+                this.Tileset2_PointerBox.Value,
+                this.CurrentEntry + "Tileset 2 repoint");
         }
         private void TilesetTSA_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                Core.GetPointer("Map Data Array") + 4 * TilesetTSA_ArrayBox.Value,
-                TilesetTSA_PointerBox.Value,
-                CurrentEntry + "Tileset TSA repoint");
+                Core.GetPointer("Map Data Array") + 4 * this.TilesetTSA_ArrayBox.Value,
+                this.TilesetTSA_PointerBox.Value,
+                this.CurrentEntry + "Tileset TSA repoint");
         }
         private void MapData_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                Core.GetPointer("Map Data Array") + 4 * MapData_ArrayBox.Value,
-                MapData_PointerBox.Value,
-                CurrentEntry + "Map repoint");
+                Core.GetPointer("Map Data Array") + 4 * this.MapData_ArrayBox.Value,
+                this.MapData_PointerBox.Value,
+                this.CurrentEntry + "Map repoint");
         }
         private void Changes_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                Core.GetPointer("Map Data Array") + 4 * Changes_ArrayBox.Value,
-                Changes_PointerBox.Value,
-                CurrentEntry + "Map Changes repoint");
+                Core.GetPointer("Map Data Array") + 4 * this.Changes_ArrayBox.Value,
+                this.Changes_PointerBox.Value,
+                this.CurrentEntry + "Map Changes repoint");
         }
         private void TileAnim1_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                Core.GetPointer("Map Data Array") + 4 * TileAnim1_ArrayBox.Value,
-                TileAnim1_PointerBox.Value,
-                CurrentEntry + "Tile Anim 1 repoint");
+                Core.GetPointer("Map Data Array") + 4 * this.TileAnim1_ArrayBox.Value,
+                this.TileAnim1_PointerBox.Value,
+                this.CurrentEntry + "Tile Anim 1 repoint");
         }
         private void TileAnim2_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                Core.GetPointer("Map Data Array") + 4 * TileAnim2_ArrayBox.Value,
-                TileAnim2_PointerBox.Value,
-                CurrentEntry + "Tile Anim 2 repoint");
+                Core.GetPointer("Map Data Array") + 4 * this.TileAnim2_ArrayBox.Value,
+                this.TileAnim2_PointerBox.Value,
+                this.CurrentEntry + "Tile Anim 2 repoint");
         }
 
         private void Clear_Button_Click(Object sender, EventArgs e)
         {
-            CurrentMap.Layout = new Int32[CurrentMap.WidthTiles, CurrentMap.HeightTiles];
+            this.CurrentMap.Layout = new Int32[this.CurrentMap.WidthTiles, this.CurrentMap.HeightTiles];
 
-            Core_WriteMap();
+            this.Core_WriteMap();
         }
 
         private void MapTileset_MagicButton_Click(Object sender, EventArgs e)
@@ -838,12 +838,12 @@ namespace EmblemMagic.Editors
             Program.Core.Core_OpenEditor(editor);
 
             editor.Core_SetEntry(
-                Palette_ArrayBox.Value,
-                Tileset1_ArrayBox.Value,
-                Tileset2_ArrayBox.Value,
-                TilesetTSA_ArrayBox.Value,
-                TileAnim1_ArrayBox.Value,
-                TileAnim2_ArrayBox.Value);
+                this.Palette_ArrayBox.Value,
+                this.Tileset1_ArrayBox.Value,
+                this.Tileset2_ArrayBox.Value,
+                this.TilesetTSA_ArrayBox.Value,
+                this.TileAnim1_ArrayBox.Value,
+                this.TileAnim2_ArrayBox.Value);
         }
     }
 }

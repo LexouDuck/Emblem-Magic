@@ -36,37 +36,37 @@ namespace GBA
 
         public Audio(Instrument instrument)
         {
-            Cancel = false;
-            Position = 0;
+            this.Cancel = false;
+            this.Position = 0;
 
-            Attack = (0xFF - instrument.Attack) / (Single)0xFF;
-            Decay =   instrument.Decay   / (Single)0xFF;
-            Sustain = instrument.Sustain / (Single)0xFF;
-            Release = instrument.Release / (Single)0xFF;
+            this.Attack = (0xFF - instrument.Attack) / (Single)0xFF;
+            this.Decay =   instrument.Decay   / (Single)0xFF;
+            this.Sustain = instrument.Sustain / (Single)0xFF;
+            this.Release = instrument.Release / (Single)0xFF;
 
-            Envelope = 0;
-            State = ADSR.Attack;
+            this.Envelope = 0;
+            this.State = ADSR.Attack;
         }
 
         protected void UpdateEnvelope()
         {
-            switch (State)
+            switch (this.State)
             {
                 case ADSR.Attack:
-                    Envelope += 1 / (Attack * SAMPLE_RATE);
-                    if (Envelope >= 1)
+                    this.Envelope += 1 / (this.Attack * SAMPLE_RATE);
+                    if (this.Envelope >= 1)
                     {
-                        Envelope = 1;
-                        State = ADSR.Decay;
+                        this.Envelope = 1;
+                        this.State = ADSR.Decay;
                     }
                     break;
 
                 case ADSR.Decay:
-                    Envelope -= 1 / (Decay * SAMPLE_RATE);
-                    if (Envelope <= Sustain)
+                    this.Envelope -= 1 / (this.Decay * SAMPLE_RATE);
+                    if (this.Envelope <= this.Sustain)
                     {
-                        Envelope = Sustain;
-                        State = ADSR.Sustain;
+                        this.Envelope = this.Sustain;
+                        this.State = ADSR.Sustain;
                     }
                     break;
 
@@ -75,15 +75,15 @@ namespace GBA
                     break;
 
                 case ADSR.Release:
-                    Envelope -= 1 / (Release * SAMPLE_RATE);
-                    if (Envelope <= 0)
+                    this.Envelope -= 1 / (this.Release * SAMPLE_RATE);
+                    if (this.Envelope <= 0)
                     {
-                        Envelope = 0;
-                        Cancel = true;
+                        this.Envelope = 0;
+                        this.Cancel = true;
                     }
                     break;
 
-                default: throw new Exception("ADSR State is invalid:" + State);
+                default: throw new Exception("ADSR State is invalid:" + this.State);
             }
         }
 
@@ -133,21 +133,21 @@ namespace GBA
 
         public Audio_DirectSound(Instrument instrument, Sample sample, UInt32 frequency = 0) : base(instrument)
         {
-            Frequency = (frequency == 0 ? sample.Pitch : frequency) / 1024;
+            this.Frequency = (frequency == 0 ? sample.Pitch : frequency) / 1024;
 
-            Sample = ChangeSampleRate(sample.PCM_Data, Frequency, SAMPLE_RATE);
+            this.Sample = ChangeSampleRate(sample.PCM_Data, this.Frequency, SAMPLE_RATE);
 
             if (sample.Looped)
             {
-                Looped = true;
-                LoopStart = (UInt32)(sample.LoopStart / ((Double)Frequency / (Double)SAMPLE_RATE));
-                if (LoopStart >= Sample.Length)
+                this.Looped = true;
+                this.LoopStart = (UInt32)(sample.LoopStart / ((Double)this.Frequency / (Double)SAMPLE_RATE));
+                if (this.LoopStart >= this.Sample.Length)
                     throw new Exception("Invalid loop starting point, is beyond the sample length.");
             }
             else
             {
-                Looped = false;
-                LoopStart = 0;
+                this.Looped = false;
+                this.LoopStart = 0;
             }
         }
 
@@ -157,26 +157,26 @@ namespace GBA
             Byte pcm = 0x00;
             for (Int32 i = 0; i < length; i++)
             {
-                if (Position >= Sample.Length)
+                if (this.Position >= this.Sample.Length)
                 {
-                    if (Looped)
+                    if (this.Looped)
                     {
-                        Position = LoopStart;
+                        this.Position = this.LoopStart;
                     }
                     else
                     {
-                        Position = 0;
-                        Cancel = true;
+                        this.Position = 0;
+                        this.Cancel = true;
                     }
                 }
-                UpdateEnvelope();
+                this.UpdateEnvelope();
                 try
                 {
-                    pcm = (Byte)(Sample[Position++] * Envelope);
+                    pcm = (Byte)(this.Sample[this.Position++] * this.Envelope);
                 }
                 catch (Exception ex)
                 {
-                    UI.ShowError("sample: " + Sample.Length + ", position:" + Position, ex);
+                    UI.ShowError("sample: " + this.Sample.Length + ", position:" + this.Position, ex);
                 }
                 result[i] = pcm;
             }

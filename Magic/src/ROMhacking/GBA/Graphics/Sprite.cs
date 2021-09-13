@@ -17,32 +17,32 @@ namespace GBA
         {
             get
             {
-                if (Transform == null)
+                if (this.Transform == null)
                 {
-                    if (x < 0 || x >= Width) throw new ArgumentException("X given is out of bounds: " + x);
-                    if (y < 0 || y >= Height) throw new ArgumentException("Y given is out of bounds: " + y);
+                    if (x < 0 || x >= this.Width) throw new ArgumentException("X given is out of bounds: " + x);
+                    if (y < 0 || y >= this.Height) throw new ArgumentException("Y given is out of bounds: " + y);
 
-                    if (FlipH) x = (Width - x - 1);
-                    if (FlipV) y = (Height - y - 1);
+                    if (this.FlipH) x = (this.Width - x - 1);
+                    if (this.FlipV) y = (this.Height - y - 1);
 
                     Int32 tileX = x / Tile.SIZE;
                     Int32 tileY = y / Tile.SIZE;
 
-                    Int32 index = Tiles[tileX, tileY];
-                    if (index < 0 || index >= Sheet.Count)
+                    Int32 index = this.Tiles[tileX, tileY];
+                    if (index < 0 || index >= this.Sheet.Count)
                         return 0;
 
                     tileX = x % Tile.SIZE;
                     tileY = y % Tile.SIZE;
 
-                    return Sheet[index][tileX, tileY];
+                    return this.Sheet[index][tileX, tileY];
                 }
-                else return Transform[x, y];
+                else return this.Transform[x, y];
             }
         }
         public Color GetColor(Int32 x, Int32 y)
         {
-            return (Colors[this[x, y]]);
+            return (this.Colors[this[x, y]]);
         }
         
         /// <summary>
@@ -52,7 +52,7 @@ namespace GBA
         {
             get
             {
-                return (Transform == null) ? Tiles.Width * 8 : Transform.Width;
+                return (this.Transform == null) ? this.Tiles.Width * 8 : this.Transform.Width;
             }
         }
         /// <summary>
@@ -62,7 +62,7 @@ namespace GBA
         {
             get
             {
-                return (Transform == null) ? Tiles.Height * 8 : Transform.Height;
+                return (this.Transform == null) ? this.Tiles.Height * 8 : this.Transform.Height;
             }
         }
 
@@ -102,14 +102,14 @@ namespace GBA
         /// </summary>
         public Sprite(Palette palette, Tileset tileset, TileMap tilemap)
         {
-            Load(palette, tileset, tilemap, false, false);
+            this.Load(palette, tileset, tilemap, false, false);
         }
         /// <summary>
         /// Creates a sprite from a block of OAM data
         /// </summary>
         public Sprite(Palette palette, Tileset tileset, OAM oam)
         {
-            Load(palette, tileset, new TileMap(oam.GetTileMap(oam.GetDimensions())), oam.FlipH, oam.FlipV);
+            this.Load(palette, tileset, new TileMap(oam.GetTileMap(oam.GetDimensions())), oam.FlipH, oam.FlipV);
         }
         /// <summary>
         /// Creates an affine/transformed sprite from a block of OAM data and the affine data with it
@@ -117,7 +117,7 @@ namespace GBA
         public Sprite(Palette palette, Tileset tileset, OAM oam, OAM_Affine transform)
         {
             Size size = oam.GetDimensions();
-            Load(palette, tileset, new TileMap(oam.GetTileMap(size)), false, false);
+            this.Load(palette, tileset, new TileMap(oam.GetTileMap(size)), false, false);
 
             Int32 width  = 8 * size.Width;
             Int32 height = 8 * size.Height;
@@ -141,14 +141,14 @@ namespace GBA
 
                 tile.X = affine.X / Tile.SIZE;
                 tile.Y = affine.Y / Tile.SIZE;
-                    Int32 index = Tiles[tile.X, tile.Y];
-                if (index < 0 || index >= Sheet.Count) continue;
+                    Int32 index = this.Tiles[tile.X, tile.Y];
+                if (index < 0 || index >= this.Sheet.Count) continue;
                 tile.X = affine.X % Tile.SIZE;
                 tile.Y = affine.Y % Tile.SIZE;
 
-                data[(halfW + x) + (halfH + y) * width] = (Byte)Sheet[index][tile.X, tile.Y];
+                data[(halfW + x) + (halfH + y) * width] = (Byte)this.Sheet[index][tile.X, tile.Y];
             }
-            Transform = new Bitmap(width, height, palette.ToBytes(false), data);
+            this.Transform = new Bitmap(width, height, palette.ToBytes(false), data);
         }
         /// <summary>
         /// Creates a GBA.Sprite from a GBA.Image, making a GBA.Tilemap by checking with the given GBA.Tileset
@@ -184,18 +184,18 @@ namespace GBA
                 map[x, y] = index;
             }
 
-            Load(new Palette(image.Colors), tileset, new TileMap(map), false, false);
+            this.Load(new Palette(image.Colors), tileset, new TileMap(map), false, false);
         }
         /// <summary>
         /// Initializes the fields of this class
         /// </summary>
         void Load(Palette palette, Tileset tileset, TileMap tilemap, Boolean flipH, Boolean flipV)
         {
-            Colors = palette;
-            Sheet = tileset;
-            Tiles = tilemap;
-            FlipH = flipH;
-            FlipV = flipV;
+            this.Colors = palette;
+            this.Sheet = tileset;
+            this.Tiles = tilemap;
+            this.FlipH = flipH;
+            this.FlipV = flipV;
         }
 
 
@@ -205,15 +205,15 @@ namespace GBA
         /// </summary>
         public Color[,] GetPixels()
         {
-            Color[,] result = new Color[Width, Height];
+            Color[,] result = new Color[this.Width, this.Height];
             Color[,] tile = new Color[Tile.SIZE, Tile.SIZE];
 
-            for (Int32 iy = 0; iy < Height; iy += Tile.SIZE)
-            for (Int32 ix = 0; ix < Width ; ix += Tile.SIZE)
+            for (Int32 iy = 0; iy < this.Height; iy += Tile.SIZE)
+            for (Int32 ix = 0; ix < this.Width ; ix += Tile.SIZE)
             {
-                tile = (Tiles[ix, iy] < 0) ?
-                    Tile.Empty.GetPixels(Colors) :
-                    Sheet[Tiles[ix, iy]].GetPixels(Colors);
+                tile = (this.Tiles[ix, iy] < 0) ?
+                    Tile.Empty.GetPixels(this.Colors) :
+                    this.Sheet[this.Tiles[ix, iy]].GetPixels(this.Colors);
 
                 for (Int32 y = 0; y < Tile.SIZE; y++)
                 for (Int32 x = 0; x < Tile.SIZE; x++)

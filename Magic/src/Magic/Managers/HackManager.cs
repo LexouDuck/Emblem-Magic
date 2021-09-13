@@ -36,13 +36,13 @@ namespace Magic
         /// <summary>
         /// Returns 'true' if this HackManager has no file path set to it
         /// </summary>
-        public Boolean IsEmpty { get { return (FilePath.Length == 0); } }
+        public Boolean IsEmpty { get { return (this.FilePath.Length == 0); } }
         /// <summary>
         /// Returns 'true' if every write of this MHF HackManager is applied to the current ROM
         /// </summary>
         public Boolean IsApplied()
         {
-            foreach (Write write in Write.History)
+            foreach (Write write in this.Write.History)
             {
                 for (Int32 i = 0; i < write.Data.Length; i++)
                 {
@@ -61,7 +61,7 @@ namespace Magic
         {
             get
             {
-                return Path.GetFileName(FilePath);
+                return Path.GetFileName(this.FilePath);
             }
         }
         public String FilePath { get; private set; }
@@ -83,18 +83,18 @@ namespace Magic
         public IApp App;
         public HackManager(IApp app)
         {
-            App = app;
+            this.App = app;
 
-            FilePath = "";
-            FileSize = TableLength;
-            FileData = new Byte[TableLength];
-            HackName = "";
-            HackAuthor = "";
-            HackDescription = "";
-            Write = new WriteManager(App);
-            Point = new PointManager(App);
-            Marks = new MarksManager(App);
-            Space = new SpaceManager(App);
+            this.FilePath = "";
+            this.FileSize = TableLength;
+            this.FileData = new Byte[TableLength];
+            this.HackName = "";
+            this.HackAuthor = "";
+            this.HackDescription = "";
+            this.Write = new WriteManager(this.App);
+            this.Point = new PointManager(this.App);
+            this.Marks = new MarksManager(this.App);
+            this.Space = new SpaceManager(this.App);
         }
 
         /// <summary>
@@ -107,13 +107,13 @@ namespace Magic
             if (!File.Exists(path))
                 throw new Exception("The module file was not found: " + path);
 
-            lock (Locked)
+            lock (this.Locked)
             {
-                FilePath = path;
-                FileData = File.ReadAllBytes(FilePath);
-                FileSize = (UInt32)FileData.Length;
+                this.FilePath = path;
+                this.FileData = File.ReadAllBytes(this.FilePath);
+                this.FileSize = (UInt32)this.FileData.Length;
 
-                LoadData();
+                this.LoadData();
 
                 this.Changed = false;
             }
@@ -123,13 +123,13 @@ namespace Magic
         /// </summary>
         public void SaveFile(String path)
         {
-            lock (Locked)
+            lock (this.Locked)
             {
-                FilePath = path;
-                FileData = MakeData();
-                FileSize = (UInt32)FileData.Length;
+                this.FilePath = path;
+                this.FileData = this.MakeData();
+                this.FileSize = (UInt32)this.FileData.Length;
 
-                File.WriteAllBytes(FilePath, FileData);
+                File.WriteAllBytes(this.FilePath, this.FileData);
 
                 this.Changed = false;
             }
@@ -143,12 +143,12 @@ namespace Magic
         public void LoadData()
         {
             UInt32 parse = 0;
-            HackData table = new HackData(FileData);
+            HackData table = new HackData(this.FileData);
             parse += TableLength;
             // the first 2 bytes are always "FE" in ascii byte encoding - they serve as an indicator that the file is valid
             // byte 3 is the associated ROM: 6,7,8
             // byte 4 is the version of the associated ROM - "E" for PAL, "U" for NTSC, "J" for japanese
-            App.Core_CheckROMIdentifier(table.TableString);
+            this.App.Core_CheckROMIdentifier(table.TableString);
 
             UInt32 length = 0;
             Byte[] buffer;
@@ -161,25 +161,25 @@ namespace Magic
             {
                 length = table.EntryLength[i];
                 buffer = new Byte[length];
-                Array.Copy(FileData, parse, buffer, 0, length);
+                Array.Copy(this.FileData, parse, buffer, 0, length);
 
                 subtable = new HackData(buffer);
                 switch (subtable.TableString)
                 {
-                    case "_MHF": LoadData_Properties(subtable); break;
-                    case "_WRT": LoadData_Write(subtable); break;
-                    case "_PNT": LoadData_Point(subtable); break;
-                    case "_MRK": LoadData_Marks(subtable); break;
-                    case "_SPC": LoadData_Space(subtable); break;
+                    case "_MHF": this.LoadData_Properties(subtable); break;
+                    case "_WRT": this.LoadData_Write(subtable); break;
+                    case "_PNT": this.LoadData_Point(subtable); break;
+                    case "_MRK": this.LoadData_Marks(subtable); break;
+                    case "_SPC": this.LoadData_Space(subtable); break;
                 }
                 parse += length;
             }
         }
         void LoadData_Properties(HackData table)
         {
-            HackName        = table.Entries[0].GetASCII(0, (Int32)table.EntryLength[0]);
-            HackAuthor      = table.Entries[1].GetASCII(0, (Int32)table.EntryLength[1]);
-            HackDescription = table.Entries[2].GetASCII(0, (Int32)table.EntryLength[2]);
+            this.HackName        = table.Entries[0].GetASCII(0, (Int32)table.EntryLength[0]);
+            this.HackAuthor      = table.Entries[1].GetASCII(0, (Int32)table.EntryLength[1]);
+            this.HackDescription = table.Entries[2].GetASCII(0, (Int32)table.EntryLength[2]);
         }
         void LoadData_Write(HackData table)
         {
@@ -198,7 +198,7 @@ namespace Magic
                     table.Entries[i].GetUInt32(index_Offset, false),                           // offset of write
                     table.Entries[i].GetBytes(index_Data, (Int32)table.EntryLength[i] - LENGTH_Write))); // data to write
             }
-            Write.History = result;
+            this.Write.History = result;
         }
         void LoadData_Point(HackData table)
         {
@@ -213,7 +213,7 @@ namespace Magic
                     table.Entries[i].GetUInt32(index_Default, false),        // asset default address
                     table.Entries[i].GetUInt32(index_Current, false)));     // asset current address
             }
-            Point.Repoints = result;
+            this.Point.Repoints = result;
         }
         void LoadData_Marks(HackData table)
         {
@@ -225,19 +225,19 @@ namespace Magic
                     table.Entries[i].GetUInt32(4, false),   // marking type layer
                     table.Entries[i].GetUInt32(8, false))); // marking type color
             }
-            Marks.MarkingTypes = result;
+            this.Marks.MarkingTypes = result;
         }
         void LoadData_Space(HackData table)
         {
             List<Space> result = new List<Space>();
             for (Int32 i = 0; i < table.EntryAmount; i++)
             {
-                result.Add(new Space(Marks.Get(
+                result.Add(new Space(this.Marks.Get(
                    table.Entries[i].GetASCII(0, 4)),       // marking type identifier
                    table.Entries[i].GetUInt32(4, false),   // offset of range start
                    table.Entries[i].GetUInt32(8, false))); // offset of range end
             }
-            Space.MarkedRanges = result;
+            this.Space.MarkedRanges = result;
         }
 
 
@@ -248,14 +248,14 @@ namespace Magic
         {
             HackData tableProperties = new HackData("_MHF", new Byte[3][]
             {
-                ByteArray.Make_ASCII(HackName),
-                ByteArray.Make_ASCII(HackAuthor),
-                ByteArray.Make_ASCII(HackDescription),
+                ByteArray.Make_ASCII(this.HackName),
+                ByteArray.Make_ASCII(this.HackAuthor),
+                ByteArray.Make_ASCII(this.HackDescription),
             });
-            HackData tableWrite = MakeData_Write();
-            HackData tablePoint = MakeData_Point();
-            HackData tableMarks = MakeData_Marks();
-            HackData tableSpace = MakeData_Space();
+            HackData tableWrite = this.MakeData_Write();
+            HackData tablePoint = this.MakeData_Point();
+            HackData tableMarks = this.MakeData_Marks();
+            HackData tableSpace = this.MakeData_Space();
 
             HackData table;
             Byte[][] table_data = new Byte[TableTotal][];
@@ -270,7 +270,7 @@ namespace Magic
         }
         HackData MakeData_Write()
         {
-            Byte[][] writes = new Byte[Write.History.Count][];
+            Byte[][] writes = new Byte[this.Write.History.Count][];
 
             Byte[] entry;
             Int32 entry_length;
@@ -283,14 +283,14 @@ namespace Magic
             Int32 index = 0;
             for (Int32 i = 0; i < writes.Length; i++)
             {
-                entry_length = (Int32)LENGTH_Write + Write.History[i].Data.Length;
+                entry_length = (Int32)LENGTH_Write + this.Write.History[i].Data.Length;
                 entry = new Byte[entry_length];
 
-                write_author = ByteArray.Make_ASCII(Write.History[i].GetEditorString());
-                write_timeof = ByteArray.Make_Int64((UInt64)Write.History[i].Time.ToBinary());
-                write_phrase = ByteArray.Make_ASCII(Write.History[i].GetPhraseString());
-                write_offset = ByteArray.Make_Int32(Write.History[i].Address);
-                write_data = Write.History[i].Data;
+                write_author = ByteArray.Make_ASCII(this.Write.History[i].GetEditorString());
+                write_timeof = ByteArray.Make_Int64((UInt64)this.Write.History[i].Time.ToBinary());
+                write_phrase = ByteArray.Make_ASCII(this.Write.History[i].GetPhraseString());
+                write_offset = ByteArray.Make_Int32(this.Write.History[i].Address);
+                write_data = this.Write.History[i].Data;
                 
                 Array.Copy(write_author, 0, entry, index, LENGTH_Write_Author); index += LENGTH_Write_Author;
                 Array.Copy(write_timeof, 0, entry, index, LENGTH_Write_TimeOf); index += LENGTH_Write_TimeOf;
@@ -305,7 +305,7 @@ namespace Magic
         }
         HackData MakeData_Point()
         {
-            Byte[][] repoints = new Byte[Point.Repoints.Count][];
+            Byte[][] repoints = new Byte[this.Point.Repoints.Count][];
             Byte[] entry;
 
             Int32 entry_length = 40;
@@ -317,9 +317,9 @@ namespace Magic
             {
                 entry = new Byte[entry_length];
 
-                asset_name = ByteArray.Make_ASCII(Point.Repoints[i].AssetName.PadRight(LENGTH_Point_Name));
-                asset_default = ByteArray.Make_Int32(Point.Repoints[i].DefaultAddress);
-                asset_current = ByteArray.Make_Int32(Point.Repoints[i].CurrentAddress);
+                asset_name = ByteArray.Make_ASCII(this.Point.Repoints[i].AssetName.PadRight(LENGTH_Point_Name));
+                asset_default = ByteArray.Make_Int32(this.Point.Repoints[i].DefaultAddress);
+                asset_current = ByteArray.Make_Int32(this.Point.Repoints[i].CurrentAddress);
 
                 Array.Copy(asset_name, 0, entry, 0, LENGTH_Point_Name);
                 Array.Copy(asset_default, 0, entry, LENGTH_Point_Name, 4);
@@ -332,7 +332,7 @@ namespace Magic
         }
         HackData MakeData_Marks()
         {
-            Byte[][] marks = new Byte[Marks.MarkingTypes.Count][];
+            Byte[][] marks = new Byte[this.Marks.MarkingTypes.Count][];
             Byte[] entry;
 
             Int32 entry_length = 12;
@@ -344,9 +344,9 @@ namespace Magic
             {
                 entry = new Byte[entry_length];
 
-                mark_name  = ByteArray.Make_ASCII(Marks.MarkingTypes[i].Name);
-                mark_layer = ByteArray.Make_Int32((UInt32)Marks.MarkingTypes[i].Layer);
-                mark_color = ByteArray.Make_Int32((UInt32)Marks.MarkingTypes[i].Color.ToArgb());
+                mark_name  = ByteArray.Make_ASCII(this.Marks.MarkingTypes[i].Name);
+                mark_layer = ByteArray.Make_Int32((UInt32)this.Marks.MarkingTypes[i].Layer);
+                mark_color = ByteArray.Make_Int32((UInt32)this.Marks.MarkingTypes[i].Color.ToArgb());
                 
                 Array.Copy(mark_name,  0, entry, 0, 4);
                 Array.Copy(mark_layer, 0, entry, 4, 4);
@@ -359,7 +359,7 @@ namespace Magic
         }
         HackData MakeData_Space()
         {
-            Byte[][] spaces = new Byte[Space.MarkedRanges.Count][];
+            Byte[][] spaces = new Byte[this.Space.MarkedRanges.Count][];
 
             Byte[] entry;
             Int32 entry_length = 16;
@@ -372,9 +372,9 @@ namespace Magic
             {
                 entry = new Byte[entry_length];
 
-                space_marked  = ByteArray.Make_ASCII(Space.MarkedRanges[i].Marked.Name);
-                space_address = ByteArray.Make_Int32(Space.MarkedRanges[i].Address);
-                space_endbyte = ByteArray.Make_Int32(Space.MarkedRanges[i].EndByte);
+                space_marked  = ByteArray.Make_ASCII(this.Space.MarkedRanges[i].Marked.Name);
+                space_address = ByteArray.Make_Int32(this.Space.MarkedRanges[i].Address);
+                space_endbyte = ByteArray.Make_Int32(this.Space.MarkedRanges[i].EndByte);
                 
                 Array.Copy(space_marked,  0, entry, 0, 4);
                 Array.Copy(space_address, 0, entry, 4, 4);

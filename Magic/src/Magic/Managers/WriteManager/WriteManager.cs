@@ -26,9 +26,9 @@ namespace Magic
         public IApp App;
         public WriteManager(IApp app)
         {
-            App = app;
-            History = new List<Write>();
-            DeadList = new List<Write>();
+            this.App = app;
+            this.History = new List<Write>();
+            this.DeadList = new List<Write>();
         }
 
         /// <summary>
@@ -36,10 +36,10 @@ namespace Magic
         /// </summary>
         public void Add(Write write)
         {
-            App.MHF.Changed = true;
+            this.App.MHF.Changed = true;
 
-            Delete(write.Address, write.Address + write.Data.Length);
-            History.Add(write);
+            this.Delete(write.Address, write.Address + write.Data.Length);
+            this.History.Add(write);
         }
         /// <summary>
         /// Changes a write (sending the old one to deadlist) and returns it.
@@ -48,10 +48,10 @@ namespace Magic
         {
             String editor = write.Author;
             String phrase = write.Phrase;
-            History.Remove(write);
-            DeadList.Add(write);
+            this.History.Remove(write);
+            this.DeadList.Add(write);
             Write result = new Write(editor, address, data, phrase);
-            History.Add(result);
+            this.History.Add(result);
             return result;
         }
 
@@ -60,17 +60,17 @@ namespace Magic
         /// </summary>
         public Boolean Delete(Write write)
         {
-            App.MHF.Changed = true;
+            this.App.MHF.Changed = true;
 
-            DeadList.Add(write);
-            return History.Remove(write);
+            this.DeadList.Add(write);
+            return this.History.Remove(write);
         }
         /// <summary>
         /// Deletes any writes or parts of writes within the given range, and returns the affected writes
         /// </summary>
         public List<WriteConflict> Delete(Pointer start, Pointer end)
         {
-            List<WriteConflict> writes = Check(start, end);
+            List<WriteConflict> writes = this.Check(start, end);
             Write write_old;
             Tuple<Write, Write> write_new;
 
@@ -79,10 +79,10 @@ namespace Magic
                 write_old = writes[i].Write;
                 write_new = writes[i].GetNewWrite();
 
-                DeadList.Add(write_old);
-                History.Remove(write_old);
-                if (write_new.Item1 != null) History.Add(write_new.Item1);
-                if (write_new.Item2 != null) History.Add(write_new.Item2);
+                this.DeadList.Add(write_old);
+                this.History.Remove(write_old);
+                if (write_new.Item1 != null) this.History.Add(write_new.Item1);
+                if (write_new.Item2 != null) this.History.Add(write_new.Item2);
             }
             return writes;
         }
@@ -94,7 +94,7 @@ namespace Magic
         {
             if (findDead)
             {
-                foreach (Write write in DeadList)
+                foreach (Write write in this.DeadList)
                 {
                     if (write.Address == address)
                     {
@@ -104,7 +104,7 @@ namespace Magic
             }
             else
             {
-                foreach (Write write in History)
+                foreach (Write write in this.History)
                 {
                     if (write.Address == address)
                     {
@@ -120,7 +120,7 @@ namespace Magic
         public Write FindMostRecent(Pointer address, Boolean findDead = false)
         {
             Write result = null;
-            foreach (Write write in DeadList)
+            foreach (Write write in this.DeadList)
             {
                 if (write.Address == address && (result == null || write.Time.CompareTo(result.Time) < 0))
                 {
@@ -138,7 +138,7 @@ namespace Magic
             List<WriteConflict> result = new List<WriteConflict>();
             if (end < start) throw new Exception("given range is negative.");
             Range range;
-            foreach (Write write in History)
+            foreach (Write write in this.History)
             {
                 if (start <= write.Address)
                 {
@@ -177,9 +177,9 @@ namespace Magic
         /// </summary>
         public void Update_MHFSaved()
         {
-            for (Int32 i = 0; i < History.Count; i++)
+            for (Int32 i = 0; i < this.History.Count; i++)
             {
-                History[i].IsSaved = true;
+                this.History[i].IsSaved = true;
             }
         }
         /// <summary>
@@ -187,9 +187,9 @@ namespace Magic
         /// </summary>
         public void Update_ROMSaved()
         {
-            for (Int32 i = 0; i < History.Count; i++)
+            for (Int32 i = 0; i < this.History.Count; i++)
             {
-                History[i].Patched = true;
+                this.History[i].Patched = true;
             }
         }
     }

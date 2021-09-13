@@ -124,7 +124,7 @@ namespace WinMM
         /// <returns>true if <paramref name="obj"/> has the same value as this instance; false, otherwise.</returns>
         public override System.Boolean Equals(System.Object obj)
         {
-            if (obj == null || GetType() != obj.GetType())
+            if (obj == null || this.GetType() != obj.GetType())
             {
                 return false;
             }

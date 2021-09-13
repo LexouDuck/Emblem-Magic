@@ -177,7 +177,7 @@ namespace EmblemMagic.Editors
     {
         public override void PrintAll()
         {
-            if (ErrorCount + MessageCount + WarningCount > 0)
+            if (this.ErrorCount + this.MessageCount + this.WarningCount > 0)
                 Prompt.ShowResult("Message logs:", "EventAssembler", this.GetText());
         }
     }
@@ -192,8 +192,8 @@ namespace EmblemMagic.Editors
 
         public ROM_Stream(Editor parent) : base()
         {
-            owner = parent;
-            changes = new Nintenlord.Collections.DataChange.DataChange<Byte>();
+            this.owner = parent;
+            this.changes = new Nintenlord.Collections.DataChange.DataChange<Byte>();
         }
 
         public String Description;
@@ -204,8 +204,8 @@ namespace EmblemMagic.Editors
         public override Int64 Length { get { return Core.App.Game.FileSize; } }
         public override Int64 Position
         {
-            get { return position; }
-            set { position = (Int32)value; }
+            get { return this.position; }
+            set { this.position = (Int32)value; }
         }
 
         public override void Flush() { }
@@ -219,25 +219,25 @@ namespace EmblemMagic.Editors
             switch (origin)
             {
                 case SeekOrigin.Begin:
-                    position = (Int32)offset;
+                    this.position = (Int32)offset;
                     break;
                 case SeekOrigin.Current:
-                    position += (Int32)offset;
+                    this.position += (Int32)offset;
                     break;
                 case SeekOrigin.End:
-                    position = (Int32)Core.App.Game.FileSize + (Int32)offset;
+                    this.position = (Int32)Core.App.Game.FileSize + (Int32)offset;
                     break;
             }
-            return position;
+            return this.position;
         }
         public override void Write(Byte[] buffer, Int32 offset, Int32 count)
         {
             try
             {
-                changes.AddChangedData(position, buffer, offset, count);
+                this.changes.AddChangedData(this.position, buffer, offset, count);
             }
             catch { }
-            position += count;
+            this.position += count;
         }
 
         public void WriteToROM(Boolean autoFreeSpace)
@@ -245,7 +245,7 @@ namespace EmblemMagic.Editors
             Pointer address = new Pointer();
             List<Byte[]> writes = new List<Byte[]>();
             Int32 length = 0;
-            foreach (var item in (IEnumerable<KeyValuePair<Int32, Byte[]>>)changes)
+            foreach (var item in (IEnumerable<KeyValuePair<Int32, Byte[]>>)this.changes)
             {
                 if (length == 0)
                 {
@@ -266,14 +266,14 @@ namespace EmblemMagic.Editors
                 }
                 else
                 {
-                    WriteToROM_Concatenate(autoFreeSpace, address, writes, length);
+                    this.WriteToROM_Concatenate(autoFreeSpace, address, writes, length);
                     writes.Clear();
                     address = new Pointer((UInt32)item.Key);
                     writes.Add(item.Value);
                     length = item.Value.Length;
                 }
             }
-            WriteToROM_Concatenate(autoFreeSpace, address, writes, length);
+            this.WriteToROM_Concatenate(autoFreeSpace, address, writes, length);
         }
         void WriteToROM_Concatenate(Boolean autoFreeSpace, Pointer address, List<Byte[]> writes, Int32 length)
         {
@@ -297,10 +297,10 @@ namespace EmblemMagic.Editors
                 address = Core.GetFreeSpace(data.Length);
                 if (address % 4 != 0) address += (4 - (address % 4));
             }
-            Core.WriteData(owner,
+            Core.WriteData(this.owner,
                 address,
                 data,
-                Description + " - " + write_description);
+                this.Description + " - " + write_description);
         }
     }
 }

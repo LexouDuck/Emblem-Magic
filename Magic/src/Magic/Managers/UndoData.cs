@@ -30,10 +30,10 @@ namespace Magic
 
         public UndoRedo(UserAction action, Write associatedWrite, Byte[] oldData, List<WriteConflict> conflict)
         {
-            Action = action;
-            Associated = associatedWrite;
-            Data = oldData;
-            Conflicts = conflict;
+            this.Action = action;
+            this.Associated = associatedWrite;
+            this.Data = oldData;
+            this.Conflicts = conflict;
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Magic.Components
 
         public MemoryDataBlock(Byte data)
         {
-            _data = new Byte[] { data };
+            this._data = new Byte[] { data };
         }
 
         public MemoryDataBlock(Byte[] data)
@@ -18,14 +18,14 @@ namespace Magic.Components
                 throw new ArgumentNullException("data");
             }
 
-            _data = (Byte[])data.Clone();
+            this._data = (Byte[])data.Clone();
         }
 
         public override Int64 Length
         {
             get
             {
-                return _data.LongLength;
+                return this._data.LongLength;
             }
         }
 
@@ -33,55 +33,55 @@ namespace Magic.Components
         {
             get
             {
-                return _data;
+                return this._data;
             }
         }
 
         public void AddByteToEnd(Byte value)
         {
-            Byte[] newData = new Byte[_data.LongLength + 1];
-            _data.CopyTo(newData, 0);
+            Byte[] newData = new Byte[this._data.LongLength + 1];
+            this._data.CopyTo(newData, 0);
             newData[newData.LongLength - 1] = value;
-            _data = newData;
+            this._data = newData;
         }
 
         public void AddByteToStart(Byte value)
         {
-            Byte[] newData = new Byte[_data.LongLength + 1];
+            Byte[] newData = new Byte[this._data.LongLength + 1];
             newData[0] = value;
-            _data.CopyTo(newData, 1);
-            _data = newData;
+            this._data.CopyTo(newData, 1);
+            this._data = newData;
         }
 
         public void InsertBytes(Int64 position, Byte[] data)
         {
-            Byte[] newData = new Byte[_data.LongLength + data.LongLength];
+            Byte[] newData = new Byte[this._data.LongLength + data.LongLength];
             if (position > 0)
             {
-                Array.Copy(_data, 0, newData, 0, position);
+                Array.Copy(this._data, 0, newData, 0, position);
             }
             Array.Copy(data, 0, newData, position, data.LongLength);
-            if (position < _data.LongLength)
+            if (position < this._data.LongLength)
             {
-                Array.Copy(_data, position, newData, position + data.LongLength, _data.LongLength - position);
+                Array.Copy(this._data, position, newData, position + data.LongLength, this._data.LongLength - position);
             }
-            _data = newData;
+            this._data = newData;
         }
 
         public override void RemoveBytes(Int64 position, Int64 count)
         {
-            Byte[] newData = new Byte[_data.LongLength - count];
+            Byte[] newData = new Byte[this._data.LongLength - count];
 
             if (position > 0)
             {
-                Array.Copy(_data, 0, newData, 0, position);
+                Array.Copy(this._data, 0, newData, 0, position);
             }
-            if (position + count < _data.LongLength)
+            if (position + count < this._data.LongLength)
             {
-                Array.Copy(_data, position + count, newData, position, newData.LongLength - position);
+                Array.Copy(this._data, position + count, newData, position, newData.LongLength - position);
             }
 
-            _data = newData;
+            this._data = newData;
         }
     }
 }

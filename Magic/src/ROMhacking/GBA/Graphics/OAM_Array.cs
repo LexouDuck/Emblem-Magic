@@ -9,11 +9,11 @@ namespace GBA
         {
             get
             {
-                return Sprites[index];
+                return this.Sprites[index];
             }
             set
             {
-                Sprites[index] = value;
+                this.Sprites[index] = value;
             }
         }
 
@@ -33,24 +33,24 @@ namespace GBA
         /// </summary>
         public OAM_Array()
         {
-            Sprites = new List<OAM>();
-            Affines = new List<OAM_Affine>();
+            this.Sprites = new List<OAM>();
+            this.Affines = new List<OAM_Affine>();
         }
         /// <summary>
         /// Creates an OAM_Array from the given array
         /// </summary>
         public OAM_Array(List<OAM> array)
         {
-            Sprites = array;
-            Affines = new List<OAM_Affine>();
+            this.Sprites = array;
+            this.Affines = new List<OAM_Affine>();
         }
         /// <summary>
         /// Reads OAM data starting at 'offset', stopping at the first terminator encountered
         /// </summary>
         public OAM_Array(Byte[] data, UInt32 offset)
         {
-            Sprites = new List<OAM>();
-            Affines = new List<OAM_Affine>();
+            this.Sprites = new List<OAM>();
+            this.Affines = new List<OAM_Affine>();
 
             Byte[] buffer = new Byte[12];
             Boolean loadAffineData = true;
@@ -60,7 +60,7 @@ namespace GBA
                 {
                     loadAffineData = false;
                     Array.Copy(data, i, buffer, 0, 12);
-                    Sprites.Add(new OAM(buffer));
+                    this.Sprites.Add(new OAM(buffer));
                 }
                 else
                 {
@@ -71,7 +71,7 @@ namespace GBA
                             if (loadAffineData)
                             {
                                 Array.Copy(data, i, buffer, 0, 12);
-                                Affines.Add(new OAM_Affine(buffer));
+                                this.Affines.Add(new OAM_Affine(buffer));
                                 goto Continue;
                             }
                             else throw new Exception("Invalid terminator read in OAM.");
@@ -90,16 +90,16 @@ namespace GBA
         /// </summary>
         public Byte[] ToBytes()
         {
-            Byte[] result = new Byte[Affines.Count * OAM.LENGTH + Sprites.Count * OAM.LENGTH + OAM.LENGTH];
+            Byte[] result = new Byte[this.Affines.Count * OAM.LENGTH + this.Sprites.Count * OAM.LENGTH + OAM.LENGTH];
             Int32 index = 0;
-            for (Int32 i = 0; i < Affines.Count; i++)
+            for (Int32 i = 0; i < this.Affines.Count; i++)
             {
-                Array.Copy(Affines[i].ToBytes(), 0, result, index, OAM.LENGTH);
+                Array.Copy(this.Affines[i].ToBytes(), 0, result, index, OAM.LENGTH);
                 index += OAM.LENGTH;
             }
-            for (Int32 i = 0; i < Sprites.Count; i++)
+            for (Int32 i = 0; i < this.Sprites.Count; i++)
             {
-                Array.Copy(Sprites[i].ToBytes(), 0, result, index, OAM.LENGTH);
+                Array.Copy(this.Sprites[i].ToBytes(), 0, result, index, OAM.LENGTH);
                 index += OAM.LENGTH;
             }
             result[result.Length - OAM.LENGTH] = 0x01; // make terminator

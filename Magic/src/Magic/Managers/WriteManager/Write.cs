@@ -44,20 +44,20 @@ namespace Magic
 
         public Write(Editor author, Pointer address, Byte[] data, String description = "")
         {
-            Author = (author == null) ? "Unknown Editor" : author.Text ?? "Unknown Editor";
-            Load(DateTime.Now, address, data, description ?? "");
+            this.Author = (author == null) ? "Unknown Editor" : author.Text ?? "Unknown Editor";
+            this.Load(DateTime.Now, address, data, description ?? "");
         }
         public Write(String author, Pointer address, Byte[] data, String description = "")
         {
-            Author = (author == null) ? "Unknown Editor" : author ?? "Unknown Editor";
-            Load(DateTime.Now, address, data, description ?? "");
+            this.Author = (author == null) ? "Unknown Editor" : author ?? "Unknown Editor";
+            this.Load(DateTime.Now, address, data, description ?? "");
         }
         /// <summary>
         /// Constructor used for loading from file.
         /// </summary>
         public Write(String author, UInt64 time, String phrase, UInt32 address, Byte[] data)
         {
-            Author = author ?? "Unknown Editor";
+            this.Author = author ?? "Unknown Editor";
             String description = phrase ?? "";
             Int32 length;
             for (length = description.Length; length > 0; length--)
@@ -65,7 +65,7 @@ namespace Magic
                 if (description[length - 1] != ' ') break;
             }
             description = description.Substring(0, length);
-            Load(DateTime.FromBinary((Int64)time), new Pointer(address), data, description);
+            this.Load(DateTime.FromBinary((Int64)time), new Pointer(address), data, description);
         }
 
         /// <summary>
@@ -77,10 +77,10 @@ namespace Magic
             if (address < 0 || address + data.Length > App.ROM.FileSize)
                 throw new Exception("Write goes outside the bounds of the current ROM file");
             */
-            Time = time;
-            Address = address;
-            Data = data;
-            Phrase = phrase;
+            this.Time = time;
+            this.Address = address;
+            this.Data = data;
+            this.Phrase = phrase;
         }
 
 
@@ -91,8 +91,8 @@ namespace Magic
         /// <returns></returns>
         public String GetEditorString()
         {
-            String result = Author;
-            for (Int32 i = 0; i < HackManager.LENGTH_Write_Author - Author.Length; i++)
+            String result = this.Author;
+            for (Int32 i = 0; i < HackManager.LENGTH_Write_Author - this.Author.Length; i++)
             {
                 result += " ";
             }
@@ -104,8 +104,8 @@ namespace Magic
         /// <returns></returns>
         public String GetPhraseString()
         {
-            String result = Phrase;
-            for (Int32 i = 0; i < HackManager.LENGTH_Write_Phrase - Phrase.Length; i++)
+            String result = this.Phrase;
+            for (Int32 i = 0; i < HackManager.LENGTH_Write_Phrase - this.Phrase.Length; i++)
             {
                 result += " ";
             }

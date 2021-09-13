@@ -32,11 +32,11 @@ namespace GBA
 
         public TSA(UInt16 value)
         {
-            Value = value;
+            this.Value = value;
         }
         public TSA(Int32 tile, Byte palette, Boolean flipH, Boolean flipV)
         {
-            Value = (UInt16)((palette << 12) |
+            this.Value = (UInt16)((palette << 12) |
                 (flipV ? BITS_FLIPV : 0) |
                 (flipH ? BITS_FLIPH : 0) |
                 (tile & 0x3FF));
@@ -58,13 +58,13 @@ namespace GBA
         {
             get
             {
-                return (UInt16)(Value & BITS_TILE);
+                return (UInt16)(this.Value & BITS_TILE);
             }
             set
             {
                 if (value > BITS_TILE) throw new Exception("Invalid TSA tile index given: " + value);
 
-                Value = (UInt16)((Value & MASK_TILE) | value);
+                this.Value = (UInt16)((this.Value & MASK_TILE) | value);
             }
         }
         /// <summary>
@@ -74,13 +74,13 @@ namespace GBA
         {
             get
             {
-                return (Byte)((Value & BITS_PALETTE) >> 12);
+                return (Byte)((this.Value & BITS_PALETTE) >> 12);
             }
             set
             {
                 if (value >= 16) throw new Exception("TSA cannot have more than 16 palettes.");
 
-                Value = (UInt16)((Value & MASK_PALETTE) | (value << 12));
+                this.Value = (UInt16)((this.Value & MASK_PALETTE) | (value << 12));
             }
         }
         /// <summary>
@@ -90,13 +90,13 @@ namespace GBA
         {
             get
             {
-                return ((Value & BITS_FLIPH) == BITS_FLIPH);
+                return ((this.Value & BITS_FLIPH) == BITS_FLIPH);
             }
             set
             {
-                Value = (value) ?
-                    (UInt16)(Value | BITS_FLIPH) :
-                    (UInt16)(Value & MASK_FLIPH);
+                this.Value = (value) ?
+                    (UInt16)(this.Value | BITS_FLIPH) :
+                    (UInt16)(this.Value & MASK_FLIPH);
             }
         }
         /// <summary>
@@ -106,13 +106,13 @@ namespace GBA
         {
             get
             {
-                return ((Value & BITS_FLIPV) == BITS_FLIPV);
+                return ((this.Value & BITS_FLIPV) == BITS_FLIPV);
             }
             set
             {
-                Value = (value) ?
-                    (UInt16)(Value | BITS_FLIPV) :
-                    (UInt16)(Value & MASK_FLIPV);
+                this.Value = (value) ?
+                    (UInt16)(this.Value | BITS_FLIPV) :
+                    (UInt16)(this.Value & MASK_FLIPV);
             }
         }
     }

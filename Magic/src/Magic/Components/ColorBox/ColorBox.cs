@@ -13,11 +13,11 @@ namespace Magic.Components
         {
             get
             {
-                return _color;
+                return this._color;
             }
             set
             {
-                _color = value;
+                this._color = value;
                 this.Invalidate();
                 return;
             }
@@ -30,11 +30,11 @@ namespace Magic.Components
         {
             get
             {
-                return _gradient;
+                return this._gradient;
             }
             set
             {
-                _gradient = value;
+                this._gradient = value;
                 this.Invalidate();
                 return;
             }
@@ -47,11 +47,11 @@ namespace Magic.Components
         {
             get
             {
-                return _selected;
+                return this._selected;
             }
             set
             {
-                _selected = value;
+                this._selected = value;
                 this.Invalidate();
                 return;
             }
@@ -62,13 +62,13 @@ namespace Magic.Components
 
         public ColorBox()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            SetStyle(ControlStyles.Opaque, false);
-            SetStyle(ControlStyles.Selectable, true);
-            SetStyle(ControlStyles.UserPaint, true);
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            this.SetStyle(ControlStyles.Opaque, false);
+            this.SetStyle(ControlStyles.Selectable, true);
+            this.SetStyle(ControlStyles.UserPaint, true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
         }
 
         
@@ -79,31 +79,31 @@ namespace Magic.Components
 
             using (Brush bg = new SolidBrush(SystemColors.Control))
             {
-                e.Graphics.FillRectangle(bg, 0, 0, Width, Height);
+                e.Graphics.FillRectangle(bg, 0, 0, this.Width, this.Height);
             }
-            if (Selected)
+            if (this.Selected)
             {
                 using (Pen outline = new Pen(SystemColors.Highlight))
                 {
-                    e.Graphics.DrawRectangle(outline, 0, 0, Width - 1, Height - 1);
+                    e.Graphics.DrawRectangle(outline, 0, 0, this.Width - 1, this.Height - 1);
                 }
             }
             
-            if (Color == Color.Empty || Color.A == 0)
+            if (this.Color == Color.Empty || this.Color.A == 0)
             using (Pen outline = new Pen(SystemColors.AppWorkspace))
             {
-                e.Graphics.DrawRectangle(outline, 2, 2, Width - 4, Height - 4);
+                e.Graphics.DrawRectangle(outline, 2, 2, this.Width - 4, this.Height - 4);
             }
 
-            if (Gradient)
+            if (this.Gradient)
             using (LinearGradientBrush color = new LinearGradientBrush(
-                new Rectangle(0, 0, Width, Height), Color.White, this.Color, LinearGradientMode.Vertical))
+                new Rectangle(0, 0, this.Width, this.Height), Color.White, this.Color, LinearGradientMode.Vertical))
             {
-                e.Graphics.FillRectangle(color, 2, 2, Width - 4, Height - 4);
+                e.Graphics.FillRectangle(color, 2, 2, this.Width - 4, this.Height - 4);
             } 
             else using (Brush color = new SolidBrush(this.Color))
             {
-                e.Graphics.FillRectangle(color, 2, 2, Width - 4, Height - 4);
+                e.Graphics.FillRectangle(color, 2, 2, this.Width - 4, this.Height - 4);
             }
         }
     }

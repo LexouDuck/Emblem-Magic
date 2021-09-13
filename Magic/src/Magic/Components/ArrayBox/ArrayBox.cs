@@ -40,13 +40,13 @@ namespace Magic.Components
         {
             get
             {
-                if (EntryComboBox.SelectedItem == null) return "";
-                KeyValuePair<UInt32, String> current = (KeyValuePair<UInt32, String>)EntryComboBox.SelectedItem;
+                if (this.EntryComboBox.SelectedItem == null) return "";
+                KeyValuePair<UInt32, String> current = (KeyValuePair<UInt32, String>)this.EntryComboBox.SelectedItem;
                 return current.Value;
             }
             set
             {
-                EntryComboBox.Text = value;
+                this.EntryComboBox.Text = value;
             }
         }
 
@@ -59,11 +59,11 @@ namespace Magic.Components
         {
             get
             {
-                return EntryValueBox.Name;
+                return this.EntryValueBox.Name;
             }
             set
             {
-                EntryValueBox.Name = value;
+                this.EntryValueBox.Name = value;
             }
         }
         /// <summary>
@@ -75,11 +75,11 @@ namespace Magic.Components
         {
             get
             {
-                return (Int32)EntryValueBox.Maximum;
+                return (Int32)this.EntryValueBox.Maximum;
             }
             set
             {
-                EntryValueBox.Maximum = value - 1;
+                this.EntryValueBox.Maximum = value - 1;
             }
         }
 
@@ -90,49 +90,49 @@ namespace Magic.Components
         /// </summary>
         public void Load(String path)
         {
-            Load(new ArrayFile(path));
+            this.Load(new ArrayFile(path));
         }
         public void Load(ArrayFile file)
         {
-            File = file;
+            this.File = file;
 
             Int32 longestString = 0;
-            for (UInt32 i = 0; i <= File.LastEntry; i++)
+            for (UInt32 i = 0; i <= this.File.LastEntry; i++)
             {
-                if (File[i].Length > longestString)
-                    longestString = File[i].Length;
+                if (this.File[i].Length > longestString)
+                    longestString = this.File[i].Length;
             }
 
-            if (AutoSize)
+            if (this.AutoSize)
             {
-                this.Size = new Size(EntryValueBox.Width + 30 + longestString * 5, 26);
-                EntryComboBox.Width = this.Width - EntryValueBox.Width - 10;
+                this.Size = new Size(this.EntryValueBox.Width + 30 + longestString * 5, 26);
+                this.EntryComboBox.Width = this.Width - this.EntryValueBox.Width - 10;
                 this.AutoSize = false;
             }
 
             //if (File.LastEntry != 0) EntryValueBox.Maximum = File.LastEntry;
 
-            EntryValueBox.MouseWheel += delegate (Object sender, MouseEventArgs e)
+            this.EntryValueBox.MouseWheel += delegate (Object sender, MouseEventArgs e)
             {
                 ((HandledMouseEventArgs)e).Handled = true;
             };
-            EntryComboBox.DataSource = File.ToList();
-            EntryComboBox.ValueMember = "Key";
-            EntryComboBox.DisplayMember = "Value";
-            EntryComboBox.SelectedValueChanged += UpdateEntryValueBox;
-            EntryComboBox.TextUpdate += UpdateArrayFileText;
-            EntryComboBox.MouseWheel += delegate (Object sender, MouseEventArgs e)
+            this.EntryComboBox.DataSource = this.File.ToList();
+            this.EntryComboBox.ValueMember = "Key";
+            this.EntryComboBox.DisplayMember = "Value";
+            this.EntryComboBox.SelectedValueChanged += this.UpdateEntryValueBox;
+            this.EntryComboBox.TextUpdate += this.UpdateArrayFileText;
+            this.EntryComboBox.MouseWheel += delegate (Object sender, MouseEventArgs e)
             {
                 ((HandledMouseEventArgs)e).Handled = true;
             };
 
-            UpdateEntryComboBox(this, null);
+            this.UpdateEntryComboBox(this, null);
         }
 
         public void SelectFirstItem()
         {
             this.EntryComboBox.SelectedIndex = 0;
-            if (EntryValueBox.Value == 0 && EntryComboBox.Items.Count > 1)
+            if (this.EntryValueBox.Value == 0 && this.EntryComboBox.Items.Count > 1)
             {
                 this.EntryComboBox.SelectedIndex = 1;
             }
@@ -144,11 +144,11 @@ namespace Magic.Components
         {
             add
             {
-                EntryValueBox.ValueChanged += value;
+                this.EntryValueBox.ValueChanged += value;
             }
             remove
             {
-                EntryValueBox.ValueChanged -= value;
+                this.EntryValueBox.ValueChanged -= value;
             }
         }
 
@@ -156,43 +156,43 @@ namespace Magic.Components
 
         protected void UpdateEntryValueBox(Object sender, EventArgs e)
         {
-            EntryValueBox.ValueChanged -= UpdateEntryComboBox;
+            this.EntryValueBox.ValueChanged -= this.UpdateEntryComboBox;
 
             try
             {
-                UInt32 value = ((KeyValuePair<UInt32, String>)EntryComboBox.SelectedItem).Key;
-                EntryValueBox.Value = value;
+                UInt32 value = ((KeyValuePair<UInt32, String>)this.EntryComboBox.SelectedItem).Key;
+                this.EntryValueBox.Value = value;
             }
             catch
             {
-                EntryComboBox.SelectedItem = null;
+                this.EntryComboBox.SelectedItem = null;
             }
 
-            EntryValueBox.ValueChanged += UpdateEntryComboBox;
+            this.EntryValueBox.ValueChanged += this.UpdateEntryComboBox;
         }
         protected void UpdateEntryComboBox(Object sender, EventArgs e)
         {
-            EntryComboBox.SelectedValueChanged -= UpdateEntryValueBox;
+            this.EntryComboBox.SelectedValueChanged -= this.UpdateEntryValueBox;
 
             try
             {
-                EntryComboBox.SelectedValue = (UInt32)EntryValueBox.Value;
+                this.EntryComboBox.SelectedValue = (UInt32)this.EntryValueBox.Value;
             }
             catch
             {
-                EntryComboBox.SelectedItem = null;
+                this.EntryComboBox.SelectedItem = null;
             }
 
-            EntryComboBox.SelectedValueChanged += UpdateEntryValueBox;
+            this.EntryComboBox.SelectedValueChanged += this.UpdateEntryValueBox;
         }
 
         protected void UpdateArrayFileText(Object sender, EventArgs e)
         {
             if (Prompt.UpdateArrayFile() == DialogResult.Yes)
             {
-                File.RenameEntry((UInt32)EntryValueBox.Value, EntryComboBox.Text);
+                this.File.RenameEntry((UInt32)this.EntryValueBox.Value, this.EntryComboBox.Text);
 
-                EntryComboBox.DataSource = File.ToList();
+                this.EntryComboBox.DataSource = this.File.ToList();
             }
         }
     }

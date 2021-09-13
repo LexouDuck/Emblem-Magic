@@ -23,11 +23,11 @@ namespace Magic.Components
 
         public MarkedSpaceBar()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             this.DoubleBuffered = true;
 
-            Ranges = new List<Tuple<Space, Range>>();
+            this.Ranges = new List<Tuple<Space, Range>>();
         }
 
 
@@ -38,8 +38,8 @@ namespace Magic.Components
         /// <param name="list">The list of spaces to show up</param>
         public void Load(UInt32 total, List<Space> list)
         {
-            Total = total;
-            Ranges.Clear();
+            this.Total = total;
+            this.Ranges.Clear();
             foreach (Space space in list)
             {
                 this.AddMarkedSpace(new Space(space.Marked, space.Address, space.EndByte));
@@ -53,17 +53,17 @@ namespace Magic.Components
             Int32 endoff;
             Single ratio;
             Space space;
-            for (Int32 i = 0; i < Ranges.Count; i++)
+            for (Int32 i = 0; i < this.Ranges.Count; i++)
             {
-                space = Ranges[i].Item1;
+                space = this.Ranges[i].Item1;
 
-                ratio = (Single)(Int32)space.Address / (Single)Total;
-                offset = (Int32)(ratio * Width);
+                ratio = (Single)(Int32)space.Address / (Single)this.Total;
+                offset = (Int32)(ratio * this.Width);
 
-                ratio = (Single)(Int32)space.EndByte / (Single)Total;
-                endoff = Math.Max(offset + 1, (Int32)(ratio * Width));
+                ratio = (Single)(Int32)space.EndByte / (Single)this.Total;
+                endoff = Math.Max(offset + 1, (Int32)(ratio * this.Width));
 
-                Ranges[i] = Tuple.Create(space, new Range(offset, endoff));
+                this.Ranges[i] = Tuple.Create(space, new Range(offset, endoff));
             }
         }
         void AddMarkedSpace(Space space)
@@ -71,13 +71,13 @@ namespace Magic.Components
             Int32 offset;
             Int32 endoff;
             Single ratio;
-            ratio = (Single)(Int32)space.Address / (Single)Total;
-            offset = (Int32)(ratio * Width);
+            ratio = (Single)(Int32)space.Address / (Single)this.Total;
+            offset = (Int32)(ratio * this.Width);
 
-            ratio = (Single)(Int32)space.EndByte / (Single)Total;
-            endoff = Math.Max(offset + 1, (Int32)(ratio * Width));
+            ratio = (Single)(Int32)space.EndByte / (Single)this.Total;
+            endoff = Math.Max(offset + 1, (Int32)(ratio * this.Width));
 
-            Ranges.Add(Tuple.Create(space, new Range(offset, endoff)));
+            this.Ranges.Add(Tuple.Create(space, new Range(offset, endoff)));
         }
 
 
@@ -85,19 +85,19 @@ namespace Magic.Components
         {
             base.OnPaint(e);
 
-            UpdateRanges();
+            this.UpdateRanges();
 
             using (Brush background = new SolidBrush(this.BackColor))
             {   // Create a brush that will draw the background of the bar
-                e.Graphics.FillRectangle(background, 0, 0, Width, Height);
+                e.Graphics.FillRectangle(background, 0, 0, this.Width, this.Height);
 
-                foreach (var range in Ranges)
+                foreach (var range in this.Ranges)
                 {
                     using (LinearGradientBrush marked = new LinearGradientBrush(
-                        new Rectangle(0, 0, Width, Height),
+                        new Rectangle(0, 0, this.Width, this.Height),
                         Color.White, range.Item1.Marked.Color, LinearGradientMode.Vertical))
                     {
-                        e.Graphics.FillRectangle(marked, range.Item2.Start, 1, range.Item2.Length, Height - 1);
+                        e.Graphics.FillRectangle(marked, range.Item2.Start, 1, range.Item2.Length, this.Height - 1);
                     }   // and a gradient for the marked bits themselves
                 }
             }
@@ -124,9 +124,9 @@ namespace Magic.Components
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(Boolean disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(disposing);
         }

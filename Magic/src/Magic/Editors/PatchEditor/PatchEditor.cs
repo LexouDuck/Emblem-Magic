@@ -23,51 +23,51 @@ namespace Magic.Editors
         {
             try
             {
-                Patches = new List<HackManager>();
-                List = new SortableBindingList<Tuple<
+                this.Patches = new List<HackManager>();
+                this.List = new SortableBindingList<Tuple<
                 String,
                 String,
                 Boolean>>();
 
-                InitializeComponent();
+                this.InitializeComponent();
 
-                Patch_DataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                Patch_DataGrid.AutoGenerateColumns = false;
-                Patch_DataGrid.DataSource = this.List;
+                this.Patch_DataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                this.Patch_DataGrid.AutoGenerateColumns = false;
+                this.Patch_DataGrid.DataSource = this.List;
 
-                Patch_Column_Author.DataPropertyName = "Item1";
-                Patch_Column_PatchName.DataPropertyName = "Item2";
-                Patch_Column_Applied.DataPropertyName = "Item3";
+                this.Patch_Column_Author.DataPropertyName = "Item1";
+                this.Patch_Column_PatchName.DataPropertyName = "Item2";
+                this.Patch_Column_Applied.DataPropertyName = "Item3";
             }
             catch (Exception ex)
             {
                 UI.ShowError("Could not properly open the " + this.Text, ex);
 
-                Core_CloseEditor(this, null);
+                this.Core_CloseEditor(this, null);
             }
         }
         
         public override void Core_OnOpen()
         {
-            Core_Update();
+            this.Core_Update();
         }
         public override void Core_Update()
         {
             try
             {
-                List.Clear();
-                Patches.Clear();
+                this.List.Clear();
+                this.Patches.Clear();
                 String[] files = Directory.GetFiles(Core.Path_Patches);
 
                 foreach (String file in files)
                 {
                     if (file.EndsWith(".mhf", StringComparison.OrdinalIgnoreCase))
                     {
-                        HackManager patch = new HackManager(App);
+                        HackManager patch = new HackManager(this.App);
                         patch.OpenFile(file);
-                        Patches.Add(patch);
+                        this.Patches.Add(patch);
 
-                        List.Add(Tuple.Create(
+                        this.List.Add(Tuple.Create(
                             patch.HackAuthor,
                             patch.HackName,
                             patch.IsApplied()));
@@ -121,7 +121,7 @@ namespace Magic.Editors
                 }
                 // else Core.Repoint(this, repoint.DefaultAddress, repoint.CurrentAddress, repoint.AssetName + " repoint");
 
-                App.MHF.Point.Add(repoint);
+                this.App.MHF.Point.Add(repoint);
             }
 
             UI.ResumeUpdate();
@@ -131,61 +131,61 @@ namespace Magic.Editors
 
         private void PatchesDataGrid_Click(Object sender, EventArgs e)
         {
-            if (Patch_DataGrid.SelectedRows.Count == 1)
+            if (this.Patch_DataGrid.SelectedRows.Count == 1)
             {
-                String patchName = (String)Patch_DataGrid.SelectedRows[0].Cells[1].Value;
-                foreach (HackManager patch in Patches)
+                String patchName = (String)this.Patch_DataGrid.SelectedRows[0].Cells[1].Value;
+                foreach (HackManager patch in this.Patches)
                 {
                     if (patchName.Equals(patch.HackName))
                     {
-                        Patch_Description_Label.Text = patch.HackDescription; break;
+                        this.Patch_Description_Label.Text = patch.HackDescription; break;
                     }
                 }
             }
             else
             {
-                Patch_Description_Label.Text = "";
+                this.Patch_Description_Label.Text = "";
             }
         }
 
         private void RefreshButton_Click(Object sender, EventArgs e)
         {
-            Core_Update();
+            this.Core_Update();
         }
         private void ApplyButton_Click(Object sender, EventArgs e)
         {
-            if (Patch_DataGrid.SelectedRows.Count == 0)
+            if (this.Patch_DataGrid.SelectedRows.Count == 0)
             {
                 UI.ShowMessage("There is no patch currently selected.");
             }
-            else if (Patch_DataGrid.SelectedRows.Count == 1)
+            else if (this.Patch_DataGrid.SelectedRows.Count == 1)
             {
-                String patchName = (String)Patch_DataGrid.SelectedRows[0].Cells[1].Value;
+                String patchName = (String)this.Patch_DataGrid.SelectedRows[0].Cells[1].Value;
 
-                foreach (HackManager patch in Patches)
+                foreach (HackManager patch in this.Patches)
                 {
                     if (patchName.Equals(patch.HackName))
                     {
-                        Core_ApplyPatch(patch);
+                        this.Core_ApplyPatch(patch);
                         break;
                     }
                 }
             }
             else
             {
-                String[] patchNames = new String[Patch_DataGrid.SelectedRows.Count];
+                String[] patchNames = new String[this.Patch_DataGrid.SelectedRows.Count];
                 for (Int32 i = 0; i < patchNames.Length; i++)
                 {
-                    patchNames[i] = (String)Patch_DataGrid.SelectedRows[i].Cells[1].Value;
+                    patchNames[i] = (String)this.Patch_DataGrid.SelectedRows[i].Cells[1].Value;
                 }
 
-                foreach (HackManager patch in Patches)
+                foreach (HackManager patch in this.Patches)
                 {
                     for (Int32 i = 0; i < patchNames.Length; i++)
                     {
                         if (patchNames[i].Equals(patch.HackName))
                         {
-                            Core_ApplyPatch(patch);
+                            this.Core_ApplyPatch(patch);
                             break;
                         }
                     }

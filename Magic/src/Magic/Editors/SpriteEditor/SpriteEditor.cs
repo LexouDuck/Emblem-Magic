@@ -61,17 +61,17 @@ namespace Magic.Editors
             {
                 if (value)
                 {
-                    FlipH_CheckBox.Enabled = false;
-                    FlipV_CheckBox.Enabled = false;
+                    this.FlipH_CheckBox.Enabled = false;
+                    this.FlipV_CheckBox.Enabled = false;
 
-                    Affine_GroupBox.Enabled = true;
+                    this.Affine_GroupBox.Enabled = true;
                 }
                 else
                 {
-                    FlipH_CheckBox.Enabled = true;
-                    FlipV_CheckBox.Enabled = true;
+                    this.FlipH_CheckBox.Enabled = true;
+                    this.FlipV_CheckBox.Enabled = true;
 
-                    Affine_GroupBox.Enabled = false;
+                    this.Affine_GroupBox.Enabled = false;
                 }
             }
         }
@@ -88,108 +88,108 @@ namespace Magic.Editors
         {
             try
             {
-                InitializeComponent();
+                this.InitializeComponent();
 
-                Status.Text = entry + address;
+                this.Status.Text = entry + address;
 
                 base.Owner = owner;
-                Entry = entry;
+                this.Entry = entry;
 
-                Address = address;
-                Compressed = compressed;
-                OffsetX = offsetX;
-                OffsetY = offsetY;
-                Colors = palette;
-                Tiles = tileset;
+                this.Address = address;
+                this.Compressed = compressed;
+                this.OffsetX = offsetX;
+                this.OffsetY = offsetY;
+                this.Colors = palette;
+                this.Tiles = tileset;
 
 
 
-                Sprite_ImageBox.Paint += OAM_ImageBox_Paint;
-                Tileset_ImageBox.Paint += Tileset_ImageBox_Paint;
+                this.Sprite_ImageBox.Paint += this.OAM_ImageBox_Paint;
+                this.Tileset_ImageBox.Paint += this.Tileset_ImageBox_Paint;
 
-                Shape_ComboBox.SelectedIndexChanged -= Shape_ComboBox_SelectedIndexChanged;
-                Shape_ComboBox.DisplayMember = "Key";
-                Shape_ComboBox.ValueMember = "Value";
-                Shape_ComboBox.DataSource = new KeyValuePair<String, OAM_Shape>[4]
+                this.Shape_ComboBox.SelectedIndexChanged -= this.Shape_ComboBox_SelectedIndexChanged;
+                this.Shape_ComboBox.DisplayMember = "Key";
+                this.Shape_ComboBox.ValueMember = "Value";
+                this.Shape_ComboBox.DataSource = new KeyValuePair<String, OAM_Shape>[4]
                 {
                     new KeyValuePair<String, OAM_Shape>("Square", OAM_Shape.Square),
                     new KeyValuePair<String, OAM_Shape>("Rect H", OAM_Shape.Rect_H),
                     new KeyValuePair<String, OAM_Shape>("Rect V", OAM_Shape.Rect_V),
                     new KeyValuePair<String, OAM_Shape>("Invalid",OAM_Shape.Invalid),
                 };
-                Shape_ComboBox.SelectedIndexChanged += Shape_ComboBox_SelectedIndexChanged;
+                this.Shape_ComboBox.SelectedIndexChanged += this.Shape_ComboBox_SelectedIndexChanged;
 
-                Size_ComboBox.SelectedIndexChanged -= Size_ComboBox_SelectedIndexChanged;
-                Size_ComboBox.DisplayMember = "Key";
-                Size_ComboBox.ValueMember = "Value";
-                Size_ComboBox.DataSource = new KeyValuePair<String, OAM_Size>[4]
+                this.Size_ComboBox.SelectedIndexChanged -= this.Size_ComboBox_SelectedIndexChanged;
+                this.Size_ComboBox.DisplayMember = "Key";
+                this.Size_ComboBox.ValueMember = "Value";
+                this.Size_ComboBox.DataSource = new KeyValuePair<String, OAM_Size>[4]
                 {
                     new KeyValuePair<String, OAM_Size>("Times 1", OAM_Size.Times1),
                     new KeyValuePair<String, OAM_Size>("Times 2", OAM_Size.Times2),
                     new KeyValuePair<String, OAM_Size>("Times 4", OAM_Size.Times4),
                     new KeyValuePair<String, OAM_Size>("Times 8", OAM_Size.Times8),
                 };
-                Size_ComboBox.SelectedIndexChanged += Size_ComboBox_SelectedIndexChanged;
+                this.Size_ComboBox.SelectedIndexChanged += this.Size_ComboBox_SelectedIndexChanged;
 
-                GFX_Mode_ComboBox.SelectedIndexChanged -= GFX_Mode_ComboBox_SelectedIndexChanged;
-                GFX_Mode_ComboBox.DisplayMember = "Key";
-                GFX_Mode_ComboBox.ValueMember = "Value";
-                GFX_Mode_ComboBox.DataSource = new KeyValuePair<String, OAM_GFXMode>[4]
+                this.GFX_Mode_ComboBox.SelectedIndexChanged -= this.GFX_Mode_ComboBox_SelectedIndexChanged;
+                this.GFX_Mode_ComboBox.DisplayMember = "Key";
+                this.GFX_Mode_ComboBox.ValueMember = "Value";
+                this.GFX_Mode_ComboBox.DataSource = new KeyValuePair<String, OAM_GFXMode>[4]
                 {
                     new KeyValuePair<String, OAM_GFXMode>("Normal",      OAM_GFXMode.Normal),
                     new KeyValuePair<String, OAM_GFXMode>("Alpha Blend", OAM_GFXMode.AlphaBlend),
                     new KeyValuePair<String, OAM_GFXMode>("Alpha Mask",  OAM_GFXMode.OBJ_Window),
                     new KeyValuePair<String, OAM_GFXMode>("Invalid",     OAM_GFXMode.Invalid),
                 };
-                GFX_Mode_ComboBox.SelectedIndexChanged -= GFX_Mode_ComboBox_SelectedIndexChanged;
+                this.GFX_Mode_ComboBox.SelectedIndexChanged -= this.GFX_Mode_ComboBox_SelectedIndexChanged;
 
-                OBJ_Mode_ComboBox.SelectedIndexChanged -= OBJ_Mode_ComboBox_SelectedIndexChanged;
-                OBJ_Mode_ComboBox.DisplayMember = "Key";
-                OBJ_Mode_ComboBox.ValueMember = "Value";
-                OBJ_Mode_ComboBox.DataSource = new KeyValuePair<String, OAM_OBJMode>[4]
+                this.OBJ_Mode_ComboBox.SelectedIndexChanged -= this.OBJ_Mode_ComboBox_SelectedIndexChanged;
+                this.OBJ_Mode_ComboBox.DisplayMember = "Key";
+                this.OBJ_Mode_ComboBox.ValueMember = "Value";
+                this.OBJ_Mode_ComboBox.DataSource = new KeyValuePair<String, OAM_OBJMode>[4]
                 {
                     new KeyValuePair<String, OAM_OBJMode>("Normal",     OAM_OBJMode.Normal),
                     new KeyValuePair<String, OAM_OBJMode>("Affine",     OAM_OBJMode.Affine),
                     new KeyValuePair<String, OAM_OBJMode>("Hidden",     OAM_OBJMode.Hidden),
                     new KeyValuePair<String, OAM_OBJMode>("Big Affine", OAM_OBJMode.BigAffine),
                 };
-                OBJ_Mode_ComboBox.SelectedIndexChanged += OBJ_Mode_ComboBox_SelectedIndexChanged;
+                this.OBJ_Mode_ComboBox.SelectedIndexChanged += this.OBJ_Mode_ComboBox_SelectedIndexChanged;
             }
             catch (Exception ex)
             {
                 UI.ShowError("Could not properly open the " + this.Text, ex);
 
-                Core_CloseEditor(this, null);
+                this.Core_CloseEditor(this, null);
             }
         }
 
         public override void Core_OnOpen()
         {
-            Core_Update();
+            this.Core_Update();
         }
         public override void Core_Update()
         {
             try
             {
                 Byte[] data;
-                if (Compressed < 0)
+                if (this.Compressed < 0)
                 {
-                    data = Core.ReadData(Address, Compressed * -1);
-                    Current = new OAM_Array(data, 0);
+                    data = Core.ReadData(this.Address, this.Compressed * -1);
+                    this.Current = new OAM_Array(data, 0);
                 }
                 else
                 {
-                    data = Core.ReadData(Address, 0);
-                    Current = new OAM_Array(data, (UInt32)Compressed);
+                    data = Core.ReadData(this.Address, 0);
+                    this.Current = new OAM_Array(data, (UInt32)this.Compressed);
                 }
 
-                Entry_ListBox.DataSource = Current.Sprites;
-                Affine_ListBox.DataSource = Current.Affines;
-                Core_UpdateValues();
+                this.Entry_ListBox.DataSource = this.Current.Sprites;
+                this.Affine_ListBox.DataSource = this.Current.Affines;
+                this.Core_UpdateValues();
 
-                Display = new SpriteSheet(240, 160);
-                Display.AddSprite(Colors, Tiles, Current, OffsetX, OffsetY);
-                Core_UpdateDisplay(Display);
+                this.Display = new SpriteSheet(240, 160);
+                this.Display.AddSprite(this.Colors, this.Tiles, this.Current, this.OffsetX, this.OffsetY);
+                this.Core_UpdateDisplay(this.Display);
             }
             catch (Exception ex)
             {
@@ -199,147 +199,147 @@ namespace Magic.Editors
 
         public void Core_UpdateDisplay(IDisplayable display)
         {
-            Sprite_ImageBox.Load(display);
+            this.Sprite_ImageBox.Load(display);
 
-            Tileset_ImageBox.Load(Tiles.ToImage(32, 8, Colors.ToBytes(false)));
+            this.Tileset_ImageBox.Load(this.Tiles.ToImage(32, 8, this.Colors.ToBytes(false)));
         }
         public void Core_UpdateValues()
         {
-            if (Current.Sprites.Count == 0)
+            if (this.Current.Sprites.Count == 0)
                 return;
 
-            ScreenX_NumBox.ValueChanged -= ScreenX_NumBox_ValueChanged;
-            ScreenY_NumBox.ValueChanged -= ScreenY_NumBox_ValueChanged;
-            Shape_ComboBox.SelectedIndexChanged -= Shape_ComboBox_SelectedIndexChanged;
-            Size_ComboBox.SelectedIndexChanged -= Size_ComboBox_SelectedIndexChanged;
-            Priority_NumBox.ValueChanged -= Priority_NumBox_ValueChanged;
+            this.ScreenX_NumBox.ValueChanged -= this.ScreenX_NumBox_ValueChanged;
+            this.ScreenY_NumBox.ValueChanged -= this.ScreenY_NumBox_ValueChanged;
+            this.Shape_ComboBox.SelectedIndexChanged -= this.Shape_ComboBox_SelectedIndexChanged;
+            this.Size_ComboBox.SelectedIndexChanged -= this.Size_ComboBox_SelectedIndexChanged;
+            this.Priority_NumBox.ValueChanged -= this.Priority_NumBox_ValueChanged;
 
-            GFX_Mode_ComboBox.SelectedIndexChanged -= GFX_Mode_ComboBox_SelectedIndexChanged;
-            OBJ_Mode_ComboBox.SelectedIndexChanged -= OBJ_Mode_ComboBox_SelectedIndexChanged;
-            FullColors_CheckBox.CheckedChanged -= FullColors_CheckBox_CheckedChanged;
-            DrawMosaic_CheckBox.CheckedChanged -= DrawMosaic_CheckBox_CheckedChanged;
-            Palette_NumBox.ValueChanged -= Palette_NumBox_ValueChanged;
+            this.GFX_Mode_ComboBox.SelectedIndexChanged -= this.GFX_Mode_ComboBox_SelectedIndexChanged;
+            this.OBJ_Mode_ComboBox.SelectedIndexChanged -= this.OBJ_Mode_ComboBox_SelectedIndexChanged;
+            this.FullColors_CheckBox.CheckedChanged -= this.FullColors_CheckBox_CheckedChanged;
+            this.DrawMosaic_CheckBox.CheckedChanged -= this.DrawMosaic_CheckBox_CheckedChanged;
+            this.Palette_NumBox.ValueChanged -= this.Palette_NumBox_ValueChanged;
 
-            SheetX_NumBox.ValueChanged -= SheetX_NumBox_ValueChanged;
-            SheetY_NumBox.ValueChanged -= SheetY_NumBox_ValueChanged;
+            this.SheetX_NumBox.ValueChanged -= this.SheetX_NumBox_ValueChanged;
+            this.SheetY_NumBox.ValueChanged -= this.SheetY_NumBox_ValueChanged;
 
-            FlipH_CheckBox.CheckedChanged -= FlipH_CheckBox_CheckedChanged;
-            FlipV_CheckBox.CheckedChanged -= FlipV_CheckBox_CheckedChanged;
+            this.FlipH_CheckBox.CheckedChanged -= this.FlipH_CheckBox_CheckedChanged;
+            this.FlipV_CheckBox.CheckedChanged -= this.FlipV_CheckBox_CheckedChanged;
 
-            Affine_Index_NumBox.ValueChanged -= Affine_Index_NumBox_ValueChanged;
-            Affine_Ux_NumBox.ValueChanged -= Affine_Ux_NumBox_ValueChanged;
-            Affine_Vx_NumBox.ValueChanged -= Affine_Uy_NumBox_ValueChanged;
-            Affine_Uy_NumBox.ValueChanged -= Affine_Vx_NumBox_ValueChanged;
-            Affine_Vy_NumBox.ValueChanged -= Affine_Vy_NumBox_ValueChanged;
+            this.Affine_Index_NumBox.ValueChanged -= this.Affine_Index_NumBox_ValueChanged;
+            this.Affine_Ux_NumBox.ValueChanged -= this.Affine_Ux_NumBox_ValueChanged;
+            this.Affine_Vx_NumBox.ValueChanged -= this.Affine_Uy_NumBox_ValueChanged;
+            this.Affine_Uy_NumBox.ValueChanged -= this.Affine_Vx_NumBox_ValueChanged;
+            this.Affine_Vy_NumBox.ValueChanged -= this.Affine_Vy_NumBox_ValueChanged;
 
             try
             {
-                Entry_Amount_Label.Text = "OAM Objects: " + Current.Sprites.Count;
-                Affine_Amount_Label.Text = "Affine Transforms: " + Current.Affines.Count;
+                this.Entry_Amount_Label.Text = "OAM Objects: " + this.Current.Sprites.Count;
+                this.Affine_Amount_Label.Text = "Affine Transforms: " + this.Current.Affines.Count;
 
-                Sprite_PaletteBox.Load(Colors);
+                this.Sprite_PaletteBox.Load(this.Colors);
 
-                if (Entry_ListBox.SelectedIndices.Count == 1)
+                if (this.Entry_ListBox.SelectedIndices.Count == 1)
                 {
-                    int index = Entry_ListBox.SelectedIndex;
-                    if (index >= Current.Sprites.Count)
+                    int index = this.Entry_ListBox.SelectedIndex;
+                    if (index >= this.Current.Sprites.Count)
                         throw new Exception("index is outside the bounds of this OAM array");
 
-                    ScreenX_NumBox.Value = Current[index].ScreenX;
-                    ScreenY_NumBox.Value = Current[index].ScreenY;
+                    this.ScreenX_NumBox.Value = this.Current[index].ScreenX;
+                    this.ScreenY_NumBox.Value = this.Current[index].ScreenY;
 
-                    SheetX_NumBox.Value = Current[index].SheetX;
-                    SheetY_NumBox.Value = Current[index].SheetY;
-                    Size dimensions = Current[index].GetDimensions();
-                    ShapeSize_Info.Text = (dimensions.Width * 8) + "x" + (dimensions.Height * 8);
-                    Shape_ComboBox.SelectedValue = Current[index].SpriteShape;
-                    Size_ComboBox.SelectedValue = Current[index].SpriteSize;
-                    Priority_NumBox.Value = Current[index].Priority;
+                    this.SheetX_NumBox.Value = this.Current[index].SheetX;
+                    this.SheetY_NumBox.Value = this.Current[index].SheetY;
+                    Size dimensions = this.Current[index].GetDimensions();
+                    this.ShapeSize_Info.Text = (dimensions.Width * 8) + "x" + (dimensions.Height * 8);
+                    this.Shape_ComboBox.SelectedValue = this.Current[index].SpriteShape;
+                    this.Size_ComboBox.SelectedValue = this.Current[index].SpriteSize;
+                    this.Priority_NumBox.Value = this.Current[index].Priority;
 
-                    GFX_Mode_ComboBox.SelectedValue = Current[index].GFXMode;
-                    OBJ_Mode_ComboBox.SelectedValue = Current[index].OBJMode;
-                    FullColors_CheckBox.Checked = Current[index].FullColors;
-                    DrawMosaic_CheckBox.Checked = Current[index].DrawMosaic;
-                    Palette_NumBox.Value = Current[index].Palette;
+                    this.GFX_Mode_ComboBox.SelectedValue = this.Current[index].GFXMode;
+                    this.OBJ_Mode_ComboBox.SelectedValue = this.Current[index].OBJMode;
+                    this.FullColors_CheckBox.Checked = this.Current[index].FullColors;
+                    this.DrawMosaic_CheckBox.Checked = this.Current[index].DrawMosaic;
+                    this.Palette_NumBox.Value = this.Current[index].Palette;
 
-                    if (Current[index].IsAffineSprite())
+                    if (this.Current[index].IsAffineSprite())
                     {
-                        OAM_Affine transform = Current.Affines[Current[index].AffineIndex];
+                        OAM_Affine transform = this.Current.Affines[this.Current[index].AffineIndex];
                         //Affine_ListBox.SelectedIndex = Current[index].AffineIndex;
-                        FlipH_CheckBox.Enabled = false; FlipH_CheckBox.Checked = false;
-                        FlipV_CheckBox.Enabled = false; FlipV_CheckBox.Checked = false;
+                        this.FlipH_CheckBox.Enabled = false; this.FlipH_CheckBox.Checked = false;
+                        this.FlipV_CheckBox.Enabled = false; this.FlipV_CheckBox.Checked = false;
 
-                        AffineSpriteMode = true;
-                        Affine_Index_NumBox.Value = Current[index].AffineIndex;
-                        Affine_Ux_NumBox.Value = (Decimal)transform.Ux;
-                        Affine_Uy_NumBox.Value = (Decimal)transform.Uy;
-                        Affine_Vx_NumBox.Value = (Decimal)transform.Vx;
-                        Affine_Vy_NumBox.Value = (Decimal)transform.Vy;
+                        this.AffineSpriteMode = true;
+                        this.Affine_Index_NumBox.Value = this.Current[index].AffineIndex;
+                        this.Affine_Ux_NumBox.Value = (Decimal)transform.Ux;
+                        this.Affine_Uy_NumBox.Value = (Decimal)transform.Uy;
+                        this.Affine_Vx_NumBox.Value = (Decimal)transform.Vx;
+                        this.Affine_Vy_NumBox.Value = (Decimal)transform.Vy;
                     }
                     else
                     {
-                        FlipH_CheckBox.Enabled = true; FlipH_CheckBox.Checked = Current[index].FlipH;
-                        FlipV_CheckBox.Enabled = true; FlipV_CheckBox.Checked = Current[index].FlipV;
+                        this.FlipH_CheckBox.Enabled = true; this.FlipH_CheckBox.Checked = this.Current[index].FlipH;
+                        this.FlipV_CheckBox.Enabled = true; this.FlipV_CheckBox.Checked = this.Current[index].FlipV;
 
-                        AffineSpriteMode = false;
-                        Affine_Index_NumBox.Value = 0;
-                        Affine_Ux_NumBox.Value = (Decimal)0;
-                        Affine_Uy_NumBox.Value = (Decimal)0;
-                        Affine_Vx_NumBox.Value = (Decimal)0;
-                        Affine_Vy_NumBox.Value = (Decimal)0;
+                        this.AffineSpriteMode = false;
+                        this.Affine_Index_NumBox.Value = 0;
+                        this.Affine_Ux_NumBox.Value = (Decimal)0;
+                        this.Affine_Uy_NumBox.Value = (Decimal)0;
+                        this.Affine_Vx_NumBox.Value = (Decimal)0;
+                        this.Affine_Vy_NumBox.Value = (Decimal)0;
                     }
                 }
                 else
                 {
-                    ScreenX_NumBox.Value = 0;
-                    ScreenY_NumBox.Value = 0;
+                    this.ScreenX_NumBox.Value = 0;
+                    this.ScreenY_NumBox.Value = 0;
 
-                    SheetX_NumBox.Value = 0;
-                    SheetY_NumBox.Value = 0;
-                    Shape_ComboBox.SelectedValue = OAM_Shape.Invalid;
-                    Size_ComboBox.SelectedValue = OAM_Size.Times1;
+                    this.SheetX_NumBox.Value = 0;
+                    this.SheetY_NumBox.Value = 0;
+                    this.Shape_ComboBox.SelectedValue = OAM_Shape.Invalid;
+                    this.Size_ComboBox.SelectedValue = OAM_Size.Times1;
 
-                    GFX_Mode_ComboBox.SelectedValue = OAM_GFXMode.Normal;
-                    OBJ_Mode_ComboBox.SelectedValue = OAM_OBJMode.Normal;
-                    FullColors_CheckBox.Checked = false;
-                    DrawMosaic_CheckBox.Checked = false;
-                    Priority_NumBox.Value = 0;
-                    Palette_NumBox.Value = 0;
+                    this.GFX_Mode_ComboBox.SelectedValue = OAM_GFXMode.Normal;
+                    this.OBJ_Mode_ComboBox.SelectedValue = OAM_OBJMode.Normal;
+                    this.FullColors_CheckBox.Checked = false;
+                    this.DrawMosaic_CheckBox.Checked = false;
+                    this.Priority_NumBox.Value = 0;
+                    this.Palette_NumBox.Value = 0;
 
-                    FlipH_CheckBox.Checked = false;
-                    FlipV_CheckBox.Checked = false;
+                    this.FlipH_CheckBox.Checked = false;
+                    this.FlipV_CheckBox.Checked = false;
 
-                    if (Entry_ListBox.SelectedIndices.Count == 0)
+                    if (this.Entry_ListBox.SelectedIndices.Count == 0)
                     {
-                        ScreenX_NumBox.Text = "";
-                        ScreenY_NumBox.Text = "";
+                        this.ScreenX_NumBox.Text = "";
+                        this.ScreenY_NumBox.Text = "";
 
-                        SheetX_NumBox.Text = "";
-                        SheetY_NumBox.Text = "";
-                        ShapeSize_Info.Text = "";
-                        Shape_ComboBox.Text = "";
-                        Size_ComboBox.Text = "";
+                        this.SheetX_NumBox.Text = "";
+                        this.SheetY_NumBox.Text = "";
+                        this.ShapeSize_Info.Text = "";
+                        this.Shape_ComboBox.Text = "";
+                        this.Size_ComboBox.Text = "";
 
-                        GFX_Mode_ComboBox.Text = "";
-                        OBJ_Mode_ComboBox.Text = "";
-                        Priority_NumBox.Text = "";
-                        Palette_NumBox.Text = "";
+                        this.GFX_Mode_ComboBox.Text = "";
+                        this.OBJ_Mode_ComboBox.Text = "";
+                        this.Priority_NumBox.Text = "";
+                        this.Palette_NumBox.Text = "";
                     }
                     else
                     {
-                        SheetX_NumBox.Text = "-";
-                        SheetY_NumBox.Text = "-";
+                        this.SheetX_NumBox.Text = "-";
+                        this.SheetY_NumBox.Text = "-";
 
-                        ScreenX_NumBox.Text = "-";
-                        ScreenY_NumBox.Text = "-";
-                        ShapeSize_Info.Text = "(mixed)";
-                        Shape_ComboBox.Text = "(mixed)";
-                        Size_ComboBox.Text = "(mixed)";
+                        this.ScreenX_NumBox.Text = "-";
+                        this.ScreenY_NumBox.Text = "-";
+                        this.ShapeSize_Info.Text = "(mixed)";
+                        this.Shape_ComboBox.Text = "(mixed)";
+                        this.Size_ComboBox.Text = "(mixed)";
 
-                        GFX_Mode_ComboBox.Text = "(mixed)";
-                        OBJ_Mode_ComboBox.Text = "(mixed)";
-                        Priority_NumBox.Text = "-";
-                        Palette_NumBox.Text = "-";
+                        this.GFX_Mode_ComboBox.Text = "(mixed)";
+                        this.OBJ_Mode_ComboBox.Text = "(mixed)";
+                        this.Priority_NumBox.Text = "-";
+                        this.Palette_NumBox.Text = "-";
                     }
                 }
             }
@@ -348,29 +348,29 @@ namespace Magic.Editors
                 UI.ShowError("Could not load OAM values.", ex);
             }
 
-            ScreenX_NumBox.ValueChanged += ScreenX_NumBox_ValueChanged;
-            ScreenY_NumBox.ValueChanged += ScreenY_NumBox_ValueChanged;
-            Shape_ComboBox.SelectedIndexChanged += Shape_ComboBox_SelectedIndexChanged;
-            Size_ComboBox.SelectedIndexChanged += Size_ComboBox_SelectedIndexChanged;
-            Priority_NumBox.ValueChanged += Priority_NumBox_ValueChanged;
+            this.ScreenX_NumBox.ValueChanged += this.ScreenX_NumBox_ValueChanged;
+            this.ScreenY_NumBox.ValueChanged += this.ScreenY_NumBox_ValueChanged;
+            this.Shape_ComboBox.SelectedIndexChanged += this.Shape_ComboBox_SelectedIndexChanged;
+            this.Size_ComboBox.SelectedIndexChanged += this.Size_ComboBox_SelectedIndexChanged;
+            this.Priority_NumBox.ValueChanged += this.Priority_NumBox_ValueChanged;
 
-            GFX_Mode_ComboBox.SelectedIndexChanged += GFX_Mode_ComboBox_SelectedIndexChanged;
-            OBJ_Mode_ComboBox.SelectedIndexChanged += OBJ_Mode_ComboBox_SelectedIndexChanged;
-            FullColors_CheckBox.CheckedChanged += FullColors_CheckBox_CheckedChanged;
-            DrawMosaic_CheckBox.CheckedChanged += DrawMosaic_CheckBox_CheckedChanged;
-            Palette_NumBox.ValueChanged += Palette_NumBox_ValueChanged;
+            this.GFX_Mode_ComboBox.SelectedIndexChanged += this.GFX_Mode_ComboBox_SelectedIndexChanged;
+            this.OBJ_Mode_ComboBox.SelectedIndexChanged += this.OBJ_Mode_ComboBox_SelectedIndexChanged;
+            this.FullColors_CheckBox.CheckedChanged += this.FullColors_CheckBox_CheckedChanged;
+            this.DrawMosaic_CheckBox.CheckedChanged += this.DrawMosaic_CheckBox_CheckedChanged;
+            this.Palette_NumBox.ValueChanged += this.Palette_NumBox_ValueChanged;
 
-            SheetX_NumBox.ValueChanged += SheetX_NumBox_ValueChanged;
-            SheetY_NumBox.ValueChanged += SheetY_NumBox_ValueChanged;
+            this.SheetX_NumBox.ValueChanged += this.SheetX_NumBox_ValueChanged;
+            this.SheetY_NumBox.ValueChanged += this.SheetY_NumBox_ValueChanged;
 
-            FlipH_CheckBox.CheckedChanged += FlipH_CheckBox_CheckedChanged;
-            FlipV_CheckBox.CheckedChanged += FlipV_CheckBox_CheckedChanged;
+            this.FlipH_CheckBox.CheckedChanged += this.FlipH_CheckBox_CheckedChanged;
+            this.FlipV_CheckBox.CheckedChanged += this.FlipV_CheckBox_CheckedChanged;
 
-            Affine_Index_NumBox.ValueChanged += Affine_Index_NumBox_ValueChanged;
-            Affine_Ux_NumBox.ValueChanged += Affine_Ux_NumBox_ValueChanged;
-            Affine_Vx_NumBox.ValueChanged += Affine_Uy_NumBox_ValueChanged;
-            Affine_Uy_NumBox.ValueChanged += Affine_Vx_NumBox_ValueChanged;
-            Affine_Vy_NumBox.ValueChanged += Affine_Vy_NumBox_ValueChanged;
+            this.Affine_Index_NumBox.ValueChanged += this.Affine_Index_NumBox_ValueChanged;
+            this.Affine_Ux_NumBox.ValueChanged += this.Affine_Ux_NumBox_ValueChanged;
+            this.Affine_Vx_NumBox.ValueChanged += this.Affine_Uy_NumBox_ValueChanged;
+            this.Affine_Uy_NumBox.ValueChanged += this.Affine_Vx_NumBox_ValueChanged;
+            this.Affine_Vy_NumBox.ValueChanged += this.Affine_Vy_NumBox_ValueChanged;
         }
         public void Core_Write()
         {
@@ -388,29 +388,29 @@ namespace Magic.Editors
             {
                 Byte[] data;
 
-                if (Compressed < 0)
+                if (this.Compressed < 0)
                 {
-                    data = Current.ToBytes();
+                    data = this.Current.ToBytes();
                 }
                 else // its in a compressed OAM data block
                 {
-                    data = Core.ReadData(Address, 0);
-                    Byte[] oam = Current.ToBytes();
-                    Array.Copy(oam, 0, data, Compressed, oam.Length);
+                    data = Core.ReadData(this.Address, 0);
+                    Byte[] oam = this.Current.ToBytes();
+                    Array.Copy(oam, 0, data, this.Compressed, oam.Length);
                     data = LZ77.Compress(data);
                 }
-                Pointer address = Core.FindData(Address.ToBytes(), 4);
+                Pointer address = Core.FindData(this.Address.ToBytes(), 4);
                 Boolean cancel = Prompt.ShowRepointDialog(this, "Repoint OAM Data",
-                    "The OAM data to insert might need to be repointed.", Entry,
-                    new Tuple<String, Pointer, Int32>[] { Tuple.Create("OAM Data", Address, data.Length) },
+                    "The OAM data to insert might need to be repointed.", this.Entry,
+                    new Tuple<String, Pointer, Int32>[] { Tuple.Create("OAM Data", this.Address, data.Length) },
                     new Pointer[] { address });
                 if (cancel) return;
 
-                Address = Core.ReadPointer(address);
+                this.Address = Core.ReadPointer(address);
 
                 Core.WriteData(this,
-                    Address, data,
-                    Entry + "OAM changed");
+                    this.Address, data,
+                    this.Entry + "OAM changed");
             }
             catch (Exception ex)
             {
@@ -489,22 +489,22 @@ namespace Magic.Editors
         {
             if (this.Sprite_ImageBox == null)
                 return;
-            foreach (int index in Entry_ListBox.SelectedIndices)
+            foreach (int index in this.Entry_ListBox.SelectedIndices)
             {
-                OAM obj = Current[index];
+                OAM obj = this.Current[index];
                 Size size = 8 * obj.GetDimensions();
                 Point pos = new(
-                    obj.ScreenX + OffsetX,
-                    obj.ScreenY + OffsetY);
+                    obj.ScreenX + this.OffsetX,
+                    obj.ScreenY + this.OffsetY);
 
                 Core_DrawRectangle(this.Sprite_ImageBox, e.Graphics,
                     SystemColors.Highlight,
-                    pos, size * (Current[index].OBJMode == OAM_OBJMode.BigAffine ? 2 : 1));
+                    pos, size * (this.Current[index].OBJMode == OAM_OBJMode.BigAffine ? 2 : 1));
                 if (obj.IsAffineSprite())
                 {
                     Core_DrawAffineVectors(this.Sprite_ImageBox, e.Graphics,
                         pos, size,
-                        Current.Affines[obj.AffineIndex]);
+                        this.Current.Affines[obj.AffineIndex]);
                 }
             }
         }
@@ -512,9 +512,9 @@ namespace Magic.Editors
         {
             if (this.Tileset_ImageBox == null)
                 return;
-            foreach (int index in Entry_ListBox.SelectedIndices)
+            foreach (int index in this.Entry_ListBox.SelectedIndices)
             {
-                OAM obj = Current[index];
+                OAM obj = this.Current[index];
                 Size size = 8 * obj.GetDimensions();
                 Point pos = new(
                     obj.SheetX * 8,
@@ -535,263 +535,263 @@ namespace Magic.Editors
 
         private void Entry_ListBox_SelectedIndexChanged(Object sender, EventArgs e)
         {
-            Core_UpdateDisplay(Display);
-            Core_UpdateValues();
+            this.Core_UpdateDisplay(this.Display);
+            this.Core_UpdateValues();
         }
         private void Entry_ListBox_MouseDown(Object sender, MouseEventArgs e)
         {   // deselect list item when user clicks empty area
-            int index = Entry_ListBox.IndexFromPoint(e.X, e.Y);
+            int index = this.Entry_ListBox.IndexFromPoint(e.X, e.Y);
             if (index < 0)
             {
-                Entry_ListBox.SelectedItems.Clear();
+                this.Entry_ListBox.SelectedItems.Clear();
             }
         }
 
         private void Entry_DeleteButton_Click(Object sender, EventArgs e)
         {
-            foreach (int index in Entry_ListBox.SelectedIndices)
+            foreach (int index in this.Entry_ListBox.SelectedIndices)
             {
-                Current.Sprites.RemoveAt(index);
+                this.Current.Sprites.RemoveAt(index);
             }
-            Core_Write();
+            this.Core_Write();
         }
         private void Entry_CreateButton_Click(Object sender, EventArgs e)
         {
-            Current.Sprites.Add(OAM.NULL);
+            this.Current.Sprites.Add(OAM.NULL);
 
-            Core_Write();
+            this.Core_Write();
         }
         private void Entry_MoveUp_Button_Click(Object sender, EventArgs e)
         {
-            foreach (int index in Entry_ListBox.SelectedIndices)
+            foreach (int index in this.Entry_ListBox.SelectedIndices)
             {
-                OAM tmp = Current.Sprites[index - 1];
-                Current.Sprites[index - 1] = Current.Sprites[index];
-                Current.Sprites[index] = tmp;
+                OAM tmp = this.Current.Sprites[index - 1];
+                this.Current.Sprites[index - 1] = this.Current.Sprites[index];
+                this.Current.Sprites[index] = tmp;
             }
-            Core_Write();
+            this.Core_Write();
         }
         private void Entry_MoveDown_Button_Click(Object sender, EventArgs e)
         {
-            foreach (int index in Entry_ListBox.SelectedIndices)
+            foreach (int index in this.Entry_ListBox.SelectedIndices)
             {
-                OAM tmp = Current.Sprites[index + 1];
-                Current.Sprites[index + 1] = Current.Sprites[index];
-                Current.Sprites[index] = tmp;
+                OAM tmp = this.Current.Sprites[index + 1];
+                this.Current.Sprites[index + 1] = this.Current.Sprites[index];
+                this.Current.Sprites[index] = tmp;
             }
-            Core_Write();
+            this.Core_Write();
         }
 
 
 
         private void Affine_ListBox_SelectedIndexChanged(Object sender, EventArgs e)
         {
-            Core_UpdateValues();
+            this.Core_UpdateValues();
         }
         private void Affine_ListBox_MouseDown(Object sender, MouseEventArgs e)
         {   // deselect list item when user clicks empty area
-            int index = Affine_ListBox.IndexFromPoint(e.X, e.Y);
+            int index = this.Affine_ListBox.IndexFromPoint(e.X, e.Y);
             if (index < 0)
             {
-                Affine_ListBox.SelectedItems.Clear();
+                this.Affine_ListBox.SelectedItems.Clear();
             }
         }
 
         private void Affine_DeleteButton_Click(Object sender, EventArgs e)
         {
-            foreach (int index in Affine_ListBox.SelectedIndices)
+            foreach (int index in this.Affine_ListBox.SelectedIndices)
             {
-                Current.Affines.RemoveAt(index);
+                this.Current.Affines.RemoveAt(index);
             }
-            Core_Write();
+            this.Core_Write();
         }
         private void Affine_CreateButton_Click(Object sender, EventArgs e)
         {
-            Current.Affines.Add(OAM_Affine.IDENTITY);
+            this.Current.Affines.Add(OAM_Affine.IDENTITY);
 
-            Core_Write();
+            this.Core_Write();
         }
         private void Affine_MoveUp_Button_Click(Object sender, EventArgs e)
         {
-            foreach (int index in Affine_ListBox.SelectedIndices)
+            foreach (int index in this.Affine_ListBox.SelectedIndices)
             {
-                OAM_Affine tmp = Current.Affines[index - 1];
-                Current.Affines[index - 1] = Current.Affines[index];
-                Current.Affines[index] = tmp;
+                OAM_Affine tmp = this.Current.Affines[index - 1];
+                this.Current.Affines[index - 1] = this.Current.Affines[index];
+                this.Current.Affines[index] = tmp;
             }
-            Core_Write();
+            this.Core_Write();
         }
         private void Affine_MoveDown_Button_Click(Object sender, EventArgs e)
         {
-            foreach (int index in Affine_ListBox.SelectedIndices)
+            foreach (int index in this.Affine_ListBox.SelectedIndices)
             {
-                OAM_Affine tmp = Current.Affines[index + 1];
-                Current.Affines[index + 1] = Current.Affines[index];
-                Current.Affines[index] = tmp;
+                OAM_Affine tmp = this.Current.Affines[index + 1];
+                this.Current.Affines[index + 1] = this.Current.Affines[index];
+                this.Current.Affines[index] = tmp;
             }
-            Core_Write();
+            this.Core_Write();
         }
 
 
 
         private void ScreenX_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            foreach (int index in Entry_ListBox.SelectedIndices)
+            foreach (int index in this.Entry_ListBox.SelectedIndices)
             {
-                Current[index].ScreenX = (Int16)ScreenX_NumBox.Value;
+                this.Current[index].ScreenX = (Int16)this.ScreenX_NumBox.Value;
             }
-            Core_Write();
+            this.Core_Write();
         }
         private void ScreenY_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            foreach (int index in Entry_ListBox.SelectedIndices)
+            foreach (int index in this.Entry_ListBox.SelectedIndices)
             {
-                Current[index].ScreenY = (Int16)ScreenY_NumBox.Value;
+                this.Current[index].ScreenY = (Int16)this.ScreenY_NumBox.Value;
             }
-            Core_Write();
+            this.Core_Write();
         }
         private void Shape_ComboBox_SelectedIndexChanged(Object sender, EventArgs e)
         {
-            foreach (int index in Entry_ListBox.SelectedIndices)
+            foreach (int index in this.Entry_ListBox.SelectedIndices)
             {
-                Current[index].SpriteShape = (OAM_Shape)Shape_ComboBox.SelectedValue;
+                this.Current[index].SpriteShape = (OAM_Shape)this.Shape_ComboBox.SelectedValue;
             }
-            Core_Write();
+            this.Core_Write();
         }
         private void Size_ComboBox_SelectedIndexChanged(Object sender, EventArgs e)
         {
-            foreach (int index in Entry_ListBox.SelectedIndices)
+            foreach (int index in this.Entry_ListBox.SelectedIndices)
             {
-                Current[index].SpriteSize = (OAM_Size)Size_ComboBox.SelectedValue;
+                this.Current[index].SpriteSize = (OAM_Size)this.Size_ComboBox.SelectedValue;
             }
-            Core_Write();
+            this.Core_Write();
         }
 
         private void SheetX_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            foreach (int index in Entry_ListBox.SelectedIndices)
+            foreach (int index in this.Entry_ListBox.SelectedIndices)
             {
-                Current[index].SheetX = (Byte)SheetX_NumBox.Value;
+                this.Current[index].SheetX = (Byte)this.SheetX_NumBox.Value;
             }
-            Core_Write();
+            this.Core_Write();
         }
         private void SheetY_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            foreach (int index in Entry_ListBox.SelectedIndices)
+            foreach (int index in this.Entry_ListBox.SelectedIndices)
             {
-                Current[index].SheetY = (Byte)SheetY_NumBox.Value;
+                this.Current[index].SheetY = (Byte)this.SheetY_NumBox.Value;
             }
-            Core_Write();
+            this.Core_Write();
         }
 
         private void GFX_Mode_ComboBox_SelectedIndexChanged(Object sender, EventArgs e)
         {
-            foreach (int index in Entry_ListBox.SelectedIndices)
+            foreach (int index in this.Entry_ListBox.SelectedIndices)
             {
-                Current[index].GFXMode = (OAM_GFXMode)GFX_Mode_ComboBox.SelectedValue;
+                this.Current[index].GFXMode = (OAM_GFXMode)this.GFX_Mode_ComboBox.SelectedValue;
             }
-            Core_Write();
+            this.Core_Write();
         }
         private void OBJ_Mode_ComboBox_SelectedIndexChanged(Object sender, EventArgs e)
         {
-            foreach (int index in Entry_ListBox.SelectedIndices)
+            foreach (int index in this.Entry_ListBox.SelectedIndices)
             {
-                Current[index].OBJMode = (OAM_OBJMode)OBJ_Mode_ComboBox.SelectedValue;
+                this.Current[index].OBJMode = (OAM_OBJMode)this.OBJ_Mode_ComboBox.SelectedValue;
             }
-            Core_Write();
+            this.Core_Write();
         }
 
         private void FullColors_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
-            foreach (int index in Entry_ListBox.SelectedIndices)
+            foreach (int index in this.Entry_ListBox.SelectedIndices)
             {
-                Current[index].FullColors = FullColors_CheckBox.Checked;
+                this.Current[index].FullColors = this.FullColors_CheckBox.Checked;
             }
-            Core_Write();
+            this.Core_Write();
         }
         private void DrawMosaic_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
-            foreach (int index in Entry_ListBox.SelectedIndices)
+            foreach (int index in this.Entry_ListBox.SelectedIndices)
             {
-                Current[index].DrawMosaic = DrawMosaic_CheckBox.Checked;
+                this.Current[index].DrawMosaic = this.DrawMosaic_CheckBox.Checked;
             }
-            Core_Write();
+            this.Core_Write();
         }
         private void Palette_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            foreach (int index in Entry_ListBox.SelectedIndices)
+            foreach (int index in this.Entry_ListBox.SelectedIndices)
             {
-                Current[index].Palette = (Byte)Palette_NumBox.Value;
+                this.Current[index].Palette = (Byte)this.Palette_NumBox.Value;
             }
-            Core_Write();
+            this.Core_Write();
         }
         private void Priority_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            foreach (int index in Entry_ListBox.SelectedIndices)
+            foreach (int index in this.Entry_ListBox.SelectedIndices)
             {
-                Current[index].Priority = (Byte)Priority_NumBox.Value;
+                this.Current[index].Priority = (Byte)this.Priority_NumBox.Value;
             }
-            Core_Write();
+            this.Core_Write();
         }
 
         private void FlipH_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
-            foreach (int index in Entry_ListBox.SelectedIndices)
+            foreach (int index in this.Entry_ListBox.SelectedIndices)
             {
-                Current[index].FlipH = FlipH_CheckBox.Checked;
+                this.Current[index].FlipH = this.FlipH_CheckBox.Checked;
             }
-            Core_Write();
+            this.Core_Write();
         }
         private void FlipV_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
-            foreach (int index in Entry_ListBox.SelectedIndices)
+            foreach (int index in this.Entry_ListBox.SelectedIndices)
             {
-                Current[index].FlipV = FlipV_CheckBox.Checked;
+                this.Current[index].FlipV = this.FlipV_CheckBox.Checked;
             }
-            Core_Write();
+            this.Core_Write();
         }
 
 
 
         private void Affine_Index_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            foreach (int index in Entry_ListBox.SelectedIndices)
+            foreach (int index in this.Entry_ListBox.SelectedIndices)
             {
-                Current[index].AffineIndex = Affine_Index_NumBox.Value;
+                this.Current[index].AffineIndex = this.Affine_Index_NumBox.Value;
             }
-            Core_Write();
+            this.Core_Write();
         }
         private void Affine_Ux_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            foreach (int index in Affine_ListBox.SelectedIndices)
+            foreach (int index in this.Affine_ListBox.SelectedIndices)
             {
-                Current.Affines[index].Ux = (Double)Affine_Ux_NumBox.Value;
+                this.Current.Affines[index].Ux = (Double)this.Affine_Ux_NumBox.Value;
             }
-            Core_Write();
+            this.Core_Write();
         }
         private void Affine_Vx_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            foreach (int index in Affine_ListBox.SelectedIndices)
+            foreach (int index in this.Affine_ListBox.SelectedIndices)
             {
-                Current.Affines[index].Uy = (Double)Affine_Uy_NumBox.Value;
+                this.Current.Affines[index].Uy = (Double)this.Affine_Uy_NumBox.Value;
             }
-            Core_Write();
+            this.Core_Write();
         }
         private void Affine_Uy_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            foreach (int index in Affine_ListBox.SelectedIndices)
+            foreach (int index in this.Affine_ListBox.SelectedIndices)
             {
-                Current.Affines[index].Vx = (Double)Affine_Vx_NumBox.Value;
+                this.Current.Affines[index].Vx = (Double)this.Affine_Vx_NumBox.Value;
             }
-            Core_Write();
+            this.Core_Write();
         }
         private void Affine_Vy_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            foreach (int index in Affine_ListBox.SelectedIndices)
+            foreach (int index in this.Affine_ListBox.SelectedIndices)
             {
-                Current.Affines[index].Vy = (Double)Affine_Vy_NumBox.Value;
+                this.Current.Affines[index].Vy = (Double)this.Affine_Vy_NumBox.Value;
             }
-            Core_Write();
+            this.Core_Write();
         }
     }
 }

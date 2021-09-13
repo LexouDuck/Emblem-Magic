@@ -18,11 +18,11 @@ namespace Magic.Editors
         {
             get
             {
-                Byte[] entry = Core.ReadData(Address + index * EntryLength, EntryLength);
-                Object[] values = new Object[Properties.Length];
-                for (Int32 i = 0; i < Properties.Length; i++)
+                Byte[] entry = Core.ReadData(this.Address + index * this.EntryLength, this.EntryLength);
+                Object[] values = new Object[this.Properties.Length];
+                for (Int32 i = 0; i < this.Properties.Length; i++)
                 {
-                    values[i] = Properties[i].GetValue(entry);
+                    values[i] = this.Properties[i].GetValue(entry);
                 }
                 return values;
             }
@@ -34,11 +34,11 @@ namespace Magic.Editors
         {
             get
             {
-                Byte[] entry = Core.ReadData(address, EntryLength);
+                Byte[] entry = Core.ReadData(address, this.EntryLength);
                 List<Object> values = new List<Object>();
-                for (Int32 i = 0; i < Properties.Length; i++)
+                for (Int32 i = 0; i < this.Properties.Length; i++)
                 {
-                    values.Add(Properties[i].GetValue(entry));
+                    values.Add(this.Properties[i].GetValue(entry));
                 }
                 return values.ToArray();
             }
@@ -66,7 +66,7 @@ namespace Magic.Editors
         {
             get
             {
-                return Pointer.CurrentAddress;
+                return this.Pointer.CurrentAddress;
             }
         }
         /// <summary>
@@ -95,11 +95,11 @@ namespace Magic.Editors
 
             if (file[7] != "NULL")
             {
-                Entries = new ArrayFile(file[7]);
+                this.Entries = new ArrayFile(file[7]);
             }
-            else Entries = null;
-            Pointer = new Repoint(file[1], ReadAddress(file[3], Entries));
-            EntryLength = Int32.Parse(file[5]);
+            else this.Entries = null;
+            this.Pointer = new Repoint(file[1], ReadAddress(file[3], this.Entries));
+            this.EntryLength = Int32.Parse(file[5]);
             Property module = new Property(1,
                 file[1],
                 file[2],
@@ -107,17 +107,17 @@ namespace Magic.Editors
                 file[6],
                 file[7]);
 
-            Name = module.Name;
-            Author = module.Section;
-            Entry = module.GetControl();
-            if (Entry is NumericUpDown) ((NumericUpDown)Entry).Maximum = ReadNumber(file[4]);
-            Entry.Name = "EntrySelector";
-            Entry.TabIndex = 2;
-            Entry.Location = new Point(80, (Entries == null) ? 2 : 0);
-            Entry.MaximumSize = new Size(10000, 26);
-            Entry.MinimumSize = new Size(30, 26);
-            Entry.Anchor = AnchorStyles.Top | AnchorStyles.Left;
-            Entry.AutoSize = true;
+            this.Name = module.Name;
+            this.Author = module.Section;
+            this.Entry = module.GetControl();
+            if (this.Entry is NumericUpDown) ((NumericUpDown)this.Entry).Maximum = ReadNumber(file[4]);
+            this.Entry.Name = "EntrySelector";
+            this.Entry.TabIndex = 2;
+            this.Entry.Location = new Point(80, (this.Entries == null) ? 2 : 0);
+            this.Entry.MaximumSize = new Size(10000, 26);
+            this.Entry.MinimumSize = new Size(30, 26);
+            this.Entry.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            this.Entry.AutoSize = true;
 
             List<Property> properties = new List<Property>();
             for (Int32 i = 8; i < file.Length; i += 6)
@@ -132,7 +132,7 @@ namespace Magic.Editors
                     file[i + 4],
                     file[i + 5]));
             }
-            Properties = properties.ToArray();
+            this.Properties = properties.ToArray();
         }
 
 

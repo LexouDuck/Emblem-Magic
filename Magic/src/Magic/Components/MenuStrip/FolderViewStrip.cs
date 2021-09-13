@@ -20,13 +20,13 @@ namespace Magic.Components
         {
             get
             {
-                return Path.GetFileName(FilePath);
+                return Path.GetFileName(this.FilePath);
             }
         }
 
         public FolderViewMenuItem(String filepath)
         {
-            FilePath = filepath;
+            this.FilePath = filepath;
         }
     }
 
@@ -36,7 +36,7 @@ namespace Magic.Components
     {
         public FolderViewMenu()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Magic.Components
             {
                 foreach (String file in files)
                 {
-                    DropDownItems.Add(new FolderViewMenuItem(file));
+                    this.DropDownItems.Add(new FolderViewMenuItem(file));
                 }
             }
             else
@@ -58,11 +58,11 @@ namespace Magic.Components
                 foreach (String file in files)
                 {
                     if (file.EndsWith(extension, StringComparison.OrdinalIgnoreCase))
-                       DropDownItems.Add(new FolderViewMenuItem(file));
+                        this.DropDownItems.Add(new FolderViewMenuItem(file));
                 }
             }
 
-            this.Enabled = (DropDownItems.Count > 0);
+            this.Enabled = (this.DropDownItems.Count > 0);
         }
 
     
@@ -80,9 +80,9 @@ namespace Magic.Components
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(Boolean disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -93,7 +93,7 @@ namespace Magic.Components
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.components = new System.ComponentModel.Container();
         }
 
         #endregion

@@ -11,57 +11,57 @@ namespace Magic
 
         public FormOptions(IApp app)
         {
-            App = app;
+            this.App = app;
 
-            InitializeComponent();
+            this.InitializeComponent();
 
-            LoadOptions();
+            this.LoadOptions();
         }
         void LoadOptions()
         {
-            Paths_CustomArrays_CheckBox.Checked = Settings.Default.UseCustomPathArrays;
-            Paths_CustomArrays_TextBox.Text = Settings.Default.PathCustomArrays;
-            Paths_CustomStructs_CheckBox.Checked = Settings.Default.UseCustomPathStructs;
-            Paths_CustomStructs_TextBox.Text = Settings.Default.PathCustomStructs;
-            Paths_Arrays_TextBox.Text = Settings.Default.PathArrays;
-            Paths_Structs_TextBox.Text = Settings.Default.PathStructs;
-            Paths_CleanROMs_TextBox.Text = Settings.Default.PathCleanROMs;
-            Paths_Modules_TextBox.Text = Settings.Default.PathModules;
-            Paths_Patches_TextBox.Text = Settings.Default.PathPatches;
+            this.Paths_CustomArrays_CheckBox.Checked = Settings.Default.UseCustomPathArrays;
+            this.Paths_CustomArrays_TextBox.Text = Settings.Default.PathCustomArrays;
+            this.Paths_CustomStructs_CheckBox.Checked = Settings.Default.UseCustomPathStructs;
+            this.Paths_CustomStructs_TextBox.Text = Settings.Default.PathCustomStructs;
+            this.Paths_Arrays_TextBox.Text = Settings.Default.PathArrays;
+            this.Paths_Structs_TextBox.Text = Settings.Default.PathStructs;
+            this.Paths_CleanROMs_TextBox.Text = Settings.Default.PathCleanROMs;
+            this.Paths_Modules_TextBox.Text = Settings.Default.PathModules;
+            this.Paths_Patches_TextBox.Text = Settings.Default.PathPatches;
 
-            Overwrite_TrackBar.Value = 0;
-            if (Settings.Default.WarnOverwriteSeveral)    Overwrite_TrackBar.Value++;
-            if (Settings.Default.WarnOverwriteSizeDiffer) Overwrite_TrackBar.Value++;
-            if (Settings.Default.WarnOverwrite)           Overwrite_TrackBar.Value++;
-            Overwrite_TrackBar_ValueChanged(this, null);
+            this.Overwrite_TrackBar.Value = 0;
+            if (Settings.Default.WarnOverwriteSeveral) this.Overwrite_TrackBar.Value++;
+            if (Settings.Default.WarnOverwriteSizeDiffer) this.Overwrite_TrackBar.Value++;
+            if (Settings.Default.WarnOverwrite) this.Overwrite_TrackBar.Value++;
+            this.Overwrite_TrackBar_ValueChanged(this, null);
 
-            Repoint_TrackBar.Value = 0;
-            if (Settings.Default.PromptRepoints)   Repoint_TrackBar.Value = 1;
-            if (Settings.Default.WriteToFreeSpace) Repoint_TrackBar.Value = 2;
-            Repoint_TrackBar_ValueChanged(this, null);
+            this.Repoint_TrackBar.Value = 0;
+            if (Settings.Default.PromptRepoints) this.Repoint_TrackBar.Value = 1;
+            if (Settings.Default.WriteToFreeSpace) this.Repoint_TrackBar.Value = 2;
+            this.Repoint_TrackBar_ValueChanged(this, null);
 
-            RecentFiles_MaxNumBox.Maximum = RecentFileMenu.Maximum;
-            RecentFiles_MaxNumBox.Value = Settings.Default.RecentFilesMax;
+            this.RecentFiles_MaxNumBox.Maximum = RecentFileMenu.Maximum;
+            this.RecentFiles_MaxNumBox.Value = Settings.Default.RecentFilesMax;
 
-            UndoAndRedo_MaxNumBox.Maximum = 100;
-            UndoAndRedo_MaxNumBox.Value = Settings.Default.UndoListMax;
+            this.UndoAndRedo_MaxNumBox.Maximum = 100;
+            this.UndoAndRedo_MaxNumBox.Value = Settings.Default.UndoListMax;
         }
 
 
 
         void Options_ApplyButton_Click(Object sender, EventArgs e)
         {
-            Settings.Default.UseCustomPathArrays = Paths_CustomArrays_CheckBox.Checked;
-            Settings.Default.PathCustomArrays = Paths_CustomArrays_TextBox.Text;
-            Settings.Default.UseCustomPathStructs = Paths_CustomStructs_CheckBox.Checked;
-            Settings.Default.PathCustomStructs = Paths_CustomStructs_TextBox.Text;
-            Settings.Default.PathArrays = Paths_Arrays_TextBox.Text;
-            Settings.Default.PathStructs = Paths_Structs_TextBox.Text;
-            Settings.Default.PathCleanROMs = Paths_CleanROMs_TextBox.Text;
-            Settings.Default.PathModules = Paths_Modules_TextBox.Text;
-            Settings.Default.PathPatches = Paths_Patches_TextBox.Text;
+            Settings.Default.UseCustomPathArrays = this.Paths_CustomArrays_CheckBox.Checked;
+            Settings.Default.PathCustomArrays = this.Paths_CustomArrays_TextBox.Text;
+            Settings.Default.UseCustomPathStructs = this.Paths_CustomStructs_CheckBox.Checked;
+            Settings.Default.PathCustomStructs = this.Paths_CustomStructs_TextBox.Text;
+            Settings.Default.PathArrays = this.Paths_Arrays_TextBox.Text;
+            Settings.Default.PathStructs = this.Paths_Structs_TextBox.Text;
+            Settings.Default.PathCleanROMs = this.Paths_CleanROMs_TextBox.Text;
+            Settings.Default.PathModules = this.Paths_Modules_TextBox.Text;
+            Settings.Default.PathPatches = this.Paths_Patches_TextBox.Text;
 
-            switch (Overwrite_TrackBar.Value)
+            switch (this.Overwrite_TrackBar.Value)
             {
                 case 0:
                     Settings.Default.WarnOverwriteSeveral    = false;
@@ -85,7 +85,7 @@ namespace Magic
                     break;
                 default: break;
             }
-            switch (Repoint_TrackBar.Value)
+            switch (this.Repoint_TrackBar.Value)
             {
                 case 0:
                     Settings.Default.PromptRepoints   = false;
@@ -101,9 +101,9 @@ namespace Magic
                     break;
                 default: break;
             }
-            Settings.Default.RecentFilesMax = (Int32)RecentFiles_MaxNumBox.Value;
-            Settings.Default.UndoListMax = (Int32)UndoAndRedo_MaxNumBox.Value;
-            Settings.Default.PreferIndexedBMP = PreferIndexedBMP_CheckBox.Checked;
+            Settings.Default.RecentFilesMax = (Int32)this.RecentFiles_MaxNumBox.Value;
+            Settings.Default.UndoListMax = (Int32)this.UndoAndRedo_MaxNumBox.Value;
+            Settings.Default.PreferIndexedBMP = this.PreferIndexedBMP_CheckBox.Checked;
 
             Settings.Default.Save();
             this.DialogResult = DialogResult.Yes;
@@ -120,7 +120,7 @@ namespace Magic
             FolderBrowserDialog folderWindow = new FolderBrowserDialog();
             if (folderWindow.ShowDialog() == DialogResult.OK)
             {
-                Paths_CustomArrays_TextBox.Text = folderWindow.SelectedPath;
+                this.Paths_CustomArrays_TextBox.Text = folderWindow.SelectedPath;
             }
         }
         private void Paths_CustomStructs_BrowseButton_Click(Object sender, EventArgs e)
@@ -128,7 +128,7 @@ namespace Magic
             FolderBrowserDialog folderWindow = new FolderBrowserDialog();
             if (folderWindow.ShowDialog() == DialogResult.OK)
             {
-                Paths_CustomStructs_TextBox.Text = folderWindow.SelectedPath;
+                this.Paths_CustomStructs_TextBox.Text = folderWindow.SelectedPath;
             }
         }
         private void Paths_Arrays_BrowseButton_Click(Object sender, EventArgs e)
@@ -136,7 +136,7 @@ namespace Magic
             FolderBrowserDialog folderWindow = new FolderBrowserDialog();
             if (folderWindow.ShowDialog() == DialogResult.OK)
             {
-                Paths_Arrays_TextBox.Text = folderWindow.SelectedPath;
+                this.Paths_Arrays_TextBox.Text = folderWindow.SelectedPath;
             }
         }
         private void Paths_Structs_BrowseButton_Click(Object sender, EventArgs e)
@@ -144,7 +144,7 @@ namespace Magic
             FolderBrowserDialog folderWindow = new FolderBrowserDialog();
             if (folderWindow.ShowDialog() == DialogResult.OK)
             {
-                Paths_Structs_TextBox.Text = folderWindow.SelectedPath;
+                this.Paths_Structs_TextBox.Text = folderWindow.SelectedPath;
             }
         }
         private void Paths_CleanROMs_BrowseButton_Click(Object sender, EventArgs e)
@@ -152,7 +152,7 @@ namespace Magic
             FolderBrowserDialog folderWindow = new FolderBrowserDialog();
             if (folderWindow.ShowDialog() == DialogResult.OK)
             {
-                Paths_CleanROMs_TextBox.Text = folderWindow.SelectedPath;
+                this.Paths_CleanROMs_TextBox.Text = folderWindow.SelectedPath;
             }
         }
         private void Paths_Modules_BrowseButton_Click(Object sender, EventArgs e)
@@ -160,7 +160,7 @@ namespace Magic
             FolderBrowserDialog folderWindow = new FolderBrowserDialog();
             if (folderWindow.ShowDialog() == DialogResult.OK)
             {
-                Paths_Modules_TextBox.Text = folderWindow.SelectedPath;
+                this.Paths_Modules_TextBox.Text = folderWindow.SelectedPath;
             }
         }
         private void Paths_Patches_BrowseButton_Click(Object sender, EventArgs e)
@@ -168,48 +168,48 @@ namespace Magic
             FolderBrowserDialog folderWindow = new FolderBrowserDialog();
             if (folderWindow.ShowDialog() == DialogResult.OK)
             {
-                Paths_Patches_TextBox.Text = folderWindow.SelectedPath;
+                this.Paths_Patches_TextBox.Text = folderWindow.SelectedPath;
             }
         }
 
         private void RecentFiles_ClearButton_Click(Object sender, EventArgs e)
         {
-            App.File_RecentFiles.Clear();
+            this.App.File_RecentFiles.Clear();
         }
 
         private void Overwrite_TrackBar_ValueChanged(Object sender, EventArgs e)
         {
-            switch (Overwrite_TrackBar.Value)
+            switch (this.Overwrite_TrackBar.Value)
             {
                 case 0:
-                    Overwrite_Label.Text = "Never prompt on overwrite.";
+                    this.Overwrite_Label.Text = "Never prompt on overwrite.";
                     break;
                 case 1:
-                    Overwrite_Label.Text = "Only prompt when several writes are affected.";
+                    this.Overwrite_Label.Text = "Only prompt when several writes are affected.";
                     break;
                 case 2:
-                    Overwrite_Label.Text = "Prompt when overwrite has different size than the preexisting write.";
+                    this.Overwrite_Label.Text = "Prompt when overwrite has different size than the preexisting write.";
                     break;
                 case 3:
-                    Overwrite_Label.Text = "Always prompt when overwriting.";
+                    this.Overwrite_Label.Text = "Always prompt when overwriting.";
                     break;
-                default: Overwrite_Label.Text = ""; break;
+                default: this.Overwrite_Label.Text = ""; break;
             }
         }
         private void Repoint_TrackBar_ValueChanged(Object sender, EventArgs e)
         {
-            switch (Repoint_TrackBar.Value)
+            switch (this.Repoint_TrackBar.Value)
             {
                 case 0:
-                    Repoint_Label.Text = "Never prompt to repoint data upon insertion.";
+                    this.Repoint_Label.Text = "Never prompt to repoint data upon insertion.";
                     break;
                 case 1:
-                    Repoint_Label.Text = "Always show a repoint prompt when inserting data.";
+                    this.Repoint_Label.Text = "Always show a repoint prompt when inserting data.";
                     break;
                 case 2:
-                    Repoint_Label.Text = "Never show repoint prompts, automatically repoint to free space.";
+                    this.Repoint_Label.Text = "Never show repoint prompts, automatically repoint to free space.";
                     break;
-                default: Repoint_Label.Text = ""; break;
+                default: this.Repoint_Label.Text = ""; break;
             }
         }
     }

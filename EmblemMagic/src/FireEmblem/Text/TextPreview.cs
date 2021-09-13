@@ -12,15 +12,15 @@ namespace EmblemMagic.FireEmblem
         {
             get
             {
-                if (Text[x, y] == 0)
+                if (this.Text[x, y] == 0)
                 {
-                    if (Bubble == null
-                     || Bubble.Tiling[x / 8, y / 8].TileIndex == 0xF
-                     || Bubble[x, y] == 0)
+                    if (this.Bubble == null
+                     || this.Bubble.Tiling[x / 8, y / 8].TileIndex == 0xF
+                     || this.Bubble[x, y] == 0)
                         return 0;
-                    else return Bubble[x, y];
+                    else return this.Bubble[x, y];
                 }
-                else return Text[x, y];
+                else return this.Text[x, y];
             }
             set
             {
@@ -29,15 +29,15 @@ namespace EmblemMagic.FireEmblem
         }
         public Color GetColor(Int32 x, Int32 y)
         {
-            if (Text.GetColor(x, y) == Glyph.Colors[0])
+            if (this.Text.GetColor(x, y) == Glyph.Colors[0])
             {
-                if (Bubble == null
-                 || Bubble.Tiling[x / 8, y / 8].TileIndex == 0xF
-                 || Bubble.GetColor(x, y) == Bubble.Palettes[0][0])
+                if (this.Bubble == null
+                 || this.Bubble.Tiling[x / 8, y / 8].TileIndex == 0xF
+                 || this.Bubble.GetColor(x, y) == this.Bubble.Palettes[0][0])
                     return Glyph.Colors[0];
-                else return Bubble.GetColor(x, y);
+                else return this.Bubble.GetColor(x, y);
             }
-            else return Text.GetColor(x, y);
+            else return this.Text.GetColor(x, y);
         }
 
         public Int32 Width
@@ -63,10 +63,10 @@ namespace EmblemMagic.FireEmblem
 
         public TextPreview(Font font, Boolean bubble, String[] text, Int32 line)
         {
-            Text = new Bitmap(Width, Height);
+            this.Text = new Bitmap(this.Width, this.Height);
             for (Int32 i = 0; i < Glyph.Colors.Length; i++)
             {
-                Text.Colors.Add(Glyph.Colors[i]);
+                this.Text.Colors.Add(Glyph.Colors[i]);
             }
             Dictionary<Char, Byte> fontmap = (Core.App.Game.Region == GameRegion.JAP) ?
                 Font.GetFontMap(bubble) : Font.GetFontMap();
@@ -89,7 +89,7 @@ namespace EmblemMagic.FireEmblem
             Int32 lines = Math.Min(bubble ? 2 : 4, text.Length);
             for (Int32 i = line; i < line + lines; i++)
             {
-                offset_x =  bubble ? 8 : Width / 2 - lengths[i] / 2;
+                offset_x =  bubble ? 8 : this.Width / 2 - lengths[i] / 2;
                 offset_y = (bubble ? 8 : 0) + (i - line) * 16;
 
                 length = 0;
@@ -100,9 +100,9 @@ namespace EmblemMagic.FireEmblem
                         for (Int32 y = 0; y < 16; y++)
                         for (Int32 x = 0; x < 16; x++)
                         {
-                            if (offset_x + length + x < Width && offset_y + y < Height && glyphs[i][j].GetColor(x, y) != Glyph.Colors[0])
+                            if (offset_x + length + x < this.Width && offset_y + y < this.Height && glyphs[i][j].GetColor(x, y) != Glyph.Colors[0])
                             {
-                                Text.SetColor(
+                                    this.Text.SetColor(
                                     offset_x + length + x,
                                     offset_y + y,
                                     glyphs[i][j].GetColor(x, y));
@@ -121,7 +121,7 @@ namespace EmblemMagic.FireEmblem
 
             if (bubble)
             {
-                Bubble = MakeTextBubble(length,
+                this.Bubble = MakeTextBubble(length,
                     Core.GetPointer("Text Bubble Tileset"),
                     Core.GetPointer("Text Bubble Palette"));
             }

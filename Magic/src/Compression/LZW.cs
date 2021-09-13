@@ -63,21 +63,21 @@ namespace Magic.Compression
 
         public LZW(Int32 width, Int32 height, Byte[] pixels, Int32 color_depth)
         {
-            ImageWidth = width;
-            ImageHeight = height;
+            this.ImageWidth = width;
+            this.ImageHeight = height;
             this.Pixels = pixels;
-            MinCodeSize = Math.Max(2, color_depth);
+            this.MinCodeSize = Math.Max(2, color_depth);
         }
 
         public Byte[] Compress()
         {
-            Remaining = ImageWidth * ImageHeight; // reset navigation variables
-            Current = 0;
+            this.Remaining = this.ImageWidth * this.ImageHeight; // reset navigation variables
+            this.Current = 0;
 
             MemoryStream stream = new MemoryStream();
-            stream.WriteByte(Convert.ToByte(MinCodeSize)); // write initiating minimal code size byte
+            stream.WriteByte(Convert.ToByte(this.MinCodeSize)); // write initiating minimal code size byte
 
-            Encode(MinCodeSize + 1, stream); // compress and write the pixel data
+            this.Encode(this.MinCodeSize + 1, stream); // compress and write the pixel data
 
             stream.WriteByte(0x00); // write block terminator
             return stream.ToArray();
@@ -94,44 +94,44 @@ namespace Magic.Compression
             Int32 disp;
             Int32 hsize_reg;
             Int32 hshift;
-            
-            InitialBits = init_bits;
+
+            this.InitialBits = init_bits;
 
             // Set up the necessary values
-            ClearFlag = false;
-            BitsPerCode = InitialBits;
-            MaxCode = GetMaxCode(BitsPerCode);
+            this.ClearFlag = false;
+            this.BitsPerCode = this.InitialBits;
+            this.MaxCode = this.GetMaxCode(this.BitsPerCode);
 
-            ClearCode = 1 << (init_bits - 1);
-            EOICode = ClearCode + 1;
-            NextCode = ClearCode + 2;
+            this.ClearCode = 1 << (init_bits - 1);
+            this.EOICode = this.ClearCode + 1;
+            this.NextCode = this.ClearCode + 2;
 
-            AccumulatedAmount = 0; // clear packet
+            this.AccumulatedAmount = 0; // clear packet
 
-            pixel = GetNextPixel();
+            pixel = this.GetNextPixel();
 
             hshift = 0;
-            for (fcode = HashSize; fcode < 65536; fcode *= 2)
+            for (fcode = this.HashSize; fcode < 65536; fcode *= 2)
             {
                 ++hshift;
             }
             hshift = 8 - hshift; // set hash code range bound
-            hsize_reg = HashSize;
+            hsize_reg = this.HashSize;
             this.ResetCodeTable(hsize_reg); // clear hash table
 
-            this.Output(ClearCode, stream);
+            this.Output(this.ClearCode, stream);
 
-            OuterLoop: while ((c = GetNextPixel()) != EOF)
+            OuterLoop: while ((c = this.GetNextPixel()) != EOF)
             {
-                fcode = (c << MaxBits) + pixel;
+                fcode = (c << this.MaxBits) + pixel;
                 i = (c << hshift) ^ pixel; // xor hashing
 
-                if (HashTable[i] == fcode)
+                if (this.HashTable[i] == fcode)
                 {
-                    pixel = CodeTable[i];
+                    pixel = this.CodeTable[i];
                     continue;
                 }
-                else if (HashTable[i] >= 0) // non-empty slot
+                else if (this.HashTable[i] >= 0) // non-empty slot
                 {
                     disp = hsize_reg - i; // secondary hash (after G. Knott)
                     if (i == 0) disp = 1;
@@ -141,25 +141,25 @@ namespace Magic.Compression
                         {
                             i += hsize_reg;
                         }
-                        if (HashTable[i] == fcode)
+                        if (this.HashTable[i] == fcode)
                         {
-                            pixel = CodeTable[i];
+                            pixel = this.CodeTable[i];
                             goto OuterLoop;
                         }
-                    } while (HashTable[i] >= 0);
+                    } while (this.HashTable[i] >= 0);
                 }
                 this.Output(pixel, stream);
                 pixel = c;
-                if (NextCode < InvalidCode)
+                if (this.NextCode < this.InvalidCode)
                 {
-                    CodeTable[i] = NextCode++; // code -> hashtable
-                    HashTable[i] = fcode;
+                    this.CodeTable[i] = this.NextCode++; // code -> hashtable
+                    this.HashTable[i] = fcode;
                 }
                 else this.ClearTable(stream);
             }
             // Put out the final code.
             this.Output(pixel, stream);
-            this.Output(EOICode, stream);
+            this.Output(this.EOICode, stream);
         }
 
         /// <summary>
@@ -170,49 +170,49 @@ namespace Magic.Compression
         /// <param name="code">A n_bits-bit integer.  If == -1, then EOF.  This assumes that (n_bits) lteq (wordsize - 1).</param>
         void Output(Int32 code, Stream stream)
         {
-            CurrentAccumulated &= BitMasks[CurrentBitAmount];
+            this.CurrentAccumulated &= this.BitMasks[this.CurrentBitAmount];
 
-            if (CurrentBitAmount > 0)
-                CurrentAccumulated |= (code << CurrentBitAmount);
+            if (this.CurrentBitAmount > 0)
+                this.CurrentAccumulated |= (code << this.CurrentBitAmount);
             else
-                CurrentAccumulated = code;
+                this.CurrentAccumulated = code;
 
-            CurrentBitAmount += BitsPerCode;
+            this.CurrentBitAmount += this.BitsPerCode;
 
-            while (CurrentBitAmount >= 8)
+            while (this.CurrentBitAmount >= 8)
             {
-                this.Add((Byte)(CurrentAccumulated & 0xff), stream);
-                CurrentAccumulated >>= 8;
-                CurrentBitAmount -= 8;
+                this.Add((Byte)(this.CurrentAccumulated & 0xff), stream);
+                this.CurrentAccumulated >>= 8;
+                this.CurrentBitAmount -= 8;
             }
 
             // If the next entry is going to be too big for the code size,
             // then increase it, if possible.
-            if (NextCode > MaxCode || ClearFlag)
+            if (this.NextCode > this.MaxCode || this.ClearFlag)
             {
-                if (ClearFlag)
+                if (this.ClearFlag)
                 {
-                    MaxCode = GetMaxCode(BitsPerCode = InitialBits);
-                    ClearFlag = false;
+                    this.MaxCode = this.GetMaxCode(this.BitsPerCode = this.InitialBits);
+                    this.ClearFlag = false;
                 }
                 else
                 {
-                    ++BitsPerCode;
-                    if (BitsPerCode == MaxBits)
-                        MaxCode = InvalidCode;
+                    ++this.BitsPerCode;
+                    if (this.BitsPerCode == this.MaxBits)
+                        this.MaxCode = this.InvalidCode;
                     else
-                        MaxCode = GetMaxCode(BitsPerCode);
+                        this.MaxCode = this.GetMaxCode(this.BitsPerCode);
                 }
             }
 
-            if (code == EOICode)
+            if (code == this.EOICode)
             {
                 // At EOF, write the rest of the buffer.
-                while (CurrentBitAmount > 0)
+                while (this.CurrentBitAmount > 0)
                 {
-                    this.Add((Byte)(CurrentAccumulated & 0xff), stream);
-                    CurrentAccumulated >>= 8;
-                    CurrentBitAmount -= 8;
+                    this.Add((Byte)(this.CurrentAccumulated & 0xff), stream);
+                    this.CurrentAccumulated >>= 8;
+                    this.CurrentBitAmount -= 8;
                 }
 
                 this.Flush(stream);
@@ -231,13 +231,13 @@ namespace Magic.Compression
         /// </summary>
         Int32 GetNextPixel()
         {
-            --Remaining;
-            if (Remaining < 0)
+            --this.Remaining;
+            if (this.Remaining < 0)
                 return EOF;
-            Int32 temp = Current;
-            if (temp <= Pixels.GetUpperBound(0))
+            Int32 temp = this.Current;
+            if (temp <= this.Pixels.GetUpperBound(0))
             {
-                Byte pixel = Pixels[Current++];
+                Byte pixel = this.Pixels[this.Current++];
 
                 return (pixel & 0xFF);
             }
@@ -249,8 +249,8 @@ namespace Magic.Compression
         /// </summary>
         void Add(Byte c, Stream stream)
         {
-            Accumulator[AccumulatedAmount++] = c;
-            if (AccumulatedAmount >= 254)
+            this.Accumulator[this.AccumulatedAmount++] = c;
+            if (this.AccumulatedAmount >= 254)
                 this.Flush(stream);
         }
         /// <summary>
@@ -258,11 +258,11 @@ namespace Magic.Compression
         /// </summary>
         void Flush(Stream stream)
         {
-            if (AccumulatedAmount > 0)
+            if (this.AccumulatedAmount > 0)
             {
-                stream.WriteByte(Convert.ToByte(AccumulatedAmount));
-                stream.Write(Accumulator, 0, AccumulatedAmount);
-                AccumulatedAmount = 0;
+                stream.WriteByte(Convert.ToByte(this.AccumulatedAmount));
+                stream.Write(this.Accumulator, 0, this.AccumulatedAmount);
+                this.AccumulatedAmount = 0;
             }
         }
         /// <summary>
@@ -270,17 +270,17 @@ namespace Magic.Compression
         /// </summary>
         void ClearTable(Stream stream)
         {
-            ResetCodeTable(HashSize);
-            NextCode = ClearCode + 2;
-            ClearFlag = true;
+            this.ResetCodeTable(this.HashSize);
+            this.NextCode = this.ClearCode + 2;
+            this.ClearFlag = true;
 
-            Output(ClearCode, stream);
+            this.Output(this.ClearCode, stream);
         }
         void ResetCodeTable(Int32 hsize)
         {
             for (Int32 i = 0; i < hsize; ++i)
             {
-                HashTable[i] = -1;
+                this.HashTable[i] = -1;
             }
         }
     }

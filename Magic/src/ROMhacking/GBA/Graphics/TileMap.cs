@@ -12,17 +12,17 @@ namespace GBA
         {
             get
             {
-                if (x < 0 || x > Width)  throw new ArgumentException("X given is out of bounds: " + x + ", should be < " + Width);
-                if (y < 0 || y > Height) throw new ArgumentException("Y given is out of bounds: " + y + ", should be < " + Height);
+                if (x < 0 || x > this.Width)  throw new ArgumentException("X given is out of bounds: " + x + ", should be < " + this.Width);
+                if (y < 0 || y > this.Height) throw new ArgumentException("Y given is out of bounds: " + y + ", should be < " + this.Height);
                 
-                return (Tiles[x + y * Width] == null) ? -1 : (Int32)Tiles[x + y * Width];
+                return (this.Tiles[x + y * this.Width] == null) ? -1 : (Int32)this.Tiles[x + y * this.Width];
             }
             set
             {
-                if (x < 0 || x > Width)  throw new ArgumentException("X given is out of bounds: " + x + ", should be < " + Width);
-                if (y < 0 || y > Height) throw new ArgumentException("Y given is out of bounds: " + y + ", should be < " + Height);
+                if (x < 0 || x > this.Width)  throw new ArgumentException("X given is out of bounds: " + x + ", should be < " + this.Width);
+                if (y < 0 || y > this.Height) throw new ArgumentException("Y given is out of bounds: " + y + ", should be < " + this.Height);
 
-                Tiles[x + y * Width] = value;
+                this.Tiles[x + y * this.Width] = value;
             }
         }
 
@@ -47,15 +47,15 @@ namespace GBA
         /// </summary>
         public TileMap(Int32 width, Int32 height)
         {
-            Load(width, height);
+            this.Load(width, height);
         }
         /// <summary>
         /// Creates a GBA.Tilemap from the given mapping data
         /// </summary>
         public TileMap(Int32?[,] map)
         {
-            Load(map.GetLength(0), map.GetLength(1));
-            Map(map);
+            this.Load(map.GetLength(0), map.GetLength(1));
+            this.Map(map);
         }
 
         /// <summary>
@@ -63,9 +63,9 @@ namespace GBA
         /// </summary>
         void Load(Int32 width, Int32 height)
         {
-            Width = width;
-            Height = height;
-            Tiles = new Int32?[width * height];
+            this.Width = width;
+            this.Height = height;
+            this.Tiles = new Int32?[width * height];
         }
 
 
@@ -78,17 +78,17 @@ namespace GBA
             Int32 width = mapping.GetLength(0);
             Int32 height = mapping.GetLength(1);
 
-            if (width > Width) throw new Exception("GBA.TileMap: given mapping has a larger width than the TileMap");
-            if (height > Height) throw new Exception("GBA.TileMap: given mapping has a larger height than the TileMap");
-            if (offsetX < 0 || offsetX + width > Width) throw new Exception("GBA.TileMap: given map goes out of bounds");
-            if (offsetY < 0 || offsetY + height > Height) throw new Exception("GBA.TileMap: given map goes out of bounds");
+            if (width > this.Width) throw new Exception("GBA.TileMap: given mapping has a larger width than the TileMap");
+            if (height > this.Height) throw new Exception("GBA.TileMap: given mapping has a larger height than the TileMap");
+            if (offsetX < 0 || offsetX + width > this.Width) throw new Exception("GBA.TileMap: given map goes out of bounds");
+            if (offsetY < 0 || offsetY + height > this.Height) throw new Exception("GBA.TileMap: given map goes out of bounds");
 
             Int32 index;
             for (Int32 y = 0; y < height; y++)
             for (Int32 x = 0; x < width; x++)
             {
-                index = (offsetX + x) + (offsetY + y) * Width;
-                Tiles[index] = mapping[x, y];
+                index = (offsetX + x) + (offsetY + y) * this.Width;
+                    this.Tiles[index] = mapping[x, y];
             }
         }
 
@@ -145,11 +145,11 @@ namespace GBA
 
         override public String ToString()
         {
-            String result = "GBA.TileMap: " + Width + "x" + Height;
-            Byte[] buffer = new Byte[Width];
-            for (Int32 i = 0; i < Height; i++)
+            String result = "GBA.TileMap: " + this.Width + "x" + this.Height;
+            Byte[] buffer = new Byte[this.Width];
+            for (Int32 i = 0; i < this.Height; i++)
             {
-                Array.Copy(Tiles, i * Width, buffer, 0, Width);
+                Array.Copy(this.Tiles, i * this.Width, buffer, 0, this.Width);
                 result += "\n" + Util.BytesToSpacedHex(buffer);
             }
             return result;
@@ -158,11 +158,11 @@ namespace GBA
         {
             if (!(other is TileMap)) return false;
             TileMap tilemap = (TileMap)other;
-            if (Width == tilemap.Width && Height == tilemap.Height)
+            if (this.Width == tilemap.Width && this.Height == tilemap.Height)
             {
-                for (Int32 i = 0; i < Tiles.Length; i++)
+                for (Int32 i = 0; i < this.Tiles.Length; i++)
                 {
-                    if (Tiles[i] != tilemap.Tiles[i]) return false;
+                    if (this.Tiles[i] != tilemap.Tiles[i]) return false;
                 }
                 return true;
             }
@@ -170,7 +170,7 @@ namespace GBA
         }
         override public Int32 GetHashCode()
         {
-            return Tiles.GetHashCode();
+            return this.Tiles.GetHashCode();
         }
     }
 }

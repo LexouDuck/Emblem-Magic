@@ -16,17 +16,17 @@ namespace GBA
         {
             get
             {
-                if (x < 0 || x >= Width)  throw new ArgumentException("X given is out of bounds: " + x);
-                if (y < 0 || y >= Height) throw new ArgumentException("Y given is out of bounds: " + y);
+                if (x < 0 || x >= this.Width)  throw new ArgumentException("X given is out of bounds: " + x);
+                if (y < 0 || y >= this.Height) throw new ArgumentException("Y given is out of bounds: " + y);
 
-                return Sheet[x + y * Width];
+                return this.Sheet[x + y * this.Width];
             }
             set
             {
-                if (x < 0 || x >= Width)  throw new ArgumentException("X given is out of bounds: " + x);
-                if (y < 0 || y >= Height) throw new ArgumentException("Y given is out of bounds: " + y);
+                if (x < 0 || x >= this.Width)  throw new ArgumentException("X given is out of bounds: " + x);
+                if (y < 0 || y >= this.Height) throw new ArgumentException("Y given is out of bounds: " + y);
 
-                Sheet[x + y * Width] = value;
+                this.Sheet[x + y * this.Width] = value;
             }
         }
 
@@ -46,11 +46,11 @@ namespace GBA
         /// </summary>
         public TileSheet(Int32 width, Int32 height) : base(width * height)
         {
-            Width = width;
-            Height = height;
+            this.Width = width;
+            this.Height = height;
             for (Int32 i = 0; i < width * height; i++)
             {
-                Sheet.Add(null);
+                this.Sheet.Add(null);
             }
         }
 
@@ -61,31 +61,31 @@ namespace GBA
         /// </summary>
         new public Tuple<Point, Boolean, Boolean> FindMatch(Tile tile)
         {
-            Int32 index = Find(tile);
+            Int32 index = this.Find(tile);
 
             if (index == -1)
             {
-                index = Find(tile.FlipHorizontal());
+                index = this.Find(tile.FlipHorizontal());
 
                 if (index == -1)
                 {
-                    index = Find(tile.FlipVertical());
+                    index = this.Find(tile.FlipVertical());
 
                     if (index == -1)
                     {
-                        index = Find(tile.FlipHorizontal().FlipVertical());
+                        index = this.Find(tile.FlipHorizontal().FlipVertical());
 
                         if (index == -1)
                         {
                             return null;
                         }
-                        else return Tuple.Create(new Point(index % Width, index / Width), true, true);
+                        else return Tuple.Create(new Point(index % this.Width, index / this.Width), true, true);
                     }
-                    else return Tuple.Create(new Point(index % Width, index / Width), false, true);
+                    else return Tuple.Create(new Point(index % this.Width, index / this.Width), false, true);
                 }
-                else return Tuple.Create(new Point(index % Width, index / Width), true, false);
+                else return Tuple.Create(new Point(index % this.Width, index / this.Width), true, false);
             }
-            else return Tuple.Create(new Point(index % Width, index / Width), false, false);
+            else return Tuple.Create(new Point(index % this.Width, index / this.Width), false, false);
         }
         /// <summary>
         /// Returns a array of points at which to put each OAM on this TileSheet, or null if they can't all fit
@@ -96,13 +96,13 @@ namespace GBA
             Point position;
             for (Int32 i = 0; i < OAMs.Count; i++)
             {
-                position = CheckIfFits(OAMs[i].Item2);
+                position = this.CheckIfFits(OAMs[i].Item2);
 
                 if (position == new Point(-1, -1))
                 {
-                    for (Int32 j = 0; j < Sheet.Count; j++)
+                    for (Int32 j = 0; j < this.Sheet.Count; j++)
                     {
-                        if (Sheet[j] == Tile.Empty) Sheet[j] = null;
+                        if (this.Sheet[j] == Tile.Empty) this.Sheet[j] = null;
                     }
                     return null;
                 }
@@ -114,9 +114,9 @@ namespace GBA
                     this[position.X + x, position.Y + y] = Tile.Empty;
                 }
             }
-            for (Int32 j = 0; j < Sheet.Count; j++)
+            for (Int32 j = 0; j < this.Sheet.Count; j++)
             {
-                if (Sheet[j] == Tile.Empty) Sheet[j] = null;
+                if (this.Sheet[j] == Tile.Empty) this.Sheet[j] = null;
             }
             return result;
         }
@@ -125,8 +125,8 @@ namespace GBA
         /// </summary>
         public Point CheckIfFits(Size oam)
         {
-            for (Int32 x = 0; x < Width; x++)
-            for (Int32 y = 0; y < Height; y++)
+            for (Int32 x = 0; x < this.Width; x++)
+            for (Int32 y = 0; y < this.Height; y++)
             {
                 for (Int32 tileY = 0; tileY < oam.Height; tileY++)
                 for (Int32 tileX = 0; tileX < oam.Width; tileX++)
@@ -153,18 +153,18 @@ namespace GBA
         /// </summary>
         public Image ToImage(Palette colors)
         {
-            Int32 width = Tile.SIZE * Width;
-            Int32 height = Tile.SIZE * Height;
+            Int32 width = Tile.SIZE * this.Width;
+            Int32 height = Tile.SIZE * this.Height;
             Byte[] result = new Byte[(width / 2) * height];
             Byte[] tile;
             Int32 ix, iy;
             Int32 index = 0;
             Int32 t = 0;
-            for (Int32 i = 0; i < Count; i++)
+            for (Int32 i = 0; i < this.Count; i++)
             {
-                ix = (i % Width) * Tile.SIZE;
-                iy = (i / Width) * Tile.SIZE;
-                tile = Sheet[i].Bytes;
+                ix = (i % this.Width) * Tile.SIZE;
+                iy = (i / this.Width) * Tile.SIZE;
+                tile = this.Sheet[i].Bytes;
                 index = (ix / 2) + (iy * (width / 2));
                 t = 0;
                 for (Int32 y = 0; y < Tile.SIZE; y++)

@@ -15,11 +15,11 @@ namespace Magic.Components
         {
             get
             {
-                return (UInt16)EntryValueBox.Value;
+                return (UInt16)this.EntryValueBox.Value;
             }
             set
             {
-                EntryValueBox.Value = value;
+                this.EntryValueBox.Value = value;
             }
         }
 
@@ -31,14 +31,14 @@ namespace Magic.Components
             this.EntryComboBox = new ComboBox();
             base.InitializeComponent();
 
-            EntryValueBox.ValueChanged += UpdateEntryComboBox;
+            this.EntryValueBox.ValueChanged += this.UpdateEntryComboBox;
 
             this.Name = "ShortArrayBox";
             this.Size = new System.Drawing.Size(128, 26);
             this.MinimumSize = new System.Drawing.Size(128, 26);
             this.EntryValueBox.Size = new System.Drawing.Size(55, 26);
             this.EntryComboBox.Location = new System.Drawing.Point(63, 2);
-            EntryComboBox.Width = this.Width - EntryValueBox.Width - 10;
+            this.EntryComboBox.Width = this.Width - this.EntryValueBox.Width - 10;
         }
     }
 }

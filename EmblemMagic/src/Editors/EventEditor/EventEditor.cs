@@ -40,59 +40,59 @@ namespace EmblemMagic.Editors
         {
             try
             {
-                InitializeComponent();
+                this.InitializeComponent();
 
-                Entry_ArrayBox.Load("Chapter List.txt");
-                Event_ArrayBox.Load("Map List.txt");
+                this.Entry_ArrayBox.Load("Chapter List.txt");
+                this.Event_ArrayBox.Load("Map List.txt");
 
-                Current = new StructFile("Chapter Struct.txt");
+                this.Current = new StructFile("Chapter Struct.txt");
 
-                Help_ToolTip_Timer = new Timer();
-                Help_ToolTip_Timer.Tick += HoverTick;
-                Help_ToolTip_Timer.Interval = 800;
+                this.Help_ToolTip_Timer = new Timer();
+                this.Help_ToolTip_Timer.Tick += this.HoverTick;
+                this.Help_ToolTip_Timer.Interval = 800;
 
-                Chapter_MagicButton.EditorToOpen = "Module:Chapter Editor";
+                this.Chapter_MagicButton.EditorToOpen = "Module:Chapter Editor";
             }
             catch (Exception ex)
             {
                 UI.ShowError("Could not properly open the " + this.Text, ex);
 
-                Core_CloseEditor(this, null);
+                this.Core_CloseEditor(this, null);
             }
         }
 
         override public void Core_OnOpen()
         {
-            Core_LoadEventSyntax();
+            this.Core_LoadEventSyntax();
 
-            Core_Update();
+            this.Core_Update();
         }
         override public void Core_Update()
         {
-            Current.EntryIndex = Entry_ArrayBox.Value;
-            Core_LoadValues();
-            Core_LoadEventCode();
-            MapChanges_ListBox.Items.Clear();
-            Core_LoadMap();
+            this.Current.EntryIndex = this.Entry_ArrayBox.Value;
+            this.Core_LoadValues();
+            this.Core_LoadEventCode();
+            this.MapChanges_ListBox.Items.Clear();
+            this.Core_LoadMap();
         }
 
         void Core_LoadValues()
         {
-            Event_ArrayBox.ValueChanged -= Event_ArrayBox_ValueChanged;
-            Event_PointerBox.ValueChanged -= Event_PointerBox_ValueChanged;
+            this.Event_ArrayBox.ValueChanged -= this.Event_ArrayBox_ValueChanged;
+            this.Event_PointerBox.ValueChanged -= this.Event_PointerBox_ValueChanged;
 
-            Event_ArrayBox.Value = Current["Events"];
-            Event_PointerBox.Value = Core.ReadPointer(Core.GetPointer("Map Data Array") + 4 * Event_ArrayBox.Value);
+            this.Event_ArrayBox.Value = this.Current["Events"];
+            this.Event_PointerBox.Value = Core.ReadPointer(Core.GetPointer("Map Data Array") + 4 * this.Event_ArrayBox.Value);
 
-            Event_ArrayBox.ValueChanged -= Event_ArrayBox_ValueChanged;
-            Event_PointerBox.ValueChanged -= Event_PointerBox_ValueChanged;
+            this.Event_ArrayBox.ValueChanged -= this.Event_ArrayBox_ValueChanged;
+            this.Event_PointerBox.ValueChanged -= this.Event_PointerBox_ValueChanged;
         }
         
         void Core_LoadEventSyntax()
         {
             try
             {
-                if (!EA.Program.CodesLoaded || LanguageProcessor == null)
+                if (!EA.Program.CodesLoaded || this.LanguageProcessor == null)
                 {
                     String folder =
 #if (DEBUG)
@@ -100,21 +100,21 @@ namespace EmblemMagic.Editors
 #else
 Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program)).Location);
 #endif
-                    LanguageProcessor = EA.Program.LoadCodes(folder + "\\Language Raws", ".txt", true, true);
+                    this.LanguageProcessor = EA.Program.LoadCodes(folder + "\\Language Raws", ".txt", true, true);
                 }
-                Language = EA.Program.Languages[Core.App.Game.Identifier.Substring(0, 3)];
+                this.Language = EA.Program.Languages[Core.App.Game.Identifier.Substring(0, 3)];
                 String keywords = "";
-                IEnumerable<String> codes = Language.GetCodeNames();
+                IEnumerable<String> codes = this.Language.GetCodeNames();
                 foreach (String code in codes)
                 {
                     keywords += code;
                     keywords += "( |\r\n)|";
                 }
-                Event_CodeBox.AddSyntax("(//).*", SystemColors.ControlDark);
-                Event_CodeBox.AddSyntax("#.* ", System.Drawing.Color.LimeGreen, FontStyle.Italic);
-                Event_CodeBox.AddSyntax(keywords.TrimEnd('|'), SystemColors.Highlight, FontStyle.Bold);
-                Event_CodeBox.AddSyntax(@"((\b[0-9]+)|((\b0x|\$)[0-9a-fA-F]+))\b", System.Drawing.Color.SlateBlue);
-                Event_CodeBox.AddCollapse(":\r\n", "\r\n\r\n");
+                this.Event_CodeBox.AddSyntax("(//).*", SystemColors.ControlDark);
+                this.Event_CodeBox.AddSyntax("#.* ", System.Drawing.Color.LimeGreen, FontStyle.Italic);
+                this.Event_CodeBox.AddSyntax(keywords.TrimEnd('|'), SystemColors.Highlight, FontStyle.Bold);
+                this.Event_CodeBox.AddSyntax(@"((\b[0-9]+)|((\b0x|\$)[0-9a-fA-F]+))\b", System.Drawing.Color.SlateBlue);
+                this.Event_CodeBox.AddCollapse(":\r\n", "\r\n\r\n");
             }
             catch (Exception ex)
             {
@@ -129,11 +129,11 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
                 using (StringWriter writer = new StringWriter(stringbuilder))
                 {
                     EA.IO.Logs.TextWriterMessageLog log = new EA.IO.Logs.TextWriterMessageLog(writer);
-                    EA.Program.Disassemble(Language,
+                    EA.Program.Disassemble(this.Language,
                         Program.Core.ROM.FileData,
                         "", writer, true,
                         EA.DisassemblyMode.Structure,
-                        Event_PointerBox.Value,
+                        this.Event_PointerBox.Value,
                         EA.Code.Language.Priority.none,
                         0, log);
                     if (log.ErrorCount > 0 || log.MessageCount > 0)
@@ -142,15 +142,15 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
                     }
                 }
                 String result = stringbuilder.ToString().TrimStart('\r', '\n');
-                EventList = Core_LoadEventCode_EventLabels(ref result);
-                if (Tools_ManageSpace.Checked)
-                    Core_LoadEventCode_ManageSpace(ref result);
-                if (View_ArrayDefinitions.Checked)
+                this.EventList = this.Core_LoadEventCode_EventLabels(ref result);
+                if (this.Tools_ManageSpace.Checked)
+                    this.Core_LoadEventCode_ManageSpace(ref result);
+                if (this.View_ArrayDefinitions.Checked)
                     EventAssemblerIO.LoadEventCode_ArrayDefinitions(ref result);
-                if (View_HelperMacros.Checked)
+                if (this.View_HelperMacros.Checked)
                     EventAssemblerIO.LoadEventCode_HelperMacros(ref result);
-                Core_LoadEventCode_MapUnitGroups();
-                Event_CodeBox.Text = result;
+                this.Core_LoadEventCode_MapUnitGroups();
+                this.Event_CodeBox.Text = result;
             }
             catch (Exception ex)
             {
@@ -289,38 +289,38 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
         }
         void Core_LoadEventCode_MapUnitGroups()
         {
-            UnitEvents_ListBox.ItemCheck -= UnitEvents_ListBox_ItemCheck;
-            UnitEvents_ListBox.Items.Clear();
+            this.UnitEvents_ListBox.ItemCheck -= this.UnitEvents_ListBox_ItemCheck;
+            this.UnitEvents_ListBox.Items.Clear();
             Boolean display_units;
-            for (Int32 i = 0; i < EventList.Count; i++)
+            for (Int32 i = 0; i < this.EventList.Count; i++)
             {
-                if (EventList[i].Command == "UNIT" && EventList[i].Label != null)
+                if (this.EventList[i].Command == "UNIT" && this.EventList[i].Label != null)
                 {
-                    display_units = EventList[i].Label.StartsWith("Beginning");
+                    display_units = this.EventList[i].Label.StartsWith("Beginning");
                     if (Core.App.Game is FE7 &&
-                        (EventList[i].Label.StartsWith("AllyUnits") ||
-                        EventList[i].Label.StartsWith("EnemyUnits")))
+                        (this.EventList[i].Label.StartsWith("AllyUnits") ||
+                        this.EventList[i].Label.StartsWith("EnemyUnits")))
                     {
-                        display_units = (EventList[i].Label.EndsWith("ENM"));
+                        display_units = (this.EventList[i].Label.EndsWith("ENM"));
                     }
-                    if (!UnitEvents_ListBox.Items.Contains(EventList[i].Label))
+                    if (!this.UnitEvents_ListBox.Items.Contains(this.EventList[i].Label))
                     {
-                        UnitEvents_ListBox.Items.Add(EventList[i].Label, display_units);
+                        this.UnitEvents_ListBox.Items.Add(this.EventList[i].Label, display_units);
                     }
                 }
             }
-            UnitEvents_ListBox.ItemCheck += UnitEvents_ListBox_ItemCheck;
+            this.UnitEvents_ListBox.ItemCheck += this.UnitEvents_ListBox_ItemCheck;
         }
 
         void Core_LoadMap()
         {
             Pointer address = Core.GetPointer("Map Data Array");
-            Pointer poin_palette    = Core.ReadPointer(address + 4 * (Byte)Current["Palette"]);
-            Pointer poin_tileset1   = Core.ReadPointer(address + 4 * (Byte)Current["Tileset1"]);
-            Pointer poin_tileset2   = Core.ReadPointer(address + 4 * (Byte)Current["Tileset2"]);
-            Pointer poin_tsa        = Core.ReadPointer(address + 4 * (Byte)Current["TSA"]);
-            Pointer poin_mapdata    = Core.ReadPointer(address + 4 * (Byte)Current["Map"]);
-            Pointer poin_mapchanges = Core.ReadPointer(address + 4 * (Byte)Current["MapChanges"]);
+            Pointer poin_palette    = Core.ReadPointer(address + 4 * (Byte)this.Current["Palette"]);
+            Pointer poin_tileset1   = Core.ReadPointer(address + 4 * (Byte)this.Current["Tileset1"]);
+            Pointer poin_tileset2   = Core.ReadPointer(address + 4 * (Byte)this.Current["Tileset2"]);
+            Pointer poin_tsa        = Core.ReadPointer(address + 4 * (Byte)this.Current["TSA"]);
+            Pointer poin_mapdata    = Core.ReadPointer(address + 4 * (Byte)this.Current["Map"]);
+            Pointer poin_mapchanges = Core.ReadPointer(address + 4 * (Byte)this.Current["MapChanges"]);
 
             MapTileset map_tileset;
             try
@@ -339,45 +339,45 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
 
             try
             {
-                CurrentMap = new Map(map_tileset,
+                this.CurrentMap = new Map(map_tileset,
                     Core.ReadData(poin_mapdata, 0),
                     poin_mapchanges, false);
             }
             catch (Exception ex)
             {
-                CurrentMap = null;
+                this.CurrentMap = null;
                 UI.ShowError("Could not load the map for this chapter.", ex);
             }
 
-            if (CurrentMap.Changes != null)
+            if (this.CurrentMap.Changes != null)
             {
-                MapChanges_ListBox.ItemCheck -= MapChanges_ListBox_ItemCheck;
-                if (MapChanges_ListBox.Items.Count > 0)
+                this.MapChanges_ListBox.ItemCheck -= this.MapChanges_ListBox_ItemCheck;
+                if (this.MapChanges_ListBox.Items.Count > 0)
                 {
-                    for (Int32 i = 0; i < CurrentMap.ShowChanges.Length; i++)
+                    for (Int32 i = 0; i < this.CurrentMap.ShowChanges.Length; i++)
                     {
-                        CurrentMap.ShowChanges[i] = MapChanges_ListBox.GetItemChecked(i);
+                        this.CurrentMap.ShowChanges[i] = this.MapChanges_ListBox.GetItemChecked(i);
                     }
-                    MapChanges_ListBox.Items.Clear();
+                    this.MapChanges_ListBox.Items.Clear();
                 }
-                for (Int32 i = 0; i < CurrentMap.Changes.Count; i++)
+                for (Int32 i = 0; i < this.CurrentMap.Changes.Count; i++)
                 {
-                    MapChanges_ListBox.Items.Add(
-                        "0x" + Util.ByteToHex(CurrentMap.Changes.GetNumber(i)),
-                        CurrentMap.ShowChanges[i]);
+                    this.MapChanges_ListBox.Items.Add(
+                        "0x" + Util.ByteToHex(this.CurrentMap.Changes.GetNumber(i)),
+                        this.CurrentMap.ShowChanges[i]);
                 }
-                MapChanges_ListBox.ItemCheck += MapChanges_ListBox_ItemCheck;
+                this.MapChanges_ListBox.ItemCheck += this.MapChanges_ListBox_ItemCheck;
             }
 
-            GBA.Bitmap result = new GBA.Bitmap(CurrentMap);
+            GBA.Bitmap result = new GBA.Bitmap(this.CurrentMap);
 
-            if (View_Units.Checked)
+            if (this.View_Units.Checked)
             {
-                Core_LoadMap_Units(result);
+                this.Core_LoadMap_Units(result);
             }
 
-            MapViewBox.Size = new Size(CurrentMap.Width, CurrentMap.Height);
-            MapViewBox.Load(result);
+            this.MapViewBox.Size = new Size(this.CurrentMap.Width, this.CurrentMap.Height);
+            this.MapViewBox.Load(result);
         }
         void Core_LoadMap_Units(GBA.Bitmap result)
         {
@@ -404,22 +404,22 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
                 Int32 offsetX;
                 Int32 offsetY;
                 Int32 index;
-                for (Int32 i = 0; i < EventList.Count; i++)
+                for (Int32 i = 0; i < this.EventList.Count; i++)
                 {
-                    if (EventList[i].Command == "UNIT" &&
-                        EventList[i].Label != null)
+                    if (this.EventList[i].Command == "UNIT" &&
+                        this.EventList[i].Label != null)
                     {
-                        index = UnitEvents_ListBox.Items.IndexOf(EventList[i].Label);
+                        index = this.UnitEvents_ListBox.Items.IndexOf(this.EventList[i].Label);
                         if (index == -1)
                             continue;
-                        else if (!UnitEvents_ListBox.GetItemChecked(index))
+                        else if (!this.UnitEvents_ListBox.GetItemChecked(index))
                             continue;
-                        unitclass = (Byte)EventList[i].Arguments[1];
+                        unitclass = (Byte)this.EventList[i].Arguments[1];
                         mapsprite = Core.ReadByte(address_classes + 6 + unitclass * class_length);
                         address = address_mapsprites + mapsprite * 8;
                         size = Core.ReadByte(address + 2);
                         tileset = new Tileset(Core.ReadData(Core.ReadPointer(address + 4), 0));
-                        palette_index = (Byte)(EventList[i].Arguments[3] & 6);
+                        palette_index = (Byte)(this.EventList[i].Arguments[3] & 6);
                         if (palette_index > 2) palette_index -= 3;
                         switch (size)
                         {
@@ -430,8 +430,8 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
                         }
                         if (image != null)
                         {
-                            offsetX = (Int32)(EventList[i].Arguments[UNIT_argX] * 16);
-                            offsetY = (Int32)(EventList[i].Arguments[UNIT_argY] * 16);
+                            offsetX = (Int32)(this.EventList[i].Arguments[UNIT_argX] * 16);
+                            offsetY = (Int32)(this.EventList[i].Arguments[UNIT_argY] * 16);
                             offsetX -= (size == 0x02 ? 8 : 0);
                             offsetY -= (size == 0x00 ? 0 : 16);
                             Int32 pixel;
@@ -523,10 +523,10 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
             using (TextReader file = (TextReader)File.OpenText(filepath))
             using (BinaryWriter output = new BinaryWriter(stream))
             {
-                stream.Description = "EventAssembler [" + Entry_ArrayBox.Text + "]";
-                EA.Program.Assemble(Language, file, output, log);
+                stream.Description = "EventAssembler [" + this.Entry_ArrayBox.Text + "]";
+                EA.Program.Assemble(this.Language, file, output, log);
                 if (log.ErrorCount == 0)
-                    stream.WriteToROM(Tools_ManageSpace.Checked);
+                    stream.WriteToROM(this.Tools_ManageSpace.Checked);
                 log.PrintAll();
             }
 
@@ -537,16 +537,16 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
         {
             UI.SuspendUpdate();
 
-            String code = Core_GetAllArrayDefines() + Event_CodeBox.Text;
+            String code = this.Core_GetAllArrayDefines() + this.Event_CodeBox.Text;
             EA_Log log = new EA_Log();
             ROM_Stream stream = new ROM_Stream(this);
             using (TextReader text = new StringReader(code))
             using (BinaryWriter output = new BinaryWriter(stream))
             {
-                stream.Description = "EventAssembler [" + Entry_ArrayBox.Text + "]";
-                EA.Program.Assemble(Language, text, output, log);
+                stream.Description = "EventAssembler [" + this.Entry_ArrayBox.Text + "]";
+                EA.Program.Assemble(this.Language, text, output, log);
                 if (log.ErrorCount == 0)
-                    stream.WriteToROM(Tools_ManageSpace.Checked);
+                    stream.WriteToROM(this.Tools_ManageSpace.Checked);
                 log.PrintAll();
             }
 
@@ -567,7 +567,7 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
             {
                 if (saveWindow.ShowDialog() == DialogResult.OK)
                 {
-                    File.WriteAllText(saveWindow.FileName, Event_CodeBox.Text);
+                    File.WriteAllText(saveWindow.FileName, this.Event_CodeBox.Text);
                 }
             }
             catch (Exception ex)
@@ -578,15 +578,15 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
 
         private void View_Grid_Click(Object sender, EventArgs e)
         {
-            MapViewBox.ShowGrid = View_Grid.Checked;
+            this.MapViewBox.ShowGrid = this.View_Grid.Checked;
         }
         private void View_Units_Click(Object sender, EventArgs e)
         {
-            Core_LoadMap();
+            this.Core_LoadMap();
         }
         private void View_ArrayDefinitions_CheckedChanged(Object sender, EventArgs e)
         {
-            Core_LoadEventCode();
+            this.Core_LoadEventCode();
         }
 
         private void Tools_MakeEAtxt_Click(Object sender, EventArgs e)
@@ -698,32 +698,32 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
         }
         private void Tools_ManageSpace_CheckedChanged(Object sender, EventArgs e)
         {
-            Core_LoadEventCode();
+            this.Core_LoadEventCode();
         }
 
 
 
         private void EntryArrayBox_ValueChanged(Object sender, EventArgs e)
         {
-            Core_Update();
-            Chapter_MagicButton.EntryToSelect = Entry_ArrayBox.Value;
+            this.Core_Update();
+            this.Chapter_MagicButton.EntryToSelect = this.Entry_ArrayBox.Value;
         }
 
         private void Event_ArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                Current.GetAddress(Current.EntryIndex, "Events"),
-                Event_ArrayBox.Value,
-                "Chapter Struct 0x" + Util.ByteToHex((Byte)Entry_ArrayBox.Value) +
-                " [" + Entry_ArrayBox.Text + "] - Events changed");
+                this.Current.GetAddress(this.Current.EntryIndex, "Events"),
+                this.Event_ArrayBox.Value,
+                "Chapter Struct 0x" + Util.ByteToHex((Byte)this.Entry_ArrayBox.Value) +
+                " [" + this.Entry_ArrayBox.Text + "] - Events changed");
         }
         private void Event_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                Core.GetPointer("Map Data Array") + 4 * Event_ArrayBox.Value,
-                Event_PointerBox.Value,
-                "Map Data Array 0x" + Util.ByteToHex(Event_ArrayBox.Value) +
-                " [" + Event_ArrayBox.Text + "] - repointed");
+                Core.GetPointer("Map Data Array") + 4 * this.Event_ArrayBox.Value,
+                this.Event_PointerBox.Value,
+                "Map Data Array 0x" + Util.ByteToHex(this.Event_ArrayBox.Value) +
+                " [" + this.Event_ArrayBox.Text + "] - repointed");
         }
 
         private Point MouseHoverLocation;
@@ -731,25 +731,25 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
         protected Timer Help_ToolTip_Timer;
         private void Event_CodeBox_MouseMove(Object sender, MouseEventArgs e)
         {
-            if (Math.Abs(e.X - MouseHoverLocation.X) > 4 &&
-                Math.Abs(e.Y - MouseHoverLocation.Y) > 4)
+            if (Math.Abs(e.X - this.MouseHoverLocation.X) > 4 &&
+                Math.Abs(e.Y - this.MouseHoverLocation.Y) > 4)
             { // Restart timer if the mouse moved too far
-                if (MouseHoverFinished)
-                    MouseHoverFinished = false;
-                if (Help_ToolTip_Timer.Enabled)
-                    Help_ToolTip_Timer.Enabled = false;
+                if (this.MouseHoverFinished)
+                    this.MouseHoverFinished = false;
+                if (this.Help_ToolTip_Timer.Enabled)
+                    this.Help_ToolTip_Timer.Enabled = false;
             }
-            MouseHoverLocation = e.Location;
-            Help_ToolTip_Timer.Enabled = true;
+            this.MouseHoverLocation = e.Location;
+            this.Help_ToolTip_Timer.Enabled = true;
         }
         private void HoverTick(Object sender, EventArgs e)
         {
-            Help_ToolTip_Timer.Enabled = false;
-            MouseHoverFinished = true;
+            this.Help_ToolTip_Timer.Enabled = false;
+            this.MouseHoverFinished = true;
             try
             {
-                Int32 code_index = Event_CodeBox.GetIndexFromPosition(MouseHoverLocation);
-                String command = Event.GetWord(Event_CodeBox.Text, code_index);
+                Int32 code_index = this.Event_CodeBox.GetIndexFromPosition(this.MouseHoverLocation);
+                String command = Event.GetWord(this.Event_CodeBox.Text, code_index);
 
                 if (command.Length > 0)
                 {
@@ -774,7 +774,7 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
                     }
                     if (caption == "")
                     {
-                        caption = LanguageProcessor.GetDoc(command,
+                        caption = this.LanguageProcessor.GetDoc(command,
                             Core.App.Game.Identifier.Substring(0, 3));
                         if (caption.StartsWith("command:"))
                         {
@@ -790,24 +790,24 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
 
                     if (caption.Length > 0)
                     {
-                        if (Help_ToolTip.Active && Help_ToolTip.ToolTipTitle == command)
+                        if (this.Help_ToolTip.Active && this.Help_ToolTip.ToolTipTitle == command)
                             return;
-                        Help_ToolTip.Active = true;
-                        Help_ToolTip.ToolTipTitle = command;
-                        Help_ToolTip.Show(caption, this,
-                            Event_CodeBox.Location.X + MouseHoverLocation.X,
-                            Event_CodeBox.Location.Y + MouseHoverLocation.Y + 40);
+                        this.Help_ToolTip.Active = true;
+                        this.Help_ToolTip.ToolTipTitle = command;
+                        this.Help_ToolTip.Show(caption, this,
+                            this.Event_CodeBox.Location.X + this.MouseHoverLocation.X,
+                            this.Event_CodeBox.Location.Y + this.MouseHoverLocation.Y + 40);
                     }
                     else
                     {
-                        Help_ToolTip.Hide(this);
-                        Help_ToolTip.Active = false;
+                        this.Help_ToolTip.Hide(this);
+                        this.Help_ToolTip.Active = false;
                     }
                 }
                 else
                 {
-                    Help_ToolTip.Hide(this);
-                    Help_ToolTip.Active = false;
+                    this.Help_ToolTip.Hide(this);
+                    this.Help_ToolTip.Active = false;
                 }
             }
             catch (Exception ex)
@@ -818,34 +818,34 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
 
         private void MapViewBox_SelectionChanged(Object sender, EventArgs e)
         {
-            if (MapViewBox.SelectionIsSingle())
+            if (this.MapViewBox.SelectionIsSingle())
             {
-                Point selection = MapViewBox.GetSelectionCoords();
-                MapSelection_Label.Text = "X: " + selection.X + ", Y: " + selection.Y;
+                Point selection = this.MapViewBox.GetSelectionCoords();
+                this.MapSelection_Label.Text = "X: " + selection.X + ", Y: " + selection.Y;
             }
-            else MapSelection_Label.Text = "X: __, Y: __";
+            else this.MapSelection_Label.Text = "X: __, Y: __";
 
-            Int32 width = MapViewBox.Selection.GetLength(0);
-            Int32 height = MapViewBox.Selection.GetLength(1);
+            Int32 width = this.MapViewBox.Selection.GetLength(0);
+            Int32 height = this.MapViewBox.Selection.GetLength(1);
             for (Int32 y = 0; y < height; y++)
             for (Int32 x = 0; x < width; x++)
             {
-                if (MapViewBox.Selection[x, y])
+                if (this.MapViewBox.Selection[x, y])
                 {
-                    for (Int32 i = 0; i < EventList.Count; i++)
+                    for (Int32 i = 0; i < this.EventList.Count; i++)
                     {
-                        if (EventList[i].Command == "UNIT" &&
-                            EventList[i].Arguments[UNIT_argX] == x &&
-                            EventList[i].Arguments[UNIT_argY] == y)
+                        if (this.EventList[i].Command == "UNIT" &&
+                            this.EventList[i].Arguments[UNIT_argX] == x &&
+                            this.EventList[i].Arguments[UNIT_argY] == y)
                         {
-                                Int32 index = UnitEvents_ListBox.Items.IndexOf(EventList[i].Label);
+                                Int32 index = this.UnitEvents_ListBox.Items.IndexOf(this.EventList[i].Label);
                             if (index == -1) continue;
-                            else if (UnitEvents_ListBox.GetItemChecked(index))
+                            else if (this.UnitEvents_ListBox.GetItemChecked(index))
                             {
-                                index = Event.GetCodeIndex(Event_CodeBox.Text, EventList[i].CodeLineNumber);
-                                Event_CodeBox.SelectionStart = index;
-                                Event_CodeBox.SelectionLength = 4;
-                                Event_CodeBox.DoSelectionVisible();
+                                index = Event.GetCodeIndex(this.Event_CodeBox.Text, this.EventList[i].CodeLineNumber);
+                                    this.Event_CodeBox.SelectionStart = index;
+                                    this.Event_CodeBox.SelectionLength = 4;
+                                    this.Event_CodeBox.DoSelectionVisible();
                                 return;
                             }
                         }
@@ -855,11 +855,11 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
         }
         private void UnitEvents_ListBox_ItemCheck(Object sender, ItemCheckEventArgs e)
         {
-            this.BeginInvoke(new MethodInvoker(Core_LoadMap), null);
+            this.BeginInvoke(new MethodInvoker(this.Core_LoadMap), null);
         }
         private void MapChanges_ListBox_ItemCheck(Object sender, ItemCheckEventArgs e)
         {
-            this.BeginInvoke(new MethodInvoker(Core_LoadMap), null);
+            this.BeginInvoke(new MethodInvoker(this.Core_LoadMap), null);
         }
 
         private void EventEditor_SizeChanged(Object sender, EventArgs e)
@@ -869,26 +869,26 @@ Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(EA.Program))
             left = (all | AnchorStyles.Left);
             right = (all | AnchorStyles.Right);
             all = (AnchorStyles)0xF;
-            if (Event_CodeBox.Anchor == all)
+            if (this.Event_CodeBox.Anchor == all)
             {
-                if (Event_CodeBox.Width == Event_CodeBox.MinimumSize.Width)
+                if (this.Event_CodeBox.Width == this.Event_CodeBox.MinimumSize.Width)
                 {
-                    Event_CodeBox.Anchor = left;
-                    Map_Panel.Anchor = all;
+                    this.Event_CodeBox.Anchor = left;
+                    this.Map_Panel.Anchor = all;
                 }
-                else Map_Panel.Width = this.Width - Event_CodeBox.Width - 47;
+                else this.Map_Panel.Width = this.Width - this.Event_CodeBox.Width - 47;
             }
             else
             {
-                if (Map_Panel.Width == Map_Panel.MaximumSize.Width)
+                if (this.Map_Panel.Width == this.Map_Panel.MaximumSize.Width)
                 {
-                    Event_CodeBox.Anchor = all;
-                    Map_Panel.Anchor = right;
+                    this.Event_CodeBox.Anchor = all;
+                    this.Map_Panel.Anchor = right;
                 }
-                else Event_CodeBox.Width = this.Width - Map_Panel.Width - 47;
+                else this.Event_CodeBox.Width = this.Width - this.Map_Panel.Width - 47;
             }
-            if (Map_Panel.Location.X < 420)
-                Map_Panel.Location = new Point(420, Map_Panel.Location.Y);
+            if (this.Map_Panel.Location.X < 420)
+                this.Map_Panel.Location = new Point(420, this.Map_Panel.Location.Y);
         }
     }
 }

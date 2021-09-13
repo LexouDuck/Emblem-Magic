@@ -7,35 +7,35 @@ namespace Magic
     {
         public CreateRepointDialog()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            Create_Button.DialogResult = DialogResult.OK;
-            Cancel_Button.DialogResult = DialogResult.Cancel;
+            this.Create_Button.DialogResult = DialogResult.OK;
+            this.Cancel_Button.DialogResult = DialogResult.Cancel;
         }
 
         public System.String AssetName
         {
             get
             {
-                return AssetName_TextBox.Text;
+                return this.AssetName_TextBox.Text;
             }
             set
             {
-                AssetName_TextBox.Text = value;
+                this.AssetName_TextBox.Text = value;
             }
         }
         public Pointer DefaultAddress
         {
             get
             {
-                return Default_PointerBox.Value;
+                return this.Default_PointerBox.Value;
             }
         }
         public Pointer RepointAddress
         {
             get
             {
-                return Repoint_PointerBox.Value;
+                return this.Repoint_PointerBox.Value;
             }
         }
     }

@@ -16,13 +16,13 @@ namespace Magic.Components
 
         public MagicButton(IApp app) : base()
         {
-            App = app;
+            this.App = app;
 
-            Name = "";
-            Text = "";
-            Size = new Size(24, 24);
-            MinimumSize = new Size(24, 24);
-            MaximumSize = new Size(24, 24);
+            this.Name = "";
+            this.Text = "";
+            this.Size = new Size(24, 24);
+            this.MinimumSize = new Size(24, 24);
+            this.MaximumSize = new Size(24, 24);
         }
     }
 }

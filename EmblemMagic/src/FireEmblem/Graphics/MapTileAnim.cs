@@ -15,7 +15,7 @@ namespace EmblemMagic.FireEmblem
         {
             if (data.Length != LENGTH) throw new Exception("Map tile frame length is invalid: " + data.Length);
 
-            Data = data;
+            this.Data = data;
         }
 
 
@@ -27,15 +27,15 @@ namespace EmblemMagic.FireEmblem
         {
             get
             {
-                if (IsPaletteAnimation())
-                     return new Pointer(Data.GetUInt32(0, true), false, true);
-                else return new Pointer(Data.GetUInt32(4, true), false, true);
+                if (this.IsPaletteAnimation())
+                     return new Pointer(this.Data.GetUInt32(0, true), false, true);
+                else return new Pointer(this.Data.GetUInt32(4, true), false, true);
             }
             set
             {
-                if (IsPaletteAnimation())
-                     Array.Copy(value.ToBytes(), 0, Data, 0, 4);
-                else Array.Copy(value.ToBytes(), 0, Data, 4, 4);
+                if (this.IsPaletteAnimation())
+                     Array.Copy(value.ToBytes(), 0, this.Data, 0, 4);
+                else Array.Copy(value.ToBytes(), 0, this.Data, 4, 4);
             }
         }
         /// <summary>
@@ -45,15 +45,15 @@ namespace EmblemMagic.FireEmblem
         {
             get
             {
-                if (IsPaletteAnimation())
-                     return Data[4];
-                else return Data[0];
+                if (this.IsPaletteAnimation())
+                     return this.Data[4];
+                else return this.Data[0];
             }
             set
             {
-                if (IsPaletteAnimation())
-                     Data[4] = value;
-                else Data[0] = value;
+                if (this.IsPaletteAnimation())
+                    this.Data[4] = value;
+                else this.Data[0] = value;
             }
         }
         /// <summary>
@@ -63,14 +63,14 @@ namespace EmblemMagic.FireEmblem
         {
             get
             {
-                if (IsPaletteAnimation())
-                    return Data[6];
+                if (this.IsPaletteAnimation())
+                    return this.Data[6];
                 else return 0x00;
             }
             set
             {
-                if (IsPaletteAnimation())
-                    Data[6] = value;
+                if (this.IsPaletteAnimation())
+                    this.Data[6] = value;
             }
         }
         /// <summary>
@@ -80,15 +80,15 @@ namespace EmblemMagic.FireEmblem
         {
             get
             {
-                if (IsPaletteAnimation())
-                     return Data[5]; // 1 per color, so 2 bytes
-                else return Data[3]; // 1 per map tile, so 16x16 4bpp data
+                if (this.IsPaletteAnimation())
+                     return this.Data[5]; // 1 per color, so 2 bytes
+                else return this.Data[3]; // 1 per map tile, so 16x16 4bpp data
             }
             set
             {
-                if (IsPaletteAnimation())
-                     Data[5] = value;
-                else Data[3] = value;
+                if (this.IsPaletteAnimation())
+                    this.Data[5] = value;
+                else this.Data[3] = value;
             }
         }
 
@@ -101,7 +101,7 @@ namespace EmblemMagic.FireEmblem
         {
             for (Int32 i = 0; i < LENGTH; i++)
             {
-                if (Data[i] != 0x00) return false;
+                if (this.Data[i] != 0x00) return false;
             }
             return true;
         }
@@ -111,14 +111,14 @@ namespace EmblemMagic.FireEmblem
         /// <returns></returns>
         public Boolean IsPaletteAnimation()
         {
-            return (Data[7] == 0x00);
+            return (this.Data[7] == 0x00);
         }
         /// <summary>
         /// Returns the 8-length byte array for this MapTileFrame struct
         /// </summary>
         public Byte[] ToBytes()
         {
-            return Data;
+            return this.Data;
         }
     }
 
@@ -133,8 +133,8 @@ namespace EmblemMagic.FireEmblem
         
         public MapTileAnim(Pointer address)
         {
-            Address = address;
-            Frames = new List<MapTileFrame>();
+            this.Address = address;
+            this.Frames = new List<MapTileFrame>();
             if (address == new Pointer())
             {
                 return;
@@ -144,19 +144,19 @@ namespace EmblemMagic.FireEmblem
             do
             {
                 frame = Core.ReadData(address + index * MapTileFrame.LENGTH, MapTileFrame.LENGTH);
-                Frames.Add(new MapTileFrame(frame));
+                this.Frames.Add(new MapTileFrame(frame));
             }
-            while (!Frames[index++].IsTerminator());
+            while (!this.Frames[index++].IsTerminator());
         }
         
 
 
         public Byte[] ToBytes()
         {
-            Byte[] result = new Byte[Frames.Count * MapTileFrame.LENGTH];
-            for (Int32 i = 0; i < Frames.Count; i++)
+            Byte[] result = new Byte[this.Frames.Count * MapTileFrame.LENGTH];
+            for (Int32 i = 0; i < this.Frames.Count; i++)
             {
-                Array.Copy(Frames[i].ToBytes(), 0, result, i * MapTileFrame.LENGTH, MapTileFrame.LENGTH);
+                Array.Copy(this.Frames[i].ToBytes(), 0, result, i * MapTileFrame.LENGTH, MapTileFrame.LENGTH);
             }
             return result;
         }

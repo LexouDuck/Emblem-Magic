@@ -15,14 +15,14 @@ namespace EmblemMagic.Editors
         {
             get
             {
-                return Instruments.GetAddress(Entry_ByteBox.Value);
+                return this.Instruments.GetAddress(this.Entry_ByteBox.Value);
             }
         }
         String CurrentEntry
         {
             get
             {
-                return "Instrument 0x" + Util.ByteToHex(Entry_ByteBox.Value) + " from " + Instruments.Address + " - ";
+                return "Instrument 0x" + Util.ByteToHex(this.Entry_ByteBox.Value) + " from " + this.Instruments.Address + " - ";
             }
         }
 
@@ -42,70 +42,70 @@ namespace EmblemMagic.Editors
         {
             try
             {
-                InitializeComponent();
+                this.InitializeComponent();
 
-                Preview = new Music();
+                this.Preview = new Music();
 
-                Entry_ByteBox.ValueChanged -= Entry_ByteBox_ValueChanged;
-                Entry_ByteBox.Value = index;
-                Entry_ByteBox.ValueChanged += Entry_ByteBox_ValueChanged;
+                this.Entry_ByteBox.ValueChanged -= this.Entry_ByteBox_ValueChanged;
+                this.Entry_ByteBox.Value = index;
+                this.Entry_ByteBox.ValueChanged += this.Entry_ByteBox_ValueChanged;
 
-                Instruments = instruments;
+                this.Instruments = instruments;
 
-                Instrument_PianoBox.SelectionChanged += Instrument_PianoBox_SelectionChanged;
+                this.Instrument_PianoBox.SelectionChanged += this.Instrument_PianoBox_SelectionChanged;
 
-                Address_Label.Text = Instruments.Address.ToString();
+                this.Address_Label.Text = this.Instruments.Address.ToString();
 
-                Type_ComboBox.SelectedIndexChanged -= Type_ComboBox_SelectedIndexChanged;
-                Type_ComboBox.DataSource = InstrumentTypes;
-                Type_ComboBox.SelectedIndexChanged += Type_ComboBox_SelectedIndexChanged;
+                this.Type_ComboBox.SelectedIndexChanged -= this.Type_ComboBox_SelectedIndexChanged;
+                this.Type_ComboBox.DataSource = this.InstrumentTypes;
+                this.Type_ComboBox.SelectedIndexChanged += this.Type_ComboBox_SelectedIndexChanged;
 
-                BaseKey_ByteArrayBox.Load("Music Notes.txt");
+                this.BaseKey_ByteArrayBox.Load("Music Notes.txt");
             }
             catch (Exception ex)
             {
                 UI.ShowError("Could not properly open the " + this.Text, ex);
 
-                Core_CloseEditor(this, null);
+                this.Core_CloseEditor(this, null);
             }
         }
 
         public override void Core_OnOpen()
         {
-            Core_Update();
+            this.Core_Update();
         }
         public override void Core_Update()
         {
-            Current = Instruments[Entry_ByteBox.Value];
+            this.Current = this.Instruments[this.Entry_ByteBox.Value];
 
-            Preview.Reset();
-            Preview.Load(Instruments.GetAudio(Entry_ByteBox.Value));
+            this.Preview.Reset();
+            this.Preview.Load(this.Instruments.GetAudio(this.Entry_ByteBox.Value));
 
-            Core_LoadValues();
+            this.Core_LoadValues();
         }
 
         void Core_LoadValues()
         {
-            Type_ComboBox.SelectedIndexChanged -= Type_ComboBox_SelectedIndexChanged;
-            BaseKey_ByteArrayBox.ValueChanged -= BaseKey_ByteArrayBox_ValueChanged;
-            Panning_ByteBox.ValueChanged -= Panning_ByteBox_ValueChanged;
-            Unused_ByteBox.ValueChanged -= Unused_ByteBox_ValueChanged;
+            this.Type_ComboBox.SelectedIndexChanged -= this.Type_ComboBox_SelectedIndexChanged;
+            this.BaseKey_ByteArrayBox.ValueChanged -= this.BaseKey_ByteArrayBox_ValueChanged;
+            this.Panning_ByteBox.ValueChanged -= this.Panning_ByteBox_ValueChanged;
+            this.Unused_ByteBox.ValueChanged -= this.Unused_ByteBox_ValueChanged;
 
-            Envelope_Attack_ByteBox.ValueChanged  -= Envelope_Attack_ByteBox_ValueChanged;
-            Envelope_Decay_ByteBox.ValueChanged   -= Envelope_Decay_ByteBox_ValueChanged;
-            Envelope_Sustain_ByteBox.ValueChanged -= Envelope_Sustain_ByteBox_ValueChanged;
-            Envelope_Release_ByteBox.ValueChanged -= Envelope_Release_ByteBox_ValueChanged;
+            this.Envelope_Attack_ByteBox.ValueChanged  -= this.Envelope_Attack_ByteBox_ValueChanged;
+            this.Envelope_Decay_ByteBox.ValueChanged   -= this.Envelope_Decay_ByteBox_ValueChanged;
+            this.Envelope_Sustain_ByteBox.ValueChanged -= this.Envelope_Sustain_ByteBox_ValueChanged;
+            this.Envelope_Release_ByteBox.ValueChanged -= this.Envelope_Release_ByteBox_ValueChanged;
 
-            DutyPeriod_ComboBox.SelectedIndexChanged -= DutyPeriod_ComboBox_SelectedIndexChanged;
-            Sample_PointerBox.ValueChanged -= Sample_PointerBox_ValueChanged;
-            KeyMap_PointerBox.ValueChanged -= KeyMap_PointerBox_ValueChanged;
+            this.DutyPeriod_ComboBox.SelectedIndexChanged -= this.DutyPeriod_ComboBox_SelectedIndexChanged;
+            this.Sample_PointerBox.ValueChanged -= this.Sample_PointerBox_ValueChanged;
+            this.KeyMap_PointerBox.ValueChanged -= this.KeyMap_PointerBox_ValueChanged;
 
 
 
             try
             {
                 Int32 index = 0;
-                switch (Current.Type)
+                switch (this.Current.Type)
                 {
                     case InstrumentType.Direct:  index = 0; break;
                     case InstrumentType.Square1: index = 1; break;
@@ -117,89 +117,89 @@ namespace EmblemMagic.Editors
                     case InstrumentType.Drums:   index = 7; break;
                     default: break;
                 }
-                Type_ComboBox.SelectedIndex = Type_ComboBox.FindStringExact(InstrumentTypes[index]);
-                BaseKey_ByteArrayBox.Value = Current.BaseKey;
-                Panning_ByteBox.Value = Current.Panning;
-                Unused_ByteBox.Value = Current.Unused;
+                this.Type_ComboBox.SelectedIndex = this.Type_ComboBox.FindStringExact(this.InstrumentTypes[index]);
+                this.BaseKey_ByteArrayBox.Value = this.Current.BaseKey;
+                this.Panning_ByteBox.Value = this.Current.Panning;
+                this.Unused_ByteBox.Value = this.Current.Unused;
 
-                Envelope_Attack_ByteBox.Value = Current.Attack;
-                Envelope_Decay_ByteBox.Value = Current.Decay;
-                Envelope_Sustain_ByteBox.Value = Current.Sustain;
-                Envelope_Release_ByteBox.Value = Current.Release;
+                this.Envelope_Attack_ByteBox.Value = this.Current.Attack;
+                this.Envelope_Decay_ByteBox.Value = this.Current.Decay;
+                this.Envelope_Sustain_ByteBox.Value = this.Current.Sustain;
+                this.Envelope_Release_ByteBox.Value = this.Current.Release;
 
-                if (Current.Type == InstrumentType.Direct ||
-                    Current.Type == InstrumentType.Fixed ||
-                    Current.Type == InstrumentType.Wave ||
-                    Current.Type == InstrumentType.Multi ||
-                    Current.Type == InstrumentType.Drums)
+                if (this.Current.Type == InstrumentType.Direct ||
+                    this.Current.Type == InstrumentType.Fixed ||
+                    this.Current.Type == InstrumentType.Wave ||
+                    this.Current.Type == InstrumentType.Multi ||
+                    this.Current.Type == InstrumentType.Drums)
                 {
-                    Sample_Label.Enabled = true;
-                    Sample_Button.Enabled = true;
-                    Sample_PointerBox.Enabled = true;
-                    Sample_PointerBox.Value = Current.Sample;
+                    this.Sample_Label.Enabled = true;
+                    this.Sample_Button.Enabled = true;
+                    this.Sample_PointerBox.Enabled = true;
+                    this.Sample_PointerBox.Value = this.Current.Sample;
                 }
                 else
                 {
-                    Sample_Label.Enabled = false;
-                    Sample_Button.Enabled = false;
-                    Sample_PointerBox.Enabled = false;
-                    Sample_PointerBox.Value = new Pointer();
+                    this.Sample_Label.Enabled = false;
+                    this.Sample_Button.Enabled = false;
+                    this.Sample_PointerBox.Enabled = false;
+                    this.Sample_PointerBox.Value = new Pointer();
                 }
 
-                if (Current.Type == InstrumentType.Multi)
+                if (this.Current.Type == InstrumentType.Multi)
                 {
-                    KeyMap_Label.Enabled = true;
-                    KeyMap_Label.Text = "Key Map :";
-                    KeyMap_Button.Enabled = true;
-                    KeyMap_PointerBox.Enabled = true;
-                    KeyMap_PointerBox.Value = Current.KeyMap;
+                    this.KeyMap_Label.Enabled = true;
+                    this.KeyMap_Label.Text = "Key Map :";
+                    this.KeyMap_Button.Enabled = true;
+                    this.KeyMap_PointerBox.Enabled = true;
+                    this.KeyMap_PointerBox.Value = this.Current.KeyMap;
                 }
-                else if (Current.Type == InstrumentType.Wave)
+                else if (this.Current.Type == InstrumentType.Wave)
                 {
-                    KeyMap_Label.Enabled = true;
-                    KeyMap_Label.Text = "Wave :";
-                    KeyMap_Button.Enabled = true;
-                    KeyMap_PointerBox.Enabled = true;
-                    KeyMap_PointerBox.Value = Current.KeyMap;
+                    this.KeyMap_Label.Enabled = true;
+                    this.KeyMap_Label.Text = "Wave :";
+                    this.KeyMap_Button.Enabled = true;
+                    this.KeyMap_PointerBox.Enabled = true;
+                    this.KeyMap_PointerBox.Value = this.Current.KeyMap;
                 }
                 else
                 {
-                    KeyMap_Label.Enabled = false;
-                    KeyMap_Button.Enabled = false;
-                    KeyMap_PointerBox.Enabled = false;
-                    KeyMap_PointerBox.Value = new Pointer();
+                    this.KeyMap_Label.Enabled = false;
+                    this.KeyMap_Button.Enabled = false;
+                    this.KeyMap_PointerBox.Enabled = false;
+                    this.KeyMap_PointerBox.Value = new Pointer();
                 }
 
-                if (Current.Type == InstrumentType.Square1 ||
-                    Current.Type == InstrumentType.Square2)
+                if (this.Current.Type == InstrumentType.Square1 ||
+                    this.Current.Type == InstrumentType.Square2)
                 {
-                    DutyPeriod_Label.Enabled = true;
-                    DutyPeriod_ComboBox.Enabled = true;
-                    DutyPeriod_ComboBox.DataSource = new String[]
+                    this.DutyPeriod_Label.Enabled = true;
+                    this.DutyPeriod_ComboBox.Enabled = true;
+                    this.DutyPeriod_ComboBox.DataSource = new String[]
                     {
                         "0x00 - 12.5%",
                         "0x01 - 25%",
                         "0x02 - 50%",
                         "0x03 - 75%",
                     };
-                    DutyPeriod_ComboBox.SelectedIndex = Current.DutyPeriod;
+                    this.DutyPeriod_ComboBox.SelectedIndex = this.Current.DutyPeriod;
                 }
-                else if (Current.Type == InstrumentType.Noise)
+                else if (this.Current.Type == InstrumentType.Noise)
                 {
-                    DutyPeriod_Label.Enabled = true;
-                    DutyPeriod_ComboBox.Enabled = true;
-                    DutyPeriod_ComboBox.DataSource = new String[]
+                    this.DutyPeriod_Label.Enabled = true;
+                    this.DutyPeriod_ComboBox.Enabled = true;
+                    this.DutyPeriod_ComboBox.DataSource = new String[]
                     {
                         "0x00 - Normal",
                         "0x01 - Metallic",
                     };
-                    DutyPeriod_ComboBox.SelectedIndex = Current.DutyPeriod;
+                    this.DutyPeriod_ComboBox.SelectedIndex = this.Current.DutyPeriod;
                 }
                 else
                 {
-                    DutyPeriod_Label.Enabled = false;
-                    DutyPeriod_ComboBox.Enabled = false;
-                    DutyPeriod_ComboBox.DataSource = null;
+                    this.DutyPeriod_Label.Enabled = false;
+                    this.DutyPeriod_ComboBox.Enabled = false;
+                    this.DutyPeriod_ComboBox.DataSource = null;
                 }
             }
             catch (Exception ex)
@@ -209,39 +209,39 @@ namespace EmblemMagic.Editors
 
 
 
-            Type_ComboBox.SelectedIndexChanged += Type_ComboBox_SelectedIndexChanged;
-            BaseKey_ByteArrayBox.ValueChanged += BaseKey_ByteArrayBox_ValueChanged;
-            Panning_ByteBox.ValueChanged += Panning_ByteBox_ValueChanged;
-            Unused_ByteBox.ValueChanged += Unused_ByteBox_ValueChanged;
+            this.Type_ComboBox.SelectedIndexChanged += this.Type_ComboBox_SelectedIndexChanged;
+            this.BaseKey_ByteArrayBox.ValueChanged += this.BaseKey_ByteArrayBox_ValueChanged;
+            this.Panning_ByteBox.ValueChanged += this.Panning_ByteBox_ValueChanged;
+            this.Unused_ByteBox.ValueChanged += this.Unused_ByteBox_ValueChanged;
 
-            Envelope_Attack_ByteBox.ValueChanged += Envelope_Attack_ByteBox_ValueChanged;
-            Envelope_Decay_ByteBox.ValueChanged += Envelope_Decay_ByteBox_ValueChanged;
-            Envelope_Sustain_ByteBox.ValueChanged += Envelope_Sustain_ByteBox_ValueChanged;
-            Envelope_Release_ByteBox.ValueChanged += Envelope_Release_ByteBox_ValueChanged;
+            this.Envelope_Attack_ByteBox.ValueChanged += this.Envelope_Attack_ByteBox_ValueChanged;
+            this.Envelope_Decay_ByteBox.ValueChanged += this.Envelope_Decay_ByteBox_ValueChanged;
+            this.Envelope_Sustain_ByteBox.ValueChanged += this.Envelope_Sustain_ByteBox_ValueChanged;
+            this.Envelope_Release_ByteBox.ValueChanged += this.Envelope_Release_ByteBox_ValueChanged;
 
-            DutyPeriod_ComboBox.SelectedIndexChanged += DutyPeriod_ComboBox_SelectedIndexChanged;
-            Sample_PointerBox.ValueChanged += Sample_PointerBox_ValueChanged;
-            KeyMap_PointerBox.ValueChanged += KeyMap_PointerBox_ValueChanged;
+            this.DutyPeriod_ComboBox.SelectedIndexChanged += this.DutyPeriod_ComboBox_SelectedIndexChanged;
+            this.Sample_PointerBox.ValueChanged += this.Sample_PointerBox_ValueChanged;
+            this.KeyMap_PointerBox.ValueChanged += this.KeyMap_PointerBox_ValueChanged;
         }
 
 
 
         private void Entry_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
-            Core_Update();
+            this.Core_Update();
         }
 
         private void Instrument_PianoBox_SelectionChanged(Object sender, EventArgs e)
         {
             for (Byte i = 0; i < Music.NOTES; i++)
             {
-                if (Instrument_PianoBox.Selection[i])
+                if (this.Instrument_PianoBox.Selection[i])
                 {
-                    Preview.PlayAudio(0, i);
+                    this.Preview.PlayAudio(0, i);
                 }
-                else if (!Preview.Samples[0][i].Cancel)
+                else if (!this.Preview.Samples[0][i].Cancel)
                 {
-                    Preview.Samples[0][i].State = Audio.ADSR.Release;
+                    this.Preview.Samples[0][i].State = Audio.ADSR.Release;
                 }
             }
         }
@@ -249,7 +249,7 @@ namespace EmblemMagic.Editors
         private void Type_ComboBox_SelectedIndexChanged(Object sender, EventArgs e)
         {
             Byte data;
-            switch (Type_ComboBox.Text)
+            switch (this.Type_ComboBox.Text)
             {
                 case "DirectSound":  data = (Byte)InstrumentType.Direct;  break;
                 case "PSG Square 1": data = (Byte)InstrumentType.Square1; break;
@@ -262,97 +262,97 @@ namespace EmblemMagic.Editors
                 default: data = 0x01; break;
             }
             Core.WriteByte(this,
-                CurrentAddress,
+                this.CurrentAddress,
                 data,
-                CurrentEntry + "Type changed");
+                this.CurrentEntry + "Type changed");
         }
         private void BaseKey_ByteArrayBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                CurrentAddress + 1,
-                BaseKey_ByteArrayBox.Value,
-                CurrentEntry + "Base Key changed");
+                this.CurrentAddress + 1,
+                this.BaseKey_ByteArrayBox.Value,
+                this.CurrentEntry + "Base Key changed");
         }
         private void Panning_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                CurrentAddress + 3,
-                Panning_ByteBox.Value,
-                CurrentEntry + "Panning changed");
+                this.CurrentAddress + 3,
+                this.Panning_ByteBox.Value,
+                this.CurrentEntry + "Panning changed");
         }
         private void Unused_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                CurrentAddress + 2,
-                Unused_ByteBox.Value,
-                CurrentEntry + "Unused byte changed");
+                this.CurrentAddress + 2,
+                this.Unused_ByteBox.Value,
+                this.CurrentEntry + "Unused byte changed");
         }
 
         private void Envelope_Attack_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                CurrentAddress + 8,
-                Envelope_Attack_ByteBox.Value,
-                CurrentEntry + "Env. Attack changed");
+                this.CurrentAddress + 8,
+                this.Envelope_Attack_ByteBox.Value,
+                this.CurrentEntry + "Env. Attack changed");
         }
         private void Envelope_Decay_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                CurrentAddress + 8,
-                Envelope_Decay_ByteBox.Value,
-                CurrentEntry + "Env. Decay changed");
+                this.CurrentAddress + 8,
+                this.Envelope_Decay_ByteBox.Value,
+                this.CurrentEntry + "Env. Decay changed");
         }
         private void Envelope_Sustain_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                CurrentAddress + 8,
-                Envelope_Sustain_ByteBox.Value,
-                CurrentEntry + "Env. Sustain changed");
+                this.CurrentAddress + 8,
+                this.Envelope_Sustain_ByteBox.Value,
+                this.CurrentEntry + "Env. Sustain changed");
         }
         private void Envelope_Release_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                CurrentAddress + 8,
-                Envelope_Release_ByteBox.Value,
-                CurrentEntry + "Env. Release changed");
+                this.CurrentAddress + 8,
+                this.Envelope_Release_ByteBox.Value,
+                this.CurrentEntry + "Env. Release changed");
         }
 
         private void DutyPeriod_ComboBox_SelectedIndexChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                CurrentAddress + 8,
-                (Byte)DutyPeriod_ComboBox.SelectedIndex,
-                CurrentEntry + "Duty Period changed");
+                this.CurrentAddress + 8,
+                (Byte)this.DutyPeriod_ComboBox.SelectedIndex,
+                this.CurrentEntry + "Duty Period changed");
         }
         private void Sample_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                CurrentAddress + 4,
-                Sample_PointerBox.Value,
-                CurrentEntry + "Sample repointed");
+                this.CurrentAddress + 4,
+                this.Sample_PointerBox.Value,
+                this.CurrentEntry + "Sample repointed");
         }
         private void KeyMap_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                CurrentAddress + 8,
-                KeyMap_PointerBox.Value,
-                CurrentEntry + "Key Map repointed");
+                this.CurrentAddress + 8,
+                this.KeyMap_PointerBox.Value,
+                this.CurrentEntry + "Key Map repointed");
         }
 
         private void Sample_Button_Click(Object sender, EventArgs e)
         {
-            if (Current.Type == InstrumentType.Drums)
+            if (this.Current.Type == InstrumentType.Drums)
             {
-                Program.Core.Core_OpenEditor(new InstrumentEditor( new InstrumentArray(Current.Sample), Current.BaseKey));
+                Program.Core.Core_OpenEditor(new InstrumentEditor( new InstrumentArray(this.Current.Sample), this.Current.BaseKey));
             }
             else
             {
-                Program.Core.Core_OpenEditor(new SampleEditor(Current.Sample));
+                Program.Core.Core_OpenEditor(new SampleEditor(this.Current.Sample));
             }
         }
         private void KeyMap_Button_Click(Object sender, EventArgs e)
         {
-            Program.Core.Core_OpenEditor(new KeyMapEditor(Current.KeyMap));
+            Program.Core.Core_OpenEditor(new KeyMapEditor(this.Current.KeyMap));
         }
     }
 }

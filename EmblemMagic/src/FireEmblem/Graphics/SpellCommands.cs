@@ -23,9 +23,9 @@ namespace EmblemMagic.FireEmblem
 
         public SpellCommand(String command, String[] asm_code, Boolean color)
         {
-            Name = command;
-            ASM_Code = asm_code;
-            Colored = color;
+            this.Name = command;
+            this.ASM_Code = asm_code;
+            this.Colored = color;
         }
     }
 
@@ -39,7 +39,7 @@ namespace EmblemMagic.FireEmblem
         {
             String[] file = File.ReadAllLines(filepath);
 
-            Commands = new List<SpellCommand>();
+            this.Commands = new List<SpellCommand>();
             for (Int32 i = 0; i < file.Length; i++)
             {
                 if (file[i].Length == 0 || file[i][0] == '@')
@@ -82,7 +82,7 @@ namespace EmblemMagic.FireEmblem
                             i++;
                         }
                     }
-                    Commands.Add(new SpellCommand(command, asmcode.ToArray(), (command.Length > 1)));
+                    this.Commands.Add(new SpellCommand(command, asmcode.ToArray(), (command.Length > 1)));
                 }
             }
         }
@@ -92,7 +92,7 @@ namespace EmblemMagic.FireEmblem
             String result = "";
             List<String> arguments;
             Boolean match;
-            foreach (var command in Commands)
+            foreach (var command in this.Commands)
             {
                 match = false;
                 arguments = new List<String>();
@@ -152,7 +152,7 @@ namespace EmblemMagic.FireEmblem
         {
             String result = "";
 
-            foreach (var command in Commands)
+            foreach (var command in this.Commands)
             {
                 if (command.Colored)
                 {

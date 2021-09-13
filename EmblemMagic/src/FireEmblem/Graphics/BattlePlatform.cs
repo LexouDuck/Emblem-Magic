@@ -20,7 +20,7 @@ namespace EmblemMagic.FireEmblem
             new Tileset(),
             new TileMap(GetMap()))
         {
-            Sheet.Parse(image, GetMap());
+            this.Sheet.Parse(image, GetMap());
         }
 
 

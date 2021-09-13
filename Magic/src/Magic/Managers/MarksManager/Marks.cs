@@ -35,14 +35,14 @@ namespace Magic
         /// </summary>
         public Mark(String name, Int32 layer, Color color)
         {
-            Load(name, layer, color);
+            this.Load(name, layer, color);
         }
         /// <summary>
         /// Constructor used for loading from file
         /// </summary>
         public Mark(String name, UInt32 layer, UInt32 color)
         {
-            Load(name, (Int32)layer, Color.FromArgb((Int32)color));
+            this.Load(name, (Int32)layer, Color.FromArgb((Int32)color));
         }
         /// <summary>
         /// Initialization function
@@ -51,9 +51,9 @@ namespace Magic
         {
             if (name.Length != 4) throw new Exception("Mark: given name has more than 4 characters.");
             if (layer < 0) throw new Exception("Mark: layer cannot be negative.");
-            Name = name;
-            Color = color;
-            Layer = layer;
+            this.Name = name;
+            this.Color = color;
+            this.Layer = layer;
         }
     }
 }

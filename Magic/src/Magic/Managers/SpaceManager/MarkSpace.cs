@@ -8,59 +8,59 @@ namespace Magic
         public IApp App;
         public MarkSpace(IApp app)
         {
-            App = app;
+            this.App = app;
 
-            InitializeComponent();
+            this.InitializeComponent();
 
-            Space_LengthBox.Maximum = Core.CurrentROMSize;
+            this.Space_LengthBox.Maximum = Core.CurrentROMSize;
 
-            Space_MarkAsComboBox.DataSource = App.MHF.Marks.GetStringList(true);
+            this.Space_MarkAsComboBox.DataSource = this.App.MHF.Marks.GetStringList(true);
         }
 
         void Space_EndByteLabel_Click(Object sender, EventArgs e)
         {
-            Space_EndByteBox.Enabled = true;
-            Space_EndByteBox.Focus();
-            Space_LengthBox.Enabled = false;
-            Space_LengthBox.ResetText();
+            this.Space_EndByteBox.Enabled = true;
+            this.Space_EndByteBox.Focus();
+            this.Space_LengthBox.Enabled = false;
+            this.Space_LengthBox.ResetText();
         }
         void Space_LengthLabel_Click(Object sender, EventArgs e)
         {
-            Space_LengthBox.Enabled = true;
-            Space_LengthBox.Focus();
-            Space_EndByteBox.Enabled = false;
-            Space_EndByteBox.ResetText();
+            this.Space_LengthBox.Enabled = true;
+            this.Space_LengthBox.Focus();
+            this.Space_EndByteBox.Enabled = false;
+            this.Space_EndByteBox.ResetText();
         }
         void Space_OKButton_Click(Object sender, EventArgs e)
         {
-            String mark = Space_MarkAsComboBox.SelectedItem.ToString();
-            GBA.Pointer address = Space_AddressBox.Value;
-            GBA.Pointer endbyte = Space_EndByteBox.Value;
-            Int32 length = (Int32)Space_LengthBox.Value;
+            String mark = this.Space_MarkAsComboBox.SelectedItem.ToString();
+            GBA.Pointer address = this.Space_AddressBox.Value;
+            GBA.Pointer endbyte = this.Space_EndByteBox.Value;
+            Int32 length = (Int32)this.Space_LengthBox.Value;
 
-            if ((Space_EndByteLabel.Checked && endbyte <= address)
-             || (Space_LengthLabel.Checked && length <= 0))
+            if ((this.Space_EndByteLabel.Checked && endbyte <= address)
+             || (this.Space_LengthLabel.Checked && length <= 0))
             {
                 UI.ShowMessage("Marked space can't be of null or be of negative length.");
-                Space_AddressBox.ResetText();
-                Space_EndByteBox.ResetText();
-                Space_LengthBox.ResetText();
+                this.Space_AddressBox.ResetText();
+                this.Space_EndByteBox.ResetText();
+                this.Space_LengthBox.ResetText();
                 return;
             }
 
             if (mark == "(unmark)")
             {
-                if (Space_EndByteLabel.Checked)
-                    App.MHF.Space.UnmarkSpace(address, endbyte);
+                if (this.Space_EndByteLabel.Checked)
+                    this.App.MHF.Space.UnmarkSpace(address, endbyte);
                 else
-                    App.MHF.Space.UnmarkSpace(address, address + length);
+                    this.App.MHF.Space.UnmarkSpace(address, address + length);
             }
             else
             {
-                if (Space_EndByteLabel.Checked)
-                    App.MHF.Space.MarkSpace(mark, address, endbyte);
+                if (this.Space_EndByteLabel.Checked)
+                    this.App.MHF.Space.MarkSpace(mark, address, endbyte);
                 else
-                    App.MHF.Space.MarkSpace(mark, address, address + length);
+                    this.App.MHF.Space.MarkSpace(mark, address, address + length);
             }
 
             UI.PerformUpdate();

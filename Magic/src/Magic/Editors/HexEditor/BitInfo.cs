@@ -9,14 +9,14 @@ namespace Magic.Editors
         {
             get
             {
-                return (_value & (1 << index)) != 0;
+                return (this._value & (1 << index)) != 0;
             }
             set
             {
                 if (value)
-                    _value |= (Byte)(1 << index); //set bit index 1
+                    this._value |= (Byte)(1 << index); //set bit index 1
                 else
-                    _value &= (Byte)(~(1 << index)); //set bit index 0
+                    this._value &= (Byte)(~(1 << index)); //set bit index 0
             }
         }
 
@@ -24,8 +24,8 @@ namespace Magic.Editors
         
 		public Byte Value
 		{
-			get { return _value; }
-			set { _value = value; }
+			get { return this._value; }
+			set { this._value = value; }
         }
         Byte _value;
 
@@ -35,8 +35,8 @@ namespace Magic.Editors
 
 		public BitInfo(Byte value, Int64 position)
 		{
-			_value = value;
-			Position = position;
+            this._value = value;
+            this.Position = position;
 		}
 
 
@@ -44,14 +44,14 @@ namespace Magic.Editors
 		public override String ToString()
 		{
 			var result = String.Format("{0}{1}{2}{3}{4}{5}{6}{7}"
-				, GetBitAsString(7)
-				, GetBitAsString(6)
-				, GetBitAsString(5)
-				, GetBitAsString(4)
-				, GetBitAsString(3)
-				, GetBitAsString(2)
-				, GetBitAsString(1)
-				, GetBitAsString(0));
+				, this.GetBitAsString(7)
+				, this.GetBitAsString(6)
+				, this.GetBitAsString(5)
+				, this.GetBitAsString(4)
+				, this.GetBitAsString(3)
+				, this.GetBitAsString(2)
+				, this.GetBitAsString(1)
+				, this.GetBitAsString(0));
 			return result;
 		}
 

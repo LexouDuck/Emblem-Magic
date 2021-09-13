@@ -31,14 +31,14 @@ namespace GBA
 
             if (sprite == new Rectangle())
             {
-                TilesetIndex = 0;
-                SpriteData = new OAM_Array();
+                this.TilesetIndex = 0;
+                this.SpriteData = new OAM_Array();
                 return;
             }
 
             var OAMs = GetSpriteOAMs(image, sprite);
 
-            TilesetIndex = -1;
+            this.TilesetIndex = -1;
             Point[] sheet = new Point[OAMs.Count];
             for (Int32 i = 0; i < Graphics.Count; i++)
             {
@@ -47,14 +47,14 @@ namespace GBA
                 if (sheet == null) continue;
                 else
                 {
-                    TilesetIndex = i; break;
+                    this.TilesetIndex = i; break;
                 }
             }
-            if (TilesetIndex == -1)
+            if (this.TilesetIndex == -1)
             {
-                TilesetIndex = Graphics.Count;
+                this.TilesetIndex = Graphics.Count;
                 Graphics.Add(new TileSheet(32, 8));
-                sheet = Graphics[TilesetIndex].CheckIfFits(OAMs);
+                sheet = Graphics[this.TilesetIndex].CheckIfFits(OAMs);
                 if (sheet == null) throw new Exception("Frame has more tiles than a 32x8 TileSheet allows.");
             }
 
@@ -69,7 +69,7 @@ namespace GBA
                 for (Int32 y = 0; y < size.Height; y++)
                 for (Int32 x = 0; x < size.Width; x++)
                 {
-                    Graphics[TilesetIndex][sheet[i].X + x, sheet[i].Y + y] = image.GetTile(
+                    Graphics[this.TilesetIndex][sheet[i].X + x, sheet[i].Y + y] = image.GetTile(
                         pos.X + x * Tile.SIZE, 
                         pos.Y + y * Tile.SIZE);
                 }
@@ -100,7 +100,7 @@ namespace GBA
                     '\n' + Magic.Util.BytesToSpacedHex(result[result.Count - 1].ToBytes())); */
             }
 
-            SpriteData = new OAM_Array(result);
+            this.SpriteData = new OAM_Array(result);
         }
 
 

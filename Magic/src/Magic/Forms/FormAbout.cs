@@ -11,14 +11,14 @@ namespace Magic
             System.Drawing.Icon icon_small,
             System.Drawing.Image icon_large)
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             this.Icon = icon_small;
             this.TitleLabel.Image = icon_large;
             this.TitleLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.TitleLabel.Text = name;
-            label1.Text = text_about;
-            label2.Text = text_legal;
+            this.label1.Text = text_about;
+            this.label2.Text = text_legal;
         }
     }
 }

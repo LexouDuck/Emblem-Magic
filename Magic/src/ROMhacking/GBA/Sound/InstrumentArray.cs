@@ -9,7 +9,7 @@ namespace GBA
         {
             get
             {
-                return new Instrument(Core.ReadData(GetAddress(index), Instrument.LENGTH));
+                return new Instrument(Core.ReadData(this.GetAddress(index), Instrument.LENGTH));
             }
         }
 
@@ -17,14 +17,14 @@ namespace GBA
 
         public InstrumentArray(Pointer address)
         {
-            Address = address;
+            this.Address = address;
         }
 
 
 
         public Pointer GetAddress(Int32 index)
         {
-            return Address + Instrument.LENGTH * index;
+            return this.Address + Instrument.LENGTH * index;
         }
 
         /// <summary>

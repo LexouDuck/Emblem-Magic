@@ -15,7 +15,7 @@ namespace EmblemMagic.FireEmblem
         {
             get
             {
-                return Changes.Count;
+                return this.Changes.Count;
             }
         }
 
@@ -25,11 +25,11 @@ namespace EmblemMagic.FireEmblem
 
         public MapChanges(List<Tuple<Byte, Rectangle, Int32[,]>> changes)
         {
-            Changes = changes;
+            this.Changes = changes;
         }
         public MapChanges(Pointer address)
         {
-            Changes = new List<Tuple<Byte, Rectangle, Int32[,]>>();
+            this.Changes = new List<Tuple<Byte, Rectangle, Int32[,]>>();
             Rectangle area;
             Int32[,] tiles;
 
@@ -66,7 +66,7 @@ namespace EmblemMagic.FireEmblem
                         tiles[i % area.Width, i / area.Width] = ((bytes[i * 2] | (bytes[i * 2 + 1] << 8)) >> 2);
                     }
 
-                    Changes.Add(Tuple.Create(buffer[0], area, tiles));
+                    this.Changes.Add(Tuple.Create(buffer[0], area, tiles));
                 }
             }
         }
@@ -75,42 +75,42 @@ namespace EmblemMagic.FireEmblem
 
         public Byte GetNumber(Int32 index)
         {
-            return Changes[index].Item1;
+            return this.Changes[index].Item1;
         }
         public Rectangle GetArea(Int32 index)
         {
-            return Changes[index].Item2;
+            return this.Changes[index].Item2;
         }
         public Int32[,] GetTiles(Int32 index)
         {
-            return Changes[index].Item3;
+            return this.Changes[index].Item3;
         }
         public Int32 GetTile(Int32 index, Int32 x, Int32 y)
         {
-            Rectangle area = Changes[index].Item2;
+            Rectangle area = this.Changes[index].Item2;
             if (area.Contains(x, y))
             {
-                return Changes[index].Item3[x - area.X, y - area.Y];
+                return this.Changes[index].Item3[x - area.X, y - area.Y];
             }
             else return 0;
         }
 
         public void SetNumber(Int32 index, Byte number)
         {
-            Changes[index] = Tuple.Create(number, GetArea(index), GetTiles(index));
+            this.Changes[index] = Tuple.Create(number, this.GetArea(index), this.GetTiles(index));
         }
         public void SetArea(Int32 index, Rectangle area)
         {
-            Changes[index] = Tuple.Create(GetNumber(index), area, GetTiles(index));
+            this.Changes[index] = Tuple.Create(this.GetNumber(index), area, this.GetTiles(index));
         }
         public void SetTiles(Int32 index, Int32[,] tiles)
         {
-            Changes[index] = Tuple.Create(GetNumber(index), GetArea(index), tiles);
+            this.Changes[index] = Tuple.Create(this.GetNumber(index), this.GetArea(index), tiles);
         }
         public void SetTile(Int32 index, Int32 x, Int32 y, Int32 tile)
         {
-            Rectangle area = GetArea(index);
-            Int32[,] tiles = GetTiles(index);
+            Rectangle area = this.GetArea(index);
+            Int32[,] tiles = this.GetTiles(index);
 
             if (area.Contains(x, y))
             {
@@ -135,7 +135,7 @@ namespace EmblemMagic.FireEmblem
                     }
                     if (empty)
                     {
-                        Changes[index] = Tuple.Create(GetNumber(index), new Rectangle(), new Int32[0, 0]);
+                        this.Changes[index] = Tuple.Create(this.GetNumber(index), new Rectangle(), new Int32[0, 0]);
                     }
                     else
                     {
@@ -152,12 +152,12 @@ namespace EmblemMagic.FireEmblem
                             result[tileX, tileY] = tiles[minX + tileX, minY + tileY];
                         }
 
-                        SetArea(index, new_area);
-                        SetTiles(index, result);
+                        this.SetArea(index, new_area);
+                        this.SetTiles(index, result);
                     }
                 }
 
-                SetTiles(index, tiles);
+                this.SetTiles(index, tiles);
             }
             else if (tile != 0)
             {
@@ -181,8 +181,8 @@ namespace EmblemMagic.FireEmblem
                 }
                 result[x - new_area.X, y - new_area.Y] = tile;
 
-                SetArea(index, new_area);
-                SetTiles(index, result);
+                this.SetArea(index, new_area);
+                this.SetTiles(index, result);
             }
         }
         
@@ -193,20 +193,20 @@ namespace EmblemMagic.FireEmblem
         /// </summary>
         public Boolean Contains(Int32 index, Int32 x, Int32 y)
         {
-            return Changes[index].Item2.Contains(x, y);
+            return this.Changes[index].Item2.Contains(x, y);
         }
         
         public Byte[] ToBytes(Pointer address)
         {
-            Byte[] changes = new Byte[Changes.Count * 12 + 12];
+            Byte[] changes = new Byte[this.Changes.Count * 12 + 12];
 
-            for (Int32 i = 0; i < Changes.Count; i++)
+            for (Int32 i = 0; i < this.Changes.Count; i++)
             {
-                changes[i * 12] = Changes[i].Item1;
-                changes[i * 12 + 1] = (Byte)Changes[i].Item2.X;
-                changes[i * 12 + 2] = (Byte)Changes[i].Item2.Y;
-                changes[i * 12 + 3] = (Byte)Changes[i].Item2.Width;
-                changes[i * 12 + 4] = (Byte)Changes[i].Item2.Height;
+                changes[i * 12] = this.Changes[i].Item1;
+                changes[i * 12 + 1] = (Byte)this.Changes[i].Item2.X;
+                changes[i * 12 + 2] = (Byte)this.Changes[i].Item2.Y;
+                changes[i * 12 + 3] = (Byte)this.Changes[i].Item2.Width;
+                changes[i * 12 + 4] = (Byte)this.Changes[i].Item2.Height;
             }
             changes[changes.Length - 12] = 0xFF;
 
@@ -215,17 +215,17 @@ namespace EmblemMagic.FireEmblem
             Pointer pointer;
             Int32 length = 0;
             Int32 index;
-            for (Int32 i = 0; i < Changes.Count; i++)
+            for (Int32 i = 0; i < this.Changes.Count; i++)
             {
                 pointer = address + changes.Length + length;
                 Array.Copy(pointer.ToBytes(), 0, changes, i * 12 + 8, 4);
 
-                result = new Byte[Changes[i].Item2.Width * Changes[i].Item2.Height * 2];
+                result = new Byte[this.Changes[i].Item2.Width * this.Changes[i].Item2.Height * 2];
                 index = 0;
-                for (Int32 y = 0; y < Changes[i].Item2.Height; y++)
-                for (Int32 x = 0; x < Changes[i].Item2.Width; x++)
+                for (Int32 y = 0; y < this.Changes[i].Item2.Height; y++)
+                for (Int32 x = 0; x < this.Changes[i].Item2.Width; x++)
                 {
-                    Array.Copy(Util.UInt16ToBytes((UInt16)(Changes[i].Item3[x, y] << 2), true), 0, result, index, 2);
+                    Array.Copy(Util.UInt16ToBytes((UInt16)(this.Changes[i].Item3[x, y] << 2), true), 0, result, index, 2);
                     index += 2;
                 }
                 tiles.Add(result);

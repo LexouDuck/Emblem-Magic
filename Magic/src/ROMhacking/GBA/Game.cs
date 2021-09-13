@@ -101,12 +101,12 @@ namespace GBA
         {
             if (!(other is Game<T>)) return false;
             Game<T> game = (Game<T>)other;
-            return (Region == game.Region)
+            return (this.Region == game.Region)
                 && (this.GetType() == game.GetType());
         }
         override public Int32 GetHashCode()
         {
-            return (this.GetType().GetHashCode() ^ Identifier.GetHashCode() ^ Checksum.GetHashCode());
+            return (this.GetType().GetHashCode() ^ this.Identifier.GetHashCode() ^ this.Checksum.GetHashCode());
         }
     }
 }

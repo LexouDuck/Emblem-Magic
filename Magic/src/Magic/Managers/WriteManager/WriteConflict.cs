@@ -22,8 +22,8 @@ namespace Magic
             if (cutPortion.Start < 0 || cutPortion.End > conflict.Data.Length)
                 throw new Exception("conflict portion is outside its write.");
 
-            Write = conflict;
-            Portion = cutPortion;
+            this.Write = conflict;
+            this.Portion = cutPortion;
         }
         /// <summary>
         /// Returns the new write(s) with its 'Portion' cut off
@@ -31,12 +31,12 @@ namespace Magic
         /// <returns></returns>
         public Tuple<Write, Write> GetNewWrite()
         {
-            String editor = Write.Author;
-            String phrase = Write.Phrase;
-            Pointer address = Write.Address;
-            if (Portion.Start == 0)
+            String editor = this.Write.Author;
+            String phrase = this.Write.Phrase;
+            Pointer address = this.Write.Address;
+            if (this.Portion.Start == 0)
             {
-                if (Portion.End == Write.Data.Length)
+                if (this.Portion.End == this.Write.Data.Length)
                 {
                     return Tuple.Create(
                         (Write)null,
@@ -44,32 +44,32 @@ namespace Magic
                 }
                 else
                 {
-                    Byte[] data = new Byte[Write.Data.Length - Portion.End];
-                    Array.Copy(Write.Data, Portion.End, data, 0, data.Length);
+                    Byte[] data = new Byte[this.Write.Data.Length - this.Portion.End];
+                    Array.Copy(this.Write.Data, this.Portion.End, data, 0, data.Length);
                     return Tuple.Create(
                         (Write)null,
-                        new Write(editor, address + new Pointer(Portion.End), data, phrase));
+                        new Write(editor, address + new Pointer(this.Portion.End), data, phrase));
                 }
             }
             else
             {
-                if (Portion.End == Write.Data.Length)
+                if (this.Portion.End == this.Write.Data.Length)
                 {
-                    Byte[] data = new Byte[Portion.Start];
-                    Array.Copy(Write.Data, 0, data, 0, data.Length);
+                    Byte[] data = new Byte[this.Portion.Start];
+                    Array.Copy(this.Write.Data, 0, data, 0, data.Length);
                     return Tuple.Create(
                         new Write(editor, address, data, phrase),
                         (Write)null);
                 }
                 else
                 {
-                    Byte[] data1 = new Byte[Portion.Start];
-                    Array.Copy(Write.Data, 0, data1, 0, data1.Length);
-                    Byte[] data2 = new Byte[Write.Data.Length - Portion.End];
-                    Array.Copy(Write.Data, Portion.End, data2, 0, data2.Length);
+                    Byte[] data1 = new Byte[this.Portion.Start];
+                    Array.Copy(this.Write.Data, 0, data1, 0, data1.Length);
+                    Byte[] data2 = new Byte[this.Write.Data.Length - this.Portion.End];
+                    Array.Copy(this.Write.Data, this.Portion.End, data2, 0, data2.Length);
                     return Tuple.Create(
                         new Write(editor, address, data1, phrase),
-                        new Write(editor, address + new Pointer(Portion.End), data2, phrase));
+                        new Write(editor, address + new Pointer(this.Portion.End), data2, phrase));
                 }
             }
         }

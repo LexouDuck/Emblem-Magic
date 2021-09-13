@@ -13,21 +13,21 @@ namespace GBA
         {
             get
             {
-                if (x < 0 || x >= Width)  throw new ArgumentException("X given is out of bounds: " + x);
-                if (y < 0 || y >= Height) throw new ArgumentException("Y given is out of bounds: " + y);
+                if (x < 0 || x >= this.Width)  throw new ArgumentException("X given is out of bounds: " + x);
+                if (y < 0 || y >= this.Height) throw new ArgumentException("Y given is out of bounds: " + y);
 
-                Int32 index = x + y * Width;
+                Int32 index = x + y * this.Width;
 
-                return Tiles[index];
+                return this.Tiles[index];
             }
             set
             {
-                if (x < 0 || x >= Width)  throw new ArgumentException("X given is out of bounds: " + x);
-                if (y < 0 || y >= Height) throw new ArgumentException("Y given is out of bounds: " + y);
+                if (x < 0 || x >= this.Width)  throw new ArgumentException("X given is out of bounds: " + x);
+                if (y < 0 || y >= this.Height) throw new ArgumentException("Y given is out of bounds: " + y);
 
-                Int32 index = x + y * Width;
+                Int32 index = x + y * this.Width;
 
-                Tiles[index] = value;
+                this.Tiles[index] = value;
             }
         }
 
@@ -49,45 +49,45 @@ namespace GBA
 
         public TSA_Array(Int32 width, Int32 height)
         {
-            Load(width, height);
+            this.Load(width, height);
         }
         public TSA_Array(Int32 width, Int32 height, Byte[] data)
         {
-            Load(width, height);
+            this.Load(width, height);
 
-            for (Int32 i = 0; i < Tiles.Length; i++)
+            for (Int32 i = 0; i < this.Tiles.Length; i++)
             {
                 if (i * 2 + 1 > data.Length) return;
 
-                Tiles[i] = new TSA((UInt16)(data[i * 2] | (data[i * 2 + 1] << 8)));
+                this.Tiles[i] = new TSA((UInt16)(data[i * 2] | (data[i * 2 + 1] << 8)));
             }
         }
         public TSA_Array(TSA_Array source, Int32 offset = 0, Rectangle region = new Rectangle())
         {
             if (region == new Rectangle())
             {
-                Load(source.Width, source.Height);
+                this.Load(source.Width, source.Height);
             }
             else
             {
-                Load(region.Width, region.Height);
+                this.Load(region.Width, region.Height);
             }
 
             if (offset == 0)
             {
-                for (Int32 y = 0; y < Height; y++)
-                for (Int32 x = 0; x < Width; x++)
+                for (Int32 y = 0; y < this.Height; y++)
+                for (Int32 x = 0; x < this.Width; x++)
                 {
-                    Tiles[x + y * Width] = source[region.X + x, region.Y + y];
+                        this.Tiles[x + y * this.Width] = source[region.X + x, region.Y + y];
                 }
             }
             else
             {
                 TSA tsa;
-                for (Int32 y = 0; y < Height; y++)
-                for (Int32 x = 0; x < Width; x++)
+                for (Int32 y = 0; y < this.Height; y++)
+                for (Int32 x = 0; x < this.Width; x++)
                 {
-                    Tiles[x + y * Width] = source[region.X + x, region.Y + y];
+                        this.Tiles[x + y * this.Width] = source[region.X + x, region.Y + y];
                     tsa = this[x, y];
                     this[x, y] = new TSA(
                         (UInt16)(offset + tsa.TileIndex),
@@ -99,9 +99,9 @@ namespace GBA
         }
         void Load(Int32 width, Int32 height)
         {
-            Width = width;
-            Height = height;
-            Tiles = new TSA[width * height];
+            this.Width = width;
+            this.Height = height;
+            this.Tiles = new TSA[width * height];
         }
 
 
@@ -150,14 +150,14 @@ namespace GBA
         /// </summary>
         public Byte[] ToBytes(Boolean compressed, Boolean flipRows)
         {
-            Byte[] result = new Byte[Tiles.Length * 2];
-            for (Int32 i = 0; i < Tiles.Length; i++)
+            Byte[] result = new Byte[this.Tiles.Length * 2];
+            for (Int32 i = 0; i < this.Tiles.Length; i++)
             {
-                result[i * 2] = (Byte)(Tiles[i].Value & 0x00FF);
-                result[i * 2 + 1] = (Byte)((Tiles[i].Value & 0xFF00) >> 8);
+                result[i * 2] = (Byte)(this.Tiles[i].Value & 0x00FF);
+                result[i * 2 + 1] = (Byte)((this.Tiles[i].Value & 0xFF00) >> 8);
             }
 
-            if (flipRows) result = FlipRows(Width, Height, result);
+            if (flipRows) result = FlipRows(this.Width, this.Height, result);
 
             return compressed ? LZ77.Compress(result) : result;
         }

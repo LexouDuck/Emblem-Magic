@@ -60,18 +60,18 @@ namespace EmblemMagic
             Core.App = this;
             UI.App = this;
 
-            AppName = software_name;
+            this.AppName = software_name;
 
-            ROM = new DataManager(this);
-            MHF = new HackManager(this);
-            Editors = new List<Editor>();
+            this.ROM = new DataManager(this);
+            this.MHF = new HackManager(this);
+            this.Editors = new List<Editor>();
 
-            InitializeComponent();
+            this.InitializeComponent();
             
-            FormClosing += File_Exit_Click;
-            File_Exit.Click += File_Exit_Click;
+            FormClosing += this.File_Exit_Click;
+            this.File_Exit.Click += this.File_Exit_Click;
 
-            Core_Menu_Lockdown();
+            this.Core_Menu_Lockdown();
 
             #if (!DEBUG)
                 Open_MenuEditor.Enabled = false;
@@ -85,63 +85,63 @@ namespace EmblemMagic
         /// </summary>
         public void Core_Update()
         {
-            if (Suspend) return;
+            if (this.Suspend) return;
 
-            Update_FileMenu();
-            Update_EditMenu();
-            Update_InfoTab();
-            Update_Editors();
+            this.Update_FileMenu();
+            this.Update_EditMenu();
+            this.Update_InfoTab();
+            this.Update_Editors();
         }
         
         public void Update_FileMenu()
         {
-            File_SaveROM.Enabled = (ROM.FilePath == null || ROM.FilePath.Length == 0) ? false : ROM.WasChanged;
-            File_SaveMHF.Enabled = (MHF.FilePath == null || MHF.FilePath.Length == 0) ? false : MHF.Changed;
+            this.File_SaveROM.Enabled = (this.ROM.FilePath == null || this.ROM.FilePath.Length == 0) ? false : this.ROM.WasChanged;
+            this.File_SaveMHF.Enabled = (this.MHF.FilePath == null || this.MHF.FilePath.Length == 0) ? false : this.MHF.Changed;
         }
         public void Update_EditMenu()
         {
-            if (ROM.UndoList.Count > 0)
+            if (this.ROM.UndoList.Count > 0)
             {
-                Edit_Undo.Enabled = true;
-                Edit_Undo.Text = "Undo " + ROM.UndoList[ROM.UndoList.Count - 1].Action.ToString();
+                this.Edit_Undo.Enabled = true;
+                this.Edit_Undo.Text = "Undo " + this.ROM.UndoList[this.ROM.UndoList.Count - 1].Action.ToString();
             }
             else
             {
-                Edit_Undo.Enabled = false;
-                Edit_Undo.Text = "Undo";
+                this.Edit_Undo.Enabled = false;
+                this.Edit_Undo.Text = "Undo";
             }
 
-            if (ROM.RedoList.Count > 0)
+            if (this.ROM.RedoList.Count > 0)
             {
-                Edit_Redo.Enabled = true;
-                Edit_Redo.Text = "Redo " + ROM.RedoList[ROM.RedoList.Count - 1].Action.ToString();
+                this.Edit_Redo.Enabled = true;
+                this.Edit_Redo.Text = "Redo " + this.ROM.RedoList[this.ROM.RedoList.Count - 1].Action.ToString();
             }
             else
             {
-                Edit_Redo.Enabled = false;
-                Edit_Redo.Text = "Redo";
+                this.Edit_Redo.Enabled = false;
+                this.Edit_Redo.Text = "Redo";
             }
         }
         public void Update_AutoSaveMHF()
         {
-            if (File_AutoSaveMHF.Selected)
+            if (this.File_AutoSaveMHF.Selected)
             {
-                File_SaveMHF_Click(null, new EventArgs());
+                this.File_SaveMHF_Click(null, new EventArgs());
             }
         }
         public void Update_AutoSaveROM()
         {
-            if (File_AutoSaveROM.Selected)
+            if (this.File_AutoSaveROM.Selected)
             {
-                File_SaveROM_Click(null, new EventArgs());
+                this.File_SaveROM_Click(null, new EventArgs());
             }
         }
         public void Update_Editors()
         {
-            Update_AutoSaveMHF();
-            Update_AutoSaveROM();
+            this.Update_AutoSaveMHF();
+            this.Update_AutoSaveROM();
 
-            foreach (Editor editor in Editors)
+            foreach (Editor editor in this.Editors)
             {
                 try
                 {
@@ -155,15 +155,15 @@ namespace EmblemMagic
         }
         public void Update_InfoTab()
         {
-            Tabs_Info_ROM_FileSize.Text = Util.GetDisplayBytes(ROM.FileSize);
-            Tabs_Info_ROM_FilePath.Text = ROM.FilePath;
-            Tabs_Info_MHF_Name.Text = MHF.HackName;
-            Tabs_Info_MHF_Author.Text = MHF.HackAuthor;
-            Tabs_Info_MHF_FileInfo.Text = MHF.Write.History.Count + " writes in this file.\n";
-            Tabs_Info_MHF_FilePath.Text = MHF.FilePath;
-            StatusLabel.Text =
-                (Game == null ? "" : Game.ToString()) + " - " +
-                (ROM.IsClean ? "Clean" : "Hacked") + " ROM";
+            this.Tabs_Info_ROM_FileSize.Text = Util.GetDisplayBytes(this.ROM.FileSize);
+            this.Tabs_Info_ROM_FilePath.Text = this.ROM.FilePath;
+            this.Tabs_Info_MHF_Name.Text = this.MHF.HackName;
+            this.Tabs_Info_MHF_Author.Text = this.MHF.HackAuthor;
+            this.Tabs_Info_MHF_FileInfo.Text = this.MHF.Write.History.Count + " writes in this file.\n";
+            this.Tabs_Info_MHF_FilePath.Text = this.MHF.FilePath;
+            this.StatusLabel.Text =
+                (this.Game == null ? "" : this.Game.ToString()) + " - " +
+                (this.ROM.IsClean ? "Clean" : "Hacked") + " ROM";
         }
 
         /// <summary>
@@ -173,9 +173,9 @@ namespace EmblemMagic
         {
             try
             {
-                Game = FireEmblem.Game.FromROM();
-                ROM.WasExpanded = (ROM.FileSize == Game.FileSize);
-                ROM.IsClean = (CRC32.GetChecksum(ROM.FileData) == Game.Checksum);
+                this.Game = FireEmblem.Game.FromROM();
+                this.ROM.WasExpanded = (this.ROM.FileSize == this.Game.FileSize);
+                this.ROM.IsClean = (CRC32.GetChecksum(this.ROM.FileData) == this.Game.Checksum);
             }
             catch (Exception ex)
             {
@@ -187,71 +187,71 @@ namespace EmblemMagic
         /// </summary>
         void Core_Menu_Activate()
         {
-            Suite_Tabs.Visible = true;
-            Suite_Tabs.SelectedIndex = 0;
+            this.Suite_Tabs.Visible = true;
+            this.Suite_Tabs.SelectedIndex = 0;
 
-            File_OpenMHF.Enabled = true;
-            File_SaveAsMHF.Enabled = true;
-            File_SaveAsROM.Enabled = true;
-            File_CloseROM.Enabled = true;
-            File_Export.Enabled = true;
+            this.File_OpenMHF.Enabled = true;
+            this.File_SaveAsMHF.Enabled = true;
+            this.File_SaveAsROM.Enabled = true;
+            this.File_CloseROM.Enabled = true;
+            this.File_Export.Enabled = true;
 
-            Edit_OpenProperties.Enabled = true;
+            this.Edit_OpenProperties.Enabled = true;
 
-            Tool_ExpandROM.Enabled = true;
-            Tool_MarkSpace.Enabled = true;
-            Tool_GetPointer.Enabled = true;
-            Tool_OpenWriteEditor.Enabled = true;
-            Tool_OpenSpaceEditor.Enabled = true;
-            Tool_OpenPointEditor.Enabled = true;
+            this.Tool_ExpandROM.Enabled = true;
+            this.Tool_MarkSpace.Enabled = true;
+            this.Tool_GetPointer.Enabled = true;
+            this.Tool_OpenWriteEditor.Enabled = true;
+            this.Tool_OpenSpaceEditor.Enabled = true;
+            this.Tool_OpenPointEditor.Enabled = true;
 
-            Core_Update();
+            this.Core_Update();
         }
         /// <summary>
         /// Disables most menu buttons and stuff, is called when you decide to close a ROM
         /// </summary>
         void Core_Menu_Lockdown()
         {
-            Suite_Tabs.Visible = false;
+            this.Suite_Tabs.Visible = false;
 
-            StatusLabel.Text = null;
+            this.StatusLabel.Text = null;
 
-            File_OpenMHF.Enabled = false;
-            File_SaveMHF.Enabled = false;
-            File_SaveROM.Enabled = false;
-            File_SaveAsMHF.Enabled = false;
-            File_SaveAsROM.Enabled = false;
-            File_CloseROM.Enabled = false;
-            File_Export.Enabled = false;
+            this.File_OpenMHF.Enabled = false;
+            this.File_SaveMHF.Enabled = false;
+            this.File_SaveROM.Enabled = false;
+            this.File_SaveAsMHF.Enabled = false;
+            this.File_SaveAsROM.Enabled = false;
+            this.File_CloseROM.Enabled = false;
+            this.File_Export.Enabled = false;
 
-            Edit_Undo.Enabled = false;
-            Edit_Redo.Enabled = false;
-            Edit_OpenProperties.Enabled = false;
+            this.Edit_Undo.Enabled = false;
+            this.Edit_Redo.Enabled = false;
+            this.Edit_OpenProperties.Enabled = false;
 
-            Tool_ExpandROM.Enabled = false;
-            Tool_MarkSpace.Enabled = false;
-            Tool_GetPointer.Enabled = false;
-            Tool_OpenWriteEditor.Enabled = false;
-            Tool_OpenSpaceEditor.Enabled = false;
-            Tool_OpenPointEditor.Enabled = false;
+            this.Tool_ExpandROM.Enabled = false;
+            this.Tool_MarkSpace.Enabled = false;
+            this.Tool_GetPointer.Enabled = false;
+            this.Tool_OpenWriteEditor.Enabled = false;
+            this.Tool_OpenSpaceEditor.Enabled = false;
+            this.Tool_OpenPointEditor.Enabled = false;
         }
 
         void Core_ResetDataManager()
         {
-            ROM = new DataManager(this);
-            foreach (Editor editor in Editors)
+            this.ROM = new DataManager(this);
+            foreach (Editor editor in this.Editors)
             {
                 editor.Dispose();
             }
-            Editors.Clear();
+            this.Editors.Clear();
 
-            Core_Update();
+            this.Core_Update();
         }
         void Core_ResetHackManager()
         {
-            MHF = new HackManager(this);
+            this.MHF = new HackManager(this);
 
-            Core_Update();
+            this.Core_Update();
         }
 
         /// <summary>
@@ -259,20 +259,20 @@ namespace EmblemMagic
         /// </summary>
         Boolean Core_CheckHackedROM()
         {
-            if (ROM.IsClean) return false;
-            String same_filename = ROM.FilePath.Remove(ROM.FilePath.Length - 4) + ".mhf";
+            if (this.ROM.IsClean) return false;
+            String same_filename = this.ROM.FilePath.Remove(this.ROM.FilePath.Length - 4) + ".mhf";
             if (File.Exists(same_filename))
             {
                 try
                 {
-                    MHF.OpenFile(same_filename);
+                    this.MHF.OpenFile(same_filename);
                     return true;
                 }
                 catch (Exception ex)
                 {
                     if (ex.Message != "ABORT")
                         UI.ShowError("Could not open the MHF hack file.", ex);
-                    Core_ResetHackManager();
+                    this.Core_ResetHackManager();
                 }
             }
             if (Prompt.AskForMHFForHackedROM() == DialogResult.Yes)
@@ -285,18 +285,18 @@ namespace EmblemMagic
 
                 if (openWindow.ShowDialog() == DialogResult.OK)
                 {
-                    if (Core_ExitMHFFile())
+                    if (this.Core_ExitMHFFile())
                     {
                         try
                         {
-                            MHF.OpenFile(openWindow.FileName);
+                            this.MHF.OpenFile(openWindow.FileName);
                             return true;
                         }
                         catch (Exception ex)
                         {
                             if (ex.Message != "ABORT")
                                 UI.ShowError("Could not open the MHF hack file.", ex);
-                            Core_ResetHackManager();
+                            this.Core_ResetHackManager();
                         }
                     }
                 }
@@ -311,7 +311,7 @@ namespace EmblemMagic
                 Int32 sequence = 0;
                 for (UInt32 i = 0; i < cleanROM.Length; i++)
                 {
-                    if (ROM.FileData[i] == cleanROM[i])
+                    if (this.ROM.FileData[i] == cleanROM[i])
                     {
                         sequence++;
                     }
@@ -327,11 +327,11 @@ namespace EmblemMagic
                             }
                             else while (sequence >= 0)
                             {
-                                write_data.Add(ROM.FileData[i - sequence]);
+                                write_data.Add(this.ROM.FileData[i - sequence]);
                                 sequence--;
                             }
                         }
-                        write_data.Add(ROM.FileData[i]);
+                        write_data.Add(this.ROM.FileData[i]);
                         sequence = 0;
                     }
                 }
@@ -341,16 +341,16 @@ namespace EmblemMagic
                     write_data.Clear();
                 }
                 address = new Pointer((UInt32)cleanROM.Length);
-                for (UInt32 i = address; i < ROM.FileSize; i++)
+                for (UInt32 i = address; i < this.ROM.FileSize; i++)
                 {
-                    write_data.Add(ROM.FileData[i]);
+                    write_data.Add(this.ROM.FileData[i]);
                 }
                 if (write_data.Count > 0)
                 {
                     writes.Add(new Write("Expanded", address, write_data.ToArray()));
                     write_data.Clear();
                 }
-                MHF.Write.History = writes;
+                this.MHF.Write.History = writes;
             }
             return false;
         }
@@ -359,16 +359,16 @@ namespace EmblemMagic
         /// </summary>
         void Core_CheckPointers()
         {
-            if (ROM.IsClean)
+            if (this.ROM.IsClean)
             {
-                MHF.Space.Load(Game.FreeSpace);
-                MHF.Point.Load(Game.GetDefaultPointers());
-                
-                MHF.Changed = false;
+                this.MHF.Space.Load(this.Game.FreeSpace);
+                this.MHF.Point.Load(this.Game.GetDefaultPointers());
+
+                this.MHF.Changed = false;
             }
             else
             {
-                Repoint[] pointers = Game.GetDefaultPointers();
+                Repoint[] pointers = this.Game.GetDefaultPointers();
                 List<Repoint> unreferenced = new List<Repoint>();
                 for (Int32 i = 0; i < pointers.Length; i++)
                 {
@@ -380,7 +380,7 @@ namespace EmblemMagic
                     Prompt.ResolveUnreferencedPointers(unreferenced);
                 }
                 //MHF.Space.Load(CurrentROM.DefaultFreeSpace());
-                MHF.Point.Load(pointers);
+                this.MHF.Point.Load(pointers);
             }
         }
         /// <summary>
@@ -390,9 +390,9 @@ namespace EmblemMagic
         {
             List<Write> writes = new List<Write>();
             Byte[] buffer;
-            foreach (Write write in MHF.Write.History)
+            foreach (Write write in this.MHF.Write.History)
             {
-                buffer = ROM.Read(write.Address, write.Data.Length);
+                buffer = this.ROM.Read(write.Address, write.Data.Length);
 
                 if (!buffer.SequenceEqual(write.Data))
                 {
@@ -401,16 +401,16 @@ namespace EmblemMagic
             }    // Create a list of differing writes between the MHF and open ROM
 
             if (writes.Count != 0 &&
-                Prompt.ApplyWritesToROM(MHF.Write.History.Count, writes.Count) == DialogResult.Yes)
+                Prompt.ApplyWritesToROM(this.MHF.Write.History.Count, writes.Count) == DialogResult.Yes)
             {
                 foreach (Write write in writes)
                 {
-                    ROM.Write(UserAction.Cancel, write, null);
+                    this.ROM.Write(UserAction.Cancel, write, null);
                 }
             }
             else
             {
-                Core_ResetHackManager();
+                this.Core_ResetHackManager();
             }
         }
 
@@ -418,76 +418,76 @@ namespace EmblemMagic
         {
             if (editor.IsDisposed) return;
 
-            editor.Icon = Icon;
+            editor.Icon = this.Icon;
             this.Editors.Add(editor);
             editor.Identifier = editor.Text.Substring(0, Math.Min(editor.Text.Length, HackManager.LENGTH_Write_Author));
             editor.Show();
         }
         public void Core_ExitEditor(Editor editor)
         {
-            Editors.Remove(editor);
+            this.Editors.Remove(editor);
             editor.Dispose();
         }
         public void Core_ExitEditor(Int32 index)
         {
-            Core_ExitEditor(Editors[index]);
+            this.Core_ExitEditor(this.Editors[index]);
         }
 
         void Core_OpenROMFile(String path)
         {
             try
             {
-                ROM.OpenFile(path);
-                Core_LoadGame();
+                this.ROM.OpenFile(path);
+                this.Core_LoadGame();
 
-                if (MHF.IsEmpty)
+                if (this.MHF.IsEmpty)
                 {
-                    if (Core_CheckHackedROM())
+                    if (this.Core_CheckHackedROM())
                         goto Continue;
                 }
-                else Core_CheckDataHackDifferences();
+                else this.Core_CheckDataHackDifferences();
 
-                if (MHF.IsEmpty) Core_CheckPointers();
+                if (this.MHF.IsEmpty) this.Core_CheckPointers();
 
                 Continue:
-                File_RecentFiles.AddFile(path);
-                Core_Menu_Activate();
-                Core_Update();
+                this.File_RecentFiles.AddFile(path);
+                this.Core_Menu_Activate();
+                this.Core_Update();
             }
             catch (Exception ex)
             {
                 UI.ShowError("Could not open the ROM file.", ex);
-                Core_ResetDataManager();
+                this.Core_ResetDataManager();
             }
         }
         void Core_OpenMHFFile(String path)
         {
             try
             {
-                MHF.OpenFile(path);
+                this.MHF.OpenFile(path);
 
-                Core_CheckDataHackDifferences();
-                Core_CheckHackedROM();
-                Core_CheckPointers();
-                
-                Core_Update();
+                this.Core_CheckDataHackDifferences();
+                this.Core_CheckHackedROM();
+                this.Core_CheckPointers();
+
+                this.Core_Update();
             }
             catch (Exception ex)
             {
                 if (ex.Message != "ABORT")
                     UI.ShowError("Could not open the MHF hack file.", ex);
-                Core_ResetHackManager();
+                this.Core_ResetHackManager();
             }
         }
         public void Core_SaveROMFile(String path)
         {
             try
             {
-                MHF.Write.Update_ROMSaved();
+                this.MHF.Write.Update_ROMSaved();
 
-                ROM.SaveFile(path);
+                this.ROM.SaveFile(path);
 
-                Core_Update();
+                this.Core_Update();
             }
             catch (IOException ex)
             {
@@ -498,11 +498,11 @@ namespace EmblemMagic
         {
             try
             {
-                MHF.Write.Update_MHFSaved();
+                this.MHF.Write.Update_MHFSaved();
 
-                MHF.SaveFile(path);
+                this.MHF.SaveFile(path);
 
-                Core_Update();
+                this.Core_Update();
             }
             catch (IOException ex)
             {
@@ -511,18 +511,18 @@ namespace EmblemMagic
         }
         Boolean Core_ExitROMFile()
         {
-            DialogResult answer = ROM.WasChanged ?
+            DialogResult answer = this.ROM.WasChanged ?
                 Prompt.SaveROMChanges() : DialogResult.No;
             if (answer == DialogResult.Cancel) return false;
             else
             {
                 if (answer == DialogResult.Yes)
                 {
-                    Core_SaveROMFile(ROM.FilePath);
+                    this.Core_SaveROMFile(this.ROM.FilePath);
                 }
-                for (Int32 i = 0; i < Editors.Count; i++)
+                for (Int32 i = 0; i < this.Editors.Count; i++)
                 {
-                    Editors[i].Close();
+                    this.Editors[i].Close();
                 }
                 this.Core_ResetDataManager();
                 this.Core_ResetHackManager();
@@ -532,18 +532,18 @@ namespace EmblemMagic
         }
         Boolean Core_ExitMHFFile()
         {
-            DialogResult answer = MHF.Changed ?
+            DialogResult answer = this.MHF.Changed ?
                 Prompt.SaveMHFChanges() : DialogResult.No;
             if (answer == DialogResult.Cancel) return false;
             else
             {
                 if (answer == DialogResult.Yes)
                 {
-                    Core_SaveMHFFile(MHF.FilePath);
+                    this.Core_SaveMHFFile(this.MHF.FilePath);
                 }
-                for (Int32 i = 0; i < Editors.Count; i++)
+                for (Int32 i = 0; i < this.Editors.Count; i++)
                 {
-                    Editors[i].Close();
+                    this.Editors[i].Close();
                 }
                 this.Core_ResetHackManager();
                 return true;
@@ -552,36 +552,36 @@ namespace EmblemMagic
 
         void Core_UserWrite(Write write)
         {
-            MHF.Write.Add(write);
-            ROM.Write(UserAction.Write, write, null);
-            MHF.Space.MarkSpace("USED", write.Address, write.Address + write.Data.Length);
+            this.MHF.Write.Add(write);
+            this.ROM.Write(UserAction.Write, write, null);
+            this.MHF.Space.MarkSpace("USED", write.Address, write.Address + write.Data.Length);
         }
         void Core_UserOverwrite(Write write, List<WriteConflict> conflict)
         {
-            MHF.Write.Add(write);
-            ROM.Write(UserAction.Overwrite, write, conflict);
-            MHF.Space.MarkSpace("USED", write.Address, write.Address + write.Data.Length);
+            this.MHF.Write.Add(write);
+            this.ROM.Write(UserAction.Overwrite, write, conflict);
+            this.MHF.Space.MarkSpace("USED", write.Address, write.Address + write.Data.Length);
         }
         void Core_UserRestore(Pointer address, Int32 length)
         {
-            List<WriteConflict> conflict = MHF.Write.Delete(address, address + length);
-            ROM.Restore(address, length, conflict);
+            List<WriteConflict> conflict = this.MHF.Write.Delete(address, address + length);
+            this.ROM.Restore(address, length, conflict);
             // not too sure about the space unmarking on data restore
-            MHF.Space.UnmarkSpace(address, address + length);
+            this.MHF.Space.UnmarkSpace(address, address + length);
         }
 
         public void Core_UserAction(UserAction action, Write write)
         {
-            lock (Locked)
+            lock (this.Locked)
             {
                 switch (action)
                 {
                     case UserAction.Write:
-                        List<WriteConflict> conflict = MHF.Write.Check(write.Address, write.Address + write.Data.Length);
+                        List<WriteConflict> conflict = this.MHF.Write.Check(write.Address, write.Address + write.Data.Length);
 
                         if (conflict == null || conflict.Count == 0)
                         {
-                            Core_UserWrite(write);
+                            this.Core_UserWrite(write);
                         }
                         else if (conflict.Count == 1)
                         {
@@ -591,7 +591,7 @@ namespace EmblemMagic
                             {
                                 if (Prompt.WriteConflict(conflict) == DialogResult.No) return;
                             }
-                            Core_UserOverwrite(write, conflict);
+                            this.Core_UserOverwrite(write, conflict);
                         }
                         else
                         {
@@ -600,107 +600,107 @@ namespace EmblemMagic
                             {
                                 if (Prompt.WriteConflict(conflict) == DialogResult.No) return;
                             }
-                            Core_UserOverwrite(write, conflict);
+                            this.Core_UserOverwrite(write, conflict);
                         }
                         break;
                     case UserAction.Overwrite:
-                        Core_UserOverwrite(write, MHF.Write.Check(write.Address, write.Address + write.Data.Length));
+                        this.Core_UserOverwrite(write, this.MHF.Write.Check(write.Address, write.Address + write.Data.Length));
                         break;
                     case UserAction.Restore:
-                        Core_UserRestore(write.Address, write.Data.Length);
+                        this.Core_UserRestore(write.Address, write.Data.Length);
                         break;
                     case UserAction.Cancel:
                         UI.ShowError("Action was cancelled before it started..?");
                         break;
                 }
 
-                Core_Update();
+                this.Core_Update();
             }
         }
 
         public void Core_Undo()
         {
-            if (ROM.UndoList.Count > 0)
+            if (this.ROM.UndoList.Count > 0)
             {
-                Core_UndoAction(ROM.UndoList.Count - 1);
+                this.Core_UndoAction(this.ROM.UndoList.Count - 1);
             }
         }
         public void Core_UndoAction(Int32 index)
         {
-            lock (Locked)
+            lock (this.Locked)
             {
-                Write write = ROM.UndoList[index].Associated;
+                Write write = this.ROM.UndoList[index].Associated;
 
-                if (ROM.UndoList.Count == 0)
+                if (this.ROM.UndoList.Count == 0)
                 {
-                    ROM.WasChanged = false;
-                    MHF.Changed = false;
+                    this.ROM.WasChanged = false;
+                    this.MHF.Changed = false;
                 }
 
-                switch (ROM.UndoList[index].Action)
+                switch (this.ROM.UndoList[index].Action)
                 {
                     case UserAction.Write:
-                        MHF.Write.Delete(write);
-                        ROM.UndoAction(index);
+                        this.MHF.Write.Delete(write);
+                        this.ROM.UndoAction(index);
                         break;
                     case UserAction.Overwrite:
-                        MHF.Write.Delete(write);
-                        foreach (WriteConflict conflict in ROM.UndoList[index].Conflicts)
+                        this.MHF.Write.Delete(write);
+                        foreach (WriteConflict conflict in this.ROM.UndoList[index].Conflicts)
                         {
-                            MHF.Write.Add(conflict.Write);
+                            this.MHF.Write.Add(conflict.Write);
                         }
-                        ROM.UndoAction(index);
+                        this.ROM.UndoAction(index);
                         break;
                     case UserAction.Restore:
-                        foreach (WriteConflict conflict in ROM.UndoList[index].Conflicts)
+                        foreach (WriteConflict conflict in this.ROM.UndoList[index].Conflicts)
                         {
-                            MHF.Write.Add(conflict.Write);
+                            this.MHF.Write.Add(conflict.Write);
                         }
-                        ROM.UndoAction(index);
+                        this.ROM.UndoAction(index);
                         break;
                     case UserAction.Cancel:
                         break; // cancels are undone instantly - this runs right after core_useraction
                 }
 
-                Core_Update();
+                this.Core_Update();
             }
         }
         public void Core_Redo()
         {
-            if (ROM.RedoList.Count > 0)
+            if (this.ROM.RedoList.Count > 0)
             {
-                Core_RedoAction(ROM.RedoList.Count - 1);
+                this.Core_RedoAction(this.ROM.RedoList.Count - 1);
             }
         }
         public void Core_RedoAction(Int32 index)
         {
-            lock (Locked)
+            lock (this.Locked)
             {
-                Write write = ROM.RedoList[index].Associated;
+                Write write = this.ROM.RedoList[index].Associated;
 
-                ROM.WasChanged = true;
-                MHF.Changed = true;
+                this.ROM.WasChanged = true;
+                this.MHF.Changed = true;
 
-                switch (ROM.RedoList[index].Action)
+                switch (this.ROM.RedoList[index].Action)
                 {
                     case UserAction.Write:
-                        MHF.Write.Add(write);
-                        ROM.RedoAction(index);
+                        this.MHF.Write.Add(write);
+                        this.ROM.RedoAction(index);
                         break;
                     case UserAction.Overwrite:
-                        MHF.Write.Add(write);
-                        ROM.RedoAction(index);
+                        this.MHF.Write.Add(write);
+                        this.ROM.RedoAction(index);
                         break;
                     case UserAction.Restore:
-                        MHF.Write.Delete(write.Address, write.Address + write.Data.Length);
-                        ROM.RedoAction(index);
+                        this.MHF.Write.Delete(write.Address, write.Address + write.Data.Length);
+                        this.ROM.RedoAction(index);
                         break;
                     case UserAction.Cancel:
                         UI.ShowError("This was an empty action you just redid..?");
                         break;
                 }
 
-                Core_Update();
+                this.Core_Update();
             }
         }
 
@@ -712,7 +712,7 @@ namespace EmblemMagic
         {
             new FormProperties(this).ShowDialog();
 
-            Update_InfoTab();
+            this.Update_InfoTab();
         }
 
         public void Core_MarkSpace()
@@ -726,7 +726,7 @@ namespace EmblemMagic
             Int32 length = Prompt.ShowNumberDialog(
                 "What length of free space is needed ?",
                 "Request pointer to free space",
-                true, 0, (Int32)ROM.FileSize);
+                true, 0, (Int32)this.ROM.FileSize);
             if (length == 0) return;
 
             Pointer address;
@@ -744,13 +744,13 @@ namespace EmblemMagic
         }
         public void Core_GetLastWrite()
         {
-            if (MHF.Write.History.Count == 0)
+            if (this.MHF.Write.History.Count == 0)
             {
                 UI.ShowMessage("No writes have been made to this ROM file.");
             }
             else
             {
-                Write write = MHF.Write.History[MHF.Write.History.Count - 1];
+                Write write = this.MHF.Write.History[this.MHF.Write.History.Count - 1];
                 UI.ShowMessage("Address: " + write.Address + "\n\n" +
                     "Pointer: " + Util.BytesToSpacedHex(write.Address.ToBytes()));
             }
@@ -798,9 +798,9 @@ namespace EmblemMagic
 
             if (openWindow.ShowDialog() == DialogResult.OK)
             {
-                if (Core_ExitROMFile())
+                if (this.Core_ExitROMFile())
                 {
-                    Core_OpenROMFile(openWindow.FileName);
+                    this.Core_OpenROMFile(openWindow.FileName);
                 }
             }
         }
@@ -814,32 +814,32 @@ namespace EmblemMagic
                 
             if (openWindow.ShowDialog() == DialogResult.OK)
             {
-                if (Core_ExitMHFFile())
+                if (this.Core_ExitMHFFile())
                 {
-                    Core_OpenMHFFile(openWindow.FileName);
+                    this.Core_OpenMHFFile(openWindow.FileName);
                 }
             }
         }
         void File_SaveROM_Click(Object sender, EventArgs e)
         {
-            if (ROM.FilePath == null)
+            if (this.ROM.FilePath == null)
             {
                 UI.ShowError("There is no file path set for the ROM file.");
             }
             else
             {
-                Core_SaveROMFile(ROM.FilePath);
+                this.Core_SaveROMFile(this.ROM.FilePath);
             }
         }
         void File_SaveMHF_Click(Object sender, EventArgs e)
         {
-            if (MHF.FilePath == null)
+            if (this.MHF.FilePath == null)
             {
                 UI.ShowError("There is no file path set for the MHF file.");
             }
             else
             {
-                Core_SaveMHFFile(MHF.FilePath);
+                this.Core_SaveMHFFile(this.MHF.FilePath);
             }
         }
         void File_SaveROMas_Click(Object sender, EventArgs e)
@@ -853,7 +853,7 @@ namespace EmblemMagic
 
             if (saveWindow.ShowDialog() == DialogResult.OK)
             {
-                Core_SaveROMFile(saveWindow.FileName);
+                this.Core_SaveROMFile(saveWindow.FileName);
             }
         }
         void File_SaveMHFas_Click(Object sender, EventArgs e)
@@ -868,27 +868,27 @@ namespace EmblemMagic
 
             if (saveWindow.ShowDialog() == DialogResult.OK)
             {
-                Core_SaveMHFFile(saveWindow.FileName);
+                this.Core_SaveMHFFile(saveWindow.FileName);
             }
         }
         void File_RecentFiles_Click(Object sender, ToolStripItemClickedEventArgs e)
         {
-            Menu_File.HideDropDown();
+            this.Menu_File.HideDropDown();
 
             RecentFileMenuItem menu_item = (RecentFileMenuItem)e.ClickedItem;
 
             if (menu_item.Text.EndsWith(".gba") || menu_item.Text.EndsWith(".GBA"))
             {
-                if (Core_ExitROMFile())
+                if (this.Core_ExitROMFile())
                 {
-                    Core_OpenROMFile(menu_item.FileName);
+                    this.Core_OpenROMFile(menu_item.FileName);
                 }
             }
             else if (menu_item.Text.EndsWith(".mhf") || menu_item.Text.EndsWith(".MHF"))
             {
-                if (Core_ExitMHFFile())
+                if (this.Core_ExitMHFFile())
                 {
-                    Core_OpenMHFFile(menu_item.FileName);
+                    this.Core_OpenMHFFile(menu_item.FileName);
                 }
             }
             else UI.ShowError("Chosen file has invalid extension");
@@ -907,8 +907,8 @@ namespace EmblemMagic
             {
                 UPS.WriteFile(saveWindow.FileName,
                     File.ReadAllBytes(Core.Path_CleanROM),
-                    Game.FileSize,
-                    Game.Checksum,
+                    this.Game.FileSize,
+                    this.Game.Checksum,
                     this.ROM.FileData,
                     Core.CurrentROMSize,
                     Core.CurrentROMChecksum);
@@ -916,11 +916,11 @@ namespace EmblemMagic
         }
         void File_CloseROM_Click(Object sender, EventArgs e)
         {
-            Core_ExitROMFile();
+            this.Core_ExitROMFile();
         }
         void File_Exit_Click(Object sender, EventArgs e)
         {
-            if (Core_ExitMHFFile() && Core_ExitROMFile())
+            if (this.Core_ExitMHFFile() && this.Core_ExitROMFile())
             {
                 Settings.Default.Save();
 
@@ -932,19 +932,19 @@ namespace EmblemMagic
 
         void Edit_Undo_Click(Object sender, EventArgs e)
         {
-            Core_Undo();
+            this.Core_Undo();
         }
         void Edit_Redo_Click(Object sender, EventArgs e)
         {
-            Core_Redo();
+            this.Core_Redo();
         }
         void Edit_OpenProperties_Click(Object sender, EventArgs e)
         {
-            Core_OpenProperties();
+            this.Core_OpenProperties();
         }
         void Edit_Options_Click(Object sender, EventArgs e)
         {
-            Core_OpenOptions();
+            this.Core_OpenOptions();
         }
 
         void Tool_ExpandROM_Click(Object sender, EventArgs e)
@@ -953,115 +953,115 @@ namespace EmblemMagic
                 "Please enter the desired ROM file size\r\n(amount of bytes, in hexadecimal).",
                 "Resize ROM", true, 0, DataManager.ROM_MAX_SIZE);
 
-            ROM.Resize(answer, MHF.Space);
-            Core_Update();
+            this.ROM.Resize(answer, this.MHF.Space);
+            this.Core_Update();
         }
         void Tool_MarkSpace_Click(Object sender, EventArgs e)
         {
-            Core_MarkSpace();
+            this.Core_MarkSpace();
         }
         void Tool_GetFreeSpace_Click(Object sender, EventArgs e)
         {
-            Core_GetFreeSpace();
+            this.Core_GetFreeSpace();
         }
         void Tool_GetLastWrite_Click(Object sender, EventArgs e)
         {
-            Core_GetLastWrite();
+            this.Core_GetLastWrite();
         }
 
         void Tool_OpenSpace_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new SpaceEditor());
+            this.Core_OpenEditor(new SpaceEditor());
         }
         void Tool_OpenWrite_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new WriteEditor());
+            this.Core_OpenEditor(new WriteEditor());
         }
         void Tool_OpenPoint_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new PointEditor());
+            this.Core_OpenEditor(new PointEditor());
         }
 
 
 
         void Open_BasicEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new BasicEditor());
+            this.Core_OpenEditor(new BasicEditor());
         }
         void Open_HexEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new HexEditor());
+            this.Core_OpenEditor(new HexEditor());
         }
         void Open_PatchEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new PatchEditor());
+            this.Core_OpenEditor(new PatchEditor());
         }
         void Open_ASMEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new ASMEditor());
+            this.Core_OpenEditor(new ASMEditor());
         }
         void Open_ModuleEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new ModuleEditor());
+            this.Core_OpenEditor(new ModuleEditor());
         }
         void Open_EventEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new EventEditor());
+            this.Core_OpenEditor(new EventEditor());
         }
         void Open_WorldMapEditor_Click(Object sender, EventArgs e)
         {
-            if (Game == null) return;
-            else if (Game is FireEmblem.FE6) Core_OpenEditor(new WorldMapEditor_FE6());
-            else if (Game is FireEmblem.FE7) Core_OpenEditor(new WorldMapEditor_FE7());
-            else if (Game is FireEmblem.FE8) Core_OpenEditor(new WorldMapEditor_FE8());
+            if (this.Game == null) return;
+            else if (this.Game is FireEmblem.FE6) this.Core_OpenEditor(new WorldMapEditor_FE6());
+            else if (this.Game is FireEmblem.FE7) this.Core_OpenEditor(new WorldMapEditor_FE7());
+            else if (this.Game is FireEmblem.FE8) this.Core_OpenEditor(new WorldMapEditor_FE8());
         }
         void Open_MapTilesetEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new MapTilesetEditor());
+            this.Core_OpenEditor(new MapTilesetEditor());
         }
         void Open_MapEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new MapEditor());
+            this.Core_OpenEditor(new MapEditor());
         }
         void Open_GraphicsEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new GraphicsEditor());
+            this.Core_OpenEditor(new GraphicsEditor());
         }
         void Open_PortraitEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new PortraitEditor());
+            this.Core_OpenEditor(new PortraitEditor());
         }
         void Open_MapSpriteEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new MapSpriteEditor());
+            this.Core_OpenEditor(new MapSpriteEditor());
         }
         void Open_BattleScreenEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new BattleScreenEditor());
+            this.Core_OpenEditor(new BattleScreenEditor());
         }
         void Open_BattleAnimEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new BattleAnimEditor());
+            this.Core_OpenEditor(new BattleAnimEditor());
         }
         void Open_SpellAnimEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new SpellAnimEditor());
+            this.Core_OpenEditor(new SpellAnimEditor());
         }
         void Open_BackgroundEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new BackgroundEditor());
+            this.Core_OpenEditor(new BackgroundEditor());
         }
         void Open_TextEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new TextEditor());
+            this.Core_OpenEditor(new TextEditor());
         }
         void Open_MusicEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new MusicEditor());
+            this.Core_OpenEditor(new MusicEditor());
         }
         void Open_ItemEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new ItemEditor());
+            this.Core_OpenEditor(new ItemEditor());
         }
         void Open_MenuEditor_Click(Object sender, EventArgs e)
         {
@@ -1069,7 +1069,7 @@ namespace EmblemMagic
         }
         void Open_TitleScreenEditor_Click(Object sender, EventArgs e)
         {
-            Core_OpenEditor(new TitleScreenEditor());
+            this.Core_OpenEditor(new TitleScreenEditor());
         }
 
         void Help_Help_Click(Object sender, EventArgs e)
@@ -1081,8 +1081,8 @@ namespace EmblemMagic
         }
         void Help_About_Click(Object sender, EventArgs e)
         {
-            FormAbout dialog = new FormAbout(AppName,
-                "(version " + AppVersion + ")"
+            FormAbout dialog = new FormAbout(this.AppName,
+                "(version " + this.AppVersion + ")"
                  + "\n\n" + "The GBA Fire Emblem all-in-one editing tool"
                  + "\n\n" + "by (Lexou Duck)"
                  + '\n' + "Thanks to documentation and code written by:"

@@ -10,55 +10,55 @@ namespace Magic.Editors
     {
         public HexGoTo()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         
         public void SetDefaultValue(Int64 byteIndex)
         {
-            GoToAdress.Value = byteIndex;
-            GoToNumber.Value = byteIndex + 1;
+            this.GoToAdress.Value = byteIndex;
+            this.GoToNumber.Value = byteIndex + 1;
         }
         public void SetMaxByteIndex(Int64 maxByteIndex)
         {
-            GoToAdress.Maximum = maxByteIndex;
-            GoToNumber.Maximum = maxByteIndex + 1;
+            this.GoToAdress.Maximum = maxByteIndex;
+            this.GoToNumber.Maximum = maxByteIndex + 1;
         }
         public Int64 GetByteIndex()
         {
-            Int64 result = GoToAdressCheckBox.Checked ? 
-                Convert.ToInt64(GoToAdress.Value) :
-                Convert.ToInt64(GoToNumber.Value) - 1;
+            Int64 result = this.GoToAdressCheckBox.Checked ? 
+                Convert.ToInt64(this.GoToAdress.Value) :
+                Convert.ToInt64(this.GoToNumber.Value) - 1;
             return result;
         }
 
         private void UponOpen(Object sender, System.EventArgs e)
         {
-            GoToAdress.Focus();
-            GoToAdress.Select(0, GoToNumber.Value.ToString().Length);
+            this.GoToAdress.Focus();
+            this.GoToAdress.Select(0, this.GoToNumber.Value.ToString().Length);
         }
 
         private void GoTo_Number_Checked(Object sender, System.EventArgs e)
         {
-            GoToNumber.Enabled = true;
-            GoToAdress.Enabled = false;
+            this.GoToNumber.Enabled = true;
+            this.GoToAdress.Enabled = false;
 
-            GoToNumber.Focus();
+            this.GoToNumber.Focus();
         }
         private void GoTo_Adress_Checked(Object sender, System.EventArgs e)
         {
-            GoToAdress.Enabled = true;
-            GoToNumber.Enabled = false;
+            this.GoToAdress.Enabled = true;
+            this.GoToNumber.Enabled = false;
 
-            GoToAdress.Focus();
+            this.GoToAdress.Focus();
         }
         private void GoTo_GoToOK_Click(Object sender, System.EventArgs e)
         {
-            DialogResult = DialogResult.OK;
+            this.DialogResult = DialogResult.OK;
         }
         private void Goto_Cancel_Click(Object sender, System.EventArgs e)
         {
-            DialogResult = DialogResult.OK;
+            this.DialogResult = DialogResult.OK;
         }
     }
 }

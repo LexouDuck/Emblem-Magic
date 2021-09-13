@@ -20,22 +20,22 @@ namespace GBA
                 {
                     switch (index)
                     {
-                        case 0:  return R0;
-                        case 1:  return R1;
-                        case 2:  return R2;
-                        case 3:  return R3;
-                        case 4:  return R4;
-                        case 5:  return R5;
-                        case 6:  return R6;
-                        case 7:  return R7;
-                        case 8:  return R8;
-                        case 9:  return R9;
-                        case 10: return R10;
-                        case 11: return R11;
-                        case 12: return R12;
-                        case 13: return SP;
-                        case 14: return LR;
-                        case 15: return PC;
+                        case 0:  return this.R0;
+                        case 1:  return this.R1;
+                        case 2:  return this.R2;
+                        case 3:  return this.R3;
+                        case 4:  return this.R4;
+                        case 5:  return this.R5;
+                        case 6:  return this.R6;
+                        case 7:  return this.R7;
+                        case 8:  return this.R8;
+                        case 9:  return this.R9;
+                        case 10: return this.R10;
+                        case 11: return this.R11;
+                        case 12: return this.R12;
+                        case 13: return this.SP;
+                        case 14: return this.LR;
+                        case 15: return this.PC;
                     }
                     throw new ArgumentException("invalid index given for register set: " + index);
                 }
@@ -43,22 +43,22 @@ namespace GBA
                 {
                     switch (index)
                     {
-                        case 0:  R0 = value;  return;
-                        case 1:  R1 = value;  return;
-                        case 2:  R2 = value;  return;
-                        case 3:  R3 = value;  return;
-                        case 4:  R4 = value;  return;
-                        case 5:  R5 = value;  return;
-                        case 6:  R6 = value;  return;
-                        case 7:  R7 = value;  return;
-                        case 8:  R8 = value;  return;
-                        case 9:  R9 = value;  return;
-                        case 10: R10 = value; return;
-                        case 11: R11 = value; return;
-                        case 12: R12 = value; return;
-                        case 13: SP = value;  return;
-                        case 14: LR = value;  return;
-                        case 15: PC = value;  return;
+                        case 0: this.R0 = value;  return;
+                        case 1: this.R1 = value;  return;
+                        case 2: this.R2 = value;  return;
+                        case 3: this.R3 = value;  return;
+                        case 4: this.R4 = value;  return;
+                        case 5: this.R5 = value;  return;
+                        case 6: this.R6 = value;  return;
+                        case 7: this.R7 = value;  return;
+                        case 8: this.R8 = value;  return;
+                        case 9: this.R9 = value;  return;
+                        case 10: this.R10 = value; return;
+                        case 11: this.R11 = value; return;
+                        case 12: this.R12 = value; return;
+                        case 13: this.SP = value;  return;
+                        case 14: this.LR = value;  return;
+                        case 15: this.PC = value;  return;
                     }
                     throw new ArgumentException("invalid index given for register set: " + index);
                 }
@@ -95,21 +95,21 @@ namespace GBA
 
             public RegisterSet(Pointer pc, Boolean thumb)
             {
-                R0 = 0; R8  = 0;
-                R1 = 0; R9  = 0;
-                R2 = 0; R10 = 0;
-                R3 = 0; R11 = 0;
-                R4 = 0; R12 = 0;
-                R5 = 0;  SP = 0;
-                R6 = 0;  LR = 0;
-                R7 = 0;  PC = pc.Address + Pointer.HardwareOffset;
-                
-                N = false; I = false;
-                Z = false; F = false;
-                C = false; T = thumb;
-                V = false; M = 0x00;
-                
-                Stack = new List<UInt32>();
+                this.R0 = 0; this.R8  = 0;
+                this.R1 = 0; this.R9  = 0;
+                this.R2 = 0; this.R10 = 0;
+                this.R3 = 0; this.R11 = 0;
+                this.R4 = 0; this.R12 = 0;
+                this.R5 = 0; this.SP = 0;
+                this.R6 = 0; this.LR = 0;
+                this.R7 = 0; this.PC = pc.Address + Pointer.HardwareOffset;
+
+                this.N = false; this.I = false;
+                this.Z = false; this.F = false;
+                this.C = false; this.T = thumb;
+                this.V = false; this.M = 0x00;
+
+                this.Stack = new List<UInt32>();
             }
         }
 
@@ -128,16 +128,16 @@ namespace GBA
 
             override public String ToString()
             {
-                return Address + " | " + Util.BytesToHex(Data) + (Data.Length == 2 ? "     | " : " | ") + Code;
+                return this.Address + " | " + Util.BytesToHex(this.Data) + (this.Data.Length == 2 ? "     | " : " | ") + this.Code;
             }
 
             public RegisterSet Read(RegisterSet cpu)
             {
                 Int32 index = 0;
                 String opcode = "";
-                while (Code[index] != ' ')
+                while (this.Code[index] != ' ')
                 {
-                    opcode += Code[index++];
+                    opcode += this.Code[index++];
                 }
                 
                 cpu.PC += 2;
@@ -145,166 +145,166 @@ namespace GBA
                 if (opcode.Equals("B", StringComparison.OrdinalIgnoreCase))
                 {
                     Int32 i = 0;
-                    while (Code[i] != '$') i++;
+                    while (this.Code[i] != '$') i++;
                     i++;
-                    return B(cpu, new Pointer(Util.HexToInt(Code.Substring(i, 8))), "");
+                    return this.B(cpu, new Pointer(Util.HexToInt(this.Code.Substring(i, 8))), "");
                 }
                 if (opcode.Equals("BL", StringComparison.OrdinalIgnoreCase))
                 {
                     Int32 i = 0;
-                    while (Code[i] != '$') i++;
+                    while (this.Code[i] != '$') i++;
                     i++;
-                    return BL(cpu, new Pointer(Util.HexToInt(Code.Substring(i, 8))));
+                    return this.BL(cpu, new Pointer(Util.HexToInt(this.Code.Substring(i, 8))));
                 }
                 if (opcode.Equals("BLH", StringComparison.OrdinalIgnoreCase))
                 {
                     Int32 i = 0;
-                    while (Code[i] != '$') i++;
+                    while (this.Code[i] != '$') i++;
                     i++;
-                    return BLH(cpu, new Pointer(Util.HexToInt(Code.Substring(i, 8))));
+                    return this.BLH(cpu, new Pointer(Util.HexToInt(this.Code.Substring(i, 8))));
                 }
                 if (opcode.Equals("BX", StringComparison.OrdinalIgnoreCase))
                 {
                     try
                     {
                         Int32 i = 0;
-                        while (Code[i] != '$') i++;
+                        while (this.Code[i] != '$') i++;
                         i++;
-                        return BL(cpu, new Pointer(Util.HexToInt(Code.Substring(i, 8))));
+                        return this.BL(cpu, new Pointer(Util.HexToInt(this.Code.Substring(i, 8))));
                     }
                     catch
                     {
-                        Int32 Rs = Read_Register(ref index);
-                        return BX(cpu, Rs);
+                        Int32 Rs = this.Read_Register(ref index);
+                        return this.BX(cpu, Rs);
                     }
                 }
                 if (opcode.StartsWith("B", StringComparison.OrdinalIgnoreCase) && opcode.Length == 3)
                 {
                     Int32 i = 0;
-                    while (Code[i] != '$') i++;
+                    while (this.Code[i] != '$') i++;
                     i++;
-                    return B(cpu, new Pointer(Util.HexToInt(Code.Substring(i, 8))), opcode.Substring(1, 2));
+                    return this.B(cpu, new Pointer(Util.HexToInt(this.Code.Substring(i, 8))), opcode.Substring(1, 2));
                 }
 
                 if (opcode.Equals("PUSH", StringComparison.OrdinalIgnoreCase))
                 {
-                    Int32[] Rlist = Read_RegisterList(ref index);
-                    return PUSH(cpu, Rlist);
+                    Int32[] Rlist = this.Read_RegisterList(ref index);
+                    return this.PUSH(cpu, Rlist);
                 }
                 if (opcode.Equals("POP", StringComparison.OrdinalIgnoreCase))
                 {
-                    Int32[] Rlist = Read_RegisterList(ref index);
-                    return POP(cpu, Rlist);
+                    Int32[] Rlist = this.Read_RegisterList(ref index);
+                    return this.POP(cpu, Rlist);
                 }
 
                 if (opcode.Equals("MOV", StringComparison.OrdinalIgnoreCase))
                 {
-                    Int32 Rd = Read_Register(ref index);
+                    Int32 Rd = this.Read_Register(ref index);
                     Boolean immediate = false;
-                    for (Int32 i = 0; i < Code.Length; i++)
+                    for (Int32 i = 0; i < this.Code.Length; i++)
                     {
-                        if (Code[i] == '#') immediate = true;
+                        if (this.Code[i] == '#') immediate = true;
                     }
                     if (immediate)
                     {
-                        Byte Imm = (Byte)Read_Immediate(ref index);
-                        return MOV(cpu, Rd, Imm);
+                        Byte Imm = (Byte)this.Read_Immediate(ref index);
+                        return this.MOV(cpu, Rd, Imm);
                     }
                     else
                     {
-                        Int32 Rs = Read_Register(ref index);
-                        return MOV(cpu, Rd, Rs);
+                        Int32 Rs = this.Read_Register(ref index);
+                        return this.MOV(cpu, Rd, Rs);
                     }
                 }
                 if (opcode.Equals("MVN", StringComparison.OrdinalIgnoreCase))
                 {
-                    Int32 Rd = Read_Register(ref index);
-                    Int32 Rs = Read_Register(ref index);
-                    return MVN(cpu, Rd, Rs);
+                    Int32 Rd = this.Read_Register(ref index);
+                    Int32 Rs = this.Read_Register(ref index);
+                    return this.MVN(cpu, Rd, Rs);
                 }
                 if (opcode.Equals("AND", StringComparison.OrdinalIgnoreCase))
                 {
-                    Int32 Rd = Read_Register(ref index);
-                    Int32 Rs = Read_Register(ref index);
-                    return AND(cpu, Rd, Rs);
+                    Int32 Rd = this.Read_Register(ref index);
+                    Int32 Rs = this.Read_Register(ref index);
+                    return this.AND(cpu, Rd, Rs);
                 }
                 if (opcode.Equals("TST", StringComparison.OrdinalIgnoreCase))
                 {
-                    Int32 Rd = Read_Register(ref index);
-                    Int32 Rs = Read_Register(ref index);
-                    return TST(cpu, Rd, Rs);
+                    Int32 Rd = this.Read_Register(ref index);
+                    Int32 Rs = this.Read_Register(ref index);
+                    return this.TST(cpu, Rd, Rs);
                 }
                 if (opcode.Equals("BIC", StringComparison.OrdinalIgnoreCase))
                 {
-                    Int32 Rd = Read_Register(ref index);
-                    Int32 Rs = Read_Register(ref index);
-                    return BIC(cpu, Rd, Rs);
+                    Int32 Rd = this.Read_Register(ref index);
+                    Int32 Rs = this.Read_Register(ref index);
+                    return this.BIC(cpu, Rd, Rs);
                 }
                 if (opcode.Equals("ORR", StringComparison.OrdinalIgnoreCase))
                 {
-                    Int32 Rd = Read_Register(ref index);
-                    Int32 Rs = Read_Register(ref index);
-                    return ORR(cpu, Rd, Rs);
+                    Int32 Rd = this.Read_Register(ref index);
+                    Int32 Rs = this.Read_Register(ref index);
+                    return this.ORR(cpu, Rd, Rs);
                 }
                 if (opcode.Equals("EOR", StringComparison.OrdinalIgnoreCase))
                 {
-                    Int32 Rd = Read_Register(ref index);
-                    Int32 Rs = Read_Register(ref index);
-                    return EOR(cpu, Rd, Rs);
+                    Int32 Rd = this.Read_Register(ref index);
+                    Int32 Rs = this.Read_Register(ref index);
+                    return this.EOR(cpu, Rd, Rs);
                 }
                 if (opcode.Equals("LSL", StringComparison.OrdinalIgnoreCase))
                 {
-                    Int32 Rd = Read_Register(ref index);
-                    Int32 Rs = Read_Register(ref index);
+                    Int32 Rd = this.Read_Register(ref index);
+                    Int32 Rs = this.Read_Register(ref index);
                     Boolean immediate = false;
-                    for (Int32 i = 0; i < Code.Length; i++)
+                    for (Int32 i = 0; i < this.Code.Length; i++)
                     {
-                        if (Code[i] == '#') immediate = true;
+                        if (this.Code[i] == '#') immediate = true;
                     }
                     if (immediate)
                     {
-                        Byte Imm = (Byte)Read_Immediate(ref index);
-                        return LSL(cpu, Rd, Rs, Imm);
+                        Byte Imm = (Byte)this.Read_Immediate(ref index);
+                        return this.LSL(cpu, Rd, Rs, Imm);
                     }
-                    else return LSL(cpu, Rd, Rs);
+                    else return this.LSL(cpu, Rd, Rs);
                 }
                 if (opcode.Equals("LSR", StringComparison.OrdinalIgnoreCase))
                 {
-                    Int32 Rd = Read_Register(ref index);
-                    Int32 Rs = Read_Register(ref index);
+                    Int32 Rd = this.Read_Register(ref index);
+                    Int32 Rs = this.Read_Register(ref index);
                     Boolean immediate = false;
-                    for (Int32 i = 0; i < Code.Length; i++)
+                    for (Int32 i = 0; i < this.Code.Length; i++)
                     {
-                        if (Code[i] == '#') immediate = true;
+                        if (this.Code[i] == '#') immediate = true;
                     }
                     if (immediate)
                     {
-                        Byte Imm = (Byte)Read_Immediate(ref index);
-                        return LSR(cpu, Rd, Rs, Imm);
+                        Byte Imm = (Byte)this.Read_Immediate(ref index);
+                        return this.LSR(cpu, Rd, Rs, Imm);
                     }
-                    else return LSR(cpu, Rd, Rs);
+                    else return this.LSR(cpu, Rd, Rs);
                 }
                 if (opcode.Equals("ASR", StringComparison.OrdinalIgnoreCase))
                 {
-                    Int32 Rd = Read_Register(ref index);
-                    Int32 Rs = Read_Register(ref index);
+                    Int32 Rd = this.Read_Register(ref index);
+                    Int32 Rs = this.Read_Register(ref index);
                     Boolean immediate = false;
-                    for (Int32 i = 0; i < Code.Length; i++)
+                    for (Int32 i = 0; i < this.Code.Length; i++)
                     {
-                        if (Code[i] == '#') immediate = true;
+                        if (this.Code[i] == '#') immediate = true;
                     }
                     if (immediate)
                     {
-                        Byte Imm = (Byte)Read_Immediate(ref index);
-                        return ASR(cpu, Rd, Rs, Imm);
+                        Byte Imm = (Byte)this.Read_Immediate(ref index);
+                        return this.ASR(cpu, Rd, Rs, Imm);
                     }
-                    else return ASR(cpu, Rd, Rs);
+                    else return this.ASR(cpu, Rd, Rs);
                 }
                 if (opcode.Equals("ROR", StringComparison.OrdinalIgnoreCase))
                 {
-                    Int32 Rd = Read_Register(ref index);
-                    Int32 Rs = Read_Register(ref index);
-                    return ROR(cpu, Rd, Rs);
+                    Int32 Rd = this.Read_Register(ref index);
+                    Int32 Rs = this.Read_Register(ref index);
+                    return this.ROR(cpu, Rd, Rs);
                 }
                 if (opcode.Equals("NOP", StringComparison.OrdinalIgnoreCase))
                 {
@@ -314,35 +314,35 @@ namespace GBA
 
                 if (opcode.Equals("ADC", StringComparison.OrdinalIgnoreCase))
                 {
-                    Int32 Rd = Read_Register(ref index);
-                    Int32 Rs = Read_Register(ref index);
-                    return ADC(cpu, Rd, Rs);
+                    Int32 Rd = this.Read_Register(ref index);
+                    Int32 Rs = this.Read_Register(ref index);
+                    return this.ADC(cpu, Rd, Rs);
                 }
                 if (opcode.Equals("SBC", StringComparison.OrdinalIgnoreCase))
                 {
-                    Int32 Rd = Read_Register(ref index);
-                    Int32 Rs = Read_Register(ref index);
-                    return SBC(cpu, Rd, Rs);
+                    Int32 Rd = this.Read_Register(ref index);
+                    Int32 Rs = this.Read_Register(ref index);
+                    return this.SBC(cpu, Rd, Rs);
                 }
 
                 if (opcode.StartsWith("LDR", StringComparison.OrdinalIgnoreCase))
                 {
-                    Int32 Rd = Read_Register(ref index);
-                    Int32 Rs = Read_Register(ref index);
+                    Int32 Rd = this.Read_Register(ref index);
+                    Int32 Rs = this.Read_Register(ref index);
                     Boolean immediate = false;
-                    for (Int32 i = 0; i < Code.Length; i++)
+                    for (Int32 i = 0; i < this.Code.Length; i++)
                     {
-                        if (Code[i] == '#') immediate = true;
+                        if (this.Code[i] == '#') immediate = true;
                     }
                     if (immediate)
                     {
-                        Byte Imm = (Byte)Read_Immediate(ref index);
-                        return LDR(cpu, Rd, Rs, Imm);
+                        Byte Imm = (Byte)this.Read_Immediate(ref index);
+                        return this.LDR(cpu, Rd, Rs, Imm);
                     }
                     else
                     {
-                        Int32 Ro = Read_Register(ref index);
-                        return LDR(cpu, Rd, Rs, Ro);
+                        Int32 Ro = this.Read_Register(ref index);
+                        return this.LDR(cpu, Rd, Rs, Ro);
                     }
                 }
 
@@ -351,52 +351,52 @@ namespace GBA
 
             private Int32 Read_Register(ref Int32 index)
             {
-                while (index < Code.Length)
+                while (index < this.Code.Length)
                 {
-                    if (Code[index] == 'r' || Code[index] == 'R')
+                    if (this.Code[index] == 'r' || this.Code[index] == 'R')
                     {
                         index++;
                         break;
                     }
-                    else if (Code.Substring(index, 2).Equals("SP", StringComparison.OrdinalIgnoreCase)) { index += 2; return 13; }
-                    else if (Code.Substring(index, 2).Equals("LR", StringComparison.OrdinalIgnoreCase)) { index += 2; return 14; }
-                    else if (Code.Substring(index, 2).Equals("PC", StringComparison.OrdinalIgnoreCase)) { index += 2; return 15; }
+                    else if (this.Code.Substring(index, 2).Equals("SP", StringComparison.OrdinalIgnoreCase)) { index += 2; return 13; }
+                    else if (this.Code.Substring(index, 2).Equals("LR", StringComparison.OrdinalIgnoreCase)) { index += 2; return 14; }
+                    else if (this.Code.Substring(index, 2).Equals("PC", StringComparison.OrdinalIgnoreCase)) { index += 2; return 15; }
                     else index++;
                 }
                 Int32 length = 1;
-                while (index + length < Code.Length)
+                while (index + length < this.Code.Length)
                 {
-                    if (Code[index + length] == ' '
-                     || Code[index + length] == ','
-                     || Code[index + length] == '-'
-                     || Code[index + length] == '}'
-                     || Code[index + length] == ']') break;
+                    if (this.Code[index + length] == ' '
+                     || this.Code[index + length] == ','
+                     || this.Code[index + length] == '-'
+                     || this.Code[index + length] == '}'
+                     || this.Code[index + length] == ']') break;
                     else length++;
                 }
-                String result = Code.Substring(index, length);
+                String result = this.Code.Substring(index, length);
                 index += length;
                 return Int32.Parse(result);
             }
             private Int32 Read_Immediate(ref Int32 index)
             {
-                while (index < Code.Length)
+                while (index < this.Code.Length)
                 {
-                    if (Code[index] == '#')
+                    if (this.Code[index] == '#')
                         break;
                     else index++;
                 }
                 index++;
                 Int32 length = 0;
-                while (index + length < Code.Length)
+                while (index + length < this.Code.Length)
                 {
-                    if (Code[index + length] == ' '
-                     || Code[index + length] == ','
-                     || Code[index + length] == '-'
-                     || Code[index + length] == '}'
-                     || Code[index + length] == ']') break;
+                    if (this.Code[index + length] == ' '
+                     || this.Code[index + length] == ','
+                     || this.Code[index + length] == '-'
+                     || this.Code[index + length] == '}'
+                     || this.Code[index + length] == ']') break;
                     else length++;
                 }
-                String immediate = Code.Substring(index, length);
+                String immediate = this.Code.Substring(index, length);
                 index += length;
                 if (immediate.StartsWith("0x"))
                 {
@@ -407,32 +407,32 @@ namespace GBA
             private Int32[] Read_RegisterList(ref Int32 index)
             {
                 List<Int32> result = new List<Int32>();
-                while (Code[index] != '{') index++;
-                result.Add(Read_Register(ref index));
-                while (Code[index] == ' ') index++;
+                while (this.Code[index] != '{') index++;
+                result.Add(this.Read_Register(ref index));
+                while (this.Code[index] == ' ') index++;
 
-                if (Code[index] == '}') goto End;
+                if (this.Code[index] == '}') goto End;
                 else
                 {
-                    if (Code[index] == '-')
+                    if (this.Code[index] == '-')
                     {
-                        Int32 list_end = Read_Register(ref index);
+                        Int32 list_end = this.Read_Register(ref index);
                         for (Int32 i = result[0]; i <= list_end; i++)
                         {
                             result.Add(i);
                         }
                     }
-                    else if (Code[index] == ',')
+                    else if (this.Code[index] == ',')
                     {
-                        result.Add(Read_Register(ref index));
+                        result.Add(this.Read_Register(ref index));
                     }
                     
-                    while (Code[index] == ' ') index++;
+                    while (this.Code[index] == ' ') index++;
 
-                    if (Code[index] == '}') goto End;
-                    if (Code[index] == ',')
+                    if (this.Code[index] == '}') goto End;
+                    if (this.Code[index] == ',')
                     {
-                        result.Add(Read_Register(ref index));
+                        result.Add(this.Read_Register(ref index));
                     }
                 }
                 End: return result.ToArray();
@@ -914,7 +914,7 @@ namespace GBA
             }
             RegisterSet BL(RegisterSet cpu, Pointer address)
             {
-                if (Data.Length == 4)
+                if (this.Data.Length == 4)
                      cpu.LR = cpu.PC + 2;
                 else cpu.LR = cpu.PC;
                 cpu.PC = address.Address;

@@ -21,13 +21,13 @@ namespace Magic.Components
             {
                 ToolStripMenuItem parent = (ToolStripMenuItem)this.OwnerItem;
                 Int32 index = parent.DropDownItems.IndexOf(this);
-                return (index + 1) + " - " + FileName;
+                return (index + 1) + " - " + this.FileName;
             }
         }
 
         public RecentFileMenuItem(String fileName)
         {
-            FileName = fileName;
+            this.FileName = fileName;
         }
     }
 
@@ -39,11 +39,11 @@ namespace Magic.Components
         
         public RecentFileMenu()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            Settings.Default.PropertyChanged += new PropertyChangedEventHandler(Settings_Changed);
+            Settings.Default.PropertyChanged += new PropertyChangedEventHandler(this.Settings_Changed);
 
-            ReloadItems();
+            this.ReloadItems();
         }
         
         /// <summary>
@@ -54,14 +54,14 @@ namespace Magic.Components
             if (Settings.Default.RecentFiles == null)
                 Settings.Default.RecentFiles = new StringCollection();
 
-            Enabled = (Settings.Default.RecentFiles.Count > 0);
+            this.Enabled = (Settings.Default.RecentFiles.Count > 0);
 
-            DropDownItems.Clear();
+            this.DropDownItems.Clear();
 
             Int32 count = Math.Min(Settings.Default.RecentFilesMax, Settings.Default.RecentFiles.Count);
             for(Int32 i = 0; i < count; i++)
             {
-                DropDownItems.Add(new RecentFileMenuItem(Settings.Default.RecentFiles[i]));
+                this.DropDownItems.Add(new RecentFileMenuItem(Settings.Default.RecentFiles[i]));
             }
         }
         /// <summary>
@@ -70,7 +70,7 @@ namespace Magic.Components
         public void Clear()
         {
             Settings.Default.RecentFiles.Clear();
-            ReloadItems();
+            this.ReloadItems();
         }
         
         /// <summary>
@@ -79,12 +79,12 @@ namespace Magic.Components
         public void AddFile(String fileName)
         {
             // check if the file is already in the collection
-            Int32 alreadyIn = GetIndex(fileName);
+            Int32 alreadyIn = this.GetIndex(fileName);
             if (alreadyIn > 0) // remove it
             {
                 Settings.Default.RecentFiles.RemoveAt(alreadyIn);
-                if (DropDownItems.Count > alreadyIn)
-                    DropDownItems.RemoveAt(alreadyIn);
+                if (this.DropDownItems.Count > alreadyIn)
+                    this.DropDownItems.RemoveAt(alreadyIn);
             }
             else if (alreadyIn == 0) // it´s the latest file so return
             {
@@ -96,14 +96,14 @@ namespace Magic.Components
 
             // insert the file on top of the list
             Settings.Default.RecentFiles.Insert(0, fileName);
-            DropDownItems.Insert(0, new RecentFileMenuItem(fileName));
+            this.DropDownItems.Insert(0, new RecentFileMenuItem(fileName));
 
             // remove the last one, if max size is reached
             if (Settings.Default.RecentFiles.Count > Maximum)
                 Settings.Default.RecentFiles.RemoveAt(Maximum);
             if (Settings.Default.RecentFiles.Count > Settings.Default.RecentFilesMax &&
-                DropDownItems.Count > Settings.Default.RecentFilesMax)
-                DropDownItems.RemoveAt(Settings.Default.RecentFilesMax);
+                this.DropDownItems.Count > Settings.Default.RecentFilesMax)
+                this.DropDownItems.RemoveAt(Settings.Default.RecentFilesMax);
 
             // save the changes
             Settings.Default.Save();
@@ -128,7 +128,7 @@ namespace Magic.Components
         {
             if (e.PropertyName == "RecentFilesMax")
             {
-                ReloadItems();
+                this.ReloadItems();
             }
         }
         
@@ -145,9 +145,9 @@ namespace Magic.Components
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(Boolean disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -158,7 +158,7 @@ namespace Magic.Components
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.components = new System.ComponentModel.Container();
         }
 
         #endregion

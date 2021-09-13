@@ -15,13 +15,13 @@ namespace EmblemMagic.FireEmblem
             get
             {
                 Int32 index = ((x % 16) / 4) + ((y % 16) * 4);
-                return ((Pixels[index] >> ((x % 4) * 2)) & 0x3);
+                return ((this.Pixels[index] >> ((x % 4) * 2)) & 0x3);
             }
         }
         public Color GetColor(Int32 x, Int32 y)
         {
             Int32 index = ((x % 16) / 4) + ((y % 16) * 4);
-            return Colors[(Pixels[index] >> ((x % 4) * 2)) & 0x3];
+            return Colors[(this.Pixels[index] >> ((x % 4) * 2)) & 0x3];
         }
 
         /// <summary>
@@ -68,17 +68,17 @@ namespace EmblemMagic.FireEmblem
         
         public Glyph(Pointer address)
         {
-            Address = address;
-            LinkedAddress = Core.ReadPointer(address);
-            ShiftJIS = Core.ReadByte(address + 4);
-            TextWidth = Core.ReadByte(address + 5);
-            Pixels = Core.ReadData(address + 8, 4 * Height); // its 2bpp so there are 4 bytes per row
+            this.Address = address;
+            this.LinkedAddress = Core.ReadPointer(address);
+            this.ShiftJIS = Core.ReadByte(address + 4);
+            this.TextWidth = Core.ReadByte(address + 5);
+            this.Pixels = Core.ReadData(address + 8, 4 * this.Height); // its 2bpp so there are 4 bytes per row
         }
         public Glyph(Bitmap image, Color[] colors)
         {
-            ShiftJIS = 0;
-            TextWidth = 0;
-            Pixels = new Byte[4 * 16];
+            this.ShiftJIS = 0;
+            this.TextWidth = 0;
+            this.Pixels = new Byte[4 * 16];
             Int32 index = 0;
             Int32[] row;
             for (Int32 y = 0; y < 16; y++)
@@ -93,12 +93,12 @@ namespace EmblemMagic.FireEmblem
                 };
                 for (Int32 i = 0; i < 4; i++)
                 {
-                    if (row[i] != 0 && x + i > TextWidth)
-                        TextWidth = (Byte)(x + i);
+                    if (row[i] != 0 && x + i > this.TextWidth)
+                            this.TextWidth = (Byte)(x + i);
                 }
-                Pixels[index++] = (Byte)((row[3] << 6) | (row[2] << 4) | (row[1] << 2) | row[0]);
+                    this.Pixels[index++] = (Byte)((row[3] << 6) | (row[2] << 4) | (row[1] << 2) | row[0]);
             }
-            TextWidth++;
+            this.TextWidth++;
         }
 
 
@@ -117,9 +117,9 @@ namespace EmblemMagic.FireEmblem
 
         public Boolean IsEmpty()
         {
-            for (Int32 i = 0; i < Pixels.Length; i++)
+            for (Int32 i = 0; i < this.Pixels.Length; i++)
             {
-                if (Pixels[i] != 0)
+                if (this.Pixels[i] != 0)
                     return false;
             }
             return true;
@@ -129,9 +129,9 @@ namespace EmblemMagic.FireEmblem
         {
             Byte[] result = new Byte[LENGTH];
 
-            result[5] = TextWidth;
+            result[5] = this.TextWidth;
 
-            Array.Copy(Pixels, 0, result, 8, Pixels.Length);
+            Array.Copy(this.Pixels, 0, result, 8, this.Pixels.Length);
 
             return result;
         }
@@ -140,22 +140,22 @@ namespace EmblemMagic.FireEmblem
 
         override public String ToString()
         {
-            return "Glyph: " + Address;
+            return "Glyph: " + this.Address;
         }
         override public Boolean Equals(Object other)
         {
             if (!(other is Glyph)) return false;
             Glyph glyph = (Glyph)other;
-            for (Int32 i = 0; i < Pixels.Length; i++)
+            for (Int32 i = 0; i < this.Pixels.Length; i++)
             {
-                if (Pixels[i] != glyph.Pixels[i])
+                if (this.Pixels[i] != glyph.Pixels[i])
                     return false;
             }
             return true;
         }
         override public Int32 GetHashCode()
         {
-            return Pixels.GetHashCode();
+            return this.Pixels.GetHashCode();
         }
     }
 }

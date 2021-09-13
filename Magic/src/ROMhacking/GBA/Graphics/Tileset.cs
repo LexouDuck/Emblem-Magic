@@ -17,17 +17,17 @@ namespace GBA
         {
             get
             {
-                if (index < 0 || index >= Count) return Tile.Empty;
+                if (index < 0 || index >= this.Count) return Tile.Empty;
                     //throw new Exception("Given index " + index + " exceeds this GBA.Tileset (" + Count + " tiles)");
 
-                return Sheet[index];
+                return this.Sheet[index];
             }
             set
             {
-                if (index < 0 || index >= Count)
-                    throw new Exception("Given index " + index + " exceeds this GBA.Tileset (" + Count + " tiles)");
+                if (index < 0 || index >= this.Count)
+                    throw new Exception("Given index " + index + " exceeds this GBA.Tileset (" + this.Count + " tiles)");
 
-                Sheet[index] = value;
+                this.Sheet[index] = value;
             }
         }
 
@@ -38,7 +38,7 @@ namespace GBA
         {
             get
             {
-                return Sheet.Count;
+                return this.Sheet.Count;
             }
         }
         /// <summary>
@@ -48,7 +48,7 @@ namespace GBA
         {
             get
             {
-                return Sheet.Capacity;
+                return this.Sheet.Capacity;
             }
         }
 
@@ -66,7 +66,7 @@ namespace GBA
         /// </summary>
         public Tileset(Int32 maximum = 0)
         {
-            Load(maximum);
+            this.Load(maximum);
         }
         /// <summary>
         /// Creates a GBA.Tileset of 8x8 tiles from the given tile data (must be a multiple of 32bytes long)
@@ -75,14 +75,14 @@ namespace GBA
         {
             if (data.Length % Tile.LENGTH != 0)
                 throw new Exception("the data given has an invalid length.");
-            
-            Load(maximum);
+
+            this.Load(maximum);
 
             Byte[] buffer = new Byte[Tile.LENGTH];
             for (Int32 i = 0; i < (data.Length / Tile.LENGTH); i++)
             {
                 Array.Copy(data, i * Tile.LENGTH, buffer, 0, Tile.LENGTH);
-                Sheet.Add(new Tile(buffer));
+                this.Sheet.Add(new Tile(buffer));
             }
         }
         /// <summary>
@@ -90,7 +90,7 @@ namespace GBA
         /// </summary>
         public Tileset(Image image, Int32 maximum = 0)
         {
-            Load(maximum);
+            this.Load(maximum);
             
             for (Int32 y = 0; y < image.Height; y += Tile.SIZE)
             for (Int32 x = 0; x < image.Width; x += Tile.SIZE)
@@ -104,7 +104,7 @@ namespace GBA
         /// </summary>
         void Load(Int32 maximum)
         {
-            Sheet = (maximum == 0) ?
+            this.Sheet = (maximum == 0) ?
                 new List<Tile>() :
                 new List<Tile>(maximum);
         }
@@ -116,7 +116,7 @@ namespace GBA
         /// </summary>
         public void Add(Tile tile)
         {
-            Sheet.Add(tile);
+            this.Sheet.Add(tile);
         }
         /// <summary>
         /// Adds a set of tiles from another tileset to this one, starting at 'index' and adding 'amount' tiles (all if amount==0)
@@ -140,7 +140,7 @@ namespace GBA
             for (Int32 parse = 0; parse < data.Length; parse += buffer.Length)
             {
                 Array.Copy(data, parse, buffer, 0, buffer.Length);
-                Sheet.Add(new Tile(buffer));
+                this.Sheet.Add(new Tile(buffer));
             }
         }
         /// <summary>
@@ -173,7 +173,7 @@ namespace GBA
             }
             for (Int32 i = 0; i < tileset.Length; i++)
             {
-                Sheet.Add(tileset[i] ?? Tile.Empty);
+                this.Sheet.Add(tileset[i] ?? Tile.Empty);
             }
         }
         
@@ -182,9 +182,9 @@ namespace GBA
         /// </summary>
         public Boolean Contains(Tile tile)
         {
-            for (Int32 i = 0; i < Count; i++)
+            for (Int32 i = 0; i < this.Count; i++)
             {
-                if (Sheet[i] != null && Sheet[i].Equals(tile)) return true;
+                if (this.Sheet[i] != null && this.Sheet[i].Equals(tile)) return true;
             }
             return false;
         }
@@ -193,9 +193,9 @@ namespace GBA
         /// </summary>
         public Int32 Find(Tile tile)
         {
-            for (Int32 i = 0; i < Count; i++)
+            for (Int32 i = 0; i < this.Count; i++)
             {
-                if (Sheet[i] != null && Sheet[i].Equals(tile)) return i;
+                if (this.Sheet[i] != null && this.Sheet[i].Equals(tile)) return i;
             }
             return -1;
         }
@@ -204,19 +204,19 @@ namespace GBA
         /// </summary>
         public Tuple<Int32, Boolean, Boolean> FindMatch(Tile tile)
         {
-            Int32 index = Find(tile);
+            Int32 index = this.Find(tile);
 
             if (index == -1)
             {
-                index = Find(tile.FlipHorizontal());
+                index = this.Find(tile.FlipHorizontal());
 
                 if (index == -1)
                 {
-                    index = Find(tile.FlipVertical());
+                    index = this.Find(tile.FlipVertical());
 
                     if (index == -1)
                     {
-                        index = Find(tile.FlipHorizontal().FlipVertical());
+                        index = this.Find(tile.FlipHorizontal().FlipVertical());
 
                         if (index == -1)
                         {
@@ -238,9 +238,9 @@ namespace GBA
             Tileset result = new Tileset(length);
             for (Int32 i = 0; i < length; i++)
             {
-                if (offset + i >= Sheet.Count)
+                if (offset + i >= this.Sheet.Count)
                     break;
-                result.Add(Sheet[offset + i]);
+                result.Add(this.Sheet[offset + i]);
             }
             return result;
         }
@@ -258,12 +258,12 @@ namespace GBA
             Int32 ix, iy;
             Int32 index;
             Int32 t = 0;
-            for (Int32 i = 0; (i < length) && (i < Sheet.Count); i++)
+            for (Int32 i = 0; (i < length) && (i < this.Sheet.Count); i++)
             {
                 ix = (i % widthTiles) * Tile.SIZE;
                 iy = (i / widthTiles) * Tile.SIZE;
                 index = (ix / 2) + (iy * (width / 2));
-                tile = (Sheet[i] == null) ? new Byte[Tile.LENGTH] : Sheet[i].Bytes;
+                tile = (this.Sheet[i] == null) ? new Byte[Tile.LENGTH] : this.Sheet[i].Bytes;
                 t = 0;
                 for (Int32 y = 0; y < Tile.SIZE; y++)
                 {
@@ -281,12 +281,12 @@ namespace GBA
         /// </summary>
         public Byte[] ToBytes(Boolean compressed)
         {
-            Byte[] result = new Byte[Count * GBA.Tile.LENGTH];
+            Byte[] result = new Byte[this.Count * GBA.Tile.LENGTH];
             Int32 index = 0;
-            for (Int32 i = 0; i < Count; i++)
+            for (Int32 i = 0; i < this.Count; i++)
             {
-                Array.Copy(Sheet[i].Bytes, 0, result, index, Sheet[i].Bytes.Length);
-                index += Sheet[i].Bytes.Length;
+                Array.Copy(this.Sheet[i].Bytes, 0, result, index, this.Sheet[i].Bytes.Length);
+                index += this.Sheet[i].Bytes.Length;
             }
 
             return compressed ? LZ77.Compress(result) : result;
@@ -296,8 +296,8 @@ namespace GBA
 
         override public String ToString()
         {
-            String result = "GBA.Tileset: " + Count + " tiles.";
-            foreach (Tile tile in Sheet)
+            String result = "GBA.Tileset: " + this.Count + " tiles.";
+            foreach (Tile tile in this.Sheet)
             {
                 result += "\n\n" + tile;
             }
@@ -307,9 +307,9 @@ namespace GBA
         {
             if (!(other is Tileset)) return false;
             Tileset tileset = (Tileset)other;
-            foreach (Tile tile in Sheet)
+            foreach (Tile tile in this.Sheet)
             {
-                for (Int32 i = 0; i < Count; i++)
+                for (Int32 i = 0; i < this.Count; i++)
                 {
                     if (!tileset[i].Equals(tile)) return false;
                 }
@@ -318,7 +318,7 @@ namespace GBA
         }
         override public Int32 GetHashCode()
         {
-            return Sheet.GetHashCode();
+            return this.Sheet.GetHashCode();
         }
     }
 }

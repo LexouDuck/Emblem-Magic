@@ -18,20 +18,20 @@ namespace GBA
         {
             get
             {
-                if (x < 0 || x >= Width)  throw new ArgumentException("X given is out of bounds: " + x);
-                if (y < 0 || y >= Height) throw new ArgumentException("Y given is out of bounds: " + y);
+                if (x < 0 || x >= this.Width)  throw new ArgumentException("X given is out of bounds: " + x);
+                if (y < 0 || y >= this.Height) throw new ArgumentException("Y given is out of bounds: " + y);
 
-                Int32 index = (x / 2) + (y * (Width / 2));
-                if (index < 0 || index >= Bytes.Length)
+                Int32 index = (x / 2) + (y * (this.Width / 2));
+                if (index < 0 || index >= this.Bytes.Length)
                     throw new ArgumentException("index is outside of the byte array.");
                 return ((x % 2 == 0) ?
-                    (Bytes[index] & 0x0F) :
-                    (Bytes[index] & 0xF0) >> 4);
+                    (this.Bytes[index] & 0x0F) :
+                    (this.Bytes[index] & 0xF0) >> 4);
             }
         }
         public Color GetColor(Int32 x, Int32 y)
         {
-            return (Colors[this[x, y]]);
+            return (this.Colors[this[x, y]]);
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace GBA
             {
                 using (System.Drawing.Bitmap file = new System.Drawing.Bitmap(filepath))
                 {
-                    Load(file.Width, file.Height, palette ?? new Palette(16));
+                    this.Load(file.Width, file.Height, palette ?? new Palette(16));
 
                     Color color;
                     Int32 HI_nibble;
@@ -72,31 +72,31 @@ namespace GBA
                     Int32 index = 0;
                     if (palette == null)
                     {
-                        for (Int32 y = 0; y < Height; y++)
-                        for (Int32 x = 0; x < Width; x += 2)
+                        for (Int32 y = 0; y < this.Height; y++)
+                        for (Int32 x = 0; x < this.Width; x += 2)
                         {
                             color = (GBA.Color)file.GetPixel(x, y);
-                            LO_nibble = Colors.Find(color);
+                            LO_nibble = this.Colors.Find(color);
                             if (LO_nibble == -1)
                             {
-                                LO_nibble = Colors.Count;
-                                Colors.Add(color);
+                                LO_nibble = this.Colors.Count;
+                                    this.Colors.Add(color);
                             }
                             color = (GBA.Color)file.GetPixel(x + 1, y);
-                            HI_nibble = Colors.Find(color);
+                            HI_nibble = this.Colors.Find(color);
                             if (HI_nibble == -1)
                             {
-                                HI_nibble = Colors.Count;
-                                Colors.Add(color);
+                                HI_nibble = this.Colors.Count;
+                                    this.Colors.Add(color);
                             }
 
-                            Bytes[index++] = (Byte)((HI_nibble << 4) | LO_nibble);
+                                this.Bytes[index++] = (Byte)((HI_nibble << 4) | LO_nibble);
                         }
                     }
                     else
                     {
-                        for (Int32 y = 0; y < Height; y++)
-                        for (Int32 x = 0; x < Width; x += 2)
+                        for (Int32 y = 0; y < this.Height; y++)
+                        for (Int32 x = 0; x < this.Width; x += 2)
                         {
                             color = (GBA.Color)file.GetPixel(x, y);
                             LO_nibble = palette.Find(color);
@@ -110,9 +110,9 @@ namespace GBA
                             if (HI_nibble == -1 || LO_nibble == -1)
                                 throw new Exception("A color in the image was not found in the palette given.");
 
-                            Bytes[index++] = (Byte)((HI_nibble << 4) | LO_nibble);
+                                this.Bytes[index++] = (Byte)((HI_nibble << 4) | LO_nibble);
                         }
-                        Colors = palette;
+                        this.Colors = palette;
                     }
                 }
             }
@@ -126,18 +126,18 @@ namespace GBA
         /// </summary>
         public Image(Int32 width, Int32 height, Byte[] palette, Byte[] data)
         {
-            Load(width, height, new Palette(palette));
+            this.Load(width, height, new Palette(palette));
 
-            Array.Copy(data, Bytes, Math.Min(data.Length, Bytes.Length));
+            Array.Copy(data, this.Bytes, Math.Min(data.Length, this.Bytes.Length));
         }
         /// <summary>
         /// Copy constructor - if palette is null, takes the palette from the source GBA.Image, otherwise recolors it.
         /// </summary>
         public Image(Image source, Palette palette = null)
         {
-            Load(source.Width, source.Height, source.Colors);
+            this.Load(source.Width, source.Height, source.Colors);
 
-            Array.Copy(source.Bytes, Bytes, Bytes.Length);
+            Array.Copy(source.Bytes, this.Bytes, this.Bytes.Length);
 
             if (palette != null) this.Recolor(palette);
         }
@@ -147,7 +147,7 @@ namespace GBA
         /// </summary>
         public Image(Bitmap image, Palette palette = null)
         {
-            Load(image.Width, image.Height, new Palette(16));
+            this.Load(image.Width, image.Height, new Palette(16));
 
             Int32 index = 0;
             Color color;
@@ -156,31 +156,31 @@ namespace GBA
 
             if (palette == null)
             {
-                for (Int32 y = 0; y < Height; y++)
-                for (Int32 x = 0; x < Width; x += 2)
+                for (Int32 y = 0; y < this.Height; y++)
+                for (Int32 x = 0; x < this.Width; x += 2)
                 {
                     color = image.GetColor(x, y);
-                    LO_nibble = Colors.Find(color);
+                    LO_nibble = this.Colors.Find(color);
                     if (LO_nibble == -1)
                     {
-                        LO_nibble = Colors.Count;
-                        Colors.Add(color);
+                        LO_nibble = this.Colors.Count;
+                            this.Colors.Add(color);
                     }
                     color = image.GetColor(x + 1, y);
-                    HI_nibble = Colors.Find(color);
+                    HI_nibble = this.Colors.Find(color);
                     if (HI_nibble == -1)
                     {
-                        HI_nibble = Colors.Count;
-                        Colors.Add(color);
+                        HI_nibble = this.Colors.Count;
+                            this.Colors.Add(color);
                     }
 
-                    Bytes[index++] = (Byte)((HI_nibble << 4) | LO_nibble);
+                        this.Bytes[index++] = (Byte)((HI_nibble << 4) | LO_nibble);
                 }
             }
             else
             {
-                for (Int32 y = 0; y < Height; y++)
-                for (Int32 x = 0; x < Width; x += 2)
+                for (Int32 y = 0; y < this.Height; y++)
+                for (Int32 x = 0; x < this.Width; x += 2)
                 {
                     color = image.GetColor(x + 1, y);
                     HI_nibble = palette.Find(color);
@@ -189,10 +189,10 @@ namespace GBA
 
                     if (HI_nibble == -1 || LO_nibble == -1)
                         throw new Exception("A color in the image was not found in the palette.");
-                    else Bytes[index] = (Byte)((HI_nibble << 4) | LO_nibble);
+                    else this.Bytes[index] = (Byte)((HI_nibble << 4) | LO_nibble);
                     index++;
                 }
-                Colors = palette;
+                this.Colors = palette;
             }
         }
         /// <summary>
@@ -200,7 +200,7 @@ namespace GBA
         /// </summary>
         public Image(Bitmap image, Rectangle region, Palette palette = null)
         {
-            Load(region.Width, region.Height, new Palette(16));
+            this.Load(region.Width, region.Height, new Palette(16));
 
             Int32 index = 0;
             Color color;
@@ -213,21 +213,21 @@ namespace GBA
                 for (Int32 x = 0; x < region.Width; x += 2)
                 {
                     color = image.GetColor(region.X + x, region.Y + y);
-                    LO_nibble = Colors.Find(color);
+                    LO_nibble = this.Colors.Find(color);
                     if (LO_nibble == -1)
                     {
-                        LO_nibble = Colors.Count;
-                        Colors.Add(color);
+                        LO_nibble = this.Colors.Count;
+                            this.Colors.Add(color);
                     }
                     color = image.GetColor(region.X + x + 1, region.Y + y);
-                    HI_nibble = Colors.Find(color);
+                    HI_nibble = this.Colors.Find(color);
                     if (HI_nibble == -1)
                     {
-                        HI_nibble = Colors.Count;
-                        Colors.Add(color);
+                        HI_nibble = this.Colors.Count;
+                            this.Colors.Add(color);
                     }
 
-                    Bytes[index++] = (Byte)((HI_nibble << 4) | LO_nibble);
+                        this.Bytes[index++] = (Byte)((HI_nibble << 4) | LO_nibble);
                 }
             }
             else
@@ -243,10 +243,10 @@ namespace GBA
                     if (HI_nibble == -1 || LO_nibble == -1)
                         throw new Exception("A color in the image was not found in the given palette.\n" +
                             "At coordinates: x = " + (region.X + x) + ", y = " + (region.Y + y));
-                    else Bytes[index] = (Byte)((HI_nibble << 4) | LO_nibble);
+                    else this.Bytes[index] = (Byte)((HI_nibble << 4) | LO_nibble);
                     index++;
                 }
-                Colors = palette;
+                this.Colors = palette;
             }
         }
 
@@ -260,10 +260,10 @@ namespace GBA
             if (palette.Maximum < GBA.Palette.MAX)
                 throw new Exception("Palette should have at least 16 colors.");
 
-            Width = width;
-            Height = height;
-            Bytes = new Byte[(Width * Height) / 2];
-            Colors = palette;
+            this.Width = width;
+            this.Height = height;
+            this.Bytes = new Byte[(this.Width * this.Height) / 2];
+            this.Colors = palette;
         }
 
 
@@ -273,9 +273,9 @@ namespace GBA
         /// </summary>
         public Boolean IsEmpty()
         {
-            for (Int32 i = 0; i < Bytes.Length; i++)
+            for (Int32 i = 0; i < this.Bytes.Length; i++)
             {
-                if (Bytes[i] != 0) { return false; }
+                if (this.Bytes[i] != 0) { return false; }
             }
             return true;
         }
@@ -295,7 +295,7 @@ namespace GBA
         /// </summary>
         public Boolean SamePaletteAs(Image other)
         {
-            return Colors.Equals(other.Colors);
+            return this.Colors.Equals(other.Colors);
         }
 
         /// <summary>
@@ -303,14 +303,14 @@ namespace GBA
         /// </summary>
         public Boolean Matches(Image other)
         {
-            if (Width != other.Width || Height != other.Height) return false;
+            if (this.Width != other.Width || this.Height != other.Height) return false;
             else
             {
-                Color[,] image1 = GetPixels(new Rectangle(0, 0, Width, Height));
-                Color[,] image2 = other.GetPixels(new Rectangle(0, 0, Width, Height));
-                for (Int32 y = 0; y < Height; y++)
+                Color[,] image1 = this.GetPixels(new Rectangle(0, 0, this.Width, this.Height));
+                Color[,] image2 = other.GetPixels(new Rectangle(0, 0, this.Width, this.Height));
+                for (Int32 y = 0; y < this.Height; y++)
                 {
-                    for (Int32 x = 0; x < Width; x++)
+                    for (Int32 x = 0; x < this.Width; x++)
                     {
                         if (image1[x, y] == image2[x, y]) return false;
                     }
@@ -323,13 +323,13 @@ namespace GBA
         /// </summary>
         public Boolean Matches(Int32 at_x, Int32 at_y, Image other, Rectangle region)
         {
-            if (at_x < 0 || at_y < 0 || (at_x + region.Width) > Width || (at_y + region.Height) > Height)
+            if (at_x < 0 || at_y < 0 || (at_x + region.Width) > this.Width || (at_y + region.Height) > this.Height)
                 throw new Exception("Invalid selection(s)");
 
-            if (Width != other.Width || Height != other.Height) return false;
+            if (this.Width != other.Width || this.Height != other.Height) return false;
             else
             {
-                Color[,] image1 = GetPixels(new Rectangle(at_x, at_y, region.Width, region.Height));
+                Color[,] image1 = this.GetPixels(new Rectangle(at_x, at_y, region.Width, region.Height));
                 Color[,] image2 = other.GetPixels(region);
                 Int32 width = image1.GetLength(0);
                 Int32 height = image1.GetLength(1);
@@ -351,10 +351,10 @@ namespace GBA
         /// </summary>
         public void Recolor(Palette palette)
         {
-            if (Colors.Count != palette.Count)
+            if (this.Colors.Count != palette.Count)
                 throw new Exception("Palette has a different color count than the current palette");
 
-            Colors = new Palette(palette);
+            this.Colors = new Palette(palette);
         }
 
 
@@ -364,7 +364,7 @@ namespace GBA
         /// </summary>
         public Tile GetTile(Int32 x, Int32 y)
         {
-            if (x < 0 || x + 8 > Width || y < 0 || y + 8 > Height)
+            if (x < 0 || x + 8 > this.Width || y < 0 || y + 8 > this.Height)
                 throw new Exception("The requested tile is (at least partially) out of bounds.");
 
             if (x % 2 == 0)
@@ -375,8 +375,8 @@ namespace GBA
                 for (Int32 tileY = 0; tileY < 8; tileY++)
                 for (Int32 tileX = 0; tileX < 8; tileX += 2)
                 {
-                    index = (x + tileX) / 2 + (y + tileY) * (Width / 2);
-                    result[i++] = Bytes[index];
+                    index = (x + tileX) / 2 + (y + tileY) * (this.Width / 2);
+                    result[i++] = this.Bytes[index];
                 }
                 return new Tile(result);
             }
@@ -388,10 +388,10 @@ namespace GBA
                 for (Int32 tileY = 0; tileY < 8; tileY++)
                 for (Int32 tileX = 0; tileX < 8; tileX++)
                 {
-                    index = ((x + tileX) / 2) + ((y + tileY) * (Width / 2));
+                    index = ((x + tileX) / 2) + ((y + tileY) * (this.Width / 2));
                     pixel = ((x + tileX) % 2 == 0) ?
-                        (Bytes[index] & 0x0F) :
-                        (Bytes[index] & 0xF0) >> 4;
+                        (this.Bytes[index] & 0x0F) :
+                        (this.Bytes[index] & 0xF0) >> 4;
                     result[tileX, tileY] = pixel;
                 }
                 return result;
@@ -402,7 +402,7 @@ namespace GBA
         /// </summary>
         public Color[,] GetPixels(Rectangle region)
         {
-            if (region.X < 0 || region.X + region.Width > Width || region.Y < 0 || region.Y + region.Height > Height)
+            if (region.X < 0 || region.X + region.Width > this.Width || region.Y < 0 || region.Y + region.Height > this.Height)
                 throw new Exception("The requested region is larger than the bitmap.");
 
             Color[,] result = new Color[region.Width, region.Height];
@@ -421,25 +421,25 @@ namespace GBA
         {
             if (pixels.Length != region.Width * region.Height)
                 throw new Exception("The array length doesn't match the region size.");
-            if (region.X < 0 || region.Y + region.Width > Width || region.Y < 0 || region.Y + region.Height > Height)
+            if (region.X < 0 || region.Y + region.Width > this.Width || region.Y < 0 || region.Y + region.Height > this.Height)
                 throw new Exception("The requested region is larger than the bitmap.");
 
             for (Int32 y = region.Y; y < region.Height; y++)
             {
                 for (Int32 x = region.X; x < region.Width; x++)
                 {
-                    if (x < 0 || x > Width)  throw new Exception("X given is out of bounds: " + x);
-                    if (y < 0 || y > Height) throw new Exception("Y given is out of bounds: " + y);
+                    if (x < 0 || x > this.Width)  throw new Exception("X given is out of bounds: " + x);
+                    if (y < 0 || y > this.Height) throw new Exception("Y given is out of bounds: " + y);
 
-                    Int32 index = (x / 2) + (y * (Width / 2));
-                    if (index < 0 || index >= Bytes.Length) throw new Exception("index is outside of the byte array.");
+                    Int32 index = (x / 2) + (y * (this.Width / 2));
+                    if (index < 0 || index >= this.Bytes.Length) throw new Exception("index is outside of the byte array.");
 
-                    Int32 pixel = Colors.Find(pixels[x, y]);
+                    Int32 pixel = this.Colors.Find(pixels[x, y]);
                     if (pixel == -1) throw new Exception("Color to set was not found in the palette.");
 
-                    Bytes[index] = (x % 2 == 0) ?
-                        (Byte)((Bytes[index] & 0xF0) | (pixel & 0x0F)) :
-                        (Byte)((Bytes[index] & 0x0F) |((pixel & 0x0F) << 4));
+                    this.Bytes[index] = (x % 2 == 0) ?
+                        (Byte)((this.Bytes[index] & 0xF0) | (pixel & 0x0F)) :
+                        (Byte)((this.Bytes[index] & 0x0F) |((pixel & 0x0F) << 4));
                 }
             }
         }
@@ -449,11 +449,11 @@ namespace GBA
         override public String ToString()
         {
             String result = "GBA.Image:";
-            Int32 length = Width / 2;
+            Int32 length = this.Width / 2;
             Byte[] line = new Byte[length];
-            for (Int32 i = 0; i < Height; i++)
+            for (Int32 i = 0; i < this.Height; i++)
             {
-                Array.Copy(Bytes, i * length, line, 0, length);
+                Array.Copy(this.Bytes, i * length, line, 0, length);
                 result += "\n" + Util.BytesToSpacedHex(line);
             }
             return result;
@@ -462,11 +462,11 @@ namespace GBA
         {
             Image image = (Image)other;
 
-            if (Bytes.Length == image.Bytes.Length && image.Colors.Equals(image.Colors))
+            if (this.Bytes.Length == image.Bytes.Length && image.Colors.Equals(image.Colors))
             {
-                for (Int32 i = 0; i < Bytes.Length; i++)
+                for (Int32 i = 0; i < this.Bytes.Length; i++)
                 {
-                    if (Bytes[i] != image.Bytes[i]) return false;
+                    if (this.Bytes[i] != image.Bytes[i]) return false;
                 }
                 return true;
             }
@@ -474,7 +474,7 @@ namespace GBA
         }
         override public Int32 GetHashCode()
         {
-            return ((Width & 0xFFFF) << 16) | (Height & 0xFFFF);
+            return ((this.Width & 0xFFFF) << 16) | (this.Height & 0xFFFF);
         }
     }
 }

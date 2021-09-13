@@ -21,7 +21,7 @@ namespace EmblemMagic.Editors
         {
             get
             {
-                return "Music 0x" + Util.ByteToHex(EntryArrayBox.Value) + " [" + EntryArrayBox.Text + "] - ";
+                return "Music 0x" + Util.ByteToHex(this.EntryArrayBox.Value) + " [" + this.EntryArrayBox.Text + "] - ";
             }
         }
 
@@ -31,39 +31,39 @@ namespace EmblemMagic.Editors
         {
             try
             {
-                InitializeComponent();
+                this.InitializeComponent();
 
-                EntryArrayBox.Load("Music List.txt");
-                Current = new StructFile("Music Struct.txt");
-                Current.Address = Core.GetPointer("Music Array");
+                this.EntryArrayBox.Load("Music List.txt");
+                this.Current = new StructFile("Music Struct.txt");
+                this.Current.Address = Core.GetPointer("Music Array");
 
-                Preview = new Music();
+                this.Preview = new Music();
             }
             catch (Exception ex)
             {
                 UI.ShowError("Could not properly open the " + this.Text, ex);
 
-                Core_CloseEditor(this, null);
+                this.Core_CloseEditor(this, null);
             }
         }
 
         public override void Core_SetEntry(UInt32 entry)
         {
-            EntryArrayBox.Value =(Byte)entry;
+            this.EntryArrayBox.Value =(Byte)entry;
         }
         public override void Core_OnOpen()
         {
-            Core_Update();
+            this.Core_Update();
         }
         public override void Core_Update()
         {
-            Current.EntryIndex = EntryArrayBox.Value;
+            this.Current.EntryIndex = this.EntryArrayBox.Value;
 
-            CurrentMusic = new MusicHeader((Pointer)Current["Address"]);
+            this.CurrentMusic = new MusicHeader((Pointer)this.Current["Address"]);
 
-            Core_LoadInstruments();
-            Core_LoadTracker();
-            Core_LoadValues();
+            this.Core_LoadInstruments();
+            this.Core_LoadTracker();
+            this.Core_LoadValues();
             //Core_LoadAudio();
         }
 
@@ -71,30 +71,30 @@ namespace EmblemMagic.Editors
         {
             try
             {
-                if (CurrentMusic.TrackAmount == 0)
+                if (this.CurrentMusic.TrackAmount == 0)
                 {
-                    Instrument_PointerBox.Value = new Pointer();
+                    this.Instrument_PointerBox.Value = new Pointer();
 
-                    Instrument_ListBox.DataSource = null;
+                    this.Instrument_ListBox.DataSource = null;
                 }
                 else
                 {
-                    Instrument_PointerBox.ValueChanged -= Instrument_PointerBox_ValueChanged;
-                    Instrument_PointerBox.Value = CurrentMusic.Instruments;
-                    Instrument_PointerBox.ValueChanged += Instrument_PointerBox_ValueChanged;
+                    this.Instrument_PointerBox.ValueChanged -= this.Instrument_PointerBox_ValueChanged;
+                    this.Instrument_PointerBox.Value = this.CurrentMusic.Instruments;
+                    this.Instrument_PointerBox.ValueChanged += this.Instrument_PointerBox_ValueChanged;
 
-                    Instruments = new InstrumentArray(CurrentMusic.Instruments);
+                    this.Instruments = new InstrumentArray(this.CurrentMusic.Instruments);
                     List<String> instruments = new List<String>();
                     String instrument;
                     for (Byte i = 0; i < 128; i++)
                     {
-                        if (Instruments[i].IsUnused())
+                        if (this.Instruments[i].IsUnused())
                         {
-                            if (View_HideInstruments.Checked)
+                            if (this.View_HideInstruments.Checked)
                                 continue;
                             else instrument = "None";
                         }
-                        else switch (Instruments[i].Type)
+                        else switch (this.Instruments[i].Type)
                         {
                             case InstrumentType.Direct:  instrument = "DirectSound";  break;
                             case InstrumentType.Square1: instrument = "PSG Square 1"; break;
@@ -108,7 +108,7 @@ namespace EmblemMagic.Editors
                         }
                         instruments.Add(Util.ByteToHex(i) + " - " + instrument);
                     }
-                    Instrument_ListBox.DataSource = instruments;
+                    this.Instrument_ListBox.DataSource = instruments;
                 }
             }
             catch (Exception ex)
@@ -121,8 +121,8 @@ namespace EmblemMagic.Editors
             List<Track> tracks = new List<Track>();
             try
             {
-                Pointer[] pointers = CurrentMusic.Tracks;
-                for (Int32 i = 0; i < CurrentMusic.TrackAmount; i++)
+                Pointer[] pointers = this.CurrentMusic.Tracks;
+                for (Int32 i = 0; i < this.CurrentMusic.TrackAmount; i++)
                 {
                     tracks.Add(new Track(pointers[i]));
                 }
@@ -131,62 +131,62 @@ namespace EmblemMagic.Editors
             {
                 UI.ShowError("Error while reading tracks.", ex);
             }
-            Music_Tracker.Load(tracks);
+            this.Music_Tracker.Load(tracks);
         }
         void Core_LoadValues()
         {
-            Entry_PointerBox.ValueChanged -= Entry_PointerBox_ValueChanged;
-            Entry_ByteBox1.ValueChanged -= Entry_ByteBox1_ValueChanged;
-            Entry_ByteBox2.ValueChanged -= Entry_ByteBox2_ValueChanged;
+            this.Entry_PointerBox.ValueChanged -= this.Entry_PointerBox_ValueChanged;
+            this.Entry_ByteBox1.ValueChanged -= this.Entry_ByteBox1_ValueChanged;
+            this.Entry_ByteBox2.ValueChanged -= this.Entry_ByteBox2_ValueChanged;
 
-            TrackAmount_ByteBox.ValueChanged -= TrackAmount_ByteBox_ValueChanged;
-            Music_Unknown_ByteBox.ValueChanged -= Music_Unknown_ByteBox_ValueChanged;
-            Music_Priority_ByteBox.ValueChanged -= Music_Priority_ByteBox_ValueChanged;
-            Music_Reverb_ByteBox.ValueChanged -= Music_Reverb_ByteBox_ValueChanged;
+            this.TrackAmount_ByteBox.ValueChanged -= this.TrackAmount_ByteBox_ValueChanged;
+            this.Music_Unknown_ByteBox.ValueChanged -= this.Music_Unknown_ByteBox_ValueChanged;
+            this.Music_Priority_ByteBox.ValueChanged -= this.Music_Priority_ByteBox_ValueChanged;
+            this.Music_Reverb_ByteBox.ValueChanged -= this.Music_Reverb_ByteBox_ValueChanged;
             
             try
             {
-                Entry_PointerBox.Value = (Pointer)Current["Address"];
-                Entry_ByteBox1.Value = (Byte)Current["TrackGroup1"];
-                Entry_ByteBox2.Value = (Byte)Current["TrackGroup2"];
+                this.Entry_PointerBox.Value = (Pointer)this.Current["Address"];
+                this.Entry_ByteBox1.Value = (Byte)this.Current["TrackGroup1"];
+                this.Entry_ByteBox2.Value = (Byte)this.Current["TrackGroup2"];
 
-                TrackAmount_ByteBox.Value = CurrentMusic.TrackAmount;
-                Music_Unknown_ByteBox.Value = CurrentMusic.Unknown;
-                Music_Priority_ByteBox.Value = CurrentMusic.Priority;
-                Music_Reverb_ByteBox.Value = CurrentMusic.Reverb;
+                this.TrackAmount_ByteBox.Value = this.CurrentMusic.TrackAmount;
+                this.Music_Unknown_ByteBox.Value = this.CurrentMusic.Unknown;
+                this.Music_Priority_ByteBox.Value = this.CurrentMusic.Priority;
+                this.Music_Reverb_ByteBox.Value = this.CurrentMusic.Reverb;
             }
             catch (Exception ex)
             {
                 UI.ShowError("There has been an error while trying to load the values.", ex);
 
-                Entry_PointerBox.Value = new Pointer();
-                Entry_ByteBox1.Value = 0;
-                Entry_ByteBox2.Value = 0;
+                this.Entry_PointerBox.Value = new Pointer();
+                this.Entry_ByteBox1.Value = 0;
+                this.Entry_ByteBox2.Value = 0;
 
-                TrackAmount_ByteBox.Value = 0;
-                Music_Unknown_ByteBox.Value = 0;
-                Music_Priority_ByteBox.Value = 0;
-                Music_Reverb_ByteBox.Value = 0;
+                this.TrackAmount_ByteBox.Value = 0;
+                this.Music_Unknown_ByteBox.Value = 0;
+                this.Music_Priority_ByteBox.Value = 0;
+                this.Music_Reverb_ByteBox.Value = 0;
             }
-            
-            Entry_PointerBox.ValueChanged += Entry_PointerBox_ValueChanged;
-            Entry_ByteBox1.ValueChanged += Entry_ByteBox1_ValueChanged;
-            Entry_ByteBox2.ValueChanged += Entry_ByteBox2_ValueChanged;
 
-            TrackAmount_ByteBox.ValueChanged += TrackAmount_ByteBox_ValueChanged;
-            Music_Unknown_ByteBox.ValueChanged += Music_Unknown_ByteBox_ValueChanged;
-            Music_Priority_ByteBox.ValueChanged += Music_Priority_ByteBox_ValueChanged;
-            Music_Reverb_ByteBox.ValueChanged += Music_Reverb_ByteBox_ValueChanged;
+            this.Entry_PointerBox.ValueChanged += this.Entry_PointerBox_ValueChanged;
+            this.Entry_ByteBox1.ValueChanged += this.Entry_ByteBox1_ValueChanged;
+            this.Entry_ByteBox2.ValueChanged += this.Entry_ByteBox2_ValueChanged;
+
+            this.TrackAmount_ByteBox.ValueChanged += this.TrackAmount_ByteBox_ValueChanged;
+            this.Music_Unknown_ByteBox.ValueChanged += this.Music_Unknown_ByteBox_ValueChanged;
+            this.Music_Priority_ByteBox.ValueChanged += this.Music_Priority_ByteBox_ValueChanged;
+            this.Music_Reverb_ByteBox.ValueChanged += this.Music_Reverb_ByteBox_ValueChanged;
         }
         void Core_LoadAudio()
         {
-            Preview.Reset();
+            this.Preview.Reset();
 
             for (Byte i = 0; i < 128; i++)
             {
-                if (Instruments[i].IsUnused())
-                    Preview.Load(null);
-                else Preview.Load(Instruments.GetAudio(i));
+                if (this.Instruments[i].IsUnused())
+                    this.Preview.Load(null);
+                else this.Preview.Load(this.Instruments.GetAudio(i));
             }
         }
 
@@ -202,78 +202,78 @@ namespace EmblemMagic.Editors
         }
         private void View_HideInstruments_Click(Object sender, EventArgs e)
         {
-            Core_LoadInstruments();
+            this.Core_LoadInstruments();
         }
 
 
 
         private void EntryArrayBox_ValueChanged(Object sender, EventArgs e)
         {
-            Core_Update();
+            this.Core_Update();
         }
 
         private void Entry_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                Current.GetAddress(Current.EntryIndex, "Address"),
-                Instrument_PointerBox.Value,
-                CurrentEntry + "Music Header repointed");
+                this.Current.GetAddress(this.Current.EntryIndex, "Address"),
+                this.Instrument_PointerBox.Value,
+                this.CurrentEntry + "Music Header repointed");
         }
         private void Entry_ByteBox1_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                Current.GetAddress(Current.EntryIndex, "TrackGroup1"),
-                Entry_ByteBox1.Value,
-                CurrentEntry + "Track Group 1 changed");
+                this.Current.GetAddress(this.Current.EntryIndex, "TrackGroup1"),
+                this.Entry_ByteBox1.Value,
+                this.CurrentEntry + "Track Group 1 changed");
         }
         private void Entry_ByteBox2_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                Current.GetAddress(Current.EntryIndex, "TrackGroup2"),
-                Entry_ByteBox2.Value,
-                CurrentEntry + "Track Group 2 changed");
+                this.Current.GetAddress(this.Current.EntryIndex, "TrackGroup2"),
+                this.Entry_ByteBox2.Value,
+                this.CurrentEntry + "Track Group 2 changed");
         }
 
         private void Instrument_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                Current.Address + 4,
-                Instrument_PointerBox.Value,
-                CurrentEntry + "Instruments repointed");
+                this.Current.Address + 4,
+                this.Instrument_PointerBox.Value,
+                this.CurrentEntry + "Instruments repointed");
         }
         private void Instrument_ListBox_MouseDoubleClick(Object sender, MouseEventArgs e)
         {
-            App.Core_OpenEditor(new InstrumentEditor(Instruments,
-                Util.HexToByte(((String)Instrument_ListBox.SelectedItem).Substring(0, 2))));
+            this.App.Core_OpenEditor(new InstrumentEditor(this.Instruments,
+                Util.HexToByte(((String)this.Instrument_ListBox.SelectedItem).Substring(0, 2))));
         }
 
         private void TrackAmount_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                Current.Address,
-                TrackAmount_ByteBox.Value,
-                CurrentEntry + "Track Amount changed");
+                this.Current.Address,
+                this.TrackAmount_ByteBox.Value,
+                this.CurrentEntry + "Track Amount changed");
         }
         private void Music_Unknown_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                Current.Address + 1,
-                Music_Unknown_ByteBox.Value,
-                CurrentEntry + "Unknown changed");
+                this.Current.Address + 1,
+                this.Music_Unknown_ByteBox.Value,
+                this.CurrentEntry + "Unknown changed");
         }
         private void Music_Priority_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                Current.Address + 2,
-                Music_Priority_ByteBox.Value,
-                CurrentEntry + "Priority changed");
+                this.Current.Address + 2,
+                this.Music_Priority_ByteBox.Value,
+                this.CurrentEntry + "Priority changed");
         }
         private void Music_Reverb_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                Current.Address + 3,
-                Music_Reverb_ByteBox.Value,
-                CurrentEntry + "Reverb changed");
+                this.Current.Address + 3,
+                this.Music_Reverb_ByteBox.Value,
+                this.CurrentEntry + "Reverb changed");
         }
 
         private void PlayStop_Button_Click(Object sender, EventArgs e)

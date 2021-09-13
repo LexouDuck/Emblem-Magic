@@ -13,16 +13,16 @@ namespace EmblemMagic.FireEmblem
             get
             {
                 System.Int32 font_i = (x / 16) + (y / 16) * 16;
-                if (Glyphs[font_i] == null)
+                if (this.Glyphs[font_i] == null)
                     return 0;
-                else return Glyphs[font_i][x % 16, y % 16];
+                else return this.Glyphs[font_i][x % 16, y % 16];
             }
         }
         public GBA.Color GetColor(System.Int32 x, System.Int32 y)
         {
             System.Int32 font_i = (x / 16) + (y / 16) * 16;
-            if (Glyphs[font_i] == null) return Glyph.Colors[0];
-            else return Glyphs[font_i].GetColor(x % 16, y % 16);
+            if (this.Glyphs[font_i] == null) return Glyph.Colors[0];
+            else return this.Glyphs[font_i].GetColor(x % 16, y % 16);
         }
 
         public System.Int32 Width
@@ -53,10 +53,10 @@ namespace EmblemMagic.FireEmblem
 
         public Font(Pointer address)
         {
-            Address = address;
-            Glyphs = new Glyph[(Core.App.Game.Region == GameRegion.JAP ? 512 : 256)];
+            this.Address = address;
+            this.Glyphs = new Glyph[(Core.App.Game.Region == GameRegion.JAP ? 512 : 256)];
             Pointer pointer;
-            for (System.Int32 i = 0; i < Glyphs.Length; i++)
+            for (System.Int32 i = 0; i < this.Glyphs.Length; i++)
             {
                 if (Core.App.Game.Region == GameRegion.JAP)
                 {
@@ -69,7 +69,7 @@ namespace EmblemMagic.FireEmblem
                     catch { continue; }
                 }
                 else pointer = Core.ReadPointer(address + i * 4);
-                Glyphs[i] = (pointer == new Pointer()) ? null : new Glyph(pointer);
+                this.Glyphs[i] = (pointer == new Pointer()) ? null : new Glyph(pointer);
             }
         }
         public Font(GBA.Bitmap image)
@@ -81,16 +81,16 @@ namespace EmblemMagic.FireEmblem
                 image.Colors[2],
                 image.Colors[3]
             };
-            Glyphs = new Glyph[256];
+            this.Glyphs = new Glyph[256];
             System.Int32 x = 1;
             System.Int32 y = 0;
-            for (System.Int32 i = 1; i < Glyphs.Length; i++)
+            for (System.Int32 i = 1; i < this.Glyphs.Length; i++)
             {
-                Glyphs[i] = new Glyph(new GBA.Bitmap(image,
+                this.Glyphs[i] = new Glyph(new GBA.Bitmap(image,
                     new Rectangle(x * 16, y * 16, 16, 16)), colors);
 
-                if (Glyphs[i].IsEmpty())
-                    Glyphs[i] = null;
+                if (this.Glyphs[i].IsEmpty())
+                    this.Glyphs[i] = null;
                 /*
                 for (int j = 0; j < i; j++)
                 {
@@ -113,7 +113,7 @@ namespace EmblemMagic.FireEmblem
         {
             System.Byte index = 0x00;
             if (fontmap.TryGetValue(letter, out index))
-                return Glyphs[index];
+                return this.Glyphs[index];
             else return null;
         }
 

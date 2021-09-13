@@ -12,63 +12,63 @@ namespace Magic.Components
 
         public TrackerGrid() : base()
         {
-            AllowUserToAddRows = false;
-            AllowUserToDeleteRows = false;
-            AllowUserToOrderColumns = false;
-            SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            RowHeadersWidth = 30;
-            RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.AllowUserToAddRows = false;
+            this.AllowUserToDeleteRows = false;
+            this.AllowUserToOrderColumns = false;
+            this.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this.RowHeadersWidth = 30;
+            this.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
 
-            ColumnHeaderMouseClick += ColumnHeaderMouseClicked;
-            ColumnWidthChanged += PlaceVolumeBars;
-            Scroll += PlaceVolumeBars;
+            ColumnHeaderMouseClick += this.ColumnHeaderMouseClicked;
+            ColumnWidthChanged += this.PlaceVolumeBars;
+            Scroll += this.PlaceVolumeBars;
             
-            CellPainting += PaintCells;
+            CellPainting += this.PaintCells;
 
-            Volumes = new List<ProgressBar>();
-            Font = new System.Drawing.Font("Consolas", 7.5F);
+            this.Volumes = new List<ProgressBar>();
+            this.Font = new System.Drawing.Font("Consolas", 7.5F);
         }
 
         public void Load(List<Track> tracks)
         {
-            foreach (ProgressBar bar in Volumes)
+            foreach (ProgressBar bar in this.Volumes)
             {
                 bar.Dispose();
             }
-            Volumes.Clear();
-            Columns.Clear();
-            Controls.Clear();
+            this.Volumes.Clear();
+            this.Columns.Clear();
+            this.Controls.Clear();
             try
             {
                 ArrayFile notes = new ArrayFile("Music Notes.txt");
-                Int32 width = RowHeadersWidth;
+                Int32 width = this.RowHeadersWidth;
                 for (Int32 i = 0; i < tracks.Count; i++)
                 {
-                    Columns.Add(new DataGridViewTextBoxColumn()
+                    this.Columns.Add(new DataGridViewTextBoxColumn()
                     {
                         HeaderText = "Track " + i + "\n\n" + "Notes |Vol|Ins|Pan| Effects",
                         MinimumWidth = 200,
                         SortMode = DataGridViewColumnSortMode.Programmatic
                     });
-                    width += Columns[i].HeaderCell.Size.Width;
+                    width += this.Columns[i].HeaderCell.Size.Width;
                     ProgressBar volume = new ProgressBar();
-                    Volumes.Add(volume);
-                    Controls.Add(volume);
+                    this.Volumes.Add(volume);
+                    this.Controls.Add(volume);
 
                     String[][] track = tracks[i].GetTrackerString(notes);
                     const Int32 height = 14;
                     for (Int32 j = 0; j < track.Length; j++)
                     {
-                        if (RowCount <= j) Rows.Add(new DataGridViewRow() { Height = height });
-                        Rows[j].HeaderCell.Value = Util.IntToHex((UInt32)j);
-                        Rows[j].Cells[i].Value = track[j];
-                        Rows[j].Height = Math.Max(
+                        if (this.RowCount <= j) this.Rows.Add(new DataGridViewRow() { Height = height });
+                        this.Rows[j].HeaderCell.Value = Util.IntToHex((UInt32)j);
+                        this.Rows[j].Cells[i].Value = track[j];
+                        this.Rows[j].Height = Math.Max(
                             (track[j][0] == null) ? height : track[j][0].Split('\n').Length * height,
                             (track[j][4] == null) ? height : track[j][4].Split('\n').Length * height);
                     }
                 }
-                PlaceVolumeBars(this, null);
+                this.PlaceVolumeBars(this, null);
             }
             catch (Exception ex)
             {
@@ -84,7 +84,7 @@ namespace Magic.Components
                     backbrush = new SolidBrush(e.CellStyle.BackColor),
                     selection = new SolidBrush(SystemColors.Highlight))
                 {
-                    if (SelectedRows.Contains(Rows[e.RowIndex]))
+                    if (this.SelectedRows.Contains(this.Rows[e.RowIndex]))
                     {
                         e.Graphics.FillRectangle(selection, e.CellBounds);
                     }
@@ -154,32 +154,32 @@ namespace Magic.Components
 
         void ColumnHeaderMouseClicked(Object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (Volumes[e.ColumnIndex].Visible)
+            if (this.Volumes[e.ColumnIndex].Visible)
             {
-                Volumes[e.ColumnIndex].Visible = false;
+                this.Volumes[e.ColumnIndex].Visible = false;
 
-                Columns[e.ColumnIndex].ReadOnly = true;
-                Columns[e.ColumnIndex].DefaultCellStyle.BackColor = System.Drawing.Color.LightGray;
-                Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = System.Drawing.Color.DarkGray;
+                this.Columns[e.ColumnIndex].ReadOnly = true;
+                this.Columns[e.ColumnIndex].DefaultCellStyle.BackColor = System.Drawing.Color.LightGray;
+                this.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = System.Drawing.Color.DarkGray;
             }
             else
             {
-                Volumes[e.ColumnIndex].Visible = true;
+                this.Volumes[e.ColumnIndex].Visible = true;
 
-                Columns[e.ColumnIndex].ReadOnly = false;
-                Columns[e.ColumnIndex].DefaultCellStyle.BackColor = System.Drawing.Color.White;
-                Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
+                this.Columns[e.ColumnIndex].ReadOnly = false;
+                this.Columns[e.ColumnIndex].DefaultCellStyle.BackColor = System.Drawing.Color.White;
+                this.Columns[e.ColumnIndex].DefaultCellStyle.ForeColor = System.Drawing.Color.Black;
             }
         }
         void PlaceVolumeBars(Object sender, EventArgs e)
         {
-            Int32 width = RowHeadersWidth;
-            Int32 scroll = HorizontalScrollingOffset;
-            for (Int32 i = 0; i < Volumes.Count; i++)
+            Int32 width = this.RowHeadersWidth;
+            Int32 scroll = this.HorizontalScrollingOffset;
+            for (Int32 i = 0; i < this.Volumes.Count; i++)
             {
-                Volumes[i].Location = new Point(width + 4 - scroll, 20);
-                Volumes[i].Size = new Size(192, 10);
-                width += Columns[i].HeaderCell.Size.Width;
+                this.Volumes[i].Location = new Point(width + 4 - scroll, 20);
+                this.Volumes[i].Size = new Size(192, 10);
+                width += this.Columns[i].HeaderCell.Size.Width;
             }
         }
     }

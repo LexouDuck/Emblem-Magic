@@ -27,17 +27,17 @@ namespace Magic.Components
 
         public PianoBox()
         {
-            Octaves = 10;
-            Selection = new Boolean[Octaves * 12];
-            ToggleSelection = false;
+            this.Octaves = 10;
+            this.Selection = new Boolean[this.Octaves * 12];
+            this.ToggleSelection = false;
 
-            InitializeComponent();
-            
-            SetStyle(ControlStyles.Opaque, true);
-            SetStyle(ControlStyles.Selectable, true);
-            SetStyle(ControlStyles.UserPaint, true);
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            this.InitializeComponent();
+
+            this.SetStyle(ControlStyles.Opaque, true);
+            this.SetStyle(ControlStyles.Selectable, true);
+            this.SetStyle(ControlStyles.UserPaint, true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
         }
 
 
@@ -48,26 +48,26 @@ namespace Magic.Components
 
         void CheckKeyboard(Boolean select)
         {
-            Selection = new Boolean[Octaves * 12];
-            for (Int32 i = 0; i < keys.Count; i++)
+            this.Selection = new Boolean[this.Octaves * 12];
+            for (Int32 i = 0; i < this.keys.Count; i++)
             {
-                switch (keys[i])
+                switch (this.keys[i])
                 {
-                    case Keys.Z:    Selection[12 * 4 + 0] = true; break; // C
-                    case Keys.S:    Selection[12 * 4 + 1] = true; break; // C#
-                    case Keys.X:    Selection[12 * 4 + 2] = true; break; // D
-                    case Keys.D:    Selection[12 * 4 + 3] = true; break; // Eb
-                    case Keys.C:    Selection[12 * 4 + 4] = true; break; // E 
-                    case Keys.V:    Selection[12 * 4 + 5] = true; break; // F
-                    case Keys.G:    Selection[12 * 4 + 6] = true; break; // F#
-                    case Keys.B:    Selection[12 * 4 + 7] = true; break; // G
-                    case Keys.H:    Selection[12 * 4 + 8] = true; break; // G#
-                    case Keys.N:    Selection[12 * 4 + 9] = true; break; // A
-                    case Keys.J:   Selection[12 * 4 + 10] = true; break; // Bb
-                    case Keys.M:   Selection[12 * 4 + 11] = true; break; // B
-                    case Keys.Oemcomma: Selection[12 * 5] = true; break;
+                    case Keys.Z: this.Selection[12 * 4 + 0] = true; break; // C
+                    case Keys.S: this.Selection[12 * 4 + 1] = true; break; // C#
+                    case Keys.X: this.Selection[12 * 4 + 2] = true; break; // D
+                    case Keys.D: this.Selection[12 * 4 + 3] = true; break; // Eb
+                    case Keys.C: this.Selection[12 * 4 + 4] = true; break; // E 
+                    case Keys.V: this.Selection[12 * 4 + 5] = true; break; // F
+                    case Keys.G: this.Selection[12 * 4 + 6] = true; break; // F#
+                    case Keys.B: this.Selection[12 * 4 + 7] = true; break; // G
+                    case Keys.H: this.Selection[12 * 4 + 8] = true; break; // G#
+                    case Keys.N: this.Selection[12 * 4 + 9] = true; break; // A
+                    case Keys.J: this.Selection[12 * 4 + 10] = true; break; // Bb
+                    case Keys.M: this.Selection[12 * 4 + 11] = true; break; // B
+                    case Keys.Oemcomma: this.Selection[12 * 5] = true; break;
 
-                    default: keys.RemoveAt(i); i--; break;
+                    default: this.keys.RemoveAt(i); i--; break;
                 }
             }
             this.SelectionChanged(this, null);
@@ -75,22 +75,22 @@ namespace Magic.Components
         }
         void CheckMouseCollisions(MouseEventArgs e)
         {
-            Single increment = Width / Octaves / 7; // the width of a white note
+            Single increment = this.Width / this.Octaves / 7; // the width of a white note
             Single width = (increment / 3) * 2;
             Single height = this.Height * 0.6f;
             Single x = width;
             if (e.Y <= height)
             {
-                for (Int32 i = 0; i < Octaves * 12; i++)
+                for (Int32 i = 0; i < this.Octaves * 12; i++)
                 {
                     switch (i % 12)
                     {
                         case 1: case 3: case 6: case 8: case 10: // black notes
                             if (e.X >= x && e.X <= x + width)
                             {
-                                if (ToggleSelection)
-                                    Selection[i] = !Selection[i];
-                                else Selection[i] = true;
+                                if (this.ToggleSelection)
+                                    this.Selection[i] = !this.Selection[i];
+                                else this.Selection[i] = true;
                                 this.SelectionChanged(this, null);
                                 this.Invalidate();
                                 return;
@@ -104,16 +104,16 @@ namespace Magic.Components
                 }
             }
             x = 0;
-            for (Int32 i = 0; i < Octaves * 12; i++)
+            for (Int32 i = 0; i < this.Octaves * 12; i++)
             {
                 switch (i % 12)
                 {
                     case 0: case 2: case 4: case 5: case 7: case 9: case 11: // white notes
                         if (e.X >= x && e.X < x + increment)
                         {
-                            if (ToggleSelection)
-                                Selection[i] = !Selection[i];
-                            else Selection[i] = true;
+                            if (this.ToggleSelection)
+                                this.Selection[i] = !this.Selection[i];
+                            else this.Selection[i] = true;
                             this.SelectionChanged(this, null);
                             this.Invalidate();
                             return;
@@ -133,20 +133,20 @@ namespace Magic.Components
         {
             base.OnMouseMove(e);
 
-            if (!ToggleSelection && mouse)
+            if (!this.ToggleSelection && this.mouse)
             {
-                Selection = new Boolean[Octaves * 12];
-                CheckMouseCollisions(e);
+                this.Selection = new Boolean[this.Octaves * 12];
+                this.CheckMouseCollisions(e);
             }
         }
         protected override void OnMouseUp(MouseEventArgs e)
         {
             base.OnMouseUp(e);
-            mouse = false;
+            this.mouse = false;
 
-            if (!ToggleSelection)
+            if (!this.ToggleSelection)
             {
-                Selection = new Boolean[Octaves * 12];
+                this.Selection = new Boolean[this.Octaves * 12];
                 this.SelectionChanged(this, null);
                 this.Invalidate();
             }
@@ -154,26 +154,26 @@ namespace Magic.Components
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
-            mouse = true;
+            this.mouse = true;
 
             this.Focus();
-            CheckMouseCollisions(e);
+            this.CheckMouseCollisions(e);
         }
 
         List<Keys> keys = new List<Keys>();
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            if (keys.Contains(e.KeyCode)) return;
-            else keys.Add(e.KeyCode);
+            if (this.keys.Contains(e.KeyCode)) return;
+            else this.keys.Add(e.KeyCode);
 
-            CheckKeyboard(true);
+            this.CheckKeyboard(true);
             e.Handled = true;
         }
         protected override void OnKeyUp(KeyEventArgs e)
         {
-            keys.Remove(e.KeyCode);
+            this.keys.Remove(e.KeyCode);
 
-            CheckKeyboard(false);
+            this.CheckKeyboard(false);
             e.Handled = true;
         }
         protected override Boolean IsInputKey(Keys keyData)
@@ -203,11 +203,11 @@ namespace Magic.Components
         {
             base.OnPaint(e);
 
-            Single increment = Width / Octaves / 7; // the width of a white note
+            Single increment = this.Width / this.Octaves / 7; // the width of a white note
 
             using (Brush white = new SolidBrush(this.ForeColor))
             {
-                e.Graphics.FillRectangle(white, 0, 0, Width, Height);
+                e.Graphics.FillRectangle(white, 0, 0, this.Width, this.Height);
             }
 
             using (Brush selected = new SolidBrush(SystemColors.Highlight))
@@ -217,17 +217,17 @@ namespace Magic.Components
                 Single x = 0;
                 using (Pen lines = new Pen(SystemColors.AppWorkspace))
                 {
-                    e.Graphics.DrawRectangle(lines, 0, 0, Width - 1, Height - 1);
+                    e.Graphics.DrawRectangle(lines, 0, 0, this.Width - 1, this.Height - 1);
                     
-                    for (Int32 i = 0; i < Octaves * 12; i++)
+                    for (Int32 i = 0; i < this.Octaves * 12; i++)
                     {
                         switch (i % 12)
                         {
                             case 0: case 2: case 4: case 5: case 7: case 9: case 11: // white notes
-                                e.Graphics.DrawLine(lines, x, 0, x, Height - 1);
-                                if (Selection[i])
+                                e.Graphics.DrawLine(lines, x, 0, x, this.Height - 1);
+                                if (this.Selection[i])
                                 {
-                                    e.Graphics.FillRectangle(selected, x + 1, 1, increment, Height - 1);
+                                    e.Graphics.FillRectangle(selected, x + 1, 1, increment, this.Height - 1);
                                 }
                                 x += increment;
                                 break;
@@ -238,13 +238,13 @@ namespace Magic.Components
                 x = width;
                 using (Brush black = new SolidBrush(this.BackColor))
                 {
-                    for (Int32 i = 0; i < Octaves * 12; i++)
+                    for (Int32 i = 0; i < this.Octaves * 12; i++)
                     {
                         switch (i % 12)
                         {
                             case 1: case 3: case 6: case 8: case 10: // black notes
                                 e.Graphics.FillRectangle(black, x, 1, width, height);
-                                if (Selection[i])
+                                if (this.Selection[i])
                                 {
                                     e.Graphics.FillRectangle(selected, x + 1, 1, width - 2, height - 1);
                                 }
@@ -280,9 +280,9 @@ namespace Magic.Components
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(Boolean disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(disposing);
         }

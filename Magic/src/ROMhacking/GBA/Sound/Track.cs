@@ -21,8 +21,8 @@ namespace GBA
                 data.Add(buffer);
                 index++;
             }
-            Data = data.ToArray();
-            Address = address;
+            this.Data = data.ToArray();
+            this.Address = address;
         }
 
         String GetAddress(UInt32 address)
@@ -88,19 +88,19 @@ namespace GBA
             Byte note = 0; // stores the last note key played
             Int32 index = 0;
             result.Add(new String[subcolumns]);
-            for (UInt32 i = 0; i < Data.Length; i++)
+            for (UInt32 i = 0; i < this.Data.Length; i++)
             {
-                if (Data[i] < 0x80) // repeat command
+                if (this.Data[i] < 0x80) // repeat command
                 {
                     if (repeat >= 0xD0) // note-on command
                     {
                         if (result[index][col_notes] != null)
                             result[index][col_notes] += '\n';
-                        length = GetLength(repeat, false);
-                        result[index][col_notes] += notes[Data[i]];
-                        note = Data[i];
-                        if ((SByte)Data[i + 1] >= 0) result[index][col_notes] += ", " + Util.ByteToHex(Data[++i]);
-                        if ((SByte)Data[i + 1] >= 0) length += Data[++i];
+                        length = this.GetLength(repeat, false);
+                        result[index][col_notes] += notes[this.Data[i]];
+                        note = this.Data[i];
+                        if ((SByte)this.Data[i + 1] >= 0) result[index][col_notes] += ", " + Util.ByteToHex(this.Data[++i]);
+                        if ((SByte)this.Data[i + 1] >= 0) length += this.Data[++i];
                         for (Int32 j = 0; j < length; j++)
                         {
                             result.Add(new String[subcolumns]);
@@ -110,43 +110,43 @@ namespace GBA
                     else switch (repeat)
                         {
                             case 0xBD: // Set Instrument (1-byte arg)
-                                result[index][col_ins] = Util.ByteToHex(Data[i]);
+                                result[index][col_ins] = Util.ByteToHex(this.Data[i]);
                                 break;
                             case 0xBE: // Set Volume (1-byte arg)
-                                result[index][col_vol] = Util.ByteToHex(Data[i]);
+                                result[index][col_vol] = Util.ByteToHex(this.Data[i]);
                                 break;
                             case 0xBF: // Set Panning (1-byte arg)
-                                result[index][col_pan] = Util.ByteToHex(Data[i]);
+                                result[index][col_pan] = Util.ByteToHex(this.Data[i]);
                                 break;
                             case 0xC0: // Pitch bend value (1-byte arg)
                                 if (result[index][col_effects] != null)
                                     result[index][col_effects] += '\n';
-                                result[index][col_effects] += "pitch:" + (Data[i] - 0x40);
+                                result[index][col_effects] += "pitch:" + (this.Data[i] - 0x40);
                                 break;
                             case 0xC1: // Pitch bend semitones (1-byte arg)
                                 if (result[index][col_effects] != null)
                                     result[index][col_effects] += '\n';
-                                result[index][col_effects] += "slide:" + (Data[i] - 0x40);
+                                result[index][col_effects] += "slide:" + (this.Data[i] - 0x40);
                                 break;
                             case 0xC4: // LFO Depth (1-byte arg)
                                 if (result[index][col_effects] != null)
                                     result[index][col_effects] += '\n';
-                                result[index][col_effects] += "lfo_depth:" + Data[i];
+                                result[index][col_effects] += "lfo_depth:" + this.Data[i];
                                 break;
 
                             case 0xC8: // Detune (1-byte arg)
                                 if (result[index][col_effects] != null)
                                     result[index][col_effects] += '\n';
-                                result[index][col_effects] += "tuning:" + (Data[i] - 0x40);
+                                result[index][col_effects] += "tuning:" + (this.Data[i] - 0x40);
                                 break;
 
                             case 0xCD: // Echo (two 1-byte args)
                                 if (result[index][col_effects] != null)
                                     result[index][col_effects] += '\n';
-                                switch (Data[i])
+                                switch (this.Data[i])
                                 {
-                                    case 0x08: result[index][col_effects] += "echo_vol:" + Data[++i]; break;
-                                    case 0x09: result[index][col_effects] += "echo_len:" + Data[++i]; break;
+                                    case 0x08: result[index][col_effects] += "echo_vol:" + this.Data[++i]; break;
+                                    case 0x09: result[index][col_effects] += "echo_len:" + this.Data[++i]; break;
                                     default:; break;
                                 }
                                 break;
@@ -155,23 +155,23 @@ namespace GBA
                                 if (result[index][col_notes] != null)
                                     result[index][col_notes] += '\n';
                                 result[index][col_notes] += "___";
-                                if ((SByte)Data[i + 1] >= 0) { result[index][col_notes] += ", " + notes[Data[i]]; note = Data[i]; }
-                                if ((SByte)Data[i + 1] >= 0) { result[index][col_notes] += ", " + Util.ByteToHex(Data[++i]); }
+                                if ((SByte)this.Data[i + 1] >= 0) { result[index][col_notes] += ", " + notes[this.Data[i]]; note = this.Data[i]; }
+                                if ((SByte)this.Data[i + 1] >= 0) { result[index][col_notes] += ", " + Util.ByteToHex(this.Data[++i]); }
                                 break;
                             case 0xCF: // Note On (two optional args)
                                 if (result[index][col_notes] != null)
                                     result[index][col_notes] += '\n';
-                                if ((SByte)Data[i + 1] >= 0) { result[index][col_notes] += notes[Data[i]]; note = Data[i]; }
+                                if ((SByte)this.Data[i + 1] >= 0) { result[index][col_notes] += notes[this.Data[i]]; note = this.Data[i]; }
                                 else result[index][col_notes] += note;
-                                if ((SByte)Data[i + 1] >= 0) { result[index][col_notes] += ", " + Util.ByteToHex(Data[++i]); }
+                                if ((SByte)this.Data[i + 1] >= 0) { result[index][col_notes] += ", " + Util.ByteToHex(this.Data[++i]); }
                                 break;
 
                             default: throw new Exception("No repeatable command to execute.");
                         }
                 }
-                else if (Data[i] <= 0xB0) // wait command
+                else if (this.Data[i] <= 0xB0) // wait command
                 {
-                    length = GetLength(Data[i], true);
+                    length = this.GetLength(this.Data[i], true);
                     for (Int32 j = 0; j < length; j++)
                     {
                         result.Add(new String[subcolumns]);
@@ -185,26 +185,26 @@ namespace GBA
                         result[index][col_effects] += "timing:" + (length % ticks);
                     }*/
                 }
-                else if (Data[i] >= 0xD0) // note-on command
+                else if (this.Data[i] >= 0xD0) // note-on command
                 {
-                    repeat = Data[i];
+                    repeat = this.Data[i];
                     if (result[index][col_notes] != null)
                         result[index][col_notes] += '\n';
-                    length = GetLength(Data[i], false);
-                    result[index][col_notes] += notes[Data[++i]];
-                    note = Data[i];
-                    if ((SByte)Data[i + 1] >= 0) result[index][col_notes] += ", " + Util.ByteToHex(Data[++i]);
-                    if ((SByte)Data[i + 1] >= 0) length += Data[++i];
+                    length = this.GetLength(this.Data[i], false);
+                    result[index][col_notes] += notes[this.Data[++i]];
+                    note = this.Data[i];
+                    if ((SByte)this.Data[i + 1] >= 0) result[index][col_notes] += ", " + Util.ByteToHex(this.Data[++i]);
+                    if ((SByte)this.Data[i + 1] >= 0) length += this.Data[++i];
                     for (Int32 j = 0; j < length; j++)
                     {
                         result.Add(new String[subcolumns]);
                         index++;
                     }
                 }
-                else switch (Data[i])
+                else switch (this.Data[i])
                 {
                     case 0xB1: // End of track
-                        if (i != Data.Length - 1)
+                        if (i != this.Data.Length - 1)
                             throw new Exception("There shouldn't be any data after an end of track command (0xB1)");
                         if (result[index][col_effects] != null)
                             result[index][col_effects] += '\n';
@@ -213,15 +213,15 @@ namespace GBA
                     case 0xB2: // Jump to address (4-byte arg)
                         if (result[index][col_effects] != null)
                             result[index][col_effects] += '\n';
-                        if (i + 4 >= Data.Length) result[index][col_effects] += "loop";
-                        else result[index][col_effects] += "jump:" + GetAddress(Data.GetUInt32((uint)++i, true));
+                        if (i + 4 >= this.Data.Length) result[index][col_effects] += "loop";
+                        else result[index][col_effects] += "jump:" + this.GetAddress(this.Data.GetUInt32((uint)++i, true));
                         i += 3;
                         break;
                     case 0xB3: // Call subsection (4-byte arg)
                         if (result[index][col_effects] != null)
                             result[index][col_effects] += '\n';
-                        if (i + 4 >= Data.Length) result[index][col_effects] += "call";
-                        else result[index][col_effects] += "call:" + GetAddress(Data.GetUInt32((uint)++i, true));
+                        if (i + 4 >= this.Data.Length) result[index][col_effects] += "call";
+                        else result[index][col_effects] += "call:" + this.GetAddress(this.Data.GetUInt32((uint)++i, true));
                         i += 3;
                         break;
                     case 0xB4: // End subsection
@@ -232,113 +232,113 @@ namespace GBA
                     case 0xB5: // Call and repeat subsection. (1-byte and 4-byte args)
                         if (result[index][col_effects] != null)
                             result[index][col_effects] += '\n';
-                        result[index][col_effects] += "loop:" + Data[++i] + "*" + GetAddress(Data.GetUInt32((uint)++i, true));
+                        result[index][col_effects] += "loop:" + this.Data[++i] + "*" + this.GetAddress(this.Data.GetUInt32((uint)++i, true));
                         i += 4;
                         break;
 
                     case 0xB9: // Conditional jump based on memory content (3 bytes..?)
                         if (result[index][col_effects] != null)
                             result[index][col_effects] += '\n';
-                        result[index][col_effects] += "jump:" + Data[++i] + "*" + Data[++i] + "*" + Data[++i];
+                        result[index][col_effects] += "jump:" + this.Data[++i] + "*" + this.Data[++i] + "*" + this.Data[++i];
                         break;
                     case 0xBA: // Set track priority (1-byte arg)
                         if (result[index][col_effects] != null)
                             result[index][col_effects] += '\n';
-                        result[index][col_effects] += "priority:" + Data[++i];
+                        result[index][col_effects] += "priority:" + this.Data[++i];
                         break;
                     case 0xBB: // Set tempo (1-byte arg)
                         if (result[index][col_effects] != null)
                             result[index][col_effects] += '\n';
-                        result[index][col_effects] += "tempo:" + Data[++i];
+                        result[index][col_effects] += "tempo:" + this.Data[++i];
                         break;
                     case 0xBC: // Transpose (1 signed byte)
                         if (result[index][col_effects] != null)
                             result[index][col_effects] += '\n';
-                        result[index][col_effects] += "transpose:" + (SByte)Data[++i];
+                        result[index][col_effects] += "transpose:" + (SByte)this.Data[++i];
                         break;
                     case 0xBD: // Set Instrument (1-byte arg)
-                        repeat = Data[i];
-                        result[index][col_ins] = Util.ByteToHex(Data[++i]);
+                        repeat = this.Data[i];
+                        result[index][col_ins] = Util.ByteToHex(this.Data[++i]);
                         break;
                     case 0xBE: // Set Volume (1-byte arg)
-                        repeat = Data[i];
-                        result[index][col_vol] = Util.ByteToHex(Data[++i]);
+                        repeat = this.Data[i];
+                        result[index][col_vol] = Util.ByteToHex(this.Data[++i]);
                         break;
                     case 0xBF: // Set Panning (1-byte arg)
-                        repeat = Data[i];
-                        result[index][col_pan] = Util.ByteToHex(Data[++i]);
+                        repeat = this.Data[i];
+                        result[index][col_pan] = Util.ByteToHex(this.Data[++i]);
                         break;
                     case 0xC0: // Pitch bend value (1-byte arg)
-                        repeat = Data[i];
+                        repeat = this.Data[i];
                         if (result[index][col_effects] != null)
                             result[index][col_effects] += '\n';
-                        result[index][col_effects] += "pitch:" + (Data[++i] - 0x40);
+                        result[index][col_effects] += "pitch:" + (this.Data[++i] - 0x40);
                         break;
                     case 0xC1: // Pitch bend semitones (1-byte arg)
-                        repeat = Data[i];
+                        repeat = this.Data[i];
                         if (result[index][col_effects] != null)
                             result[index][col_effects] += '\n';
-                        result[index][col_effects] += "slide:" + (Data[++i] - 0x40);
+                        result[index][col_effects] += "slide:" + (this.Data[++i] - 0x40);
                         break;
                     case 0xC2: // LFO Speed (1-byte arg)
                         if (result[index][col_effects] != null)
                             result[index][col_effects] += '\n';
-                        result[index][col_effects] += "lfo_speed:" + Data[++i];
+                        result[index][col_effects] += "lfo_speed:" + this.Data[++i];
                         break;
                     case 0xC3: // LFO Delay (1-byte arg)
                         if (result[index][col_effects] != null)
                             result[index][col_effects] += '\n';
-                        result[index][col_effects] += "lfo_delay:" + Data[++i];
+                        result[index][col_effects] += "lfo_delay:" + this.Data[++i];
                         break;
                     case 0xC4: // LFO Depth (1-byte arg)
-                        repeat = Data[i];
+                        repeat = this.Data[i];
                         if (result[index][col_effects] != null)
                             result[index][col_effects] += '\n';
-                        result[index][col_effects] += "lfo_depth:" + Data[++i];
+                        result[index][col_effects] += "lfo_depth:" + this.Data[++i];
                         break;
                     case 0xC5: // LFO Type (1-byte arg)
                         if (result[index][col_effects] != null)
                             result[index][col_effects] += '\n';
-                        result[index][col_effects] += "lfo_type:" + Data[++i];
+                        result[index][col_effects] += "lfo_type:" + this.Data[++i];
                         break;
 
                     case 0xC8: // Detune (1-byte arg)
-                        repeat = Data[i];
+                        repeat = this.Data[i];
                         if (result[index][col_effects] != null)
                             result[index][col_effects] += '\n';
-                        result[index][col_effects] += "detune:" + (Data[++i] - 0x40);
+                        result[index][col_effects] += "detune:" + (this.Data[++i] - 0x40);
                         break;
 
                     case 0xCD: // Echo (two 1-byte args)
-                        repeat = Data[i];
+                        repeat = this.Data[i];
                         if (result[index][col_effects] != null)
                             result[index][col_effects] += '\n';
-                        switch (Data[++i])
+                        switch (this.Data[++i])
                         {
-                            case 0x08: result[index][col_effects] += "echo_vol:" + Data[++i]; break;
-                            case 0x09: result[index][col_effects] += "echo_len:" + Data[++i]; break;
+                            case 0x08: result[index][col_effects] += "echo_vol:" + this.Data[++i]; break;
+                            case 0x09: result[index][col_effects] += "echo_len:" + this.Data[++i]; break;
                             default:; break;
                         }
                         break;
 
                     case 0xCE: // Note Off (two optional args)
-                        repeat = Data[i];
+                        repeat = this.Data[i];
                         if (result[index][col_notes] != null)
                             result[index][col_notes] += '\n';
                         result[index][col_notes] += "___";
-                        if ((SByte)Data[i + 1] >= 0) { result[index][col_notes] += ", " + notes[Data[++i]]; note = Data[i]; }
-                        if ((SByte)Data[i + 1] >= 0) { result[index][col_notes] += ", " + Util.ByteToHex(Data[++i]); }
+                        if ((SByte)this.Data[i + 1] >= 0) { result[index][col_notes] += ", " + notes[this.Data[++i]]; note = this.Data[i]; }
+                        if ((SByte)this.Data[i + 1] >= 0) { result[index][col_notes] += ", " + Util.ByteToHex(this.Data[++i]); }
                         break;
                     case 0xCF: // Note On (two optional args)
-                        repeat = Data[i];
+                        repeat = this.Data[i];
                         if (result[index][col_notes] != null)
                             result[index][col_notes] += '\n';
-                        if ((SByte)Data[i + 1] >= 0) { result[index][col_notes] += notes[Data[++i]]; note = Data[i]; }
+                        if ((SByte)this.Data[i + 1] >= 0) { result[index][col_notes] += notes[this.Data[++i]]; note = this.Data[i]; }
                         else result[index][col_notes] += note;
-                        if ((SByte)Data[i + 1] >= 0) { result[index][col_notes] += ", " + Util.ByteToHex(Data[++i]); }
+                        if ((SByte)this.Data[i + 1] >= 0) { result[index][col_notes] += ", " + Util.ByteToHex(this.Data[++i]); }
                         break;
 
-                    default: throw new Exception("Unsupported command: " + Util.ByteToHex(Data[i]));
+                    default: throw new Exception("Unsupported command: " + Util.ByteToHex(this.Data[i]));
                 }
             }
             return result.ToArray();

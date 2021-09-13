@@ -19,49 +19,49 @@ namespace Magic.Editors
 
         public ASMEditor()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            Read_LengthBox.Maximum = Core.CurrentROMSize;
+            this.Read_LengthBox.Maximum = Core.CurrentROMSize;
 
-            CurrentCPU = new ASM.RegisterSet(new Pointer(), true);
-            CurrentStack = new BindingList<String>();
+            this.CurrentCPU = new ASM.RegisterSet(new Pointer(), true);
+            this.CurrentStack = new BindingList<String>();
 
-            Test_Stack.DataSource = CurrentStack;
+            this.Test_Stack.DataSource = this.CurrentStack;
         }
         
         void Core_LoadValues()
         {
-            Test_R0.Value = CurrentCPU.R0;
-            Test_R1.Value = CurrentCPU.R1;
-            Test_R2.Value = CurrentCPU.R2;
-            Test_R3.Value = CurrentCPU.R3;
-            Test_R4.Value = CurrentCPU.R4;
-            Test_R5.Value = CurrentCPU.R5;
-            Test_R6.Value = CurrentCPU.R6;
-            Test_R7.Value = CurrentCPU.R7;
-            Test_R8.Value = CurrentCPU.R8;
-            Test_R9.Value = CurrentCPU.R9;
-            Test_R10.Value = CurrentCPU.R10;
-            Test_R11.Value = CurrentCPU.R11;
-            Test_R12.Value = CurrentCPU.R12;
-            Test_SP.Value = CurrentCPU.SP;
-            Test_LR.Value = CurrentCPU.LR;
-            Test_PC.Value = CurrentCPU.PC;
+            this.Test_R0.Value = this.CurrentCPU.R0;
+            this.Test_R1.Value = this.CurrentCPU.R1;
+            this.Test_R2.Value = this.CurrentCPU.R2;
+            this.Test_R3.Value = this.CurrentCPU.R3;
+            this.Test_R4.Value = this.CurrentCPU.R4;
+            this.Test_R5.Value = this.CurrentCPU.R5;
+            this.Test_R6.Value = this.CurrentCPU.R6;
+            this.Test_R7.Value = this.CurrentCPU.R7;
+            this.Test_R8.Value = this.CurrentCPU.R8;
+            this.Test_R9.Value = this.CurrentCPU.R9;
+            this.Test_R10.Value = this.CurrentCPU.R10;
+            this.Test_R11.Value = this.CurrentCPU.R11;
+            this.Test_R12.Value = this.CurrentCPU.R12;
+            this.Test_SP.Value = this.CurrentCPU.SP;
+            this.Test_LR.Value = this.CurrentCPU.LR;
+            this.Test_PC.Value = this.CurrentCPU.PC;
 
-            Test_CPSR_N.Checked = CurrentCPU.N;
-            Test_CPSR_Z.Checked = CurrentCPU.Z;
-            Test_CPSR_C.Checked = CurrentCPU.C;
-            Test_CPSR_V.Checked = CurrentCPU.V;
+            this.Test_CPSR_N.Checked = this.CurrentCPU.N;
+            this.Test_CPSR_Z.Checked = this.CurrentCPU.Z;
+            this.Test_CPSR_C.Checked = this.CurrentCPU.C;
+            this.Test_CPSR_V.Checked = this.CurrentCPU.V;
 
-            Test_CPSR_I.Checked = CurrentCPU.I;
-            Test_CPSR_F.Checked = CurrentCPU.F;
-            Test_CPSR_T.Checked = CurrentCPU.T;
-            Test_CPSR_Mode.Value = CurrentCPU.M;
+            this.Test_CPSR_I.Checked = this.CurrentCPU.I;
+            this.Test_CPSR_F.Checked = this.CurrentCPU.F;
+            this.Test_CPSR_T.Checked = this.CurrentCPU.T;
+            this.Test_CPSR_Mode.Value = this.CurrentCPU.M;
 
-            CurrentStack.Clear();
-            foreach (UInt32 item in CurrentCPU.Stack)
+            this.CurrentStack.Clear();
+            foreach (UInt32 item in this.CurrentCPU.Stack)
             {
-                CurrentStack.Add(Util.UInt32ToHex(item).PadLeft(8, '0'));
+                this.CurrentStack.Add(Util.UInt32ToHex(item).PadLeft(8, '0'));
             }
         }
         void Core_Dissassemble(Pointer address, Int32 length, Boolean thumb)
@@ -77,29 +77,29 @@ namespace Magic.Editors
             if (!thumb && length % 4 != 0)
                 throw new Exception("ARM machine code is 4 bytes per instruction - length should be a multiple of 4");
 
-            CurrentCPU.T = thumb;
-            CurrentCPU.PC = address + Pointer.HardwareOffset;
+            this.CurrentCPU.T = thumb;
+            this.CurrentCPU.PC = address + Pointer.HardwareOffset;
 
             Byte[] data = Core.ReadData(address, (Int32)length);
 
-            CurrentASM = thumb ?
+            this.CurrentASM = thumb ?
                 GBA.ASM.Disassemble_Thumb(data, address) :
                 GBA.ASM.Disassemble_ARM(data, address);
 
-            CodeBox.Items.Clear();
-            ListViewItem[] code = new ListViewItem[CurrentASM.Length];
-            for (Int32 i = 0; i < CurrentASM.Length; i++)
+            this.CodeBox.Items.Clear();
+            ListViewItem[] code = new ListViewItem[this.CurrentASM.Length];
+            for (Int32 i = 0; i < this.CurrentASM.Length; i++)
             {
                 code[i] = new ListViewItem(new String[]
                 {
-                    CurrentASM[i].Address.ToString(),
-                    Util.BytesToHex(CurrentASM[i].Data),
-                    CurrentASM[i].Code
+                    this.CurrentASM[i].Address.ToString(),
+                    Util.BytesToHex(this.CurrentASM[i].Data),
+                    this.CurrentASM[i].Code
                 });
             }
-            CodeBox.Items.AddRange(code);
-            CodeBox.Items[0].Selected = true;
-            CodeBox.Select();
+            this.CodeBox.Items.AddRange(code);
+            this.CodeBox.Items[0].Selected = true;
+            this.CodeBox.Select();
         }
 
 
@@ -113,16 +113,16 @@ namespace Magic.Editors
         {
             try
             {
-                Core_Dissassemble(
-                    Read_AddressBox.Value,
-                    (Int32)Read_LengthBox.Value,
-                    Read_ThumbRadioButton.Checked);
-                Core_LoadValues();
+                this.Core_Dissassemble(
+                    this.Read_AddressBox.Value,
+                    (Int32)this.Read_LengthBox.Value,
+                    this.Read_ThumbRadioButton.Checked);
+                this.Core_LoadValues();
             }
             catch (Exception ex)
             {
                 UI.ShowError("There has been an error while attempting to disassemble.", ex);
-                CodeBox.Items.Clear();
+                this.CodeBox.Items.Clear();
                 return;
             }
         }
@@ -131,52 +131,52 @@ namespace Magic.Editors
 
         private void Test_ResetCPUButton_Click(Object sender, EventArgs e)
         {
-            CurrentCPU = new ASM.RegisterSet(Read_AddressBox.Value, Read_ThumbRadioButton.Checked);
+            this.CurrentCPU = new ASM.RegisterSet(this.Read_AddressBox.Value, this.Read_ThumbRadioButton.Checked);
 
-            Core_LoadValues();
+            this.Core_LoadValues();
         }
         private void Test_ReadLineButton_Click(Object sender, EventArgs e)
         {
-            Int32 currentLine = CodeBox.SelectedIndices[0];
+            Int32 currentLine = this.CodeBox.SelectedIndices[0];
 
             try
             {
-                CurrentCPU = CurrentASM[currentLine].Read(CurrentCPU);
+                this.CurrentCPU = this.CurrentASM[currentLine].Read(this.CurrentCPU);
             }
             catch (Exception ex)
             {
                 UI.ShowError("Could not properly read selected line.", ex); return;
             }
 
-            Pointer address = new Pointer(CurrentCPU.PC, false, true);
+            Pointer address = new Pointer(this.CurrentCPU.PC, false, true);
 
-            if (address - 2 == CurrentASM[currentLine].Address)
+            if (address - 2 == this.CurrentASM[currentLine].Address)
             {
-                CodeBox.Items[currentLine + 1].Selected = true;
-                CodeBox.Select();
+                this.CodeBox.Items[currentLine + 1].Selected = true;
+                this.CodeBox.Select();
             }
             else
             {
-                Read_ThumbRadioButton.Checked = CurrentCPU.T;
-                Read_AddressBox.Value = address;
+                this.Read_ThumbRadioButton.Checked = this.CurrentCPU.T;
+                this.Read_AddressBox.Value = address;
                 Try: try
                 {
-                    Core_Dissassemble(
-                        Read_AddressBox.Value,
-                        (Int32)Read_LengthBox.Value,
-                        Read_ThumbRadioButton.Checked);
-                    Core_LoadValues();
+                    this.Core_Dissassemble(
+                        this.Read_AddressBox.Value,
+                        (Int32)this.Read_LengthBox.Value,
+                        this.Read_ThumbRadioButton.Checked);
+                    this.Core_LoadValues();
                 }
                 catch
                 {
-                    Read_LengthBox.Value += 2;
+                    this.Read_LengthBox.Value += 2;
                     goto Try;
                 }
 
-                CodeBox.Items[0].Selected = true;
-                CodeBox.Select();
+                this.CodeBox.Items[0].Selected = true;
+                this.CodeBox.Select();
             }
-            Core_LoadValues();
+            this.Core_LoadValues();
         }
 
         private void IO_SaveButton_Click(Object sender, EventArgs e)

@@ -18,11 +18,11 @@ namespace Magic
         public IApp App;
         public MarksManager(IApp app)
         {
-            App = app;
-            MarkingTypes = new List<Mark>();
+            this.App = app;
+            this.MarkingTypes = new List<Mark>();
 
-            MarkingTypes.Add(Mark.FREE);
-            MarkingTypes.Add(Mark.USED);
+            this.MarkingTypes.Add(Mark.FREE);
+            this.MarkingTypes.Add(Mark.USED);
         }
 
 
@@ -32,7 +32,7 @@ namespace Magic
         /// </summary>
         public Mark Get(String markname)
         {
-            foreach (var mark in MarkingTypes)
+            foreach (var mark in this.MarkingTypes)
             {
                 if (mark.Name.Equals(markname))
                 {
@@ -52,9 +52,9 @@ namespace Magic
         public Mark Add(String name, Int32 layer, Color color)
         {
             Mark mark = new Mark(name, layer, color);
-            MarkingTypes.Add(mark);
+            this.MarkingTypes.Add(mark);
 
-            App.MHF.Changed = true;
+            this.App.MHF.Changed = true;
 
             return mark;
         }
@@ -67,11 +67,11 @@ namespace Magic
         {
             if (Prompt.RemoveMarkingType() == DialogResult.Yes)
             {
-                MarkingTypes.Remove(mark);
+                this.MarkingTypes.Remove(mark);
 
-                App.MHF.Space.RemoveAllMarkedAs(mark);
+                this.App.MHF.Space.RemoveAllMarkedAs(mark);
 
-                App.MHF.Changed = true;
+                this.App.MHF.Changed = true;
             }
         }
 
@@ -88,7 +88,7 @@ namespace Magic
             {
                 result.Add("(unmark)");
             }
-            foreach (var mark in MarkingTypes)
+            foreach (var mark in this.MarkingTypes)
             {
                 result.Add(mark.Name);
             }

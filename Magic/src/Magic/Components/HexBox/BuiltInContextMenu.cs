@@ -43,8 +43,8 @@ namespace Magic.Components
         /// <param name="hexBox">the HexBox control</param>
         internal BuiltInContextMenu(HexBox hexBox)
         {
-            _hexBox = hexBox;
-            _hexBox.ByteProviderChanged += new EventHandler(HexBox_ByteProviderChanged);
+            this._hexBox = hexBox;
+            this._hexBox.ByteProviderChanged += new EventHandler(this.HexBox_ByteProviderChanged);
         }
         /// <summary>
         /// If ByteProvider
@@ -53,7 +53,7 @@ namespace Magic.Components
         /// <param name="e">the event data</param>
         void HexBox_ByteProviderChanged(Object sender, EventArgs e)
         {
-            CheckBuiltInContextMenu();
+            this.CheckBuiltInContextMenu();
         }
         /// <summary>
         /// Assigns the ContextMenuStrip control to the HexBox control.
@@ -63,26 +63,26 @@ namespace Magic.Components
             if (this._contextMenuStrip == null)
             {
                 ContextMenuStrip cms = new ContextMenuStrip();
-                _cutToolStripMenuItem = new ToolStripMenuItem(CutMenuItemTextInternal, CutMenuItemImage, new EventHandler(CutMenuItem_Click));
-                cms.Items.Add(_cutToolStripMenuItem);
-                _copyToolStripMenuItem = new ToolStripMenuItem(CopyMenuItemTextInternal, CopyMenuItemImage, new EventHandler(CopyMenuItem_Click));
-                cms.Items.Add(_copyToolStripMenuItem);
-                _pasteToolStripMenuItem = new ToolStripMenuItem(PasteMenuItemTextInternal, PasteMenuItemImage, new EventHandler(PasteMenuItem_Click));
-                cms.Items.Add(_pasteToolStripMenuItem);
+                this._cutToolStripMenuItem = new ToolStripMenuItem(this.CutMenuItemTextInternal, this.CutMenuItemImage, new EventHandler(this.CutMenuItem_Click));
+                cms.Items.Add(this._cutToolStripMenuItem);
+                this._copyToolStripMenuItem = new ToolStripMenuItem(this.CopyMenuItemTextInternal, this.CopyMenuItemImage, new EventHandler(this.CopyMenuItem_Click));
+                cms.Items.Add(this._copyToolStripMenuItem);
+                this._pasteToolStripMenuItem = new ToolStripMenuItem(this.PasteMenuItemTextInternal, this.PasteMenuItemImage, new EventHandler(this.PasteMenuItem_Click));
+                cms.Items.Add(this._pasteToolStripMenuItem);
 
                 cms.Items.Add(new ToolStripSeparator());
 
-                _selectAllToolStripMenuItem = new ToolStripMenuItem(SelectAllMenuItemTextInternal, SelectAllMenuItemImage, new EventHandler(SelectAllMenuItem_Click));
-                cms.Items.Add(_selectAllToolStripMenuItem);
-                cms.Opening += new CancelEventHandler(BuildInContextMenuStrip_Opening);
+                this._selectAllToolStripMenuItem = new ToolStripMenuItem(this.SelectAllMenuItemTextInternal, this.SelectAllMenuItemImage, new EventHandler(this.SelectAllMenuItem_Click));
+                cms.Items.Add(this._selectAllToolStripMenuItem);
+                cms.Opening += new CancelEventHandler(this.BuildInContextMenuStrip_Opening);
 
-                _contextMenuStrip = cms;
+                this._contextMenuStrip = cms;
             }
 
             if (this._hexBox.ByteProvider == null && this._hexBox.ContextMenuStrip == this._contextMenuStrip)
                 this._hexBox.ContextMenuStrip = null;
             else if (this._hexBox.ByteProvider != null && this._hexBox.ContextMenuStrip == null)
-                this._hexBox.ContextMenuStrip = _contextMenuStrip;
+                this._hexBox.ContextMenuStrip = this._contextMenuStrip;
         }
         /// <summary>
         /// Before opening the ContextMenuStrip, we manage the availability of the items.
@@ -91,10 +91,10 @@ namespace Magic.Components
         /// <param name="e">the event data</param>
         void BuildInContextMenuStrip_Opening(Object sender, CancelEventArgs e)
         {
-            _cutToolStripMenuItem.Enabled = this._hexBox.CanCut();
-            _copyToolStripMenuItem.Enabled = this._hexBox.CanCopy();
-            _pasteToolStripMenuItem.Enabled = this._hexBox.CanPaste();
-            _selectAllToolStripMenuItem.Enabled = this._hexBox.CanSelectAll();
+            this._cutToolStripMenuItem.Enabled = this._hexBox.CanCut();
+            this._copyToolStripMenuItem.Enabled = this._hexBox.CanCopy();
+            this._pasteToolStripMenuItem.Enabled = this._hexBox.CanPaste();
+            this._selectAllToolStripMenuItem.Enabled = this._hexBox.CanSelectAll();
         }
         /// <summary>
         /// The handler for the "Cut"-Click event
@@ -126,8 +126,8 @@ namespace Magic.Components
         [Category("BuiltIn-ContextMenu"), DefaultValue(null), Localizable(true)]
         public String CopyMenuItemText
         {
-            get { return _copyMenuItemText; }
-            set { _copyMenuItemText = value; }
+            get { return this._copyMenuItemText; }
+            set { this._copyMenuItemText = value; }
         }
         String _copyMenuItemText;
 
@@ -137,8 +137,8 @@ namespace Magic.Components
         [Category("BuiltIn-ContextMenu"), DefaultValue(null), Localizable(true)]
         public String CutMenuItemText
         {
-            get { return _cutMenuItemText; }
-            set { _cutMenuItemText = value; }
+            get { return this._cutMenuItemText; }
+            set { this._cutMenuItemText = value; }
         }
         String _cutMenuItemText;
 
@@ -148,8 +148,8 @@ namespace Magic.Components
         [Category("BuiltIn-ContextMenu"), DefaultValue(null), Localizable(true)]
         public String PasteMenuItemText
         {
-            get { return _pasteMenuItemText; }
-            set { _pasteMenuItemText = value; }
+            get { return this._pasteMenuItemText; }
+            set { this._pasteMenuItemText = value; }
         }
         String _pasteMenuItemText;
 
@@ -159,27 +159,27 @@ namespace Magic.Components
         [Category("BuiltIn-ContextMenu"), DefaultValue(null), Localizable(true)]
         public String SelectAllMenuItemText
         {
-            get { return _selectAllMenuItemText; }
-            set { _selectAllMenuItemText = value; }
+            get { return this._selectAllMenuItemText; }
+            set { this._selectAllMenuItemText = value; }
         }
         String _selectAllMenuItemText = null;
 
         /// <summary>
         /// Gets the text of the "Cut" ContextMenuStrip item.
         /// </summary>
-        internal String CutMenuItemTextInternal { get { return !String.IsNullOrEmpty(CutMenuItemText) ? CutMenuItemText : "Cut"; } }
+        internal String CutMenuItemTextInternal { get { return !String.IsNullOrEmpty(this.CutMenuItemText) ? this.CutMenuItemText : "Cut"; } }
         /// <summary>
         /// Gets the text of the "Copy" ContextMenuStrip item.
         /// </summary>
-        internal String CopyMenuItemTextInternal { get { return !String.IsNullOrEmpty(CopyMenuItemText) ? CopyMenuItemText : "Copy"; } }
+        internal String CopyMenuItemTextInternal { get { return !String.IsNullOrEmpty(this.CopyMenuItemText) ? this.CopyMenuItemText : "Copy"; } }
         /// <summary>
         /// Gets the text of the "Paste" ContextMenuStrip item.
         /// </summary>
-        internal String PasteMenuItemTextInternal { get { return !String.IsNullOrEmpty(PasteMenuItemText) ? PasteMenuItemText : "Paste"; } }
+        internal String PasteMenuItemTextInternal { get { return !String.IsNullOrEmpty(this.PasteMenuItemText) ? this.PasteMenuItemText : "Paste"; } }
         /// <summary>
         /// Gets the text of the "Select All" ContextMenuStrip item.
         /// </summary>
-        internal String SelectAllMenuItemTextInternal { get { return !String.IsNullOrEmpty(SelectAllMenuItemText) ? SelectAllMenuItemText : "SelectAll"; } }
+        internal String SelectAllMenuItemTextInternal { get { return !String.IsNullOrEmpty(this.SelectAllMenuItemText) ? this.SelectAllMenuItemText : "SelectAll"; } }
 
         /// <summary>
         /// Gets or sets the image of the "Cut" ContextMenuStrip item.
@@ -187,8 +187,8 @@ namespace Magic.Components
         [Category("BuiltIn-ContextMenu"), DefaultValue(null)]
         public Image CutMenuItemImage
         {
-            get { return _cutMenuItemImage; }
-            set { _cutMenuItemImage = value; }
+            get { return this._cutMenuItemImage; }
+            set { this._cutMenuItemImage = value; }
         } Image _cutMenuItemImage = null;
         /// <summary>
         /// Gets or sets the image of the "Copy" ContextMenuStrip item.
@@ -196,8 +196,8 @@ namespace Magic.Components
         [Category("BuiltIn-ContextMenu"), DefaultValue(null)]
         public Image CopyMenuItemImage
         {
-            get { return _copyMenuItemImage; }
-            set { _copyMenuItemImage = value; }
+            get { return this._copyMenuItemImage; }
+            set { this._copyMenuItemImage = value; }
         } Image _copyMenuItemImage = null;
         /// <summary>
         /// Gets or sets the image of the "Paste" ContextMenuStrip item.
@@ -205,8 +205,8 @@ namespace Magic.Components
         [Category("BuiltIn-ContextMenu"), DefaultValue(null)]
         public Image PasteMenuItemImage
         {
-            get { return _pasteMenuItemImage; }
-            set { _pasteMenuItemImage = value; }
+            get { return this._pasteMenuItemImage; }
+            set { this._pasteMenuItemImage = value; }
         } Image _pasteMenuItemImage = null;
         /// <summary>
         /// Gets or sets the image of the "Select All" ContextMenuStrip item.
@@ -214,8 +214,8 @@ namespace Magic.Components
         [Category("BuiltIn-ContextMenu"), DefaultValue(null)]
         public Image SelectAllMenuItemImage
         {
-            get { return _selectAllMenuItemImage; }
-            set { _selectAllMenuItemImage = value; }
+            get { return this._selectAllMenuItemImage; }
+            set { this._selectAllMenuItemImage = value; }
         } Image _selectAllMenuItemImage = null;
     }
 }

@@ -36,11 +36,11 @@ namespace EmblemMagic.FireEmblem
             UInt32 offset,
             UInt32 duration)
         {
-            OAM_Data_L = oamData_L;
-            OAM_Data_R = oamData_R;
-            TilesetIndex = tileset;
-            OAM_Offset = offset;
-            Duration = duration;
+            this.OAM_Data_L = oamData_L;
+            this.OAM_Data_R = oamData_R;
+            this.TilesetIndex = tileset;
+            this.OAM_Offset = offset;
+            this.Duration = duration;
         }
     }
 
@@ -151,7 +151,7 @@ namespace EmblemMagic.FireEmblem
                 }
             }
 
-            Frames = new BattleAnimFrame[frames.Length + anomalies.Count];
+            this.Frames = new BattleAnimFrame[frames.Length + anomalies.Count];
             List<Pointer> pointers = new List<Pointer>();
             for (Int32 i = 0; i < frames.Length; i++)
             {
@@ -161,7 +161,7 @@ namespace EmblemMagic.FireEmblem
                     {
                         pointers.Add(frames[i].Item1);
                     }
-                    Frames[i] = new BattleAnimFrame(
+                    this.Frames[i] = new BattleAnimFrame(
                         new OAM_Array(OAMdataL, frames[i].Item2),
                         new OAM_Array(OAMdataR, frames[i].Item2),
                         frames[i].Item1.Address,
@@ -175,7 +175,7 @@ namespace EmblemMagic.FireEmblem
                 {
                     pointers.Add(anomalies[i].Item1);
                 }
-                Frames[frames.Length + i] = new BattleAnimFrame(
+                this.Frames[frames.Length + i] = new BattleAnimFrame(
                     new OAM_Array(OAMdataL, anomalies[i].Item2),
                     new OAM_Array(OAMdataR, anomalies[i].Item2),
                     anomalies[i].Item1.Address,
@@ -183,10 +183,10 @@ namespace EmblemMagic.FireEmblem
                     anomalies[i].Item3);
             }
 
-            AnimCode = new String[sections.Length][];
+            this.AnimCode = new String[sections.Length][];
             for (Int32 i = 0; i < sections.Length; i++)
             {
-                AnimCode[i] = DecompileAnimCode(animdata, sections[i], Frames);
+                this.AnimCode[i] = DecompileAnimCode(animdata, sections[i], this.Frames);
             }
 
             pointers.Sort(delegate (Pointer first, Pointer second)
@@ -194,16 +194,16 @@ namespace EmblemMagic.FireEmblem
                 return (Int32)(first.Address - second.Address);
             });
 
-            Tilesets = new Tileset[pointers.Count];
-            for (Int32 i = 0; i < Tilesets.Length; i++)
+            this.Tilesets = new Tileset[pointers.Count];
+            for (Int32 i = 0; i < this.Tilesets.Length; i++)
             {
-                for (Int32 j = 0; j < Frames.Length; j++)
+                for (Int32 j = 0; j < this.Frames.Length; j++)
                 {
-                    if (Frames[j] == null) continue;
-                    if (Frames[j].TilesetIndex == pointers[i])
-                        Frames[j].TilesetIndex = (UInt32)i;
+                    if (this.Frames[j] == null) continue;
+                    if (this.Frames[j].TilesetIndex == pointers[i])
+                        this.Frames[j].TilesetIndex = (UInt32)i;
                 }
-                Tilesets[i] = new Tileset(Core.ReadData(pointers[i], 0));
+                this.Tilesets[i] = new Tileset(Core.ReadData(pointers[i], 0));
             }
         }
 
@@ -216,12 +216,12 @@ namespace EmblemMagic.FireEmblem
         {
             this.Clear();
 
-            if (frame >= Frames.Length || Frames[frame] == null)
+            if (frame >= this.Frames.Length || this.Frames[frame] == null)
                 return;
 
             this.AddSprite(palette,
-                Tilesets[Frames[frame].TilesetIndex],
-                leftToRight ? Frames[frame].OAM_Data_L : Frames[frame].OAM_Data_R,
+                this.Tilesets[this.Frames[frame].TilesetIndex],
+                leftToRight ? this.Frames[frame].OAM_Data_L : this.Frames[frame].OAM_Data_R,
                 leftToRight ? SCREEN_OFFSET_X_L : SCREEN_OFFSET_X_R,
                 SCREEN_OFFSET_Y);
         }
@@ -232,17 +232,17 @@ namespace EmblemMagic.FireEmblem
         public String[] GetMergedAnimCode()
         {
             Int32 length = 0;
-            for (Int32 i = 0; i < AnimCode.Length; i++)
+            for (Int32 i = 0; i < this.AnimCode.Length; i++)
             {
-                length += AnimCode[i].Length;
+                length += this.AnimCode[i].Length;
             }
             String[] result = new String[length];
             length = 0;
-            for (Int32 i = 0; i < AnimCode.Length; i++)
+            for (Int32 i = 0; i < this.AnimCode.Length; i++)
             {
-                for (Int32 j = 0; j < AnimCode[i].Length; j++)
+                for (Int32 j = 0; j < this.AnimCode[i].Length; j++)
                 {
-                    result[length] = AnimCode[i][j];
+                    result[length] = this.AnimCode[i][j];
                     length++;
                 }
             }

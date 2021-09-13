@@ -17,29 +17,29 @@ namespace Magic
         /// </summary>
         public Repoint(System.String assetName, Pointer defaultAddress)
         {
-            AssetName = assetName;
+            this.AssetName = assetName;
 
-            DefaultAddress = defaultAddress;
-            CurrentAddress = defaultAddress;
+            this.DefaultAddress = defaultAddress;
+            this.CurrentAddress = defaultAddress;
 
-            UpdateReferences();
+            this.UpdateReferences();
         }
         /// <summary>
         /// Called when loading an MHF file
         /// </summary>
         public Repoint(System.String assetName, System.UInt32 defaultAddress, System.UInt32 currentAddress)
         {
-            AssetName = assetName;
+            this.AssetName = assetName;
 
-            DefaultAddress = new Pointer(defaultAddress);
-            CurrentAddress = new Pointer(currentAddress);
+            this.DefaultAddress = new Pointer(defaultAddress);
+            this.CurrentAddress = new Pointer(currentAddress);
 
-            UpdateReferences();
+            this.UpdateReferences();
         }
 
         public void UpdateReferences()
         {
-            References = Core.SearchData(CurrentAddress.ToBytes(), 4);
+            this.References = Core.SearchData(this.CurrentAddress.ToBytes(), 4);
         }
     }
 }

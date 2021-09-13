@@ -31,7 +31,7 @@ namespace Magic.Components
 		/// <param name="bytes"></param>
 		public DataByteProvider(List<Byte> bytes)
 		{
-			_bytes = bytes;
+            this._bytes = bytes;
 		}
 
 		/// <summary>
@@ -39,7 +39,7 @@ namespace Magic.Components
 		/// </summary>
 		void OnChanged(EventArgs e)
 		{
-			_hasChanges = true;
+            this._hasChanges = true;
 
 			if(Changed != null)
 				Changed(this, e);
@@ -59,7 +59,7 @@ namespace Magic.Components
 		/// </summary>
 		public List<Byte> Bytes
 		{
-			get { return _bytes; }
+			get { return this._bytes; }
 		}
 
 		#region IByteProvider Members
@@ -68,7 +68,7 @@ namespace Magic.Components
 		/// </summary>
 		public Boolean HasChanges()
 		{
-			return _hasChanges;
+			return this._hasChanges;
 		}
 
 		/// <summary>
@@ -76,7 +76,7 @@ namespace Magic.Components
 		/// </summary>
 		public void ApplyChanges()
 		{
-			_hasChanges = false;
+            this._hasChanges = false;
 		}
 
 		/// <summary>
@@ -96,7 +96,7 @@ namespace Magic.Components
 		/// <param name="index">the index of the byte to read</param>
 		/// <returns>the byte</returns>
 		public Byte ReadByte(Int64 index)
-		{ return _bytes[(Int32)index]; }
+		{ return this._bytes[(Int32)index]; }
 
 		/// <summary>
 		/// Write a byte into the byte collection.
@@ -105,8 +105,8 @@ namespace Magic.Components
 		/// <param name="value">the byte</param>
 		public void WriteByte(Int64 index, Byte value)
 		{
-			_bytes[(Int32)index] = value;
-			OnChanged(EventArgs.Empty);
+            this._bytes[(Int32)index] = value;
+            this.OnChanged(EventArgs.Empty);
 		}
 
 		/// <summary>
@@ -117,11 +117,11 @@ namespace Magic.Components
 		public void DeleteBytes(Int64 index, Int64 length)
 		{
             Int32 internal_index = (Int32)Math.Max(0, index);
-            Int32 internal_length = (Int32)Math.Min((Int32)Length, length);
-			_bytes.RemoveRange(internal_index, internal_length); 
+            Int32 internal_length = (Int32)Math.Min((Int32)this.Length, length);
+            this._bytes.RemoveRange(internal_index, internal_length);
 
-			OnLengthChanged(EventArgs.Empty);
-			OnChanged(EventArgs.Empty);
+            this.OnLengthChanged(EventArgs.Empty);
+            this.OnChanged(EventArgs.Empty);
 		}
 
 		/// <summary>
@@ -130,11 +130,11 @@ namespace Magic.Components
 		/// <param name="index">the start index of the bytes in the byte collection</param>
 		/// <param name="bs">the byte array to insert</param>
 		public void InsertBytes(Int64 index, Byte[] bs)
-		{ 
-			_bytes.InsertRange((Int32)index, bs); 
+		{
+            this._bytes.InsertRange((Int32)index, bs);
 
-			OnLengthChanged(EventArgs.Empty);
-			OnChanged(EventArgs.Empty);
+            this.OnLengthChanged(EventArgs.Empty);
+            this.OnChanged(EventArgs.Empty);
 		}
 
 		/// <summary>
@@ -144,7 +144,7 @@ namespace Magic.Components
 		{
 			get
 			{
-				return _bytes.Count;
+				return this._bytes.Count;
 			}
 		}
 

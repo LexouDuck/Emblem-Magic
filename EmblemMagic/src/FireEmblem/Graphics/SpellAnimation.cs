@@ -23,134 +23,134 @@ namespace EmblemMagic.FireEmblem
         {
             get
             {
-                return Data[0];
+                return this.Data[0];
             }
             set
             {
-                Data[0] = value;
+                this.Data[0] = value;
             }
         }
         Int16 OffsetX
         {
             get
             {
-                return Data.GetInt16(2, true);
+                return this.Data.GetInt16(2, true);
             }
             set
             {
                 Byte[] data = Util.Int16ToBytes(value, true);
-                Array.Copy(data, 0, Data, 2, 2);
+                Array.Copy(data, 0, this.Data, 2, 2);
             }
         }
         Byte Duration
         {
             get
             {
-                return Data[6];
+                return this.Data[6];
             }
             set
             {
-                Data[6] = value;
+                this.Data[6] = value;
             }
         }
         UInt16 TSAwtf
         {
             get
             {
-                return Data.GetUInt16(8, true);
+                return this.Data.GetUInt16(8, true);
             }
             set
             {
                 Byte[] data = Util.UInt16ToBytes(value, true);
-                Array.Copy(data, 0, Data, 8, 2);
+                Array.Copy(data, 0, this.Data, 8, 2);
             }
         }
         Byte Frame
         {
             get
             {
-                return Data[19];
+                return this.Data[19];
             }
             set
             {
-                Data[19] = value;
+                this.Data[19] = value;
             }
         }
         Byte Command
         {
             get
             {
-                return Data[21];
+                return this.Data[21];
             }
             set
             {
-                Data[21] = value;
+                this.Data[21] = value;
             }
         }
         Pointer FramePointer
         {
             get
             {
-                return new Pointer(Data.GetUInt32(32, true));
+                return new Pointer(this.Data.GetUInt32(32, true));
             }
             set
             {
-                Array.Copy(value.ToBytes(), 0, Data, 32, 4);
+                Array.Copy(value.ToBytes(), 0, this.Data, 32, 4);
             }
         }
         Pointer CommandPointer
         {
             get
             {
-                return new Pointer(Data.GetUInt32(36, true));
+                return new Pointer(this.Data.GetUInt32(36, true));
             }
             set
             {
-                Array.Copy(value.ToBytes(), 0, Data, 36, 4);
+                Array.Copy(value.ToBytes(), 0, this.Data, 36, 4);
             }
         }
         Pointer OAM
         {
             get
             {
-                return new Pointer(Data.GetUInt32(48, true));
+                return new Pointer(this.Data.GetUInt32(48, true));
             }
             set
             {
-                Array.Copy(value.ToBytes(), 0, Data, 48, 4);
+                Array.Copy(value.ToBytes(), 0, this.Data, 48, 4);
             }
         }
         Pointer Frame_Previous
         {
             get
             {
-                return new Pointer(Data.GetUInt32(52, true));
+                return new Pointer(this.Data.GetUInt32(52, true));
             }
             set
             {
-                Array.Copy(value.ToBytes(), 0, Data, 52, 4);
+                Array.Copy(value.ToBytes(), 0, this.Data, 52, 4);
             }
         }
         Pointer Frame_Next
         {
             get
             {
-                return new Pointer(Data.GetUInt32(56, true));
+                return new Pointer(this.Data.GetUInt32(56, true));
             }
             set
             {
-                Array.Copy(value.ToBytes(), 0, Data, 56, 4);
+                Array.Copy(value.ToBytes(), 0, this.Data, 56, 4);
             }
         }
         Pointer OAM_Pointer
 {
             get
             {
-                return new Pointer(Data.GetUInt32(60, true));
+                return new Pointer(this.Data.GetUInt32(60, true));
             }
             set
             {
-                Array.Copy(value.ToBytes(), 0, Data, 60, 4);
+                Array.Copy(value.ToBytes(), 0, this.Data, 60, 4);
             }
         }
 
@@ -158,8 +158,8 @@ namespace EmblemMagic.FireEmblem
         {
             if (data.Length != LENGTH) throw new Exception("Invalid frame AIS length.");
 
-            Data = new Byte[LENGTH];
-            Array.Copy(data, Data, LENGTH);
+            this.Data = new Byte[LENGTH];
+            Array.Copy(data, this.Data, LENGTH);
         }
     }
 
@@ -176,21 +176,21 @@ namespace EmblemMagic.FireEmblem
 
         public SpellAnimation(Pointer address)
         {
-            Address_Constructor = address - 1;
-            Constructor = ReadASM(Address_Constructor);
+            this.Address_Constructor = address - 1;
+            this.Constructor = this.ReadASM(this.Address_Constructor);
 
-            Pointer callback = Address_Constructor + Constructor.Length;
+            Pointer callback = this.Address_Constructor + this.Constructor.Length;
             if (callback % 4 != 0) callback += 2;
 
-            Address_LoopRoutine = ReadCallback(Core.ReadPointer(callback)) - 1;
-            LoopRoutine = ReadASM(Address_LoopRoutine);
+            this.Address_LoopRoutine = this.ReadCallback(Core.ReadPointer(callback)) - 1;
+            this.LoopRoutine = this.ReadASM(this.Address_LoopRoutine);
 
-            Address_AnimLoading = Address_LoopRoutine + LoopRoutine.Length;
-            while (Core.ReadByte(Address_AnimLoading) == 0x00 && Core.ReadByte(Address_AnimLoading + 1) == 0x00)
+            this.Address_AnimLoading = this.Address_LoopRoutine + this.LoopRoutine.Length;
+            while (Core.ReadByte(this.Address_AnimLoading) == 0x00 && Core.ReadByte(this.Address_AnimLoading + 1) == 0x00)
             {
-                Address_AnimLoading += 2;
+                this.Address_AnimLoading += 2;
             }
-            AnimLoading = ReadASM(Address_AnimLoading);
+            this.AnimLoading = this.ReadASM(this.Address_AnimLoading);
         }
 
         Byte[] ReadASM(Pointer address)
@@ -219,8 +219,8 @@ namespace EmblemMagic.FireEmblem
             switch (callback.GetInt32(0, true))
             {
                 case 0x19: break;
-                case 0x01: Name = new Pointer(callback.GetUInt32(4, true), false, true); break;
-                case 0x03: Looped = true; break;
+                case 0x01: this.Name = new Pointer(callback.GetUInt32(4, true), false, true); break;
+                case 0x03: this.Looped = true; break;
                 default: throw new Exception("Unusual 6C callback:\n" + Util.BytesToHex(callback));
             }
             return new Pointer(callback.GetUInt32(12, true), false, true);
@@ -231,15 +231,15 @@ namespace EmblemMagic.FireEmblem
 
         public ASM.Instruction[] GetASM_Constructor()
         {
-            return ASM.Disassemble_Thumb(Constructor, Address_Constructor);
+            return ASM.Disassemble_Thumb(this.Constructor, this.Address_Constructor);
         }
         public ASM.Instruction[] GetASM_LoopRoutine()
         {
-            return ASM.Disassemble_Thumb(LoopRoutine, Address_LoopRoutine);
+            return ASM.Disassemble_Thumb(this.LoopRoutine, this.Address_LoopRoutine);
         }
         public ASM.Instruction[] GetASM_AnimLoading()
         {
-            return ASM.Disassemble_Thumb(AnimLoading, Address_AnimLoading);
+            return ASM.Disassemble_Thumb(this.AnimLoading, this.Address_AnimLoading);
         }
 
         public String[] GetAnimCode(SpellCommands commands)
@@ -247,19 +247,19 @@ namespace EmblemMagic.FireEmblem
             List<String> result = new List<String>();
 
             result.Add("Constructor");
-            result.AddRange(GetAnimCode(GetASM_Constructor(), commands));
+            result.AddRange(this.GetAnimCode(this.GetASM_Constructor(), commands));
             result.Add("");
             result.Add("LoopRoutine");
-            result.AddRange(GetAnimCode(GetASM_LoopRoutine(), commands));
+            result.AddRange(this.GetAnimCode(this.GetASM_LoopRoutine(), commands));
             result.Add("");
             result.Add("AnimLoading");
-            result.AddRange(GetAnimCode(GetASM_AnimLoading(), commands));
+            result.AddRange(this.GetAnimCode(this.GetASM_AnimLoading(), commands));
 
             return result.ToArray();
         }
         List<String> GetAnimCode(ASM.Instruction[] routine, SpellCommands commands)
         {
-            routine = GetCleanASM(routine);
+            routine = this.GetCleanASM(routine);
 
             Int32 count = 1;
             Int32 indent = 0;

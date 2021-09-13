@@ -31,17 +31,17 @@ namespace Magic.Components
 
         public MapBox()
         {
-            ShowGrid = false;
-            TileSize = 8;
-            Hovered = new Point();
+            this.ShowGrid = false;
+            this.TileSize = 8;
+            this.Hovered = new Point();
 
-            InitializeComponent();
+            this.InitializeComponent();
 
-            SetStyle(ControlStyles.Opaque, false);
-            SetStyle(ControlStyles.Selectable, true);
-            SetStyle(ControlStyles.UserPaint, true);
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            this.SetStyle(ControlStyles.Opaque, false);
+            this.SetStyle(ControlStyles.Selectable, true);
+            this.SetStyle(ControlStyles.UserPaint, true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
         }
         /// <summary>
         /// Loads the given GBA.Palette onto the control.
@@ -50,26 +50,26 @@ namespace Magic.Components
         {
             if (image == null)
             {
-                Display = null;
+                this.Display = null;
                 this.Invalidate();
                 return;
             }
-            if (image.Width % TileSize != 0)
-                throw new Exception("Image width is not a multiple of " + TileSize);
-            if (image.Height % TileSize != 0)
-                throw new Exception("Image height is not a multiple of " + TileSize);
+            if (image.Width % this.TileSize != 0)
+                throw new Exception("Image width is not a multiple of " + this.TileSize);
+            if (image.Height % this.TileSize != 0)
+                throw new Exception("Image height is not a multiple of " + this.TileSize);
 
-            Width = image.Width;
-            Height = image.Height;
-            Display = new Bitmap(Width, Height);
-            for (Int32 y = 0; y < Height; y++)
-            for (Int32 x = 0; x < Width; x++)
+            this.Width = image.Width;
+            this.Height = image.Height;
+            this.Display = new Bitmap(this.Width, this.Height);
+            for (Int32 y = 0; y < this.Height; y++)
+            for (Int32 x = 0; x < this.Width; x++)
             {
-                Display.SetPixel(x, y, (System.Drawing.Color)image.GetColor(x, y));
+                    this.Display.SetPixel(x, y, (System.Drawing.Color)image.GetColor(x, y));
             }
 
-            Hovered = new Point();
-            Hover = null;
+            this.Hovered = new Point();
+            this.Hover = null;
 
             this.Invalidate();
         }
@@ -78,10 +78,10 @@ namespace Magic.Components
         /// </summary>
         public void Reset()
         {
-            Display = null;
+            this.Display = null;
 
-            Hovered = new Point();
-            Hover = null;
+            this.Hovered = new Point();
+            this.Hover = null;
 
             this.Invalidate();
         }
@@ -95,7 +95,7 @@ namespace Magic.Components
         {
             base.OnMouseMove(e);
 
-            Hovered = new Point(e.X / TileSize, e.Y / TileSize);
+            this.Hovered = new Point(e.X / this.TileSize, e.Y / this.TileSize);
 
             this.Invalidate();
         }
@@ -104,7 +104,7 @@ namespace Magic.Components
         /// </summary>
         protected override void OnPaint(PaintEventArgs e)
         {
-            if (Display == null)
+            if (this.Display == null)
             {
                 using (Brush gap = new SolidBrush(SystemColors.AppWorkspace))
                 {
@@ -114,52 +114,52 @@ namespace Magic.Components
             }
             else
             {
-                e.Graphics.DrawImage(Display, 0, 0);
+                e.Graphics.DrawImage(this.Display, 0, 0);
             }
-            if (ShowGrid)
+            if (this.ShowGrid)
             {
                 using (Pen select = new Pen(SystemColors.Highlight))
                 using (Pen normal = new Pen(SystemColors.ControlDarkDark))
                 {
-                    Int32 width = Width / TileSize;
-                    Int32 height = Height / TileSize;
+                    Int32 width = this.Width / this.TileSize;
+                    Int32 height = this.Height / this.TileSize;
 
                     for (Int32 y = 0; y < height; y++)
                     for (Int32 x = 0; x < width; x++)
                     {
-                        if (Hover != null &&
-                            x >= Hovered.X && x < Hovered.X + Hover.GetLength(0) &&
-                            y >= Hovered.Y && y < Hovered.Y + Hover.GetLength(1) &&
-                            Hover[x - Hovered.X, y - Hovered.Y])
+                        if (this.Hover != null &&
+                            x >= this.Hovered.X && x < this.Hovered.X + this.Hover.GetLength(0) &&
+                            y >= this.Hovered.Y && y < this.Hovered.Y + this.Hover.GetLength(1) &&
+                            this.Hover[x - this.Hovered.X, y - this.Hovered.Y])
                         {
                             e.Graphics.DrawRectangle(select,
-                                x * TileSize,
-                                y * TileSize,
-                                TileSize - 1, TileSize - 1);
+                                x * this.TileSize,
+                                y * this.TileSize,
+                                this.TileSize - 1, this.TileSize - 1);
                         }
                         else
                         {
                             e.Graphics.DrawRectangle(normal,
-                                x * TileSize,
-                                y * TileSize,
-                                TileSize - 1, TileSize - 1);
+                                x * this.TileSize,
+                                y * this.TileSize,
+                                this.TileSize - 1, this.TileSize - 1);
                         }
                     }
                 }
             }
-            else if (Hover != null)
+            else if (this.Hover != null)
             {
                 using (Pen select = new Pen(SystemColors.Highlight))
                 {
-                    for (Int32 y = 0; y < Hover.GetLength(1); y++)
-                    for (Int32 x = 0; x < Hover.GetLength(0); x++)
+                    for (Int32 y = 0; y < this.Hover.GetLength(1); y++)
+                    for (Int32 x = 0; x < this.Hover.GetLength(0); x++)
                     {
-                        if (Hover[x, y])
+                        if (this.Hover[x, y])
                         {
                             e.Graphics.DrawRectangle(select,
-                                (Hovered.X + x) * TileSize,
-                                (Hovered.Y + y) * TileSize,
-                                TileSize - 1, TileSize - 1);
+                                (this.Hovered.X + x) * this.TileSize,
+                                (this.Hovered.Y + y) * this.TileSize,
+                                this.TileSize - 1, this.TileSize - 1);
                         }
                     }
                 }

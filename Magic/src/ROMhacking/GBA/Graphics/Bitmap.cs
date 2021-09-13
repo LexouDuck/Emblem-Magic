@@ -17,30 +17,30 @@ namespace GBA
         {
             get
             {
-                if (x < 0 || x >= Width) throw new ArgumentException("x given is out of bounds: " + x);
-                if (y < 0 || y >= Height) throw new ArgumentException("y given is out of bounds: " + y);
+                if (x < 0 || x >= this.Width) throw new ArgumentException("x given is out of bounds: " + x);
+                if (y < 0 || y >= this.Height) throw new ArgumentException("y given is out of bounds: " + y);
 
-                Int32 index = x + y * Width;
-                return Bytes[index];
+                Int32 index = x + y * this.Width;
+                return this.Bytes[index];
             }
             set
             {
-                if (x < 0 || x >= Width)  throw new ArgumentException("x given is out of bounds: " + x);
-                if (y < 0 || y >= Height) throw new ArgumentException("y given is out of bounds: " + y);
+                if (x < 0 || x >= this.Width)  throw new ArgumentException("x given is out of bounds: " + x);
+                if (y < 0 || y >= this.Height) throw new ArgumentException("y given is out of bounds: " + y);
 
-                Int32 index = x + y * Width;
+                Int32 index = x + y * this.Width;
                 if (value == -1) throw new ArgumentException("Color wasn't found in palette: " + value);
-                Bytes[index] = (Byte)value;
+                this.Bytes[index] = (Byte)value;
                 return;
             }
         }
         public Color GetColor(Int32 x, Int32 y)
         {
-            return Colors[this[x, y]];
+            return this.Colors[this[x, y]];
         }
         public void SetColor(Int32 x, Int32 y, Color value)
         {
-            this[x, y] = Colors.Find(value);
+            this[x, y] = this.Colors.Find(value);
         }
 
         /// <summary>
@@ -69,29 +69,29 @@ namespace GBA
         /// </summary>
         public Bitmap(Int32 width, Int32 height)
         {
-            Load(width, height);
+            this.Load(width, height);
         }
         /// <summary>
         /// Creates a GBA.Bitmap from the given IDisplayable object
         /// </summary>
         public Bitmap(IDisplayable pixels)
         {
-            Load(pixels.Width, pixels.Height);
+            this.Load(pixels.Width, pixels.Height);
 
             Int32 index = 0;
             Int32 pixel;
             Color color;
-            for (Int32 y = 0; y < Height; y++)
-            for (Int32 x = 0; x < Width; x++)
+            for (Int32 y = 0; y < this.Height; y++)
+            for (Int32 x = 0; x < this.Width; x++)
             {
                 color = pixels.GetColor(x, y);
-                pixel = Colors.Find(color);
+                pixel = this.Colors.Find(color);
                 if (pixel == -1)
                 {
-                    pixel = Colors.Count;
-                    Colors.Add(color);
+                    pixel = this.Colors.Count;
+                        this.Colors.Add(color);
                 }
-                Bytes[index++] = (Byte)pixel;
+                    this.Bytes[index++] = (Byte)pixel;
             }
         }
         /// <summary>
@@ -101,30 +101,30 @@ namespace GBA
         {
             using (System.Drawing.Bitmap file = new System.Drawing.Bitmap(filepath))
             {
-                Load(file.Width, file.Height);
+                this.Load(file.Width, file.Height);
 
                 if (palette != null)
                 {
-                    Colors = palette;
+                    this.Colors = palette;
                 }
                 Int32 index = 0;
                 Int32 pixel;
                 Color color;
-                for (Int32 y = 0; y < Height; y++)
-                for (Int32 x = 0; x < Width; x++)
+                for (Int32 y = 0; y < this.Height; y++)
+                for (Int32 x = 0; x < this.Width; x++)
                 {
                     color = (GBA.Color)file.GetPixel(x, y);
-                    pixel = Colors.Find(color);
+                    pixel = this.Colors.Find(color);
                     if (pixel == -1)
                     {
                         if (palette == null)
                         {
-                            pixel = Colors.Count;
-                            Colors.Add(color);
+                            pixel = this.Colors.Count;
+                                this.Colors.Add(color);
                         }
                         else throw new Exception("A color in the bitmap was not found in the palette given: at x=" + x + ", y=" + y);
                     }
-                    Bytes[index++] = (Byte)pixel;
+                        this.Bytes[index++] = (Byte)pixel;
                 }
             }
         }
@@ -133,11 +133,11 @@ namespace GBA
         /// </summary>
         public Bitmap(Int32 width, Int32 height, Byte[] palette, Byte[] data)
         {
-            Load(width, height);
+            this.Load(width, height);
 
-            Colors = new Palette(palette, palette.Length / 2);
+            this.Colors = new Palette(palette, palette.Length / 2);
 
-            Array.Copy(data, Bytes, Math.Min(data.Length, Bytes.Length));
+            Array.Copy(data, this.Bytes, Math.Min(data.Length, this.Bytes.Length));
         }
         /// <summary>
         /// Copies an existing GBA.Bitmap or makes one from a subregion of an existing bitmap
@@ -146,9 +146,9 @@ namespace GBA
         {
             if (region == new Rectangle())
             {
-                Load(source.Width, source.Height);
-                Colors = source.Colors;
-                Array.Copy(source.Bytes, Bytes, Bytes.Length);
+                this.Load(source.Width, source.Height);
+                this.Colors = source.Colors;
+                Array.Copy(source.Bytes, this.Bytes, this.Bytes.Length);
             }
             else
             {
@@ -156,13 +156,13 @@ namespace GBA
                  || region.Y < 0 || region.Y + region.Height > source.Height)
                     throw new Exception("Rectangle region goes outside the GBA.Bitmap.");
 
-                Load(region.Width, region.Height);
-                Colors = source.Colors;
+                this.Load(region.Width, region.Height);
+                this.Colors = source.Colors;
                 Int32 index = 0;
-                for (Int32 y = 0; y < Height; y++)
-                for (Int32 x = 0; x < Width; x++)
+                for (Int32 y = 0; y < this.Height; y++)
+                for (Int32 x = 0; x < this.Width; x++)
                 {
-                    Bytes[index++] = source.Bytes[(region.X + x) + (region.Y + y) * source.Width];
+                        this.Bytes[index++] = source.Bytes[(region.X + x) + (region.Y + y) * source.Width];
                 }
             }
         }
@@ -172,10 +172,10 @@ namespace GBA
         /// </summary>
         void Load(Int32 width, Int32 height)
         {
-            Width = width;
-            Height = height;
-            Bytes = new Byte[Width * Height];
-            Colors = new Palette(256);
+            this.Width = width;
+            this.Height = height;
+            this.Bytes = new Byte[this.Width * this.Height];
+            this.Colors = new Palette(256);
         }
 
 
@@ -185,7 +185,7 @@ namespace GBA
         /// </summary>
         public Byte[] ToBytes()
         {
-            return Bytes;
+            return this.Bytes;
         }
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace GBA
         /// </summary>
         public Color[,] GetPixels(Rectangle region)
         {
-            if (region.X < 0 || region.Y + region.Width > Width || region.Y < 0 || region.Y + region.Height > Height)
+            if (region.X < 0 || region.Y + region.Width > this.Width || region.Y < 0 || region.Y + region.Height > this.Height)
                 throw new Exception("The requested region is larger than the bitmap.");
 
             Color[,] result = new Color[region.Width, region.Height];
@@ -209,7 +209,7 @@ namespace GBA
         /// </summary>
         public void SetPixels(Func<Int32, Int32, Byte> displayfunc, Rectangle region)
         {
-            if (region.X < 0 || region.Y + region.Width > Width || region.Y < 0 || region.Y + region.Height > Height)
+            if (region.X < 0 || region.Y + region.Width > this.Width || region.Y < 0 || region.Y + region.Height > this.Height)
                 throw new Exception("The requested region is larger than the bitmap.");
             
             for (Int32 y = 0; y < region.Height; y++)
@@ -226,9 +226,9 @@ namespace GBA
         /// </summary>
         public Boolean IsEmpty()
         {
-            for (Int32 i = 0; i < Bytes.Length; i++)
+            for (Int32 i = 0; i < this.Bytes.Length; i++)
             {
-                if (Bytes[i] != 0) { return false; }
+                if (this.Bytes[i] != 0) { return false; }
             }
             return true;
         }

@@ -11,15 +11,15 @@ namespace GBA
         {
             get
             {
-                if (x < 0 || x >= Width)  throw new ArgumentException("X given is out of bounds: " + x);
-                if (y < 0 || y >= Height) throw new ArgumentException("Y given is out of bounds: " + y);
+                if (x < 0 || x >= this.Width)  throw new ArgumentException("X given is out of bounds: " + x);
+                if (y < 0 || y >= this.Height) throw new ArgumentException("Y given is out of bounds: " + y);
 
                 Int32 tileX = x / Tile.SIZE;
                 Int32 tileY = y / Tile.SIZE;
-                Tile tile = Graphics[Tiling[tileX, tileY].TileIndex];
-                Int32 palette = Tiling[tileX, tileY].Palette;
-                Boolean flipH = Tiling[tileX, tileY].FlipH;
-                Boolean flipV = Tiling[tileX, tileY].FlipV;
+                Tile tile = this.Graphics[this.Tiling[tileX, tileY].TileIndex];
+                Int32 palette = this.Tiling[tileX, tileY].Palette;
+                Boolean flipH = this.Tiling[tileX, tileY].FlipH;
+                Boolean flipV = this.Tiling[tileX, tileY].FlipV;
                 tileX = flipH ? 7 - x % Tile.SIZE : x % Tile.SIZE;
                 tileY = flipV ? 7 - y % Tile.SIZE : y % Tile.SIZE;
                 return palette * Palette.MAX + tile[tileX, tileY];
@@ -27,28 +27,28 @@ namespace GBA
         }
         public Byte GetPaletteIndex(Int32 x, Int32 y)
         {
-            if (x < 0 || x >= Width) throw new ArgumentException("X given is out of bounds: " + x);
-            if (y < 0 || y >= Height) throw new ArgumentException("Y given is out of bounds: " + y);
+            if (x < 0 || x >= this.Width) throw new ArgumentException("X given is out of bounds: " + x);
+            if (y < 0 || y >= this.Height) throw new ArgumentException("Y given is out of bounds: " + y);
 
             Int32 tileX = x / Tile.SIZE;
             Int32 tileY = y / Tile.SIZE;
-            Tile tile = Graphics[Tiling[tileX, tileY].TileIndex];
-            return Tiling[tileX, tileY].Palette;
+            Tile tile = this.Graphics[this.Tiling[tileX, tileY].TileIndex];
+            return this.Tiling[tileX, tileY].Palette;
         }
         public Color GetColor(Int32 x, Int32 y)
         {
-            if (x < 0 || x >= Width) throw new ArgumentException("X given is out of bounds: " + x);
-            if (y < 0 || y >= Height) throw new ArgumentException("Y given is out of bounds: " + y);
+            if (x < 0 || x >= this.Width) throw new ArgumentException("X given is out of bounds: " + x);
+            if (y < 0 || y >= this.Height) throw new ArgumentException("Y given is out of bounds: " + y);
 
             Int32 tileX = x / Tile.SIZE;
             Int32 tileY = y / Tile.SIZE;
-            Tile tile = Graphics[Tiling[tileX, tileY].TileIndex];
-            Int32 palette = Tiling[tileX, tileY].Palette;
-            Boolean flipH = Tiling[tileX, tileY].FlipH;
-            Boolean flipV = Tiling[tileX, tileY].FlipV;
+            Tile tile = this.Graphics[this.Tiling[tileX, tileY].TileIndex];
+            Int32 palette = this.Tiling[tileX, tileY].Palette;
+            Boolean flipH = this.Tiling[tileX, tileY].FlipH;
+            Boolean flipV = this.Tiling[tileX, tileY].FlipV;
             tileX = flipH ? 7 - x % Tile.SIZE : x % Tile.SIZE;
             tileY = flipV ? 7 - y % Tile.SIZE : y % Tile.SIZE;
-            return Palettes[palette][tile[tileX, tileY]];
+            return this.Palettes[palette][tile[tileX, tileY]];
         }
         /// <summary>
         /// The width of this TSA_Image, in pixels
@@ -76,8 +76,8 @@ namespace GBA
 
         public TSA_Image(Int32 width, Int32 height)
         {
-            Width = width * 8;
-            Height = height * 8;
+            this.Width = width * 8;
+            this.Height = height * 8;
         }
         public TSA_Image(
             Byte[] palettes,
@@ -93,19 +93,19 @@ namespace GBA
             if (palettes.Length % GBA.Palette.LENGTH != 0)
                 throw new Exception("Given palette data has invalid length");
 
-            Width = tsa.Width * 8;
-            Height = tsa.Height * 8;
+            this.Width = tsa.Width * 8;
+            this.Height = tsa.Height * 8;
 
-            Tiling = tsa;
+            this.Tiling = tsa;
 
-            Graphics = new Tileset(graphics);
+            this.Graphics = new Tileset(graphics);
 
-            Palettes = new Palette[palettes.Length / GBA.Palette.LENGTH];
+            this.Palettes = new Palette[palettes.Length / GBA.Palette.LENGTH];
             Byte[] buffer = new Byte[GBA.Palette.LENGTH];
-            for (Int32 p = 0; p < Palettes.Length; p++)
+            for (Int32 p = 0; p < this.Palettes.Length; p++)
             {
                 Array.Copy(palettes, p * GBA.Palette.LENGTH, buffer, 0, GBA.Palette.LENGTH);
-                Palettes[p] = new Palette(buffer);
+                this.Palettes[p] = new Palette(buffer);
             }
         }
         public TSA_Image(
@@ -120,12 +120,12 @@ namespace GBA
             if (palettes.Count % GBA.Palette.MAX != 0)
                 throw new Exception("Given palette data has invalid length");
 
-            Width = tsa.Width * 8;
-            Height = tsa.Height * 8;
+            this.Width = tsa.Width * 8;
+            this.Height = tsa.Height * 8;
 
-            Tiling = tsa;
-            Graphics = graphics;
-            Palettes = Palette.Split(palettes, palettes.Count / Palette.MAX);
+            this.Tiling = tsa;
+            this.Graphics = graphics;
+            this.Palettes = Palette.Split(palettes, palettes.Count / Palette.MAX);
         }
         /// <summary>
         /// Automatically generates a TSA-compliant image with the specified palette
@@ -142,12 +142,12 @@ namespace GBA
             Int32 paletteAmount,
             Boolean checkRedundantTiles)
         {
-            Width = width * 8;
-            Height = height * 8;
+            this.Width = width * 8;
+            this.Height = height * 8;
 
-            if (image.Width != Width || image.Height != Height)
+            if (image.Width != this.Width || image.Height != this.Height)
                 throw new Exception("Image given has invalid dimensions.\n" +
-                    "It must be " + Width + "x" + Height + " pixels.");
+                    "It must be " + this.Width + "x" + this.Height + " pixels.");
 
             while (palette.Count < paletteAmount * Palette.MAX)
             {
@@ -156,11 +156,11 @@ namespace GBA
 
             if (image.Colors.Count <= 16)
             {   // no need to run TSA-ifier code
-                Palettes = Palette.Split(palette, paletteAmount);
+                this.Palettes = Palette.Split(palette, paletteAmount);
 
-                Graphics = new Tileset(new Image(image, palette));
+                this.Graphics = new Tileset(new Image(image, palette));
 
-                Tiling = TSA_Array.GetBasicTSA(width, height);
+                this.Tiling = TSA_Array.GetBasicTSA(width, height);
             }
             else using (FormLoading loading = new FormLoading())
             {   // run the image TSA-ifier and show a loading bar window
@@ -178,7 +178,7 @@ namespace GBA
                 for (Int32 tileY = 0; tileY < height; tileY++)
                 for (Int32 tileX = 0; tileX < width; tileX++)
                 {
-                    index = tileX * 8 + tileY * 8 * Width;
+                    index = tileX * 8 + tileY * 8 * this.Width;
                     for (Int32 y = 0; y < 8; y++)
                     {
                         for (Int32 x = 0; x < 8; x++)
@@ -186,7 +186,7 @@ namespace GBA
                             colorTotals[bytes[index]]++;
                             colorAmounts[bytes[index], tile_index]++;
                         }
-                        index += Width - 8;
+                        index += this.Width - 8;
                     }
                     tile_index++;
                 }   // first we take a look at which colors are most present (in all, and per tile)
@@ -210,7 +210,7 @@ namespace GBA
 
                 loading.SetPercent(9);
 
-                Palettes = Palette.Split(palette, paletteAmount);
+                    this.Palettes = Palette.Split(palette, paletteAmount);
 
                 loading.SetLoading("Asserting tile palettes...", 10);
 
@@ -227,7 +227,7 @@ namespace GBA
                     {
                         amount = colorAmounts[colors[i], tile_index];
 
-                        if (Palettes[tilePalettes[tile_index]].Contains(color))
+                        if (this.Palettes[tilePalettes[tile_index]].Contains(color))
                         {
                             certainty[tile_index] += amount;
                         }
@@ -249,8 +249,8 @@ namespace GBA
 
                 loading.SetMessage("Creating TSA information...");
 
-                Graphics = new Tileset(width * height);
-                Tiling = new TSA_Array(width, height);
+                    this.Graphics = new Tileset(width * height);
+                    this.Tiling = new TSA_Array(width, height);
                     Int32 pixel;
                 tile_index = 0;
                     Byte HI_nibble;
@@ -260,18 +260,18 @@ namespace GBA
                 for (Int32 tileY = 0; tileY < height; tileY++)
                 for (Int32 tileX = 0; tileX < width; tileX++)
                 {
-                    index = (Palettes[tilePalettes[tile_index]].IsFull) ? tilePalettes[tile_index] : 0;
+                    index = (this.Palettes[tilePalettes[tile_index]].IsFull) ? tilePalettes[tile_index] : 0;
                     bytes = new Byte[GBA.Tile.LENGTH];
 
                     for (Int32 y = 0; y < 8; y++)
                     for (Int32 x = 0; x < 4; x++)
                     {
                         color = image.GetColor(tileX * 8 + x * 2, tileY * 8 + y);
-                        pixel = GBA.Color.GetNearest(Palettes[index], color);
+                        pixel = GBA.Color.GetNearest(this.Palettes[index], color);
                         LO_nibble = (pixel == -1) ? (Byte)0x00 : (Byte)(pixel);
 
                         color = image.GetColor(tileX * 8 + x * 2 + 1, tileY * 8 + y);
-                        pixel = GBA.Color.GetNearest(Palettes[index], color);
+                        pixel = GBA.Color.GetNearest(this.Palettes[index], color);
                         HI_nibble = (pixel == -1) ? (Byte)0x00 : (Byte)(pixel);
 
                         bytes[x + y * 4] = (Byte)((HI_nibble << 4) | LO_nibble);
@@ -287,22 +287,22 @@ namespace GBA
                         }
                         else
                         {
-                            current = Graphics.FindMatch(tile);
+                            current = this.Graphics.FindMatch(tile);
 
                             if (current == null)
                             {
-                                current = Tuple.Create(Graphics.Count, false, false);
-                                Graphics.Add(tile);
+                                current = Tuple.Create(this.Graphics.Count, false, false);
+                                        this.Graphics.Add(tile);
                             }
                         }
                     }
                     else
                     {
-                        current = Tuple.Create(Graphics.Count, false, false);
-                        Graphics.Add(tile);
+                        current = Tuple.Create(this.Graphics.Count, false, false);
+                                this.Graphics.Add(tile);
                     }
-                    // try {
-                    Tiling[tileX, tileY] = new TSA(
+                            // try {
+                            this.Tiling[tileX, tileY] = new TSA(
                         (UInt16)current.Item1,
                         tilePalettes[tile_index],
                         current.Item2,
@@ -328,20 +328,20 @@ namespace GBA
             Int32 paletteAmount,
             Boolean checkRedundantTiles)
         {
-            Width = width * 8;
-            Height = height * 8;
+            this.Width = width * 8;
+            this.Height = height * 8;
 
-            if (image.Width != Width || image.Height != Height)
+            if (image.Width != this.Width || image.Height != this.Height)
                 throw new Exception("Image given has invalid dimensions.\n" +
-                    "It must be " + Width + "x" + Height + " pixels.");
+                    "It must be " + this.Width + "x" + this.Height + " pixels.");
 
             if (image.Colors.Count <= 16)
             {   // No need to run TSA-ifier code
-                Palettes = Palette.Split(image.Colors, paletteAmount);
+                this.Palettes = Palette.Split(image.Colors, paletteAmount);
 
-                Graphics = new Tileset(new Image(image));
+                this.Graphics = new Tileset(new Image(image));
 
-                Tiling = TSA_Array.GetBasicTSA(width, height);
+                this.Tiling = TSA_Array.GetBasicTSA(width, height);
             }
             else using (FormLoading loading = new FormLoading())
             {   // Run the image TSA-ifier
@@ -359,7 +359,7 @@ namespace GBA
                 for (Int32 tileY = 0; tileY < height; tileY++)
                 for (Int32 tileX = 0; tileX < width; tileX++)
                 {
-                    index = tileX * 8 + tileY * 8 * Width;
+                    index = tileX * 8 + tileY * 8 * this.Width;
                     for (Int32 y = 0; y < 8; y++)
                     {
                         for (Int32 x = 0; x < 8; x++)
@@ -367,7 +367,7 @@ namespace GBA
                             colorTotals[bytes[index]]++;
                             colorAmounts[bytes[index], tile]++;
                         }
-                        index += Width - 8;
+                        index += this.Width - 8;
                     }
                     tile++;
                 }   // first we take a look at which colors are most present (in all, and per tile)
@@ -391,11 +391,11 @@ namespace GBA
 
                 loading.SetPercent(9);
 
-                Palettes = new Palette[paletteAmount];
+                    this.Palettes = new Palette[paletteAmount];
                 for (Int32 i = 0; i < paletteAmount; i++)
                 {
-                    Palettes[i] = new GBA.Palette(16);
-                    Palettes[i].Add(new GBA.Color(0x0000));
+                        this.Palettes[i] = new GBA.Palette(16);
+                        this.Palettes[i].Add(new GBA.Color(0x0000));
                 }   // we create our palettes, forcing the 1st color to be black on each palette
 
                 loading.SetLoading("Asserting tile palettes...", 10);
@@ -413,18 +413,18 @@ namespace GBA
                     {
                         amount = colorAmounts[colors[i], tile];
 
-                        if (Palettes[tilePalettes[tile]].Contains(color))
+                        if (this.Palettes[tilePalettes[tile]].Contains(color))
                         {
                             certainty[tile] += amount;
                         }
                         else
                         {
-                            if (Palettes[tilePalettes[tile]].IsFull)
+                            if (this.Palettes[tilePalettes[tile]].IsFull)
                             {
                                 if (certainty[tile] < amount)
                                 {
                                     tilePalettes[tile]++;
-                                    tilePalettes[tile] %= (Byte)Palettes.Length;
+                                    tilePalettes[tile] %= (Byte)this.Palettes.Length;
                                     certainty[tile] = 0;
                                     i++; break;
                                 }
@@ -432,7 +432,7 @@ namespace GBA
                             }
                             else if (amount != 0)
                             {
-                                Palettes[tilePalettes[tile]].Add(color);
+                                    this.Palettes[tilePalettes[tile]].Add(color);
                                 certainty[tile] += amount;
                             }
                         }
@@ -442,23 +442,23 @@ namespace GBA
                 }   // and we do a loop going from  most used color to least used, setting tilePalettes and filling said palettes
 
                 amount = 0;
-                for (Int32 p = 0; p < Palettes.Length; p++)
+                for (Int32 p = 0; p < this.Palettes.Length; p++)
                 {
-                    Palettes[p].Sort(delegate (GBA.Color first, GBA.Color second)
+                        this.Palettes[p].Sort(delegate (GBA.Color first, GBA.Color second)
                     {
                         return (first.GetValueR() + first.GetValueG() + first.GetValueB())
                                 - (second.GetValueR() + second.GetValueG() + second.GetValueB());
                     });
-                    for (Int32 i = Palettes[p].Count; i < 16; i++)
+                    for (Int32 i = this.Palettes[p].Count; i < 16; i++)
                     {
-                        Palettes[p].Add(new Color(0x0000));
+                            this.Palettes[p].Add(new Color(0x0000));
                     }
                 }
 
                 loading.SetMessage("Creating TSA information...");
 
-                Graphics = new Tileset(width * height);
-                Tiling = new TSA_Array(width, height);
+                    this.Graphics = new Tileset(width * height);
+                    this.Tiling = new TSA_Array(width, height);
                     Int32 pixel;
                 tile = 0;
                     Byte HI_nibble;
@@ -468,18 +468,18 @@ namespace GBA
                 for (Int32 tileY = 0; tileY < height; tileY++)
                 for (Int32 tileX = 0; tileX < width; tileX++)
                 {
-                    index = (Palettes[tilePalettes[tile]].IsFull) ? tilePalettes[tile] : 0;
+                    index = (this.Palettes[tilePalettes[tile]].IsFull) ? tilePalettes[tile] : 0;
                     bytes = new Byte[GBA.Tile.LENGTH];
 
                     for (Int32 y = 0; y < 8; y++)
                     for (Int32 x = 0; x < 4; x++)
                     {
                         color = image.GetColor(tileX * 8 + x * 2, tileY * 8 + y);
-                        pixel = GBA.Color.GetNearest(Palettes[index], color);
+                        pixel = GBA.Color.GetNearest(this.Palettes[index], color);
                         LO_nibble = (pixel == -1) ? (Byte)0x00 : (Byte)(pixel);
 
                         color = image.GetColor(tileX * 8 + x * 2 + 1, tileY * 8 + y);
-                        pixel = GBA.Color.GetNearest(Palettes[index], color);
+                        pixel = GBA.Color.GetNearest(this.Palettes[index], color);
                         HI_nibble = (pixel == -1) ? (Byte)0x00 : (Byte)(pixel);
 
                         bytes[x + y * 4] = (Byte)((HI_nibble << 4) | LO_nibble);
@@ -495,22 +495,22 @@ namespace GBA
                         }
                         else
                         {
-                            current = Graphics.FindMatch(currentTile);
+                            current = this.Graphics.FindMatch(currentTile);
 
                             if (current == null)
                             {
-                                current = Tuple.Create(Graphics.Count, false, false);
-                                Graphics.Add(currentTile);
+                                current = Tuple.Create(this.Graphics.Count, false, false);
+                                        this.Graphics.Add(currentTile);
                             }
                         }
                     }
                     else
                     {
-                        current = Tuple.Create(Graphics.Count, false, false);
-                        Graphics.Add(currentTile);
+                        current = Tuple.Create(this.Graphics.Count, false, false);
+                                this.Graphics.Add(currentTile);
                     }
-                    // try {
-                    Tiling[tileX, tileY] = new TSA(
+                            // try {
+                            this.Tiling[tileX, tileY] = new TSA(
                         (UInt16)current.Item1,
                         tilePalettes[tile],
                         current.Item2,

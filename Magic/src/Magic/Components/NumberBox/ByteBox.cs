@@ -20,15 +20,15 @@ namespace Magic.Components
 
         public ByteBox() : base()
         {
-            SuspendLayout();
+            this.SuspendLayout();
 
-            Minimum = 0;
-            Maximum = 255;
-            Name = "ByteBox";
-            Size = new Size(40, 20);
-            Hexadecimal = true;
+            this.Minimum = 0;
+            this.Maximum = 255;
+            this.Name = "ByteBox";
+            this.Size = new Size(40, 20);
+            this.Hexadecimal = true;
 
-            ResumeLayout(false);
+            this.ResumeLayout(false);
         }
     }
 }

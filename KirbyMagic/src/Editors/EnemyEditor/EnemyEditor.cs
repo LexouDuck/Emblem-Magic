@@ -20,7 +20,7 @@ namespace KirbyMagic.Editors
         {
             get
             {
-                return "Enemy 0x" + Util.UInt16ToHex(EntryArrayBox.Value) + " [" + EntryArrayBox.Text + "] - ";
+                return "Enemy 0x" + Util.UInt16ToHex(this.EntryArrayBox.Value) + " [" + this.EntryArrayBox.Text + "] - ";
             }
         }
 
@@ -28,18 +28,18 @@ namespace KirbyMagic.Editors
 
         public EnemyEditor()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
         
         override public void Core_OnOpen()
         {
-            Core_Update();
+            this.Core_Update();
         }
         override public void Core_Update()
         {
-            Current.EntryIndex = EntryArrayBox.Value;
+            this.Current.EntryIndex = this.EntryArrayBox.Value;
 
-            Core_LoadValues();
+            this.Core_LoadValues();
         }
 
         void Core_LoadValues()

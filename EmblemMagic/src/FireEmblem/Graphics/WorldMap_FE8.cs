@@ -66,9 +66,9 @@ namespace EmblemMagic.FireEmblem
             {
                 image = new TSA_Image(WIDTH, HEIGHT, new GBA.Bitmap(path), palette, PALETTES, true);
             }
-            Graphics = image.Graphics;
-            Palettes = image.Palettes;
-            Tiling = image.Tiling;
+            this.Graphics = image.Graphics;
+            this.Palettes = image.Palettes;
+            this.Tiling = image.Tiling;
         }
     }
 
@@ -83,10 +83,10 @@ namespace EmblemMagic.FireEmblem
                 Int32 tileX = x / 8;
                 Int32 tileY = y / 8;
                 Int32 index = tileX + tileY * WIDTH;
-                Int32 palette = PaletteMap[tileX, tileY];
+                Int32 palette = this.PaletteMap[tileX, tileY];
                 tileX = x % Tile.SIZE;
                 tileY = y % Tile.SIZE;
-                return palette * Palette.MAX + Graphics[index][tileX, tileY];
+                return palette * Palette.MAX + this.Graphics[index][tileX, tileY];
             }
         }
         public Color GetColor(Int32 x, Int32 y)
@@ -94,10 +94,10 @@ namespace EmblemMagic.FireEmblem
             Int32 tileX = x / 8;
             Int32 tileY = y / 8;
             Int32 index = tileX + tileY * WIDTH;
-            Int32 palette = PaletteMap[tileX, tileY];
+            Int32 palette = this.PaletteMap[tileX, tileY];
             tileX = x % Tile.SIZE;
             tileY = y % Tile.SIZE;
-            return Palettes[palette][Graphics[index][tileX, tileY]];
+            return this.Palettes[palette][this.Graphics[index][tileX, tileY]];
         }
 
         public Int32 Width
@@ -131,22 +131,22 @@ namespace EmblemMagic.FireEmblem
             Pointer tileset,
             Pointer tsa)
         {
-            Palettes = new Palette[PALETTES];
-            for (Int32 i = 0; i < Palettes.Length; i++)
+            this.Palettes = new Palette[PALETTES];
+            for (Int32 i = 0; i < this.Palettes.Length; i++)
             {
-                Palettes[i] = Core.ReadPalette(palette + i * 32, Palette.LENGTH);
+                this.Palettes[i] = Core.ReadPalette(palette + i * 32, Palette.LENGTH);
             }
-            
-            Graphics = new Tileset(Core.ReadData(tileset, WIDTH * HEIGHT * Tile.LENGTH));
+
+            this.Graphics = new Tileset(Core.ReadData(tileset, WIDTH * HEIGHT * Tile.LENGTH));
 
             Byte[] map = Core.ReadData(tsa, 0);
-            PaletteMap = new Int32[WIDTH, HEIGHT];
+            this.PaletteMap = new Int32[WIDTH, HEIGHT];
             Int32 x = 0;
             Int32 y = 0;
             for (Int32 i = 0; i < map.Length; i++)
             {
-                PaletteMap[x++, y] = (map[i] & 0x0F);
-                PaletteMap[x++, y] = (map[i] & 0xF0) >> 4;
+                this.PaletteMap[x++, y] = (map[i] & 0x0F);
+                this.PaletteMap[x++, y] = (map[i] & 0xF0) >> 4;
                 if (x % WIDTH == 0)
                 {
                     i += 2;
@@ -167,13 +167,13 @@ namespace EmblemMagic.FireEmblem
             {
                 image = new TSA_Image(WIDTH, HEIGHT, new GBA.Bitmap(path), palette, PALETTES, false);
             }
-            Graphics = image.Graphics;
-            Palettes = image.Palettes;
-            PaletteMap = new Int32[WIDTH, HEIGHT];
+            this.Graphics = image.Graphics;
+            this.Palettes = image.Palettes;
+            this.PaletteMap = new Int32[WIDTH, HEIGHT];
             for (Int32 y = 0; y < HEIGHT; y++)
             for (Int32 x = 0; x < WIDTH; x++)
             {
-                PaletteMap[x, y] = image.Tiling[x, y].Palette;
+                    this.PaletteMap[x, y] = image.Tiling[x, y].Palette;
             }
         }
 
@@ -187,8 +187,8 @@ namespace EmblemMagic.FireEmblem
             for (Int32 i = 0; i < map.Length; i++)
             {
                 map[i] = (Byte)
-                    ((PaletteMap[x++, y] & 0x0F) &
-                    ((PaletteMap[x++, y] << 4) & 0xF0));
+                    ((this.PaletteMap[x++, y] & 0x0F) &
+                    ((this.PaletteMap[x++, y] << 4) & 0xF0));
 
                 if (x % WIDTH == 0)
                 {

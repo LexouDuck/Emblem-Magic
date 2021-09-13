@@ -22,7 +22,7 @@ namespace EmblemMagic.Editors
         {
             get
             {
-                return "Portrait 0x" + Util.UInt16ToHex(EntryArrayBox.Value) + " [" + EntryArrayBox.Text + "] - ";
+                return "Portrait 0x" + Util.UInt16ToHex(this.EntryArrayBox.Value) + " [" + this.EntryArrayBox.Text + "] - ";
             }
         }
         /// <summary>
@@ -32,7 +32,7 @@ namespace EmblemMagic.Editors
         {
             get
             {
-                return (Core.App.Game is FE6) ? (Current["Chibi"] == 0) : (Current["Face"] == 0);
+                return (Core.App.Game is FE6) ? (this.Current["Chibi"] == 0) : (this.Current["Face"] == 0);
             }
         }
 
@@ -42,217 +42,217 @@ namespace EmblemMagic.Editors
         {
             try
             {
-                InitializeComponent();
+                this.InitializeComponent();
 
-                EntryArrayBox.Load("Portrait List.txt");
-                Current = new StructFile("Portrait Struct.txt");
-                Current.Address = Core.GetPointer("Portrait Array");
+                this.EntryArrayBox.Load("Portrait List.txt");
+                this.Current = new StructFile("Portrait Struct.txt");
+                this.Current.Address = Core.GetPointer("Portrait Array");
             }
             catch (Exception ex)
             {
                 UI.ShowError("Could not properly open the " + this.Text, ex);
 
-                Core_CloseEditor(this, null);
+                this.Core_CloseEditor(this, null);
             }
         }
         
         public override void Core_SetEntry(UInt32 entry)
         {
-            EntryArrayBox.Value = (UInt16)entry;
+            this.EntryArrayBox.Value = (UInt16)entry;
         }
         public override void Core_OnOpen()
         {
-            EntryArrayBox.ValueChanged -= EntryArrayBox_ValueChanged;
-            EntryArrayBox.Value = 1;
-            EntryArrayBox.ValueChanged += EntryArrayBox_ValueChanged;
+            this.EntryArrayBox.ValueChanged -= this.EntryArrayBox_ValueChanged;
+            this.EntryArrayBox.Value = 1;
+            this.EntryArrayBox.ValueChanged += this.EntryArrayBox_ValueChanged;
 
-            Core_Update();
+            this.Core_Update();
         }
         public override void Core_Update()
         {
-            Current.EntryIndex = EntryArrayBox.Value;
+            this.Current.EntryIndex = this.EntryArrayBox.Value;
 
-            Core_UpdatePortrait();
-            Core_LoadValues();
-            Core_CheckControls();
-            Core_UpdateTestView();
+            this.Core_UpdatePortrait();
+            this.Core_LoadValues();
+            this.Core_CheckControls();
+            this.Core_UpdateTestView();
         }
         
         void Core_UpdatePortrait()
         {
             try
             {
-                if (IsGenericClassCard)
+                if (this.IsGenericClassCard)
                 {
-                    CurrentPortrait = new Portrait(
-                        Core.ReadPalette((Pointer)Current["Palette"], Palette.LENGTH),
-                        Core.ReadData((Pointer)Current[(Core.App.Game is FE6) ? "Main" : "Card"], 0));
+                    this.CurrentPortrait = new Portrait(
+                        Core.ReadPalette((Pointer)this.Current["Palette"], Palette.LENGTH),
+                        Core.ReadData((Pointer)this.Current[(Core.App.Game is FE6) ? "Main" : "Card"], 0));
                 }
                 else
                 {
-                    CurrentPortrait = new Portrait(
-                        Core.ReadPalette((Pointer)Current["Palette"], Palette.LENGTH),
+                    this.CurrentPortrait = new Portrait(
+                        Core.ReadPalette((Pointer)this.Current["Palette"], Palette.LENGTH),
                         ((Core.App.Game is FE7 && Core.App.Game.Region == GameRegion.JAP) || Core.App.Game is FE8) ?
-                            Core.ReadData((Pointer)Current["Face"] + 4, Portrait.Face_Length) :
-                            Core.ReadData((Pointer)Current[(Core.App.Game is FE6) ? "Main" : "Face"], 0),
-                        Core.ReadData((Pointer)Current["Chibi"], (Core.App.Game is FE6) ? Portrait.Chibi_Length : 0),
+                            Core.ReadData((Pointer)this.Current["Face"] + 4, Portrait.Face_Length) :
+                            Core.ReadData((Pointer)this.Current[(Core.App.Game is FE6) ? "Main" : "Face"], 0),
+                        Core.ReadData((Pointer)this.Current["Chibi"], (Core.App.Game is FE6) ? Portrait.Chibi_Length : 0),
                         (Core.App.Game is FE6) ? null :
-                        Core.ReadData((Pointer)Current["Mouth"], Portrait.Mouth_Length));
+                        Core.ReadData((Pointer)this.Current["Mouth"], Portrait.Mouth_Length));
                 }
 
-                Image_ImageBox.Load(CurrentPortrait);
-                Palette_PaletteBox.Load(CurrentPortrait.Colors);
+                this.Image_ImageBox.Load(this.CurrentPortrait);
+                this.Palette_PaletteBox.Load(this.CurrentPortrait.Colors);
             }
             catch (Exception ex)
             {
                 UI.ShowError("Could not load the portrait image.", ex);
-                Image_ImageBox.Reset();
-                Palette_PaletteBox.Reset();
+                this.Image_ImageBox.Reset();
+                this.Palette_PaletteBox.Reset();
             }
         }
         void Core_UpdateTestView()
         {
             try
             {
-                GBA.Palette palette = new GBA.Palette(CurrentPortrait.Colors);
+                GBA.Palette palette = new GBA.Palette(this.CurrentPortrait.Colors);
                 palette[0] = palette[0].SetAlpha(true);
                 for (Int32 i = 1; i < palette.Count; i++)
                 {
                     palette[i] = palette[i].SetAlpha(false);
                 }   // force correct alpha on the palette (1st color transparent, all others opaque)
-                GBA.TileMap tilemap = new TileMap(Portrait.Map_Test(IsGenericClassCard));
+                GBA.TileMap tilemap = new TileMap(Portrait.Map_Test(this.IsGenericClassCard));
 
-                TestPortrait = new SpriteSheet(tilemap.Width * 8, tilemap.Height * 8);
+                this.TestPortrait = new SpriteSheet(tilemap.Width * 8, tilemap.Height * 8);
 
-                if (!IsGenericClassCard)
+                if (!this.IsGenericClassCard)
                 {
-                    tilemap = new GBA.TileMap(GetTileMap_Mouth(
-                        Test_Mouth_Smile_RadioButton.Checked,
-                        Test_Mouth_TrackBar.Value));
-                    TestPortrait.AddSprite(
+                    tilemap = new GBA.TileMap(this.GetTileMap_Mouth(
+                        this.Test_Mouth_Smile_RadioButton.Checked,
+                        this.Test_Mouth_TrackBar.Value));
+                    this.TestPortrait.AddSprite(
                         new Sprite(palette,
-                        (Core.App.Game is FE6 || (Test_Mouth_Smile_RadioButton.Checked && Test_Mouth_TrackBar.Value == 0)) ?
-                        CurrentPortrait.Sprites[Portrait.MAIN].Sheet :
-                        CurrentPortrait.Sprites[Portrait.MOUTH].Sheet,
+                        (Core.App.Game is FE6 || (this.Test_Mouth_Smile_RadioButton.Checked && this.Test_Mouth_TrackBar.Value == 0)) ?
+                        this.CurrentPortrait.Sprites[Portrait.MAIN].Sheet :
+                        this.CurrentPortrait.Sprites[Portrait.MOUTH].Sheet,
                         tilemap),
-                        (Byte)Current["MouthX"] * 8,
-                        (Byte)Current["MouthY"] * 8);
+                        (Byte)this.Current["MouthX"] * 8,
+                        (Byte)this.Current["MouthY"] * 8);
 
-                    tilemap = new GBA.TileMap(GetTileMap_Eyes(
-                        EyesClosed_CheckBox.Checked,
-                        Test_Blink_TrackBar.Value));
-                    TestPortrait.AddSprite(
+                    tilemap = new GBA.TileMap(this.GetTileMap_Eyes(
+                        this.EyesClosed_CheckBox.Checked,
+                        this.Test_Blink_TrackBar.Value));
+                    this.TestPortrait.AddSprite(
                         new Sprite(palette,
-                        CurrentPortrait.Sprites[Portrait.MAIN].Sheet,
+                        this.CurrentPortrait.Sprites[Portrait.MAIN].Sheet,
                         tilemap),
-                        (Byte)Current["BlinkX"] * 8,
-                        (Byte)Current["BlinkY"] * 8);
+                        (Byte)this.Current["BlinkX"] * 8,
+                        (Byte)this.Current["BlinkY"] * 8);
                 }
-                tilemap = new TileMap(Portrait.Map_Test(IsGenericClassCard));
-                TestPortrait.AddSprite(
+                tilemap = new TileMap(Portrait.Map_Test(this.IsGenericClassCard));
+                this.TestPortrait.AddSprite(
                     new Sprite(palette,
-                    CurrentPortrait.Sprites[Portrait.MAIN].Sheet,
+                    this.CurrentPortrait.Sprites[Portrait.MAIN].Sheet,
                     tilemap),
                     0, 0);
 
-                Test_ImageBox.Load(TestPortrait);
+                this.Test_ImageBox.Load(this.TestPortrait);
             }
             catch (Exception ex)
             {
                 UI.ShowError("Could not load the portrait test view.", ex);
-                Test_ImageBox.Reset();
+                this.Test_ImageBox.Reset();
             }
         }
         void Core_LoadValues()
         {
-            Palette_PointerBox.ValueChanged -= Palette_PointerBox_Changed;
-            Image_PointerBox.ValueChanged -= Image_PointerBox_Changed;
-            Chibi_PointerBox.ValueChanged -= Chibi_PointerBox_Changed;
-            Mouth_PointerBox.ValueChanged -= Mouth_PointerBox_Changed;
-            MouthX_ByteBox.ValueChanged -= MouthX_NumBox_Changed;
-            MouthY_ByteBox.ValueChanged -= MouthY_NumBox_Changed;
-            BlinkX_ByteBox.ValueChanged -= BlinkX_NumBox_Changed;
-            BlinkY_ByteBox.ValueChanged -= BlinkY_NumBox_Changed;
-            EyesClosed_CheckBox.CheckedChanged -= EyesClosed_CheckBox_Changed;
+            this.Palette_PointerBox.ValueChanged -= this.Palette_PointerBox_Changed;
+            this.Image_PointerBox.ValueChanged -= this.Image_PointerBox_Changed;
+            this.Chibi_PointerBox.ValueChanged -= this.Chibi_PointerBox_Changed;
+            this.Mouth_PointerBox.ValueChanged -= this.Mouth_PointerBox_Changed;
+            this.MouthX_ByteBox.ValueChanged -= this.MouthX_NumBox_Changed;
+            this.MouthY_ByteBox.ValueChanged -= this.MouthY_NumBox_Changed;
+            this.BlinkX_ByteBox.ValueChanged -= this.BlinkX_NumBox_Changed;
+            this.BlinkY_ByteBox.ValueChanged -= this.BlinkY_NumBox_Changed;
+            this.EyesClosed_CheckBox.CheckedChanged -= this.EyesClosed_CheckBox_Changed;
             
             try
             {
-                Palette_PointerBox.Value = (Pointer)Current["Palette"];
-                Chibi_PointerBox.Value = (Pointer)Current["Chibi"];
+                this.Palette_PointerBox.Value = (Pointer)this.Current["Palette"];
+                this.Chibi_PointerBox.Value = (Pointer)this.Current["Chibi"];
 
-                MouthX_ByteBox.Value = (Byte)Current["MouthX"];
-                MouthY_ByteBox.Value = (Byte)Current["MouthY"];
-                BlinkX_ByteBox.Value = (Byte)Current["BlinkX"];
-                BlinkY_ByteBox.Value = (Byte)Current["BlinkY"];
+                this.MouthX_ByteBox.Value = (Byte)this.Current["MouthX"];
+                this.MouthY_ByteBox.Value = (Byte)this.Current["MouthY"];
+                this.BlinkX_ByteBox.Value = (Byte)this.Current["BlinkX"];
+                this.BlinkY_ByteBox.Value = (Byte)this.Current["BlinkY"];
 
                 if (Core.App.Game is FE6)
                 {
-                    Image_PointerBox.Value = (Pointer)Current["Main"];
+                    this.Image_PointerBox.Value = (Pointer)this.Current["Main"];
                 }
                 else
                 {
-                    Image_PointerBox.Value = (IsGenericClassCard) ?
-                        (Pointer)Current["Card"] :
-                        (Pointer)Current["Face"];
-                    Mouth_PointerBox.Value = (Pointer)Current["Mouth"];
+                    this.Image_PointerBox.Value = (this.IsGenericClassCard) ?
+                        (Pointer)this.Current["Card"] :
+                        (Pointer)this.Current["Face"];
+                    this.Mouth_PointerBox.Value = (Pointer)this.Current["Mouth"];
 
-                    EyesClosed_CheckBox.Checked = (Current["EyesClosed"] == 0x06);
+                    this.EyesClosed_CheckBox.Checked = (this.Current["EyesClosed"] == 0x06);
                 }
             }
             catch (Exception ex)
             {
                 UI.ShowError("There has been an error while trying to load the values.", ex);
 
-                Palette_PointerBox.Value = new Pointer();
-                Image_PointerBox.Value = new Pointer();
-                Chibi_PointerBox.Value = new Pointer();
-                Mouth_PointerBox.Value = new Pointer();
-                MouthX_ByteBox.Value = 0;
-                MouthY_ByteBox.Value = 0;
-                BlinkX_ByteBox.Value = 0;
-                BlinkY_ByteBox.Value = 0;
+                this.Palette_PointerBox.Value = new Pointer();
+                this.Image_PointerBox.Value = new Pointer();
+                this.Chibi_PointerBox.Value = new Pointer();
+                this.Mouth_PointerBox.Value = new Pointer();
+                this.MouthX_ByteBox.Value = 0;
+                this.MouthY_ByteBox.Value = 0;
+                this.BlinkX_ByteBox.Value = 0;
+                this.BlinkY_ByteBox.Value = 0;
             }
 
-            Palette_PointerBox.ValueChanged += Palette_PointerBox_Changed;
-            Image_PointerBox.ValueChanged += Image_PointerBox_Changed;
-            Chibi_PointerBox.ValueChanged += Chibi_PointerBox_Changed;
-            Mouth_PointerBox.ValueChanged += Mouth_PointerBox_Changed;
-            MouthX_ByteBox.ValueChanged += MouthX_NumBox_Changed;
-            MouthY_ByteBox.ValueChanged += MouthY_NumBox_Changed;
-            BlinkX_ByteBox.ValueChanged += BlinkX_NumBox_Changed;
-            BlinkY_ByteBox.ValueChanged += BlinkY_NumBox_Changed;
-            EyesClosed_CheckBox.CheckedChanged += EyesClosed_CheckBox_Changed;
+            this.Palette_PointerBox.ValueChanged += this.Palette_PointerBox_Changed;
+            this.Image_PointerBox.ValueChanged += this.Image_PointerBox_Changed;
+            this.Chibi_PointerBox.ValueChanged += this.Chibi_PointerBox_Changed;
+            this.Mouth_PointerBox.ValueChanged += this.Mouth_PointerBox_Changed;
+            this.MouthX_ByteBox.ValueChanged += this.MouthX_NumBox_Changed;
+            this.MouthY_ByteBox.ValueChanged += this.MouthY_NumBox_Changed;
+            this.BlinkX_ByteBox.ValueChanged += this.BlinkX_NumBox_Changed;
+            this.BlinkY_ByteBox.ValueChanged += this.BlinkY_NumBox_Changed;
+            this.EyesClosed_CheckBox.CheckedChanged += this.EyesClosed_CheckBox_Changed;
         }
         void Core_CheckControls()
         {
-            switch (CurrentPortrait.Type)
+            switch (this.CurrentPortrait.Type)
             {
                 case PortraitType.Portrait:
-                    Test_Blink_Label.Enabled = !(Core.App.Game is FE6);
-                    Test_Blink_TrackBar.Enabled = !(Core.App.Game is FE6);
-                    Test_Mouth_TrackBar.Enabled = true;
-                    Test_Mouth_TrackBar.Minimum = 0;
-                    Test_Mouth_TrackBar.Maximum = (Core.App.Game is FE6) ? 2 : 3;
-                    Test_Mouth_Smile_RadioButton.Enabled = true;
-                    Test_Mouth_Frown_RadioButton.Enabled = true;
+                    this.Test_Blink_Label.Enabled = !(Core.App.Game is FE6);
+                    this.Test_Blink_TrackBar.Enabled = !(Core.App.Game is FE6);
+                    this.Test_Mouth_TrackBar.Enabled = true;
+                    this.Test_Mouth_TrackBar.Minimum = 0;
+                    this.Test_Mouth_TrackBar.Maximum = (Core.App.Game is FE6) ? 2 : 3;
+                    this.Test_Mouth_Smile_RadioButton.Enabled = true;
+                    this.Test_Mouth_Frown_RadioButton.Enabled = true;
                     break;
                 case PortraitType.Generic:
-                    Test_Blink_Label.Enabled = false;
-                    Test_Blink_TrackBar.Enabled = false;
-                    Test_Mouth_TrackBar.Enabled = false;
-                    Test_Mouth_TrackBar.Minimum = 0;
-                    Test_Mouth_TrackBar.Maximum = 1;
-                    Test_Mouth_Smile_RadioButton.Enabled = false;
-                    Test_Mouth_Frown_RadioButton.Enabled = false;
+                    this.Test_Blink_Label.Enabled = false;
+                    this.Test_Blink_TrackBar.Enabled = false;
+                    this.Test_Mouth_TrackBar.Enabled = false;
+                    this.Test_Mouth_TrackBar.Minimum = 0;
+                    this.Test_Mouth_TrackBar.Maximum = 1;
+                    this.Test_Mouth_Smile_RadioButton.Enabled = false;
+                    this.Test_Mouth_Frown_RadioButton.Enabled = false;
                     break;
                 case PortraitType.Shop:
-                    Test_Blink_Label.Enabled = false;
-                    Test_Blink_TrackBar.Enabled = false;
-                    Test_Mouth_TrackBar.Enabled = true;
-                    Test_Mouth_TrackBar.Minimum = 1;
-                    Test_Mouth_TrackBar.Maximum = 3;
-                    Test_Mouth_Smile_RadioButton.Enabled = true;
-                    Test_Mouth_Frown_RadioButton.Enabled = true;
+                    this.Test_Blink_Label.Enabled = false;
+                    this.Test_Blink_TrackBar.Enabled = false;
+                    this.Test_Mouth_TrackBar.Enabled = true;
+                    this.Test_Mouth_TrackBar.Minimum = 1;
+                    this.Test_Mouth_TrackBar.Maximum = 3;
+                    this.Test_Mouth_Smile_RadioButton.Enabled = true;
+                    this.Test_Mouth_Frown_RadioButton.Enabled = true;
                     break;
                 default: break;
             }
@@ -274,15 +274,15 @@ namespace EmblemMagic.Editors
                 var repoints = new List<Tuple<String, Pointer, Int32>>();
                 var writepos = new List<Pointer>();
 
-                repoints.Add(Tuple.Create("Palette", (Pointer)Current["Palette"], data_palette.Length));
-                writepos.Add(Current.GetAddress(Current.EntryIndex, "Palette"));
+                repoints.Add(Tuple.Create("Palette", (Pointer)this.Current["Palette"], data_palette.Length));
+                writepos.Add(this.Current.GetAddress(this.Current.EntryIndex, "Palette"));
                 
-                if (IsGenericClassCard)
+                if (this.IsGenericClassCard)
                 {
                     data_main = LZ77.Compress(data_main);
 
-                    repoints.Add(Tuple.Create("Card", (Pointer)Current["Card"], header + data_main.Length));
-                    writepos.Add(Current.GetAddress(Current.EntryIndex, "Card"));
+                    repoints.Add(Tuple.Create("Card", (Pointer)this.Current["Card"], header + data_main.Length));
+                    writepos.Add(this.Current.GetAddress(this.Current.EntryIndex, "Card"));
                 }
                 else
                 {
@@ -293,54 +293,54 @@ namespace EmblemMagic.Editors
                        (Core.App.Game is FE7 && Core.App.Game.Region != GameRegion.JAP))
                         data_main = LZ77.Compress(data_main);
 
-                    repoints.Add(Tuple.Create("Face", (Pointer)Current["Face"], header + data_main.Length));
-                    writepos.Add(Current.GetAddress(Current.EntryIndex, "Face"));
+                    repoints.Add(Tuple.Create("Face", (Pointer)this.Current["Face"], header + data_main.Length));
+                    writepos.Add(this.Current.GetAddress(this.Current.EntryIndex, "Face"));
 
                     if (!(Core.App.Game is FE6))
                     {
-                        repoints.Add(Tuple.Create("Mouth", (Pointer)Current["Mouth"], data_mouth.Length));
-                        writepos.Add(Current.GetAddress(Current.EntryIndex, "Mouth"));
+                        repoints.Add(Tuple.Create("Mouth", (Pointer)this.Current["Mouth"], data_mouth.Length));
+                        writepos.Add(this.Current.GetAddress(this.Current.EntryIndex, "Mouth"));
 
                         data_chibi = LZ77.Compress(data_chibi);
                     }
-                    repoints.Add(Tuple.Create("Chibi", (Pointer)Current["Chibi"], data_chibi.Length));
-                    writepos.Add(Current.GetAddress(Current.EntryIndex, "Chibi"));
+                    repoints.Add(Tuple.Create("Chibi", (Pointer)this.Current["Chibi"], data_chibi.Length));
+                    writepos.Add(this.Current.GetAddress(this.Current.EntryIndex, "Chibi"));
                 }
 
                 Boolean cancel = Prompt.ShowRepointDialog(this, "Repoint Portrait",
                     "The portrait to insert might need some of its parts to be repointed.",
-                    CurrentEntry, repoints.ToArray(), writepos.ToArray());
+                    this.CurrentEntry, repoints.ToArray(), writepos.ToArray());
                 if (cancel) return;
 
                 Core.WriteData(this,
-                    (Pointer)Current["Palette"],
+                    (Pointer)this.Current["Palette"],
                     data_palette,
-                    CurrentEntry + "Palette changed");
+                    this.CurrentEntry + "Palette changed");
 
-                if (IsGenericClassCard)
+                if (this.IsGenericClassCard)
                 {
                     Core.WriteData(this,
-                        (Pointer)Current["Card"],
+                        (Pointer)this.Current["Card"],
                         data_main,
-                        CurrentEntry + "Image changed");
+                        this.CurrentEntry + "Image changed");
                 }
                 else
                 {
                     Core.WriteData(this,
-                        (Pointer)Current["Face"] + header,
+                        (Pointer)this.Current["Face"] + header,
                         data_main,
-                        CurrentEntry + "Main image changed");
+                        this.CurrentEntry + "Main image changed");
 
                     Core.WriteData(this,
-                        (Pointer)Current["Chibi"],
+                        (Pointer)this.Current["Chibi"],
                         data_chibi,
-                        CurrentEntry + "Chibi image changed");
+                        this.CurrentEntry + "Chibi image changed");
 
                     if (!(Program.Core.Game is FE6))
                         Core.WriteData(this,
-                            (Pointer)Current["Mouth"],
+                            (Pointer)this.Current["Mouth"],
                             data_mouth,
-                            CurrentEntry + "Mouth image changed");
+                            this.CurrentEntry + "Mouth image changed");
                 }
             }
             catch (Exception ex)
@@ -379,7 +379,7 @@ namespace EmblemMagic.Editors
                 UI.ShowError("Could not load the image file.", ex);
                 return;
             }
-            Core_Insert(portrait);
+            this.Core_Insert(portrait);
         }
         void Core_InsertData(String filepath)
         {
@@ -399,14 +399,14 @@ namespace EmblemMagic.Editors
                     format = System.Drawing.Imaging.ImageFormat.Gif;
                 */
                 Core.SaveImage(filepath,
-                    CurrentPortrait.Width,
-                    CurrentPortrait.Height,
-                    new Palette[1] { CurrentPortrait.Colors },
+                    this.CurrentPortrait.Width,
+                    this.CurrentPortrait.Height,
+                    new Palette[1] { this.CurrentPortrait.Colors },
                     delegate(Int32 x, Int32 y)
                     {
                         if (y == 0 && x < Palette.MAX)
                             return (Byte)x;
-                        return (Byte)CurrentPortrait[x, y];
+                        return (Byte)this.CurrentPortrait[x, y];
                     });
             }
             catch (Exception ex)
@@ -561,12 +561,12 @@ namespace EmblemMagic.Editors
                     openWindow.FileName.EndsWith(".bmp", StringComparison.OrdinalIgnoreCase) ||
                     openWindow.FileName.EndsWith(".gif", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_InsertImage(openWindow.FileName);
+                    this.Core_InsertImage(openWindow.FileName);
                     return;
                 }
                 if (openWindow.FileName.EndsWith(".chr", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_InsertData(openWindow.FileName);
+                    this.Core_InsertData(openWindow.FileName);
                     return;
                 }
                 UI.ShowError("File chosen has invalid extension.\r\n" + openWindow.FileName);
@@ -590,12 +590,12 @@ namespace EmblemMagic.Editors
                     saveWindow.FileName.EndsWith(".bmp", StringComparison.OrdinalIgnoreCase) ||
                     saveWindow.FileName.EndsWith(".gif", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_SaveImage(saveWindow.FileName.Remove(saveWindow.FileName.Length - 4));
+                    this.Core_SaveImage(saveWindow.FileName.Remove(saveWindow.FileName.Length - 4));
                     return;
                 }
                 if (saveWindow.FileName.EndsWith(".chr", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_SaveData(saveWindow.FileName);
+                    this.Core_SaveData(saveWindow.FileName);
                     return;
                 }
                 UI.ShowError("File chosen has invalid extension.\r\n" + saveWindow.FileName);
@@ -604,89 +604,89 @@ namespace EmblemMagic.Editors
 
         private void EntryArrayBox_ValueChanged(Object sender, EventArgs e)
         {
-            Core_Update();
+            this.Core_Update();
         }
         private void Test_ViewBox_Changed(Object sender, EventArgs e)
         {
-            Core_UpdateTestView();
+            this.Core_UpdateTestView();
         }
 
         private void Palette_PaletteBox_Click(Object sender, EventArgs e)
         {
-            UI.OpenPaletteEditor(this, CurrentEntry, (Pointer)Current["Palette"], 1);
+            UI.OpenPaletteEditor(this, this.CurrentEntry, (Pointer)this.Current["Palette"], 1);
         }
         private void Palette_PointerBox_Changed(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                Current.GetAddress(Current.EntryIndex, "Palette"),
-                Palette_PointerBox.Value,
-                CurrentEntry + "Palette repointed");
+                this.Current.GetAddress(this.Current.EntryIndex, "Palette"),
+                this.Palette_PointerBox.Value,
+                this.CurrentEntry + "Palette repointed");
         }
         private void Image_PointerBox_Changed(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
                 (Core.App.Game is FE6) ?
-                    Current.GetAddress(Current.EntryIndex, "Main") :
-                (IsGenericClassCard) ?
-                    Current.GetAddress(Current.EntryIndex, "Card") :
-                    Current.GetAddress(Current.EntryIndex, "Face"),
-                Image_PointerBox.Value,
-                CurrentEntry + "Main image repointed");
+                    this.Current.GetAddress(this.Current.EntryIndex, "Main") :
+                (this.IsGenericClassCard) ?
+                    this.Current.GetAddress(this.Current.EntryIndex, "Card") :
+                    this.Current.GetAddress(this.Current.EntryIndex, "Face"),
+                this.Image_PointerBox.Value,
+                this.CurrentEntry + "Main image repointed");
         }
         private void Chibi_PointerBox_Changed(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                Current.GetAddress(Current.EntryIndex, "Chibi"),
-                Chibi_PointerBox.Value,
-                CurrentEntry + "Chibi image repointed");
+                this.Current.GetAddress(this.Current.EntryIndex, "Chibi"),
+                this.Chibi_PointerBox.Value,
+                this.CurrentEntry + "Chibi image repointed");
         }
         private void Mouth_PointerBox_Changed(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                Current.GetAddress(Current.EntryIndex, "Mouth"),
-                Mouth_PointerBox.Value,
-                CurrentEntry + "Mouth image repointed");
+                this.Current.GetAddress(this.Current.EntryIndex, "Mouth"),
+                this.Mouth_PointerBox.Value,
+                this.CurrentEntry + "Mouth image repointed");
         }
         private void EyesClosed_CheckBox_Changed(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                Current.GetAddress(Current.EntryIndex, "EyesClosed"),
-                (EyesClosed_CheckBox.Checked) ? (Byte)0x06 : (Byte)0x01,
-                CurrentEntry + (EyesClosed_CheckBox.Checked ? "Eyes closed" : "Eyes opened"));
-            Test_ViewBox_Changed(this, null);
+                this.Current.GetAddress(this.Current.EntryIndex, "EyesClosed"),
+                (this.EyesClosed_CheckBox.Checked) ? (Byte)0x06 : (Byte)0x01,
+                this.CurrentEntry + (this.EyesClosed_CheckBox.Checked ? "Eyes closed" : "Eyes opened"));
+            this.Test_ViewBox_Changed(this, null);
         }
 
         private void MouthX_NumBox_Changed(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                Current.GetAddress(Current.EntryIndex, "MouthX"),
-                MouthX_ByteBox.Value,
-                CurrentEntry + "Mouth X changed");
-            Test_ViewBox_Changed(this, null);
+                this.Current.GetAddress(this.Current.EntryIndex, "MouthX"),
+                this.MouthX_ByteBox.Value,
+                this.CurrentEntry + "Mouth X changed");
+            this.Test_ViewBox_Changed(this, null);
         }
         private void MouthY_NumBox_Changed(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                Current.GetAddress(Current.EntryIndex, "MouthY"),
-                MouthY_ByteBox.Value,
-                CurrentEntry + "Mouth Y changed");
-            Test_ViewBox_Changed(this, null);
+                this.Current.GetAddress(this.Current.EntryIndex, "MouthY"),
+                this.MouthY_ByteBox.Value,
+                this.CurrentEntry + "Mouth Y changed");
+            this.Test_ViewBox_Changed(this, null);
         }
         private void BlinkX_NumBox_Changed(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                Current.GetAddress(Current.EntryIndex, "BlinkX"),
-                BlinkX_ByteBox.Value,
-                CurrentEntry + "Blink X changed");
-            Test_ViewBox_Changed(this, null);
+                this.Current.GetAddress(this.Current.EntryIndex, "BlinkX"),
+                this.BlinkX_ByteBox.Value,
+                this.CurrentEntry + "Blink X changed");
+            this.Test_ViewBox_Changed(this, null);
         }
         private void BlinkY_NumBox_Changed(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                Current.GetAddress(Current.EntryIndex, "BlinkY"),
-                BlinkY_ByteBox.Value,
-                CurrentEntry + "Blink Y changed");
-            Test_ViewBox_Changed(this, null);
+                this.Current.GetAddress(this.Current.EntryIndex, "BlinkY"),
+                this.BlinkY_ByteBox.Value,
+                this.CurrentEntry + "Blink Y changed");
+            this.Test_ViewBox_Changed(this, null);
         }
     }
 }

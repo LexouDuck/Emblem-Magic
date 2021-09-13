@@ -28,28 +28,28 @@ namespace EmblemMagic.FireEmblem
         {
             get
             {
-                return Graphics.GetTiles(L_NAME_OFFSET, NAME_WIDTH * 2);
+                return this.Graphics.GetTiles(L_NAME_OFFSET, NAME_WIDTH * 2);
             }
         }
         public Tileset L_Weapon
         {
             get
             {
-                return Graphics.GetTiles(L_WEAPON_OFFSET, WEAPON_WIDTH * 2);
+                return this.Graphics.GetTiles(L_WEAPON_OFFSET, WEAPON_WIDTH * 2);
             }
         }
         public Tileset R_Name
         {
             get
             {
-                return Graphics.GetTiles(R_NAME_OFFSET, NAME_WIDTH * 2);
+                return this.Graphics.GetTiles(R_NAME_OFFSET, NAME_WIDTH * 2);
             }
         }
         public Tileset R_Weapon
         {
             get
             {
-                return Graphics.GetTiles(R_WEAPON_OFFSET, WEAPON_WIDTH * 2);
+                return this.Graphics.GetTiles(R_WEAPON_OFFSET, WEAPON_WIDTH * 2);
             }
         }
 
@@ -61,31 +61,31 @@ namespace EmblemMagic.FireEmblem
             Tileset R_name, Tileset R_weapon)
             : base(palettes, tileset, tsa)
         {
-            LoadSecondaryTileset(L_name,   L_NAME_OFFSET);
-            LoadSecondaryTileset(L_weapon, L_WEAPON_OFFSET);
-            LoadSecondaryTileset(R_name,   R_NAME_OFFSET);
-            LoadSecondaryTileset(R_weapon, R_WEAPON_OFFSET);
+            this.LoadSecondaryTileset(L_name,   L_NAME_OFFSET);
+            this.LoadSecondaryTileset(L_weapon, L_WEAPON_OFFSET);
+            this.LoadSecondaryTileset(R_name,   R_NAME_OFFSET);
+            this.LoadSecondaryTileset(R_weapon, R_WEAPON_OFFSET);
         }
         void LoadSecondaryTileset(Tileset tileset, Int32 offset)
         {
-            while (Graphics.Count < offset + tileset.Count)
+            while (this.Graphics.Count < offset + tileset.Count)
             {
-                Graphics.Add(Tile.Empty);
+                this.Graphics.Add(Tile.Empty);
             }
             for (Int32 i = 0; i < tileset.Count; i++)
             {
-                Graphics[offset + i] = tileset[i];
+                this.Graphics[offset + i] = tileset[i];
             }
         }
 
         public BattleScreen(Bitmap image, Palette[] palettes) : base(WIDTH, HEIGHT)
         {
-            if (image.Width != Width || image.Height != Height)
-                throw new Exception("Image given has invalid dimensions, should be " + Width + "x" + Height + " pixels.");
+            if (image.Width != this.Width || image.Height != this.Height)
+                throw new Exception("Image given has invalid dimensions, should be " + this.Width + "x" + this.Height + " pixels.");
 
-            Palettes = palettes;
-            Graphics = new Tileset(WIDTH * HEIGHT);
-            Tiling = new TSA_Array(WIDTH, HEIGHT);
+            this.Palettes = palettes;
+            this.Graphics = new Tileset(WIDTH * HEIGHT);
+            this.Tiling = new TSA_Array(WIDTH, HEIGHT);
 
             const Int32 X_L_NAME = 1;
             const Int32 X_L_WEAPON = 8;
@@ -117,46 +117,46 @@ namespace EmblemMagic.FireEmblem
                 region = new System.Drawing.Rectangle(x * Tile.SIZE, y * Tile.SIZE, Tile.SIZE, Tile.SIZE);
                 tile = new Tile(new Image(image, region, palettes[paletteIndex]));
                     
-                if (Graphics.Count == EMPTY_TILE)
+                if (this.Graphics.Count == EMPTY_TILE)
                 {
-                    Graphics.Add(Tile.Empty);
+                        this.Graphics.Add(Tile.Empty);
                 }
-                if (Graphics.Count == TILE_LIMIT)
+                if (this.Graphics.Count == TILE_LIMIT)
                 {
                     for (Int32 i = 0; TILE_LIMIT + i < TILE_LIMIT_END; i++)
                     {
-                        Graphics.Add(Tile.Empty);
+                            this.Graphics.Add(Tile.Empty);
                     }
                 }
-                if (Graphics.Count >= 128)
+                if (this.Graphics.Count >= 128)
                 {
                     throw new Exception("Battle Screen Frame cannot have more than 128 tiles.");
                 }
                 if (tile.IsEmpty())
                 {
-                    Tiling[x, y] = new TSA(EMPTY_TILE, paletteIndex, false, false);
+                        this.Tiling[x, y] = new TSA(EMPTY_TILE, paletteIndex, false, false);
                 }
                 else
                 {
-                    var match = Graphics.FindMatch(tile);
+                    var match = this.Graphics.FindMatch(tile);
                         
                     if (match == null)
                     {
-                        Tiling[x, y] = new TSA(Graphics.Count, paletteIndex, false, false);
-                        Graphics.Add(tile);
+                            this.Tiling[x, y] = new TSA(this.Graphics.Count, paletteIndex, false, false);
+                            this.Graphics.Add(tile);
                     }
                     else
                     {
-                        Tiling[x, y] = new TSA(match.Item1, paletteIndex, match.Item2, match.Item3);
+                            this.Tiling[x, y] = new TSA(match.Item1, paletteIndex, match.Item2, match.Item3);
                     }
                 }
             }
-            while (Graphics.Count < TILE_LIMIT_END) Graphics.Add(Tile.Empty);
+            while (this.Graphics.Count < TILE_LIMIT_END) this.Graphics.Add(Tile.Empty);
 
-            LoadSecondaryTileset(image, palettes, L_NAME_OFFSET,   1, X_L_NAME,   Y_NAME,   NAME_WIDTH,   2);
-            LoadSecondaryTileset(image, palettes, L_WEAPON_OFFSET, 1, X_L_WEAPON, Y_WEAPON, WEAPON_WIDTH, 2);
-            LoadSecondaryTileset(image, palettes, R_NAME_OFFSET,   0, X_R_NAME,   Y_NAME,   NAME_WIDTH,   2);
-            LoadSecondaryTileset(image, palettes, R_WEAPON_OFFSET, 0, X_R_WEAPON, Y_WEAPON, WEAPON_WIDTH, 2);
+            this.LoadSecondaryTileset(image, palettes, L_NAME_OFFSET,   1, X_L_NAME,   Y_NAME,   NAME_WIDTH,   2);
+            this.LoadSecondaryTileset(image, palettes, L_WEAPON_OFFSET, 1, X_L_WEAPON, Y_WEAPON, WEAPON_WIDTH, 2);
+            this.LoadSecondaryTileset(image, palettes, R_NAME_OFFSET,   0, X_R_NAME,   Y_NAME,   NAME_WIDTH,   2);
+            this.LoadSecondaryTileset(image, palettes, R_WEAPON_OFFSET, 0, X_R_WEAPON, Y_WEAPON, WEAPON_WIDTH, 2);
         }
         void LoadSecondaryTileset(
             Bitmap image, Palette[] palettes,
@@ -166,8 +166,8 @@ namespace EmblemMagic.FireEmblem
             for (Int32 x = 0; x < width; x++)
             for (Int32 y = 0; y < height; y++)
             {
-                Tiling[tileX + x, tileY + y] = new TSA(index, paletteIndex, false, false);
-                Graphics[index++] = new Tile(new Image(image,
+                    this.Tiling[tileX + x, tileY + y] = new TSA(index, paletteIndex, false, false);
+                    this.Graphics[index++] = new Tile(new Image(image,
                     new System.Drawing.Rectangle(
                         (tileX + x) * Tile.SIZE,
                         (tileY + y) * Tile.SIZE,

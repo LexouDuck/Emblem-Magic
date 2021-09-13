@@ -20,7 +20,7 @@ namespace EmblemMagic.Editors
         {
             get
             {
-                return "Battle Platform 0x" + Util.ByteToHex(EntryArrayBox.Value) + " [" + EntryArrayBox.Text + "] - ";
+                return "Battle Platform 0x" + Util.ByteToHex(this.EntryArrayBox.Value) + " [" + this.EntryArrayBox.Text + "] - ";
             }
         }
 
@@ -33,32 +33,32 @@ namespace EmblemMagic.Editors
         {
             try
             {
-                InitializeComponent();
+                this.InitializeComponent();
 
-                EntryArrayBox.Load("Battle Platform List.txt");
-                Current = new StructFile("Battle Platform Struct.txt");
-                Current.Address = Core.GetPointer("Battle Platform Array");
+                this.EntryArrayBox.Load("Battle Platform List.txt");
+                this.Current = new StructFile("Battle Platform Struct.txt");
+                this.Current.Address = Core.GetPointer("Battle Platform Array");
             }
             catch (Exception ex)
             {
                 UI.ShowError("Could not properly open the " + this.Text, ex);
 
-                Core_CloseEditor(this, null);
+                this.Core_CloseEditor(this, null);
             }
         }
 
         public override void Core_OnOpen()
         {
-            Core_Update();
+            this.Core_Update();
         }
         public override void Core_Update()
         {
-            Current.EntryIndex = EntryArrayBox.Value;
+            this.Current.EntryIndex = this.EntryArrayBox.Value;
 
-            Core_LoadScreen();
-            Core_LoadScreenValues();
-            Core_LoadPlatform();
-            Core_LoadPlatformValues();
+            this.Core_LoadScreen();
+            this.Core_LoadScreenValues();
+            this.Core_LoadPlatform();
+            this.Core_LoadPlatformValues();
         }
 
         void Core_LoadScreen()
@@ -69,94 +69,94 @@ namespace EmblemMagic.Editors
                 Byte[] palettes = Core.ReadData(Core.GetPointer("Battle Screen Palettes"), 4 * Palette.LENGTH);
                 TSA_Array tsa = Core.ReadTSA(Core.GetPointer("Battle Screen TSA"), 16, 32, false, false);
 
-                CurrentScreen = new BattleScreen(
+                this.CurrentScreen = new BattleScreen(
                     palettes, tileset, BattleScreen.GetReadibleTSA(tsa),
                     new Tileset(Core.ReadData(Core.GetPointer("Battle Screen L Name"), 0)),
                     new Tileset(Core.ReadData(Core.GetPointer("Battle Screen L Weapon"), 0)),
                     new Tileset(Core.ReadData(Core.GetPointer("Battle Screen R Name"), 0)),
                     new Tileset(Core.ReadData(Core.GetPointer("Battle Screen R Weapon"), 0)));
 
-                Screen_GridBox.Load(CurrentScreen);
-                Screen_PaletteBox.Load(new Palette(palettes, 4 * Palette.MAX));
+                this.Screen_GridBox.Load(this.CurrentScreen);
+                this.Screen_PaletteBox.Load(new Palette(palettes, 4 * Palette.MAX));
             }
             catch (Exception ex)
             {
                 UI.ShowError("Could not load the battle platform image.", ex);
 
-                Screen_GridBox.Reset();
-                Screen_PaletteBox.Reset();
+                this.Screen_GridBox.Reset();
+                this.Screen_PaletteBox.Reset();
             }
         }
         void Core_LoadPlatform()
         {
             try
             {
-                Byte[] tileset = Core.ReadData((Pointer)Current["Tileset"], 0);
-                Byte[] palette = Core.ReadData((Pointer)Current["Palette"], Palette.LENGTH);
+                Byte[] tileset = Core.ReadData((Pointer)this.Current["Tileset"], 0);
+                Byte[] palette = Core.ReadData((Pointer)this.Current["Palette"], Palette.LENGTH);
 
-                CurrentPlatform = new BattlePlatform(tileset, palette);
+                this.CurrentPlatform = new BattlePlatform(tileset, palette);
 
-                Platform_ImageBox.Load(CurrentPlatform);
-                Platform_PaletteBox.Load(new Palette(palette));
+                this.Platform_ImageBox.Load(this.CurrentPlatform);
+                this.Platform_PaletteBox.Load(new Palette(palette));
             }
             catch (Exception ex)
             {
                 UI.ShowError("Could not load the battle platform image.", ex);
 
-                Platform_ImageBox.Reset();
-                Platform_PaletteBox.Reset();
+                this.Platform_ImageBox.Reset();
+                this.Platform_PaletteBox.Reset();
             }
         }
         void Core_LoadScreenValues()
         {
-            Screen_TileIndex_NumBox.ValueChanged -= Screen_Tile_NumBox_ValueChanged;
-            Screen_Palette_NumBox.ValueChanged -= Screen_Palette_NumBox_ValueChanged;
-            Screen_FlipH_CheckBox.CheckedChanged -= Screen_FlipH_CheckBox_CheckedChanged;
-            Screen_FlipV_CheckBox.CheckedChanged -= Screen_FlipV_CheckBox_CheckedChanged;
+            this.Screen_TileIndex_NumBox.ValueChanged -= this.Screen_Tile_NumBox_ValueChanged;
+            this.Screen_Palette_NumBox.ValueChanged -= this.Screen_Palette_NumBox_ValueChanged;
+            this.Screen_FlipH_CheckBox.CheckedChanged -= this.Screen_FlipH_CheckBox_CheckedChanged;
+            this.Screen_FlipV_CheckBox.CheckedChanged -= this.Screen_FlipV_CheckBox_CheckedChanged;
 
             try
             {
-                if (Screen_GridBox.SelectionIsEmpty())
+                if (this.Screen_GridBox.SelectionIsEmpty())
                 {
-                    Screen_TileIndex_NumBox.Enabled = false;
-                    Screen_Palette_NumBox.Enabled = false;
-                    Screen_FlipH_CheckBox.Enabled = false;
-                    Screen_FlipV_CheckBox.Enabled = false;
+                    this.Screen_TileIndex_NumBox.Enabled = false;
+                    this.Screen_Palette_NumBox.Enabled = false;
+                    this.Screen_FlipH_CheckBox.Enabled = false;
+                    this.Screen_FlipV_CheckBox.Enabled = false;
 
-                    Screen_TileIndex_NumBox.Value = 0;
-                    Screen_Palette_NumBox.Value = 0;
-                    Screen_FlipH_CheckBox.Checked = false;
-                    Screen_FlipV_CheckBox.Checked = false;
+                    this.Screen_TileIndex_NumBox.Value = 0;
+                    this.Screen_Palette_NumBox.Value = 0;
+                    this.Screen_FlipH_CheckBox.Checked = false;
+                    this.Screen_FlipV_CheckBox.Checked = false;
 
-                    Screen_TileIndex_NumBox.Text = Screen_TileIndex_NumBox.Value.ToString();
-                    Screen_Palette_NumBox.Text = Screen_Palette_NumBox.Value.ToString();
+                    this.Screen_TileIndex_NumBox.Text = this.Screen_TileIndex_NumBox.Value.ToString();
+                    this.Screen_Palette_NumBox.Text = this.Screen_Palette_NumBox.Value.ToString();
                 }
                 else
                 {
-                    Screen_TileIndex_NumBox.Enabled = true;
-                    Screen_Palette_NumBox.Enabled = true;
-                    Screen_FlipH_CheckBox.Enabled = true;
-                    Screen_FlipV_CheckBox.Enabled = true;
+                    this.Screen_TileIndex_NumBox.Enabled = true;
+                    this.Screen_Palette_NumBox.Enabled = true;
+                    this.Screen_FlipH_CheckBox.Enabled = true;
+                    this.Screen_FlipV_CheckBox.Enabled = true;
 
-                    if (Screen_GridBox.SelectionIsSingle())
+                    if (this.Screen_GridBox.SelectionIsSingle())
                     {
-                        Point selection = Screen_GridBox.GetSelectionCoords();
-                        TSA tsa = CurrentScreen.Tiling[selection.X, selection.Y];
+                        Point selection = this.Screen_GridBox.GetSelectionCoords();
+                        TSA tsa = this.CurrentScreen.Tiling[selection.X, selection.Y];
 
-                        Screen_TileIndex_NumBox.Value = tsa.TileIndex;
-                        Screen_Palette_NumBox.Value = tsa.Palette;
-                        Screen_FlipH_CheckBox.Checked = tsa.FlipH;
-                        Screen_FlipV_CheckBox.Checked = tsa.FlipV;
+                        this.Screen_TileIndex_NumBox.Value = tsa.TileIndex;
+                        this.Screen_Palette_NumBox.Value = tsa.Palette;
+                        this.Screen_FlipH_CheckBox.Checked = tsa.FlipH;
+                        this.Screen_FlipV_CheckBox.Checked = tsa.FlipV;
 
-                        Screen_TileIndex_NumBox.Text = Screen_TileIndex_NumBox.Value.ToString();
-                        Screen_Palette_NumBox.Text = Screen_Palette_NumBox.Value.ToString();
+                        this.Screen_TileIndex_NumBox.Text = this.Screen_TileIndex_NumBox.Value.ToString();
+                        this.Screen_Palette_NumBox.Text = this.Screen_Palette_NumBox.Value.ToString();
                     }
                     else
                     {
-                        Screen_TileIndex_NumBox.Text = "";
-                        Screen_Palette_NumBox.Text = "";
-                        Screen_FlipH_CheckBox.Checked = false;
-                        Screen_FlipV_CheckBox.Checked = false;
+                        this.Screen_TileIndex_NumBox.Text = "";
+                        this.Screen_Palette_NumBox.Text = "";
+                        this.Screen_FlipH_CheckBox.Checked = false;
+                        this.Screen_FlipV_CheckBox.Checked = false;
                     }
                 }
             }
@@ -165,47 +165,47 @@ namespace EmblemMagic.Editors
                 UI.ShowError("There has been an error while trying to load the Battle Screen Frame TSA values.", ex);
             }
 
-            Screen_TileIndex_NumBox.ValueChanged += Screen_Tile_NumBox_ValueChanged;
-            Screen_Palette_NumBox.ValueChanged += Screen_Palette_NumBox_ValueChanged;
-            Screen_FlipH_CheckBox.CheckedChanged += Screen_FlipH_CheckBox_CheckedChanged;
-            Screen_FlipV_CheckBox.CheckedChanged += Screen_FlipV_CheckBox_CheckedChanged;
+            this.Screen_TileIndex_NumBox.ValueChanged += this.Screen_Tile_NumBox_ValueChanged;
+            this.Screen_Palette_NumBox.ValueChanged += this.Screen_Palette_NumBox_ValueChanged;
+            this.Screen_FlipH_CheckBox.CheckedChanged += this.Screen_FlipH_CheckBox_CheckedChanged;
+            this.Screen_FlipV_CheckBox.CheckedChanged += this.Screen_FlipV_CheckBox_CheckedChanged;
         }
         void Core_LoadPlatformValues()
         {
-            Platform_Name_TextBox.TextChanged -= Platform_Name_TextBox_TextChanged;
-            Platform_Tileset_PointerBox.ValueChanged -= Platform_Tileset_PointerBox_ValueChanged;
-            Platform_Palette_PointerBox.ValueChanged -= Platform_Palette_PointerBox_ValueChanged;
+            this.Platform_Name_TextBox.TextChanged -= this.Platform_Name_TextBox_TextChanged;
+            this.Platform_Tileset_PointerBox.ValueChanged -= this.Platform_Tileset_PointerBox_ValueChanged;
+            this.Platform_Palette_PointerBox.ValueChanged -= this.Platform_Palette_PointerBox_ValueChanged;
 
             try
             {
-                Platform_Name_TextBox.Text = (String)Current["Name"];
-                Platform_Tileset_PointerBox.Value = (Pointer)Current["Tileset"];
-                Platform_Palette_PointerBox.Value = (Pointer)Current["Palette"];
+                this.Platform_Name_TextBox.Text = (String)this.Current["Name"];
+                this.Platform_Tileset_PointerBox.Value = (Pointer)this.Current["Tileset"];
+                this.Platform_Palette_PointerBox.Value = (Pointer)this.Current["Palette"];
             }
             catch (Exception ex)
             {
                 UI.ShowError("There has been an error while trying to load the Battle Platform values.", ex);
 
-                Platform_Name_TextBox.Text = "";
-                Platform_Tileset_PointerBox.Value = new Pointer();
-                Platform_Palette_PointerBox.Value = new Pointer();
+                this.Platform_Name_TextBox.Text = "";
+                this.Platform_Tileset_PointerBox.Value = new Pointer();
+                this.Platform_Palette_PointerBox.Value = new Pointer();
             }
 
-            Platform_Name_TextBox.TextChanged += Platform_Name_TextBox_TextChanged;
-            Platform_Tileset_PointerBox.ValueChanged += Platform_Tileset_PointerBox_ValueChanged;
-            Platform_Palette_PointerBox.ValueChanged += Platform_Palette_PointerBox_ValueChanged;
+            this.Platform_Name_TextBox.TextChanged += this.Platform_Name_TextBox_TextChanged;
+            this.Platform_Tileset_PointerBox.ValueChanged += this.Platform_Tileset_PointerBox_ValueChanged;
+            this.Platform_Palette_PointerBox.ValueChanged += this.Platform_Palette_PointerBox_ValueChanged;
         }
 
         void Core_WriteBattleScreenTSA(TSA_Array tsa)
         {
-            Boolean[,] selection = Screen_GridBox.Selection;
+            Boolean[,] selection = this.Screen_GridBox.Selection;
 
             Core.WriteData(this,
                 Core.GetPointer("Battle Screen TSA"),
-                BattleScreen.GetInsertableTSA(CurrentScreen.Tiling).ToBytes(false, false),
-                BattleScreenEntry + "TSA changed");
+                BattleScreen.GetInsertableTSA(this.CurrentScreen.Tiling).ToBytes(false, false),
+                this.BattleScreenEntry + "TSA changed");
 
-            Screen_GridBox.Selection = selection;
+            this.Screen_GridBox.Selection = selection;
         }
         void Core_Insert(BattleScreen insert)
         {
@@ -229,7 +229,7 @@ namespace EmblemMagic.Editors
 
                 Boolean cancel = Prompt.ShowRepointDialog(this, "Repoint Battle Screen",
                     "The battle screen to insert might need some of its parts to be repointed.",
-                    BattleScreenEntry, new Tuple<String, Pointer, Int32>[] {
+                    this.BattleScreenEntry, new Tuple<String, Pointer, Int32>[] {
                         Tuple.Create("Tileset",  Core.GetPointer("Battle Screen Tileset"),  data_tileset.Length),
                         Tuple.Create("Palette",  Core.GetPointer("Battle Screen Palettes"), data_palette.Length),
                         // Tuple.Create("TSA", Core.GetPointer("Battle Screen TSA"), data_tsa.Length),
@@ -243,35 +243,35 @@ namespace EmblemMagic.Editors
                 Core.WriteData(this,
                     Core.GetPointer("Battle Screen Tileset"),
                     data_tileset,
-                    CurrentEntry + "Tileset changed");
+                    this.CurrentEntry + "Tileset changed");
 
                 Core.WriteData(this,
                     Core.GetPointer("Battle Screen Palettes"),
                     data_palette,
-                    CurrentEntry + "Palettes changed");
+                    this.CurrentEntry + "Palettes changed");
 
                 Core.WriteData(this,
                     Core.GetPointer("Battle Screen TSA"),
                     data_tsa,
-                    CurrentEntry + "TSA changed");
+                    this.CurrentEntry + "TSA changed");
 
                 Core.WriteData(this,
                     Core.GetPointer("Battle Screen L Name"),
-                    data_L_name,   CurrentEntry + "L Name changed");
+                    data_L_name, this.CurrentEntry + "L Name changed");
                 Core.WriteData(this,
                     Core.GetPointer("Battle Screen L Weapon"),
-                    data_L_weapon, CurrentEntry + "L Weapon changed");
+                    data_L_weapon, this.CurrentEntry + "L Weapon changed");
                 Core.WriteData(this,
                     Core.GetPointer("Battle Screen R Name"),
-                    data_R_name,   CurrentEntry + "R Name changed");
+                    data_R_name, this.CurrentEntry + "R Name changed");
                 Core.WriteData(this,
                     Core.GetPointer("Battle Screen R Weapon"),
-                    data_R_weapon, CurrentEntry + "R Weapon changed");
+                    data_R_weapon, this.CurrentEntry + "R Weapon changed");
             }
             catch (Exception ex)
             {
                 UI.ShowError("Could not insert the Battle Screen Frame.", ex);
-                Core_Update();
+                this.Core_Update();
             }
             UI.ResumeUpdate();
             UI.PerformUpdate();
@@ -286,29 +286,29 @@ namespace EmblemMagic.Editors
 
                 Boolean cancel = Prompt.ShowRepointDialog(this, "Repoint Battle Platform",
                     "The battle platform to insert might need some of its parts to be repointed.",
-                    CurrentEntry, new Tuple<String, Pointer, Int32>[] {
-                        Tuple.Create("Tileset", (Pointer)Current["Tileset"], data_tileset.Length),
-                        Tuple.Create("Palette", (Pointer)Current["Palette"], data_palette.Length),
+                    this.CurrentEntry, new Tuple<String, Pointer, Int32>[] {
+                        Tuple.Create("Tileset", (Pointer)this.Current["Tileset"], data_tileset.Length),
+                        Tuple.Create("Palette", (Pointer)this.Current["Palette"], data_palette.Length),
                     }, new Pointer[] {
-                        Current.GetAddress(Current.EntryIndex, "Tileset"),
-                        Current.GetAddress(Current.EntryIndex, "Palette"),
+                        this.Current.GetAddress(this.Current.EntryIndex, "Tileset"),
+                        this.Current.GetAddress(this.Current.EntryIndex, "Palette"),
                     });
                 if (cancel) return;
 
                 Core.WriteData(this,
-                    (Pointer)Current["Tileset"],
+                    (Pointer)this.Current["Tileset"],
                     data_tileset,
-                    CurrentEntry + "Tileset changed");
+                    this.CurrentEntry + "Tileset changed");
 
                 Core.WriteData(this,
-                    (Pointer)Current["Palette"],
+                    (Pointer)this.Current["Palette"],
                     data_palette,
-                    CurrentEntry + "Palette changed");
+                    this.CurrentEntry + "Palette changed");
             }
             catch (Exception ex)
             {
                 UI.ShowError("Could not insert the image.", ex);
-                Core_Update();
+                this.Core_Update();
             }
             UI.ResumeUpdate();
             UI.PerformUpdate();
@@ -330,7 +330,7 @@ namespace EmblemMagic.Editors
                 UI.ShowError("Could not load the image.", ex);
                 return;
             }
-            Core_Insert(screen);
+            this.Core_Insert(screen);
         }
         void Core_Screen_InsertData(String filepath)
         {
@@ -366,19 +366,19 @@ namespace EmblemMagic.Editors
                 UI.ShowError("Could not load the image data.", ex);
                 return;
             }
-            Core_Insert(screen);
+            this.Core_Insert(screen);
         }
         void Core_Screen_SaveImage(String filepath)
         {
             try
             {
                 Core.SaveImage(filepath,
-                    CurrentScreen.Width,
-                    CurrentScreen.Height,
-                    CurrentScreen.Palettes,
+                    this.CurrentScreen.Width,
+                    this.CurrentScreen.Height,
+                    this.CurrentScreen.Palettes,
                     delegate (Int32 x, Int32 y)
                     {
-                        return (Byte)CurrentScreen[x, y];
+                        return (Byte)this.CurrentScreen[x, y];
                     });
             }
             catch (Exception ex)
@@ -393,17 +393,17 @@ namespace EmblemMagic.Editors
                 String path = Path.GetDirectoryName(filepath) + "\\";
                 String file = Path.GetFileNameWithoutExtension(filepath);
 
-                Byte[] data_tileset = CurrentScreen.Graphics.ToBytes(false);
-                Byte[] data_palette = Palette.Merge(CurrentScreen.Palettes).ToBytes(false);
-                Byte[] data_tsa = CurrentScreen.Tiling.ToBytes(false, false);
+                Byte[] data_tileset = this.CurrentScreen.Graphics.ToBytes(false);
+                Byte[] data_palette = Palette.Merge(this.CurrentScreen.Palettes).ToBytes(false);
+                Byte[] data_tsa = this.CurrentScreen.Tiling.ToBytes(false, false);
 
                 File.WriteAllBytes(path + file + ".chr", data_tileset);
                 File.WriteAllBytes(path + file + ".pal", data_palette);
                 File.WriteAllBytes(path + file + ".tsa", data_tsa);
-                File.WriteAllBytes(path + file + " L name.chr",   CurrentScreen.L_Name.ToBytes(false));
-                File.WriteAllBytes(path + file + " L weapon.chr", CurrentScreen.L_Weapon.ToBytes(false));
-                File.WriteAllBytes(path + file + " R name.chr",   CurrentScreen.R_Name.ToBytes(false));
-                File.WriteAllBytes(path + file + " R weapon.chr", CurrentScreen.R_Weapon.ToBytes(false));
+                File.WriteAllBytes(path + file + " L name.chr", this.CurrentScreen.L_Name.ToBytes(false));
+                File.WriteAllBytes(path + file + " L weapon.chr", this.CurrentScreen.L_Weapon.ToBytes(false));
+                File.WriteAllBytes(path + file + " R name.chr", this.CurrentScreen.R_Name.ToBytes(false));
+                File.WriteAllBytes(path + file + " R weapon.chr", this.CurrentScreen.R_Weapon.ToBytes(false));
             }
             catch (Exception ex)
             {
@@ -423,7 +423,7 @@ namespace EmblemMagic.Editors
                 UI.ShowError("Could not load the image file.", ex);
                 return;
             }
-            Core_Insert(platform);
+            this.Core_Insert(platform);
         }
         void Core_Platform_InsertData(String filepath)
         {
@@ -448,19 +448,19 @@ namespace EmblemMagic.Editors
                 UI.ShowError("Could not load the image file.", ex);
                 return;
             }
-            Core_Insert(platform);
+            this.Core_Insert(platform);
         }
         void Core_Platform_SaveImage(String filepath)
         {
             try
             {
                 Core.SaveImage(filepath,
-                    CurrentPlatform.Width,
-                    CurrentPlatform.Height,
-                    new Palette[1] { CurrentPlatform.Colors },
+                    this.CurrentPlatform.Width,
+                    this.CurrentPlatform.Height,
+                    new Palette[1] { this.CurrentPlatform.Colors },
                     delegate (Int32 x, Int32 y)
                     {
-                        return (Byte)CurrentPlatform[x, y];
+                        return (Byte)this.CurrentPlatform[x, y];
                     });
             }
             catch (Exception ex)
@@ -475,8 +475,8 @@ namespace EmblemMagic.Editors
                 String path = Path.GetDirectoryName(filepath) + "\\";
                 String file = Path.GetFileNameWithoutExtension(filepath);
 
-                Byte[] data_tileset = CurrentPlatform.Sheet.ToBytes(false);
-                Byte[] data_palette = CurrentPlatform.Colors.ToBytes(false);
+                Byte[] data_tileset = this.CurrentPlatform.Sheet.ToBytes(false);
+                Byte[] data_palette = this.CurrentPlatform.Colors.ToBytes(false);
 
                 File.WriteAllBytes(path + file + ".chr", data_tileset);
                 File.WriteAllBytes(path + file + ".pal", data_palette);
@@ -506,14 +506,14 @@ namespace EmblemMagic.Editors
                     openWindow.FileName.EndsWith(".bmp", StringComparison.OrdinalIgnoreCase) ||
                     openWindow.FileName.EndsWith(".gif", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_Screen_InsertImage(openWindow.FileName);
+                    this.Core_Screen_InsertImage(openWindow.FileName);
                     return;
                 }
                 if (openWindow.FileName.EndsWith(".chr", StringComparison.OrdinalIgnoreCase) ||
                     openWindow.FileName.EndsWith(".pal", StringComparison.OrdinalIgnoreCase) ||
                     openWindow.FileName.EndsWith(".tsa", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_Screen_InsertData(openWindow.FileName);
+                    this.Core_Screen_InsertData(openWindow.FileName);
                     return;
                 }
                 UI.ShowError("File chosen has invalid extension.\r\n" + openWindow.FileName);
@@ -536,12 +536,12 @@ namespace EmblemMagic.Editors
                     openWindow.FileName.EndsWith(".bmp", StringComparison.OrdinalIgnoreCase) ||
                     openWindow.FileName.EndsWith(".gif", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_Platform_InsertImage(openWindow.FileName);
+                    this.Core_Platform_InsertImage(openWindow.FileName);
                     return;
                 }
                 if (openWindow.FileName.EndsWith(".chr", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_Platform_InsertData(openWindow.FileName);
+                    this.Core_Platform_InsertData(openWindow.FileName);
                     return;
                 }
                 UI.ShowError("File chosen has invalid extension.\r\n" + openWindow.FileName);
@@ -563,12 +563,12 @@ namespace EmblemMagic.Editors
             {
                 if (saveWindow.FileName.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_Screen_SaveImage(saveWindow.FileName.Remove(saveWindow.FileName.Length - 4));
+                    this.Core_Screen_SaveImage(saveWindow.FileName.Remove(saveWindow.FileName.Length - 4));
                     return;
                 }
                 if (saveWindow.FileName.EndsWith(".chr", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_Screen_SaveData(saveWindow.FileName);
+                    this.Core_Screen_SaveData(saveWindow.FileName);
                     return;
                 }
                 UI.ShowError("File chosen has invalid extension.\r\n" + saveWindow.FileName);
@@ -590,12 +590,12 @@ namespace EmblemMagic.Editors
             {
                 if (saveWindow.FileName.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_Platform_SaveImage(saveWindow.FileName.Remove(saveWindow.FileName.Length - 4));
+                    this.Core_Platform_SaveImage(saveWindow.FileName.Remove(saveWindow.FileName.Length - 4));
                     return;
                 }
                 if (saveWindow.FileName.EndsWith(".chr", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_Platform_SaveData(saveWindow.FileName);
+                    this.Core_Platform_SaveData(saveWindow.FileName);
                     return;
                 }
                 UI.ShowError("File chosen has invalid extension.\r\n" + saveWindow.FileName);
@@ -605,8 +605,8 @@ namespace EmblemMagic.Editors
         private void Tool_OpenPalette_Platform_Click(Object sender, EventArgs e)
         {
             UI.OpenPaletteEditor(this,
-                CurrentEntry,
-                (Pointer)Current["Palette"], 1);
+                this.CurrentEntry,
+                (Pointer)this.Current["Palette"], 1);
         }
         private void Tool_OpenPalette_Screen_Click(Object sender, EventArgs e)
         {
@@ -617,95 +617,95 @@ namespace EmblemMagic.Editors
 
         private void View_ShowGrid_Click(Object sender, EventArgs e)
         {
-            Screen_GridBox.ShowGrid = View_ShowGrid.Checked;
+            this.Screen_GridBox.ShowGrid = this.View_ShowGrid.Checked;
         }
 
 
 
         private void Screen_GridBox_SelectionChanged(Object sender, EventArgs e)
         {
-            Core_LoadScreenValues();
+            this.Core_LoadScreenValues();
         }
 
         private void Screen_Tile_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            Int32 width = Screen_GridBox.Selection.GetLength(0);
-            Int32 height = Screen_GridBox.Selection.GetLength(1);
+            Int32 width = this.Screen_GridBox.Selection.GetLength(0);
+            Int32 height = this.Screen_GridBox.Selection.GetLength(1);
             TSA tsa;
             for (Int32 y = 0; y < height; y++)
             for (Int32 x = 0; x < width; x++)
             {
-                if (Screen_GridBox.Selection[x, y])
+                if (this.Screen_GridBox.Selection[x, y])
                 {
-                    tsa = CurrentScreen.Tiling[x, y];
-                    CurrentScreen.Tiling[x, y] = new TSA(
-                        (Int32)Screen_TileIndex_NumBox.Value,
+                    tsa = this.CurrentScreen.Tiling[x, y];
+                        this.CurrentScreen.Tiling[x, y] = new TSA(
+                        (Int32)this.Screen_TileIndex_NumBox.Value,
                         tsa.Palette,
                         tsa.FlipH,
                         tsa.FlipV);
                 }
             }
-            Core_WriteBattleScreenTSA(CurrentScreen.Tiling);
+            this.Core_WriteBattleScreenTSA(this.CurrentScreen.Tiling);
         }
         private void Screen_Palette_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            Int32 width = Screen_GridBox.Selection.GetLength(0);
-            Int32 height = Screen_GridBox.Selection.GetLength(1);
+            Int32 width = this.Screen_GridBox.Selection.GetLength(0);
+            Int32 height = this.Screen_GridBox.Selection.GetLength(1);
             TSA tsa;
             for (Int32 y = 0; y < height; y++)
             for (Int32 x = 0; x < width; x++)
             {
-                if (Screen_GridBox.Selection[x, y])
+                if (this.Screen_GridBox.Selection[x, y])
                 {
-                    tsa = CurrentScreen.Tiling[x, y];
-                    CurrentScreen.Tiling[x, y] = new TSA(
+                    tsa = this.CurrentScreen.Tiling[x, y];
+                        this.CurrentScreen.Tiling[x, y] = new TSA(
                         tsa.TileIndex,
-                        (Byte)Screen_Palette_NumBox.Value,
+                        (Byte)this.Screen_Palette_NumBox.Value,
                         tsa.FlipH,
                         tsa.FlipV);
                 }
             }
-            Core_WriteBattleScreenTSA(CurrentScreen.Tiling);
+            this.Core_WriteBattleScreenTSA(this.CurrentScreen.Tiling);
         }
         private void Screen_FlipH_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
-            Int32 width = Screen_GridBox.Selection.GetLength(0);
-            Int32 height = Screen_GridBox.Selection.GetLength(1);
+            Int32 width = this.Screen_GridBox.Selection.GetLength(0);
+            Int32 height = this.Screen_GridBox.Selection.GetLength(1);
             TSA tsa;
             for (Int32 y = 0; y < height; y++)
             for (Int32 x = 0; x < width; x++)
             {
-                if (Screen_GridBox.Selection[x, y])
+                if (this.Screen_GridBox.Selection[x, y])
                 {
-                    tsa = CurrentScreen.Tiling[x, y];
-                    CurrentScreen.Tiling[x, y] = new TSA(
+                    tsa = this.CurrentScreen.Tiling[x, y];
+                        this.CurrentScreen.Tiling[x, y] = new TSA(
                         tsa.TileIndex,
                         tsa.Palette,
-                        Screen_FlipH_CheckBox.Checked,
+                        this.Screen_FlipH_CheckBox.Checked,
                         tsa.FlipV);
                 }
             }
-            Core_WriteBattleScreenTSA(CurrentScreen.Tiling);
+            this.Core_WriteBattleScreenTSA(this.CurrentScreen.Tiling);
         }
         private void Screen_FlipV_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
-            Int32 width = Screen_GridBox.Selection.GetLength(0);
-            Int32 height = Screen_GridBox.Selection.GetLength(1);
+            Int32 width = this.Screen_GridBox.Selection.GetLength(0);
+            Int32 height = this.Screen_GridBox.Selection.GetLength(1);
             TSA tsa;
             for (Int32 y = 0; y < height; y++)
             for (Int32 x = 0; x < width; x++)
             {
-                if (Screen_GridBox.Selection[x, y])
+                if (this.Screen_GridBox.Selection[x, y])
                 {
-                    tsa = CurrentScreen.Tiling[x, y];
-                    CurrentScreen.Tiling[x, y] = new TSA(
+                    tsa = this.CurrentScreen.Tiling[x, y];
+                        this.CurrentScreen.Tiling[x, y] = new TSA(
                         tsa.TileIndex,
                         tsa.Palette,
                         tsa.FlipH,
-                        Screen_FlipV_CheckBox.Checked);
+                        this.Screen_FlipV_CheckBox.Checked);
                 }
             }
-            Core_WriteBattleScreenTSA(CurrentScreen.Tiling);
+            this.Core_WriteBattleScreenTSA(this.CurrentScreen.Tiling);
         }
 
         private void Screen_MagicButton_Click(Object sender, EventArgs e)
@@ -722,7 +722,7 @@ namespace EmblemMagic.Editors
 
         protected override Boolean ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            Core_LoadScreenValues();
+            this.Core_LoadScreenValues();
 
             return base.ProcessCmdKey(ref msg, keyData);
         }
@@ -731,29 +731,29 @@ namespace EmblemMagic.Editors
 
         private void EntryArrayBox_ValueChanged(Object sender, EventArgs e)
         {
-            Core_Update();
+            this.Core_Update();
         }
 
         private void Platform_Name_TextBox_TextChanged(Object sender, EventArgs e)
         {
             Core.WriteData(this,
-                Current.GetAddress(Current.EntryIndex, "Name"),
-                ByteArray.Make_ASCII(Platform_Name_TextBox.Text),
-                CurrentEntry + "Name changed");
+                this.Current.GetAddress(this.Current.EntryIndex, "Name"),
+                ByteArray.Make_ASCII(this.Platform_Name_TextBox.Text),
+                this.CurrentEntry + "Name changed");
         }
         private void Platform_Tileset_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                Current.GetAddress(Current.EntryIndex, "Tileset"),
-                Platform_Tileset_PointerBox.Value,
-                CurrentEntry + "Tileset repointed");
+                this.Current.GetAddress(this.Current.EntryIndex, "Tileset"),
+                this.Platform_Tileset_PointerBox.Value,
+                this.CurrentEntry + "Tileset repointed");
         }
         private void Platform_Palette_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WritePointer(this,
-                Current.GetAddress(Current.EntryIndex, "Palette"),
-                Platform_Palette_PointerBox.Value,
-                CurrentEntry + "Palette repointed");
+                this.Current.GetAddress(this.Current.EntryIndex, "Palette"),
+                this.Platform_Palette_PointerBox.Value,
+                this.CurrentEntry + "Palette repointed");
         }
 
         private void Platform_MagicButton_Click(Object sender, EventArgs e)
@@ -761,8 +761,8 @@ namespace EmblemMagic.Editors
             GraphicsEditor editor = new GraphicsEditor();
 
             editor.Core_SetEntry(32, 4,
-                (Pointer)Current["Palette"], false,
-                (Pointer)Current["Tileset"], true);
+                (Pointer)this.Current["Palette"], false,
+                (Pointer)this.Current["Tileset"], true);
 
             Program.Core.Core_OpenEditor(editor);
         }

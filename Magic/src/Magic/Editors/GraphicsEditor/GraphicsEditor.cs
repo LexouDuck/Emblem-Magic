@@ -18,37 +18,37 @@ namespace Magic.Editors
 
         public GraphicsEditor()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            Tileset_2bpp_RadioButton.Enabled = false;
+            this.Tileset_2bpp_RadioButton.Enabled = false;
 
-            GrayScale = new Palette();
+            this.GrayScale = new Palette();
             Byte value;
             for (Int32 i = 0; i < Palette.MAX; i++)
             {
                 value = (Byte)(i * 16);
-                GrayScale.Add(new GBA.Color(0, value, value, value));
+                this.GrayScale.Add(new GBA.Color(0, value, value, value));
             }
         }
 
         public override void Core_OnOpen()
         {
-            Core_Update();
+            this.Core_Update();
         }
         public override void Core_Update()
         {
             try
             {
                 Byte[] palette = Core.ReadData(
-                    Palette_PointerBox.Value + (Int32)Palette_Index_NumBox.Value * Palette.LENGTH,
-                    Palette_CheckBox.Checked ? 0 : 16 * Palette.LENGTH);
+                    this.Palette_PointerBox.Value + (Int32)this.Palette_Index_NumBox.Value * Palette.LENGTH,
+                    this.Palette_CheckBox.Checked ? 0 : 16 * Palette.LENGTH);
                 Byte[] tileset = Core.ReadData(
-                    Tileset_PointerBox.Value,
-                    Tileset_CheckBox.Checked ? 0 : (Tileset_8bpp_RadioButton.Checked ?
-                        ((Int32)Width_NumBox.Value * (Int32)Height_NumBox.Value * Tile.SIZE * Tile.SIZE) :
-                        ((Int32)Width_NumBox.Value * (Int32)Height_NumBox.Value * Tile.LENGTH)));
+                    this.Tileset_PointerBox.Value,
+                    this.Tileset_CheckBox.Checked ? 0 : (this.Tileset_8bpp_RadioButton.Checked ?
+                        ((Int32)this.Width_NumBox.Value * (Int32)this.Height_NumBox.Value * Tile.SIZE * Tile.SIZE) :
+                        ((Int32)this.Width_NumBox.Value * (Int32)this.Height_NumBox.Value * Tile.LENGTH)));
 
-                if (Palette_Opaque_CheckBox.Checked)
+                if (this.Palette_Opaque_CheckBox.Checked)
                 {
                     for (Int32 i = 0; i < palette.Length; i += 2)
                     {
@@ -58,62 +58,62 @@ namespace Magic.Editors
 
                 if (palette == null || palette.Length == 0)
                 {
-                    Palette_PaletteBox.Reset();
-                    Image_ImageBox.Reset();
+                    this.Palette_PaletteBox.Reset();
+                    this.Image_ImageBox.Reset();
                     return;
                 }
                 if (tileset == null || tileset.Length == 0)
                 {
-                    Palette_PaletteBox.Load(new Palette(palette, Palette.MAX * 16));
-                    Image_ImageBox.Reset();
+                    this.Palette_PaletteBox.Load(new Palette(palette, Palette.MAX * 16));
+                    this.Image_ImageBox.Reset();
                     return;
                 }
 
                 IDisplayable image = null;
-                if (TSA_Label.Checked && TSA_PointerBox.Value != new Pointer())
+                if (this.TSA_Label.Checked && this.TSA_PointerBox.Value != new Pointer())
                 {
                     image = new TSA_Image(palette, tileset,
-                        Core.ReadTSA(TSA_PointerBox.Value,
-                            (Int32)Width_NumBox.Value,
-                            (Int32)Height_NumBox.Value,
-                            TSA_CheckBox.Checked,
-                            TSA_FlipRows_CheckBox.Checked));
+                        Core.ReadTSA(this.TSA_PointerBox.Value,
+                            (Int32)this.Width_NumBox.Value,
+                            (Int32)this.Height_NumBox.Value,
+                            this.TSA_CheckBox.Checked,
+                            this.TSA_FlipRows_CheckBox.Checked));
 
-                    Tool_OpenTSAEditor.Enabled = true;
+                    this.Tool_OpenTSAEditor.Enabled = true;
                 }
-                else if (Tileset_8bpp_RadioButton.Checked)
+                else if (this.Tileset_8bpp_RadioButton.Checked)
                 {
                     image = new Bitmap(
-                        (Int32)Width_NumBox.Value * Tile.SIZE,
-                        (Int32)Height_NumBox.Value * Tile.SIZE,
-                        View_GrayscalePalette.Checked ?
-                            GrayScale.ToBytes(false) :
+                        (Int32)this.Width_NumBox.Value * Tile.SIZE,
+                        (Int32)this.Height_NumBox.Value * Tile.SIZE,
+                        this.View_GrayscalePalette.Checked ?
+                            this.GrayScale.ToBytes(false) :
                             palette,
                         tileset);
 
-                    Tool_OpenTSAEditor.Enabled = false;
+                    this.Tool_OpenTSAEditor.Enabled = false;
                 }
                 else
                 {
                     image = new Tileset(tileset).ToImage(
-                        (Int32)Width_NumBox.Value,
-                        (Int32)Height_NumBox.Value,
-                        View_GrayscalePalette.Checked ?
-                            GrayScale.ToBytes(false) :
+                        (Int32)this.Width_NumBox.Value,
+                        (Int32)this.Height_NumBox.Value,
+                        this.View_GrayscalePalette.Checked ?
+                            this.GrayScale.ToBytes(false) :
                             palette.GetBytes(0, Palette.LENGTH));
 
-                    Tool_OpenTSAEditor.Enabled = false;
+                    this.Tool_OpenTSAEditor.Enabled = false;
                 }
 
-                Palette_PaletteBox.Load(new Palette(palette, Palette.MAX * 16));
-                Image_ImageBox.Size = new System.Drawing.Size(image.Width, image.Height);
-                Image_ImageBox.Load(image);
+                this.Palette_PaletteBox.Load(new Palette(palette, Palette.MAX * 16));
+                this.Image_ImageBox.Size = new System.Drawing.Size(image.Width, image.Height);
+                this.Image_ImageBox.Load(image);
             }
             catch (Exception ex)
             {
                 UI.ShowError("There has been an error while trying to load the image.", ex);
 
-                Image_ImageBox.Reset();
+                this.Image_ImageBox.Reset();
             }
         }
 
@@ -122,49 +122,49 @@ namespace Magic.Editors
             Pointer tileset, Boolean tileset_compressed,
             Pointer tsa = new Pointer(), Boolean tsa_compressed = false, Boolean tsa_flipped = false)
         {
-            Palette_PointerBox.ValueChanged      -= Palette_PointerBox_ValueChanged;
-            Palette_CheckBox.CheckedChanged      -= Palette_CheckBox_CheckedChanged;
-            Tileset_PointerBox.ValueChanged      -= Tileset_PointerBox_ValueChanged;
-            Tileset_CheckBox.CheckedChanged      -= Tileset_CheckBox_CheckedChanged;
-            TSA_PointerBox.ValueChanged          -= TSA_PointerBox_ValueChanged;     
-            TSA_CheckBox.CheckedChanged          -= TSA_CheckBox_CheckedChanged;
-            TSA_FlipRows_CheckBox.CheckedChanged -= TSA_FlipRows_CheckBox_CheckedChanged;
+            this.Palette_PointerBox.ValueChanged      -= this.Palette_PointerBox_ValueChanged;
+            this.Palette_CheckBox.CheckedChanged      -= this.Palette_CheckBox_CheckedChanged;
+            this.Tileset_PointerBox.ValueChanged      -= this.Tileset_PointerBox_ValueChanged;
+            this.Tileset_CheckBox.CheckedChanged      -= this.Tileset_CheckBox_CheckedChanged;
+            this.TSA_PointerBox.ValueChanged          -= this.TSA_PointerBox_ValueChanged;
+            this.TSA_CheckBox.CheckedChanged          -= this.TSA_CheckBox_CheckedChanged;
+            this.TSA_FlipRows_CheckBox.CheckedChanged -= this.TSA_FlipRows_CheckBox_CheckedChanged;
 
-            Palette_PointerBox.Value = palette;
-            Palette_CheckBox.Checked = palette_compressed;
-            Tileset_PointerBox.Value = tileset;
-            Tileset_CheckBox.Checked = tileset_compressed;
-            TSA_PointerBox.Value = tsa;
-            TSA_CheckBox.Checked = tsa_compressed;
-            TSA_FlipRows_CheckBox.Checked = tsa_flipped;
-            Palette_Offset_Label.Enabled = !Palette_CheckBox.Checked;
-            Palette_Index_NumBox.Enabled = !Palette_CheckBox.Checked;
+            this.Palette_PointerBox.Value = palette;
+            this.Palette_CheckBox.Checked = palette_compressed;
+            this.Tileset_PointerBox.Value = tileset;
+            this.Tileset_CheckBox.Checked = tileset_compressed;
+            this.TSA_PointerBox.Value = tsa;
+            this.TSA_CheckBox.Checked = tsa_compressed;
+            this.TSA_FlipRows_CheckBox.Checked = tsa_flipped;
+            this.Palette_Offset_Label.Enabled = !this.Palette_CheckBox.Checked;
+            this.Palette_Index_NumBox.Enabled = !this.Palette_CheckBox.Checked;
 
-            Palette_PointerBox.ValueChanged      += Palette_PointerBox_ValueChanged;
-            Palette_CheckBox.CheckedChanged      += Palette_CheckBox_CheckedChanged;
-            Tileset_PointerBox.ValueChanged      += Tileset_PointerBox_ValueChanged;
-            Tileset_CheckBox.CheckedChanged      += Tileset_CheckBox_CheckedChanged;
-            TSA_PointerBox.ValueChanged          += TSA_PointerBox_ValueChanged;     
-            TSA_CheckBox.CheckedChanged          += TSA_CheckBox_CheckedChanged;
-            TSA_FlipRows_CheckBox.CheckedChanged += TSA_FlipRows_CheckBox_CheckedChanged;
+            this.Palette_PointerBox.ValueChanged      += this.Palette_PointerBox_ValueChanged;
+            this.Palette_CheckBox.CheckedChanged      += this.Palette_CheckBox_CheckedChanged;
+            this.Tileset_PointerBox.ValueChanged      += this.Tileset_PointerBox_ValueChanged;
+            this.Tileset_CheckBox.CheckedChanged      += this.Tileset_CheckBox_CheckedChanged;
+            this.TSA_PointerBox.ValueChanged          += this.TSA_PointerBox_ValueChanged;
+            this.TSA_CheckBox.CheckedChanged          += this.TSA_CheckBox_CheckedChanged;
+            this.TSA_FlipRows_CheckBox.CheckedChanged += this.TSA_FlipRows_CheckBox_CheckedChanged;
 
-            TSA_Label_CheckedChanged(this, null);
+            this.TSA_Label_CheckedChanged(this, null);
         }
         public void Core_SetEntry(Int32 width, Int32 height,
             Pointer palette, Boolean palette_compressed,
             Pointer tileset, Boolean tileset_compressed,
             Pointer tsa = new Pointer(), Boolean tsa_compressed = false, Boolean tsa_flipped = false)
         {
-            Width_NumBox.ValueChanged  -= Width_NumBox_ValueChanged;
-            Height_NumBox.ValueChanged -= Height_NumBox_ValueChanged;
+            this.Width_NumBox.ValueChanged  -= this.Width_NumBox_ValueChanged;
+            this.Height_NumBox.ValueChanged -= this.Height_NumBox_ValueChanged;
 
-            Width_NumBox.Value = width;
-            Height_NumBox.Value = height;
+            this.Width_NumBox.Value = width;
+            this.Height_NumBox.Value = height;
 
-            Width_NumBox.ValueChanged  += Width_NumBox_ValueChanged;
-            Height_NumBox.ValueChanged += Height_NumBox_ValueChanged;
+            this.Width_NumBox.ValueChanged  += this.Width_NumBox_ValueChanged;
+            this.Height_NumBox.ValueChanged += this.Height_NumBox_ValueChanged;
 
-            Core_SetEntry(
+            this.Core_SetEntry(
                 palette, palette_compressed,
                 tileset, tileset_compressed,
                 tsa, tsa_compressed, tsa_flipped);
@@ -178,40 +178,40 @@ namespace Magic.Editors
             UI.SuspendUpdate();
             try
             {
-                Byte[] data_palette = palette.ToBytes(Palette_CheckBox.Checked);
-                Byte[] data_tileset = Tileset_CheckBox.Checked ? LZ77.Compress(graphics) : graphics;
+                Byte[] data_palette = palette.ToBytes(this.Palette_CheckBox.Checked);
+                Byte[] data_tileset = this.Tileset_CheckBox.Checked ? LZ77.Compress(graphics) : graphics;
                 Byte[] data_tsa = null;
 
                 List<Tuple<String, Pointer, Int32>> repoints = new List<Tuple<String, Pointer, Int32>>();
-                repoints.Add(Tuple.Create("Palette", Palette_PointerBox.Value, data_palette.Length));
-                repoints.Add(Tuple.Create("Tileset", Tileset_PointerBox.Value, data_tileset.Length));
+                repoints.Add(Tuple.Create("Palette", this.Palette_PointerBox.Value, data_palette.Length));
+                repoints.Add(Tuple.Create("Tileset", this.Tileset_PointerBox.Value, data_tileset.Length));
                 if (tsa != null)
                 {
-                    data_tsa = tsa.ToBytes(TSA_CheckBox.Checked, TSA_FlipRows_CheckBox.Checked);
-                    repoints.Add(Tuple.Create("TSA", TSA_PointerBox.Value, data_tsa.Length));
+                    data_tsa = tsa.ToBytes(this.TSA_CheckBox.Checked, this.TSA_FlipRows_CheckBox.Checked);
+                    repoints.Add(Tuple.Create("TSA", this.TSA_PointerBox.Value, data_tsa.Length));
                 }
 
                 Boolean cancel = Prompt.ShowRepointDialog(this, "Repoint Graphics",
                     "The image and palette to insert might need to be repointed.",
-                    "Image at " + Tileset_PointerBox.Value + " - ", repoints.ToArray());
+                    "Image at " + this.Tileset_PointerBox.Value + " - ", repoints.ToArray());
                 if (cancel) return;
 
                 Core.WriteData(this,
-                    Palette_PointerBox.Value,
+                    this.Palette_PointerBox.Value,
                     data_palette,
-                    "Palette at " + Palette_PointerBox.Value + " changed");
+                    "Palette at " + this.Palette_PointerBox.Value + " changed");
 
                 Core.WriteData(this,
-                    Tileset_PointerBox.Value,
+                    this.Tileset_PointerBox.Value,
                     data_tileset,
-                    "Tileset at " + Tileset_PointerBox.Value + " changed");
+                    "Tileset at " + this.Tileset_PointerBox.Value + " changed");
 
                 if (tsa != null)
                 {
                     Core.WriteData(this,
-                        TSA_PointerBox.Value,
+                        this.TSA_PointerBox.Value,
                         data_tsa,
-                        "TSA Array at " + TSA_PointerBox.Value + " changed");
+                        "TSA Array at " + this.TSA_PointerBox.Value + " changed");
                 }
             }
             catch (Exception ex)
@@ -228,14 +228,14 @@ namespace Magic.Editors
             {
                 Palette palette = Core.FindPaletteFile(filepath);
 
-                if (TSA_Label.Checked && TSA_PointerBox.Value != new Pointer())
+                if (this.TSA_Label.Checked && this.TSA_PointerBox.Value != new Pointer())
                 {
-                    Int32 width = TSA_FlipRows_CheckBox.Checked ?
-                        ((TSA_Image)Image_ImageBox.Display).Tiling.Width :
-                        (Int32)Width_NumBox.Value;
-                    Int32 height = TSA_FlipRows_CheckBox.Checked ?
-                        ((TSA_Image)Image_ImageBox.Display).Tiling.Height :
-                        (Int32)Height_NumBox.Value;
+                    Int32 width = this.TSA_FlipRows_CheckBox.Checked ?
+                        ((TSA_Image)this.Image_ImageBox.Display).Tiling.Width :
+                        (Int32)this.Width_NumBox.Value;
+                    Int32 height = this.TSA_FlipRows_CheckBox.Checked ?
+                        ((TSA_Image)this.Image_ImageBox.Display).Tiling.Height :
+                        (Int32)this.Height_NumBox.Value;
 
                     if (palette == null)
                     {
@@ -255,7 +255,7 @@ namespace Magic.Editors
                             true);
                     }
                 }
-                else if (Tileset_8bpp_RadioButton.Checked)
+                else if (this.Tileset_8bpp_RadioButton.Checked)
                 {
                     image = new GBA.Bitmap(filepath, palette);
                 }
@@ -267,13 +267,13 @@ namespace Magic.Editors
             catch (Exception ex)
             {
                 UI.ShowError("Could not load image file.", ex);
-                Core_Update();
+                this.Core_Update();
                 return;
             }
 
             if (image is GBA.TSA_Image)
             {
-                Core_Insert(
+                this.Core_Insert(
                     Palette.Merge(((TSA_Image)image).Palettes),
                     ((TSA_Image)image).Graphics.ToBytes(false),
                     ((TSA_Image)image).Tiling);
@@ -281,14 +281,14 @@ namespace Magic.Editors
             }
             if (image is GBA.Bitmap)
             {
-                Core_Insert(
+                this.Core_Insert(
                     ((Bitmap)image).Colors,
                     ((Bitmap)image).ToBytes());
                 return;
             }
             if (image is GBA.Image)
             {
-                Core_Insert(
+                this.Core_Insert(
                     ((Image)image).Colors,
                     new Tileset((Image)image).ToBytes(false));
                 return;
@@ -317,8 +317,8 @@ namespace Magic.Editors
                 if (!File.Exists(path + file + ".tsa"))
                 {
                     tsa = new TSA_Array(
-                        (Int32)Width_NumBox.Value,
-                        (Int32)Height_NumBox.Value,
+                        (Int32)this.Width_NumBox.Value,
+                        (Int32)this.Height_NumBox.Value,
                         File.ReadAllBytes(path + file + ".tsa"));
                 }
             }
@@ -327,28 +327,28 @@ namespace Magic.Editors
                 UI.ShowError("Could not load image data files.", ex);
                 return;
             }
-            Core_Insert(palette, graphics, tsa);
+            this.Core_Insert(palette, graphics, tsa);
         }
         void Core_SaveImage(String filepath)
         {
             Byte[] data = Core.ReadData(
-                Palette_PointerBox.Value + (Int32)Palette_Index_NumBox.Value * Palette.LENGTH,
-                Palette_CheckBox.Checked ? 0 : 16 * Palette.LENGTH);
+                this.Palette_PointerBox.Value + (Int32)this.Palette_Index_NumBox.Value * Palette.LENGTH,
+                this.Palette_CheckBox.Checked ? 0 : 16 * Palette.LENGTH);
             Palette[] palettes = new Palette[16];
             for (UInt32 i = 0; i < 16; i++)
             {
                 palettes[i] = new Palette(data.GetBytes(i * Palette.LENGTH, Palette.LENGTH));
             }
             Core.SaveImage(filepath,
-                Image_ImageBox.Display.Width,
-                Image_ImageBox.Display.Height,
+                this.Image_ImageBox.Display.Width,
+                this.Image_ImageBox.Display.Height,
                 palettes,
                 delegate (Int32 x, Int32 y)
                 {
                     Int32 palette = 0;
-                    if (TSA_Label.Checked)
-                        palette = ((TSA_Image)Image_ImageBox.Display).GetPaletteIndex(x, y);
-                    return (Byte)palettes[palette].Find(Image_ImageBox.Display.GetColor(x, y));
+                    if (this.TSA_Label.Checked)
+                        palette = ((TSA_Image)this.Image_ImageBox.Display).GetPaletteIndex(x, y);
+                    return (Byte)palettes[palette].Find(this.Image_ImageBox.Display.GetColor(x, y));
                 });
         }
         void Core_SaveData(String filepath)
@@ -357,7 +357,7 @@ namespace Magic.Editors
             String file = Path.GetFileNameWithoutExtension(filepath);
             try
             {
-                IDisplayable image = Image_ImageBox.Display;
+                IDisplayable image = this.Image_ImageBox.Display;
 
                 Byte[] data_palette = null;
                 Byte[] data_tileset = null;
@@ -457,7 +457,7 @@ namespace Magic.Editors
             openWindow.FilterIndex = 1;
             openWindow.Filter =
                 "Image files (*.png, *.bmp, *.gif)|*.png;*.bmp;*.gif|" +
-                "Image data " + (TSA_Label.Checked ?
+                "Image data " + (this.TSA_Label.Checked ?
                     "(.tsa + .chr + .pal)|*.tsa;*.chr;*.pal|" :
                     "(.chr + .pal)|*.chr;*.pal|") +
                 "All files (*.*)|*.*";
@@ -468,14 +468,14 @@ namespace Magic.Editors
                     openWindow.FileName.EndsWith(".bmp", StringComparison.OrdinalIgnoreCase) ||
                     openWindow.FileName.EndsWith(".gif", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_InsertImage(openWindow.FileName);
+                    this.Core_InsertImage(openWindow.FileName);
                     return;
                 }
                 if (openWindow.FileName.EndsWith(".pal", StringComparison.OrdinalIgnoreCase) ||
                     openWindow.FileName.EndsWith(".chr", StringComparison.OrdinalIgnoreCase) ||
                     openWindow.FileName.EndsWith(".tsa", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_InsertData(openWindow.FileName);
+                    this.Core_InsertData(openWindow.FileName);
                     return;
                 }
                 UI.ShowError("File chosen has invalid extension.\r\n" + openWindow.FileName);
@@ -490,7 +490,7 @@ namespace Magic.Editors
             saveWindow.FilterIndex = 1;
             saveWindow.Filter =
                 "Image file (*.png)|*.png|" +
-                "Image data " + (TSA_Label.Checked ?
+                "Image data " + (this.TSA_Label.Checked ?
                     "(.tsa + .chr + .pal)|*.tsa;*.chr;*.pal|" :
                     "(.chr + .pal)|*.chr;*.pal|") +
                 "All files (*.*)|*.*";
@@ -499,14 +499,14 @@ namespace Magic.Editors
             {
                 if (saveWindow.FileName.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_SaveImage(saveWindow.FileName.Remove(saveWindow.FileName.Length - 4));
+                    this.Core_SaveImage(saveWindow.FileName.Remove(saveWindow.FileName.Length - 4));
                     return;
                 }
                 if (saveWindow.FileName.EndsWith(".pal", StringComparison.OrdinalIgnoreCase) ||
                     saveWindow.FileName.EndsWith(".chr", StringComparison.OrdinalIgnoreCase) ||
                     saveWindow.FileName.EndsWith(".tsa", StringComparison.OrdinalIgnoreCase))
                 {
-                    Core_SaveData(saveWindow.FileName);
+                    this.Core_SaveData(saveWindow.FileName);
                     return;
                 }
                 UI.ShowError("File chosen has invalid extension.\r\n" + saveWindow.FileName);
@@ -517,171 +517,171 @@ namespace Magic.Editors
         {
             UI.OpenPaletteEditor(this,
                 "Unknown Palette - ",
-                Palette_PointerBox.Value + (Int32)Palette_Index_NumBox.Value * Palette.LENGTH,
-                Palette_CheckBox.Checked ? 0 : 1);
+                this.Palette_PointerBox.Value + (Int32)this.Palette_Index_NumBox.Value * Palette.LENGTH,
+                this.Palette_CheckBox.Checked ? 0 : 1);
         }
         private void Tool_OpenTSAEditor_Click(Object sender, EventArgs e)
         {
-            TSA_Array tsa = ((TSA_Image)Image_ImageBox.Display).Tiling;
+            TSA_Array tsa = ((TSA_Image)this.Image_ImageBox.Display).Tiling;
 
             UI.OpenTSAEditor(this,
                 "Unknown TSA Array - ",
-                Palette_PointerBox.Value, Palette_CheckBox.Checked ? 0 : 16 * Palette.LENGTH,
-                Tileset_PointerBox.Value, Tileset_CheckBox.Checked ? 0 :
-                    (Int32)(Width_NumBox.Value * Height_NumBox.Value) * Tile.LENGTH,
-                TSA_PointerBox.Value,
+                this.Palette_PointerBox.Value, this.Palette_CheckBox.Checked ? 0 : 16 * Palette.LENGTH,
+                this.Tileset_PointerBox.Value, this.Tileset_CheckBox.Checked ? 0 :
+                    (Int32)(this.Width_NumBox.Value * this.Height_NumBox.Value) * Tile.LENGTH,
+                this.TSA_PointerBox.Value,
                 tsa.Width, tsa.Height,
-                TSA_CheckBox.Checked, TSA_FlipRows_CheckBox.Checked);
+                this.TSA_CheckBox.Checked, this.TSA_FlipRows_CheckBox.Checked);
         }
 
         private void View_GrayscalePalette_Click(Object sender, EventArgs e)
         {
-            Core_Update();
+            this.Core_Update();
         }
 
 
 
         private void Palette_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
-            Core_Update();
+            this.Core_Update();
         }
         private void Palette_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
-            Palette_Offset_Label.Enabled = !Palette_CheckBox.Checked;
-            Palette_Index_NumBox.Enabled = !Palette_CheckBox.Checked;
+            this.Palette_Offset_Label.Enabled = !this.Palette_CheckBox.Checked;
+            this.Palette_Index_NumBox.Enabled = !this.Palette_CheckBox.Checked;
 
-            Core_Update();
+            this.Core_Update();
         }
         private void Tileset_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
-            Core_Update();
+            this.Core_Update();
         }
         private void Tileset_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
-            Core_Update();
+            this.Core_Update();
         }
         private void TSA_Label_CheckedChanged(Object sender, EventArgs e)
         {
-            if (TSA_Label.Checked)
+            if (this.TSA_Label.Checked)
             {
-                TSA_PointerBox.Enabled = true;
-                TSA_CheckBox.Enabled = true;
+                this.TSA_PointerBox.Enabled = true;
+                this.TSA_CheckBox.Enabled = true;
 
-                TSA_GroupBox.Enabled = true;
+                this.TSA_GroupBox.Enabled = true;
 
-                Tileset_2bpp_RadioButton.Enabled = false;
-                Tileset_4bpp_RadioButton.CheckedChanged -= Tileset_4bpp_RadioButton_CheckedChanged;
-                Tileset_4bpp_RadioButton.Checked = true;
-                Tileset_4bpp_RadioButton.CheckedChanged += Tileset_4bpp_RadioButton_CheckedChanged;
-                Tileset_8bpp_RadioButton.Enabled = false;
+                this.Tileset_2bpp_RadioButton.Enabled = false;
+                this.Tileset_4bpp_RadioButton.CheckedChanged -= this.Tileset_4bpp_RadioButton_CheckedChanged;
+                this.Tileset_4bpp_RadioButton.Checked = true;
+                this.Tileset_4bpp_RadioButton.CheckedChanged += this.Tileset_4bpp_RadioButton_CheckedChanged;
+                this.Tileset_8bpp_RadioButton.Enabled = false;
             }
             else
             {
-                TSA_PointerBox.Enabled = false;
-                TSA_CheckBox.Enabled = false;
+                this.TSA_PointerBox.Enabled = false;
+                this.TSA_CheckBox.Enabled = false;
 
-                Size_GroupBox.Enabled = true;
-                TSA_FlipRows_CheckBox.CheckedChanged -= TSA_FlipRows_CheckBox_CheckedChanged;
-                TSA_FlipRows_CheckBox.Checked = false;
-                TSA_FlipRows_CheckBox.CheckedChanged += TSA_FlipRows_CheckBox_CheckedChanged;
-                TSA_GroupBox.Enabled = false;
+                this.Size_GroupBox.Enabled = true;
+                this.TSA_FlipRows_CheckBox.CheckedChanged -= this.TSA_FlipRows_CheckBox_CheckedChanged;
+                this.TSA_FlipRows_CheckBox.Checked = false;
+                this.TSA_FlipRows_CheckBox.CheckedChanged += this.TSA_FlipRows_CheckBox_CheckedChanged;
+                this.TSA_GroupBox.Enabled = false;
 
-                Tileset_2bpp_RadioButton.Enabled = false;
-                Tileset_8bpp_RadioButton.Enabled = true;
+                this.Tileset_2bpp_RadioButton.Enabled = false;
+                this.Tileset_8bpp_RadioButton.Enabled = true;
             }
-            Core_Update();
+            this.Core_Update();
         }
         private void TSA_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
-            Core_Update();
+            this.Core_Update();
         }
         private void TSA_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
-            Core_Update();
+            this.Core_Update();
         }
 
         private void Width_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            Core_Update();
+            this.Core_Update();
         }
         private void Height_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            Core_Update();
+            this.Core_Update();
         }
 
         private void Tileset_2bpp_RadioButton_CheckedChanged(Object sender, EventArgs e)
         {
-            Core_Update();
+            this.Core_Update();
         }
         private void Tileset_4bpp_RadioButton_CheckedChanged(Object sender, EventArgs e)
         {
-            Core_Update();
+            this.Core_Update();
         }
         private void Tileset_8bpp_RadioButton_CheckedChanged(Object sender, EventArgs e)
         {
-            if (Tileset_8bpp_RadioButton.Checked)
+            if (this.Tileset_8bpp_RadioButton.Checked)
             {
-                TSA_Label.CheckedChanged -= TSA_Label_CheckedChanged;
-                TSA_Label.Checked = false;
-                TSA_Label.CheckedChanged += TSA_Label_CheckedChanged;
-                TSA_Label.Enabled = false;
+                this.TSA_Label.CheckedChanged -= this.TSA_Label_CheckedChanged;
+                this.TSA_Label.Checked = false;
+                this.TSA_Label.CheckedChanged += this.TSA_Label_CheckedChanged;
+                this.TSA_Label.Enabled = false;
             }
             else
             {
-                TSA_Label.Enabled = true;
+                this.TSA_Label.Enabled = true;
             }
-            Core_Update();
+            this.Core_Update();
         }
 
         private void Palette_Index_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            Core_Update();
+            this.Core_Update();
         }
         private void Palette_Opaque_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
-            Core_Update();
+            this.Core_Update();
         }
 
         private void TSA_Dimensions_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
-            Core_Update();
+            this.Core_Update();
         }
         private void TSA_FlipRows_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
-            if (TSA_FlipRows_CheckBox.Checked)
+            if (this.TSA_FlipRows_CheckBox.Checked)
             {
-                Size_GroupBox.Enabled = false;
+                this.Size_GroupBox.Enabled = false;
             }
             else
             {
-                Size_GroupBox.Enabled = true;
+                this.Size_GroupBox.Enabled = true;
             }
-            Core_Update();
+            this.Core_Update();
         }
 
         private void Prev_Palette_Button_Click(Object sender, EventArgs e)
         {
-            Core_FindPrevLZ77Address(Palette_PointerBox, false);
+            this.Core_FindPrevLZ77Address(this.Palette_PointerBox, false);
         }
         private void Next_Palette_Button_Click(Object sender, EventArgs e)
         {
-            Core_FindNextLZ77Address(Palette_PointerBox, false);
+            this.Core_FindNextLZ77Address(this.Palette_PointerBox, false);
         }
         private void Prev_Tileset_Button_Click(Object sender, EventArgs e)
         {
-            Core_FindPrevLZ77Address(Tileset_PointerBox, true);
+            this.Core_FindPrevLZ77Address(this.Tileset_PointerBox, true);
         }
         private void Next_Tileset_Button_Click(Object sender, EventArgs e)
         {
-            Core_FindNextLZ77Address(Tileset_PointerBox, true);
+            this.Core_FindNextLZ77Address(this.Tileset_PointerBox, true);
         }
         private void Prev_TSA_Button_Click(Object sender, EventArgs e)
         {
-            Core_FindPrevLZ77Address(TSA_PointerBox, false);
+            this.Core_FindPrevLZ77Address(this.TSA_PointerBox, false);
         }
         private void Next_TSA_Button_Click(Object sender, EventArgs e)
         {
-            Core_FindNextLZ77Address(TSA_PointerBox, false);
+            this.Core_FindNextLZ77Address(this.TSA_PointerBox, false);
         }
     }
 }

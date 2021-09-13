@@ -20,15 +20,15 @@ namespace Magic.Components
 
         public ShortBox() : base()
         {
-            SuspendLayout();
+            this.SuspendLayout();
 
-            Minimum = 0;
-            Maximum = UInt16.MaxValue;
-            Name = "ShortBox";
-            Size = new Size(55, 20);
-            Hexadecimal = true;
+            this.Minimum = 0;
+            this.Maximum = UInt16.MaxValue;
+            this.Name = "ShortBox";
+            this.Size = new Size(55, 20);
+            this.Hexadecimal = true;
 
-            ResumeLayout(false);
+            this.ResumeLayout(false);
         }
     }
 }

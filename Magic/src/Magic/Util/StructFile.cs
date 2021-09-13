@@ -14,9 +14,9 @@ namespace Magic
         {
             get
             {
-                StructField field = GetField(entryField);
+                StructField field = this.GetField(entryField);
 
-                Byte[] data = Core.ReadData(Address + EntryIndex * EntryLength + field.Offset, field.Length);
+                Byte[] data = Core.ReadData(this.Address + this.EntryIndex * this.EntryLength + field.Offset, field.Length);
 
                 if (field.Type == typeof(Pointer))
                     return new Pointer((UInt32)Util.BytesToNumber(data, true), false, true);
@@ -53,15 +53,15 @@ namespace Magic
 
         public StructFile(String fileName)
         {
-            FilePath = Core.Path_Structs + fileName;
+            this.FilePath = Core.Path_Structs + fileName;
             String[] file;
             try
             {
-                file = File.ReadAllLines(FilePath);
+                file = File.ReadAllLines(this.FilePath);
             }
             catch (Exception ex)
             {
-                UI.ShowError("Could not open the struct file:\n" + FilePath, ex);
+                UI.ShowError("Could not open the struct file:\n" + this.FilePath, ex);
                 return;
             }
 
@@ -92,8 +92,8 @@ namespace Magic
 
                     if (i == 0)
                     {
-                        Address = new Pointer(field_offset);
-                        EntryLength = (Int32)field_length;
+                        this.Address = new Pointer(field_offset);
+                        this.EntryLength = (Int32)field_length;
                     }
                     else
                     {
@@ -110,10 +110,10 @@ namespace Magic
                 }
                 catch (Exception ex)
                 {
-                    UI.ShowError("There has been an error while reading the struct file:\n" + FilePath + "\nAt line: " + i, ex);
+                    UI.ShowError("There has been an error while reading the struct file:\n" + this.FilePath + "\nAt line: " + i, ex);
                 }
             }
-            Fields = fields.ToArray();
+            this.Fields = fields.ToArray();
         }
 
 
@@ -123,11 +123,11 @@ namespace Magic
         /// </summary>
         public StructField GetField(String name)
         {
-            for (Int32 i = 0; i < Fields.Length; i++)
+            for (Int32 i = 0; i < this.Fields.Length; i++)
             {
-                if (Fields[i].Name == name)
+                if (this.Fields[i].Name == name)
                 {
-                    return Fields[i];
+                    return this.Fields[i];
                 }
             }
             throw new Exception("Couldn't find struct field named: " + name);
@@ -138,12 +138,12 @@ namespace Magic
         /// </summary>
         public Pointer GetAddress(Int32 entryIndex, String entryField = "")
         {
-            Pointer address = Address + entryIndex * EntryLength;
+            Pointer address = this.Address + entryIndex * this.EntryLength;
 
             if (entryField == "") return address;
             else
             {
-                StructField field = GetField(entryField);
+                StructField field = this.GetField(entryField);
                 return address + field.Offset;
             }
         }
@@ -152,7 +152,7 @@ namespace Magic
         /// </summary>
         public Boolean EntryIsNull(Int32 entryIndex)
         {
-            Byte[] entry = Core.ReadData(Address + entryIndex * EntryLength, EntryLength);
+            Byte[] entry = Core.ReadData(this.Address + entryIndex * this.EntryLength, this.EntryLength);
             for (Int32 i = 0; i < entry.Length; i++)
             {
                 if (entry[i] != 0x00)
@@ -211,10 +211,10 @@ namespace Magic
 
         public StructField(String name, Type type, UInt32 offset, UInt32 length)
         {
-            Name = name;
-            Type = type;
-            Offset = (Int32)offset;
-            Length = (Int32)length;
+            this.Name = name;
+            this.Type = type;
+            this.Offset = (Int32)offset;
+            this.Length = (Int32)length;
         }
     }
 }

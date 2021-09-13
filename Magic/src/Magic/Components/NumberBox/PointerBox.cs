@@ -24,27 +24,27 @@ namespace Magic.Components
 
         public PointerBox() : base()
         {
-            SuspendLayout();
+            this.SuspendLayout();
 
-            Minimum = 0;
-            Maximum = DataManager.ROM_MAX_SIZE;
-            Name = "PointerBox";
-            Size = new Size(70, 20);
-            Hexadecimal = true;
-            ValueChanged += new EventHandler(UpdateMaximum);
+            this.Minimum = 0;
+            this.Maximum = DataManager.ROM_MAX_SIZE;
+            this.Name = "PointerBox";
+            this.Size = new Size(70, 20);
+            this.Hexadecimal = true;
+            ValueChanged += new EventHandler(this.UpdateMaximum);
 
-            ResumeLayout(false);
+            this.ResumeLayout(false);
         }
 
         void UpdateMaximum(Object sender, EventArgs e)
         {
             try
             {
-                Maximum = Core.CurrentROMSize;
+                this.Maximum = Core.CurrentROMSize;
             }
             catch
             {
-                Maximum = 0;
+                this.Maximum = 0;
             }
         }
     }

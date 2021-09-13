@@ -28,15 +28,15 @@ namespace GBA
         {
             get
             {
-                if (index >= Maximum) throw new ArgumentException("index cannot be " + Maximum + " or more");
-                else if (index >= Count) return new Color();//throw new Exception("index out of range, should be under " + Count);
-                return Colors[index];
+                if (index >= this.Maximum) throw new ArgumentException("index cannot be " + this.Maximum + " or more");
+                else if (index >= this.Count) return new Color();//throw new Exception("index out of range, should be under " + Count);
+                return this.Colors[index];
             }
             set
             {
-                if (index >= Maximum) throw new ArgumentException("index cannot be " + Maximum + " or more");
-                else if (index >= Count) throw new ArgumentException("index out of range, should be under " + Count);
-                Colors[index] = value;
+                if (index >= this.Maximum) throw new ArgumentException("index cannot be " + this.Maximum + " or more");
+                else if (index >= this.Count) throw new ArgumentException("index out of range, should be under " + this.Count);
+                this.Colors[index] = value;
             }
         }
 
@@ -52,11 +52,11 @@ namespace GBA
         {
             get
             {
-                return Colors.Capacity;
+                return this.Colors.Capacity;
             }
             set
             {
-                Colors.Capacity = value;
+                this.Colors.Capacity = value;
             }
         }
 
@@ -67,7 +67,7 @@ namespace GBA
         {
             get
             {
-                return Colors.Count;
+                return this.Colors.Count;
             }
         }
 
@@ -78,7 +78,7 @@ namespace GBA
         {
             get
             {
-                return (Count == Maximum);
+                return (this.Count == this.Maximum);
             }
         }
 
@@ -89,7 +89,7 @@ namespace GBA
         /// </summary>
         public Palette(Int32 maximum = MAX)
         {
-            Colors = new List<Color>(maximum);
+            this.Colors = new List<Color>(maximum);
         }
         /// <summary>
         /// Creates a Palette by reading a sequence of 2-byte colors from a byte array.
@@ -99,13 +99,13 @@ namespace GBA
             if (data == null || data.Length % 2 != 0 || data.Length > maximum * 2)
                 throw new Exception("given byte array has invalid length.");
 
-            Colors = new List<Color>(maximum);
+            this.Colors = new List<Color>(maximum);
             Byte[] buffer = new Byte[2];
             for (Int32 i = 0; i < data.Length / 2; i++)
             {
                 buffer[0] = data[i * 2 + 1];
                 buffer[1] = data[i * 2];
-                Colors.Add(new Color(buffer));
+                this.Colors.Add(new Color(buffer));
             }
         }
         /// <summary>
@@ -113,7 +113,7 @@ namespace GBA
         /// </summary>
         public Palette(String filepath, Int32 maximum = MAX)
         {
-            Colors = new List<Color>(maximum);
+            this.Colors = new List<Color>(maximum);
 
             if (filepath.EndsWith(".png", StringComparison.OrdinalIgnoreCase) ||
                 filepath.EndsWith(".gif", StringComparison.OrdinalIgnoreCase) ||
@@ -204,7 +204,7 @@ namespace GBA
                 {
                     buffer[0] = palette[i * 2 + 1];
                     buffer[1] = palette[i * 2];
-                    Colors.Add(new Color(buffer));
+                    this.Colors.Add(new Color(buffer));
                 }
             }
             else throw new Exception("Invalid filetype given to load palette.");
@@ -215,16 +215,16 @@ namespace GBA
         public Palette(Color[] colors)
         {
             if (colors == null || colors.Length >= MAX)
-                throw new Exception("The given Color array has more than " + Maximum + " colors");
+                throw new Exception("The given Color array has more than " + this.Maximum + " colors");
 
-            Colors = new List<Color>(colors);
+            this.Colors = new List<Color>(colors);
         }
         /// <summary>
         /// Copy constructor
         /// </summary>
         public Palette(Palette source)
         {
-            Colors = new List<Color>(source.Colors);
+            this.Colors = new List<Color>(source.Colors);
         }
 
 
@@ -235,9 +235,9 @@ namespace GBA
         public void Add(Color color)
         {
             if (this.IsFull)
-                throw new Exception("This palette cannot hold more than " + Maximum + " colors");
+                throw new Exception("This palette cannot hold more than " + this.Maximum + " colors");
 
-            Colors.Add(color);
+            this.Colors.Add(color);
         }
         /// <summary>
         /// Adds all the colors of the given palette at the end of this one, and returns the new length of this Palette
@@ -246,10 +246,10 @@ namespace GBA
         {
             for (Int32 i = 0; i < palette.Count; i++)
             {
-                if (this.IsFull) throw new Exception("This palette cannot hold more than " + Maximum + " colors");
-                Colors.Add(palette[i]);
+                if (this.IsFull) throw new Exception("This palette cannot hold more than " + this.Maximum + " colors");
+                this.Colors.Add(palette[i]);
             }
-            return Count;
+            return this.Count;
         }
 
         /// <summary>
@@ -257,9 +257,9 @@ namespace GBA
         /// </summary>
         public Int32 Find(Color color)
         {
-            for (Int32 i = 0; i < Count; i++)
+            for (Int32 i = 0; i < this.Count; i++)
             {
-                if (Colors[i] == color) { return i; }
+                if (this.Colors[i] == color) { return i; }
             }
             return -1;
         }
@@ -268,7 +268,7 @@ namespace GBA
         /// </summary>
         public Boolean Contains(Color color)
         {
-            return Colors.Contains(color);
+            return this.Colors.Contains(color);
         }
         
         /// <summary>
@@ -276,25 +276,25 @@ namespace GBA
         /// </summary>
         public void Set(Int32 index, Color color)
         {
-            if (index < 0 || index >= Count)
+            if (index < 0 || index >= this.Count)
                 throw new Exception("index out of bounds");
-            Colors[index] = color;
+            this.Colors[index] = color;
         }
         /// <summary>
         /// Swaps the location of 2 colors in the GBA.Palette
         /// </summary>
         public void Swap(Int32 fromIndex, Int32 toIndex)
         {
-            Color color = Colors[toIndex];
-            Colors[toIndex] = Colors[fromIndex];
-            Colors[fromIndex] = color;
+            Color color = this.Colors[toIndex];
+            this.Colors[toIndex] = this.Colors[fromIndex];
+            this.Colors[fromIndex] = color;
         }
         /// <summary>
         /// Sorts the colors of this Palette according to the given comparison
         /// </summary>
         public void Sort(Comparison<Color> comparison)
         {
-            Colors.Sort(comparison);
+            this.Colors.Sort(comparison);
         }
 
 
@@ -307,7 +307,7 @@ namespace GBA
             Int32 result = 0;
             for (Int32 i = 0; i < other.Count; i++)
             {
-                if (Colors.Contains(other[i]))
+                if (this.Colors.Contains(other[i]))
                     result++;
             }
             return result;
@@ -320,12 +320,12 @@ namespace GBA
         {
             Palette result = new Palette(this);
 
-            if (oldColors.Length > Maximum || newColors.Length > Maximum)
+            if (oldColors.Length > this.Maximum || newColors.Length > this.Maximum)
                 throw new Exception("Palettes aren't the same length");
             if (oldColors.Length != newColors.Length)
                 throw new Exception("Palettes aren't the same length");
 
-            for (Int32 i = 0; i < Count; ++i)
+            for (Int32 i = 0; i < this.Count; ++i)
             {
                 for (Int32 j = 0; j < oldColors.Length; ++j)
                 {
@@ -411,12 +411,12 @@ namespace GBA
         /// </summary>
         public Byte[] ToBytes(Boolean compressed)
         {
-            Byte[] result = new Byte[Count * 2];
+            Byte[] result = new Byte[this.Count * 2];
             Byte[] color;
             Int32 index = 0;
-            for (Int32 i = 0; i < Count; i++)
+            for (Int32 i = 0; i < this.Count; i++)
             {
-                color = Colors[i].ToBytes(true);
+                color = this.Colors[i].ToBytes(true);
                 result[index] = color[0];
                 result[index + 1] = color[1];
                 index += 2;
@@ -429,20 +429,20 @@ namespace GBA
         override public String ToString()
         {
             String result = "GBA.Palette:";
-            for (Int32 i = 0; i < Count; ++i)
+            for (Int32 i = 0; i < this.Count; ++i)
             {
-                result += "\n" + i + " - " + Colors[i].ToString();
+                result += "\n" + i + " - " + this.Colors[i].ToString();
             }
             return result;
         }
         override public Boolean Equals(Object other)
         {
             Palette palette = (Palette)other;
-            if (Count == palette.Count)
+            if (this.Count == palette.Count)
             {
-                for (Int32 i = 0; i < Maximum; i++)
+                for (Int32 i = 0; i < this.Maximum; i++)
                 {
-                    if (Colors[i] != palette[i]) return false;
+                    if (this.Colors[i] != palette[i]) return false;
                 }
                 return true;
             }
@@ -450,10 +450,10 @@ namespace GBA
         }
         override public Int32 GetHashCode()
         {
-            Int32 result = Count;
-            for (Int32 i = 0; i < Count; ++i)
+            Int32 result = this.Count;
+            for (Int32 i = 0; i < this.Count; ++i)
             {
-                result ^= Colors[i].Value;
+                result ^= this.Colors[i].Value;
             }
             return result;
         }

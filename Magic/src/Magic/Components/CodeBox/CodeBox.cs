@@ -16,16 +16,16 @@ namespace Magic.Components
 
         public CodeBox() : base()
         {
-            SyntaxColors = new List<Tuple<Regex, TextStyle>>();
-            Collapses = new List<Tuple<String, String>>();
+            this.SyntaxColors = new List<Tuple<Regex, TextStyle>>();
+            this.Collapses = new List<Tuple<String, String>>();
 
-            bg = new SolidBrush(this.BackColor);
+            this.bg = new SolidBrush(this.BackColor);
             this.SelectionColor = SystemColors.Highlight;
 
-            WordWrap = false;
-            Font = new Font("Consolas", 8F);
+            this.WordWrap = false;
+            this.Font = new Font("Consolas", 8F);
 
-            TextChanged += RedrawChangedText;
+            TextChanged += this.RedrawChangedText;
         }
 
         /// <summary>
@@ -33,26 +33,26 @@ namespace Magic.Components
         /// </summary>
         public void AddSyntax(String regex, Color color, FontStyle style = FontStyle.Regular)
         {
-            SyntaxColors.Add(Tuple.Create(new Regex(regex),
-                new TextStyle(new SolidBrush(color), bg, style)));
+            this.SyntaxColors.Add(Tuple.Create(new Regex(regex),
+                new TextStyle(new SolidBrush(color), this.bg, style)));
         }
         /// <summary>
         /// Adds a new collapsing region rule for this CodeBox
         /// </summary>
         public void AddCollapse(String start, String end)
         {
-            Collapses.Add(Tuple.Create(start, end));
+            this.Collapses.Add(Tuple.Create(start, end));
         }
 
         void RedrawChangedText(Object sender, TextChangedEventArgs e)
         {
-            foreach (Tuple<Regex, TextStyle> syntax in SyntaxColors)
+            foreach (Tuple<Regex, TextStyle> syntax in this.SyntaxColors)
             {
                 e.ChangedRange.ClearStyle(syntax.Item2);
                 e.ChangedRange.SetStyle(syntax.Item2, syntax.Item1);
             }
             e.ChangedRange.ClearFoldingMarkers();
-            foreach (Tuple<String, String> collapse in Collapses)
+            foreach (Tuple<String, String> collapse in this.Collapses)
             {
                 e.ChangedRange.SetFoldingMarkers(collapse.Item1, collapse.Item2);
             }
@@ -60,7 +60,7 @@ namespace Magic.Components
 
         public Int32 GetIndexFromPosition(Point position)
         {
-            return PointToPosition(position);
+            return this.PointToPosition(position);
         }
     }
 

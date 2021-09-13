@@ -24,41 +24,41 @@ namespace EmblemMagic.Editors
         {
             get
             {
-                return "Sample at " + Address + " - ";
+                return "Sample at " + this.Address + " - ";
             }
         }
 
         public SampleEditor(Pointer address)
         {
-            Address = address;
-            InitializeComponent();
+            this.Address = address;
+            this.InitializeComponent();
         }
         public override void Core_OnOpen()
         {
-            Core_Update();
+            this.Core_Update();
         }
         public override void Core_Update()
         {
-            Preview = new Music();
-            Current = new Sample(Address);
+            this.Preview = new Music();
+            this.Current = new Sample(this.Address);
 
-            Wave_SampleBox.Load(Current);
+            this.Wave_SampleBox.Load(this.Current);
 
-            Core_LoadValues();
+            this.Core_LoadValues();
         }
         void Core_LoadValues()
         {
-            Loop_CheckBox.CheckedChanged -= Loop_CheckBox_CheckedChanged;
-            Loop_NumberBox.ValueChanged -= Loop_NumberBox_ValueChanged;
-            Rate_NumberBox.ValueChanged -= Rate_NumberBox_ValueChanged;
+            this.Loop_CheckBox.CheckedChanged -= this.Loop_CheckBox_CheckedChanged;
+            this.Loop_NumberBox.ValueChanged -= this.Loop_NumberBox_ValueChanged;
+            this.Rate_NumberBox.ValueChanged -= this.Rate_NumberBox_ValueChanged;
 
-            Loop_CheckBox.Checked = Current.Looped;
-            Loop_NumberBox.Value = Current.LoopStart;
-            Rate_NumberBox.Value = Current.Pitch / 1024;
+            this.Loop_CheckBox.Checked = this.Current.Looped;
+            this.Loop_NumberBox.Value = this.Current.LoopStart;
+            this.Rate_NumberBox.Value = this.Current.Pitch / 1024;
 
-            Loop_CheckBox.CheckedChanged += Loop_CheckBox_CheckedChanged;
-            Loop_NumberBox.ValueChanged += Loop_NumberBox_ValueChanged;
-            Rate_NumberBox.ValueChanged += Rate_NumberBox_ValueChanged;
+            this.Loop_CheckBox.CheckedChanged += this.Loop_CheckBox_CheckedChanged;
+            this.Loop_NumberBox.ValueChanged += this.Loop_NumberBox_ValueChanged;
+            this.Rate_NumberBox.ValueChanged += this.Rate_NumberBox_ValueChanged;
         }
 
 
@@ -75,28 +75,28 @@ namespace EmblemMagic.Editors
         private void Loop_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
             Core.WriteByte(this,
-                Address + 3,
-                Loop_CheckBox.Checked ? (Byte)0x40 : (Byte)0x00,
-                CurrentEntry + "Loop changed");
+                this.Address + 3,
+                this.Loop_CheckBox.Checked ? (Byte)0x40 : (Byte)0x00,
+                this.CurrentEntry + "Loop changed");
         }
         private void Loop_NumberBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteData(this,
-                Address + 8,
-                Util.UInt32ToBytes((UInt32)Loop_NumberBox.Value, true),
-                CurrentEntry + "Loop Start changed");
+                this.Address + 8,
+                Util.UInt32ToBytes((UInt32)this.Loop_NumberBox.Value, true),
+                this.CurrentEntry + "Loop Start changed");
         }
         private void Rate_NumberBox_ValueChanged(Object sender, EventArgs e)
         {
             Core.WriteData(this,
-                Address + 4,
-                Util.UInt32ToBytes((UInt32)(Rate_NumberBox.Value * 1024), true),
-                CurrentEntry + "Sampling Rate changed");
+                this.Address + 4,
+                Util.UInt32ToBytes((UInt32)(this.Rate_NumberBox.Value * 1024), true),
+                this.CurrentEntry + "Sampling Rate changed");
         }
 
         private void Play_Button_Click(Object sender, EventArgs e)
         {
-            Preview.PlaySample(Current);
+            this.Preview.PlaySample(this.Current);
         }
     }
 }

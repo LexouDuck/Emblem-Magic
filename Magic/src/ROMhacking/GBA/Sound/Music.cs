@@ -37,19 +37,19 @@ namespace GBA
 
         public Music()
         {
-            Output = new WaveOut(WaveOut.WaveOutMapperDeviceId);
-            Output.Open(WaveFormat.Pcm32Khz8BitMono);
-            Player = null;
-            Playing = new List<Audio>();
-            Samples = new List<Audio[]>();
+            this.Output = new WaveOut(WaveOut.WaveOutMapperDeviceId);
+            this.Output.Open(WaveFormat.Pcm32Khz8BitMono);
+            this.Player = null;
+            this.Playing = new List<Audio>();
+            this.Samples = new List<Audio[]>();
         }
         public void Load(Audio[] notes)
         {
-            Samples.Add(notes);
+            this.Samples.Add(notes);
         }
         public void Reset()
         {
-            Samples.Clear();
+            this.Samples.Clear();
         }
         public void Dispose()
         {
@@ -57,11 +57,11 @@ namespace GBA
         }
         protected virtual void Dispose(Boolean full)
         {
-            if (Output != null)
+            if (this.Output != null)
             {
-                Output.Close();
-                Output.Dispose();
-                Output = null;
+                this.Output.Close();
+                this.Output.Dispose();
+                this.Output = null;
             }
             GC.SuppressFinalize(this);
         }
@@ -70,26 +70,26 @@ namespace GBA
         
         void RunAudioThread()
         {
-            while (Playing.Count > 0)
+            while (this.Playing.Count > 0)
             {
-                Byte[] buffer = MixAudioBuffers(4096); // 3145.728
+                Byte[] buffer = this.MixAudioBuffers(4096); // 3145.728
 
-                if (buffer != null) Output.Write(buffer);
+                if (buffer != null) this.Output.Write(buffer);
 
                 Thread.Sleep(10); // 10.416666...
             }
-            Output.Stop();
-            Player = null;
+            this.Output.Stop();
+            this.Player = null;
         }
         Byte[] MixAudioBuffers(Int32 length)
         {
             Byte[] result = new Byte[length];
 
             List<Byte[]> buffers = new List<Byte[]>();
-            for (Int32 i = 0; i < Playing.Count; i++)
+            for (Int32 i = 0; i < this.Playing.Count; i++)
             {
-                if (Playing[i].Cancel) Playing.RemoveAt(i);
-                else buffers.Add(Playing[i].GetBuffer(result.Length));
+                if (this.Playing[i].Cancel) this.Playing.RemoveAt(i);
+                else buffers.Add(this.Playing[i].GetBuffer(result.Length));
             }
             if (buffers.Count == 0) return null;
             Single sum_total;
@@ -118,28 +118,28 @@ namespace GBA
         }
         public void PlaySample(Sample sample)
         {
-            Output.Write(Audio.ChangeSampleRate(
+            this.Output.Write(Audio.ChangeSampleRate(
                 sample.PCM_Data,
                 sample.Pitch / 1024,
                 Audio.SAMPLE_RATE));
         }
         public void PlayAudio(Byte instrument, Byte note)
         {
-            if (Samples[instrument] == null) return;
-            Audio audio = Samples[instrument][note];
+            if (this.Samples[instrument] == null) return;
+            Audio audio = this.Samples[instrument][note];
             if (audio == null) return;
             audio.Cancel = false;
             audio.State = Audio.ADSR.Attack;
             audio.Position = 0;
 
-            if (!Playing.Contains(audio))
+            if (!this.Playing.Contains(audio))
             {
-                Playing.Add(audio);
+                this.Playing.Add(audio);
             }
-            if (Player == null)
+            if (this.Player == null)
             {
-                Player = new Thread(RunAudioThread);
-                Player.Start();
+                this.Player = new Thread(this.RunAudioThread);
+                this.Player.Start();
             }
         }
         public void PlayTrack(Track track, ref Int32 i)

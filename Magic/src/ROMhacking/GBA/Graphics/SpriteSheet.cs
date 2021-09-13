@@ -17,34 +17,34 @@ namespace GBA
         {
             get
             {
-                Int32 index = GetSpriteIndex(x, y);
+                Int32 index = this.GetSpriteIndex(x, y);
                 if (index == -1)
                 {
                     return 0;
                 }
                 else
                 {
-                    x -= Offsets[index].X;
-                    y -= Offsets[index].Y;
-                    return Sprites[index][x, y];
+                    x -= this.Offsets[index].X;
+                    y -= this.Offsets[index].Y;
+                    return this.Sprites[index][x, y];
                 }
             }
         }
         public Color GetColor(Int32 x, Int32 y)
         {
-            Int32 index = GetSpriteIndex(x, y);
+            Int32 index = this.GetSpriteIndex(x, y);
             if (index == -1)
             {
-                if (Sprites.Count == 0)
+                if (this.Sprites.Count == 0)
                     return new Color();
-                else return Sprites[0].Colors[0];
+                else return this.Sprites[0].Colors[0];
             }
             else
             {
-                x -= Offsets[index].X;
-                y -= Offsets[index].Y;
+                x -= this.Offsets[index].X;
+                y -= this.Offsets[index].Y;
 
-                return Sprites[index].GetColor(x, y);
+                return this.Sprites[index].GetColor(x, y);
             }
         }
         /// <summary>
@@ -52,15 +52,15 @@ namespace GBA
         /// </summary>
         public Int32 GetSpriteIndex(Int32 x, Int32 y)
         {
-            if (x < 0 || x >= Width) throw new ArgumentException("X given is out of bounds: " + x);
-            if (y < 0 || y >= Height) throw new ArgumentException("Y given is out of bounds: " + y);
+            if (x < 0 || x >= this.Width) throw new ArgumentException("X given is out of bounds: " + x);
+            if (y < 0 || y >= this.Height) throw new ArgumentException("Y given is out of bounds: " + y);
 
-            for (Int32 i = 0; i < Count; i++)
+            for (Int32 i = 0; i < this.Count; i++)
             {
-                if ((x >= Offsets[i].X) && (x < Offsets[i].X + Sprites[i].Width) &&
-                    (y >= Offsets[i].Y) && (y < Offsets[i].Y + Sprites[i].Height))
+                if ((x >= this.Offsets[i].X) && (x < this.Offsets[i].X + this.Sprites[i].Width) &&
+                    (y >= this.Offsets[i].Y) && (y < this.Offsets[i].Y + this.Sprites[i].Height))
                 {
-                    if (Sprites[i].GetColor(x - Offsets[i].X, y - Offsets[i].Y) == Sprites[i].Colors[0])
+                    if (this.Sprites[i].GetColor(x - this.Offsets[i].X, y - this.Offsets[i].Y) == this.Sprites[i].Colors[0])
                         continue;
                     else return i;
                 }
@@ -95,7 +95,7 @@ namespace GBA
         {
             get
             {
-                return Sprites.Count;
+                return this.Sprites.Count;
             }
         }
 
@@ -106,10 +106,10 @@ namespace GBA
         /// </summary>
         public SpriteSheet(Int32 width, Int32 height)
         {
-            Width = width;
-            Height = height;
-            Offsets = new List<Point>();
-            Sprites = new List<Sprite>();
+            this.Width = width;
+            this.Height = height;
+            this.Offsets = new List<Point>();
+            this.Sprites = new List<Sprite>();
         }
 
 
@@ -119,8 +119,8 @@ namespace GBA
         /// </summary>
         public void AddSprite(Sprite sprite, Int32 offsetX, Int32 offsetY)
         {
-            Offsets.Add(new Point(offsetX, offsetY));
-            Sprites.Add(sprite);
+            this.Offsets.Add(new Point(offsetX, offsetY));
+            this.Sprites.Add(sprite);
         }
         /// <summary>
         /// Adds a compound sprite made from an OAM array onto the spritesheet
@@ -147,8 +147,8 @@ namespace GBA
         /// </summary>
         public void Clear()
         {
-            Offsets = new List<Point>();
-            Sprites = new List<Sprite>();
+            this.Offsets = new List<Point>();
+            this.Sprites = new List<Sprite>();
         }
 
         public Boolean IsRegionEmpty(Rectangle region)

@@ -27,26 +27,26 @@ namespace EmblemMagic.Editors
         {
             get
             {
-                return EntryNumBox.Value;
+                return this.EntryNumBox.Value;
             }
         }
         public String CurrentEntry
         {
             get
             {
-                return "Text Entry 0x" + Util.UInt16ToHex(EntryNumBox.Value) + " - ";
+                return "Text Entry 0x" + Util.UInt16ToHex(this.EntryNumBox.Value) + " - ";
             }
         }
         public Magic.Range CurrentSelection
         {
             get
             {
-                return new Magic.Range(Text_CodeBox.SelectionStart, Text_CodeBox.SelectionStart + Text_CodeBox.SelectionLength);
+                return new Magic.Range(this.Text_CodeBox.SelectionStart, this.Text_CodeBox.SelectionStart + this.Text_CodeBox.SelectionLength);
             }
             set
             {
-                Text_CodeBox.SelectionStart = (Int32)value.Start;
-                Text_CodeBox.SelectionLength = (Int32)value.Length;
+                this.Text_CodeBox.SelectionStart = (Int32)value.Start;
+                this.Text_CodeBox.SelectionLength = (Int32)value.Length;
                 this.Select();
                 //Text_CodeBox.ScrollToCaret();
             }
@@ -58,15 +58,15 @@ namespace EmblemMagic.Editors
         {
             try
             {
-                InitializeComponent();
-                TextCommands1 = new ArrayFile("Text Commands.txt");
-                TextCommands2 = new ArrayFile("Text Commands 2.txt");
-                PortraitList = new ArrayFile("Portrait List.txt");
+                this.InitializeComponent();
+                this.TextCommands1 = new ArrayFile("Text Commands.txt");
+                this.TextCommands2 = new ArrayFile("Text Commands 2.txt");
+                this.PortraitList = new ArrayFile("Portrait List.txt");
 
-                Text_CodeBox.KeyDown += new KeyEventHandler(TextBox_SelectAll);
-                Text_CodeBox.AddSyntax(@"\[(.*?)\]", System.Drawing.SystemColors.Highlight);
+                this.Text_CodeBox.KeyDown += new KeyEventHandler(this.TextBox_SelectAll);
+                this.Text_CodeBox.AddSyntax(@"\[(.*?)\]", System.Drawing.SystemColors.Highlight);
 
-                Font_ComboBox.DataSource = new String[]
+                this.Font_ComboBox.DataSource = new String[]
                 {
                     "Menu Font",
                     "Text Bubble Font"
@@ -76,32 +76,32 @@ namespace EmblemMagic.Editors
             {
                 UI.ShowError("Could not properly open the " + this.Text, ex);
 
-                Core_CloseEditor(this, null);
+                this.Core_CloseEditor(this, null);
             }
         }
 
         public override void Core_SetEntry(UInt32 entry)
         {
-            EntryNumBox.Value = (UInt16)entry;
+            this.EntryNumBox.Value = (UInt16)entry;
         }
         public override void Core_OnOpen()
         {
-            Core_Update();
+            this.Core_Update();
         }
         public override void Core_Update()
         {
-            Core_LoadFont();
-            Core_LoadText();
-            Core_LoadPreview();
+            this.Core_LoadFont();
+            this.Core_LoadText();
+            this.Core_LoadPreview();
         }
 
         void Core_LoadFont()
         {
             try
             {
-                CurrentFont = new Font(Core.GetPointer((String)Font_ComboBox.SelectedValue));
+                this.CurrentFont = new Font(Core.GetPointer((String)this.Font_ComboBox.SelectedValue));
 
-                Font_GridBox.Load(CurrentFont);
+                this.Font_GridBox.Load(this.CurrentFont);
             }
             catch (Exception ex)
             {
@@ -110,71 +110,71 @@ namespace EmblemMagic.Editors
         }
         void Core_LoadFontValues()
         {
-            Glyph_Address_PointerBox.ValueChanged -= Glyph_Address_PointerBox_ValueChanged;
-            Glyph_Pointer_PointerBox.ValueChanged -= Glyph_Pointer_PointerBox_ValueChanged;
-            Glyph_Shift_ByteBox.ValueChanged -= Glyph_Shift_ByteBox_ValueChanged;
-            Glyph_Width_ByteBox.ValueChanged -= Glyph_Width_ByteBox_ValueChanged;
+            this.Glyph_Address_PointerBox.ValueChanged -= this.Glyph_Address_PointerBox_ValueChanged;
+            this.Glyph_Pointer_PointerBox.ValueChanged -= this.Glyph_Pointer_PointerBox_ValueChanged;
+            this.Glyph_Shift_ByteBox.ValueChanged -= this.Glyph_Shift_ByteBox_ValueChanged;
+            this.Glyph_Width_ByteBox.ValueChanged -= this.Glyph_Width_ByteBox_ValueChanged;
 
-            if (Font_GridBox.SelectionIsEmpty())
+            if (this.Font_GridBox.SelectionIsEmpty())
             {
-                Glyph_Address_PointerBox.Value = new Pointer();
-                Glyph_Pointer_PointerBox.Value = new Pointer();
-                Glyph_Shift_ByteBox.Value = 0;
-                Glyph_Width_ByteBox.Value = 0;
+                this.Glyph_Address_PointerBox.Value = new Pointer();
+                this.Glyph_Pointer_PointerBox.Value = new Pointer();
+                this.Glyph_Shift_ByteBox.Value = 0;
+                this.Glyph_Width_ByteBox.Value = 0;
 
-                Glyph_Address_PointerBox.Text = Glyph_Address_PointerBox.Value.ToString();
-                Glyph_Pointer_PointerBox.Text = Glyph_Pointer_PointerBox.Value.ToString();
-                Glyph_Shift_ByteBox.Text = Glyph_Shift_ByteBox.Value.ToString();
-                Glyph_Width_ByteBox.Text = Glyph_Width_ByteBox.Value.ToString();
+                this.Glyph_Address_PointerBox.Text = this.Glyph_Address_PointerBox.Value.ToString();
+                this.Glyph_Pointer_PointerBox.Text = this.Glyph_Pointer_PointerBox.Value.ToString();
+                this.Glyph_Shift_ByteBox.Text = this.Glyph_Shift_ByteBox.Value.ToString();
+                this.Glyph_Width_ByteBox.Text = this.Glyph_Width_ByteBox.Value.ToString();
             }
-            else if (Font_GridBox.SelectionIsSingle())
+            else if (this.Font_GridBox.SelectionIsSingle())
             {
-                System.Drawing.Point selection = Font_GridBox.GetSelectionCoords();
+                System.Drawing.Point selection = this.Font_GridBox.GetSelectionCoords();
                 Int32 index = selection.X + selection.Y * 16;
-                if (CurrentFont.Glyphs[index] == null)
+                if (this.CurrentFont.Glyphs[index] == null)
                 {
-                    Glyph_Address_PointerBox.Value = new Pointer();
-                    Glyph_Pointer_PointerBox.Value = new Pointer();
-                    Glyph_Shift_ByteBox.Value = 0;
-                    Glyph_Width_ByteBox.Value = 0;
+                    this.Glyph_Address_PointerBox.Value = new Pointer();
+                    this.Glyph_Pointer_PointerBox.Value = new Pointer();
+                    this.Glyph_Shift_ByteBox.Value = 0;
+                    this.Glyph_Width_ByteBox.Value = 0;
                 }
                 else
                 {
-                    Glyph_Address_PointerBox.Value = CurrentFont.Glyphs[index].Address;
-                    Glyph_Pointer_PointerBox.Value = CurrentFont.Glyphs[index].LinkedAddress;
-                    Glyph_Shift_ByteBox.Value = CurrentFont.Glyphs[index].ShiftJIS;
-                    Glyph_Width_ByteBox.Value = CurrentFont.Glyphs[index].TextWidth;
+                    this.Glyph_Address_PointerBox.Value = this.CurrentFont.Glyphs[index].Address;
+                    this.Glyph_Pointer_PointerBox.Value = this.CurrentFont.Glyphs[index].LinkedAddress;
+                    this.Glyph_Shift_ByteBox.Value = this.CurrentFont.Glyphs[index].ShiftJIS;
+                    this.Glyph_Width_ByteBox.Value = this.CurrentFont.Glyphs[index].TextWidth;
                 }
-                Glyph_Address_PointerBox.Text = Glyph_Address_PointerBox.Value.ToString();
-                Glyph_Pointer_PointerBox.Text = Glyph_Pointer_PointerBox.Value.ToString();
-                Glyph_Shift_ByteBox.Text = Glyph_Shift_ByteBox.Value.ToString();
-                Glyph_Width_ByteBox.Text = Glyph_Width_ByteBox.Value.ToString();
+                this.Glyph_Address_PointerBox.Text = this.Glyph_Address_PointerBox.Value.ToString();
+                this.Glyph_Pointer_PointerBox.Text = this.Glyph_Pointer_PointerBox.Value.ToString();
+                this.Glyph_Shift_ByteBox.Text = this.Glyph_Shift_ByteBox.Value.ToString();
+                this.Glyph_Width_ByteBox.Text = this.Glyph_Width_ByteBox.Value.ToString();
             }
             else
             {
-                Glyph_Address_PointerBox.Text = "";
-                Glyph_Pointer_PointerBox.Text = "";
-                Glyph_Shift_ByteBox.Text = "";
-                Glyph_Width_ByteBox.Text = "";
+                this.Glyph_Address_PointerBox.Text = "";
+                this.Glyph_Pointer_PointerBox.Text = "";
+                this.Glyph_Shift_ByteBox.Text = "";
+                this.Glyph_Width_ByteBox.Text = "";
             }
 
-            Glyph_Address_PointerBox.ValueChanged += Glyph_Address_PointerBox_ValueChanged;
-            Glyph_Pointer_PointerBox.ValueChanged += Glyph_Pointer_PointerBox_ValueChanged;
-            Glyph_Shift_ByteBox.ValueChanged += Glyph_Shift_ByteBox_ValueChanged;
-            Glyph_Width_ByteBox.ValueChanged += Glyph_Width_ByteBox_ValueChanged;
+            this.Glyph_Address_PointerBox.ValueChanged += this.Glyph_Address_PointerBox_ValueChanged;
+            this.Glyph_Pointer_PointerBox.ValueChanged += this.Glyph_Pointer_PointerBox_ValueChanged;
+            this.Glyph_Shift_ByteBox.ValueChanged += this.Glyph_Shift_ByteBox_ValueChanged;
+            this.Glyph_Width_ByteBox.ValueChanged += this.Glyph_Width_ByteBox_ValueChanged;
         }
         void Core_LoadText()
         {
             try
             {
-                Pointer address = Core.ReadPointer(Core.GetPointer("Text Array") + EntryNumBox.Value * 4);
+                Pointer address = Core.ReadPointer(Core.GetPointer("Text Array") + this.EntryNumBox.Value * 4);
 
-                Text_PointerBox.Value = new Pointer((UInt32)(address & 0x7FFFFFFF));
-                Text_ASCII_CheckBox.CheckedChanged -= Text_ASCII_CheckBox_CheckedChanged;
-                Text_ASCII_CheckBox.Checked = ((address & 0x80000000) != 0);
-                Text_ASCII_CheckBox.CheckedChanged += Text_ASCII_CheckBox_CheckedChanged;
+                this.Text_PointerBox.Value = new Pointer((UInt32)(address & 0x7FFFFFFF));
+                this.Text_ASCII_CheckBox.CheckedChanged -= this.Text_ASCII_CheckBox_CheckedChanged;
+                this.Text_ASCII_CheckBox.Checked = ((address & 0x80000000) != 0);
+                this.Text_ASCII_CheckBox.CheckedChanged += this.Text_ASCII_CheckBox_CheckedChanged;
 
-                Text_CodeBox.Text = Core_GetText(EntryNumBox.Value);
+                this.Text_CodeBox.Text = this.Core_GetText(this.EntryNumBox.Value);
             }
             catch (Exception ex)
             {
@@ -185,13 +185,13 @@ namespace EmblemMagic.Editors
         {
             try
             {
-                String[] text = FireEmblem.Text.RemoveBracketCodes(Text_CodeBox.Text.Split('\r', '\n'));
-                Boolean bubble = ((String)Font_ComboBox.SelectedValue).Equals("Text Bubble Font");
+                String[] text = FireEmblem.Text.RemoveBracketCodes(this.Text_CodeBox.Text.Split('\r', '\n'));
+                Boolean bubble = ((String)this.Font_ComboBox.SelectedValue).Equals("Text Bubble Font");
 
-                CurrentTextPreview = new TextPreview(CurrentFont, bubble, text, Text_Line_NumBox.Value);
+                this.CurrentTextPreview = new TextPreview(this.CurrentFont, bubble, text, this.Text_Line_NumBox.Value);
 
-                Text_Line_NumBox.Maximum = Math.Max(0, text.Length - (bubble ? 2 : 4));
-                Text_Preview_ImageBox.Load(CurrentTextPreview);
+                this.Text_Line_NumBox.Maximum = Math.Max(0, text.Length - (bubble ? 2 : 4));
+                this.Text_Preview_ImageBox.Load(this.CurrentTextPreview);
             }
             catch (Exception ex)
             {
@@ -212,10 +212,10 @@ namespace EmblemMagic.Editors
                     Huffman.Decompress(address,
                         Core.GetPointer("Huffman Tree"),
                         Core.ReadPointer(Core.GetPointer("Huffman Tree Root"))),
-                    View_Bytecodes.Checked,
-                    TextCommands1,
-                    TextCommands2,
-                    PortraitList);
+                    this.View_Bytecodes.Checked,
+                    this.TextCommands1,
+                    this.TextCommands2,
+                    this.PortraitList);
             }
             else
             {
@@ -234,10 +234,10 @@ namespace EmblemMagic.Editors
                 }
                 return FireEmblem.Text.BytesToText(
                     data.ToArray(),
-                    View_Bytecodes.Checked,
-                    TextCommands1,
-                    TextCommands2,
-                    PortraitList);
+                    this.View_Bytecodes.Checked,
+                    this.TextCommands1,
+                    this.TextCommands2,
+                    this.PortraitList);
             }
         }
         public void Core_WriteText(String text, UInt16 entry)
@@ -248,9 +248,9 @@ namespace EmblemMagic.Editors
                 Pointer address;
                 Byte[] data = FireEmblem.Text.TextToBytes(
                     text,
-                    TextCommands1,
-                    TextCommands2,
-                    PortraitList);
+                    this.TextCommands1,
+                    this.TextCommands2,
+                    this.PortraitList);
 
                 if (Settings.Default.WriteToFreeSpace)
                 {
@@ -264,17 +264,17 @@ namespace EmblemMagic.Editors
 
                     if (address == new Pointer()) return;
                 }
-                else address = Text_PointerBox.Value;
+                else address = this.Text_PointerBox.Value;
 
                 Core.WritePointer(this,
                     Core.GetPointer("Text Array") + entry * 4,
                     new Pointer(address + 0x80000000),
-                    CurrentEntry + "repoint");
+                    this.CurrentEntry + "repoint");
 
                 Core.WriteData(this,
                     address,
                     data,
-                    CurrentEntry + "changed");
+                    this.CurrentEntry + "changed");
             }
             catch (Exception ex)
             {
@@ -302,10 +302,10 @@ namespace EmblemMagic.Editors
                 List<Pointer> addresses = new List<Pointer>();
                 for (Int32 i = 0; i < 256; i++)
                 {
-                    if (font.Glyphs[i] != null && CurrentFont.Glyphs[i] == null)
+                    if (font.Glyphs[i] != null && this.CurrentFont.Glyphs[i] == null)
                     {
                         repoints.Add(Tuple.Create("Glyph 0x" + Util.ByteToHex((Byte)i), new Pointer(), 0x48));
-                        addresses.Add(CurrentFont.Address + i * 4);
+                        addresses.Add(this.CurrentFont.Address + i * 4);
                     }
                 }
 
@@ -315,23 +315,23 @@ namespace EmblemMagic.Editors
                         "Repoint Null Glyphs",
                         "Some glyphs in the font are currently set as null in the ROM.\n" +
                         "As such, a non-null pointer must be given to these glyphs.",
-                        Font_ComboBox.SelectedValue + " -",
+                        this.Font_ComboBox.SelectedValue + " -",
                         repoints.ToArray(),
                         addresses.ToArray());
 
                     if (cancel) { UI.ResumeUpdate(); return; }
                 }
 
-                CurrentFont = new FireEmblem.Font(Core.GetPointer((String)Font_ComboBox.SelectedValue));
+                this.CurrentFont = new FireEmblem.Font(Core.GetPointer((String)this.Font_ComboBox.SelectedValue));
 
                 for (Int32 i = 0; i < 256; i++)
                 {
-                    if (font.Glyphs[i] != null && CurrentFont.Glyphs[i].Address != new Pointer())
+                    if (font.Glyphs[i] != null && this.CurrentFont.Glyphs[i].Address != new Pointer())
                     {
                         Core.WriteData(this,
-                            CurrentFont.Glyphs[i].Address,
+                            this.CurrentFont.Glyphs[i].Address,
                             font.Glyphs[i].ToBytes(),
-                            Font_ComboBox.SelectedValue + " - Glyph 0x" + Util.ByteToHex((Byte)i) + " changed");
+                            this.Font_ComboBox.SelectedValue + " - Glyph 0x" + Util.ByteToHex((Byte)i) + " changed");
                     }
                 }
             }
@@ -358,7 +358,7 @@ namespace EmblemMagic.Editors
 
                 if (saveWindow.ShowDialog() == DialogResult.OK)
                 {
-                    File.WriteAllText(saveWindow.FileName, Text_CodeBox.Text);
+                    File.WriteAllText(saveWindow.FileName, this.Text_CodeBox.Text);
                 }
             }
         }
@@ -385,7 +385,7 @@ namespace EmblemMagic.Editors
                             loading.SetPercent(100 * ((Single)entry / (Single)0x5000));
                             try
                             {
-                                file += Core_GetText(entry) + "\r\n";
+                                file += this.Core_GetText(entry) + "\r\n";
                             }
                             catch { break; }
                         }
@@ -417,7 +417,7 @@ namespace EmblemMagic.Editors
                             {
                                 name = folderWindow.SelectedPath + "\\0x" + Util.UInt16ToHex((UInt16)entry) + ".txt";
 
-                                File.WriteAllText(name, Core_GetText(entry));
+                                File.WriteAllText(name, this.Core_GetText(entry));
                                 amount++;
                             }
                             catch { break; }
@@ -438,7 +438,7 @@ namespace EmblemMagic.Editors
 
                 if (openWindow.ShowDialog() == DialogResult.OK)
                 {
-                    Core_WriteText(File.ReadAllText(openWindow.FileName), CurrentIndex);
+                    this.Core_WriteText(File.ReadAllText(openWindow.FileName), this.CurrentIndex);
                 }
             }
         }
@@ -453,7 +453,7 @@ namespace EmblemMagic.Editors
 
                 if (openWindow.ShowDialog() == DialogResult.OK)
                 {
-                    String end_command = TextCommands1[0x00];
+                    String end_command = this.TextCommands1[0x00];
                     String file = File.ReadAllText(openWindow.FileName);
                     UInt16 entry = 0x0000;
                     Int32 parse = 0;
@@ -468,14 +468,14 @@ namespace EmblemMagic.Editors
                             {
                                 parse += end_command.Length + 1;
                                 length += end_command.Length + 1;
-                                Core_WriteText(file.Substring(parse - length, length), entry);
+                                this.Core_WriteText(file.Substring(parse - length, length), entry);
                                 length = 0;
                             }
                             else if (file.Substring(parse, 4) == "0x00")
                             {
                                 parse += 4 + 1;
                                 length += 4 + 1;
-                                Core_WriteText(file.Substring(parse - length, length), entry);
+                                this.Core_WriteText(file.Substring(parse - length, length), entry);
                                 length = 0;
                             }
                         }
@@ -503,7 +503,7 @@ namespace EmblemMagic.Editors
                         {
                             index = (UInt16)((Util.HexToByte(file.Substring(2, 2)) << 8) + Util.HexToByte(file.Substring(4, 2)));
 
-                            Core_WriteText(File.ReadAllText(filepath), index);
+                            this.Core_WriteText(File.ReadAllText(filepath), index);
                             amount++;
                         }
                     }
@@ -514,79 +514,79 @@ namespace EmblemMagic.Editors
 
         private void Tool_Find_Click(Object sender, EventArgs e)
         {
-            if (FindWindow == null || FindWindow.IsDisposed)
+            if (this.FindWindow == null || this.FindWindow.IsDisposed)
             {
-                FindWindow = new TextFind(this);
-                FindWindow.Show();
+                this.FindWindow = new TextFind(this);
+                this.FindWindow.Show();
             }
-            FindWindow.Select();
+            this.FindWindow.Select();
         }
         private void Tool_Replace_Click(Object sender, EventArgs e)
         {
-            if (ReplaceWindow == null || ReplaceWindow.IsDisposed)
+            if (this.ReplaceWindow == null || this.ReplaceWindow.IsDisposed)
             {
-                ReplaceWindow = new TextReplace(this);
-                ReplaceWindow.Show();
+                this.ReplaceWindow = new TextReplace(this);
+                this.ReplaceWindow.Show();
             }
-            ReplaceWindow.Select();
+            this.ReplaceWindow.Select();
         }
 
         private void View_Bytecodes_Click(Object sender, EventArgs e)
         {
-            Core_Update();
+            this.Core_Update();
         }
 
 
 
         private void EntryNumBox_ValueChanged(Object sender, EventArgs e)
         {
-            Text_Line_NumBox.ValueChanged -= Text_Line_NumBox_ValueChanged;
-            Text_Line_NumBox.Value = 0;
-            Text_Line_NumBox.ValueChanged += Text_Line_NumBox_ValueChanged;
+            this.Text_Line_NumBox.ValueChanged -= this.Text_Line_NumBox_ValueChanged;
+            this.Text_Line_NumBox.Value = 0;
+            this.Text_Line_NumBox.ValueChanged += this.Text_Line_NumBox_ValueChanged;
 
-            Core_LoadText();
-            Core_LoadPreview();
+            this.Core_LoadText();
+            this.Core_LoadPreview();
         }
 
         private void Text_ASCII_CheckBox_CheckedChanged(Object sender, EventArgs e)
         {
-            if (Text_ASCII_CheckBox.Checked)
+            if (this.Text_ASCII_CheckBox.Checked)
             {
-                Core_WriteText(Text_CodeBox.Text, CurrentIndex);
+                this.Core_WriteText(this.Text_CodeBox.Text, this.CurrentIndex);
             }
             else
             {
-                Text_ASCII_CheckBox.CheckedChanged -= Text_ASCII_CheckBox_CheckedChanged;
-                Text_ASCII_CheckBox.Checked = true;
-                Text_ASCII_CheckBox.CheckedChanged += Text_ASCII_CheckBox_CheckedChanged;
+                this.Text_ASCII_CheckBox.CheckedChanged -= this.Text_ASCII_CheckBox_CheckedChanged;
+                this.Text_ASCII_CheckBox.Checked = true;
+                this.Text_ASCII_CheckBox.CheckedChanged += this.Text_ASCII_CheckBox_CheckedChanged;
 
                 UI.ShowMessage("Sorry, text cannot be changed back into huffman encoded text data.");
             }
         }
         private void Text_Apply_Button_Click(Object sender, EventArgs e)
         {
-            Core_WriteText(Text_CodeBox.Text, CurrentIndex);
+            this.Core_WriteText(this.Text_CodeBox.Text, this.CurrentIndex);
         }
         private void Text_Cancel_Button_Click(Object sender, EventArgs e)
         {
-            Core_LoadText();
-            Core_LoadPreview();
+            this.Core_LoadText();
+            this.Core_LoadPreview();
         }
         private void Text_Line_NumBox_ValueChanged(Object sender, EventArgs e)
         {
-            Core_LoadPreview();
+            this.Core_LoadPreview();
         }
 
 
 
         private void Font_ComboBox_SelectedIndexChanged(Object sender, EventArgs e)
         {
-            Core_LoadFont();
-            Core_LoadPreview();
+            this.Core_LoadFont();
+            this.Core_LoadPreview();
         }
         private void Font_GridBox_SelectionChanged(Object sender, EventArgs e)
         {
-            Core_LoadFontValues();
+            this.Core_LoadFontValues();
         }
 
         private void Font_InsertButton_Click(Object sender, EventArgs e)
@@ -599,13 +599,13 @@ namespace EmblemMagic.Editors
 
             if (openWindow.ShowDialog() == DialogResult.OK)
             {
-                Core_WriteFont(openWindow.FileName);
+                this.Core_WriteFont(openWindow.FileName);
             }
         }
         
         private void Glyph_Address_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
-            Boolean[,] selection = Font_GridBox.Selection;
+            Boolean[,] selection = this.Font_GridBox.Selection;
             Int32 width  = selection.GetLength(0);
             Int32 height = selection.GetLength(1);
             Byte index;
@@ -616,16 +616,16 @@ namespace EmblemMagic.Editors
                 {
                     index = (Byte)(x + y * 16);
                     Core.WritePointer(this,
-                        CurrentFont.Address + index * 4,
-                        Glyph_Address_PointerBox.Value,
-                        (String)Font_ComboBox.SelectedValue + " - Glyph 0x" + Util.ByteToHex(index) + " repointed");
+                        this.CurrentFont.Address + index * 4,
+                        this.Glyph_Address_PointerBox.Value,
+                        (String)this.Font_ComboBox.SelectedValue + " - Glyph 0x" + Util.ByteToHex(index) + " repointed");
                 }
             }
-            Font_GridBox.Selection = selection;
+            this.Font_GridBox.Selection = selection;
         }
         private void Glyph_Pointer_PointerBox_ValueChanged(Object sender, EventArgs e)
         {
-            Boolean[,] selection = Font_GridBox.Selection;
+            Boolean[,] selection = this.Font_GridBox.Selection;
             Int32 width  = selection.GetLength(0);
             Int32 height = selection.GetLength(1);
             Byte index;
@@ -636,16 +636,16 @@ namespace EmblemMagic.Editors
                 {
                     index = (Byte)(x + y * 16);
                     Core.WritePointer(this,
-                        CurrentFont.Glyphs[index].Address,
-                        Glyph_Address_PointerBox.Value,
-                        (String)Font_ComboBox.SelectedValue + " - Glyph 0x" + Util.ByteToHex(index) + " Local Pointer changed");
+                        this.CurrentFont.Glyphs[index].Address,
+                        this.Glyph_Address_PointerBox.Value,
+                        (String)this.Font_ComboBox.SelectedValue + " - Glyph 0x" + Util.ByteToHex(index) + " Local Pointer changed");
                 }
             }
-            Font_GridBox.Selection = selection;
+            this.Font_GridBox.Selection = selection;
         }
         private void Glyph_Shift_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
-            Boolean[,] selection = Font_GridBox.Selection;
+            Boolean[,] selection = this.Font_GridBox.Selection;
             Int32 width  = selection.GetLength(0);
             Int32 height = selection.GetLength(1);
             Byte index;
@@ -656,16 +656,16 @@ namespace EmblemMagic.Editors
                 {
                     index = (Byte)(x + y * 16);
                     Core.WriteByte(this,
-                        CurrentFont.Glyphs[index].Address + 4,
-                        Glyph_Shift_ByteBox.Value,
-                        (String)Font_ComboBox.SelectedValue + " - Glyph 0x" + Util.ByteToHex(index) + " Unknown byte changed");
+                        this.CurrentFont.Glyphs[index].Address + 4,
+                        this.Glyph_Shift_ByteBox.Value,
+                        (String)this.Font_ComboBox.SelectedValue + " - Glyph 0x" + Util.ByteToHex(index) + " Unknown byte changed");
                 }
             }
-            Font_GridBox.Selection = selection;
+            this.Font_GridBox.Selection = selection;
         }
         private void Glyph_Width_ByteBox_ValueChanged(Object sender, EventArgs e)
         {
-            Boolean[,] selection = Font_GridBox.Selection;
+            Boolean[,] selection = this.Font_GridBox.Selection;
             Int32 width  = selection.GetLength(0);
             Int32 height = selection.GetLength(1);
             Byte index;
@@ -676,12 +676,12 @@ namespace EmblemMagic.Editors
                 {
                     index = (Byte)(x + y * 16);
                     Core.WriteByte(this,
-                        CurrentFont.Glyphs[index].Address + 5,
-                        Glyph_Width_ByteBox.Value,
-                        (String)Font_ComboBox.SelectedValue + " - Glyph 0x" + Util.ByteToHex(index) + " Width changed");
+                        this.CurrentFont.Glyphs[index].Address + 5,
+                        this.Glyph_Width_ByteBox.Value,
+                        (String)this.Font_ComboBox.SelectedValue + " - Glyph 0x" + Util.ByteToHex(index) + " Width changed");
                 }
             }
-            Font_GridBox.Selection = selection;
+            this.Font_GridBox.Selection = selection;
         }
     }
 }

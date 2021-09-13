@@ -12,30 +12,30 @@ namespace Magic.Components
 
         public MarkingBox(MarksManager marks)
         {
-            Marks = marks;
+            this.Marks = marks;
 
             this.SuspendLayout();
             
             this.Name = "MarkingBox";
             this.Size = new Size(60, 20);
-            this.Click += new EventHandler(UpdateMarkList);
+            this.Click += new EventHandler(this.UpdateMarkList);
 
             this.ResumeLayout(false);
 
-            UpdateMarkList(this, null);
+            this.UpdateMarkList(this, null);
         }
 
         void UpdateMarkList(Object sender, EventArgs e)
         {
             try
             {
-                DataSource = Marks.GetStringList(true);
+                this.DataSource = this.Marks.GetStringList(true);
             }
             catch
             {
                 BindingList <String> emptylist = new BindingList<String>();
                 emptylist.Add("(unmark)");
-                DataSource = emptylist;
+                this.DataSource = emptylist;
             }
         }
     }

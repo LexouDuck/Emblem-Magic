@@ -17,14 +17,14 @@ namespace Magic.Components
 
         public SampleBox()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             this.DoubleBuffered = true;
         }
         public void Load(Sample sample)
         {
-            Loop = sample.Looped ? (Int32)sample.LoopStart : -1;
-            Data = sample.PCM_Data;
+            this.Loop = sample.Looped ? (Int32)sample.LoopStart : -1;
+            this.Data = sample.PCM_Data;
 
             this.Invalidate();
         }
@@ -37,10 +37,10 @@ namespace Magic.Components
 
             using (Brush background = new SolidBrush(this.BackColor))
             {   // Create a brush that will draw the background of the bar
-                e.Graphics.FillRectangle(background, 0, 0, Width, Height);
+                e.Graphics.FillRectangle(background, 0, 0, this.Width, this.Height);
             }
 
-            if (Data != null)
+            if (this.Data != null)
             {
                 using (Pen wave = new Pen(this.ForeColor))
                 {
@@ -49,19 +49,19 @@ namespace Magic.Components
                     Int32 height = this.Height / 2;
                     for (Int32 i = 0; i < width; i++)
                     {
-                        amplitude = ((Data[i * Data.Length / Width] - 128) / (Single)128) * height;
+                        amplitude = ((this.Data[i * this.Data.Length / this.Width] - 128) / (Single)128) * height;
                         e.Graphics.DrawLine(wave,
                             i, height + amplitude,
                             i, height + amplitude * -1);
                     }
                 }
-                if (Loop != -1)
+                if (this.Loop != -1)
                 {
                     using (Pen loop = new Pen(SystemColors.Highlight))
                     {
                         e.Graphics.DrawLine(loop,
-                            Loop * Width / Data.Length, 0,
-                            Loop * Width / Data.Length, this.Height);
+                            this.Loop * this.Width / this.Data.Length, 0,
+                            this.Loop * this.Width / this.Data.Length, this.Height);
                     }
                 }
             }
@@ -88,9 +88,9 @@ namespace Magic.Components
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(Boolean disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (this.components != null))
             {
-                components.Dispose();
+                this.components.Dispose();
             }
             base.Dispose(disposing);
         }

@@ -9,15 +9,15 @@ namespace Magic.Components
 
         public FileDataBlock(Int64 fileOffset, Int64 length)
         {
-            _fileOffset = fileOffset;
-            _length = length;
+            this._fileOffset = fileOffset;
+            this._length = length;
         }
 
         public Int64 FileOffset
         {
             get
             {
-                return _fileOffset;
+                return this._fileOffset;
             }
         }
 
@@ -25,71 +25,71 @@ namespace Magic.Components
         {
             get
             {
-                return _length;
+                return this._length;
             }
         }
 
         public void SetFileOffset(Int64 value)
         {
-            _fileOffset = value;
+            this._fileOffset = value;
         }
 
         public void RemoveBytesFromEnd(Int64 count)
         {
-            if (count > _length)
+            if (count > this._length)
             {
                 throw new ArgumentOutOfRangeException("count");
             }
 
-            _length -= count;
+            this._length -= count;
         }
 
         public void RemoveBytesFromStart(Int64 count)
         {
-            if (count > _length)
+            if (count > this._length)
             {
                 throw new ArgumentOutOfRangeException("count");
             }
 
-            _fileOffset += count;
-            _length -= count;
+            this._fileOffset += count;
+            this._length -= count;
         }
 
         public override void RemoveBytes(Int64 position, Int64 count)
         {
-            if (position > _length)
+            if (position > this._length)
             {
                 throw new ArgumentOutOfRangeException("position");
             }
 
-            if (position + count > _length)
+            if (position + count > this._length)
             {
                 throw new ArgumentOutOfRangeException("count");
             }
 
             Int64 prefixLength = position;
-            Int64 prefixFileOffset = _fileOffset;
+            Int64 prefixFileOffset = this._fileOffset;
 
-            Int64 suffixLength = _length - count - prefixLength;
-            Int64 suffixFileOffset = _fileOffset + position + count;
+            Int64 suffixLength = this._length - count - prefixLength;
+            Int64 suffixFileOffset = this._fileOffset + position + count;
 
             if (prefixLength > 0 && suffixLength > 0)
             {
-                _fileOffset = prefixFileOffset;
-                _length = prefixLength;
-                _map.AddAfter(this, new FileDataBlock(suffixFileOffset, suffixLength));
+                this._fileOffset = prefixFileOffset;
+                this._length = prefixLength;
+                this._map.AddAfter(this, new FileDataBlock(suffixFileOffset, suffixLength));
                 return;
             }
 
             if (prefixLength > 0)
             {
-                _fileOffset = prefixFileOffset;
-                _length = prefixLength;
+                this._fileOffset = prefixFileOffset;
+                this._length = prefixLength;
             }
             else
             {
-                _fileOffset = suffixFileOffset;
-                _length = suffixLength;
+                this._fileOffset = suffixFileOffset;
+                this._length = suffixLength;
             }
         }
     }

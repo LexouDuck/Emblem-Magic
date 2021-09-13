@@ -18,7 +18,7 @@ namespace Magic.Editors
         
         public WriteEditor()
         {
-            List = new SortableBindingList<Tuple<
+            this.List = new SortableBindingList<Tuple<
             DateTime,
             Pointer,
             Int32,
@@ -26,35 +26,35 @@ namespace Magic.Editors
             String,
             Boolean,
             Boolean>>();
-            
-            InitializeComponent();
 
-            WriteDataHexBox.KeyDown += new KeyEventHandler(TextBox_SelectAll);
-            WritePhraseTextBox.KeyDown += new KeyEventHandler(TextBox_SelectAll);
+            this.InitializeComponent();
 
-            WriteHistoryList.AutoGenerateColumns = false;
-            WriteHistoryList.DataSource = this.List;
+            this.WriteDataHexBox.KeyDown += new KeyEventHandler(this.TextBox_SelectAll);
+            this.WritePhraseTextBox.KeyDown += new KeyEventHandler(this.TextBox_SelectAll);
 
-            List_TimeColumn.DataPropertyName    = "Item1";
-            List_AddressColumn.DataPropertyName = "Item2";
-            List_LengthColumn.DataPropertyName  = "Item3";
-            List_AuthorColumn.DataPropertyName  = "Item4";
-            List_PhraseColumn.DataPropertyName  = "Item5";
-            List_IsSavedColumn.DataPropertyName = "Item6";
-            List_PatchedColumn.DataPropertyName = "Item7";
+            this.WriteHistoryList.AutoGenerateColumns = false;
+            this.WriteHistoryList.DataSource = this.List;
+
+            this.List_TimeColumn.DataPropertyName    = "Item1";
+            this.List_AddressColumn.DataPropertyName = "Item2";
+            this.List_LengthColumn.DataPropertyName  = "Item3";
+            this.List_AuthorColumn.DataPropertyName  = "Item4";
+            this.List_PhraseColumn.DataPropertyName  = "Item5";
+            this.List_IsSavedColumn.DataPropertyName = "Item6";
+            this.List_PatchedColumn.DataPropertyName = "Item7";
         }
 
 
 
         public override void Core_OnOpen()
         {
-            Core_Update();
+            this.Core_Update();
         }
         public override void Core_Update()
         {
-            Update_WriteList();
+            this.Update_WriteList();
 
-            Update_EditPanel(null);
+            this.Update_EditPanel(null);
         }
 
 
@@ -63,11 +63,11 @@ namespace Magic.Editors
         {
             try
             {
-                List.Clear();
+                this.List.Clear();
 
-                foreach (var write in App.MHF.Write.History)
+                foreach (var write in this.App.MHF.Write.History)
                 {
-                    List.Add(Tuple.Create(
+                    this.List.Add(Tuple.Create(
                         write.Time,
                         write.Address,
                         write.Data.Length,//"0x" + Util.UInt32ToHex((uint)write.Data.Length).TrimStart('0'),
@@ -86,19 +86,19 @@ namespace Magic.Editors
         {
             if (selection == null)
             {
-                WriteDataHexBox.Value = new Byte[0];
-                WritePointerBox.Value = new Pointer();
-                WriteLength.Text = "-";
-                WriteEditorLabel.Text = "";
-                WritePhraseTextBox.Text = "";
+                this.WriteDataHexBox.Value = new Byte[0];
+                this.WritePointerBox.Value = new Pointer();
+                this.WriteLength.Text = "-";
+                this.WriteEditorLabel.Text = "";
+                this.WritePhraseTextBox.Text = "";
             }
             else
             {
-                WriteDataHexBox.Value = selection.Data;
-                WritePointerBox.Value = selection.Address;
-                WriteLength.Text = "0x" + Util.UInt32ToHex((UInt32)selection.Data.Length).TrimStart('0');
-                WriteEditorLabel.Text = selection.Author;
-                WritePhraseTextBox.Text = selection.Phrase;
+                this.WriteDataHexBox.Value = selection.Data;
+                this.WritePointerBox.Value = selection.Address;
+                this.WriteLength.Text = "0x" + Util.UInt32ToHex((UInt32)selection.Data.Length).TrimStart('0');
+                this.WriteEditorLabel.Text = selection.Author;
+                this.WritePhraseTextBox.Text = selection.Phrase;
             }
         }
 
@@ -109,15 +109,15 @@ namespace Magic.Editors
         /// </summary>
         private void SelectWrite_Click(Object sender, EventArgs e)
         {
-            if (WriteHistoryList.SelectedRows.Count == 1)
+            if (this.WriteHistoryList.SelectedRows.Count == 1)
             {
-                Pointer address = (Pointer)WriteHistoryList.CurrentRow.Cells[1].Value;
+                Pointer address = (Pointer)this.WriteHistoryList.CurrentRow.Cells[1].Value;
 
-                Update_EditPanel(App.MHF.Write.Find(address));
+                this.Update_EditPanel(this.App.MHF.Write.Find(address));
             }
             else
             {
-                Update_EditPanel(null);
+                this.Update_EditPanel(null);
             }
         }
         /// <summary>
@@ -125,30 +125,30 @@ namespace Magic.Editors
         /// </summary>
         private void ApplyWrite_Click(Object sender, EventArgs e)
         {
-            if (WriteHistoryList.SelectedRows.Count == 0)
+            if (this.WriteHistoryList.SelectedRows.Count == 0)
             {
                 UI.ShowMessage("There is no write selected.");
             }
-            else if (WriteHistoryList.SelectedRows.Count == 1)
+            else if (this.WriteHistoryList.SelectedRows.Count == 1)
             {
                 Core.WriteData(this,
-                    WritePointerBox.Value,
-                    WriteDataHexBox.Value,
-                    WritePhraseTextBox.Text);
+                    this.WritePointerBox.Value,
+                    this.WriteDataHexBox.Value,
+                    this.WritePhraseTextBox.Text);
             }
             else
             {
-                if (WritePointerBox.Enabled)
+                if (this.WritePointerBox.Enabled)
                 {
                     UI.ShowMessage("Cannot have several writes on one offset.");
                 }
                 else if (Prompt.ChangeSeveralWrites() == DialogResult.Yes)
                 {
-                    foreach (DataGridViewRow row in WriteHistoryList.SelectedRows)
+                    foreach (DataGridViewRow row in this.WriteHistoryList.SelectedRows)
                     {
                         Core.WriteData(this,
                             Util.StringToAddress((String)row.Cells[1].Value),
-                            WriteDataHexBox.Value,
+                            this.WriteDataHexBox.Value,
                             (String)row.Cells[4].Value);
                     }
                 }
@@ -159,13 +159,13 @@ namespace Magic.Editors
         /// </summary>
         private void DeleteWrite_Click(Object sender, EventArgs e)
         {
-            if (WriteHistoryList.SelectedRows.Count == 0)
+            if (this.WriteHistoryList.SelectedRows.Count == 0)
             {
                 UI.ShowMessage("There is no write selected.");
             }
-            else if (WriteHistoryList.SelectedRows.Count == 1)
+            else if (this.WriteHistoryList.SelectedRows.Count == 1)
             {
-                Core.RestoreData(WritePointerBox.Value, WriteDataHexBox.Value.Length);
+                Core.RestoreData(this.WritePointerBox.Value, this.WriteDataHexBox.Value.Length);
             }
             else
             {
@@ -180,11 +180,11 @@ namespace Magic.Editors
         /// </summary>
         private void MergeWrites_Click(Object sender, EventArgs e)
         {
-            if (WriteHistoryList.SelectedRows.Count == 0)
+            if (this.WriteHistoryList.SelectedRows.Count == 0)
             {
                 UI.ShowMessage("There is no write selected.");
             }
-            else if (WriteHistoryList.SelectedRows.Count == 1)
+            else if (this.WriteHistoryList.SelectedRows.Count == 1)
             {
                 UI.ShowMessage("Only one write is selected.");
             }
@@ -192,7 +192,7 @@ namespace Magic.Editors
             {
                 Pointer address = new Pointer((UInt32)Core.CurrentROMSize);
                 Pointer endbyte = new Pointer();
-                foreach (DataGridViewRow row in WriteHistoryList.SelectedRows)
+                foreach (DataGridViewRow row in this.WriteHistoryList.SelectedRows)
                 {
                     if ((Pointer)row.Cells[1].Value < address)
                         address = (Pointer)row.Cells[1].Value;
@@ -206,23 +206,23 @@ namespace Magic.Editors
 
         private void MarkSpaceButton_Click(Object sender, EventArgs e)
         {
-            if (WriteHistoryList.SelectedRows.Count == 0)
+            if (this.WriteHistoryList.SelectedRows.Count == 0)
             {
                 UI.ShowMessage("There are no writes selected.");
             }
-            else if (WriteHistoryList.SelectedRows.Count == 1)
+            else if (this.WriteHistoryList.SelectedRows.Count == 1)
             {
-                Pointer address = (Pointer)WriteHistoryList.SelectedRows[0].Cells[1].Value;
-                App.MHF.Space.MarkSpace((String)MarkSpaceBox.SelectedValue,
-                    address, address + (Int32)WriteHistoryList.SelectedRows[0].Cells[2].Value);
+                Pointer address = (Pointer)this.WriteHistoryList.SelectedRows[0].Cells[1].Value;
+                this.App.MHF.Space.MarkSpace((String)this.MarkSpaceBox.SelectedValue,
+                    address, address + (Int32)this.WriteHistoryList.SelectedRows[0].Cells[2].Value);
                 UI.PerformUpdate();
             }
             else
             {
-                foreach (DataGridViewRow row in WriteHistoryList.SelectedRows)
+                foreach (DataGridViewRow row in this.WriteHistoryList.SelectedRows)
                 {
                     Pointer address = (Pointer)row.Cells[1].Value;
-                    App.MHF.Space.MarkSpace((String)MarkSpaceBox.SelectedValue,
+                    this.App.MHF.Space.MarkSpace((String)this.MarkSpaceBox.SelectedValue,
                         address, address + (Int32)row.Cells[2].Value);
                 }
                 UI.PerformUpdate();

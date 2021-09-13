@@ -47,25 +47,25 @@ namespace Magic.Editors
         {
             get
             {
-                return _index;
+                return this._index;
             }
             set
             {
-                if (SwapMode)
+                if (this.SwapMode)
                 {
-                    Core_SwapColors(_index, value);
-                    SwapMode = false;
+                    this.Core_SwapColors(this._index, value);
+                    this.SwapMode = false;
                 }
-                SwapButton.Enabled = true;
-                LoadButton.Enabled = true;
-                SaveButton.Enabled = true;
+                this.SwapButton.Enabled = true;
+                this.LoadButton.Enabled = true;
+                this.SaveButton.Enabled = true;
 
-                ColorBoxes[_index].Selected = false;
-                ColorBoxes[value].Selected = true;
+                this.ColorBoxes[this._index].Selected = false;
+                this.ColorBoxes[value].Selected = true;
 
-                _index = value;
+                this._index = value;
 
-                Core_LoadValues();
+                this.Core_LoadValues();
             }
         }
         Int32 _index;
@@ -76,7 +76,7 @@ namespace Magic.Editors
         {
             get
             {
-                return Address + CurrentIndex * 2;
+                return this.Address + this.CurrentIndex * 2;
             }
         }
         /// <summary>
@@ -86,43 +86,43 @@ namespace Magic.Editors
         {
             get
             {
-                return _swap;
+                return this._swap;
             }
             set
             {
                 if (value)
                 {
-                    SwapButton.Enabled = false;
-                    LoadButton.Enabled = false;
-                    SaveButton.Enabled = false;
-                    AlphaCheckBox.Enabled = false;
-                    NumBox_16bit.Enabled = false;
-                    NumBox_32bit.Enabled = false;
-                    TrackBar_R.Enabled = false;
-                    TrackBar_G.Enabled = false;
-                    TrackBar_B.Enabled = false;
-                    NumBox_R.Enabled = false;
-                    NumBox_G.Enabled = false;
-                    NumBox_B.Enabled = false;
+                    this.SwapButton.Enabled = false;
+                    this.LoadButton.Enabled = false;
+                    this.SaveButton.Enabled = false;
+                    this.AlphaCheckBox.Enabled = false;
+                    this.NumBox_16bit.Enabled = false;
+                    this.NumBox_32bit.Enabled = false;
+                    this.TrackBar_R.Enabled = false;
+                    this.TrackBar_G.Enabled = false;
+                    this.TrackBar_B.Enabled = false;
+                    this.NumBox_R.Enabled = false;
+                    this.NumBox_G.Enabled = false;
+                    this.NumBox_B.Enabled = false;
                 }
                 else
                 {
-                    SwapButton.Enabled = true;
-                    SwapButton.Text = "Swap Colors";
-                    LoadButton.Enabled = true;
-                    LoadButton.Text = "Swap and Recolor";
-                    SaveButton.Enabled = true;
-                    AlphaCheckBox.Enabled = true;
-                    NumBox_16bit.Enabled = true;
-                    NumBox_32bit.Enabled = true;
-                    TrackBar_R.Enabled = true;
-                    TrackBar_G.Enabled = true;
-                    TrackBar_B.Enabled = true;
-                    NumBox_R.Enabled = true;
-                    NumBox_G.Enabled = true;
-                    NumBox_B.Enabled = true;
+                    this.SwapButton.Enabled = true;
+                    this.SwapButton.Text = "Swap Colors";
+                    this.LoadButton.Enabled = true;
+                    this.LoadButton.Text = "Swap and Recolor";
+                    this.SaveButton.Enabled = true;
+                    this.AlphaCheckBox.Enabled = true;
+                    this.NumBox_16bit.Enabled = true;
+                    this.NumBox_32bit.Enabled = true;
+                    this.TrackBar_R.Enabled = true;
+                    this.TrackBar_G.Enabled = true;
+                    this.TrackBar_B.Enabled = true;
+                    this.NumBox_R.Enabled = true;
+                    this.NumBox_G.Enabled = true;
+                    this.NumBox_B.Enabled = true;
                 }
-                _swap = value;
+                this._swap = value;
             }
         }
         Boolean _swap;
@@ -134,128 +134,128 @@ namespace Magic.Editors
             Pointer address,
             Byte amount)
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            Status.Text = entry + address;
+            this.Status.Text = entry + address;
 
-            Owner = owner;
-            Entry = entry;
-            Address = address;
-            IsCompressed = (amount == 0);
-            Current = Core.ReadPalette(address, amount * Palette.LENGTH);
-            if (IsCompressed)
+            this.Owner = owner;
+            this.Entry = entry;
+            this.Address = address;
+            this.IsCompressed = (amount == 0);
+            this.Current = Core.ReadPalette(address, amount * Palette.LENGTH);
+            if (this.IsCompressed)
             {
-                amount = (Byte)(Current.Count / Palette.MAX);
+                amount = (Byte)(this.Current.Count / Palette.MAX);
             }
-            PaletteAmount = amount;
+            this.PaletteAmount = amount;
 
             this.Size = new System.Drawing.Size(390, 250 + 22 * amount);
             this.MinimumSize = this.Size;
             this.MaximumSize = this.Size;
-            SwapButton.Location = new System.Drawing.Point( 13, 170 + 22 * amount);
-            LoadButton.Location = new System.Drawing.Point(131, 170 + 22 * amount);
-            SaveButton.Location = new System.Drawing.Point(248, 170 + 22 * amount);
-            
-            ColorBoxes = new ColorBox[GBA.Palette.MAX * amount];
-            for (Int32 i = 0; i < ColorBoxes.Length; i++)
+            this.SwapButton.Location = new System.Drawing.Point( 13, 170 + 22 * amount);
+            this.LoadButton.Location = new System.Drawing.Point(131, 170 + 22 * amount);
+            this.SaveButton.Location = new System.Drawing.Point(248, 170 + 22 * amount);
+
+            this.ColorBoxes = new ColorBox[GBA.Palette.MAX * amount];
+            for (Int32 i = 0; i < this.ColorBoxes.Length; i++)
             {
-                ColorBoxes[i] = new ColorBox();
-                ColorBoxes[i].Gradient = false;
-                ColorBoxes[i].Selected = false;
-                ColorBoxes[i].Location = new System.Drawing.Point(
+                this.ColorBoxes[i] = new ColorBox();
+                this.ColorBoxes[i].Gradient = false;
+                this.ColorBoxes[i].Selected = false;
+                this.ColorBoxes[i].Location = new System.Drawing.Point(
                     13 + 22 * (i % GBA.Palette.MAX),
                     169 + 22 * (i / GBA.Palette.MAX));
-                ColorBoxes[i].Size = new System.Drawing.Size(16, 16);
-                ColorBoxes[i].Name = "ColorBox" + i;
-                ColorBoxes[i].TabIndex = 8;
-                ColorBoxes[i].TabStop = false;
+                this.ColorBoxes[i].Size = new System.Drawing.Size(16, 16);
+                this.ColorBoxes[i].Name = "ColorBox" + i;
+                this.ColorBoxes[i].TabIndex = 8;
+                this.ColorBoxes[i].TabStop = false;
 
                 Int32 index = i;
-                ColorBoxes[i].Click += delegate (Object sender, EventArgs e)
+                this.ColorBoxes[i].Click += delegate (Object sender, EventArgs e)
                 {
-                    if (CurrentIndex == index)
+                    if (this.CurrentIndex == index)
                     {
                         ColorDialog colorWindow = new ColorDialog();
                         colorWindow.FullOpen = true;
-                        colorWindow.Color = (System.Drawing.Color)Current[CurrentIndex];
+                        colorWindow.Color = (System.Drawing.Color)this.Current[this.CurrentIndex];
 
                         if (colorWindow.ShowDialog(this) == DialogResult.OK)
                         {
-                            Core_WriteColor((GBA.Color)colorWindow.Color);
+                            this.Core_WriteColor((GBA.Color)colorWindow.Color);
                         }
                     }
-                    else CurrentIndex = index;
+                    else this.CurrentIndex = index;
                 };
 
-                this.Controls.Add(ColorBoxes[i]);
+                this.Controls.Add(this.ColorBoxes[i]);
             }
-            ColorBoxes[0].Selected = true;
+            this.ColorBoxes[0].Selected = true;
         }
 
         override public void Core_OnOpen()
         {
-            Core_Update();
+            this.Core_Update();
         }
         override public void Core_Update()
         {
-            Current = Core.ReadPalette(Address, IsCompressed ? 0 : PaletteAmount * GBA.Palette.LENGTH);
+            this.Current = Core.ReadPalette(this.Address, this.IsCompressed ? 0 : this.PaletteAmount * GBA.Palette.LENGTH);
 
-            for (Int32 i = 0; i < ColorBoxes.Length; i++)
+            for (Int32 i = 0; i < this.ColorBoxes.Length; i++)
             {
-                ColorBoxes[i].Color = (System.Drawing.Color)Current[i];
+                this.ColorBoxes[i].Color = (System.Drawing.Color)this.Current[i];
             }
 
-            Core_LoadValues();
+            this.Core_LoadValues();
         }
 
         public void Core_LoadValues()
         {
-            AlphaCheckBox.CheckedChanged -= AlphaCheckBox_CheckedChanged;
-            NumBox_16bit.ValueChanged -= NumBox_16bit_ValueChanged;
-            NumBox_32bit.ValueChanged -= NumBox_32bit_ValueChanged;
-            NumBox_R.ValueChanged -= NumBox_R_ValueChanged;
-            NumBox_G.ValueChanged -= NumBox_G_ValueChanged;
-            NumBox_B.ValueChanged -= NumBox_B_ValueChanged;
-            TrackBar_R.Scroll -= TrackBar_R_Scroll;
-            TrackBar_G.Scroll -= TrackBar_G_Scroll;
-            TrackBar_B.Scroll -= TrackBar_B_Scroll;
+            this.AlphaCheckBox.CheckedChanged -= this.AlphaCheckBox_CheckedChanged;
+            this.NumBox_16bit.ValueChanged -= this.NumBox_16bit_ValueChanged;
+            this.NumBox_32bit.ValueChanged -= this.NumBox_32bit_ValueChanged;
+            this.NumBox_R.ValueChanged -= this.NumBox_R_ValueChanged;
+            this.NumBox_G.ValueChanged -= this.NumBox_G_ValueChanged;
+            this.NumBox_B.ValueChanged -= this.NumBox_B_ValueChanged;
+            this.TrackBar_R.Scroll -= this.TrackBar_R_Scroll;
+            this.TrackBar_G.Scroll -= this.TrackBar_G_Scroll;
+            this.TrackBar_B.Scroll -= this.TrackBar_B_Scroll;
 
-            if (Current == null || CurrentIndex >= Current.Count)
+            if (this.Current == null || this.CurrentIndex >= this.Current.Count)
             {
-                AlphaCheckBox.Checked = false;
-                NumBox_16bit.Value = 0;
-                NumBox_32bit.Value = 0;
-                TrackBar_R.Value = 0;
-                TrackBar_G.Value = 0;
-                TrackBar_B.Value = 0;
-                NumBox_R.Value = 0;
-                NumBox_G.Value = 0;
-                NumBox_B.Value = 0;
+                this.AlphaCheckBox.Checked = false;
+                this.NumBox_16bit.Value = 0;
+                this.NumBox_32bit.Value = 0;
+                this.TrackBar_R.Value = 0;
+                this.TrackBar_G.Value = 0;
+                this.TrackBar_B.Value = 0;
+                this.NumBox_R.Value = 0;
+                this.NumBox_G.Value = 0;
+                this.NumBox_B.Value = 0;
             }
             else
             {
-                GBA.Color color = Current[CurrentIndex];
+                GBA.Color color = this.Current[this.CurrentIndex];
 
-                AlphaCheckBox.Checked = color.GetAlpha();
-                NumBox_16bit.Value = color.To16bit();
-                NumBox_32bit.Value = color.To32bit();
-                TrackBar_R.Value = color.GetValueR();
-                TrackBar_G.Value = color.GetValueG();
-                TrackBar_B.Value = color.GetValueB();
-                NumBox_R.Value = TrackBar_R.Value;
-                NumBox_G.Value = TrackBar_G.Value;
-                NumBox_B.Value = TrackBar_B.Value;
+                this.AlphaCheckBox.Checked = color.GetAlpha();
+                this.NumBox_16bit.Value = color.To16bit();
+                this.NumBox_32bit.Value = color.To32bit();
+                this.TrackBar_R.Value = color.GetValueR();
+                this.TrackBar_G.Value = color.GetValueG();
+                this.TrackBar_B.Value = color.GetValueB();
+                this.NumBox_R.Value = this.TrackBar_R.Value;
+                this.NumBox_G.Value = this.TrackBar_G.Value;
+                this.NumBox_B.Value = this.TrackBar_B.Value;
             }
 
-            AlphaCheckBox.CheckedChanged += AlphaCheckBox_CheckedChanged;
-            NumBox_16bit.ValueChanged += NumBox_16bit_ValueChanged;
-            NumBox_32bit.ValueChanged += NumBox_32bit_ValueChanged;
-            NumBox_R.ValueChanged += NumBox_R_ValueChanged;
-            NumBox_G.ValueChanged += NumBox_G_ValueChanged;
-            NumBox_B.ValueChanged += NumBox_B_ValueChanged;
-            TrackBar_R.Scroll += TrackBar_R_Scroll;
-            TrackBar_G.Scroll += TrackBar_G_Scroll;
-            TrackBar_B.Scroll += TrackBar_B_Scroll;
+            this.AlphaCheckBox.CheckedChanged += this.AlphaCheckBox_CheckedChanged;
+            this.NumBox_16bit.ValueChanged += this.NumBox_16bit_ValueChanged;
+            this.NumBox_32bit.ValueChanged += this.NumBox_32bit_ValueChanged;
+            this.NumBox_R.ValueChanged += this.NumBox_R_ValueChanged;
+            this.NumBox_G.ValueChanged += this.NumBox_G_ValueChanged;
+            this.NumBox_B.ValueChanged += this.NumBox_B_ValueChanged;
+            this.TrackBar_R.Scroll += this.TrackBar_R_Scroll;
+            this.TrackBar_G.Scroll += this.TrackBar_G_Scroll;
+            this.TrackBar_B.Scroll += this.TrackBar_B_Scroll;
         }
 
         public void Core_Insert(String filepath)
@@ -265,10 +265,10 @@ namespace Magic.Editors
                 Palette palette = new Palette(filepath);
 
                 Core.WriteData(
-                    Owner ?? this,
-                    Address,
-                    palette.ToBytes(IsCompressed),
-                    Entry + "Palette changed");
+                    this.Owner ?? this,
+                    this.Address,
+                    palette.ToBytes(this.IsCompressed),
+                    this.Entry + "Palette changed");
             }
             catch (Exception ex)
             {
@@ -278,54 +278,54 @@ namespace Magic.Editors
 
         public void Core_WriteColor(Color color)
         {
-            if (IsCompressed)
+            if (this.IsCompressed)
             {
-                Current[CurrentIndex] = color;
+                this.Current[this.CurrentIndex] = color;
 
-                Core.WriteData(Owner ?? this,
-                    Address,
-                    Current.ToBytes(true),
-                    Entry + "Palette changed");
+                Core.WriteData(this.Owner ?? this,
+                    this.Address,
+                    this.Current.ToBytes(true),
+                    this.Entry + "Palette changed");
             }
             else
             {
-                Core.WriteData(Owner ?? this,
-                    CurrentAddress,
+                Core.WriteData(this.Owner ?? this,
+                    this.CurrentAddress,
                     color.ToBytes(true),
-                    Entry + "Palette color " + CurrentIndex + " changed");
+                    this.Entry + "Palette color " + this.CurrentIndex + " changed");
             }
         }
         public void Core_SwapColors(Int32 index1, Int32 index2)
         {
-            if (index1 < 0 || index1 >= PaletteAmount * 16
-             || index2 < 0 || index2 >= PaletteAmount * 16)
+            if (index1 < 0 || index1 >= this.PaletteAmount * 16
+             || index2 < 0 || index2 >= this.PaletteAmount * 16)
                 throw new Exception("Invalid index given.");
 
-            GBA.Color color1 = Current[index1];
-            GBA.Color color2 = Current[index2];
+            GBA.Color color1 = this.Current[index1];
+            GBA.Color color2 = this.Current[index2];
 
             UI.SuspendUpdate();
 
-            if (IsCompressed)
+            if (this.IsCompressed)
             {
-                Current.Swap(index1, index2);
+                this.Current.Swap(index1, index2);
 
-                Core.WriteData(Owner ?? this,
-                    Address,
-                    Current.ToBytes(true),
-                    Entry + "Palette changed");
+                Core.WriteData(this.Owner ?? this,
+                    this.Address,
+                    this.Current.ToBytes(true),
+                    this.Entry + "Palette changed");
             }
             else
             {
-                Core.WriteData(Owner ?? this,
-                    Address + index2 * 2,
+                Core.WriteData(this.Owner ?? this,
+                    this.Address + index2 * 2,
                     color1.ToBytes(true),
-                    Entry + "Palette color " + index1 + " swapped");
+                    this.Entry + "Palette color " + index1 + " swapped");
 
-                Core.WriteData(Owner ?? this,
-                    Address + index1 * 2,
+                Core.WriteData(this.Owner ?? this,
+                    this.Address + index1 * 2,
                     color2.ToBytes(true),
-                    Entry + "Palette color " + index2 + " swapped");
+                    this.Entry + "Palette color " + index2 + " swapped");
             }
 
             UI.ResumeUpdate();
@@ -336,9 +336,9 @@ namespace Magic.Editors
 
         private void SwapButton_Click(Object sender, EventArgs e)
         {
-            SwapMode = true;
-            SwapButton.Text = "Cancel";
-            SwapButton.Enabled = true;
+            this.SwapMode = true;
+            this.SwapButton.Text = "Cancel";
+            this.SwapButton.Enabled = true;
         }
         private void LoadButton_Click(Object sender, EventArgs e)
         {
@@ -353,7 +353,7 @@ namespace Magic.Editors
 
             if (openWindow.ShowDialog() == DialogResult.OK)
             {
-                Core_Insert(openWindow.FileName);
+                this.Core_Insert(openWindow.FileName);
             }
         }
         private void SaveButton_Click(Object sender, EventArgs e)
@@ -369,48 +369,48 @@ namespace Magic.Editors
 
             if (saveWindow.ShowDialog() == DialogResult.OK)
             {
-                File.WriteAllBytes(saveWindow.FileName, Current.ToBytes(false));
+                File.WriteAllBytes(saveWindow.FileName, this.Current.ToBytes(false));
             }
         }
 
         private void AlphaCheckBox_CheckedChanged(Object sender, EventArgs e)
         {
-            Core_WriteColor(Current[CurrentIndex].SetAlpha(AlphaCheckBox.Checked));
+            this.Core_WriteColor(this.Current[this.CurrentIndex].SetAlpha(this.AlphaCheckBox.Checked));
         }
 
         private void NumBox_16bit_ValueChanged(Object sender, EventArgs e)
         {
-            Core_WriteColor(new GBA.Color((UInt16)NumBox_16bit.Value));
+            this.Core_WriteColor(new GBA.Color((UInt16)this.NumBox_16bit.Value));
         }
         private void NumBox_32bit_ValueChanged(Object sender, EventArgs e)
         {
-            Core_WriteColor(new GBA.Color((UInt32)NumBox_32bit.Value));
+            this.Core_WriteColor(new GBA.Color((UInt32)this.NumBox_32bit.Value));
         }
 
         private void NumBox_R_ValueChanged(Object sender, EventArgs e)
         {
-            Core_WriteColor(Current[CurrentIndex].SetValueR((Byte)NumBox_R.Value));
+            this.Core_WriteColor(this.Current[this.CurrentIndex].SetValueR((Byte)this.NumBox_R.Value));
         }
         private void NumBox_G_ValueChanged(Object sender, EventArgs e)
         {
-            Core_WriteColor(Current[CurrentIndex].SetValueG((Byte)NumBox_G.Value));
+            this.Core_WriteColor(this.Current[this.CurrentIndex].SetValueG((Byte)this.NumBox_G.Value));
         }
         private void NumBox_B_ValueChanged(Object sender, EventArgs e)
         {
-            Core_WriteColor(Current[CurrentIndex].SetValueB((Byte)NumBox_B.Value));
+            this.Core_WriteColor(this.Current[this.CurrentIndex].SetValueB((Byte)this.NumBox_B.Value));
         }
 
         private void TrackBar_R_Scroll(Object sender, EventArgs e)
         {
-            NumBox_R.Value = TrackBar_R.Value;
+            this.NumBox_R.Value = this.TrackBar_R.Value;
         }
         private void TrackBar_G_Scroll(Object sender, EventArgs e)
         {
-            NumBox_G.Value = TrackBar_G.Value;
+            this.NumBox_G.Value = this.TrackBar_G.Value;
         }
         private void TrackBar_B_Scroll(Object sender, EventArgs e)
         {
-            NumBox_B.Value = TrackBar_B.Value;
+            this.NumBox_B.Value = this.TrackBar_B.Value;
         }
     }
 }

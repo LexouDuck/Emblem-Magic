@@ -10,12 +10,12 @@ namespace EmblemMagic.FireEmblem
     {
         public WorldMap_FE6_Small(String path) : base(path)
         {
-            if (Width != 240 || Height != 160)
+            if (this.Width != 240 || this.Height != 160)
                 throw new Exception("Image given has invalid dimensions. It should be 240x160 pixels.");
 
-            for (Int32 i = Colors.Count; i < 256; i++)
+            for (Int32 i = this.Colors.Count; i < 256; i++)
             {
-                Colors.Add(new GBA.Color(0x0000));
+                this.Colors.Add(new GBA.Color(0x0000));
             }
         }
 
@@ -28,7 +28,7 @@ namespace EmblemMagic.FireEmblem
         {
             for (Int32 i = 0; i < 256; i++)
             {
-                Colors[i] = Colors[i].SetAlpha(false);
+                this.Colors[i] = this.Colors[i].SetAlpha(false);
             }
         }
     }
@@ -42,13 +42,13 @@ namespace EmblemMagic.FireEmblem
             get
             {
                 Int32 i = (((x < Screen.WIDTH) ? 0 : 1) + ((y < Screen.HEIGHT) ? 0 : 2));
-                return Graphics[i][x % Screen.WIDTH, y % Screen.HEIGHT];
+                return this.Graphics[i][x % Screen.WIDTH, y % Screen.HEIGHT];
             }
         }
         public GBA.Color GetColor(Int32 x, Int32 y)
         {
             Int32 i = (((x < Screen.WIDTH) ? 0 : 1) + ((y < Screen.HEIGHT) ? 0 : 2));
-            return Graphics[i].GetColor(x % Screen.WIDTH, y % Screen.HEIGHT);
+            return this.Graphics[i].GetColor(x % Screen.WIDTH, y % Screen.HEIGHT);
         }
 
         public Int32 Width
@@ -75,17 +75,17 @@ namespace EmblemMagic.FireEmblem
 
         public WorldMap_FE6_Large(GBA.Bitmap image)
         {
-            if (image.Width != Width || image.Height != Height)
+            if (image.Width != this.Width || image.Height != this.Height)
                 throw new Exception("Image given has invalid dimensions. It should be 480x320 pixels.");
 
             for (Int32 i = image.Colors.Count; i < 256; i++)
             {
                 image.Colors.Add(new GBA.Color(0x0000));
             }
-            Graphics = new GBA.Bitmap[4];
+            this.Graphics = new GBA.Bitmap[4];
             for (Int32 i = 0; i < 4; i++)
             {
-                Graphics[i] = new GBA.Bitmap(image, new Rectangle(
+                this.Graphics[i] = new GBA.Bitmap(image, new Rectangle(
                         ((i & 0x1) == 0) ? 0 : 240,
                         ((i & 0x2) == 0) ? 0 : 160,
                         240, 160));
@@ -98,15 +98,15 @@ namespace EmblemMagic.FireEmblem
         {
             Pointer[] palettes = GetPointerArray(palette);
             Pointer[] tilesets = GetPointerArray(tiles);
-            Graphics = new GBA.Bitmap[4];
+            this.Graphics = new GBA.Bitmap[4];
             for (Int32 i = 0; i < 4; i++)
             {
-                Graphics[i] = new GBA.Bitmap(240, 160,
+                this.Graphics[i] = new GBA.Bitmap(240, 160,
                     Core.ReadData(palettes[i], 0),
                     Core.ReadData(tilesets[i], 0));
                 for (Int32 p = 0; p < 256; p++)
                 {
-                    Graphics[i].Colors[p] = Graphics[i].Colors[p].SetAlpha(false);
+                    this.Graphics[i].Colors[p] = this.Graphics[i].Colors[p].SetAlpha(false);
                 }
             }
         }

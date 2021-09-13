@@ -17,7 +17,7 @@ namespace Magic
             get
             {
                 String entry = "";
-                if (Entries.TryGetValue(index, out entry))
+                if (this.Entries.TryGetValue(index, out entry))
                 {
                     return entry;
                 }
@@ -40,26 +40,26 @@ namespace Magic
         
         public ArrayFile(String fileName)
         {
-            FilePath = Core.Path_Arrays + fileName;
-            Entries = new Dictionary<UInt32, String>();
+            this.FilePath = Core.Path_Arrays + fileName;
+            this.Entries = new Dictionary<UInt32, String>();
 
             String[] file;
             try
             {
-                file = File.ReadAllLines(FilePath);
+                file = File.ReadAllLines(this.FilePath);
             }
             catch (Exception ex)
             {
-                throw new Exception("Could not open the array file:\n" + FilePath, ex);
+                throw new Exception("Could not open the array file:\n" + this.FilePath, ex);
             }
-            Load(file);
+            this.Load(file);
         }
         public ArrayFile(String[] file)
         {
-            FilePath = null;
-            Entries = new Dictionary<UInt32, String>();
-            
-            Load(file);
+            this.FilePath = null;
+            this.Entries = new Dictionary<UInt32, String>();
+
+            this.Load(file);
         }
         void Load(String[] file)
         {
@@ -79,14 +79,14 @@ namespace Magic
 
                     if (index > max) max = index;
 
-                    Entries.Add(index, file[line].Substring(i + 1));
+                    this.Entries.Add(index, file[line].Substring(i + 1));
                 }
                 catch (Exception ex)
                 {
-                    UI.ShowError("There has been an error while reading the array file:\n" + FilePath + "\nAt line: " + line, ex);
+                    UI.ShowError("There has been an error while reading the array file:\n" + this.FilePath + "\nAt line: " + line, ex);
                 }
             }
-            LastEntry = max;
+            this.LastEntry = max;
         }
 
 
@@ -96,7 +96,7 @@ namespace Magic
         /// </summary>
         public UInt32 FindEntry(String name)
         {
-            foreach (var entry in Entries)
+            foreach (var entry in this.Entries)
             {
                 if (entry.Value.Equals(name))
                     return entry.Key;
@@ -105,16 +105,16 @@ namespace Magic
         }
         public void RenameEntry(UInt32 value, String text)
         {
-            Entries[value] = text;
-            String[] file = new String[LastEntry + 1];
+            this.Entries[value] = text;
+            String[] file = new String[this.LastEntry + 1];
             Int32 index = 0;
-            foreach (var entry in Entries)
+            foreach (var entry in this.Entries)
             {
                 file[index++] = "0x" + Util.UInt32ToHex(entry.Key) + " " + entry.Value;
             }
-            File.WriteAllLines(FilePath, file);
-            Entries.Clear();
-            Load(file);
+            File.WriteAllLines(this.FilePath, file);
+            this.Entries.Clear();
+            this.Load(file);
         }
 
 
@@ -125,7 +125,7 @@ namespace Magic
         public Regex GetRegex()
         {
             String result = "";
-            foreach (var entry in Entries)
+            foreach (var entry in this.Entries)
             {
                 result += entry.Value;
                 result += "|";
@@ -137,18 +137,18 @@ namespace Magic
         {
             get
             {
-                return Entries[position];
+                return this.Entries[this.position];
             }
         }
         UInt32 position = 0;
         public void Reset()
         {
-            position = 0;
+            this.position = 0;
         }
         public Boolean MoveNext()
         {
-            position++;
-            return (position < LastEntry);
+            this.position++;
+            return (this.position < this.LastEntry);
         }
 
         public IEnumerator GetEnumerator()
@@ -157,7 +157,7 @@ namespace Magic
         }
         public List<KeyValuePair<UInt32, String>> ToList()
         {
-            return Entries.ToList();
+            return this.Entries.ToList();
         }
     }
 }

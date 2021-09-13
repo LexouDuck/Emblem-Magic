@@ -16,34 +16,34 @@ namespace Magic
 
         public PointEditor()
         {
-            List = new SortableBindingList<Tuple<
+            this.List = new SortableBindingList<Tuple<
                 String,
                 Boolean,
                 Pointer,
                 Int32>>();
 
-            InitializeComponent();
+            this.InitializeComponent();
 
-            PointerDataGrid.AutoGenerateColumns = false;
-            PointerDataGrid.DataSource = this.List;
+            this.PointerDataGrid.AutoGenerateColumns = false;
+            this.PointerDataGrid.DataSource = this.List;
 
-            AssetColumn.DataPropertyName      = "Item1";
-            RepointedColumn.DataPropertyName  = "Item2";
-            AddressColumn.DataPropertyName    = "Item3";
-            ReferencesColumn.DataPropertyName = "Item4";
+            this.AssetColumn.DataPropertyName      = "Item1";
+            this.RepointedColumn.DataPropertyName  = "Item2";
+            this.AddressColumn.DataPropertyName    = "Item3";
+            this.ReferencesColumn.DataPropertyName = "Item4";
         }
 
 
 
         public override void Core_OnOpen()
         {
-            Core_Update();
+            this.Core_Update();
         }
         public override void Core_Update()
         {
-            Update_WriteList();
+            this.Update_WriteList();
 
-            Update_EditPanel(null);
+            this.Update_EditPanel(null);
         }
 
 
@@ -52,15 +52,15 @@ namespace Magic
         {
             try
             {
-                List.Clear();
+                this.List.Clear();
 
-                if (ShowHideCheckBox.Checked)
+                if (this.ShowHideCheckBox.Checked)
                 {
-                    foreach (var repoint in App.MHF.Point.Repoints)
+                    foreach (var repoint in this.App.MHF.Point.Repoints)
                     {
                         if (repoint.DefaultAddress != repoint.CurrentAddress)
                         {
-                            List.Add(Tuple.Create(
+                            this.List.Add(Tuple.Create(
                                 repoint.AssetName,
                                 true,
                                 repoint.CurrentAddress,
@@ -70,9 +70,9 @@ namespace Magic
                 }
                 else
                 {
-                    foreach (var repoint in App.MHF.Point.Repoints)
+                    foreach (var repoint in this.App.MHF.Point.Repoints)
                     {
-                        List.Add(Tuple.Create(
+                        this.List.Add(Tuple.Create(
                             repoint.AssetName,
                             repoint.DefaultAddress != repoint.CurrentAddress,
                             repoint.CurrentAddress,
@@ -89,17 +89,17 @@ namespace Magic
         {
             if (selection == null)
             {
-                ReferenceListBox.DataSource = null;
-                Repoint_NameTextBox.Text = "";
-                Repoint_DefaultPointerBox.Value = new Pointer();
-                Repoint_CurrentPointerBox.Value = new Pointer();
+                this.ReferenceListBox.DataSource = null;
+                this.Repoint_NameTextBox.Text = "";
+                this.Repoint_DefaultPointerBox.Value = new Pointer();
+                this.Repoint_CurrentPointerBox.Value = new Pointer();
             }
             else
             {
-                ReferenceListBox.DataSource = selection.References;
-                Repoint_NameTextBox.Text = selection.AssetName;
-                Repoint_DefaultPointerBox.Value = selection.DefaultAddress;
-                Repoint_CurrentPointerBox.Value = selection.CurrentAddress;
+                this.ReferenceListBox.DataSource = selection.References;
+                this.Repoint_NameTextBox.Text = selection.AssetName;
+                this.Repoint_DefaultPointerBox.Value = selection.DefaultAddress;
+                this.Repoint_CurrentPointerBox.Value = selection.CurrentAddress;
             }
         }
 
@@ -107,72 +107,72 @@ namespace Magic
 
         private void SelectPointer_Click(Object sender, EventArgs e)
         {
-            if (PointerDataGrid.SelectedRows.Count == 0)
+            if (this.PointerDataGrid.SelectedRows.Count == 0)
             {
                 UI.ShowMessage("There is no pointer selected.");
             }
-            else if (PointerDataGrid.SelectedRows.Count == 1)
+            else if (this.PointerDataGrid.SelectedRows.Count == 1)
             {
-                String asset = (String)PointerDataGrid.CurrentRow.Cells[0].Value;
+                String asset = (String)this.PointerDataGrid.CurrentRow.Cells[0].Value;
 
-                Update_EditPanel(App.MHF.Point.Get(asset));
+                this.Update_EditPanel(this.App.MHF.Point.Get(asset));
             }
             else
             {
-                Update_EditPanel(null);
+                this.Update_EditPanel(null);
             }
         }
 
         private void RepointButton_Click(Object sender, EventArgs e)
         {
-            if (PointerDataGrid.SelectedRows.Count == 0)
+            if (this.PointerDataGrid.SelectedRows.Count == 0)
             {
                 UI.ShowMessage("There is no pointer selected.");
             }
-            else if (PointerDataGrid.SelectedRows.Count == 1)
+            else if (this.PointerDataGrid.SelectedRows.Count == 1)
             {
-                Repoint asset = App.MHF.Point.Get((String)PointerDataGrid.CurrentRow.Cells[0].Value);
-                asset.AssetName = Repoint_NameTextBox.Text;
-                Core.Repoint(this, asset.CurrentAddress, Repoint_CurrentPointerBox.Value, asset.AssetName + " repointed");
+                Repoint asset = this.App.MHF.Point.Get((String)this.PointerDataGrid.CurrentRow.Cells[0].Value);
+                asset.AssetName = this.Repoint_NameTextBox.Text;
+                Core.Repoint(this, asset.CurrentAddress, this.Repoint_CurrentPointerBox.Value, asset.AssetName + " repointed");
             }
             else
             {
                 UI.ShowMessage("You cannot modify several asset pointers at once.");
             }
-            Core_Update();
+            this.Core_Update();
         }
         private void CreateButton_Click(Object sender, EventArgs e)
         {
             Repoint repoint = Prompt.ShowRepointCreateDialog();
 
-            App.MHF.Point.Add(repoint);
+            this.App.MHF.Point.Add(repoint);
 
             if (repoint.CurrentAddress != repoint.DefaultAddress)
             {
                 Core.Repoint(this, repoint.CurrentAddress, repoint.CurrentAddress, repoint.AssetName + " repoint");
             }
-            Core_Update();
+            this.Core_Update();
         }
         private void DeleteButton_Click(Object sender, EventArgs e)
         {
-            if (PointerDataGrid.SelectedRows.Count == 0)
+            if (this.PointerDataGrid.SelectedRows.Count == 0)
             {
                 UI.ShowMessage("There is no pointer selected.");
             }
-            else if (PointerDataGrid.SelectedRows.Count == 1)
+            else if (this.PointerDataGrid.SelectedRows.Count == 1)
             {
-                App.MHF.Point.Remove((String)PointerDataGrid.CurrentRow.Cells[0].Value);
+                this.App.MHF.Point.Remove((String)this.PointerDataGrid.CurrentRow.Cells[0].Value);
             }
-            else foreach (DataGridViewRow row in PointerDataGrid.SelectedRows)
+            else foreach (DataGridViewRow row in this.PointerDataGrid.SelectedRows)
             {
-                App.MHF.Point.Remove((String)row.Cells[0].Value);
+                    this.App.MHF.Point.Remove((String)row.Cells[0].Value);
             }
-            Core_Update();
+            this.Core_Update();
         }
 
         private void ShowHideCheckBox_CheckedChanged(Object sender, EventArgs e)
         {
-            Core_Update();
+            this.Core_Update();
         }
     }
 }

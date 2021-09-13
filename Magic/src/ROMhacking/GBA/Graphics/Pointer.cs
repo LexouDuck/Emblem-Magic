@@ -34,7 +34,7 @@ namespace GBA
                 data[1] == 0 &&
                 data[2] == 0 &&
                 data[3] == 0) {
-                Address = 0;
+                this.Address = 0;
                 return;
             }
             UInt32 address = Util.BytesToUInt32(data, littleEndian);
@@ -48,7 +48,7 @@ namespace GBA
             //if (address >= Core.CurrentROMSize)
             //    throw new Exception("Pointer is beyond the range of the ROM: " + Util.AddressToString(address, 8));
 
-            Address = (UInt32)address;
+            this.Address = (UInt32)address;
         }
         /// <summary>
         /// Makes a Pointer from the given address. The 2 bools will decide how the int address is read.
@@ -57,7 +57,7 @@ namespace GBA
         {
             if (address == 0)
             {
-                Address = 0;
+                this.Address = 0;
                 return;
             }
             if (littleEndian)
@@ -74,7 +74,7 @@ namespace GBA
             //if (address >= Core.CurrentROMSize)
             //    throw new Exception("Pointer is beyond the range of the ROM: " + Util.AddressToString(address, 8));
 
-            Address = address;
+            this.Address = address;
         }
 
 
@@ -84,26 +84,26 @@ namespace GBA
         /// </summary>
         public Byte[] ToBytes(Boolean littleEndian = true, Boolean hardwareOffset = true)
         {
-            if (Address == 0) return new Byte[4] { 0x00, 0x00, 0x00, 0x00 };
+            if (this.Address == 0) return new Byte[4] { 0x00, 0x00, 0x00, 0x00 };
 
-            return Util.UInt32ToBytes((hardwareOffset) ? Address + HardwareOffset : Address, littleEndian);
+            return Util.UInt32ToBytes((hardwareOffset) ? this.Address + HardwareOffset : this.Address, littleEndian);
         }
         
 
 
         override public String ToString()
         {
-            return Util.AddressToString(Address);
+            return Util.AddressToString(this.Address);
         }
         override public Boolean Equals(Object other)
         {
             if (!(other is Pointer)) return false;
             Pointer pointer = (Pointer)other;
-            return (Address == pointer.Address);
+            return (this.Address == pointer.Address);
         }
         override public Int32 GetHashCode()
         {
-            return Address.GetHashCode();
+            return this.Address.GetHashCode();
         }
 
         public static Boolean operator ==(Pointer left, Pointer right)

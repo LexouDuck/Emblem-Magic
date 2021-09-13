@@ -32,7 +32,7 @@ namespace Magic
         {
             get
             {
-                return EndByte - Address;
+                return this.EndByte - this.Address;
             }
         }
 
@@ -41,10 +41,10 @@ namespace Magic
         public Space(Mark mark, Int32 start, Int32 end)
         {
             if (end < start) throw new Exception("space cannot be negative.");
-            
-            Marked = mark;
-            Address = new Pointer((UInt32)start);
-            EndByte = new Pointer((UInt32)end);
+
+            this.Marked = mark;
+            this.Address = new Pointer((UInt32)start);
+            this.EndByte = new Pointer((UInt32)end);
         }
         /// <summary>
         /// Constructor used for loading from file.
@@ -53,14 +53,14 @@ namespace Magic
         {
             if (end < start) throw new Exception("space cannot be negative.");
 
-            Marked = mark;
-            Address = new Pointer(start);
-            EndByte = new Pointer(end);
+            this.Marked = mark;
+            this.Address = new Pointer(start);
+            this.EndByte = new Pointer(end);
         }
 
         public Boolean Contains(Pointer address)
         {
-            if (address >= Address && address < EndByte)
+            if (address >= this.Address && address < this.EndByte)
                 return true;
             else return false;
         }

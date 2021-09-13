@@ -10,19 +10,19 @@ namespace Magic.Components
     {
         public BytePositionInfo(Int64 index, Int32 characterPosition)
         {
-            _index = index;
-            _characterPosition = characterPosition;
+            this._index = index;
+            this._characterPosition = characterPosition;
         }
 
         public Int32 CharacterPosition
         {
-            get { return _characterPosition; }
+            get { return this._characterPosition; }
         }
         Int32 _characterPosition;
 
         public Int64 Index
         {
-            get { return _index; }
+            get { return this._index; }
         }
         Int64 _index;
     }
