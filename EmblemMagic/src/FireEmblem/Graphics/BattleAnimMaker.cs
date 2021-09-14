@@ -12,6 +12,16 @@ namespace EmblemMagic.FireEmblem
     /// </summary>
     public class BattleAnimMaker
     {
+        // state enum for the anim code parser
+        enum CompileMode
+        {
+            Usual,
+            Frame,
+            Extra
+        }
+
+
+
         /// <summary>
         /// The animation code translated from the text file's code
         /// </summary>
@@ -33,13 +43,6 @@ namespace EmblemMagic.FireEmblem
         /// </summary>
         public List<TileSheet> Graphics;
 
-        // state enum for the anim code parser
-        enum CompileMode
-        {
-            Usual,
-            Frame,
-            Extra
-        }
 
 
         /// <summary>
@@ -438,14 +441,14 @@ namespace EmblemMagic.FireEmblem
                 (Int16)(screen.X - BattleAnimation.SCREEN_OFFSET_X_R),
                 (Int16)(screen.Y - BattleAnimation.SCREEN_OFFSET_Y),
                 0x00, 0x00,
-                OAM_GFXMode.Normal,
-                (bigAffine) ? OAM_OBJMode.BigAffine : OAM_OBJMode.Affine,
+                OAM.GFXMode.Normal,
+                (bigAffine) ? OAM.OBJMode.BigAffine : OAM.OBJMode.Affine,
                 false,
                 false,
                 (Byte)sheet.X, (Byte)sheet.Y,
                 (Byte)this.Frames[frame].Affines.Count));
 
-            this.Frames[frame].Affines.Add(new OAM_Affine(
+            this.Frames[frame].Affines.Add(new OAM.Affine(
                 vectors[0],
                 vectors[1],
                 vectors[2],

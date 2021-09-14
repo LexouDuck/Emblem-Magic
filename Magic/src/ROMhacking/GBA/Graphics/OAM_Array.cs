@@ -24,7 +24,7 @@ namespace GBA
         /// <summary>
         /// The transformation data in this OAM array, for any OAM entries that are affine sprites
         /// </summary>
-        public List<OAM_Affine> Affines;
+        public List<OAM.Affine> Affines;
 
 
 
@@ -34,7 +34,7 @@ namespace GBA
         public OAM_Array()
         {
             this.Sprites = new List<OAM>();
-            this.Affines = new List<OAM_Affine>();
+            this.Affines = new List<OAM.Affine>();
         }
         /// <summary>
         /// Creates an OAM_Array from the given array
@@ -42,7 +42,7 @@ namespace GBA
         public OAM_Array(List<OAM> array)
         {
             this.Sprites = array;
-            this.Affines = new List<OAM_Affine>();
+            this.Affines = new List<OAM.Affine>();
         }
         /// <summary>
         /// Reads OAM data starting at 'offset', stopping at the first terminator encountered
@@ -50,7 +50,7 @@ namespace GBA
         public OAM_Array(Byte[] data, UInt32 offset)
         {
             this.Sprites = new List<OAM>();
-            this.Affines = new List<OAM_Affine>();
+            this.Affines = new List<OAM.Affine>();
 
             Byte[] buffer = new Byte[12];
             Boolean loadAffineData = true;
@@ -71,7 +71,7 @@ namespace GBA
                             if (loadAffineData)
                             {
                                 Array.Copy(data, i, buffer, 0, 12);
-                                this.Affines.Add(new OAM_Affine(buffer));
+                                this.Affines.Add(new OAM.Affine(buffer));
                                 goto Continue;
                             }
                             else throw new Exception("Invalid terminator read in OAM.");

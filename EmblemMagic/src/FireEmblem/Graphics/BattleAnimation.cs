@@ -808,7 +808,7 @@ namespace EmblemMagic.FireEmblem
                     if (result.Length > 0)
                         result += "\r\n\t";
                     Int32 index = oam.Sprites[s].AffineIndex;
-                    Boolean big = oam.Sprites[s].OBJMode == OAM_OBJMode.BigAffine;
+                    Boolean big = oam.Sprites[s].ModeOBJ == OAM.OBJMode.BigAffine;
                     result += (big ? " d" : " a");
                     result += " [" + file + "_affine_" + affine_index;
                     result += ".png]";

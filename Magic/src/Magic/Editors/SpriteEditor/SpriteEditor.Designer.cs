@@ -40,8 +40,6 @@ namespace Magic.Editors
             this.DrawMosaic_CheckBox = new System.Windows.Forms.CheckBox();
             this.FlipV_CheckBox = new System.Windows.Forms.CheckBox();
             this.FlipH_CheckBox = new System.Windows.Forms.CheckBox();
-            this.ShapeSize_Label = new System.Windows.Forms.Label();
-            this.ShapeSize_Info = new System.Windows.Forms.Label();
             this.ScreenX_NumBox = new System.Windows.Forms.NumericUpDown();
             this.ScreenY_NumBox = new System.Windows.Forms.NumericUpDown();
             this.ScreenX_Label = new System.Windows.Forms.Label();
@@ -59,12 +57,21 @@ namespace Magic.Editors
             this.RenderBlit_GroupBox = new System.Windows.Forms.GroupBox();
             this.Sprite_PaletteBox = new Magic.Components.PaletteBox();
             this.ScreenBlit_GroupBox = new System.Windows.Forms.GroupBox();
+            this.Affine_Index_Label = new System.Windows.Forms.Label();
+            this.Affine_Index_NumBox = new Magic.Components.ByteBox();
             this.TileSheet_GroupBox = new System.Windows.Forms.GroupBox();
             this.MenuBar = new System.Windows.Forms.MenuStrip();
             this.Status = new System.Windows.Forms.ToolStripLabel();
             this.Affine_GroupBox = new System.Windows.Forms.GroupBox();
-            this.Affine_Index_NumBox = new Magic.Components.ByteBox();
-            this.Affine_Index_Label = new System.Windows.Forms.Label();
+            this.Affine_Separator = new System.Windows.Forms.Label();
+            this.Affine_ScaleX_Label = new System.Windows.Forms.Label();
+            this.Affine_Rotate_Label = new System.Windows.Forms.Label();
+            this.Affine_ScaleX_NumBox = new System.Windows.Forms.NumericUpDown();
+            this.Affine_ScaleY_NumBox = new System.Windows.Forms.NumericUpDown();
+            this.Affine_ScaleY_Label = new System.Windows.Forms.Label();
+            this.Affine_Shear_Label = new System.Windows.Forms.Label();
+            this.Affine_Rotate_NumBox = new System.Windows.Forms.NumericUpDown();
+            this.Affine_Shear_NumBox = new System.Windows.Forms.NumericUpDown();
             this.Affine_Ux_Label = new System.Windows.Forms.Label();
             this.Affine_Uy_Label = new System.Windows.Forms.Label();
             this.Affine_Ux_NumBox = new System.Windows.Forms.NumericUpDown();
@@ -93,10 +100,14 @@ namespace Magic.Editors
             ((System.ComponentModel.ISupportInitialize)(this.Priority_NumBox)).BeginInit();
             this.RenderBlit_GroupBox.SuspendLayout();
             this.ScreenBlit_GroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Affine_Index_NumBox)).BeginInit();
             this.TileSheet_GroupBox.SuspendLayout();
             this.MenuBar.SuspendLayout();
             this.Affine_GroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Affine_Index_NumBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Affine_ScaleX_NumBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Affine_ScaleY_NumBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Affine_Rotate_NumBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Affine_Shear_NumBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Affine_Ux_NumBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Affine_Vx_NumBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Affine_Uy_NumBox)).BeginInit();
@@ -105,7 +116,6 @@ namespace Magic.Editors
             // 
             // Shape_ComboBox
             // 
-            this.Shape_ComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Shape_ComboBox.FormattingEnabled = true;
             this.Shape_ComboBox.Location = new System.Drawing.Point(172, 22);
             this.Shape_ComboBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -116,7 +126,6 @@ namespace Magic.Editors
             // 
             // Size_ComboBox
             // 
-            this.Size_ComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Size_ComboBox.FormattingEnabled = true;
             this.Size_ComboBox.Location = new System.Drawing.Point(172, 53);
             this.Size_ComboBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -127,7 +136,6 @@ namespace Magic.Editors
             // 
             // Size_Label
             // 
-            this.Size_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Size_Label.AutoSize = true;
             this.Size_Label.Location = new System.Drawing.Point(131, 56);
             this.Size_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -138,7 +146,6 @@ namespace Magic.Editors
             // 
             // Shape_Label
             // 
-            this.Shape_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Shape_Label.AutoSize = true;
             this.Shape_Label.Location = new System.Drawing.Point(119, 25);
             this.Shape_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -149,9 +156,8 @@ namespace Magic.Editors
             // 
             // GFX_Mode_Label
             // 
-            this.GFX_Mode_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.GFX_Mode_Label.AutoSize = true;
-            this.GFX_Mode_Label.Location = new System.Drawing.Point(10, 24);
+            this.GFX_Mode_Label.Location = new System.Drawing.Point(5, 24);
             this.GFX_Mode_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.GFX_Mode_Label.Name = "GFX_Mode_Label";
             this.GFX_Mode_Label.Size = new System.Drawing.Size(68, 15);
@@ -160,9 +166,8 @@ namespace Magic.Editors
             // 
             // OBJ_Mode_Label
             // 
-            this.OBJ_Mode_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.OBJ_Mode_Label.AutoSize = true;
-            this.OBJ_Mode_Label.Location = new System.Drawing.Point(11, 56);
+            this.OBJ_Mode_Label.Location = new System.Drawing.Point(6, 56);
             this.OBJ_Mode_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.OBJ_Mode_Label.Name = "OBJ_Mode_Label";
             this.OBJ_Mode_Label.Size = new System.Drawing.Size(67, 15);
@@ -171,9 +176,8 @@ namespace Magic.Editors
             // 
             // OBJ_Mode_ComboBox
             // 
-            this.OBJ_Mode_ComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.OBJ_Mode_ComboBox.FormattingEnabled = true;
-            this.OBJ_Mode_ComboBox.Location = new System.Drawing.Point(86, 53);
+            this.OBJ_Mode_ComboBox.Location = new System.Drawing.Point(76, 53);
             this.OBJ_Mode_ComboBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.OBJ_Mode_ComboBox.Name = "OBJ_Mode_ComboBox";
             this.OBJ_Mode_ComboBox.Size = new System.Drawing.Size(100, 23);
@@ -182,9 +186,8 @@ namespace Magic.Editors
             // 
             // GFX_Mode_ComboBox
             // 
-            this.GFX_Mode_ComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.GFX_Mode_ComboBox.FormattingEnabled = true;
-            this.GFX_Mode_ComboBox.Location = new System.Drawing.Point(86, 21);
+            this.GFX_Mode_ComboBox.Location = new System.Drawing.Point(76, 21);
             this.GFX_Mode_ComboBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.GFX_Mode_ComboBox.Name = "GFX_Mode_ComboBox";
             this.GFX_Mode_ComboBox.Size = new System.Drawing.Size(100, 23);
@@ -193,20 +196,18 @@ namespace Magic.Editors
             // 
             // FullColors_CheckBox
             // 
-            this.FullColors_CheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.FullColors_CheckBox.AutoSize = true;
             this.FullColors_CheckBox.Location = new System.Drawing.Point(119, 82);
             this.FullColors_CheckBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.FullColors_CheckBox.Name = "FullColors_CheckBox";
-            this.FullColors_CheckBox.Size = new System.Drawing.Size(173, 19);
+            this.FullColors_CheckBox.Size = new System.Drawing.Size(139, 19);
             this.FullColors_CheckBox.TabIndex = 8;
-            this.FullColors_CheckBox.Text = "Full 256-Color Palette Mode";
+            this.FullColors_CheckBox.Text = "Full 256-Color Palette";
             this.FullColors_CheckBox.UseVisualStyleBackColor = true;
             this.FullColors_CheckBox.CheckedChanged += new System.EventHandler(this.FullColors_CheckBox_CheckedChanged);
             // 
             // DrawMosaic_CheckBox
             // 
-            this.DrawMosaic_CheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.DrawMosaic_CheckBox.AutoSize = true;
             this.DrawMosaic_CheckBox.Location = new System.Drawing.Point(119, 107);
             this.DrawMosaic_CheckBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -219,7 +220,6 @@ namespace Magic.Editors
             // 
             // FlipV_CheckBox
             // 
-            this.FlipV_CheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.FlipV_CheckBox.AutoSize = true;
             this.FlipV_CheckBox.Location = new System.Drawing.Point(8, 107);
             this.FlipV_CheckBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -232,7 +232,6 @@ namespace Magic.Editors
             // 
             // FlipH_CheckBox
             // 
-            this.FlipH_CheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.FlipH_CheckBox.AutoSize = true;
             this.FlipH_CheckBox.Location = new System.Drawing.Point(8, 82);
             this.FlipH_CheckBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -243,32 +242,9 @@ namespace Magic.Editors
             this.FlipH_CheckBox.UseVisualStyleBackColor = true;
             this.FlipH_CheckBox.CheckedChanged += new System.EventHandler(this.FlipH_CheckBox_CheckedChanged);
             // 
-            // ShapeSize_Label
-            // 
-            this.ShapeSize_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ShapeSize_Label.AutoSize = true;
-            this.ShapeSize_Label.Location = new System.Drawing.Point(173, 24);
-            this.ShapeSize_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.ShapeSize_Label.Name = "ShapeSize_Label";
-            this.ShapeSize_Label.Size = new System.Drawing.Size(33, 15);
-            this.ShapeSize_Label.TabIndex = 12;
-            this.ShapeSize_Label.Text = "Size :";
-            // 
-            // ShapeSize_Info
-            // 
-            this.ShapeSize_Info.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ShapeSize_Info.AutoSize = true;
-            this.ShapeSize_Info.Location = new System.Drawing.Point(218, 24);
-            this.ShapeSize_Info.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.ShapeSize_Info.Name = "ShapeSize_Info";
-            this.ShapeSize_Info.Size = new System.Drawing.Size(12, 15);
-            this.ShapeSize_Info.TabIndex = 13;
-            this.ShapeSize_Info.Text = "-";
-            // 
             // ScreenX_NumBox
             // 
-            this.ScreenX_NumBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ScreenX_NumBox.Location = new System.Drawing.Point(81, 22);
+            this.ScreenX_NumBox.Location = new System.Drawing.Point(76, 22);
             this.ScreenX_NumBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ScreenX_NumBox.Maximum = new decimal(new int[] {
             32767,
@@ -281,14 +257,13 @@ namespace Magic.Editors
             0,
             -2147483648});
             this.ScreenX_NumBox.Name = "ScreenX_NumBox";
-            this.ScreenX_NumBox.Size = new System.Drawing.Size(73, 23);
+            this.ScreenX_NumBox.Size = new System.Drawing.Size(70, 23);
             this.ScreenX_NumBox.TabIndex = 14;
             this.ScreenX_NumBox.ValueChanged += new System.EventHandler(this.ScreenX_NumBox_ValueChanged);
             // 
             // ScreenY_NumBox
             // 
-            this.ScreenY_NumBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ScreenY_NumBox.Location = new System.Drawing.Point(81, 52);
+            this.ScreenY_NumBox.Location = new System.Drawing.Point(76, 52);
             this.ScreenY_NumBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.ScreenY_NumBox.Maximum = new decimal(new int[] {
             32767,
@@ -301,15 +276,14 @@ namespace Magic.Editors
             0,
             -2147483648});
             this.ScreenY_NumBox.Name = "ScreenY_NumBox";
-            this.ScreenY_NumBox.Size = new System.Drawing.Size(73, 23);
+            this.ScreenY_NumBox.Size = new System.Drawing.Size(70, 23);
             this.ScreenY_NumBox.TabIndex = 15;
             this.ScreenY_NumBox.ValueChanged += new System.EventHandler(this.ScreenY_NumBox_ValueChanged);
             // 
             // ScreenX_Label
             // 
-            this.ScreenX_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ScreenX_Label.AutoSize = true;
-            this.ScreenX_Label.Location = new System.Drawing.Point(15, 24);
+            this.ScreenX_Label.Location = new System.Drawing.Point(10, 24);
             this.ScreenX_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ScreenX_Label.Name = "ScreenX_Label";
             this.ScreenX_Label.Size = new System.Drawing.Size(58, 15);
@@ -318,9 +292,8 @@ namespace Magic.Editors
             // 
             // ScreenY_Label
             // 
-            this.ScreenY_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ScreenY_Label.AutoSize = true;
-            this.ScreenY_Label.Location = new System.Drawing.Point(15, 54);
+            this.ScreenY_Label.Location = new System.Drawing.Point(10, 53);
             this.ScreenY_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.ScreenY_Label.Name = "ScreenY_Label";
             this.ScreenY_Label.Size = new System.Drawing.Size(58, 15);
@@ -329,8 +302,7 @@ namespace Magic.Editors
             // 
             // SheetY_NumBox
             // 
-            this.SheetY_NumBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SheetY_NumBox.Location = new System.Drawing.Point(56, 51);
+            this.SheetY_NumBox.Location = new System.Drawing.Point(52, 51);
             this.SheetY_NumBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.SheetY_NumBox.Maximum = new decimal(new int[] {
             7,
@@ -344,8 +316,7 @@ namespace Magic.Editors
             // 
             // SheetX_NumBox
             // 
-            this.SheetX_NumBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SheetX_NumBox.Location = new System.Drawing.Point(56, 22);
+            this.SheetX_NumBox.Location = new System.Drawing.Point(52, 22);
             this.SheetX_NumBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.SheetX_NumBox.Maximum = new decimal(new int[] {
             31,
@@ -379,9 +350,8 @@ namespace Magic.Editors
             // 
             // Palette_NumBox
             // 
-            this.Palette_NumBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Palette_NumBox.Hexadecimal = true;
-            this.Palette_NumBox.Location = new System.Drawing.Point(249, 21);
+            this.Palette_NumBox.Location = new System.Drawing.Point(233, 21);
             this.Palette_NumBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Palette_NumBox.Maximum = new decimal(new int[] {
             15,
@@ -395,8 +365,7 @@ namespace Magic.Editors
             // 
             // Priority_NumBox
             // 
-            this.Priority_NumBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Priority_NumBox.Location = new System.Drawing.Point(222, 52);
+            this.Priority_NumBox.Location = new System.Drawing.Point(223, 22);
             this.Priority_NumBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Priority_NumBox.Maximum = new decimal(new int[] {
             3,
@@ -410,9 +379,8 @@ namespace Magic.Editors
             // 
             // Priority_Label
             // 
-            this.Priority_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Priority_Label.AutoSize = true;
-            this.Priority_Label.Location = new System.Drawing.Point(173, 54);
+            this.Priority_Label.Location = new System.Drawing.Point(174, 24);
             this.Priority_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Priority_Label.Name = "Priority_Label";
             this.Priority_Label.Size = new System.Drawing.Size(41, 15);
@@ -421,9 +389,8 @@ namespace Magic.Editors
             // 
             // Palette_Label
             // 
-            this.Palette_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Palette_Label.AutoSize = true;
-            this.Palette_Label.Location = new System.Drawing.Point(194, 24);
+            this.Palette_Label.Location = new System.Drawing.Point(183, 24);
             this.Palette_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Palette_Label.Name = "Palette_Label";
             this.Palette_Label.Size = new System.Drawing.Size(49, 15);
@@ -432,6 +399,8 @@ namespace Magic.Editors
             // 
             // Sprite_ImageBox
             // 
+            this.Sprite_ImageBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.Sprite_ImageBox.BackColor = System.Drawing.SystemColors.Control;
             this.Sprite_ImageBox.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.Sprite_ImageBox.Location = new System.Drawing.Point(13, 29);
@@ -444,6 +413,9 @@ namespace Magic.Editors
             // 
             // Tileset_ImageBox
             // 
+            this.Tileset_ImageBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.Tileset_ImageBox.BackColor = System.Drawing.SystemColors.Control;
             this.Tileset_ImageBox.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.Tileset_ImageBox.Location = new System.Drawing.Point(487, 30);
@@ -456,6 +428,7 @@ namespace Magic.Editors
             // 
             // RenderBlit_GroupBox
             // 
+            this.RenderBlit_GroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.RenderBlit_GroupBox.Controls.Add(this.Sprite_PaletteBox);
             this.RenderBlit_GroupBox.Controls.Add(this.GFX_Mode_ComboBox);
             this.RenderBlit_GroupBox.Controls.Add(this.FlipV_CheckBox);
@@ -467,11 +440,11 @@ namespace Magic.Editors
             this.RenderBlit_GroupBox.Controls.Add(this.GFX_Mode_Label);
             this.RenderBlit_GroupBox.Controls.Add(this.FullColors_CheckBox);
             this.RenderBlit_GroupBox.Controls.Add(this.DrawMosaic_CheckBox);
-            this.RenderBlit_GroupBox.Location = new System.Drawing.Point(487, 313);
+            this.RenderBlit_GroupBox.Location = new System.Drawing.Point(13, 311);
             this.RenderBlit_GroupBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.RenderBlit_GroupBox.Name = "RenderBlit_GroupBox";
             this.RenderBlit_GroupBox.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.RenderBlit_GroupBox.Size = new System.Drawing.Size(299, 135);
+            this.RenderBlit_GroupBox.Size = new System.Drawing.Size(280, 139);
             this.RenderBlit_GroupBox.TabIndex = 33;
             this.RenderBlit_GroupBox.TabStop = false;
             this.RenderBlit_GroupBox.Text = "Sprite Rendering Attributes";
@@ -479,7 +452,7 @@ namespace Magic.Editors
             // Sprite_PaletteBox
             // 
             this.Sprite_PaletteBox.ColorsPerLine = 8;
-            this.Sprite_PaletteBox.Location = new System.Drawing.Point(200, 53);
+            this.Sprite_PaletteBox.Location = new System.Drawing.Point(183, 53);
             this.Sprite_PaletteBox.Name = "Sprite_PaletteBox";
             this.Sprite_PaletteBox.Size = new System.Drawing.Size(88, 23);
             this.Sprite_PaletteBox.TabIndex = 26;
@@ -488,12 +461,13 @@ namespace Magic.Editors
             // 
             // ScreenBlit_GroupBox
             // 
+            this.ScreenBlit_GroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ScreenBlit_GroupBox.Controls.Add(this.Affine_Index_Label);
+            this.ScreenBlit_GroupBox.Controls.Add(this.Affine_Index_NumBox);
             this.ScreenBlit_GroupBox.Controls.Add(this.ScreenY_NumBox);
             this.ScreenBlit_GroupBox.Controls.Add(this.ScreenX_NumBox);
             this.ScreenBlit_GroupBox.Controls.Add(this.ScreenX_Label);
             this.ScreenBlit_GroupBox.Controls.Add(this.ScreenY_Label);
-            this.ScreenBlit_GroupBox.Controls.Add(this.ShapeSize_Label);
-            this.ScreenBlit_GroupBox.Controls.Add(this.ShapeSize_Info);
             this.ScreenBlit_GroupBox.Controls.Add(this.Priority_NumBox);
             this.ScreenBlit_GroupBox.Controls.Add(this.Priority_Label);
             this.ScreenBlit_GroupBox.Location = new System.Drawing.Point(13, 220);
@@ -505,8 +479,36 @@ namespace Magic.Editors
             this.ScreenBlit_GroupBox.TabStop = false;
             this.ScreenBlit_GroupBox.Text = "Sprite Screen Positioning";
             // 
+            // Affine_Index_Label
+            // 
+            this.Affine_Index_Label.AutoSize = true;
+            this.Affine_Index_Label.Location = new System.Drawing.Point(170, 54);
+            this.Affine_Index_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Affine_Index_Label.Name = "Affine_Index_Label";
+            this.Affine_Index_Label.Size = new System.Drawing.Size(45, 15);
+            this.Affine_Index_Label.TabIndex = 38;
+            this.Affine_Index_Label.Text = "Affine :";
+            // 
+            // Affine_Index_NumBox
+            // 
+            this.Affine_Index_NumBox.BackColor = System.Drawing.SystemColors.Window;
+            this.Affine_Index_NumBox.Hexadecimal = true;
+            this.Affine_Index_NumBox.Location = new System.Drawing.Point(223, 52);
+            this.Affine_Index_NumBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Affine_Index_NumBox.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.Affine_Index_NumBox.Name = "Affine_Index_NumBox";
+            this.Affine_Index_NumBox.Size = new System.Drawing.Size(49, 23);
+            this.Affine_Index_NumBox.TabIndex = 39;
+            this.Affine_Index_NumBox.Value = ((byte)(0));
+            this.Affine_Index_NumBox.ValueChanged += new System.EventHandler(this.Affine_Index_NumBox_ValueChanged);
+            // 
             // TileSheet_GroupBox
             // 
+            this.TileSheet_GroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.TileSheet_GroupBox.Controls.Add(this.Shape_ComboBox);
             this.TileSheet_GroupBox.Controls.Add(this.Size_ComboBox);
             this.TileSheet_GroupBox.Controls.Add(this.SheetY_NumBox);
@@ -543,8 +545,16 @@ namespace Magic.Editors
             // 
             // Affine_GroupBox
             // 
-            this.Affine_GroupBox.Controls.Add(this.Affine_Index_NumBox);
-            this.Affine_GroupBox.Controls.Add(this.Affine_Index_Label);
+            this.Affine_GroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Affine_GroupBox.Controls.Add(this.Affine_Separator);
+            this.Affine_GroupBox.Controls.Add(this.Affine_ScaleX_Label);
+            this.Affine_GroupBox.Controls.Add(this.Affine_Rotate_Label);
+            this.Affine_GroupBox.Controls.Add(this.Affine_ScaleX_NumBox);
+            this.Affine_GroupBox.Controls.Add(this.Affine_ScaleY_NumBox);
+            this.Affine_GroupBox.Controls.Add(this.Affine_ScaleY_Label);
+            this.Affine_GroupBox.Controls.Add(this.Affine_Shear_Label);
+            this.Affine_GroupBox.Controls.Add(this.Affine_Rotate_NumBox);
+            this.Affine_GroupBox.Controls.Add(this.Affine_Shear_NumBox);
             this.Affine_GroupBox.Controls.Add(this.Affine_Ux_Label);
             this.Affine_GroupBox.Controls.Add(this.Affine_Uy_Label);
             this.Affine_GroupBox.Controls.Add(this.Affine_Ux_NumBox);
@@ -553,46 +563,167 @@ namespace Magic.Editors
             this.Affine_GroupBox.Controls.Add(this.Affine_Vy_Label);
             this.Affine_GroupBox.Controls.Add(this.Affine_Uy_NumBox);
             this.Affine_GroupBox.Controls.Add(this.Affine_Vy_NumBox);
-            this.Affine_GroupBox.Location = new System.Drawing.Point(13, 311);
+            this.Affine_GroupBox.Location = new System.Drawing.Point(488, 313);
             this.Affine_GroupBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Affine_GroupBox.Name = "Affine_GroupBox";
             this.Affine_GroupBox.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.Affine_GroupBox.Size = new System.Drawing.Size(280, 137);
+            this.Affine_GroupBox.Size = new System.Drawing.Size(298, 137);
             this.Affine_GroupBox.TabIndex = 37;
             this.Affine_GroupBox.TabStop = false;
             this.Affine_GroupBox.Text = "Affine Sprite Transform";
             // 
-            // Affine_Index_NumBox
+            // Affine_Separator
             // 
-            this.Affine_Index_NumBox.BackColor = System.Drawing.SystemColors.Window;
-            this.Affine_Index_NumBox.Hexadecimal = true;
-            this.Affine_Index_NumBox.Location = new System.Drawing.Point(153, 20);
-            this.Affine_Index_NumBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.Affine_Index_NumBox.Maximum = new decimal(new int[] {
-            255,
+            this.Affine_Separator.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.Affine_Separator.Location = new System.Drawing.Point(6, 73);
+            this.Affine_Separator.Name = "Affine_Separator";
+            this.Affine_Separator.Size = new System.Drawing.Size(285, 2);
+            this.Affine_Separator.TabIndex = 39;
+            // 
+            // Affine_ScaleX_Label
+            // 
+            this.Affine_ScaleX_Label.AutoSize = true;
+            this.Affine_ScaleX_Label.Location = new System.Drawing.Point(10, 22);
+            this.Affine_ScaleX_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Affine_ScaleX_Label.Name = "Affine_ScaleX_Label";
+            this.Affine_ScaleX_Label.Size = new System.Drawing.Size(50, 15);
+            this.Affine_ScaleX_Label.TabIndex = 37;
+            this.Affine_ScaleX_Label.Text = "Scale X :";
+            // 
+            // Affine_Rotate_Label
+            // 
+            this.Affine_Rotate_Label.AutoSize = true;
+            this.Affine_Rotate_Label.Location = new System.Drawing.Point(147, 22);
+            this.Affine_Rotate_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Affine_Rotate_Label.Name = "Affine_Rotate_Label";
+            this.Affine_Rotate_Label.Size = new System.Drawing.Size(47, 15);
+            this.Affine_Rotate_Label.TabIndex = 38;
+            this.Affine_Rotate_Label.Text = "Rotate :";
+            // 
+            // Affine_ScaleX_NumBox
+            // 
+            this.Affine_ScaleX_NumBox.DecimalPlaces = 4;
+            this.Affine_ScaleX_NumBox.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.Affine_ScaleX_NumBox.Location = new System.Drawing.Point(69, 20);
+            this.Affine_ScaleX_NumBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Affine_ScaleX_NumBox.Maximum = new decimal(new int[] {
+            127,
             0,
             0,
             0});
-            this.Affine_Index_NumBox.Name = "Affine_Index_NumBox";
-            this.Affine_Index_NumBox.Size = new System.Drawing.Size(61, 23);
-            this.Affine_Index_NumBox.TabIndex = 39;
-            this.Affine_Index_NumBox.Value = ((byte)(0));
-            this.Affine_Index_NumBox.ValueChanged += new System.EventHandler(this.Affine_Index_NumBox_ValueChanged);
+            this.Affine_ScaleX_NumBox.Minimum = new decimal(new int[] {
+            128,
+            0,
+            0,
+            -2147483648});
+            this.Affine_ScaleX_NumBox.Name = "Affine_ScaleX_NumBox";
+            this.Affine_ScaleX_NumBox.Size = new System.Drawing.Size(66, 23);
+            this.Affine_ScaleX_NumBox.TabIndex = 36;
+            this.Affine_ScaleX_NumBox.ValueChanged += new System.EventHandler(this.Affine_ScaleX_NumBox_ValueChanged);
             // 
-            // Affine_Index_Label
+            // Affine_ScaleY_NumBox
             // 
-            this.Affine_Index_Label.AutoSize = true;
-            this.Affine_Index_Label.Location = new System.Drawing.Point(12, 22);
-            this.Affine_Index_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.Affine_Index_Label.Name = "Affine_Index_Label";
-            this.Affine_Index_Label.Size = new System.Drawing.Size(126, 15);
-            this.Affine_Index_Label.TabIndex = 38;
-            this.Affine_Index_Label.Text = "Transform Data Index :";
+            this.Affine_ScaleY_NumBox.DecimalPlaces = 4;
+            this.Affine_ScaleY_NumBox.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.Affine_ScaleY_NumBox.Location = new System.Drawing.Point(69, 45);
+            this.Affine_ScaleY_NumBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Affine_ScaleY_NumBox.Maximum = new decimal(new int[] {
+            127,
+            0,
+            0,
+            0});
+            this.Affine_ScaleY_NumBox.Minimum = new decimal(new int[] {
+            128,
+            0,
+            0,
+            -2147483648});
+            this.Affine_ScaleY_NumBox.Name = "Affine_ScaleY_NumBox";
+            this.Affine_ScaleY_NumBox.Size = new System.Drawing.Size(66, 23);
+            this.Affine_ScaleY_NumBox.TabIndex = 35;
+            this.Affine_ScaleY_NumBox.ValueChanged += new System.EventHandler(this.Affine_ScaleY_NumBox_ValueChanged);
+            // 
+            // Affine_ScaleY_Label
+            // 
+            this.Affine_ScaleY_Label.AutoSize = true;
+            this.Affine_ScaleY_Label.Location = new System.Drawing.Point(11, 47);
+            this.Affine_ScaleY_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Affine_ScaleY_Label.Name = "Affine_ScaleY_Label";
+            this.Affine_ScaleY_Label.Size = new System.Drawing.Size(50, 15);
+            this.Affine_ScaleY_Label.TabIndex = 33;
+            this.Affine_ScaleY_Label.Text = "Scale Y :";
+            // 
+            // Affine_Shear_Label
+            // 
+            this.Affine_Shear_Label.AutoSize = true;
+            this.Affine_Shear_Label.Location = new System.Drawing.Point(152, 47);
+            this.Affine_Shear_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Affine_Shear_Label.Name = "Affine_Shear_Label";
+            this.Affine_Shear_Label.Size = new System.Drawing.Size(42, 15);
+            this.Affine_Shear_Label.TabIndex = 34;
+            this.Affine_Shear_Label.Text = "Shear :";
+            // 
+            // Affine_Rotate_NumBox
+            // 
+            this.Affine_Rotate_NumBox.DecimalPlaces = 4;
+            this.Affine_Rotate_NumBox.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.Affine_Rotate_NumBox.Location = new System.Drawing.Point(202, 20);
+            this.Affine_Rotate_NumBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Affine_Rotate_NumBox.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.Affine_Rotate_NumBox.Minimum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            -2147483648});
+            this.Affine_Rotate_NumBox.Name = "Affine_Rotate_NumBox";
+            this.Affine_Rotate_NumBox.Size = new System.Drawing.Size(88, 23);
+            this.Affine_Rotate_NumBox.TabIndex = 32;
+            this.Affine_Rotate_NumBox.ValueChanged += new System.EventHandler(this.Affine_Rotate_NumBox_ValueChanged);
+            // 
+            // Affine_Shear_NumBox
+            // 
+            this.Affine_Shear_NumBox.DecimalPlaces = 4;
+            this.Affine_Shear_NumBox.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.Affine_Shear_NumBox.Location = new System.Drawing.Point(202, 45);
+            this.Affine_Shear_NumBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Affine_Shear_NumBox.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.Affine_Shear_NumBox.Minimum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            -2147483648});
+            this.Affine_Shear_NumBox.Name = "Affine_Shear_NumBox";
+            this.Affine_Shear_NumBox.Size = new System.Drawing.Size(88, 23);
+            this.Affine_Shear_NumBox.TabIndex = 31;
+            this.Affine_Shear_NumBox.ValueChanged += new System.EventHandler(this.Affine_Shear_NumBox_ValueChanged);
             // 
             // Affine_Ux_Label
             // 
             this.Affine_Ux_Label.AutoSize = true;
-            this.Affine_Ux_Label.Location = new System.Drawing.Point(13, 77);
+            this.Affine_Ux_Label.Location = new System.Drawing.Point(10, 82);
             this.Affine_Ux_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Affine_Ux_Label.Name = "Affine_Ux_Label";
             this.Affine_Ux_Label.Size = new System.Drawing.Size(29, 15);
@@ -602,7 +733,7 @@ namespace Magic.Editors
             // Affine_Uy_Label
             // 
             this.Affine_Uy_Label.AutoSize = true;
-            this.Affine_Uy_Label.Location = new System.Drawing.Point(145, 77);
+            this.Affine_Uy_Label.Location = new System.Drawing.Point(164, 82);
             this.Affine_Uy_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Affine_Uy_Label.Name = "Affine_Uy_Label";
             this.Affine_Uy_Label.Size = new System.Drawing.Size(30, 15);
@@ -611,13 +742,13 @@ namespace Magic.Editors
             // 
             // Affine_Ux_NumBox
             // 
-            this.Affine_Ux_NumBox.DecimalPlaces = 6;
+            this.Affine_Ux_NumBox.DecimalPlaces = 8;
             this.Affine_Ux_NumBox.Increment = new decimal(new int[] {
             1,
             0,
             0,
             131072});
-            this.Affine_Ux_NumBox.Location = new System.Drawing.Point(47, 75);
+            this.Affine_Ux_NumBox.Location = new System.Drawing.Point(47, 80);
             this.Affine_Ux_NumBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Affine_Ux_NumBox.Maximum = new decimal(new int[] {
             127,
@@ -636,7 +767,7 @@ namespace Magic.Editors
             // 
             // Affine_Vx_NumBox
             // 
-            this.Affine_Vx_NumBox.DecimalPlaces = 6;
+            this.Affine_Vx_NumBox.DecimalPlaces = 8;
             this.Affine_Vx_NumBox.Increment = new decimal(new int[] {
             1,
             0,
@@ -657,12 +788,12 @@ namespace Magic.Editors
             this.Affine_Vx_NumBox.Name = "Affine_Vx_NumBox";
             this.Affine_Vx_NumBox.Size = new System.Drawing.Size(88, 23);
             this.Affine_Vx_NumBox.TabIndex = 27;
-            this.Affine_Vx_NumBox.ValueChanged += new System.EventHandler(this.Affine_Uy_NumBox_ValueChanged);
+            this.Affine_Vx_NumBox.ValueChanged += new System.EventHandler(this.Affine_Vx_NumBox_ValueChanged);
             // 
             // Affine_Vx_Label
             // 
             this.Affine_Vx_Label.AutoSize = true;
-            this.Affine_Vx_Label.Location = new System.Drawing.Point(11, 110);
+            this.Affine_Vx_Label.Location = new System.Drawing.Point(11, 107);
             this.Affine_Vx_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Affine_Vx_Label.Name = "Affine_Vx_Label";
             this.Affine_Vx_Label.Size = new System.Drawing.Size(28, 15);
@@ -672,7 +803,7 @@ namespace Magic.Editors
             // Affine_Vy_Label
             // 
             this.Affine_Vy_Label.AutoSize = true;
-            this.Affine_Vy_Label.Location = new System.Drawing.Point(146, 107);
+            this.Affine_Vy_Label.Location = new System.Drawing.Point(165, 107);
             this.Affine_Vy_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Affine_Vy_Label.Name = "Affine_Vy_Label";
             this.Affine_Vy_Label.Size = new System.Drawing.Size(29, 15);
@@ -681,13 +812,13 @@ namespace Magic.Editors
             // 
             // Affine_Uy_NumBox
             // 
-            this.Affine_Uy_NumBox.DecimalPlaces = 6;
+            this.Affine_Uy_NumBox.DecimalPlaces = 8;
             this.Affine_Uy_NumBox.Increment = new decimal(new int[] {
             1,
             0,
             0,
             131072});
-            this.Affine_Uy_NumBox.Location = new System.Drawing.Point(183, 75);
+            this.Affine_Uy_NumBox.Location = new System.Drawing.Point(202, 80);
             this.Affine_Uy_NumBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Affine_Uy_NumBox.Maximum = new decimal(new int[] {
             127,
@@ -702,17 +833,17 @@ namespace Magic.Editors
             this.Affine_Uy_NumBox.Name = "Affine_Uy_NumBox";
             this.Affine_Uy_NumBox.Size = new System.Drawing.Size(88, 23);
             this.Affine_Uy_NumBox.TabIndex = 1;
-            this.Affine_Uy_NumBox.ValueChanged += new System.EventHandler(this.Affine_Vx_NumBox_ValueChanged);
+            this.Affine_Uy_NumBox.ValueChanged += new System.EventHandler(this.Affine_Uy_NumBox_ValueChanged);
             // 
             // Affine_Vy_NumBox
             // 
-            this.Affine_Vy_NumBox.DecimalPlaces = 6;
+            this.Affine_Vy_NumBox.DecimalPlaces = 8;
             this.Affine_Vy_NumBox.Increment = new decimal(new int[] {
             1,
             0,
             0,
             131072});
-            this.Affine_Vy_NumBox.Location = new System.Drawing.Point(183, 105);
+            this.Affine_Vy_NumBox.Location = new System.Drawing.Point(202, 105);
             this.Affine_Vy_NumBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Affine_Vy_NumBox.Maximum = new decimal(new int[] {
             127,
@@ -731,16 +862,18 @@ namespace Magic.Editors
             // 
             // Affine_Amount_Label
             // 
+            this.Affine_Amount_Label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.Affine_Amount_Label.AutoSize = true;
             this.Affine_Amount_Label.Location = new System.Drawing.Point(299, 261);
             this.Affine_Amount_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Affine_Amount_Label.Name = "Affine_Amount_Label";
-            this.Affine_Amount_Label.Size = new System.Drawing.Size(158, 15);
+            this.Affine_Amount_Label.Size = new System.Drawing.Size(113, 15);
             this.Affine_Amount_Label.TabIndex = 40;
             this.Affine_Amount_Label.Text = "Affine Transforms: -";
             // 
             // Entry_Delete_Button
             // 
+            this.Entry_Delete_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.Entry_Delete_Button.Location = new System.Drawing.Point(374, 220);
             this.Entry_Delete_Button.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Entry_Delete_Button.Name = "Entry_Delete_Button";
@@ -752,6 +885,7 @@ namespace Magic.Editors
             // 
             // Entry_Create_Button
             // 
+            this.Entry_Create_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.Entry_Create_Button.Location = new System.Drawing.Point(430, 220);
             this.Entry_Create_Button.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Entry_Create_Button.Name = "Entry_Create_Button";
@@ -767,16 +901,17 @@ namespace Magic.Editors
             this.Entry_Amount_Label.Location = new System.Drawing.Point(302, 27);
             this.Entry_Amount_Label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Entry_Amount_Label.Name = "Entry_Amount_Label";
-            this.Entry_Amount_Label.Size = new System.Drawing.Size(122, 15);
+            this.Entry_Amount_Label.Size = new System.Drawing.Size(89, 15);
             this.Entry_Amount_Label.TabIndex = 41;
             this.Entry_Amount_Label.Text = "OAM Objects: -";
             // 
             // Entry_ListBox
             // 
+            this.Entry_ListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.Entry_ListBox.Font = new System.Drawing.Font("Consolas", 8.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Entry_ListBox.FormattingEnabled = true;
             this.Entry_ListBox.IntegralHeight = false;
-            this.Entry_ListBox.ItemHeight = 15;
             this.Entry_ListBox.Location = new System.Drawing.Point(300, 45);
             this.Entry_ListBox.Name = "Entry_ListBox";
             this.Entry_ListBox.ScrollAlwaysVisible = true;
@@ -788,6 +923,7 @@ namespace Magic.Editors
             // 
             // Affine_ListBox
             // 
+            this.Affine_ListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.Affine_ListBox.Font = new System.Drawing.Font("Consolas", 8.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Affine_ListBox.FormattingEnabled = true;
             this.Affine_ListBox.IntegralHeight = false;
@@ -802,6 +938,7 @@ namespace Magic.Editors
             // 
             // Entry_MoveUp_Button
             // 
+            this.Entry_MoveUp_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.Entry_MoveUp_Button.Location = new System.Drawing.Point(300, 220);
             this.Entry_MoveUp_Button.Name = "Entry_MoveUp_Button";
             this.Entry_MoveUp_Button.Size = new System.Drawing.Size(24, 24);
@@ -812,6 +949,7 @@ namespace Magic.Editors
             // 
             // Entry_MoveDown_Button
             // 
+            this.Entry_MoveDown_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.Entry_MoveDown_Button.Location = new System.Drawing.Point(330, 220);
             this.Entry_MoveDown_Button.Name = "Entry_MoveDown_Button";
             this.Entry_MoveDown_Button.Size = new System.Drawing.Size(24, 24);
@@ -822,6 +960,7 @@ namespace Magic.Editors
             // 
             // Affine_MoveDown_Button
             // 
+            this.Affine_MoveDown_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.Affine_MoveDown_Button.Location = new System.Drawing.Point(330, 424);
             this.Affine_MoveDown_Button.Name = "Affine_MoveDown_Button";
             this.Affine_MoveDown_Button.Size = new System.Drawing.Size(24, 24);
@@ -832,6 +971,7 @@ namespace Magic.Editors
             // 
             // Affine_MoveUp_Button
             // 
+            this.Affine_MoveUp_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.Affine_MoveUp_Button.Location = new System.Drawing.Point(300, 424);
             this.Affine_MoveUp_Button.Name = "Affine_MoveUp_Button";
             this.Affine_MoveUp_Button.Size = new System.Drawing.Size(24, 24);
@@ -840,8 +980,9 @@ namespace Magic.Editors
             this.Affine_MoveUp_Button.UseVisualStyleBackColor = true;
             this.Affine_MoveUp_Button.Click += new System.EventHandler(this.Affine_MoveUp_Button_Click);
             // 
-            // button4
+            // Affine_Create_Button
             // 
+            this.Affine_Create_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.Affine_Create_Button.Location = new System.Drawing.Point(430, 424);
             this.Affine_Create_Button.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Affine_Create_Button.Name = "Affine_Create_Button";
@@ -851,11 +992,12 @@ namespace Magic.Editors
             this.Affine_Create_Button.UseVisualStyleBackColor = true;
             this.Affine_Create_Button.Click += new System.EventHandler(this.Affine_CreateButton_Click);
             // 
-            // button5
+            // Affine_Delete_Button
             // 
+            this.Affine_Delete_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.Affine_Delete_Button.Location = new System.Drawing.Point(374, 424);
             this.Affine_Delete_Button.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.Affine_Delete_Button.Name = "button5";
+            this.Affine_Delete_Button.Name = "Affine_Delete_Button";
             this.Affine_Delete_Button.Size = new System.Drawing.Size(50, 24);
             this.Affine_Delete_Button.TabIndex = 48;
             this.Affine_Delete_Button.Text = "Affine_Delete_Button";
@@ -902,13 +1044,17 @@ namespace Magic.Editors
             this.RenderBlit_GroupBox.PerformLayout();
             this.ScreenBlit_GroupBox.ResumeLayout(false);
             this.ScreenBlit_GroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Affine_Index_NumBox)).EndInit();
             this.TileSheet_GroupBox.ResumeLayout(false);
             this.TileSheet_GroupBox.PerformLayout();
             this.MenuBar.ResumeLayout(false);
             this.MenuBar.PerformLayout();
             this.Affine_GroupBox.ResumeLayout(false);
             this.Affine_GroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Affine_Index_NumBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Affine_ScaleX_NumBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Affine_ScaleY_NumBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Affine_Rotate_NumBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Affine_Shear_NumBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Affine_Ux_NumBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Affine_Vx_NumBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Affine_Uy_NumBox)).EndInit();
@@ -932,8 +1078,6 @@ namespace Magic.Editors
         private System.Windows.Forms.CheckBox DrawMosaic_CheckBox;
         private System.Windows.Forms.CheckBox FlipV_CheckBox;
         private System.Windows.Forms.CheckBox FlipH_CheckBox;
-        private System.Windows.Forms.Label ShapeSize_Label;
-        private System.Windows.Forms.Label ShapeSize_Info;
         private System.Windows.Forms.NumericUpDown ScreenX_NumBox;
         private System.Windows.Forms.NumericUpDown ScreenY_NumBox;
         private System.Windows.Forms.Label ScreenX_Label;
@@ -977,5 +1121,14 @@ namespace Magic.Editors
         private System.Windows.Forms.Button Affine_MoveUp_Button;
         private System.Windows.Forms.Button Affine_Create_Button;
         private System.Windows.Forms.Button Affine_Delete_Button;
+        private System.Windows.Forms.Label Affine_ScaleX_Label;
+        private System.Windows.Forms.Label Affine_Rotate_Label;
+        private System.Windows.Forms.NumericUpDown Affine_ScaleX_NumBox;
+        private System.Windows.Forms.NumericUpDown Affine_ScaleY_NumBox;
+        private System.Windows.Forms.Label Affine_ScaleY_Label;
+        private System.Windows.Forms.Label Affine_Shear_Label;
+        private System.Windows.Forms.NumericUpDown Affine_Rotate_NumBox;
+        private System.Windows.Forms.NumericUpDown Affine_Shear_NumBox;
+        private System.Windows.Forms.Label Affine_Separator;
     }
 }

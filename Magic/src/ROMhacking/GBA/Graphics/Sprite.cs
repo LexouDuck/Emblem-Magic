@@ -114,14 +114,14 @@ namespace GBA
         /// <summary>
         /// Creates an affine/transformed sprite from a block of OAM data and the affine data with it
         /// </summary>
-        public Sprite(Palette palette, Tileset tileset, OAM oam, OAM_Affine transform)
+        public Sprite(Palette palette, Tileset tileset, OAM oam, OAM.Affine transform)
         {
             Size size = oam.GetDimensions();
             this.Load(palette, tileset, new TileMap(oam.GetTileMap(size)), false, false);
 
             Int32 width  = 8 * size.Width;
             Int32 height = 8 * size.Height;
-            if (oam.OBJMode == OAM_OBJMode.BigAffine)
+            if (oam.ModeOBJ == OAM.OBJMode.BigAffine)
             {
                 width  *= 2;
                 height *= 2;

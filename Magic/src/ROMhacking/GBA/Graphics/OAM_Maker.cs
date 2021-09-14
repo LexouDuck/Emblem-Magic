@@ -86,8 +86,8 @@ namespace GBA
                     (Int16)(pos.Y - offsetY),
                     0x00,
                     0x00,
-                    OAM_GFXMode.Normal,
-                    OAM_OBJMode.Normal,
+                    OAM.GFXMode.Normal,
+                    OAM.OBJMode.Normal,
                     false,
                     false,
                     (Byte)sheet[i].X, (Byte)sheet[i].Y,
@@ -219,18 +219,18 @@ namespace GBA
         /// </summary>
         static Size[] possibleOAMs = new Size[12]
         {
-            new Size(8, 8), // OAM_Shape.Square, OAM_Size.Times8
-            new Size(8, 4), // OAM_Shape.Rect_H, OAM_Size.Times8
-            new Size(4, 8), // OAM_Shape.Rect_V, OAM_Size.Times8
-            new Size(4, 4), // OAM_Shape.Square, OAM_Size.Times4
-            new Size(4, 2), // OAM_Shape.Rect_H, OAM_Size.Times4
-            new Size(2, 4), // OAM_Shape.Rect_V, OAM_Size.Times4
-            new Size(4, 1), // OAM_Shape.Rect_H, OAM_Size.Times2
-            new Size(1, 4), // OAM_Shape.Rect_V, OAM_Size.Times2
-            new Size(2, 2), // OAM_Shape.Square, OAM_Size.Times2
-            new Size(2, 1), // OAM_Shape.Rect_H, OAM_Size.Times1
-            new Size(1, 2), // OAM_Shape.Rect_V, OAM_Size.Times1
-            new Size(1, 1), // OAM_Shape.Square, OAM_Size.Times1
+            new Size(8, 8), // OAM.Shape.Square, OAM.Size.Times8
+            new Size(8, 4), // OAM.Shape.Rect_H, OAM.Size.Times8
+            new Size(4, 8), // OAM.Shape.Rect_V, OAM.Size.Times8
+            new Size(4, 4), // OAM.Shape.Square, OAM.Size.Times4
+            new Size(4, 2), // OAM.Shape.Rect_H, OAM.Size.Times4
+            new Size(2, 4), // OAM.Shape.Rect_V, OAM.Size.Times4
+            new Size(4, 1), // OAM.Shape.Rect_H, OAM.Size.Times2
+            new Size(1, 4), // OAM.Shape.Rect_V, OAM.Size.Times2
+            new Size(2, 2), // OAM.Shape.Square, OAM.Size.Times2
+            new Size(2, 1), // OAM.Shape.Rect_H, OAM.Size.Times1
+            new Size(1, 2), // OAM.Shape.Rect_V, OAM.Size.Times1
+            new Size(1, 1), // OAM.Shape.Square, OAM.Size.Times1
         };
 
 
@@ -376,8 +376,8 @@ namespace GBA
                 (Int16)(imageX - 0x94), (Int16)(imageY),
                 0x00,
                 0x00,
-                OAM_GFXMode.Normal,
-                OAM_OBJMode.Normal,
+                OAM.GFXMode.Normal,
+                OAM.OBJMode.Normal,
                 false,
                 false,
                 (Byte)sheet.X, (Byte)sheet.Y,
