@@ -44,7 +44,7 @@ namespace EmblemMagic.FireEmblem
             new Magic.Range(0xFE4000, 0xFFF000),
             new Magic.Range(0xFDC000, 0xFE0000),
         };
-        public override Dictionary<String, Pointer> Addresses => new()
+        public override Dictionary<String, Pointer> Addresses => new Dictionary<String, Pointer>()
         {
             ["Class Array"]             = new Pointer(0x0),//Address_ClassArray()
             ["Chapter Array"]           = new Pointer(0xD62110),//Address_ChapterArray()
@@ -129,7 +129,7 @@ namespace EmblemMagic.FireEmblem
             new Magic.Range(0xFE3100, 0xFFD000),
             new Magic.Range(0xFFE000, 0xFFF140),
         };
-        public override Dictionary<String, Pointer> Addresses => new()
+        public override Dictionary<String, Pointer> Addresses => new Dictionary<String, Pointer>()
         {
             ["Class Array"]             = new Pointer(0xBE015C),//Address_ClassArray()
             ["Chapter Array"]           = new Pointer(0xC9A200),//Address_ChapterArray()
@@ -209,7 +209,7 @@ namespace EmblemMagic.FireEmblem
         {
             // TODO
         };
-        public override Dictionary<String, Pointer> Addresses => new()
+        public override Dictionary<String, Pointer> Addresses => new Dictionary<String, Pointer>()
         {
             ["Class Array"]             = new Pointer(0x0),//Address_ClassArray()
             ["Chapter Array"]           = new Pointer(0xD612B0),//Address_ChapterArray()

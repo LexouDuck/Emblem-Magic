@@ -127,8 +127,8 @@ namespace GBA
                 height *= 2;
             }
             Byte[] data = new Byte[width * height];
-            Point tile = new();
-            Point affine = new();
+            Point tile = new Point();
+            Point affine = new Point();
             Int32 halfW = width / 2;
             Int32 halfH = height / 2;
             for (Int32 y = -halfH; y < halfH; y++)

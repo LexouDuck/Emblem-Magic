@@ -434,7 +434,9 @@ namespace GBA
         /// </summary>
         public override String ToString()
         {
-            System.Drawing.Size size = this.GetDimensions() * 8;
+            System.Drawing.Size size = this.GetDimensions();
+            size.Width  *= 8;
+            size.Height *= 8;
             return (
                 "X:" + this.ScreenX.ToString().PadRight(6) +
                 "Y:" + this.ScreenY.ToString().PadRight(6) +
@@ -601,7 +603,7 @@ namespace GBA
         /// </summary>
         public class Affine
         {
-            public static readonly Affine IDENTITY = new(
+            public static readonly Affine IDENTITY = new Affine(
                 1, 0,
                 0, 1);
 
@@ -684,7 +686,7 @@ namespace GBA
             /// </summary>
             public class SVD
             {
-                public static readonly Affine.SVD IDENTITY = new(1, 1, 0, 0);
+                public static readonly Affine.SVD IDENTITY = new Affine.SVD(1, 1, 0, 0);
 
                 /// <summary>
                 /// horizontal scaling factor
@@ -760,7 +762,7 @@ namespace GBA
                             0, svd.S[1],
                         });
                     Matrix<Double> matrix = (svd.VT + sigma + svd.U);
-                    OAM.Affine result = new(
+                    OAM.Affine result = new OAM.Affine(
                         matrix[0, 0],
                         matrix[1, 0],
                         matrix[0, 1],

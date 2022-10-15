@@ -38,7 +38,7 @@ namespace KirbyMagic.Kirby
         {
             // TODO
         };
-        public override Dictionary<String, Pointer> Addresses => new()
+        public override Dictionary<String, Pointer> Addresses => new Dictionary<String, Pointer>()
         {
             ["Text Array"]              = new Pointer(0x0),
             ["Menu Font"]               = new Pointer(0x0),
@@ -81,7 +81,7 @@ namespace KirbyMagic.Kirby
         {
             // TODO
         };
-        public override Dictionary<String, Pointer> Addresses => new()
+        public override Dictionary<String, Pointer> Addresses => new Dictionary<String, Pointer>()
         {
             ["Text Array"]              = new Pointer(0x0),
             ["Menu Font"]               = new Pointer(0x0),
@@ -124,7 +124,7 @@ namespace KirbyMagic.Kirby
         {
             // TODO
         };
-        public override Dictionary<String, Pointer> Addresses => new()
+        public override Dictionary<String, Pointer> Addresses => new Dictionary<String, Pointer>()
         {
             ["Text Array"]              = new Pointer(0x0),
             ["Menu Font"]               = new Pointer(0x0),

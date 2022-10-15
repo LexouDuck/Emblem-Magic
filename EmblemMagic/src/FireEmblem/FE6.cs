@@ -50,7 +50,7 @@ namespace EmblemMagic.FireEmblem
             new Magic.Range(0xB013F0, 0x1000000)
         };
         */
-        public override Dictionary<String, Pointer> Addresses => new()
+        public override Dictionary<String, Pointer> Addresses => new Dictionary<String, Pointer>()
         {
             ["Class Array"]             = new Pointer(0x60A0E8),
             ["Chapter Array"]           = new Pointer(0x6637A4),

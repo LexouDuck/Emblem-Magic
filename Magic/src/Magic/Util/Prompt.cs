@@ -278,7 +278,7 @@ namespace Magic
             return MessageBox.Show(
             "The hack has been modified, would you like to save the MHF file ?",
 
-            "Save changes to FE Hack ?",
+            "Save changes to Magic Hack File ?",
             MessageBoxButtons.YesNoCancel,
             MessageBoxIcon.Warning);
         }

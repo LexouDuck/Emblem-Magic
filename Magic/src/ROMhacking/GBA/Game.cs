@@ -83,7 +83,7 @@ namespace GBA
         /// </summary>
         public Repoint[] GetDefaultPointers()
         {
-            List<Repoint> result = new();
+            List<Repoint> result = new List<Repoint>();
             foreach (KeyValuePair<String, Pointer> item in this.Addresses)
             {
                 result.Add(new Repoint(item.Key, item.Value));

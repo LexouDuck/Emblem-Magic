@@ -628,5 +628,27 @@ namespace Magic
                 length++;
             return text.Substring(offset, length);
         }
+
+
+        /*
+        public static System.Drawing.Point operator * (System.Drawing.Point point, float scalar)
+        {
+            return new Point(point.X * scalar, point.Y * scalar);
+        }
+        public static System.Drawing.Point operator * (float scalar, System.Drawing.Point point)
+        {
+            return new Point(point.X * scalar, point.Y * scalar);
+        }
+        */
+        /*
+        public static System.Drawing.Size operator * (System.Drawing.Size size, float scalar)
+        {
+            return new Size(size.Width * scalar, size.Height * scalar);
+        }
+        public static System.Drawing.Size operator * (float scalar, System.Drawing.Size size)
+        {
+            return new Size(size.Width * scalar, size.Height * scalar);
+        }
+        */
     }
 }

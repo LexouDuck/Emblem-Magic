@@ -301,7 +301,7 @@ namespace Magic.Editors
                         this.Affine_Vx_NumBox.Value = (Decimal)transform.Vx;
                         this.Affine_Vy_NumBox.Value = (Decimal)transform.Vy;
 
-                        OAM.Affine.SVD svd = new(transform);
+                        OAM.Affine.SVD svd = new OAM.Affine.SVD(transform);
                         this.Affine_ScaleX_NumBox.Value = (Decimal)svd.ScaleX;
                         this.Affine_ScaleY_NumBox.Value = (Decimal)svd.ScaleX;
                         this.Affine_Rotate_NumBox.Value = (Decimal)svd.Rotate;
@@ -447,27 +447,31 @@ namespace Magic.Editors
             Point pos,
             Size size)
         {
-            using Pen pen = new(color);
-            Point offset = new(
-                (control.Width  / 2) - (control.Display.Width  / 2),
-                (control.Height / 2) - (control.Display.Height / 2));
-            g.DrawRectangle(pen, new Rectangle(
-                offset.X + pos.X,
-                offset.Y + pos.Y,
-                size.Width  - 1,
-                size.Height - 1));
+            using (Pen pen = new Pen(color))
+            {
+                Point offset = new Point(
+                    (control.Width  / 2) - (control.Display.Width  / 2),
+                    (control.Height / 2) - (control.Display.Height / 2));
+                g.DrawRectangle(pen, new Rectangle(
+                    offset.X + pos.X,
+                    offset.Y + pos.Y,
+                    size.Width  - 1,
+                    size.Height - 1));
+            }
         }
         public static void Core_DrawVector(ImageBox control, Graphics g, System.Drawing.Color color,
             Point a,
             Point b)
         {
-            using Pen pen = new(color);
-            Point offset = new(
-                (control.Width  / 2) - (control.Display.Width  / 2),
-                (control.Height / 2) - (control.Display.Height / 2));
-            g.DrawLine(pen,
-                new Point(offset.X + a.X, offset.Y + a.Y),
-                new Point(offset.X + b.X, offset.Y + b.Y));
+            using (Pen pen = new Pen(color))
+            {
+                Point offset = new Point(
+                    (control.Width  / 2) - (control.Display.Width  / 2),
+                    (control.Height / 2) - (control.Display.Height / 2));
+                g.DrawLine(pen,
+                    new Point(offset.X + a.X, offset.Y + a.Y),
+                    new Point(offset.X + b.X, offset.Y + b.Y));
+            }
         }
         public static void Core_DrawAffineVectors(ImageBox control, Graphics g,
             Point pos,
@@ -478,14 +482,14 @@ namespace Magic.Editors
             if (affine == null)
             {
                 affine = OAM.Affine.IDENTITY;
-                offset = new(0,0);
+                offset = new Point(0,0);
             }
             else
             {
-                offset = new(
+                offset = new Point(
                     (size.Width / 2),
                     (size.Height / 2));
-                offset = new(
+                offset = new Point(
                     offset.X - ((Int32)(affine.Ux * offset.X) + (Int32)(affine.Vx * offset.Y)),
                     offset.Y - ((Int32)(affine.Uy * offset.X) + (Int32)(affine.Vy * offset.Y)));
                 pos += new Size(offset);
@@ -513,14 +517,21 @@ namespace Magic.Editors
             foreach (Int32 index in this.Entry_ListBox.SelectedIndices)
             {
                 OAM obj = this.Current[index];
-                Size size = 8 * obj.GetDimensions();
-                Point pos = new(
+                Size size = obj.GetDimensions();
+                size.Width  *= 8;
+                size.Height *= 8;
+                Point pos = new Point(
                     obj.ScreenX + this.OffsetX,
                     obj.ScreenY + this.OffsetY);
-
+                Size final_size = size;
+                if (this.Current[index].ModeOBJ == OAM.OBJMode.BigAffine)
+                {
+                    final_size.Width  *= 2;
+                    final_size.Height *= 2;
+                }
                 Core_DrawRectangle(this.Sprite_ImageBox, e.Graphics,
                     SystemColors.Highlight,
-                    pos, size * (this.Current[index].ModeOBJ == OAM.OBJMode.BigAffine ? 2 : 1));
+                    pos, final_size);
                 if (obj.IsAffineSprite())
                 {
                     Core_DrawAffineVectors(this.Sprite_ImageBox, e.Graphics,
@@ -536,8 +547,10 @@ namespace Magic.Editors
             foreach (Int32 index in this.Entry_ListBox.SelectedIndices)
             {
                 OAM obj = this.Current[index];
-                Size size = 8 * obj.GetDimensions();
-                Point pos = new(
+                Size size = obj.GetDimensions();
+                size.Width  *= 8;
+                size.Height *= 8;
+                Point pos = new Point(
                     obj.SheetX * 8,
                     obj.SheetY * 8);
 
@@ -819,7 +832,7 @@ namespace Magic.Editors
         private void Affine_ScaleX_NumBox_ValueChanged(Object sender, EventArgs e)
         {
             OAM.Affine transform = this.Current.Affines[this.Current[Entry_ListBox.SelectedIndex].AffineIndex];
-            OAM.Affine.SVD svd = new(transform);
+            OAM.Affine.SVD svd = new OAM.Affine.SVD(transform);
             svd.ScaleX = (Double)this.Affine_ScaleX_NumBox.Value;
             foreach (Int32 index in this.Affine_ListBox.SelectedIndices)
             {
@@ -830,7 +843,7 @@ namespace Magic.Editors
         private void Affine_ScaleY_NumBox_ValueChanged(Object sender, EventArgs e)
         {
             OAM.Affine transform = this.Current.Affines[this.Current[Entry_ListBox.SelectedIndex].AffineIndex];
-            OAM.Affine.SVD svd = new(transform);
+            OAM.Affine.SVD svd = new OAM.Affine.SVD(transform);
             svd.ScaleY = (Double)this.Affine_ScaleY_NumBox.Value;
             foreach (Int32 index in this.Affine_ListBox.SelectedIndices)
             {
@@ -841,7 +854,7 @@ namespace Magic.Editors
         private void Affine_Rotate_NumBox_ValueChanged(Object sender, EventArgs e)
         {
             OAM.Affine transform = this.Current.Affines[this.Current[Entry_ListBox.SelectedIndex].AffineIndex];
-            OAM.Affine.SVD svd = new(transform);
+            OAM.Affine.SVD svd = new OAM.Affine.SVD(transform);
             svd.Rotate = (Double)this.Affine_Rotate_NumBox.Value;
             foreach (Int32 index in this.Affine_ListBox.SelectedIndices)
             {
@@ -852,7 +865,7 @@ namespace Magic.Editors
         private void Affine_Shear_NumBox_ValueChanged(Object sender, EventArgs e)
         {
             OAM.Affine transform = this.Current.Affines[this.Current[Entry_ListBox.SelectedIndex].AffineIndex];
-            OAM.Affine.SVD svd = new(transform);
+            OAM.Affine.SVD svd = new OAM.Affine.SVD(transform);
             svd.Shear = (Double)this.Affine_Shear_NumBox.Value;
             foreach (Int32 index in this.Affine_ListBox.SelectedIndices)
             {
