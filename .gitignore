@@ -1,4 +1,6 @@
 
+/dotnet-*
+
 *.sublime-workspace
 
 *.DS_Store

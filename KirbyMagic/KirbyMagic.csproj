@@ -1,5 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="System.Resources.Extensions" Version="6.0.0" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFrameworks>net461</TargetFrameworks>
     <OutputType>WinExe</OutputType>
@@ -8,7 +13,6 @@
 
     <AssemblyName>KirbyMagic</AssemblyName>
 
-    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -42,6 +46,8 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>assets\icon.ico</ApplicationIcon>
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+    <EmbeddedResourceUseDependentUponConvention>true</EmbeddedResourceUseDependentUponConvention>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>
@@ -67,18 +73,7 @@
     <None Remove="Other\**" />
     <None Remove="Test\**" />
   </ItemGroup>
-  <ItemGroup>
-    <Reference Include="FastColoredTextBox">
-      <HintPath>bin\Release\Utils\FastColoredTextBox.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="src\Properties\DataSources\Modules.WriteModule.datasource" />
-    <None Include="src\Properties\DataSources\Write.datasource" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="assets\icon.ico" />
-  </ItemGroup>
+
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
       <Visible>False</Visible>
@@ -92,8 +87,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0" PrivateAssets="All" />
-    <PackageReference Include="System.Resources.Extensions" Version="6.0.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -105,7 +98,20 @@
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="5.0.2" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="FastColoredTextBox">
+      <HintPath>bin\Release\Utils\FastColoredTextBox.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Magic\Magic.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="src\Properties\DataSources\Modules.WriteModule.datasource" />
+    <None Include="src\Properties\DataSources\Write.datasource" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="src\Properties\Resources.Designer.cs">
@@ -113,16 +119,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="src\App.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="src\Editors\MagicButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="src\Properties\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <CustomToolNamespace>KirbyMagic.Properties</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
+
 </Project>
